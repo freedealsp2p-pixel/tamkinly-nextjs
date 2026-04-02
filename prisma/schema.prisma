@@ -1,0 +1,847 @@
+// ============================================
+// Tamkinly - Prisma Schema
+// ============================================
+// Identity Transformation Platform
+// Database: SQLite (Development) -> PostgreSQL (Production)
+// Updated: Access Tier System for Apps
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USER MANAGEMENT
+// ============================================
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String?
+  password     String?    // Hashed password
+  role         UserRole   @default(CUSTOMER)
+  avatar       String?
+  locale       String     @default("en")
+  timezone     String?
+  
+  // Access Codes
+  accessCodes  AppAccess[]
+  
+  // Progress tracking
+  progress     UserProgress?
+  habits       Habit[]
+  goals        Goal[]
+  journalEntries JournalEntry[]
+  appUsage     AppUsage[]
+  
+  // Timestamps
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  @@map("users")
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+  EDITOR
+}
+
+// ============================================
+// ACCESS TIERS SYSTEM (Based on $100M Money Models)
+// ============================================
+
+enum AccessTier {
+  FREE      // Lead Magnet - Free valuable apps
+  TRIAL     // 7-Day Trial - Limited access
+  BASIC     // Basic Package - 4 core apps
+  PREMIUM   // Premium Package - 6 apps
+  BUNDLE    // Complete Bundle - All 8 apps + exclusive
+}
+
+model AppAccess {
+  id           String     @id @default(cuid())
+  code         String     @unique  // Access code like TMLY-XXXX-XXXX
+  tier         AccessTier @default(BASIC)
+  
+  // Customer info (from WooCommerce)
+  email        String
+  customerName String?
+  productName  String?
+  productId    String?   // Product identifier (basic, premium, bundle)
+  orderId      String?   // WooCommerce Order ID
+  
+  // Status
+  isActive     Boolean    @default(true)
+  isUsed       Boolean    @default(false)
+  
+  // Usage tracking
+  usedAt       DateTime?
+  lastUsedAt   DateTime?
+  usageCount   Int        @default(0)
+  expiresAt    DateTime?  // For trial access
+  
+  // Relations
+  userId       String?
+  user         User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  @@index([code])
+  @@index([email])
+  @@map("app_access")
+}
+
+// ============================================
+// APPS SYSTEM
+// ============================================
+
+model App {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  name            String
+  nameAr          String?
+  description     String
+  descriptionAr   String?
+  
+  // Access Control
+  minTier         AccessTier  @default(BASIC)
+  isFreeApp       Boolean     @default(false)  // Lead magnet apps
+  
+  // App Details
+  icon            String      // Lucide icon name
+  color           String      // Hex color
+  category        AppCategory
+  
+  // Features (JSON array)
+  features        String
+  featuresAr      String?
+  
+  // Content
+  shortDescription String?
+  
+  // Order and Status
+  sortOrder       Int         @default(0)
+  isActive        Boolean     @default(true)
+  isFeatured      Boolean     @default(false)
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  @@map("apps")
+}
+
+enum AppCategory {
+  ASSESSMENT    // Identity assessments
+  PLANNING      // Daily/weekly planning
+  TRACKING      // Progress tracking
+  WORKSHEET     // Interactive worksheets
+  ANALYTICS     // Advanced analytics
+  COACHING      // AI coaching
+  COMMUNITY     // Community features
+}
+
+// Track app usage per user
+model AppUsage {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  appSlug     String
+  
+  lastUsedAt  DateTime @default(now())
+  usageCount  Int      @default(1)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, appSlug])
+  @@index([userId])
+  @@map("app_usage")
+}
+
+// ============================================
+// USER PROGRESS
+// ============================================
+
+model UserProgress {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // 30-Day Journey Progress
+  currentDay        Int      @default(1)
+  currentPhase      Phase    @default(AWARENESS)
+  
+  // Completion tracking
+  completedDays     String   @default("[]") // JSON array of completed days
+  totalExercises    Int      @default(0)
+  completedExercises Int     @default(0)
+  
+  // Identity metrics
+  identityScore     Float?   // 0-100
+  clarityScore      Float?   // 0-100
+  alignmentScore    Float?   // 0-100
+  
+  // Streaks
+  currentStreak     Int      @default(0)
+  longestStreak     Int      @default(0)
+  lastActivityDate  DateTime?
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@map("user_progress")
+}
+
+enum Phase {
+  AWARENESS    // Days 1-7: Awareness & Foundation
+  RECODING     // Days 8-21: Active Recoding
+  INTEGRATION  // Days 22-30: Integration & Maintenance
+}
+
+// ============================================
+// HABITS TRACKER
+// ============================================
+
+model Habit {
+  id          String      @id @default(cuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String
+  description String?
+  icon        String?
+  color       String?
+  
+  // Scheduling
+  frequency   Frequency   @default(DAILY)
+  daysOfWeek  String      @default("[]") // JSON array: [0,1,2,3,4,5,6]
+  reminder    String?     // Time in HH:mm format
+  
+  // Tracking
+  streak      Int         @default(0)
+  longestStreak Int       @default(0)
+  completions HabitCompletion[]
+  
+  // Status
+  isArchived  Boolean     @default(false)
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@index([userId])
+  @@map("habits")
+}
+
+model HabitCompletion {
+  id        String   @id @default(cuid())
+  habitId   String
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  
+  date      String   // YYYY-MM-DD
+  completed Boolean  @default(true)
+  note      String?
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([habitId, date])
+  @@index([habitId, date])
+  @@map("habit_completions")
+}
+
+enum Frequency {
+  DAILY
+  WEEKLY
+  CUSTOM
+}
+
+// ============================================
+// GOALS
+// ============================================
+
+model Goal {
+  id          String      @id @default(cuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  title       String
+  description String?
+  category    GoalCategory?
+  
+  // Timeline
+  targetDate  DateTime?
+  
+  // Progress
+  status      GoalStatus  @default(NOT_STARTED)
+  progress    Int         @default(0) // 0-100
+  
+  // Milestones
+  milestones  Milestone[]
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@index([userId])
+  @@map("goals")
+}
+
+model Milestone {
+  id          String   @id @default(cuid())
+  goalId      String
+  goal        Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  
+  title       String
+  completed   Boolean  @default(false)
+  order       Int      @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([goalId])
+  @@map("milestones")
+}
+
+enum GoalCategory {
+  IDENTITY
+  CAREER
+  HEALTH
+  RELATIONSHIPS
+  PERSONAL_GROWTH
+  FINANCIAL
+  SPIRITUAL
+}
+
+enum GoalStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+// ============================================
+// JOURNAL
+// ============================================
+
+model JournalEntry {
+  id          String      @id @default(cuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  date        String      // YYYY-MM-DD
+  title       String?
+  content     String      // Markdown content
+  
+  // Day-specific prompts (for 30-day journey)
+  dayNumber   Int?        // 1-30 for journey entries
+  prompt      String?     // The prompt that was answered
+  
+  // Mood tracking
+  mood        Mood?
+  energy      Int?        // 1-10
+  
+  // Tags
+  tags        String      @default("[]") // JSON array
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@unique([userId, date])
+  @@index([userId, date])
+  @@map("journal_entries")
+}
+
+enum Mood {
+  GREAT
+  GOOD
+  NEUTRAL
+  LOW
+  DIFFICULT
+}
+
+// ============================================
+// IDENTITY ASSESSMENT
+// ============================================
+
+model AssessmentResult {
+  id              String   @id @default(cuid())
+  userId          String?
+  
+  // Assessment type
+  type            AssessmentType
+  
+  // Scores (0-100)
+  identityClarity  Float?
+  selfAwareness    Float?
+  valuesAlignment  Float?
+  purposeClarity   Float?
+  emotionalReg     Float?
+  overallScore     Float?
+  
+  // Detailed results (JSON)
+  detailedResults  String   // JSON object with detailed breakdown
+  
+  // Recommendations
+  recommendations  String   // JSON array of recommendations
+  
+  createdAt       DateTime @default(now())
+  
+  @@index([userId])
+  @@map("assessment_results")
+}
+
+enum AssessmentType {
+  IDENTITY_GAP
+  VALUES_ALIGNMENT
+  SELF_AUTHORSHIP
+  LOCUS_OF_CONTROL
+  EMOTIONAL_REGULATION
+}
+
+// ============================================
+// PRODUCTS
+// ============================================
+
+model Product {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  nameAr          String?
+  description     String
+  descriptionAr   String?
+  shortDesc       String?  // Short description for cards
+  
+  // Pricing
+  price           Float
+  comparePrice    Float?   // Original price for comparison/sale
+  originalPrice   Float?
+  currency        String   @default("USD")
+  
+  // Product type
+  type            ProductType
+  category        String?  // Product category (trial, planner, premium, bundle)
+  
+  // Access tier this product grants
+  accessTier      AccessTier?
+  
+  // Apps included (JSON array of app slugs)
+  includedApps    String   @default("[]")
+  
+  // Features (JSON array)
+  features        String
+  featuresAr      String?
+  
+  // Media
+  image           String?  // Product image URL
+  
+  // Downloads
+  digitalFile     String?  // URL to PDF
+  appUrl          String?  // URL to interactive app
+  
+  // Order
+  sortOrder       Int      @default(0)
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  isPopular       Boolean  @default(false)
+  
+  // Cart items relation
+  cartItems       CartItem[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@map("products")
+}
+
+enum ProductType {
+  DIGITAL_PDF
+  INTERACTIVE_APP
+  BUNDLE
+  TRIAL
+}
+
+// ============================================
+// TESTIMONIALS
+// ============================================
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  nameAr      String?
+  role        String?
+  roleAr      String?
+  avatar      String?
+  content     String
+  contentAr   String?
+  rating      Int      @default(5) // 1-5
+  isApproved  Boolean  @default(false)
+  isFeatured  Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  
+  @@map("testimonials")
+}
+
+// ============================================
+// CONTACT FORM
+// ============================================
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  isReplied Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  @@map("contact_messages")
+}
+
+// ============================================
+// EMAIL SEQUENCES - Customer Journey Automation
+// ============================================
+
+model EmailSequence {
+  id            String   @id @default(cuid())
+  name          String   // e.g., "Welcome Series", "Abandoned Cart"
+  trigger       String   // What triggers this sequence
+  description   String?
+  isActive      Boolean  @default(true)
+  
+  // Steps in the sequence
+  steps         EmailSequenceStep[]
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("email_sequences")
+}
+
+model EmailSequenceStep {
+  id            String   @id @default(cuid())
+  sequenceId    String
+  sequence      EmailSequence @relation(fields: [sequenceId], references: [id], onDelete: Cascade)
+  
+  // Step details
+  stepNumber    Int      // Order in sequence (1, 2, 3...)
+  delayHours    Int      @default(24) // Hours after previous step
+  
+  // Email content
+  subject       String
+  preheader     String?
+  content       String   // Markdown or HTML content
+  templateName  String?  // Reference to email template
+  
+  // CTA
+  primaryCta    String?  // Primary call-to-action text
+  primaryUrl    String?  // Primary CTA link
+  
+  // Tracking
+  openRate      Float?   @default(0)
+  clickRate     Float?   @default(0)
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@unique([sequenceId, stepNumber])
+  @@map("email_sequence_steps")
+}
+
+model EmailSubscription {
+  id            String   @id @default(cuid())
+  email         String
+  name          String?
+  
+  // Subscription status
+  status        EmailSubscriptionStatus @default(ACTIVE)
+  source        String?  // Where they subscribed from
+  
+  // Progress tracking
+  currentSequenceId  String?
+  currentStepNumber  Int?
+  
+  // Timestamps
+  subscribedAt  DateTime @default(now())
+  unsubscribedAt DateTime?
+  lastEmailAt   DateTime?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@unique([email])
+  @@map("email_subscriptions")
+}
+
+enum EmailSubscriptionStatus {
+  ACTIVE
+  UNSUBSCRIBED
+  BOUNCED
+  COMPLAINED
+}
+
+model EmailQueue {
+  id            String   @id @default(cuid())
+  email         String
+  name          String?
+  
+  // Sequence reference
+  sequenceId    String?
+  stepNumber    Int?
+  
+  // Email details
+  subject       String
+  content       String
+  templateName  String?
+  
+  // Scheduling
+  scheduledAt   DateTime
+  sentAt        DateTime?
+  
+  // Status
+  status        EmailQueueStatus @default(PENDING)
+  error         String?
+  
+  // Tracking
+  openedAt      DateTime?
+  clickedAt     DateTime?
+  clickedUrl    String?
+  
+  createdAt     DateTime @default(now())
+  
+  @@index([email])
+  @@index([scheduledAt])
+  @@index([status])
+  @@map("email_queue")
+}
+
+enum EmailQueueStatus {
+  PENDING
+  QUEUED
+  SENDING
+  SENT
+  FAILED
+  CANCELLED
+}
+
+// ============================================
+// EMAIL LOGS
+// ============================================
+
+model EmailLog {
+  id          String   @id @default(cuid())
+  email       String
+  type        EmailType
+  subject     String
+  status      EmailStatus
+  error       String?
+  sentAt      DateTime @default(now())
+  
+  @@index([email])
+  @@map("email_logs")
+}
+
+enum EmailType {
+  ORDER_CONFIRMATION
+  ACCESS_KEY_DELIVERY
+  DAY_1_CHECKIN
+  DAY_7_MILESTONE
+  DAY_21_TURNING_POINT
+  DAY_30_COMPLETION
+  WELCOME
+  PASSWORD_RESET
+  LEAD_MAGNET
+  ABANDONED_CART
+  PRODUCT_LAUNCH
+  NEWSLETTER
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+  BOUNCED
+}
+
+// ============================================
+// SHOPPING CART
+// ============================================
+
+model Cart {
+  id          String      @id @default(cuid())
+  items       CartItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("carts")
+}
+
+model CartItem {
+  id          String   @id @default(cuid())
+  cartId      String
+  cart        Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity    Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([cartId, productId])
+  @@map("cart_items")
+}
+
+// ============================================
+// ORDERS
+// ============================================
+
+model Order {
+  id            String   @id @default(cuid())
+  orderNumber   String   @unique
+  customerEmail String   // Encrypted
+  customerName  String?
+  
+  // Pricing
+  subtotal      Float
+  tax           Float    @default(0)
+  total         Float
+  currency      String   @default("USD")
+  
+  // Payment
+  paymentMethod String?
+  paymentId     String?  // External payment ID
+  paymentStatus PaymentStatus @default(PENDING)
+  
+  // Status
+  status        OrderStatus @default(PENDING)
+  
+  // Digital Delivery
+  deliveries    DigitalDelivery[]
+  
+  // Timestamps
+  paidAt        DateTime?
+  fulfilledAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([customerEmail])
+  @@index([orderNumber])
+  @@map("orders")
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+// ============================================
+// DIGITAL DELIVERIES
+// ============================================
+
+model DigitalDelivery {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  // Product info
+  productId     String
+  productName   String
+  
+  // Customer info (encrypted)
+  customerEmail String   // Encrypted
+  customerName  String?
+  
+  // Access credentials (encrypted)
+  accessCode    String   @unique  // Access code like TMLY-XXXX-XXXX-XXXX
+  licenseKey    String            // Encrypted license key
+  
+  // Access tier
+  tier          AccessTier @default(BASIC)
+  
+  // Delivery status
+  status        DeliveryStatus @default(PENDING)
+  
+  // Download tracking
+  downloadCount Int      @default(0)
+  maxDownloads  Int      @default(10)
+  
+  // Timestamps
+  expiresAt     DateTime?
+  deliveredAt   DateTime?
+  lastDownloadAt DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([accessCode])
+  @@index([orderId])
+  @@map("digital_deliveries")
+}
+
+enum DeliveryStatus {
+  PENDING
+  DELIVERED
+  FAILED
+  EXPIRED
+  REVOKED
+}
+
+// ============================================
+// AI COACH CONVERSATIONS
+// ============================================
+
+model AICoachConversation {
+  id          String   @id @default(cuid())
+  sessionId   String   @unique
+  userId      String?
+  
+  // Messages stored as JSON array
+  messages    String   @default("[]") // JSON array of {role, content, timestamp}
+  
+  // Metadata
+  messageCount Int    @default(0)
+  lastMessageAt DateTime @default(now())
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([sessionId])
+  @@index([userId])
+  @@map("ai_coach_conversations")
+}
+
+// ============================================
+// ANALYTICS
+// ============================================
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  referrer  String?
+  country   String?
+  device    String?
+  browser   String?
+  locale    String?
+  sessionId String?
+  userId    String?
+  createdAt DateTime @default(now())
+  
+  @@index([path])
+  @@index([createdAt])
+  @@map("page_views")
+}

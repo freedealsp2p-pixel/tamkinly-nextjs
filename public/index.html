@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamkinly Products - Download Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0F1C2E 0%, #1a2a3a 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #3DD4B0;
+        }
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-box .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3DD4B0;
+        }
+        .stat-box .label {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        .files-grid {
+            display: grid;
+            gap: 20px;
+        }
+        .file-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+        .file-card:hover {
+            border-color: #3DD4B0;
+            transform: translateX(-5px);
+        }
+        .file-info {
+            flex: 1;
+        }
+        .file-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .file-desc {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+        .file-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .download-btn {
+            background: #3DD4B0;
+            color: #0F1C2E;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .download-btn:hover {
+            background: #2BC49E;
+            transform: scale(1.05);
+        }
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        .note {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(61, 212, 176, 0.1);
+            border: 1px solid rgba(61, 212, 176, 0.3);
+            border-radius: 10px;
+            color: #3DD4B0;
+        }
+        @media (max-width: 600px) {
+            .file-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📥 Tamkinly Products</h1>
+        <p class="subtitle">Identity Recode Planner - 6 مستندات للتحميل</p>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="number">6</div>
+                <div class="label">ملفات</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">48</div>
+                <div class="label">صفحة</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">387 KB</div>
+                <div class="label">الحجم الكلي</div>
+            </div>
+        </div>
+
+        <div class="files-grid">
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">Executive Manual</div>
+                    <div class="file-desc">دليل تشغيلي لنظام Identity Recode - المنهجية والقواعد</div>
+                    <div class="file-meta">
+                        <span>📄 6 صفحات</span>
+                        <span>💾 74 KB</span>
+                    </div>
+                </div>
+                <a href="/Executive-Manual.pdf" download class="download-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    تحميل
+                </a>
+            </div>
+
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">Identity Baseline Worksheet</div>
+                    <div class="file-desc">ورقة عمل لقياس حالة الهوية عبر 8 أبعاد رئيسية</div>
+                    <div class="file-meta">
+                        <span>📄 12 صفحة</span>
+                        <span>💾 75 KB</span>
+                    </div>
+                </div>
+                <a href="/Identity-Baseline-Worksheet.pdf" download class="download-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    تحميل
+                </a>
+            </div>
+
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">Environmental Audit</div>
+                    <div class="file-desc">تدقيق البيئة لتحديد العوامل الداعمة والمعيقة</div>
+                    <div class="file-meta">
+                        <span>📄 8 صفحات</span>
+                        <span>💾 62 KB</span>
+                    </div>
+                </div>
+                <a href="/Environmental-Audit.pdf" download class="download-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    تحميل
+                </a>
+            </div>
+
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">Decision Pattern Analysis</div>
+                    <div class="file-desc">تحليل أنماط القرار لكشف التحيزات المتكررة</div>
+                    <div class="file-meta">
+                        <span>📄 7 صفحات</span>
+                        <span>💾 58 KB</span>
+                    </div>
+                </div>
+                <a href="/Decision-Pattern-Analysis.pdf" download class="download-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    تحميل
+                </a>
+            </div>
+
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">Evidence Tracking System</div>
+                    <div class="file-desc">نظام تتبع الأدلة السلوكية لإثبات التغيير</div>
+                    <div class="file-meta">
+                        <span>📄 8 صفحات</span>
+                        <span>💾 60 KB</span>
+                    </div>
+                </div>
+                <a href="/Evidence-Tracking-System.pdf" download class="download-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    تحميل
+                </a>
+            </div>
+
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">Progress Dashboard Guide</div>
+                    <div class="file-desc">دليل لوحة المتابعة لعرض التقدم عبر الوقت</div>
+                    <div class="file-meta">
+                        <span>📄 7 صفحات</span>
+                        <span>💾 58 KB</span>
+                    </div>
+                </div>
+                <a href="/Progress-Dashboard-Guide.pdf" download class="download-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    تحميل
+                </a>
+            </div>
+        </div>
+
+        <div class="note">
+            💡 اضغط على زر "تحميل" بجانب كل ملف لتحميله مباشرة
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/Tamkinly-Products.zip" download style="display: inline-block; background: #1F6F78; color: #fff; padding: 18px 50px; border-radius: 10px; text-decoration: none; font-size: 1.2rem; font-weight: bold;">
+                📦 تحميل الكل (ZIP - 259 KB)
+            </a>
+        </div>
+    </div>
+</body>
+</html>
