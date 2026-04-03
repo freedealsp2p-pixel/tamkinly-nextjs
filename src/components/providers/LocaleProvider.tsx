@@ -68,7 +68,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     return getNestedValue(messages[locale] as unknown as Record<string, unknown>, key);
   }, [locale]);
   
-  const direction = useMemo(() => locale === 'ar' ? 'rtl' : 'ltr', [locale]);
+  const direction = useMemo((): 'ltr' | 'rtl' => locale === 'ar' ? 'rtl' : 'ltr', [locale]);
   
   const contextValue = useMemo(() => ({
     locale,

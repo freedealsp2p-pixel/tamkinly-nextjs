@@ -1,11 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { AccessTier } from '@prisma/client';
+import { verifyAdminPassword } from '@/lib/admin-auth';
 
-// Generate access code (for admin/testing)
+// Generate access code (for admin only)
 export async function POST(request: NextRequest) {
   try {
-    const { email, customerName, productId, tier = 'BASIC', orderId } = await request.json();
+    const { email, customerName, productId, tier = 'BASIC', orderId, password } = await request.json();
+
+    // Require admin authentication
+    if (!verifyAdminPassword(password || '')) {
+      return NextResponse.json(
+        { error: 'Unauthorized - Admin access required' },
+        { status: 401 }
+      );
+    }
 
     if (!email) {
       return NextResponse.json(

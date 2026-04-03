@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
         items: {
           create: orderItems.map(item => ({
             productId: item.productId,
-            name: item.name,
+            productName: item.name,
             price: item.price,
             quantity: item.quantity,
           })),

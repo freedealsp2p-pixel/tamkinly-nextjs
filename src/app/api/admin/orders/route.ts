@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-
-const ADMIN_PASSWORD = 'tamkinly2024';
+import { verifyAdminPassword } from '@/lib/admin-auth';
 
 // Get all orders
 export async function GET(request: NextRequest) {
   try {
     const password = request.nextUrl.searchParams.get('password');
-    
-    if (password !== ADMIN_PASSWORD) {
+
+    if (!verifyAdminPassword(password || '')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -142,7 +141,7 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
     const { orderId, status, password, generateCode } = body;
 
-    if (password !== ADMIN_PASSWORD) {
+    if (!verifyAdminPassword(password || '')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

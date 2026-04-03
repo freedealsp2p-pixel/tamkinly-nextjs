@@ -109,8 +109,8 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  // Use environment variable or fallback for production
-  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET || 'tamkinly-default-secret-key-for-production-2026-secure-fallback',
+  // JWT secret - MUST be set via environment variable in production
+  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
   // Skip secret validation in development or when no secret is provided
   debug: process.env.NODE_ENV === 'development',
 };
