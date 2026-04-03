@@ -137,10 +137,8 @@ function CheckoutContent() {
       amount: product.price.toString(),
       currency: 'USD',
       language: 'EN',
-      detail1_description: 'Tamkinly Product',
+      detail1_description: 'Tamkinly',
       detail1_text: product.name,
-      merchant_fields: 'customer_id',
-      customer_id: formData.email,
       return_url: `${window.location.origin}/payment/success`,
       cancel_url: `${window.location.origin}/payment/cancel`,
       status_url: `${window.location.origin}/api/payment/webhook`
