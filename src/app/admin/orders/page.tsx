@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import {
   Package,
   Mail,
@@ -16,72 +17,180 @@ import {
   XCircle,
   Eye,
   ArrowLeft,
-  RefreshCw
+  RefreshCw,
+  Key,
+  Copy,
+  Lock
 } from 'lucide-react';
+
+interface OrderItem {
+  id: string;
+  productId: string;
+  productName: string;
+  price: number;
+  quantity: number;
+}
+
+interface AccessCode {
+  code: string;
+  tier: string;
+  isUsed: boolean;
+  productId: string;
+}
 
 interface Order {
   id: string;
-  product: string;
-  productName: string;
-  price: number;
-  customerName: string;
+  orderNumber: string;
+  customerName: string | null;
   customerEmail: string;
-  transactionId?: string;
-  notes?: string;
-  status: 'pending' | 'completed' | 'cancelled';
+  status: string;
+  total: number;
+  currency: string;
+  paymentMethod: string | null;
+  transactionId: string | null;
+  notes: string | null;
+  items: OrderItem[];
+  accessCodes: AccessCode[];
   createdAt: string;
 }
 
-// Helper function to load orders from localStorage
-function loadOrdersFromStorage(): Order[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const storedOrders = localStorage.getItem('tamkinly_orders');
-    return storedOrders ? JSON.parse(storedOrders) : [];
-  } catch {
-    return [];
-  }
-}
+const ADMIN_PASSWORD = 'tamkinly2024';
 
 export default function OrdersAdminPage() {
-  const [orders, setOrders] = useState<Order[]>(loadOrdersFromStorage);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [generatingCode, setGeneratingCode] = useState(false);
 
-  const loadOrders = () => {
-    setLoading(true);
-    setOrders(loadOrdersFromStorage());
-    setLoading(false);
+  // Check authentication on mount
+  useEffect(() => {
+    const savedAuth = sessionStorage.getItem('admin_auth');
+    if (savedAuth === 'true') {
+      setIsAuthenticated(true);
+      loadOrders();
+    }
+  }, []);
+
+  const handleLogin = () => {
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      sessionStorage.setItem('admin_auth', 'true');
+      setAuthError('');
+      loadOrders();
+    } else {
+      setAuthError('Incorrect password');
+    }
   };
 
-  const updateOrderStatus = (orderId: string, newStatus: 'completed' | 'cancelled') => {
-    const updatedOrders = orders.map(order =>
-      order.id === orderId ? { ...order, status: newStatus } : order
-    );
-    setOrders(updatedOrders);
-    localStorage.setItem('tamkinly_orders', JSON.stringify(updatedOrders));
-
-    // Update selected order if viewing
-    if (selectedOrder?.id === orderId) {
-      setSelectedOrder({ ...selectedOrder, status: newStatus });
+  const loadOrders = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/admin/orders?password=${ADMIN_PASSWORD}`);
+      const data = await response.json();
+      if (data.success) {
+        setOrders(data.orders);
+      }
+    } catch (error) {
+      console.error('Failed to load orders:', error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const updateOrderStatus = async (orderId: string, newStatus: 'COMPLETED' | 'CANCELLED', generateCode: boolean = false) => {
+    setGeneratingCode(true);
+    try {
+      const response = await fetch('/api/admin/orders', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderId,
+          status: newStatus,
+          password: ADMIN_PASSWORD,
+          generateCode,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        // Refresh orders
+        await loadOrders();
+        // Update selected order
+        if (selectedOrder?.id === orderId) {
+          setSelectedOrder({ ...selectedOrder, status: newStatus });
+        }
+      }
+    } catch (error) {
+      console.error('Failed to update order:', error);
+    } finally {
+      setGeneratingCode(false);
+    }
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    alert('Copied to clipboard!');
   };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'completed':
+      case 'COMPLETED':
         return <Badge className="bg-green-100 text-green-700"><CheckCircle2 className="w-3 h-3 mr-1" />Completed</Badge>;
-      case 'cancelled':
+      case 'CANCELLED':
         return <Badge className="bg-red-100 text-red-700"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
+      case 'PROCESSING':
+        return <Badge className="bg-blue-100 text-blue-700"><RefreshCw className="w-3 h-3 mr-1" />Processing</Badge>;
       default:
         return <Badge className="bg-amber-100 text-amber-700"><Clock className="w-3 h-3 mr-1" />Pending</Badge>;
     }
   };
 
-  const pendingOrders = orders.filter(o => o.status === 'pending').length;
-  const totalRevenue = orders.filter(o => o.status === 'completed').reduce((sum, o) => sum + o.price, 0);
+  const pendingOrders = orders.filter(o => o.status === 'PENDING').length;
+  const totalRevenue = orders.filter(o => o.status === 'COMPLETED').reduce((sum, o) => sum + o.total, 0);
 
-  if (loading) {
+  // Login screen
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
+        <Card className="w-full max-w-md border-0 shadow-lg">
+          <CardHeader className="text-center">
+            <div className="w-16 h-16 rounded-full bg-[#1F6F78]/10 flex items-center justify-center mx-auto mb-4">
+              <Lock className="w-8 h-8 text-[#1F6F78]" />
+            </div>
+            <CardTitle className="text-[#0F1C2E]">Admin Access</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Input
+                type="password"
+                placeholder="Enter admin password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
+              />
+              {authError && (
+                <p className="text-sm text-red-500">{authError}</p>
+              )}
+            </div>
+            <Button onClick={handleLogin} className="w-full bg-[#1F6F78] hover:bg-[#1F6F78]/90 text-white">
+              Login
+            </Button>
+            <Link href="/" className="block text-center text-sm text-[#8A94A6] hover:text-[#1F6F78]">
+              ← Back to Home
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (loading && orders.length === 0) {
     return (
       <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
         <RefreshCw className="w-8 h-8 animate-spin text-[#1F6F78]" />
@@ -144,7 +253,7 @@ export default function OrdersAdminPage() {
                   <CheckCircle2 className="w-5 h-5 text-green-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-[#0F1C2E]">{orders.filter(o => o.status === 'completed').length}</p>
+                  <p className="text-2xl font-bold text-[#0F1C2E]">{orders.filter(o => o.status === 'COMPLETED').length}</p>
                   <p className="text-xs text-[#8A94A6]">Completed</p>
                 </div>
               </div>
@@ -158,7 +267,7 @@ export default function OrdersAdminPage() {
                   <DollarSign className="w-5 h-5 text-[#1F6F78]" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-[#0F1C2E]">${totalRevenue}</p>
+                  <p className="text-2xl font-bold text-[#0F1C2E]">${totalRevenue.toFixed(2)}</p>
                   <p className="text-xs text-[#8A94A6]">Revenue</p>
                 </div>
               </div>
@@ -183,7 +292,7 @@ export default function OrdersAdminPage() {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    {orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((order) => (
+                    {orders.map((order) => (
                       <div
                         key={order.id}
                         className={`p-4 rounded-lg border transition-all cursor-pointer hover:shadow-md ${selectedOrder?.id === order.id ? 'border-[#3DD4B0] bg-[#3DD4B0]/5' : 'border-slate-200 bg-white'}`}
@@ -195,12 +304,13 @@ export default function OrdersAdminPage() {
                               <Package className="w-5 h-5 text-[#1F6F78]" />
                             </div>
                             <div>
-                              <p className="font-semibold text-[#0F1C2E]">{order.productName}</p>
-                              <p className="text-xs text-[#8A94A6]">{order.customerName} • {order.customerEmail}</p>
+                              <p className="font-semibold text-[#0F1C2E]">{order.orderNumber}</p>
+                              <p className="text-xs text-[#8A94A6]">{order.customerName || 'No name'} • {order.customerEmail}</p>
+                              <p className="text-xs text-slate-400">{order.items?.map(i => i.productName).join(', ')}</p>
                             </div>
                           </div>
                           <div className="text-right">
-                            <p className="font-bold text-[#0F1C2E]">${order.price}</p>
+                            <p className="font-bold text-[#0F1C2E]">${order.total}</p>
                             {getStatusBadge(order.status)}
                           </div>
                         </div>
@@ -225,14 +335,14 @@ export default function OrdersAdminPage() {
                 {selectedOrder ? (
                   <div className="space-y-4">
                     <div className="p-3 bg-slate-50 rounded-lg">
-                      <p className="text-xs text-[#8A94A6]">Order ID</p>
-                      <p className="font-mono text-sm text-[#0F1C2E]">{selectedOrder.id}</p>
+                      <p className="text-xs text-[#8A94A6]">Order Number</p>
+                      <p className="font-mono text-sm text-[#0F1C2E]">{selectedOrder.orderNumber}</p>
                     </div>
 
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
                         <User className="w-4 h-4 text-[#8A94A6]" />
-                        <span className="text-sm text-[#2B2E34]">{selectedOrder.customerName}</span>
+                        <span className="text-sm text-[#2B2E34]">{selectedOrder.customerName || 'Not provided'}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Mail className="w-4 h-4 text-[#8A94A6]" />
@@ -240,11 +350,11 @@ export default function OrdersAdminPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Package className="w-4 h-4 text-[#8A94A6]" />
-                        <span className="text-sm text-[#2B2E34]">{selectedOrder.productName}</span>
+                        <span className="text-sm text-[#2B2E34]">{selectedOrder.items?.map(i => i.productName).join(', ')}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <DollarSign className="w-4 h-4 text-[#8A94A6]" />
-                        <span className="text-sm font-semibold text-[#0F1C2E]">${selectedOrder.price}</span>
+                        <span className="text-sm font-semibold text-[#0F1C2E]">${selectedOrder.total}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-[#8A94A6]" />
@@ -266,36 +376,56 @@ export default function OrdersAdminPage() {
                       </div>
                     )}
 
+                    {/* Access Codes */}
+                    {selectedOrder.accessCodes && selectedOrder.accessCodes.length > 0 && (
+                      <div className="p-3 bg-green-50 rounded-lg">
+                        <p className="text-xs text-green-600 mb-2">Access Codes</p>
+                        {selectedOrder.accessCodes.map((ac, idx) => (
+                          <div key={idx} className="flex items-center justify-between mb-1">
+                            <span className="font-mono text-sm font-bold text-green-700">{ac.code}</span>
+                            <div className="flex items-center gap-2">
+                              <Badge variant="outline" className="text-xs">{ac.tier}</Badge>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => copyToClipboard(ac.code)}
+                              >
+                                <Copy className="w-3 h-3" />
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
                     <div className="pt-4 border-t">
                       <p className="text-sm font-medium text-[#2B2E34] mb-2">Status: {getStatusBadge(selectedOrder.status)}</p>
                     </div>
 
-                    {selectedOrder.status === 'pending' && (
-                      <div className="flex gap-2">
+                    {selectedOrder.status === 'PENDING' && (
+                      <div className="space-y-2">
                         <Button
-                          onClick={() => updateOrderStatus(selectedOrder.id, 'completed')}
-                          className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                          onClick={() => updateOrderStatus(selectedOrder.id, 'COMPLETED', true)}
+                          disabled={generatingCode}
+                          className="w-full bg-green-600 hover:bg-green-700 text-white"
                         >
-                          <CheckCircle2 className="w-4 h-4 mr-1" />
-                          Complete
+                          <Key className="w-4 h-4 mr-1" />
+                          {generatingCode ? 'Processing...' : 'Complete & Generate Code'}
                         </Button>
                         <Button
-                          onClick={() => updateOrderStatus(selectedOrder.id, 'cancelled')}
+                          onClick={() => updateOrderStatus(selectedOrder.id, 'CANCELLED')}
                           variant="outline"
-                          className="flex-1 border-red-200 text-red-600 hover:bg-red-50"
+                          className="w-full border-red-200 text-red-600 hover:bg-red-50"
                         >
                           <XCircle className="w-4 h-4 mr-1" />
-                          Cancel
+                          Cancel Order
                         </Button>
                       </div>
                     )}
 
                     {/* Copy Email */}
                     <Button
-                      onClick={() => {
-                        navigator.clipboard.writeText(selectedOrder.customerEmail);
-                        alert('Email copied!');
-                      }}
+                      onClick={() => copyToClipboard(selectedOrder.customerEmail)}
                       variant="outline"
                       className="w-full"
                     >

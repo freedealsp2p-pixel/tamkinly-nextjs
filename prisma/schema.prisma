@@ -703,7 +703,7 @@ model CartItem {
 model Order {
   id            String   @id @default(cuid())
   orderNumber   String   @unique
-  customerEmail String   // Encrypted
+  customerEmail String
   customerName  String?
   
   // Pricing
@@ -714,11 +714,18 @@ model Order {
   
   // Payment
   paymentMethod String?
-  paymentId     String?  // External payment ID
+  paymentId     String?  // External payment ID (Skrill transaction ID)
   paymentStatus PaymentStatus @default(PENDING)
   
   // Status
   status        OrderStatus @default(PENDING)
+  
+  // Additional info
+  notes         String?  // Customer notes
+  transactionId String?  // Skrill transaction ID
+  
+  // Order Items
+  items         OrderItem[]
   
   // Digital Delivery
   deliveries    DigitalDelivery[]
@@ -732,6 +739,24 @@ model Order {
   @@index([customerEmail])
   @@index([orderNumber])
   @@map("orders")
+}
+
+// Order Items
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  // Product info
+  productId   String
+  productName String
+  price       Float
+  quantity    Int      @default(1)
+  
+  createdAt   DateTime @default(now())
+  
+  @@index([orderId])
+  @@map("order_items")
 }
 
 enum PaymentStatus {

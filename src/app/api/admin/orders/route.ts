@@ -1,32 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+
+const ADMIN_PASSWORD = 'tamkinly2024';
 
 // Get all orders
 export async function GET(request: NextRequest) {
   try {
     const password = request.nextUrl.searchParams.get('password');
     
-    if (!verifyAdminPassword(password)) {
+    if (password !== ADMIN_PASSWORD) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const status = request.nextUrl.searchParams.get('status') || '';
     const search = request.nextUrl.searchParams.get('search') || '';
 
+    // Build where clause
     const where: {
       status?: string;
-      OR?: Array<{ email: { contains: string; mode: 'insensitive' } } | { wooOrderId: { contains: string; mode: 'insensitive' } }>;
+      OR?: Array<{ customerEmail: { contains: string } } | { customerName: { contains: string } } | { orderNumber: { contains: string } }>;
     } = {};
 
     if (status) {
-      where.status = status;
+      where.status = status.toUpperCase();
     }
 
     if (search) {
       where.OR = [
-        { email: { contains: search, mode: 'insensitive' } },
-        { wooOrderId: { contains: search, mode: 'insensitive' } },
+        { customerEmail: { contains: search.toLowerCase() } },
+        { customerName: { contains: search } },
+        { orderNumber: { contains: search.toUpperCase() } },
       ];
     }
 
@@ -34,9 +37,7 @@ export async function GET(request: NextRequest) {
       where,
       orderBy: { createdAt: 'desc' },
       include: {
-        _count: {
-          select: { id: true },
-        },
+        items: true,
       },
     });
 
@@ -44,23 +45,28 @@ export async function GET(request: NextRequest) {
     const ordersWithCodes = await Promise.all(
       orders.map(async (order) => {
         const accessCodes = await db.appAccess.findMany({
-          where: { orderId: order.wooOrderId || undefined },
+          where: { email: order.customerEmail },
           select: {
             code: true,
             tier: true,
             isUsed: true,
+            productId: true,
           },
         });
 
         return {
           id: order.id,
-          email: order.email,
+          orderNumber: order.orderNumber,
+          email: order.customerEmail,
+          customerName: order.customerName,
           status: order.status,
           total: order.total,
           currency: order.currency,
           paymentMethod: order.paymentMethod,
           paymentId: order.paymentId,
-          wooOrderId: order.wooOrderId,
+          transactionId: order.transactionId,
+          notes: order.notes,
+          items: order.items,
           createdAt: order.createdAt,
           accessCodes,
         };
@@ -75,4 +81,140 @@ export async function GET(request: NextRequest) {
     console.error('Get orders error:', error);
     return NextResponse.json({ error: 'Failed to fetch orders' }, { status: 500 });
   }
+}
+
+// Create new order
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { customerEmail, customerName, items, total, paymentMethod, transactionId, notes } = body;
+
+    if (!customerEmail || !items || items.length === 0) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    // Generate order number
+    const orderNumber = `TMLY-${Date.now().toString(36).toUpperCase()}`;
+
+    // Create order with items
+    const order = await db.order.create({
+      data: {
+        orderNumber,
+        customerEmail: customerEmail.toLowerCase(),
+        customerName,
+        subtotal: total,
+        total,
+        paymentMethod: paymentMethod || 'skrill',
+        transactionId,
+        notes,
+        status: 'PENDING',
+        items: {
+          create: items.map((item: { productId: string; productName: string; price: number; quantity?: number }) => ({
+            productId: item.productId,
+            productName: item.productName,
+            price: item.price,
+            quantity: item.quantity || 1,
+          })),
+        },
+      },
+      include: {
+        items: true,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      order: {
+        id: order.id,
+        orderNumber: order.orderNumber,
+        status: order.status,
+      },
+    });
+  } catch (error) {
+    console.error('Create order error:', error);
+    return NextResponse.json({ error: 'Failed to create order' }, { status: 500 });
+  }
+}
+
+// Update order status
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { orderId, status, password, generateCode } = body;
+
+    if (password !== ADMIN_PASSWORD) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const updateData: {
+      status: string;
+      fulfilledAt?: Date;
+      paidAt?: Date;
+    } = { status };
+
+    if (status === 'COMPLETED') {
+      updateData.fulfilledAt = new Date();
+      updateData.paidAt = new Date();
+    }
+
+    const order = await db.order.update({
+      where: { id: orderId },
+      data: updateData,
+    });
+
+    // Generate access code if requested
+    if (generateCode && status === 'COMPLETED') {
+      const orderWithItems = await db.order.findUnique({
+        where: { id: orderId },
+        include: { items: true },
+      });
+
+      if (orderWithItems && orderWithItems.items.length > 0) {
+        // Generate access code for each item
+        for (const item of orderWithItems.items) {
+          const code = generateAccessCode();
+          const tier = getTierFromProductId(item.productId);
+
+          await db.appAccess.create({
+            data: {
+              code,
+              email: orderWithItems.customerEmail.toLowerCase(),
+              customerName: orderWithItems.customerName || '',
+              productId: item.productId,
+              tier,
+              orderId: orderWithItems.orderNumber,
+              isUsed: false,
+              isActive: true,
+            },
+          });
+        }
+      }
+    }
+
+    return NextResponse.json({
+      success: true,
+      order,
+    });
+  } catch (error) {
+    console.error('Update order error:', error);
+    return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });
+  }
+}
+
+// Helper functions
+function generateAccessCode(): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const segment = () =>
+    Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  return `TMLY-${segment()}-${segment()}`;
+}
+
+function getTierFromProductId(productId: string): 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE' {
+  const tierMap: Record<string, 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE'> = {
+    'trial': 'TRIAL',
+    'planner': 'BASIC',
+    'premium': 'PREMIUM',
+    'bundle': 'BUNDLE',
+  };
+  return tierMap[productId.toLowerCase()] || 'BASIC';
 }

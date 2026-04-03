@@ -1,56 +1,68 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { tahweelPayment } from '@/lib/tahweel-payment';
 
-// POST - Handle webhook from Tahweel payment gateway
+// POST - Handle webhook from payment gateways (Skrill, Tahweel, etc.)
 export async function POST(request: NextRequest) {
   try {
-    // Get raw body for signature verification
+    // Get raw body
     const rawBody = await request.text();
-    const signature = request.headers.get('x-tahweel-signature') || '';
-
-    // Verify webhook signature
-    if (!tahweelPayment.verifyWebhookSignature(rawBody, signature)) {
-      console.error('Invalid webhook signature');
-      return NextResponse.json(
-        { error: 'Invalid signature' },
-        { status: 401 }
-      );
+    
+    // Parse webhook payload
+    let payload;
+    try {
+      payload = JSON.parse(rawBody);
+    } catch {
+      // Try form data
+      const formData = new URLSearchParams(rawBody);
+      payload = Object.fromEntries(formData);
     }
 
-    // Parse webhook payload
-    const payload = JSON.parse(rawBody);
     const { 
       paymentId, 
       orderId, 
+      orderNumber,
       status, 
       amount, 
       currency, 
       customerEmail,
+      customer_id,
+      transaction_id,
       metadata,
     } = payload;
 
-    console.log('Webhook received:', { paymentId, orderId, status });
+    console.log('Webhook received:', { paymentId, orderId, orderNumber, status, customerEmail, customer_id });
+
+    // Determine customer email
+    const email = customerEmail || customer_id || metadata?.customerEmail;
+    
+    if (!email) {
+      console.error('No customer email in webhook payload');
+      return NextResponse.json({ error: 'Missing customer email' }, { status: 400 });
+    }
 
     // Handle different payment statuses
-    switch (status) {
+    switch (status?.toLowerCase()) {
       case 'completed':
+      case 'processed':
+      case 'success':
         await handlePaymentSuccess({
-          paymentId,
-          orderId,
-          amount,
-          currency,
-          customerEmail,
+          paymentId: paymentId || transaction_id,
+          orderId: orderId || orderNumber,
+          amount: parseFloat(amount) || 0,
+          currency: currency || 'USD',
+          customerEmail: email,
           metadata,
         });
         break;
 
       case 'failed':
-        await handlePaymentFailed({ orderId, paymentId });
+      case 'error':
+        await handlePaymentFailed({ orderId: orderId || orderNumber, paymentId });
         break;
 
       case 'cancelled':
-        await handlePaymentCancelled({ orderId, paymentId });
+      case 'canceled':
+        await handlePaymentCancelled({ orderId: orderId || orderNumber, paymentId });
         break;
 
       default:
@@ -69,8 +81,8 @@ export async function POST(request: NextRequest) {
 }
 
 async function handlePaymentSuccess(data: {
-  paymentId: string;
-  orderId: string;
+  paymentId?: string;
+  orderId?: string;
   amount: number;
   currency: string;
   customerEmail: string;
@@ -78,12 +90,12 @@ async function handlePaymentSuccess(data: {
 }) {
   const { paymentId, orderId, amount, customerEmail, metadata } = data;
 
-  // Check if order already processed
-  const existingOrder = await db.order.findFirst({
+  // Check if order already exists
+  const existingOrder = orderId ? await db.order.findFirst({
     where: { orderNumber: orderId },
-  });
+  }) : null;
 
-  if (existingOrder && existingOrder.status === 'completed') {
+  if (existingOrder && existingOrder.status === 'COMPLETED') {
     console.log('Order already processed:', orderId);
     return;
   }
@@ -91,31 +103,42 @@ async function handlePaymentSuccess(data: {
   // Generate access code
   const accessCode = generateAccessCode();
 
-  // Determine tier based on amount or metadata
+  // Determine tier based on amount
   const tier = getTierFromAmount(amount);
 
-  // Create or update order
+  // Determine product ID
+  const productId = metadata?.productId || getProductIdFromAmount(amount);
+
   if (existingOrder) {
+    // Update existing order
     await db.order.update({
       where: { id: existingOrder.id },
       data: {
-        status: 'completed',
-        paymentId,
+        status: 'COMPLETED',
+        paymentId: paymentId || existingOrder.paymentId,
+        paidAt: new Date(),
+        fulfilledAt: new Date(),
       },
     });
   } else {
+    // Create new order
+    const newOrderNumber = orderId || `TMLY-${Date.now().toString(36).toUpperCase()}`;
+    
     await db.order.create({
       data: {
-        orderNumber: orderId,
+        orderNumber: newOrderNumber,
         customerEmail: customerEmail.toLowerCase(),
-        status: 'completed',
+        status: 'COMPLETED',
         subtotal: amount,
         total: amount,
-        paymentId,
+        paymentId: paymentId,
+        paymentMethod: 'skrill',
+        paidAt: new Date(),
+        fulfilledAt: new Date(),
         items: {
           create: {
-            productId: metadata?.productId || 'unknown',
-            name: metadata?.productName || 'Product',
+            productId: productId,
+            productName: getProductName(productId),
             price: amount,
             quantity: 1,
           },
@@ -129,17 +152,21 @@ async function handlePaymentSuccess(data: {
     data: {
       code: accessCode,
       email: customerEmail.toLowerCase(),
-      productId: metadata?.productId || 'bundle',
+      productId,
       tier,
       isUsed: false,
       isActive: true,
     },
   });
 
-  console.log('Payment success processed:', { orderId, accessCode });
+  console.log('Payment success processed:', { orderId, accessCode, customerEmail });
+
+  // TODO: Send email with access code
 }
 
-async function handlePaymentFailed(data: { orderId: string; paymentId: string }) {
+async function handlePaymentFailed(data: { orderId?: string; paymentId?: string }) {
+  if (!data.orderId) return;
+
   const existingOrder = await db.order.findFirst({
     where: { orderNumber: data.orderId },
   });
@@ -147,14 +174,16 @@ async function handlePaymentFailed(data: { orderId: string; paymentId: string })
   if (existingOrder) {
     await db.order.update({
       where: { id: existingOrder.id },
-      data: { status: 'failed' },
+      data: { status: 'CANCELLED' },
     });
   }
 
   console.log('Payment failed:', data.orderId);
 }
 
-async function handlePaymentCancelled(data: { orderId: string; paymentId: string }) {
+async function handlePaymentCancelled(data: { orderId?: string; paymentId?: string }) {
+  if (!data.orderId) return;
+
   const existingOrder = await db.order.findFirst({
     where: { orderNumber: data.orderId },
   });
@@ -162,7 +191,7 @@ async function handlePaymentCancelled(data: { orderId: string; paymentId: string
   if (existingOrder) {
     await db.order.update({
       where: { id: existingOrder.id },
-      data: { status: 'cancelled' },
+      data: { status: 'CANCELLED' },
     });
   }
 
@@ -171,19 +200,9 @@ async function handlePaymentCancelled(data: { orderId: string; paymentId: string
 
 function generateAccessCode(): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const segments = 3;
-  const segmentLength = 4;
-  
-  const codeSegments = [];
-  for (let i = 0; i < segments; i++) {
-    let segment = '';
-    for (let j = 0; j < segmentLength; j++) {
-      segment += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    codeSegments.push(segment);
-  }
-  
-  return `TMLY-${codeSegments.join('-')}`;
+  const segment = () =>
+    Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  return `TMLY-${segment()}-${segment()}`;
 }
 
 function getTierFromAmount(amount: number): 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE' {
@@ -191,4 +210,21 @@ function getTierFromAmount(amount: number): 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUN
   if (amount <= 17) return 'BASIC';
   if (amount <= 27) return 'PREMIUM';
   return 'BUNDLE';
+}
+
+function getProductIdFromAmount(amount: number): string {
+  if (amount <= 7) return 'trial';
+  if (amount <= 17) return 'planner';
+  if (amount <= 27) return 'premium';
+  return 'bundle';
+}
+
+function getProductName(productId: string): string {
+  const names: Record<string, string> = {
+    'trial': '7-Day Trial',
+    'planner': 'Identity Recode Planner',
+    'premium': 'Premium Transformation',
+    'bundle': 'Complete Bundle',
+  };
+  return names[productId] || 'Tamkinly Product';
 }

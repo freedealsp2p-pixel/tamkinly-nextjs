@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -94,6 +94,7 @@ function CheckoutContent() {
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [orderNumber, setOrderNumber] = useState<string>('');
   const [paymentStep, setPaymentStep] = useState<'info' | 'payment' | 'confirm'>('info');
 
   // Get product directly from productId (no state needed)
@@ -146,45 +147,52 @@ function CheckoutContent() {
     return `https://pay.skrill.com/?${params.toString()}`;
   };
 
-  // Handle payment confirmation
+  // Handle payment confirmation - Save to database
   const handleConfirmPayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setProcessing(true);
 
     try {
-      // Store order locally for now
-      const order = {
-        id: `ORD-${Date.now()}`,
-        product: product?.id,
-        productName: product?.name,
-        price: product?.price,
-        customerName: formData.name,
-        customerEmail: formData.email,
-        transactionId: formData.transactionId,
-        notes: formData.notes,
-        status: 'pending',
-        createdAt: new Date().toISOString()
-      };
+      // Save order to database via API
+      const response = await fetch('/api/admin/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerEmail: formData.email,
+          customerName: formData.name,
+          items: [{
+            productId: product?.id,
+            productName: product?.name,
+            price: product?.price,
+            quantity: 1,
+          }],
+          total: product?.price,
+          paymentMethod: 'skrill',
+          transactionId: formData.transactionId || undefined,
+          notes: formData.notes || undefined,
+        }),
+      });
 
-      // Get existing orders
-      const existingOrders = JSON.parse(localStorage.getItem('tamkinly_orders') || '[]');
-      existingOrders.push(order);
-      localStorage.setItem('tamkinly_orders', JSON.stringify(existingOrders));
+      const data = await response.json();
 
-      // Store user info
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create order');
+      }
+
+      // Store user info locally for convenience
       localStorage.setItem('tamkinly_user', JSON.stringify({
         name: formData.name,
         email: formData.email
       }));
 
-      // Simulate processing
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
+      setOrderNumber(data.order.orderNumber);
       setSuccess(true);
     } catch (err) {
       console.error('Confirmation error:', err);
-      setError('Failed to submit order. Please try again.');
+      setError(err instanceof Error ? err.message : 'Failed to submit order. Please try again.');
     } finally {
       setProcessing(false);
     }
@@ -231,7 +239,7 @@ function CheckoutContent() {
             <Card className="border-0 shadow-sm mb-8">
               <CardContent className="p-6">
                 <p className="text-sm text-[#8A94A6] mb-2">Order Reference</p>
-                <p className="text-xl font-mono font-bold text-[#0F1C2E]">{`ORD-${Date.now().toString().slice(-8)}`}</p>
+                <p className="text-xl font-mono font-bold text-[#0F1C2E]">{orderNumber}</p>
                 <p className="text-xs text-[#8A94A6] mt-2">Save this reference for support</p>
               </CardContent>
             </Card>
