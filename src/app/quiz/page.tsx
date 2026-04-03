@@ -311,19 +311,6 @@ export default function IdentityQuizPage() {
   const renderIntro = () => (
     <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-slate-900 flex items-center justify-center p-4">
       <div className="max-w-4xl mx-auto text-center">
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <div className="relative w-24 h-28 rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm p-2 border border-[#3DD4B0]/20">
-            <Image 
-              src="/logo.png" 
-              alt="Tamkinly Logo" 
-              fill 
-              className="object-contain"
-              priority
-            />
-          </div>
-        </div>
-
         {/* Badge */}
         <Badge className="mb-6 px-4 py-2 bg-[#3DD4B0]/10 text-[#3DD4B0] border border-[#3DD4B0]/30">
           <Sparkles className="w-3.5 h-3.5 mr-2" />
