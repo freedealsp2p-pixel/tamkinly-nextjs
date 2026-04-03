@@ -414,14 +414,14 @@ function CheckoutContent() {
                     </div>
 
                     {/* Crypto Payment Option */}
-                    <div className="bg-gradient-to-br from-[#F7931A] to-[#C77800] rounded-xl p-6 text-white">
+                    <div className="bg-gradient-to-br from-[#8B5CF6] to-[#6366F1] rounded-xl p-6 text-white">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-                          <span className="text-2xl font-bold">₿</span>
+                          <span className="text-2xl">⚡</span>
                         </div>
                         <div>
                           <p className="font-bold text-lg">Pay with Crypto</p>
-                          <p className="text-white/70 text-sm">USDC or USDT - Instant & Global</p>
+                          <p className="text-white/70 text-sm">USDC/USDT • Instant & Global</p>
                         </div>
                       </div>
 
