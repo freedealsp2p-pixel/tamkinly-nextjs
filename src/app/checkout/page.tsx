@@ -30,10 +30,15 @@ import {
   CreditCard
 } from 'lucide-react';
 
-// Wise Payment Configuration
+// Payment Configuration
 const WISE_CONFIG = {
   paymentLink: 'https://wise.com/pay/me/abdallahc60',
   accountName: 'Abdallah Chouaf'
+};
+
+const CRYPTO_CONFIG = {
+  usdcAddress: '0x81b36f47a10565eb9d00a0fdf7fd084b83d5f3a9',
+  network: 'Ethereum (ERC-20) / Base / Polygon'
 };
 
 // Product data
@@ -390,6 +395,59 @@ function CheckoutContent() {
                       </p>
                     </div>
 
+                    {/* OR Divider */}
+                    <div className="relative my-6">
+                      <Separator />
+                      <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm font-medium text-[#0F1C2E]">
+                        OR
+                      </span>
+                    </div>
+
+                    {/* Crypto Payment Option */}
+                    <div className="bg-gradient-to-br from-[#6366F1] to-[#4F46E5] rounded-xl p-6 text-white">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                          <span className="text-2xl font-bold">$</span>
+                        </div>
+                        <div>
+                          <p className="font-bold text-lg">Pay with USDC</p>
+                          <p className="text-white/70 text-sm">Crypto - Instant & Global</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">USDC Wallet Address:</p>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="font-mono text-xs break-all">{CRYPTO_CONFIG.usdcAddress}</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(CRYPTO_CONFIG.usdcAddress)}
+                              className="text-white hover:bg-white/20 h-8 px-2 flex-shrink-0"
+                            >
+                              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Network:</p>
+                          <p className="font-semibold text-sm">{CRYPTO_CONFIG.network}</p>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Amount to send:</p>
+                          <p className="text-2xl font-bold">${product.price} USDC</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="text-center text-sm text-[#8A94A6] mt-2">
+                      Send USDC to the wallet address above
+                    </p>
+
                     {/* Divider */}
                     <div className="relative">
                       <Separator />
@@ -403,16 +461,16 @@ function CheckoutContent() {
                       <p className="font-medium text-[#0F1C2E]">Confirm Your Payment</p>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-[#2B2E34]">Wise Transaction ID (Optional)</label>
+                        <label className="text-sm font-medium text-[#2B2E34]">Transaction ID / TX Hash (Optional)</label>
                         <Input
                           type="text"
-                          placeholder="e.g., 1234567890"
+                          placeholder="Wise transaction ID or crypto TX hash"
                           value={formData.transactionId}
                           onChange={(e) => setFormData({ ...formData, transactionId: e.target.value })}
                           className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
                         />
                         <p className="text-xs text-[#8A94A6]">
-                          Found in your Wise transaction history or email confirmation
+                          Found in your Wise transaction history or wallet transaction
                         </p>
                       </div>
 
