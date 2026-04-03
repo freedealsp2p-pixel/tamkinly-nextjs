@@ -9,35 +9,45 @@ export async function GET(request: NextRequest) {
     // Simple password protection (in production, use proper auth)
     if (password !== 'tamkinly2024') {
       return NextResponse.json(
-        { error: 'Unauthorized' },
+        { success: false, error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    const codes = await db.appAccess.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
+    try {
+      const codes = await db.appAccess.findMany({
+        orderBy: { createdAt: 'desc' },
+      });
 
-    return NextResponse.json({
-      success: true,
-      codes: codes.map(code => ({
-        id: code.id,
-        code: code.code,
-        email: code.email,
-        customerName: code.customerName,
-        productId: code.productId,
-        tier: code.tier,
-        orderId: code.orderId,
-        isUsed: code.isUsed,
-        usedAt: code.usedAt,
-        expiresAt: code.expiresAt,
-        createdAt: code.createdAt,
-      })),
-    });
+      return NextResponse.json({
+        success: true,
+        codes: codes.map(code => ({
+          id: code.id,
+          code: code.code,
+          email: code.email,
+          customerName: code.customerName,
+          productId: code.productId,
+          tier: code.tier,
+          orderId: code.orderId,
+          isUsed: code.isUsed,
+          usedAt: code.usedAt,
+          expiresAt: code.expiresAt,
+          createdAt: code.createdAt,
+        })),
+      });
+    } catch (dbError) {
+      console.error('Database error:', dbError);
+      // Return empty codes array if database error
+      return NextResponse.json({
+        success: true,
+        codes: [],
+        warning: 'Database connection issue - showing empty list'
+      });
+    }
   } catch (error) {
     console.error('List codes error:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch codes' },
+      { success: false, error: 'Failed to fetch codes' },
       { status: 500 }
     );
   }

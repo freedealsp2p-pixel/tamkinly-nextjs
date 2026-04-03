@@ -222,16 +222,25 @@ export default function AdminPage() {
 
     try {
       const response = await fetch(`/api/access/list?password=${encodeURIComponent(password)}`);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        setError(errorData.error || `Server error: ${response.status}`);
+        setLoading(false);
+        return;
+      }
+      
       const data = await response.json();
 
-      if (response.ok && data.success) {
+      if (data.success) {
         setIsAuthenticated(true);
-        setCodes(data.codes);
+        setCodes(data.codes || []);
       } else {
         setError(data.error || 'Invalid password');
       }
-    } catch {
-      setError('Network error. Please try again.');
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Network error. Please check your connection.');
     } finally {
       setLoading(false);
     }
