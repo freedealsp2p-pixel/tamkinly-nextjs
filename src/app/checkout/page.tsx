@@ -95,6 +95,7 @@ function CheckoutContent() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [orderNumber, setOrderNumber] = useState<string>('');
+  const [accessCode, setAccessCode] = useState<string>('');
   const [paymentStep, setPaymentStep] = useState<'info' | 'payment' | 'confirm'>('info');
 
   // Get product directly from productId (no state needed)
@@ -154,25 +155,19 @@ function CheckoutContent() {
     setProcessing(true);
 
     try {
-      // Save order to database via API
-      const response = await fetch('/api/admin/orders', {
+      // Process checkout via API - this creates order AND generates access code
+      const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          customerEmail: formData.email,
-          customerName: formData.name,
-          items: [{
-            productId: product?.id,
-            productName: product?.name,
-            price: product?.price,
-            quantity: 1,
-          }],
-          total: product?.price,
-          paymentMethod: 'skrill',
+          email: formData.email,
+          name: formData.name,
+          productId: product?.id,
+          productName: product?.name,
+          price: product?.price,
           transactionId: formData.transactionId || undefined,
-          notes: formData.notes || undefined,
         }),
       });
 
@@ -188,7 +183,10 @@ function CheckoutContent() {
         email: formData.email
       }));
 
-      setOrderNumber(data.order.orderNumber);
+      setOrderNumber(data.orderNumber);
+      if (data.accessCode) {
+        setAccessCode(data.accessCode);
+      }
       setSuccess(true);
     } catch (err) {
       console.error('Confirmation error:', err);
@@ -231,10 +229,31 @@ function CheckoutContent() {
             <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-12 h-12 text-green-600" />
             </div>
-            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">Order Submitted!</h1>
+            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">Order Completed!</h1>
             <p className="text-[#8A94A6] mb-8">
-              Thank you! Your order has been received. We will verify your payment and send your access code within 24 hours.
+              Thank you for your purchase! Your order has been processed successfully.
             </p>
+
+            {/* Access Code Section */}
+            {accessCode && (
+              <Card className="border-2 border-[#3DD4B0] shadow-sm mb-6">
+                <CardContent className="p-6">
+                  <p className="text-sm font-medium text-[#1F6F78] mb-2">Your Access Code</p>
+                  <div className="flex items-center justify-center gap-2">
+                    <p className="text-2xl font-mono font-bold text-[#0F1C2E]">{accessCode}</p>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => copyToClipboard(accessCode)}
+                      className="h-8 w-8 p-0"
+                    >
+                      {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                  </div>
+                  <p className="text-xs text-[#8A94A6] mt-2">Save this code to access your products</p>
+                </CardContent>
+              </Card>
+            )}
 
             <Card className="border-0 shadow-sm mb-8">
               <CardContent className="p-6">
@@ -245,14 +264,14 @@ function CheckoutContent() {
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products">
+              <Link href="/apps">
                 <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-8">
-                  Continue Shopping
+                  Access Your Apps
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/products">
                 <Button variant="outline" className="h-12 px-8">
-                  Contact Support
+                  Continue Shopping
                 </Button>
               </Link>
             </div>

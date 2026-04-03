@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
         orderNumber,
         customerEmail: email.toLowerCase(),
         customerName: name || null,
-        status: 'completed',
+        status: 'COMPLETED',
         subtotal: total,
         total,
         items: {
@@ -152,10 +152,20 @@ export async function POST(request: NextRequest) {
     // Send purchase confirmation email
     if (accessTier) {
       try {
+        // Map productId to productType for email
+        const productTypeMap: Record<string, 'trial' | 'planner' | 'premium' | 'bundle'> = {
+          'trial': 'trial',
+          'planner': 'planner',
+          'premium': 'premium',
+          'bundle': 'bundle',
+        };
+        const productType = productTypeMap[productId || 'bundle'] || 'bundle';
+        
         const emailResult = await EmailService.sendPurchaseConfirmationEmail({
           to: email,
           name: name || 'Friend',
           productName: productName || 'Transformation Package',
+          productType,
           accessKey: accessCode,
         });
         
@@ -167,7 +177,7 @@ export async function POST(request: NextRequest) {
       // Add to Brevo for email sequences
       try {
         await addContactToList(email, name || 'Friend', {
-          type: productId || 'bundle',
+          type: (productId || 'bundle') as 'trial' | 'planner' | 'premium' | 'bundle',
           accessKey: accessCode,
         });
       } catch (brevoError) {
