@@ -1,0 +1,49 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd ${{ secrets.PROJECT_PATH }}
+            
+            # Pull latest changes
+            git pull origin main
+            
+            # Install dependencies
+            bun install
+            
+            # Generate Prisma client
+            bunx prisma generate
+            
+            # Apply database migrations
+            bunx prisma db push --accept-data-loss
+            
+            # Build with increased memory
+            NODE_OPTIONS='--max-old-space-size=1536' bun next build
+            
+            # Copy static files
+            mkdir -p .next/standalone/.next
+            cp -r .next/static .next/standalone/.next/
+            cp -r public .next/standalone/
+            
+            # Restart PM2
+            pm2 restart tamkinly-nextjs
+            
+            # Save PM2 state
+            pm2 save
+            
+            echo "✅ Deployment completed successfully!"
