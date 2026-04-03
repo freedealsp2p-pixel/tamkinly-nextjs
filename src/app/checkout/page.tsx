@@ -38,7 +38,8 @@ const WISE_CONFIG = {
 
 const CRYPTO_CONFIG = {
   usdcAddress: '0x81b36f47a10565eb9d00a0fdf7fd084b83d5f3a9',
-  network: 'Ethereum (ERC-20) / Base / Polygon'
+  usdtAddress: '0x81b36f47a10565eb9d00a0fdf7fd084b83d5f3a9',
+  network: 'BEP20 (Binance Smart Chain)'
 };
 
 // Product data
@@ -404,32 +405,50 @@ function CheckoutContent() {
                     </div>
 
                     {/* Crypto Payment Option */}
-                    <div className="bg-gradient-to-br from-[#6366F1] to-[#4F46E5] rounded-xl p-6 text-white">
+                    <div className="bg-gradient-to-br from-[#F7931A] to-[#C77800] rounded-xl p-6 text-white">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-                          <span className="text-2xl font-bold">$</span>
+                          <span className="text-2xl font-bold">₿</span>
                         </div>
                         <div>
-                          <p className="font-bold text-lg">Pay with USDC</p>
-                          <p className="text-white/70 text-sm">Crypto - Instant & Global</p>
+                          <p className="font-bold text-lg">Pay with Crypto</p>
+                          <p className="text-white/70 text-sm">USDC or USDT - Instant & Global</p>
                         </div>
                       </div>
 
                       <div className="space-y-3">
+                        {/* USDC */}
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">USDC Wallet Address:</p>
-                          <div className="flex items-center justify-between gap-2">
-                            <p className="font-mono text-xs break-all">{CRYPTO_CONFIG.usdcAddress}</p>
+                          <div className="flex items-center justify-between mb-2">
+                            <p className="text-sm font-semibold">USDC</p>
                             <Button
                               type="button"
                               variant="ghost"
                               size="sm"
                               onClick={() => copyToClipboard(CRYPTO_CONFIG.usdcAddress)}
-                              className="text-white hover:bg-white/20 h-8 px-2 flex-shrink-0"
+                              className="text-white hover:bg-white/20 h-7 px-2"
                             >
-                              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                             </Button>
                           </div>
+                          <p className="font-mono text-xs break-all">{CRYPTO_CONFIG.usdcAddress}</p>
+                        </div>
+
+                        {/* USDT */}
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <p className="text-sm font-semibold">USDT</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(CRYPTO_CONFIG.usdtAddress)}
+                              className="text-white hover:bg-white/20 h-7 px-2"
+                            >
+                              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                            </Button>
+                          </div>
+                          <p className="font-mono text-xs break-all">{CRYPTO_CONFIG.usdtAddress}</p>
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
@@ -439,13 +458,13 @@ function CheckoutContent() {
 
                         <div className="bg-white/10 rounded-lg p-3">
                           <p className="text-xs text-white/60 mb-1">Amount to send:</p>
-                          <p className="text-2xl font-bold">${product.price} USDC</p>
+                          <p className="text-2xl font-bold">${product.price} USDC/USDT</p>
                         </div>
                       </div>
                     </div>
 
                     <p className="text-center text-sm text-[#8A94A6] mt-2">
-                      Send USDC to the wallet address above
+                      Send USDC or USDT (BEP20) to the wallet address above
                     </p>
 
                     {/* Divider */}
