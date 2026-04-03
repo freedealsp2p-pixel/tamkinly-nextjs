@@ -1,0 +1,63 @@
+diff --git a/src/app/contact/page.tsx b/src/app/contact/page.tsx
+index a3766c2..582e0cd 100755
+--- a/src/app/contact/page.tsx
++++ b/src/app/contact/page.tsx
+@@ -180,7 +180,7 @@ function AlternativeSection() {
+               </div>
+               <h3 className="font-semibold text-primary mb-2">Response Time</h3>
+               <p className="text-slate-600 text-sm">
+-                We typically respond within 24-48 hours during business days.
++                <span className="font-medium text-accent">24-48 hours</span> during business days (Mon-Fri, 9AM-6PM GMT+3)
+               </p>
+             </CardContent>
+           </Card>
+diff --git a/src/components/layout/Header.tsx b/src/components/layout/Header.tsx
+index 1f6356f..e7dfd84 100755
+--- a/src/components/layout/Header.tsx
++++ b/src/components/layout/Header.tsx
+@@ -93,7 +93,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open:
+             {/* Promo Banner */}
+             <div className="bg-accent/10 text-accent text-xs p-3 rounded-lg text-center font-medium">
+               <Sparkles className="h-3 w-3 inline mr-1" />
+-              Get 41% Off Today Only
++              Limited Time: Save $44 on Complete Bundle (41% Off)
+             </div>
+ 
+             <Link href="/cart" onClick={() => setIsOpen(false)}>
+@@ -102,9 +102,9 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open:
+                 Cart (0)
+               </Button>
+             </Link>
+-            <Link href="/products" onClick={() => setIsOpen(false)}>
++            <Link href="/quiz" onClick={() => setIsOpen(false)}>
+               <Button className="w-full bg-accent text-primary hover:bg-accent/90 font-semibold">
+-                Start Transformation
++                Start Free Assessment
+               </Button>
+             </Link>
+           </div>
+@@ -152,10 +152,10 @@ export function Header() {
+ 
+           {/* Desktop Actions */}
+           <div className="hidden md:flex items-center space-x-3">
+-            {/* Promo Badge */}
++            {/* Promo Badge - Limited Time Offer */}
+             <div className="hidden lg:flex items-center gap-1.5 text-xs text-accent bg-accent/10 px-3 py-1.5 rounded-full font-medium">
+               <Sparkles className="h-3 w-3" />
+-              <span>41% Off</span>
++              <span>Save $44 on Bundle (Limited)</span>
+             </div>
+             
+             <Link href="/cart">
+@@ -166,9 +166,9 @@ export function Header() {
+                 </span>
+               </Button>
+             </Link>
+-            <Link href="/products">
++            <Link href="/quiz">
+               <Button className="bg-accent text-primary hover:bg-accent/90 font-semibold shadow-sm hover:shadow-md transition-all">
+-                Get Started — $17
++                Start Free Assessment
+               </Button>
+             </Link>
+           </div>
