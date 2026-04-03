@@ -30,10 +30,9 @@ import {
   CreditCard
 } from 'lucide-react';
 
-// Skrill Account Configuration
-const SKRILL_CONFIG = {
-  email: 'abdallahchouaf1@gmail.com',
-  customerId: '375652661',
+// Wise Payment Configuration
+const WISE_CONFIG = {
+  paymentLink: 'https://wise.com/pay/me/abdallahc60',
   accountName: 'Abdallah Chouaf'
 };
 
@@ -127,22 +126,6 @@ function CheckoutContent() {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  // Generate Skrill payment URL
-  const getSkrillPaymentUrl = () => {
-    if (!product) return '';
-    const origin = window.location.origin;
-    const params = new URLSearchParams();
-    params.append('pay_to_email', SKRILL_CONFIG.email);
-    params.append('amount', product.price.toString());
-    params.append('currency', 'USD');
-    params.append('language', 'EN');
-    params.append('detail1_description', 'Tamkinly');
-    params.append('detail1_text', product.name);
-    params.append('return_url', `${origin}/payment/success`);
-    params.append('cancel_url', `${origin}/payment/cancel`);
-    return `https://pay.skrill.com/?${params.toString()}`;
   };
 
   // Handle payment confirmation - Save to database
@@ -355,40 +338,24 @@ function CheckoutContent() {
                       <div className="w-8 h-8 rounded-full bg-[#3DD4B0] text-[#0F1C2E] flex items-center justify-center font-bold">2</div>
                       <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                         <CreditCard className="w-5 h-5 text-[#3DD4B0]" />
-                        Payment via Skrill
+                        Payment via Wise
                       </CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    {/* Skrill Payment Info */}
-                    <div className="bg-gradient-to-br from-[#862165] to-[#5a1a45] rounded-xl p-6 text-white">
+                    {/* Wise Payment Info */}
+                    <div className="bg-gradient-to-br from-[#00B9FF] to-[#0066B2] rounded-xl p-6 text-white">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-                          <span className="text-2xl font-bold">S</span>
+                          <span className="text-2xl font-bold">W</span>
                         </div>
                         <div>
-                          <p className="font-bold text-lg">Skrill Payment</p>
-                          <p className="text-white/70 text-sm">Fast & Secure</p>
+                          <p className="font-bold text-lg">Wise Payment</p>
+                          <p className="text-white/70 text-sm">Fast, Low-cost Transfers</p>
                         </div>
                       </div>
 
                       <div className="space-y-3">
-                        <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Send payment to:</p>
-                          <div className="flex items-center justify-between">
-                            <p className="font-mono font-semibold">{SKRILL_CONFIG.email}</p>
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => copyToClipboard(SKRILL_CONFIG.email)}
-                              className="text-white hover:bg-white/20 h-8 px-2"
-                            >
-                              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                            </Button>
-                          </div>
-                        </div>
-
                         <div className="bg-white/10 rounded-lg p-3">
                           <p className="text-xs text-white/60 mb-1">Amount to send:</p>
                           <p className="text-2xl font-bold">${product.price} USD</p>
@@ -396,7 +363,7 @@ function CheckoutContent() {
 
                         <div className="bg-white/10 rounded-lg p-3">
                           <p className="text-xs text-white/60 mb-1">Account Holder:</p>
-                          <p className="font-semibold">{SKRILL_CONFIG.accountName}</p>
+                          <p className="font-semibold">{WISE_CONFIG.accountName}</p>
                         </div>
                       </div>
                     </div>
@@ -404,22 +371,22 @@ function CheckoutContent() {
                     {/* Payment Button */}
                     <div className="space-y-4">
                       <a
-                        href={getSkrillPaymentUrl()}
+                        href={WISE_CONFIG.paymentLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block"
                       >
                         <Button
                           type="button"
-                          className="w-full bg-[#862165] hover:bg-[#6b1a50] text-white h-14 text-lg font-semibold"
+                          className="w-full bg-[#00B9FF] hover:bg-[#0099DD] text-white h-14 text-lg font-semibold"
                         >
                           <ExternalLink className="w-5 h-5 mr-2" />
-                          Pay ${product.price} with Skrill
+                          Pay ${product.price} with Wise
                         </Button>
                       </a>
 
                       <p className="text-center text-sm text-[#8A94A6]">
-                        Click to open Skrill payment page in a new tab
+                        Click to open Wise payment page in a new tab
                       </p>
                     </div>
 
@@ -436,7 +403,7 @@ function CheckoutContent() {
                       <p className="font-medium text-[#0F1C2E]">Confirm Your Payment</p>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-[#2B2E34]">Skrill Transaction ID (Optional)</label>
+                        <label className="text-sm font-medium text-[#2B2E34]">Wise Transaction ID (Optional)</label>
                         <Input
                           type="text"
                           placeholder="e.g., 1234567890"
@@ -445,7 +412,7 @@ function CheckoutContent() {
                           className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
                         />
                         <p className="text-xs text-[#8A94A6]">
-                          Found in your Skrill transaction history or email confirmation
+                          Found in your Wise transaction history or email confirmation
                         </p>
                       </div>
 
@@ -514,7 +481,7 @@ function CheckoutContent() {
               </div>
               <div className="flex items-center gap-2">
                 <Lock className="h-4 w-4 text-[#3DD4B0]" />
-                <span>Verified by Skrill</span>
+                <span>Verified by Wise</span>
               </div>
             </div>
           </div>
