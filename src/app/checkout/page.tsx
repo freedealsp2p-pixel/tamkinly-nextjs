@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
 import {
-  CreditCard,
   Shield,
   CheckCircle2,
   Lock,
@@ -23,8 +23,19 @@ import {
   Calendar,
   Award,
   Monitor,
-  Clock
+  Clock,
+  Copy,
+  Check,
+  ExternalLink,
+  CreditCard
 } from 'lucide-react';
+
+// Skrill Account Configuration
+const SKRILL_CONFIG = {
+  email: 'abdallahchouaf1@gmail.com',
+  customerId: '375652661',
+  accountName: 'Abdallah Chouaf'
+};
 
 // Product data
 const productsData: Record<string, {
@@ -78,16 +89,17 @@ function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const productId = searchParams.get('product');
-  
+
+  const [copied, setCopied] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [accessCode, setAccessCode] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [paymentStep, setPaymentStep] = useState<'info' | 'payment' | 'confirm'>('info');
 
   // Get product directly from productId (no state needed)
   const product = productId && productsData[productId] ? productsData[productId] : null;
 
-  // Form state - initialize with saved user data if available
+  // Form state
   const [formData, setFormData] = useState(() => {
     if (typeof window !== 'undefined') {
       const userStored = localStorage.getItem('tamkinly_user');
@@ -97,53 +109,88 @@ function CheckoutContent() {
           return {
             name: user.name || '',
             email: user.email || '',
+            transactionId: '',
+            notes: ''
           };
         } catch {
           // Ignore JSON parse errors
         }
       }
     }
-    return { name: '', email: '' };
+    return { name: '', email: '', transactionId: '', notes: '' };
   });
 
-  // Handle checkout - Redirect to Tahweel Payment Gateway
-  const handleCheckout = async (e: React.FormEvent) => {
+  // Copy to clipboard
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  // Generate Skrill payment URL
+  const getSkrillPaymentUrl = () => {
+    if (!product) return '';
+    const params = new URLSearchParams({
+      pay_to_email: SKRILL_CONFIG.email,
+      amount: product.price.toString(),
+      currency: 'USD',
+      language: 'EN',
+      detail1_description: 'Tamkinly Product',
+      detail1_text: product.name,
+      merchant_fields: 'customer_id',
+      customer_id: formData.email,
+      return_url: `${window.location.origin}/payment/success`,
+      cancel_url: `${window.location.origin}/payment/cancel`,
+      status_url: `${window.location.origin}/api/payment/webhook`
+    });
+    return `https://pay.skrill.com/?${params.toString()}`;
+  };
+
+  // Handle payment confirmation
+  const handleConfirmPayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setProcessing(true);
 
     try {
-      // Create payment session with Tahweel
-      const response = await fetch('/api/payment/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: product?.price,
-          currency: 'USD',
-          customerEmail: formData.email,
-          customerName: formData.name,
-          productId: product?.id,
-          productName: product?.name,
-        }),
-      });
+      // Store order locally for now
+      const order = {
+        id: `ORD-${Date.now()}`,
+        product: product?.id,
+        productName: product?.name,
+        price: product?.price,
+        customerName: formData.name,
+        customerEmail: formData.email,
+        transactionId: formData.transactionId,
+        notes: formData.notes,
+        status: 'pending',
+        createdAt: new Date().toISOString()
+      };
 
-      const data = await response.json();
+      // Get existing orders
+      const existingOrders = JSON.parse(localStorage.getItem('tamkinly_orders') || '[]');
+      existingOrders.push(order);
+      localStorage.setItem('tamkinly_orders', JSON.stringify(existingOrders));
 
-      if (response.ok && data.success && data.paymentUrl) {
-        // Redirect to Tahweel payment page
-        window.location.href = data.paymentUrl;
-      } else {
-        setError(data.error || 'Failed to create payment session. Please try again.');
-        setProcessing(false);
-      }
+      // Store user info
+      localStorage.setItem('tamkinly_user', JSON.stringify({
+        name: formData.name,
+        email: formData.email
+      }));
+
+      // Simulate processing
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      setSuccess(true);
     } catch (err) {
-      console.error('Checkout error:', err);
-      setError('Network error. Please try again.');
+      console.error('Confirmation error:', err);
+      setError('Failed to submit order. Please try again.');
+    } finally {
       setProcessing(false);
     }
   };
 
-  // No product selected - show product selection
+  // No product selected
   if (!product) {
     return (
       <div className="min-h-screen bg-[#F6F8FA]">
@@ -176,31 +223,28 @@ function CheckoutContent() {
             <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-12 h-12 text-green-600" />
             </div>
-            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">Order Complete!</h1>
+            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">Order Submitted!</h1>
             <p className="text-[#8A94A6] mb-8">
-              Thank you for your purchase. Your access code has been sent to your email.
+              Thank you! Your order has been received. We will verify your payment and send your access code within 24 hours.
             </p>
-            
-            {accessCode && (
-              <Card className="border-0 shadow-sm mb-8">
-                <CardContent className="p-6">
-                  <p className="text-sm text-[#8A94A6] mb-2">Your Access Code</p>
-                  <p className="text-3xl font-mono font-bold text-[#0F1C2E]">{accessCode}</p>
-                  <p className="text-xs text-[#8A94A6] mt-2">Save this code to access your products</p>
-                </CardContent>
-              </Card>
-            )}
-            
+
+            <Card className="border-0 shadow-sm mb-8">
+              <CardContent className="p-6">
+                <p className="text-sm text-[#8A94A6] mb-2">Order Reference</p>
+                <p className="text-xl font-mono font-bold text-[#0F1C2E]">{`ORD-${Date.now().toString().slice(-8)}`}</p>
+                <p className="text-xs text-[#8A94A6] mt-2">Save this reference for support</p>
+              </CardContent>
+            </Card>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/apps">
+              <Link href="/products">
                 <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-8">
-                  Access Your Products
-                  <Sparkles className="w-4 h-4 ml-2" />
+                  Continue Shopping
                 </Button>
               </Link>
-              <Link href="/account">
+              <Link href="/contact">
                 <Button variant="outline" className="h-12 px-8">
-                  View Account
+                  Contact Support
                 </Button>
               </Link>
             </div>
@@ -225,23 +269,23 @@ function CheckoutContent() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Checkout Form */}
+          {/* Main Content */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleCheckout}>
-              {/* Customer Info */}
+            {/* Step 1: Customer Info */}
+            {paymentStep === 'info' && (
               <Card className="border-0 shadow-sm mb-6">
                 <CardHeader>
-                  <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-                    <User className="w-5 h-5 text-[#3DD4B0]" />
-                    Customer Information
-                  </CardTitle>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-[#3DD4B0] text-[#0F1C2E] flex items-center justify-center font-bold">1</div>
+                    <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
+                      <User className="w-5 h-5 text-[#3DD4B0]" />
+                      Customer Information
+                    </CardTitle>
+                  </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
-                      <User className="w-4 h-4" />
-                      Name
-                    </label>
+                    <label className="text-sm font-medium text-[#2B2E34]">Full Name</label>
                     <Input
                       type="text"
                       placeholder="Your name"
@@ -251,12 +295,9 @@ function CheckoutContent() {
                       className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
-                      <Mail className="w-4 h-4" />
-                      Email Address
-                    </label>
+                    <label className="text-sm font-medium text-[#2B2E34]">Email Address</label>
                     <Input
                       type="email"
                       placeholder="your@email.com"
@@ -269,83 +310,189 @@ function CheckoutContent() {
                       Your access code will be sent to this email.
                     </p>
                   </div>
+
+                  <Button
+                    onClick={() => setPaymentStep('payment')}
+                    disabled={!formData.name || !formData.email}
+                    className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12"
+                  >
+                    Continue to Payment
+                  </Button>
                 </CardContent>
               </Card>
+            )}
 
-              {/* Payment Info */}
-              <Card className="border-0 shadow-sm mb-6">
-                <CardHeader>
-                  <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-                    <CreditCard className="w-5 h-5 text-[#3DD4B0]" />
-                    Payment via Tahweel
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center">
-                      <Shield className="w-5 h-5 text-[#3DD4B0]" />
+            {/* Step 2: Payment */}
+            {paymentStep === 'payment' && (
+              <form onSubmit={handleConfirmPayment}>
+                <Card className="border-0 shadow-sm mb-6">
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#3DD4B0] text-[#0F1C2E] flex items-center justify-center font-bold">2</div>
+                      <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
+                        <CreditCard className="w-5 h-5 text-[#3DD4B0]" />
+                        Payment via Skrill
+                      </CardTitle>
                     </div>
-                    <div>
-                      <p className="font-semibold text-[#0F1C2E]">Secure Payment</p>
-                      <p className="text-xs text-slate-500">Powered by Tahweel</p>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    {/* Skrill Payment Info */}
+                    <div className="bg-gradient-to-br from-[#862165] to-[#5a1a45] rounded-xl p-6 text-white">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                          <span className="text-2xl font-bold">S</span>
+                        </div>
+                        <div>
+                          <p className="font-bold text-lg">Skrill Payment</p>
+                          <p className="text-white/70 text-sm">Fast & Secure</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Send payment to:</p>
+                          <div className="flex items-center justify-between">
+                            <p className="font-mono font-semibold">{SKRILL_CONFIG.email}</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(SKRILL_CONFIG.email)}
+                              className="text-white hover:bg-white/20 h-8 px-2"
+                            >
+                              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Amount to send:</p>
+                          <p className="text-2xl font-bold">${product.price} USD</p>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Account Holder:</p>
+                          <p className="font-semibold">{SKRILL_CONFIG.accountName}</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <p className="text-sm text-slate-600 mb-4">
-                    You will be redirected to Tahweel&apos;s secure payment gateway to complete your purchase.
-                  </p>
-                  
-                  {/* Payment Methods */}
-                  <div className="space-y-3">
-                    <p className="text-sm font-medium text-[#2B2E34]">Accepted Payment Methods:</p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="text-sm">Credit Card</Badge>
-                      <Badge variant="outline" className="text-sm">Debit Card</Badge>
-                      <Badge variant="outline" className="text-sm">Bank Transfer</Badge>
+
+                    {/* Payment Button */}
+                    <div className="space-y-4">
+                      <a
+                        href={getSkrillPaymentUrl()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Button
+                          type="button"
+                          className="w-full bg-[#862165] hover:bg-[#6b1a50] text-white h-14 text-lg font-semibold"
+                        >
+                          <ExternalLink className="w-5 h-5 mr-2" />
+                          Pay ${product.price} with Skrill
+                        </Button>
+                      </a>
+
+                      <p className="text-center text-sm text-[#8A94A6]">
+                        Click to open Skrill payment page in a new tab
+                      </p>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
 
-              {/* Error Message */}
-              {error && (
-                <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 p-4 rounded-lg mb-6">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                  {error}
-                </div>
-              )}
+                    {/* Divider */}
+                    <div className="relative">
+                      <Separator />
+                      <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-sm text-[#8A94A6]">
+                        Already paid?
+                      </span>
+                    </div>
 
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                disabled={processing}
-                className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-14 text-lg font-semibold"
-              >
-                {processing ? (
-                  <>
-                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    Creating Payment...
-                  </>
-                ) : (
-                  <>
-                    <Lock className="w-4 h-4 mr-2" />
-                    Proceed to Payment — ${product.price}
-                  </>
-                )}
-              </Button>
+                    {/* Confirmation Section */}
+                    <div className="space-y-4">
+                      <p className="font-medium text-[#0F1C2E]">Confirm Your Payment</p>
 
-              {/* Trust Badges */}
-              <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-sm text-[#8A94A6]">
-                <div className="flex items-center gap-2">
-                  <Shield className="h-4 w-4 text-[#3DD4B0]" />
-                  <span>Secure checkout</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#3DD4B0]" />
-                  <span>30-day money-back</span>
-                </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Skrill Transaction ID (Optional)</label>
+                        <Input
+                          type="text"
+                          placeholder="e.g., 1234567890"
+                          value={formData.transactionId}
+                          onChange={(e) => setFormData({ ...formData, transactionId: e.target.value })}
+                          className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
+                        />
+                        <p className="text-xs text-[#8A94A6]">
+                          Found in your Skrill transaction history or email confirmation
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Additional Notes (Optional)</label>
+                        <Textarea
+                          placeholder="Any notes about your order..."
+                          value={formData.notes}
+                          onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                          className="border-[#1F6F78]/20 focus:border-[#3DD4B0] min-h-[80px]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Error Message */}
+                    {error && (
+                      <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 p-4 rounded-lg">
+                        <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                        {error}
+                      </div>
+                    )}
+
+                    {/* Submit Button */}
+                    <Button
+                      type="submit"
+                      disabled={processing}
+                      className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-14 text-lg font-semibold"
+                    >
+                      {processing ? (
+                        <>
+                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="w-4 h-4 mr-2" />
+                          Confirm Order
+                        </>
+                      )}
+                    </Button>
+
+                    {/* Back Button */}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      onClick={() => setPaymentStep('info')}
+                      className="w-full"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back to Customer Info
+                    </Button>
+                  </CardContent>
+                </Card>
+              </form>
+            )}
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-sm text-[#8A94A6]">
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-[#3DD4B0]" />
+                <span>Secure payment</span>
               </div>
-            </form>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#3DD4B0]" />
+                <span>30-day money-back</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Lock className="h-4 w-4 text-[#3DD4B0]" />
+                <span>Verified by Skrill</span>
+              </div>
+            </div>
           </div>
 
           {/* Order Summary */}
@@ -382,9 +529,9 @@ function CheckoutContent() {
                     </div>
                   ))}
                 </div>
-                
+
                 <Separator />
-                
+
                 <div className="flex justify-between text-[#8A94A6]">
                   <span>Subtotal</span>
                   <span>${product.price.toFixed(2)}</span>
@@ -402,21 +549,21 @@ function CheckoutContent() {
                 <Separator />
                 <div className="flex justify-between text-lg font-bold text-[#0F1C2E]">
                   <span>Total</span>
-                  <span>${product.price.toFixed(2)}</span>
+                  <span>${product.price.toFixed(2)} USD</span>
                 </div>
 
                 {/* Trust */}
                 <div className="pt-4 space-y-3 border-t">
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]">
-                    <CheckCircle2 className="w-4 h-4 text-[#3DD4B0]" />
-                    <span>Instant access after purchase</span>
+                    <CheckCircle2 className="w-4 w-4 text-[#3DD4B0]" />
+                    <span>Instant access after payment</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]">
-                    <Shield className="w-4 h-4 text-[#3DD4B0]" />
+                    <Shield className="w-4 w-4 text-[#3DD4B0]" />
                     <span>Access code sent via email</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]">
-                    <Sparkles className="w-4 h-4 text-[#3DD4B0]" />
+                    <Sparkles className="w-4 w-4 text-[#3DD4B0]" />
                     <span>Lifetime access</span>
                   </div>
                 </div>
