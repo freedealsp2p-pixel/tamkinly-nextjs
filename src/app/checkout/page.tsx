@@ -42,6 +42,15 @@ const CRYPTO_CONFIG = {
   network: 'BEP20 (Binance Smart Chain)'
 };
 
+const BANK_CONFIG = {
+  accountName: 'Abdallah Chouaf',
+  accountNumber: '8313147497',
+  routingNumber: '026073150',
+  swiftBic: 'CMFGUS33',
+  bankName: 'Community Federal Savings Bank',
+  bankAddress: '89-16 Jamaica Ave, Woodhaven, NY, 11421, United States'
+};
+
 // Product data
 const productsData: Record<string, {
   id: string;
@@ -465,6 +474,107 @@ function CheckoutContent() {
 
                     <p className="text-center text-sm text-[#8A94A6] mt-2">
                       Send USDC or USDT (BEP20) to the wallet address above
+                    </p>
+
+                    {/* OR Divider */}
+                    <div className="relative my-6">
+                      <Separator />
+                      <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm font-medium text-[#0F1C2E]">
+                        OR
+                      </span>
+                    </div>
+
+                    {/* Bank Transfer Option */}
+                    <div className="bg-gradient-to-br from-[#1F6F78] to-[#0F4F56] rounded-xl p-6 text-white">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                          <span className="text-2xl font-bold">🏦</span>
+                        </div>
+                        <div>
+                          <p className="font-bold text-lg">Bank Transfer</p>
+                          <p className="text-white/70 text-sm">International Wire / ACH</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Account Name:</p>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="font-semibold">{BANK_CONFIG.accountName}</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(BANK_CONFIG.accountName)}
+                              className="text-white hover:bg-white/20 h-7 px-2"
+                            >
+                              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Account Number:</p>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="font-mono font-semibold">{BANK_CONFIG.accountNumber}</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(BANK_CONFIG.accountNumber)}
+                              className="text-white hover:bg-white/20 h-7 px-2"
+                            >
+                              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Routing Number (ACH):</p>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="font-mono font-semibold">{BANK_CONFIG.routingNumber}</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(BANK_CONFIG.routingNumber)}
+                              className="text-white hover:bg-white/20 h-7 px-2"
+                            >
+                              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">SWIFT/BIC (International):</p>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="font-mono font-semibold">{BANK_CONFIG.swiftBic}</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => copyToClipboard(BANK_CONFIG.swiftBic)}
+                              className="text-white hover:bg-white/20 h-7 px-2"
+                            >
+                              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Bank Name:</p>
+                          <p className="font-semibold text-sm">{BANK_CONFIG.bankName}</p>
+                        </div>
+
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <p className="text-xs text-white/60 mb-1">Amount to send:</p>
+                          <p className="text-2xl font-bold">${product.price} USD</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="text-center text-sm text-[#8A94A6] mt-2">
+                      International wire transfers may take 1-3 business days
                     </p>
 
                     {/* Divider */}
