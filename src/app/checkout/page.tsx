@@ -132,17 +132,16 @@ function CheckoutContent() {
   // Generate Skrill payment URL
   const getSkrillPaymentUrl = () => {
     if (!product) return '';
-    const params = new URLSearchParams({
-      pay_to_email: SKRILL_CONFIG.email,
-      amount: product.price.toString(),
-      currency: 'USD',
-      language: 'EN',
-      detail1_description: 'Tamkinly',
-      detail1_text: product.name,
-      return_url: `${window.location.origin}/payment/success`,
-      cancel_url: `${window.location.origin}/payment/cancel`,
-      status_url: `${window.location.origin}/api/payment/webhook`
-    });
+    const origin = window.location.origin;
+    const params = new URLSearchParams();
+    params.append('pay_to_email', SKRILL_CONFIG.email);
+    params.append('amount', product.price.toString());
+    params.append('currency', 'USD');
+    params.append('language', 'EN');
+    params.append('detail1_description', 'Tamkinly');
+    params.append('detail1_text', product.name);
+    params.append('return_url', `${origin}/payment/success`);
+    params.append('cancel_url', `${origin}/payment/cancel`);
     return `https://pay.skrill.com/?${params.toString()}`;
   };
 
