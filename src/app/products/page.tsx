@@ -216,7 +216,7 @@ function HeroSection() {
         <div className="max-w-4xl mx-auto text-center">
           <Badge className="mb-6 px-4 py-2 border-[#3DD4B0]/30 text-[#3DD4B0] bg-[#3DD4B0]/10">
             <Zap className="w-3.5 h-3.5 mr-2" />
-            Value Ladder: Start Free, Upgrade Anytime
+            Start Free — Upgrade When Ready
           </Badge>
           
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -548,7 +548,7 @@ function ProductsSection() {
               SSL Secured
             </span>
             <span>|</span>
-            <span>Wise / Bank Transfer</span>
+            <span>Wise • Crypto • Bank Transfer (Coming Soon)</span>
             <span>|</span>
             <span>30-Day Refund Policy</span>
           </div>
