@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { verifyAdminPassword } from '@/lib/admin-auth';
 
 // Get all access codes (admin only - simple password protection)
 export async function GET(request: NextRequest) {
   try {
     const password = request.nextUrl.searchParams.get('password');
 
-    // Simple password protection (in production, use proper auth)
-    if (password !== 'tamkinly2024') {
+    // Use unified admin password verification
+    if (!verifyAdminPassword(password || '')) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
         { status: 401 }
@@ -58,7 +59,7 @@ export async function DELETE(request: NextRequest) {
   try {
     const { id, password } = await request.json();
 
-    if (password !== 'tamkinly2024') {
+    if (!verifyAdminPassword(password || '')) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
