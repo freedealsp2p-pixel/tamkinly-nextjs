@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
+import { createContext, useContext, useEffect, ReactNode, useCallback, useMemo, useSyncExternalStore } from 'react';
 import enMessages from '@/../messages/en.json';
 import arMessages from '@/../messages/ar.json';
 
@@ -37,45 +37,54 @@ function getNestedValue(obj: Record<string, unknown>, path: string): string {
   return typeof result === 'string' ? result : path;
 }
 
-// Get initial locale from localStorage
-function getInitialLocale(): Locale {
-  // Default for SSR
+// Subscribe to storage events (for cross-tab sync)
+function subscribe(callback: () => void) {
+  window.addEventListener('storage', callback);
+  return () => window.removeEventListener('storage', callback);
+}
+
+// Get stored locale from localStorage
+function getStoredLocale(): Locale {
   if (typeof window === 'undefined') return 'en';
-  
-  const saved = localStorage.getItem('locale');
-  if (saved === 'ar' || saved === 'en') {
-    return saved;
-  }
+  const stored = localStorage.getItem('locale');
+  return (stored === 'ar' || stored === 'en') ? stored : 'en';
+}
+
+// Server snapshot (always returns 'en' for SSR)
+function getServerSnapshot(): Locale {
   return 'en';
 }
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  // Use lazy initializer to get locale from localStorage once on mount
-  const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
+  // Use useSyncExternalStore for localStorage sync (handles SSR hydration correctly)
+  const storedLocale = useSyncExternalStore(subscribe, getStoredLocale, getServerSnapshot);
   
   // Update document attributes when locale changes
   useEffect(() => {
-    document.documentElement.lang = locale;
-    document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
-  }, [locale]);
+    document.documentElement.lang = storedLocale;
+    document.documentElement.dir = storedLocale === 'ar' ? 'rtl' : 'ltr';
+  }, [storedLocale]);
   
   const setLocale = useCallback((newLocale: Locale) => {
-    setLocaleState(newLocale);
     localStorage.setItem('locale', newLocale);
+    // Dispatch storage event to trigger re-render
+    window.dispatchEvent(new StorageEvent('storage', { key: 'locale', newValue: newLocale }));
+    document.documentElement.lang = newLocale;
+    document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
   }, []);
   
   const t = useCallback((key: string): string => {
-    return getNestedValue(messages[locale] as unknown as Record<string, unknown>, key);
-  }, [locale]);
+    return getNestedValue(messages[storedLocale] as unknown as Record<string, unknown>, key);
+  }, [storedLocale]);
   
-  const direction = useMemo((): 'ltr' | 'rtl' => locale === 'ar' ? 'rtl' : 'ltr', [locale]);
+  const direction = useMemo((): 'ltr' | 'rtl' => storedLocale === 'ar' ? 'rtl' : 'ltr', [storedLocale]);
   
   const contextValue = useMemo(() => ({
-    locale,
+    locale: storedLocale,
     setLocale,
     t,
     direction,
-  }), [locale, setLocale, t, direction]);
+  }), [storedLocale, setLocale, t, direction]);
   
   return (
     <LocaleContext.Provider value={contextValue}>
