@@ -851,6 +851,92 @@ model AICoachConversation {
 }
 
 // ============================================
+// SUPPORT TICKETS
+// ============================================
+
+model SupportTicket {
+  id            String           @id @default(cuid())
+  ticketNumber  String           @unique  // TKT-XXXXX
+  
+  // Customer info
+  email         String
+  name          String?
+  
+  // Ticket details
+  subject       String
+  message       String
+  category      TicketCategory?
+  priority      TicketPriority   @default(NORMAL)
+  
+  // Status
+  status        TicketStatus     @default(OPEN)
+  
+  // Response tracking
+  firstResponseAt DateTime?
+  resolvedAt    DateTime?
+  
+  // Messages
+  messages      TicketMessage[]
+  
+  // Timestamps
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  
+  @@index([email])
+  @@index([status])
+  @@map("support_tickets")
+}
+
+model TicketMessage {
+  id          String   @id @default(cuid())
+  ticketId    String
+  ticket      SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  
+  // Sender
+  senderType  SenderType
+  senderName  String?
+  senderEmail String?
+  
+  // Content
+  message     String
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  
+  @@index([ticketId])
+  @@map("ticket_messages")
+}
+
+enum TicketCategory {
+  TECHNICAL
+  BILLING
+  ACCESS
+  FEEDBACK
+  GENERAL
+}
+
+enum TicketPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING
+  RESOLVED
+  CLOSED
+}
+
+enum SenderType {
+  CUSTOMER
+  SUPPORT
+  SYSTEM
+}
+
+// ============================================
 // ANALYTICS
 // ============================================
 

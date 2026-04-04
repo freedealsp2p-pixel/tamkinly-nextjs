@@ -14,7 +14,8 @@ import {
   Sparkles,
   Target,
   TrendingUp,
-  CheckCircle2
+  CheckCircle2,
+  Shield
 } from 'lucide-react';
 
 interface Question {
@@ -119,29 +120,30 @@ export default function IdentityGapQuiz() {
     return sorted[0];
   };
 
+  // Tamkinly brand colors only
   const dimensionInfo: Record<string, { name: string; description: string; color: string; icon: React.ReactNode }> = {
     selfTrust: {
       name: 'Self-Trust',
       description: 'Your ability to trust your own judgment and keep promises to yourself',
-      color: '#3DD4B0',
+      color: '#3DD4B0', // Mint - primary accent
       icon: <Brain className="w-5 h-5" />
     },
     clarity: {
       name: 'Clarity',
       description: 'How clear you are about who you want to become and what you value',
-      color: '#1F6F78',
+      color: '#1F6F78', // Teal - secondary
       icon: <Target className="w-5 h-5" />
     },
     alignment: {
       name: 'Alignment',
       description: 'The match between your daily actions and your stated values',
-      color: '#64B5F6',
+      color: '#FFB74D', // Amber - warm accent
       icon: <Sparkles className="w-5 h-5" />
     },
     consistency: {
       name: 'Consistency',
       description: 'Your ability to follow through on commitments regardless of motivation',
-      color: '#BA68C8',
+      color: '#0F1C2E', // Navy - primary
       icon: <TrendingUp className="w-5 h-5" />
     }
   };
