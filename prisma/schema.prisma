@@ -956,3 +956,275 @@ model PageView {
   @@index([createdAt])
   @@map("page_views")
 }
+
+// ============================================
+// UNIFIED PROGRESS TRACKING SYSTEM
+// ============================================
+
+// Cross-App Achievement System
+model UserAchievement {
+  id            String         @id @default(cuid())
+  userId        String
+  
+  // Achievement details
+  achievementId String         // Achievement identifier (e.g., "first_habit", "week_streak")
+  category      AchievementCategory
+  tier          AccessTier     @default(FREE)  // Minimum tier required
+  
+  // Progress
+  progress      Int            @default(0)    // 0-100
+  completed     Boolean        @default(false)
+  completedAt   DateTime?
+  
+  // Metadata
+  metadata      String         @default("{}") // JSON for additional data
+  
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  
+  @@unique([userId, achievementId])
+  @@index([userId])
+  @@map("user_achievements")
+}
+
+enum AchievementCategory {
+  HABITS
+  GOALS
+  JOURNAL
+  IDENTITY
+  CONSISTENCY
+  TRANSFORMATION
+  ENGAGEMENT
+  MILESTONE
+}
+
+// App-Specific Progress Records
+model AppProgress {
+  id            String   @id @default(cuid())
+  userId        String
+  appSlug       String
+  
+  // Progress data
+  progressData  String   @default("{}")  // JSON object with app-specific progress
+  score         Float?   // Overall score for this app
+  
+  // Completion tracking
+  completed     Boolean  @default(false)
+  completedAt   DateTime?
+  
+  // Usage
+  lastAccessed  DateTime @default(now())
+  accessCount   Int      @default(1)
+  timeSpent     Int      @default(0)  // Total time in minutes
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@unique([userId, appSlug])
+  @@index([userId])
+  @@map("app_progress")
+}
+
+// Worksheet Responses (for all worksheet apps)
+model WorksheetResponse {
+  id              String   @id @default(cuid())
+  userId          String?
+  sessionId       String?  // For anonymous users
+  
+  // Worksheet identification
+  worksheetType   String   // identity-baseline, environmental-audit, decision-analysis, etc.
+  
+  // Responses
+  responses       String   // JSON object with all responses
+  
+  // Scores (computed)
+  overallScore    Float?
+  dimensionScores String   @default("{}")  // JSON with dimension breakdown
+  
+  // Metadata
+  completedAt     DateTime @default(now())
+  timeSpent       Int?     // Time in seconds
+  
+  @@index([userId])
+  @@index([worksheetType])
+  @@map("worksheet_responses")
+}
+
+// Daily Action Evidence (from Evidence Tracking)
+model DailyEvidence {
+  id              String   @id @default(cuid())
+  userId          String
+  
+  // Date and type
+  date            String   // YYYY-MM-DD
+  evidenceType    String   // self-trust, commitment, emotional, decision, environment, value, agency, identity
+  
+  // Evidence details
+  description     String
+  strengthScore   Int      // 1-10
+  
+  // Linked apps
+  sourceApp       String?  // Which app this evidence came from
+  
+  createdAt       DateTime @default(now())
+  
+  @@unique([userId, date, evidenceType])
+  @@index([userId, date])
+  @@map("daily_evidence")
+}
+
+// Decision Journal Entry (from Decision Analysis)
+model DecisionEntry {
+  id                  String   @id @default(cuid())
+  userId              String
+  
+  // Decision details
+  date                String   // YYYY-MM-DD
+  decision            String
+  context             String?
+  alternatives        String?
+  choice              String?
+  outcome             String?
+  emotionState        String?
+  
+  // Quality scores
+  clarity             Int      @default(50)
+  emotionalStability  Int      @default(50)
+  valueAlignment      Int      @default(50)
+  futureUsefulness    Int      @default(50)
+  consequenceAwareness Int     @default(50)
+  consistencyScore    Int      @default(50)
+  selfControl         Int      @default(50)
+  overallQuality      Int      @default(50)
+  
+  // Pattern recognition
+  patternNoticed      String?
+  upgradeRule         String?
+  reflection          String?
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  @@index([userId, date])
+  @@map("decision_entries")
+}
+
+// ERQ Assessment Result
+model ERQResult {
+  id                  String   @id @default(cuid())
+  userId              String?
+  sessionId           String?
+  
+  // Scores
+  reappraisalScore    Float    // Average 1-7
+  suppressionScore    Float    // Average 1-7
+  
+  // Responses
+  responses           String   // JSON array of answers
+  
+  // Interpretation
+  interpretation      String?  // JSON with interpretation data
+  
+  completedAt         DateTime @default(now())
+  
+  @@index([userId])
+  @@map("erq_results")
+}
+
+// Identity Baseline Result
+model IdentityBaselineResult {
+  id                  String   @id @default(cuid())
+  userId              String?
+  sessionId           String?
+  
+  // Dimension scores (0-100)
+  selfConcept         Int      @default(50)
+  valueCongruence     Int      @default(50)
+  selfTrust           Int      @default(50)
+  commitmentConsistency Int    @default(50)
+  decisionQuality     Int      @default(50)
+  emotionalRegulation Int      @default(50)
+  environmentalAlignment Int   @default(50)
+  personalAgency      Int      @default(50)
+  
+  // Overall
+  overallScore        Int      @default(50)
+  
+  // Reflections
+  reflections         String   @default("{}")  // JSON with reflection per dimension
+  finalStatement      String?
+  
+  completedAt         DateTime @default(now())
+  
+  @@index([userId])
+  @@map("identity_baseline_results")
+}
+
+// Environmental Audit Result
+model EnvironmentalAuditResult {
+  id                  String   @id @default(cuid())
+  userId              String?
+  sessionId           String?
+  
+  // Dimension scores (0-100)
+  physicalSpace       Int      @default(50)
+  digitalEnvironment  Int      @default(50)
+  socialCircle        Int      @default(50)
+  resourceAccess      Int      @default(50)
+  cueQuality          Int      @default(50)
+  
+  // Overall
+  overallScore        Int      @default(50)
+  
+  // Friction map
+  frictionMap         String   @default("{}")  // JSON with friction levels
+  
+  // Reflections
+  reflections         String   @default("{}")
+  finalStatement      String?
+  
+  completedAt         DateTime @default(now())
+  
+  @@index([userId])
+  @@map("environmental_audit_results")
+}
+
+// User Transformation Journey
+model TransformationJourney {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  
+  // Journey progress
+  currentDay            Int      @default(1)
+  currentPhase          Phase    @default(AWARENESS)
+  
+  // Baseline and current scores
+  baselineScores        String   @default("{}")  // Initial assessment scores
+  currentScores         String   @default("{}")  // Current assessment scores
+  
+  // Progress tracking
+  totalIdentityVotes    Int      @default(0)
+  totalHabitsCompleted  Int      @default(0)
+  totalGoalsCompleted   Int      @default(0)
+  totalWordsWritten     Int      @default(0)
+  totalDecisionsLogged  Int      @default(0)
+  totalEvidenceRecords  Int      @default(0)
+  
+  // Streaks
+  currentStreak         Int      @default(0)
+  longestStreak         Int      @default(0)
+  lastActivityDate      DateTime?
+  
+  // Package/Tier info
+  accessTier            AccessTier @default(FREE)
+  journeyStartDate      DateTime?
+  journeyEndDate        DateTime?
+  
+  // Milestones achieved
+  milestonesAchieved    String   @default("[]")  // JSON array of milestone IDs
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  @@map("transformation_journeys")
+}
