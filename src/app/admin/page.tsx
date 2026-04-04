@@ -50,6 +50,9 @@ import {
   Globe,
   CreditCard,
   ExternalLink,
+  LogOut,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 
 // Access Tier Colors
@@ -101,14 +104,13 @@ function PaymentTab() {
     tahweelMerchantId: '',
     demoMode: true,
   });
-  const [saving, setSaving] = useState(false);
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-[#0F1C2E]">Payment Settings</h2>
-          <p className="text-slate-600">Configure Tahweel payment gateway</p>
+          <p className="text-slate-600">Configure payment gateways</p>
         </div>
       </div>
 
@@ -116,69 +118,30 @@ function PaymentTab() {
         <CardHeader>
           <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
             <CreditCard className="w-5 h-5 text-[#3DD4B0]" />
-            Tahweel Configuration
+            Active Payment Methods
           </CardTitle>
-          <CardDescription>
-            Connect your Tahweel account for payment processing
-          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center gap-3 p-4 bg-[#3DD4B0]/10 rounded-lg">
             <CheckCircle2 className="w-5 h-5 text-[#3DD4B0]" />
             <div>
-              <p className="font-medium text-[#0F1C2E]">Demo Mode Active</p>
-              <p className="text-sm text-slate-600">Payments are simulated. Configure API keys for production.</p>
+              <p className="font-medium text-[#0F1C2E]">Wise Payment</p>
+              <p className="text-sm text-slate-600">wise.com/pay/me/abdallahc60</p>
             </div>
           </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[#2B2E34]">API Key</label>
-            <Input
-              type="password"
-              placeholder="Enter your Tahweel API Key"
-              value={config.tahweelApiKey}
-              onChange={(e) => setConfig({ ...config, tahweelApiKey: e.target.value })}
-              className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
-            />
+          <div className="flex items-center gap-3 p-4 bg-purple-50 rounded-lg">
+            <CheckCircle2 className="w-5 h-5 text-purple-600" />
+            <div>
+              <p className="font-medium text-[#0F1C2E]">Crypto (USDC/USDT)</p>
+              <p className="text-sm text-slate-600">BEP20 Network</p>
+            </div>
           </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[#2B2E34]">Secret Key</label>
-            <Input
-              type="password"
-              placeholder="Enter your Tahweel Secret Key"
-              value={config.tahweelSecretKey}
-              onChange={(e) => setConfig({ ...config, tahweelSecretKey: e.target.value })}
-              className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-[#2B2E34]">Merchant ID</label>
-            <Input
-              placeholder="Enter your Merchant ID"
-              value={config.tahweelMerchantId}
-              onChange={(e) => setConfig({ ...config, tahweelMerchantId: e.target.value })}
-              className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
-            />
-          </div>
-
-          <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
-            {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Zap className="w-4 h-4 mr-2" />}
-            Save Configuration
-          </Button>
-        </CardContent>
-      </Card>
-
-      <Card className="border-0 shadow-sm">
-        <CardHeader>
-          <CardTitle className="text-[#0F1C2E]">Webhook Configuration</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="p-3 bg-slate-50 rounded text-xs font-mono">
-            <p className="text-slate-500 mb-2"># Configure in Tahweel Dashboard:</p>
-            <p className="text-[#0F1C2E]"><strong>Webhook URL:</strong> https://tamkinly.com/api/webhook/tahweel</p>
-            <p className="text-[#0F1C2E]"><strong>Events:</strong> payment.completed, payment.failed</p>
+          <div className="flex items-center gap-3 p-4 bg-[#1F6F78]/10 rounded-lg">
+            <CheckCircle2 className="w-5 h-5 text-[#1F6F78]" />
+            <div>
+              <p className="font-medium text-[#0F1C2E]">Bank Transfer</p>
+              <p className="text-sm text-slate-600">Community Federal Savings Bank</p>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -189,6 +152,7 @@ function PaymentTab() {
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [codes, setCodes] = useState<AccessCode[]>([]);
@@ -199,8 +163,29 @@ export default function AdminPage() {
   const [newTier, setNewTier] = useState('BASIC');
   const [generating, setGenerating] = useState(false);
   const [generatedCode, setGeneratedCode] = useState<string | null>(null);
+  const [copiedCode, setCopiedCode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  // Check for saved session on mount
+  useEffect(() => {
+    const savedSession = localStorage.getItem('tamkinly_admin_session');
+    if (savedSession) {
+      try {
+        const session = JSON.parse(savedSession);
+        if (session.expiry > Date.now()) {
+          setPassword(session.password);
+          setIsAuthenticated(true);
+          fetchCodes(session.password);
+        } else {
+          localStorage.removeItem('tamkinly_admin_session');
+        }
+      } catch {
+        localStorage.removeItem('tamkinly_admin_session');
+      }
+    }
+  }, []);
 
   const stats = {
     total: codes.length,
@@ -225,7 +210,7 @@ export default function AdminPage() {
       
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        setError(errorData.error || `Server error: ${response.status}`);
+        setError(errorData.error || 'Access denied');
         setLoading(false);
         return;
       }
@@ -235,8 +220,16 @@ export default function AdminPage() {
       if (data.success) {
         setIsAuthenticated(true);
         setCodes(data.codes || []);
+        
+        // Save session if remember me is checked
+        if (rememberMe) {
+          localStorage.setItem('tamkinly_admin_session', JSON.stringify({
+            password,
+            expiry: Date.now() + (7 * 24 * 60 * 60 * 1000) // 7 days
+          }));
+        }
       } else {
-        setError(data.error || 'Invalid password');
+        setError(data.error || 'Access denied');
       }
     } catch (err) {
       console.error('Login error:', err);
@@ -246,10 +239,10 @@ export default function AdminPage() {
     }
   };
 
-  const fetchCodes = async () => {
+  const fetchCodes = async (pwd?: string) => {
     setLoadingCodes(true);
     try {
-      const response = await fetch(`/api/access/list?password=${encodeURIComponent(password)}`);
+      const response = await fetch(`/api/access/list?password=${encodeURIComponent(pwd || password)}`);
       const data = await response.json();
       if (data.success) {
         setCodes(data.codes);
@@ -267,6 +260,7 @@ export default function AdminPage() {
 
     setGenerating(true);
     setGeneratedCode(null);
+    setCopiedCode(false);
 
     try {
       const response = await fetch('/api/access/generate', {
@@ -278,7 +272,7 @@ export default function AdminPage() {
           orderId: newOrderId || undefined,
           tier: newTier,
           productId: newTier.toLowerCase(),
-          password, // Add password for admin authentication
+          password,
         }),
       });
 
@@ -320,6 +314,15 @@ export default function AdminPage() {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 3000);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('tamkinly_admin_session');
+    setIsAuthenticated(false);
+    setPassword('');
+    setCodes([]);
   };
 
   const filteredCodes = codes.filter(code =>
@@ -338,7 +341,7 @@ export default function AdminPage() {
               <Shield className="w-8 h-8 text-[#3DD4B0]" />
             </div>
             <CardTitle className="text-2xl text-[#0F1C2E]">Admin Access</CardTitle>
-            <CardDescription className="text-[#8A94A6]">Enter admin password to continue</CardDescription>
+            <CardDescription className="text-[#8A94A6]">Enter your credentials to continue</CardDescription>
           </CardHeader>
 
           <CardContent className="p-6">
@@ -350,14 +353,33 @@ export default function AdminPage() {
                 </div>
               )}
 
-              <Input
-                type="password"
-                placeholder="Admin password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
-              />
+              <div className="relative">
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Admin password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="border-[#1F6F78]/20 focus:border-[#3DD4B0] pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+
+              <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="rounded border-slate-300"
+                />
+                Keep me logged in for 7 days
+              </label>
 
               <Button
                 type="submit"
@@ -369,10 +391,6 @@ export default function AdminPage() {
                 ) : 'Enter Admin Panel'}
               </Button>
             </form>
-
-            <p className="text-center text-xs text-[#8A94A6] mt-4">
-              Contact administrator for access
-            </p>
           </CardContent>
         </Card>
       </div>
@@ -400,6 +418,8 @@ export default function AdminPage() {
                 <Button variant="secondary"><Globe className="w-4 h-4 mr-2" />View Site</Button></Link>
               <Button variant="secondary" onClick={fetchCodes} disabled={loadingCodes}>
                 <RefreshCw className={`w-4 h-4 mr-2 ${loadingCodes ? 'animate-spin' : ''}`} />Refresh</Button>
+              <Button variant="destructive" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />Logout</Button>
             </div>
           </div>
         </div>
@@ -592,11 +612,19 @@ export default function AdminPage() {
 
                   {generatedCode && (
                     <div className="mt-6 p-4 bg-[#3DD4B0]/10 rounded-lg border border-[#3DD4B0]/30">
-                      <p className="text-sm text-[#8A94A6] mb-2">Code generated successfully!</p>
+                      <p className="text-sm text-[#8A94A6] mb-2">✅ Code generated successfully!</p>
                       <div className="flex items-center justify-between bg-white p-3 rounded-md">
                         <code className="text-lg font-mono font-bold text-[#0F1C2E]">{generatedCode}</code>
-                        <Button variant="ghost" size="sm" onClick={() => copyToClipboard(generatedCode)} className="text-[#1F6F78] hover:text-[#0F1C2E]">
-                          <Copy className="w-4 h-4" /></Button>
+                        <Button 
+                          onClick={() => copyToClipboard(generatedCode)} 
+                          className={`${copiedCode ? 'bg-green-500 text-white' : 'bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]'} h-10 px-4`}
+                        >
+                          {copiedCode ? (
+                            <><CheckCircle2 className="w-4 h-4 mr-2" />Copied!</>
+                          ) : (
+                            <><Copy className="w-4 h-4 mr-2" />Copy</>
+                          )}
+                        </Button>
                       </div>
                     </div>
                   )}
@@ -666,8 +694,8 @@ export default function AdminPage() {
                   <span className="font-medium text-[#0F1C2E]">Next.js 16 (Standalone)</span>
                 </div>
                 <div className="flex justify-between p-3 bg-slate-50 rounded">
-                  <span className="text-slate-600">Payment Gateway</span>
-                  <span className="font-medium text-[#0F1C2E]">Tahweel</span>
+                  <span className="text-slate-600">Payment Gateways</span>
+                  <span className="font-medium text-[#0F1C2E]">Wise, Crypto, Bank Transfer</span>
                 </div>
                 <div className="flex justify-between p-3 bg-slate-50 rounded">
                   <span className="text-slate-600">Database</span>
@@ -678,8 +706,8 @@ export default function AdminPage() {
                   <span className="font-medium text-[#0F1C2E]">4 Products (Local)</span>
                 </div>
                 <div className="flex justify-between p-3 bg-[#3DD4B0]/10 rounded">
-                  <span className="text-[#1F6F78]">Platform</span>
-                  <span className="font-medium text-[#3DD4B0]">Standalone ✓</span>
+                  <span className="text-[#1F6F78]">Status</span>
+                  <span className="font-medium text-[#3DD4B0]">Online ✓</span>
                 </div>
               </CardContent>
             </Card>
