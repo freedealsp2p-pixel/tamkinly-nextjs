@@ -255,5 +255,12 @@
     "refundPolicy": "سياسة الاسترداد",
     "copyright": "© {year} تمكينلي. جميع الحقوق محفوظة.",
     "madeWith": "صنع بـ"
+  },
+  "search": {
+    "identityQuiz": "اختبار فجوة الهوية",
+    "habitTracker": "متتبع العادات",
+    "goalSystem": "نظام الأهداف",
+    "aiCoach": "مدرب الهوية بالذكاء الاصطناعي",
+    "dailyReflection": "التأمل اليومي"
   }
 }

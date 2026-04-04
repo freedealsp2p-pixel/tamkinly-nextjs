@@ -20,6 +20,14 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
       {
+        userAgent: 'Googlebot-Image',
+        allow: '/images/',
+        allow: '/og-',
+        allow: '/logo',
+        allow: '/favicon',
+        allow: '/testimonials/',
+      },
+      {
         userAgent: 'Bingbot',
         allow: '/',
         disallow: [
@@ -64,6 +72,34 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/admin/',
           '/api/',
+        ],
+      },
+      {
+        userAgent: 'Applebot',
+        allow: '/',
+        disallow: [
+          '/admin/',
+          '/api/',
+          '/checkout/',
+          '/account/',
+        ],
+      },
+      {
+        userAgent: 'DuckDuckBot',
+        allow: '/',
+        disallow: [
+          '/admin/',
+          '/api/',
+        ],
+      },
+      {
+        userAgent: 'Yandex',
+        allow: '/',
+        disallow: [
+          '/admin/',
+          '/api/',
+          '/checkout/',
+          '/account/',
         ],
       },
       {

@@ -255,5 +255,12 @@
     "refundPolicy": "Refund Policy",
     "copyright": "© {year} Tamkinly. All rights reserved.",
     "madeWith": "Made with"
+  },
+  "search": {
+    "identityQuiz": "Identity Gap Quiz",
+    "habitTracker": "Habit Tracker",
+    "goalSystem": "Goal System",
+    "aiCoach": "AI Identity Coach",
+    "dailyReflection": "Daily Reflection"
   }
 }

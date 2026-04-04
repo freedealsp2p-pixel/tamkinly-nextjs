@@ -16,17 +16,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu, ShoppingCart, Search, Globe } from "lucide-react";
 
-// Search pages data
+// Search pages data - comprehensive list for better search
 const searchablePages = [
-  { titleKey: "navigation.home", path: "/", keywords: ["home", "main", "start", "landing"] },
-  { titleKey: "navigation.products", path: "/products", keywords: ["pricing", "buy", "purchase", "planner", "bundle", "premium", "trial"] },
-  { titleKey: "navigation.apps", path: "/apps", keywords: ["tools", "applications", "quiz", "assessment"] },
-  { titleKey: "navigation.quiz", path: "/quiz", keywords: ["quiz", "assessment", "test", "identity", "gap"] },
-  { titleKey: "navigation.methodology", path: "/methodology", keywords: ["method", "approach", "how", "process"] },
-  { titleKey: "navigation.about", path: "/about", keywords: ["about", "team", "founder", "story", "mission"] },
-  { titleKey: "navigation.contact", path: "/contact", keywords: ["contact", "support", "help", "email"] },
-  { titleKey: "navigation.resources", path: "/resources", keywords: ["resources", "blog", "articles", "guides"] },
-  { titleKey: "navigation.blog", path: "/blog", keywords: ["blog", "articles", "posts", "news"] },
+  { titleKey: "navigation.home", path: "/", keywords: ["home", "main", "start", "landing", "الرئيسية"] },
+  { titleKey: "navigation.products", path: "/products", keywords: ["pricing", "buy", "purchase", "planner", "bundle", "premium", "trial", "المنتجات", "الأسعار"] },
+  { titleKey: "navigation.apps", path: "/apps", keywords: ["tools", "applications", "quiz", "assessment", "التطبيقات", "الأدوات"] },
+  { titleKey: "navigation.quiz", path: "/quiz", keywords: ["quiz", "assessment", "test", "identity", "gap", "اختبار", "تقييم", "فجوة"] },
+  { titleKey: "navigation.methodology", path: "/methodology", keywords: ["method", "approach", "how", "process", "المنهجية"] },
+  { titleKey: "navigation.about", path: "/about", keywords: ["about", "team", "founder", "story", "mission", "من نحن"] },
+  { titleKey: "navigation.contact", path: "/contact", keywords: ["contact", "support", "help", "email", "تواصل"] },
+  { titleKey: "navigation.resources", path: "/resources", keywords: ["resources", "blog", "articles", "guides", "الموارد"] },
+  { titleKey: "navigation.blog", path: "/blog", keywords: ["blog", "articles", "posts", "news", "المدونة"] },
+  // Popular Apps
+  { titleKey: "search.identityQuiz", path: "/apps/identity-gap-quiz", keywords: ["identity", "quiz", "gap", "assessment", "هوية", "اختبار"] },
+  { titleKey: "search.habitTracker", path: "/apps/habit-tracker", keywords: ["habit", "tracker", "habits", "عادات", "متتبع"] },
+  { titleKey: "search.goalSystem", path: "/apps/goal-system", keywords: ["goal", "goals", "system", "أهداف", "نظام"] },
+  { titleKey: "search.aiCoach", path: "/apps/ai-identity-coach", keywords: ["ai", "coach", "artificial", "intelligence", "ذكاء", "مدرب"] },
+  { titleKey: "search.dailyReflection", path: "/apps/daily-reflection", keywords: ["daily", "reflection", "journal", "يومي", "تأمل"] },
 ];
 
 // Custom hook to safely detect client-side mounting
