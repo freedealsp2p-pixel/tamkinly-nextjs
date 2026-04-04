@@ -181,6 +181,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}
+        suppressHydrationWarning
       >
         <LocaleProvider>
           <AuthProvider>
