@@ -12,12 +12,24 @@ async function check() {
   });
 
   // Check build log
-  const logResult = await ssh.execCommand('tail -30 /tmp/tamkinly-build.log 2>/dev/null || echo "No build log found"');
+  const logResult = await ssh.execCommand('tail -50 /tmp/tamkinly-build.log 2>/dev/null');
   console.log('Build Log:\n', logResult.stdout);
 
   // Check if server.js exists
   const checkResult = await ssh.execCommand('ls -la /var/www/tamkinly/.next/standalone/server.js 2>&1');
   console.log('\nServer.js check:', checkResult.stdout);
+
+  // If server.js exists, restart PM2
+  if (checkResult.stdout.includes('server.js')) {
+    console.log('\n✓ Build complete! Restarting PM2...');
+    const restartResult = await ssh.execCommand('pm2 restart tamkinly-nextjs');
+    console.log(restartResult.stdout);
+    
+    await new Promise(r => setTimeout(r, 3000));
+    
+    const statusResult = await ssh.execCommand('pm2 status');
+    console.log('\nPM2 Status:\n', statusResult.stdout);
+  }
 
   ssh.dispose();
 }

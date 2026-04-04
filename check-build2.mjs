@@ -12,7 +12,7 @@ async function check() {
   });
 
   // Check build log
-  const logResult = await ssh.execCommand('tail -30 /tmp/tamkinly-build.log 2>/dev/null || echo "No build log found"');
+  const logResult = await ssh.execCommand('tail -50 /tmp/tamkinly-build.log 2>/dev/null || echo "No build log found"');
   console.log('Build Log:\n', logResult.stdout);
 
   // Check if server.js exists
