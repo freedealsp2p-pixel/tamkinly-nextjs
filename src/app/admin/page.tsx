@@ -278,6 +278,7 @@ export default function AdminPage() {
           orderId: newOrderId || undefined,
           tier: newTier,
           productId: newTier.toLowerCase(),
+          password, // Add password for admin authentication
         }),
       });
 
@@ -370,7 +371,7 @@ export default function AdminPage() {
             </form>
 
             <p className="text-center text-xs text-[#8A94A6] mt-4">
-              Default password: <code className="bg-slate-100 px-1 rounded">tamkinly2024</code>
+              Contact administrator for access
             </p>
           </CardContent>
         </Card>

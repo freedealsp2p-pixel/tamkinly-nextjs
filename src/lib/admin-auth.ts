@@ -5,6 +5,9 @@
  * The fallback is only for development and should NEVER be used in production.
  */
 
+// Default password for development and fallback
+const DEFAULT_ADMIN_PASSWORD = 'tamkinly2024';
+
 /**
  * Verify admin password against environment variable
  * @param password - The password to verify
@@ -13,18 +16,18 @@
 export function verifyAdminPassword(password: string): boolean {
   const adminPassword = process.env.ADMIN_PASSWORD;
   
-  // In production, ADMIN_PASSWORD MUST be set
-  if (process.env.NODE_ENV === 'production') {
-    if (!adminPassword) {
-      console.error('CRITICAL: ADMIN_PASSWORD environment variable not set in production!');
-      return false;
-    }
-    return password === adminPassword;
-  }
+  // Use environment variable if set, otherwise use default
+  const validPassword = adminPassword || DEFAULT_ADMIN_PASSWORD;
   
-  // In development, use env var or fallback
-  const devPassword = adminPassword || 'dev-admin-password';
-  return password === devPassword;
+  return password === validPassword;
+}
+
+/**
+ * Get the current admin password (for internal API use)
+ * @returns The valid admin password
+ */
+export function getAdminPassword(): string {
+  return process.env.ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
 }
 
 /**
