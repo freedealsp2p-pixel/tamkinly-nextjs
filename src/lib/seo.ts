@@ -196,8 +196,8 @@ export function generatePageMetadata({
     alternates: {
       canonical: url,
       languages: {
-        'en-US': url,
-        'ar-SA': url, // Same URL, language switched via localStorage
+        'x-default': url,
+        'en': url,
       },
     },
     
@@ -320,7 +320,7 @@ export function generateWebSiteSchema() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${SITE_CONFIG.url}/blog?q={search_term_string}`,
+        urlTemplate: `${SITE_CONFIG.url}/search?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
