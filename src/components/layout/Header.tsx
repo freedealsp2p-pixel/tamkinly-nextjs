@@ -119,12 +119,12 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
             <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2.5">
               <div className="relative w-10 h-10 flex items-center justify-center">
                 <Image
-                  src="/logo-icon.webp?v=7"
+                  src="/logo-icon.png"
                   alt="Tamkinly Logo"
                   width={40}
                   height={40}
                   className="object-contain"
-                  unoptimized
+                  priority
                 />
               </div>
               <span className="font-serif text-xl font-bold text-primary">
@@ -310,13 +310,12 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-10 h-10 flex items-center justify-center group-hover:scale-105 transition-transform">
               <Image 
-                src="/logo-icon.webp?v=7" 
+                src="/logo-icon.png" 
                 alt="Tamkinly Logo" 
                 width={40}
                 height={40}
                 className="object-contain"
                 priority
-                unoptimized
               />
             </div>
             <span className="font-serif text-xl font-bold text-primary group-hover:text-secondary transition-colors">
