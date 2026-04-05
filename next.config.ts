@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: [
     'preview-chat-f27fc0d8-bdfb-441b-90c5-e050c2a87613.space.z.ai',
     '.space.z.ai',
+    'tamkinly.com',
+    'www.tamkinly.com',
   ],
   
   // Experimental features for memory optimization
