@@ -1,8 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Disable standalone for simpler deployment on memory-constrained server
-  // output: 'standalone',
+  // Enable standalone for efficient deployment on memory-constrained server
+  output: 'standalone',
 
   // TypeScript config
   typescript: {
