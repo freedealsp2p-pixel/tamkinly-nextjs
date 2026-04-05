@@ -31,9 +31,18 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
 
-  // Headers for caching
+  // Security & caching headers
   async headers() {
     return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Powered-By',
+            value: '',
+          },
+        ],
+      },
       {
         source: '/:all*(svg|jpg|png|ico|webp)',
         headers: [
