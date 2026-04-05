@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,8 +10,23 @@ import {
   Mail, 
   MessageSquare, 
   Send,
-  CheckCircle2
+  CheckCircle2,
+  AlertCircle,
+  Loader2
 } from "lucide-react";
+
+interface FormState {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+interface FormStatus {
+  type: 'idle' | 'loading' | 'success' | 'error';
+  message?: string;
+  errors?: string[];
+}
 
 // Hero Section
 function HeroSection() {
@@ -38,12 +53,64 @@ function HeroSection() {
 
 // Contact Form Section
 function ContactSection() {
-  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState<FormState>({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [status, setStatus] = useState<FormStatus>({ type: 'idle' });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear errors when user starts typing
+    if (status.type === 'error') {
+      setStatus({ type: 'idle' });
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // In production, this would send to an API
-    setSubmitted(true);
+    setStatus({ type: 'loading' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus({ 
+          type: 'success', 
+          message: data.message || 'Your message has been sent successfully!' 
+        });
+        // Reset form on success
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus({ 
+          type: 'error', 
+          message: data.error || 'Failed to send message',
+          errors: data.errors 
+        });
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      setStatus({ 
+        type: 'error', 
+        message: 'An unexpected error occurred. Please try again later.' 
+      });
+    }
+  };
+
+  const resetForm = () => {
+    setStatus({ type: 'idle' });
+    setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
   return (
@@ -52,7 +119,7 @@ function ContactSection() {
         <div className="max-w-2xl mx-auto">
           <Card className="border-0 shadow-lg">
             <CardContent className="p-6 lg:p-10">
-              {submitted ? (
+              {status.type === 'success' ? (
                 <div className="text-center py-8">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 text-accent mb-6">
                     <CheckCircle2 className="h-8 w-8" />
@@ -61,9 +128,9 @@ function ContactSection() {
                     Message Sent!
                   </h2>
                   <p className="text-slate-600 mb-6">
-                    Thank you for reaching out. We'll get back to you within 24-48 hours.
+                    {status.message || "Thank you for reaching out. We'll get back to you within 24-48 hours."}
                   </p>
-                  <Button onClick={() => setSubmitted(false)} variant="outline">
+                  <Button onClick={resetForm} variant="outline">
                     Send Another Message
                   </Button>
                 </div>
@@ -78,6 +145,26 @@ function ContactSection() {
                     </p>
                   </div>
                   
+                  {status.type === 'error' && (
+                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <p className="font-medium text-red-800">
+                            {status.message || 'Something went wrong'}
+                          </p>
+                          {status.errors && status.errors.length > 0 && (
+                            <ul className="mt-2 text-sm text-red-600 list-disc list-inside">
+                              {status.errors.map((error, index) => (
+                                <li key={index}>{error}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -87,8 +174,11 @@ function ContactSection() {
                         <Input 
                           id="name" 
                           name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
                           placeholder="Your name"
                           required
+                          disabled={status.type === 'loading'}
                           className="bg-white"
                         />
                       </div>
@@ -100,8 +190,11 @@ function ContactSection() {
                           id="email" 
                           name="email"
                           type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
                           placeholder="you@example.com"
                           required
+                          disabled={status.type === 'loading'}
                           className="bg-white"
                         />
                       </div>
@@ -114,8 +207,11 @@ function ContactSection() {
                       <Input 
                         id="subject" 
                         name="subject"
+                        value={formData.subject}
+                        onChange={handleInputChange}
                         placeholder="How can we help?"
                         required
+                        disabled={status.type === 'loading'}
                         className="bg-white"
                       />
                     </div>
@@ -127,16 +223,33 @@ function ContactSection() {
                       <Textarea 
                         id="message" 
                         name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
                         placeholder="Tell us more about your question or feedback..."
                         rows={6}
                         required
+                        disabled={status.type === 'loading'}
                         className="bg-white resize-none"
                       />
                     </div>
                     
-                    <Button type="submit" size="lg" className="w-full bg-accent text-primary hover:bg-accent/90">
-                      <Send className="mr-2 h-4 w-4" />
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      className="w-full bg-accent text-primary hover:bg-accent/90"
+                      disabled={status.type === 'loading'}
+                    >
+                      {status.type === 'loading' ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-4 w-4" />
+                          Send Message
+                        </>
+                      )}
                     </Button>
                   </form>
                 </>

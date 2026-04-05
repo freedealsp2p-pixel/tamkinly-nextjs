@@ -2,7 +2,6 @@
 
 import React, { useState, use } from 'react';
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,327 +15,83 @@ import {
   Download,
   Star,
   Clock,
-  FileText,
-  Heart,
-  Sparkles,
-  Monitor,
-  BookOpen,
   Calendar,
   Award,
-  ExternalLink,
+  Monitor,
   Loader2,
-  Target,
-  Users,
-  TrendingUp,
-  Lock,
-  Brain,
-  Headphones,
-  Sun,
-  User,
-  Home,
-  GitBranch,
-  BarChart3,
   Check,
-  X
+  Sparkles
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
 
-// Complete product data
-const productsData: Record<string, {
+// Product configuration with prices and icons only (translatable content comes from translations)
+const productsConfig: Record<string, {
   id: string;
   slug: string;
-  name: string;
-  shortName: string;
   price: number;
   comparePrice: number;
-  tier: string;
-  description: string;
-  longDescription: string;
-  features: string[];
-  benefits: { title: string; description: string }[];
-  apps: { name: string; description: string }[];
-  testimonials: { name: string; role: string; content: string }[];
-  highlights: string[];
+  popular: boolean;
   icon: React.ElementType;
   color: string;
-  cta: string;
-  popular: boolean;
-  includes: { name: string; value: string }[];
-  specifications: { name: string; value: string }[];
-  faqs: { q: string; a: string }[];
 }> = {
   'trial': {
     id: "trial",
     slug: "trial",
-    name: "7-Day Trial",
-    shortName: "Trial",
     price: 7,
     comparePrice: 15,
-    tier: "TRIAL",
-    description: "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
-    longDescription: "Not sure if the Identity Recode system is right for you? Try our 7-day trial to experience the full power of transformation before committing. You'll get access to the core methodology and see real results in just one week.",
-    features: [
-      "7-Day Guided Journey",
-      "Daily identity prompts",
-      "Evidence tracking system",
-      "Progress dashboard",
-      "Email support",
-      "PDF worksheets included"
-    ],
-    benefits: [
-      { title: "Test Before Committing", description: "Experience the full methodology without a long-term commitment" },
-      { title: "See Real Results", description: "Many users report breakthrough insights within the first 3 days" },
-      { title: "Full System Access", description: "Try all core features of the planner system" }
-    ],
-    apps: [
-      { name: "7-Day Trial Planner", description: "A condensed version of our 30-day system" },
-      { name: "Identity Gap Assessment", description: "Discover your identity gap score" },
-      { name: "Values Clarification", description: "Identify your core values" },
-      { name: "Daily Reflection", description: "Guided daily prompts" }
-    ],
-    testimonials: [
-      { name: "Ahmed M.", role: "Engineer", content: "The 7-day trial convinced me. I upgraded to the full planner on day 4 because I was already seeing results." },
-      { name: "Sarah K.", role: "Teacher", content: "Perfect way to test the system. The daily prompts were eye-opening." }
-    ],
-    highlights: [
-      "Full system access",
-      "7 days",
-      "Low risk"
-    ],
-    icon: Clock,
-    color: "#64B5F6",
-    cta: "Start 7-Day Trial",
     popular: false,
-    includes: [
-      { name: "Duration", value: "7 Days" },
-      { name: "Apps Access", value: "4 Core Apps" },
-      { name: "PDF Downloads", value: "Yes" },
-      { name: "Support", value: "Email" },
-      { name: "Updates", value: "7 Days" }
-    ],
-    specifications: [
-      { name: "Format", value: "Digital + Interactive" },
-      { name: "Device", value: "Any Device" },
-      { name: "Languages", value: "English" },
-      { name: "Access", value: "Instant" }
-    ],
-    faqs: [
-      { q: "What happens after 7 days?", a: "Your access will expire, but you can upgrade to any paid plan to continue your journey." },
-      { q: "Can I extend the trial?", a: "The trial is a one-time offer per customer. We recommend upgrading to continue your progress." },
-      { q: "Is my progress saved?", a: "Yes! If you upgrade within 30 days, all your trial data will be preserved." }
-    ]
+    icon: Clock,
+    color: "#64B5F6"
   },
   'planner': {
     id: "planner",
     slug: "planner",
-    name: "Identity Recode Planner",
-    shortName: "The Planner",
     price: 17,
     comparePrice: 29,
-    tier: "BASIC",
-    description: "The complete 30-day transformation system with interactive apps and PDF downloads.",
-    longDescription: "The Identity Recode Planner is our flagship 30-day transformation system. Based on evidence-based psychology and identity science, this planner guides you through a structured journey of self-discovery and lasting change. Includes both digital interactive apps and printable PDF versions.",
-    features: [
-      "30-Day Identity Planner",
-      "Executive Manual (50+ pages)",
-      "Identity Baseline Worksheet",
-      "Environmental Audit Template",
-      "Digital + Print PDFs",
-      "Lifetime access",
-      "All future updates included"
-    ],
-    benefits: [
-      { title: "Structured Transformation", description: "A clear 30-day roadmap from confusion to clarity" },
-      { title: "Evidence-Based Design", description: "Built on psychology, neuroscience, and proven methods" },
-      { title: "Print & Digital", description: "Use on any device or print for pen-and-paper work" }
-    ],
-    apps: [
-      { name: "Executive Manual", description: "Comprehensive guide to identity transformation" },
-      { name: "30-Day Daily Planner", description: "Interactive daily prompts and tracking" },
-      { name: "Identity Baseline Worksheet", description: "Establish your starting point" },
-      { name: "Environmental Audit", description: "Assess your surroundings for growth" }
-    ],
-    testimonials: [
-      { name: "Fatima A.", role: "Marketing Director", content: "The 30-day planner became my morning ritual. It's not about motivation—it's about identity. Life-changing." },
-      { name: "James K.", role: "Entrepreneur", content: "I've done many personality tests, but this one actually told me what to DO. Worth every penny." },
-      { name: "Michael T.", role: "Software Engineer", content: "3 months later, I'm a different person. The planner helped me understand my self-sabotage patterns." }
-    ],
-    highlights: [
-      "Most popular",
-      "Print included",
-      "30-day journey"
-    ],
-    icon: Calendar,
-    color: "#3DD4B0",
-    cta: "Get The Planner",
     popular: true,
-    includes: [
-      { name: "Duration", value: "Lifetime" },
-      { name: "Apps Access", value: "4 Core Apps" },
-      { name: "PDF Downloads", value: "Yes - All" },
-      { name: "Support", value: "Email" },
-      { name: "Updates", value: "Free Forever" }
-    ],
-    specifications: [
-      { name: "Format", value: "Digital + Print PDF" },
-      { name: "Pages", value: "50+ Pages" },
-      { name: "Device", value: "Any Device" },
-      { name: "Languages", value: "English" }
-    ],
-    faqs: [
-      { q: "Is this a physical product?", a: "No, this is a digital product. You'll receive instant access to interactive apps and downloadable PDFs that you can print." },
-      { q: "How long do I have access?", a: "Lifetime! Purchase once, access forever, including all future updates." },
-      { q: "Can I print the materials?", a: "Yes! All PDFs are print-ready. Many users prefer the pen-and-paper experience." }
-    ]
+    icon: Calendar,
+    color: "#3DD4B0"
   },
   'premium': {
     id: "premium",
     slug: "premium",
-    name: "Premium Transformation",
-    shortName: "Premium",
     price: 27,
     comparePrice: 44,
-    tier: "PREMIUM",
-    description: "Everything in Planner plus advanced analytics and decision tracking tools.",
-    longDescription: "The Premium package includes everything in the Planner, plus powerful analytics tools to track your transformation journey. Understand your decision patterns, track evidence of your growth, and visualize your progress over time. Perfect for those who want data-driven insights into their transformation.",
-    features: [
-      "Everything in Planner ($17 value)",
-      "Decision Pattern Analysis",
-      "Evidence Tracking System",
-      "Progress Dashboard",
-      "Advanced analytics",
-      "Priority support",
-      "Export your data"
-    ],
-    benefits: [
-      { title: "Data-Driven Growth", description: "See your transformation with clear metrics and trends" },
-      { title: "Pattern Recognition", description: "Identify decision patterns that help or hinder you" },
-      { title: "Evidence Collection", description: "Build proof of your growth over time" }
-    ],
-    apps: [
-      { name: "Everything in Planner", description: "All 4 core apps included" },
-      { name: "Decision Pattern Analysis", description: "Understand how you make choices" },
-      { name: "Evidence Tracking System", description: "Document your transformation proof" },
-      { name: "Progress Dashboard", description: "Visualize your growth journey" }
-    ],
-    testimonials: [
-      { name: "David L.", role: "Professor", content: "As someone who studies behavioral psychology, I'm impressed by the scientific grounding. The analytics are powerful." },
-      { name: "Amira H.", role: "Therapist", content: "I recommend this to clients. The decision pattern analysis alone is worth the upgrade." }
-    ],
-    highlights: [
-      "Best value",
-      "Save $17",
-      "Analytics included"
-    ],
-    icon: Award,
-    color: "#1F6F78",
-    cta: "Get Premium",
     popular: false,
-    includes: [
-      { name: "Duration", value: "Lifetime" },
-      { name: "Apps Access", value: "7 Apps" },
-      { name: "PDF Downloads", value: "Yes - All" },
-      { name: "Support", value: "Priority Email" },
-      { name: "Updates", value: "Free Forever" },
-      { name: "Analytics", value: "Yes" }
-    ],
-    specifications: [
-      { name: "Format", value: "Digital + Print PDF" },
-      { name: "Analytics", value: "Advanced" },
-      { name: "Export", value: "CSV/PDF" },
-      { name: "Dashboard", value: "Interactive" }
-    ],
-    faqs: [
-      { q: "What's different from the Planner?", a: "Premium includes 3 additional apps: Decision Analysis, Evidence Tracking, and Progress Dashboard—perfect for data-driven transformation." },
-      { q: "Can I upgrade from Planner?", a: "Yes! Contact us and we'll apply your $17 purchase toward Premium." },
-      { q: "Is the analytics worth it?", a: "Users with Premium are 2.5x more likely to complete the 30-day program based on our data." }
-    ]
+    icon: Award,
+    color: "#1F6F78"
   },
   'bundle': {
     id: "bundle",
     slug: "bundle",
-    name: "Complete Bundle",
-    shortName: "Bundle",
     price: 47,
     comparePrice: 91,
-    tier: "BUNDLE",
-    description: "The ultimate package: All apps + AI coaching + community access + priority support.",
-    longDescription: "The Complete Bundle is our most comprehensive offering. Get everything we've built: all products, all apps, AI-powered identity coaching, access to our transformation community, and priority support with 24-hour response time. This is the fastest path to transformation.",
-    features: [
-      "All PDF products ($44 value)",
-      "All Interactive Apps",
-      "AI Identity Coach (GPT-4 powered)",
-      "Transformation Community",
-      "Emotion Regulation (ERQ)",
-      "Priority Support (24hr response)",
-      "Monthly live Q&A sessions",
-      "Direct founder access",
-      "Early access to new features"
-    ],
-    benefits: [
-      { title: "Complete Transformation", description: "Every tool, every resource, every support option" },
-      { title: "AI-Powered Guidance", description: "Get personalized coaching from our AI identity coach" },
-      { title: "Community Connection", description: "Connect with others on the same journey" }
-    ],
-    apps: [
-      { name: "All Core Apps", description: "Everything in Premium (7 apps)" },
-      { name: "AI Identity Coach", description: "GPT-4 powered coaching anytime" },
-      { name: "Emotion Regulation (ERQ)", description: "Advanced emotional intelligence training" },
-      { name: "Community Access", description: "Private transformation community" }
-    ],
-    testimonials: [
-      { name: "Sarah M.", role: "Life Coach", content: "I've recommended the Bundle to 20+ clients. The AI coach alone provides incredible value between sessions." },
-      { name: "Omar R.", role: "Executive", content: "The community and live Q&As made the difference. Worth every dollar for the support alone." }
-    ],
-    highlights: [
-      "Save $44",
-      "AI coaching",
-      "VIP access"
-    ],
-    icon: Monitor,
-    color: "#0F1C2E",
-    cta: "Get Complete Bundle",
     popular: false,
-    includes: [
-      { name: "Duration", value: "Lifetime" },
-      { name: "Apps Access", value: "All 15 Apps" },
-      { name: "PDF Downloads", value: "Yes - All" },
-      { name: "Support", value: "Priority (24hr)" },
-      { name: "AI Coach", value: "Unlimited" },
-      { name: "Community", value: "Lifetime Access" },
-      { name: "Live Q&A", value: "Monthly" }
-    ],
-    specifications: [
-      { name: "AI Coach", value: "GPT-4 Powered" },
-      { name: "Community", value: "Private Discord" },
-      { name: "Support Hours", value: "24hr Response" },
-      { name: "Bonus", value: "Founder Access" }
-    ],
-    faqs: [
-      { q: "Is the AI Coach actually helpful?", a: "Our AI Coach uses GPT-4 with custom training on identity transformation. Users report it provides breakthrough insights between sessions." },
-      { q: "What's the community like?", a: "A private Discord with 500+ members on transformation journeys. Weekly challenges, accountability partners, and genuine support." },
-      { q: "How do I contact the founder?", a: "Bundle members get a direct email line to Abdallah with 48-hour response time." }
-    ]
+    icon: Monitor,
+    color: "#0F1C2E"
   }
 };
 
 // Product page component
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
+  const t = useTranslations();
+  const { direction } = useLocale();
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   
-  const product = productsData[slug];
+  const config = productsConfig[slug];
   
-  if (!product) {
+  if (!config) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F6F8FA]">
         <Card className="max-w-md mx-auto">
           <CardContent className="p-8 text-center">
-            <h1 className="text-2xl font-bold text-[#0F1C2E] mb-4">Product Not Found</h1>
-            <p className="text-slate-600 mb-6">The product you&apos;re looking for doesn&apos;t exist.</p>
+            <h1 className="text-2xl font-bold text-[#0F1C2E] mb-4">{t('productDetail.productNotFound')}</h1>
+            <p className="text-slate-600 mb-6">{t('productDetail.productNotFoundDesc')}</p>
             <Link href="/products">
-              <Button>Browse All Products</Button>
+              <Button>{t('productDetail.browseAllProducts')}</Button>
             </Link>
           </CardContent>
         </Card>
@@ -344,22 +99,265 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     );
   }
   
-  const Icon = product.icon;
+  const Icon = config.icon;
+  const productKey = `productDetail.products.${slug}` as const;
+  
+  // Get translated product data
+  const name = t(`${productKey}.name`);
+  const tier = t(`${productKey}.tier`);
+  const description = t(`${productKey}.description`);
+  const longDescription = t(`${productKey}.longDescription`);
+  const cta = t(`${productKey}.cta`);
+  
+  // Get highlights based on product
+  const getHighlights = () => {
+    if (slug === 'trial') {
+      return [
+        t(`${productKey}.highlights.fullAccess`),
+        t(`${productKey}.highlights.sevenDays`),
+        t(`${productKey}.highlights.lowRisk`)
+      ];
+    } else if (slug === 'planner') {
+      return [
+        t(`${productKey}.highlights.mostPopular`),
+        t(`${productKey}.highlights.printIncluded`),
+        t(`${productKey}.highlights.thirtyDays`)
+      ];
+    } else if (slug === 'premium') {
+      return [
+        t(`${productKey}.highlights.bestValue`),
+        t(`${productKey}.highlights.save`),
+        t(`${productKey}.highlights.analytics`)
+      ];
+    } else if (slug === 'bundle') {
+      return [
+        t(`${productKey}.highlights.save`),
+        t(`${productKey}.highlights.aiCoaching`),
+        t(`${productKey}.highlights.vipAccess`)
+      ];
+    }
+    return [];
+  };
+
+  // Get benefits based on product
+  const getBenefits = () => {
+    if (slug === 'trial') {
+      return [
+        { title: t(`${productKey}.benefits.testBeforeCommit.title`), description: t(`${productKey}.benefits.testBeforeCommit.description`) },
+        { title: t(`${productKey}.benefits.seeResults.title`), description: t(`${productKey}.benefits.seeResults.description`) },
+        { title: t(`${productKey}.benefits.fullSystem.title`), description: t(`${productKey}.benefits.fullSystem.description`) }
+      ];
+    } else if (slug === 'planner') {
+      return [
+        { title: t(`${productKey}.benefits.structured.title`), description: t(`${productKey}.benefits.structured.description`) },
+        { title: t(`${productKey}.benefits.evidence.title`), description: t(`${productKey}.benefits.evidence.description`) },
+        { title: t(`${productKey}.benefits.printDigital.title`), description: t(`${productKey}.benefits.printDigital.description`) }
+      ];
+    } else if (slug === 'premium') {
+      return [
+        { title: t(`${productKey}.benefits.dataDriven.title`), description: t(`${productKey}.benefits.dataDriven.description`) },
+        { title: t(`${productKey}.benefits.patterns.title`), description: t(`${productKey}.benefits.patterns.description`) },
+        { title: t(`${productKey}.benefits.evidence.title`), description: t(`${productKey}.benefits.evidence.description`) }
+      ];
+    } else if (slug === 'bundle') {
+      return [
+        { title: t(`${productKey}.benefits.complete.title`), description: t(`${productKey}.benefits.complete.description`) },
+        { title: t(`${productKey}.benefits.aiGuidance.title`), description: t(`${productKey}.benefits.aiGuidance.description`) },
+        { title: t(`${productKey}.benefits.community.title`), description: t(`${productKey}.benefits.community.description`) }
+      ];
+    }
+    return [];
+  };
+
+  // Get features (array from translation)
+  const getFeatures = (): string[] => {
+    const features: string[] = [];
+    for (let i = 0; i < 10; i++) {
+      try {
+        const feature = t(`${productKey}.features.${i}`);
+        if (feature && !feature.includes('features.')) {
+          features.push(feature);
+        } else {
+          break;
+        }
+      } catch {
+        break;
+      }
+    }
+    return features;
+  };
+
+  // Get apps based on product
+  const getApps = () => {
+    if (slug === 'trial') {
+      return [
+        { name: t(`${productKey}.apps.trialPlanner.name`), description: t(`${productKey}.apps.trialPlanner.description`) },
+        { name: t(`${productKey}.apps.identityGap.name`), description: t(`${productKey}.apps.identityGap.description`) },
+        { name: t(`${productKey}.apps.values.name`), description: t(`${productKey}.apps.values.description`) },
+        { name: t(`${productKey}.apps.reflection.name`), description: t(`${productKey}.apps.reflection.description`) }
+      ];
+    } else if (slug === 'planner') {
+      return [
+        { name: t(`${productKey}.apps.manual.name`), description: t(`${productKey}.apps.manual.description`) },
+        { name: t(`${productKey}.apps.dailyPlanner.name`), description: t(`${productKey}.apps.dailyPlanner.description`) },
+        { name: t(`${productKey}.apps.baseline.name`), description: t(`${productKey}.apps.baseline.description`) },
+        { name: t(`${productKey}.apps.audit.name`), description: t(`${productKey}.apps.audit.description`) }
+      ];
+    } else if (slug === 'premium') {
+      return [
+        { name: t(`${productKey}.apps.allPlanner.name`), description: t(`${productKey}.apps.allPlanner.description`) },
+        { name: t(`${productKey}.apps.decision.name`), description: t(`${productKey}.apps.decision.description`) },
+        { name: t(`${productKey}.apps.evidence.name`), description: t(`${productKey}.apps.evidence.description`) },
+        { name: t(`${productKey}.apps.dashboard.name`), description: t(`${productKey}.apps.dashboard.description`) }
+      ];
+    } else if (slug === 'bundle') {
+      return [
+        { name: t(`${productKey}.apps.allPremium.name`), description: t(`${productKey}.apps.allPremium.description`) },
+        { name: t(`${productKey}.apps.aiCoach.name`), description: t(`${productKey}.apps.aiCoach.description`) },
+        { name: t(`${productKey}.apps.emotion.name`), description: t(`${productKey}.apps.emotion.description`) },
+        { name: t(`${productKey}.apps.community.name`), description: t(`${productKey}.apps.community.description`) }
+      ];
+    }
+    return [];
+  };
+
+  // Get includes based on product
+  const getIncludes = () => {
+    if (slug === 'trial') {
+      return [
+        { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
+        { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
+        { name: t(`${productKey}.includes.pdfDownloads`), value: t(`${productKey}.includes.yes`) },
+        { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.email`) },
+        { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.durationValue`) }
+      ];
+    } else if (slug === 'planner') {
+      return [
+        { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
+        { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
+        { name: t(`${productKey}.includes.pdfDownloads`), value: t(`${productKey}.includes.all`) },
+        { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.email`) },
+        { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.freeForever`) }
+      ];
+    } else if (slug === 'premium') {
+      return [
+        { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
+        { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
+        { name: t(`${productKey}.includes.pdfDownloads`), value: t(`${productKey}.includes.all`) },
+        { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.priorityEmail`) },
+        { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.freeForever`) },
+        { name: t(`${productKey}.includes.analytics`), value: t(`${productKey}.includes.yes`) }
+      ];
+    } else if (slug === 'bundle') {
+      return [
+        { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
+        { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
+        { name: t(`${productKey}.includes.pdfDownloads`), value: t(`${productKey}.includes.all`) },
+        { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.priority`) },
+        { name: t(`${productKey}.includes.aiCoach`), value: t(`${productKey}.includes.unlimited`) },
+        { name: t(`${productKey}.includes.community`), value: t(`${productKey}.includes.lifetimeAccess`) },
+        { name: t(`${productKey}.includes.liveQA`), value: t(`${productKey}.includes.monthly`) }
+      ];
+    }
+    return [];
+  };
+
+  // Get specifications based on product
+  const getSpecifications = () => {
+    if (slug === 'trial') {
+      return [
+        { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
+        { name: t(`${productKey}.specs.device`), value: t(`${productKey}.specs.deviceValue`) },
+        { name: t(`${productKey}.specs.languages`), value: t(`${productKey}.specs.languagesValue`) },
+        { name: t(`${productKey}.specs.access`), value: t(`${productKey}.specs.accessValue`) }
+      ];
+    } else if (slug === 'planner') {
+      return [
+        { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
+        { name: t(`${productKey}.specs.pages`), value: t(`${productKey}.specs.pagesValue`) },
+        { name: t(`${productKey}.specs.device`), value: t(`${productKey}.specs.deviceValue`) },
+        { name: t(`${productKey}.specs.languages`), value: t(`${productKey}.specs.languagesValue`) }
+      ];
+    } else if (slug === 'premium') {
+      return [
+        { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
+        { name: t(`${productKey}.specs.analytics`), value: t(`${productKey}.specs.analyticsValue`) },
+        { name: t(`${productKey}.specs.export`), value: t(`${productKey}.specs.exportValue`) },
+        { name: t(`${productKey}.specs.dashboard`), value: t(`${productKey}.specs.dashboardValue`) }
+      ];
+    } else if (slug === 'bundle') {
+      return [
+        { name: t(`${productKey}.specs.aiCoach`), value: t(`${productKey}.specs.aiCoachValue`) },
+        { name: t(`${productKey}.specs.community`), value: t(`${productKey}.specs.communityValue`) },
+        { name: t(`${productKey}.specs.supportHours`), value: t(`${productKey}.specs.supportHoursValue`) },
+        { name: t(`${productKey}.specs.bonus`), value: t(`${productKey}.specs.bonusValue`) }
+      ];
+    }
+    return [];
+  };
+
+  // Get FAQs (array from translation)
+  const getFAQs = () => {
+    const faqs: { q: string; a: string }[] = [];
+    for (let i = 0; i < 10; i++) {
+      try {
+        const q = t(`${productKey}.faqs.${i}.q`);
+        const a = t(`${productKey}.faqs.${i}.a`);
+        if (q && a && !q.includes('faqs.') && !a.includes('faqs.')) {
+          faqs.push({ q, a });
+        } else {
+          break;
+        }
+      } catch {
+        break;
+      }
+    }
+    return faqs;
+  };
+
+  // Get testimonials (array from translation)
+  const getTestimonials = () => {
+    const testimonials: { name: string; role: string; content: string }[] = [];
+    for (let i = 0; i < 10; i++) {
+      try {
+        const name = t(`${productKey}.testimonials.${i}.name`);
+        const role = t(`${productKey}.testimonials.${i}.role`);
+        const content = t(`${productKey}.testimonials.${i}.content`);
+        if (name && role && content && !name.includes('testimonials.')) {
+          testimonials.push({ name, role, content });
+        } else {
+          break;
+        }
+      } catch {
+        break;
+      }
+    }
+    return testimonials;
+  };
   
   const handleBuyNow = async () => {
     setIsProcessing(true);
     
     toast({
-      title: "Redirecting to checkout...",
-      description: `Preparing ${product.name} for purchase`,
+      title: t('productDetail.redirectToCheckout'),
+      description: t('productDetail.preparingPurchase', { name }),
     });
 
     // Redirect to checkout with product info
     setTimeout(() => {
-      window.location.href = `/checkout?product=${product.id}`;
+      window.location.href = `/checkout?product=${config.id}`;
     }, 500);
   };
 
+  const highlights = getHighlights();
+  const benefits = getBenefits();
+  const features = getFeatures();
+  const apps = getApps();
+  const includes = getIncludes();
+  const specifications = getSpecifications();
+  const faqs = getFAQs();
+  const testimonials = getTestimonials();
+  
   return (
     <div className="min-h-screen bg-[#F6F8FA]">
       {/* Breadcrumb */}
@@ -367,7 +365,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link href="/products" className="inline-flex items-center text-sm text-slate-600 hover:text-[#3DD4B0] transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Products
+            {t('productDetail.backToProducts')}
           </Link>
         </div>
       </div>
@@ -395,43 +393,43 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0] border border-[#3DD4B0]/30">
-                    {product.tier}
+                    {tier}
                   </Badge>
-                  {product.popular && (
+                  {config.popular && (
                     <Badge className="bg-[#3DD4B0] text-[#0F1C2E]">
                       <Star className="w-3 h-3 mr-1 fill-current" />
-                      Most Popular
+                      {t('productDetail.mostPopular')}
                     </Badge>
                   )}
-                  {product.comparePrice > product.price && (
+                  {config.comparePrice > config.price && (
                     <Badge className="bg-green-500/20 text-green-400 border border-green-500/30">
-                      Save ${product.comparePrice - product.price}
+                      {t('productDetail.save')} ${config.comparePrice - config.price}
                     </Badge>
                   )}
                 </div>
                 
                 <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-                  {product.name}
+                  {name}
                 </h1>
                 
                 <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-                  {product.description}
+                  {description}
                 </p>
                 
                 {/* Price */}
                 <div className="flex items-baseline gap-3 mb-6">
-                  <span className="text-4xl lg:text-5xl font-bold text-white">${product.price}</span>
-                  {product.comparePrice > product.price && (
-                    <span className="text-xl text-slate-400 line-through">${product.comparePrice}</span>
+                  <span className="text-4xl lg:text-5xl font-bold text-white">${config.price}</span>
+                  {config.comparePrice > config.price && (
+                    <span className="text-xl text-slate-400 line-through">${config.comparePrice}</span>
                   )}
                   <Badge variant="outline" className="text-slate-300 border-slate-600">
-                    One-time payment
+                    {t('productDetail.oneTimePayment')}
                   </Badge>
                 </div>
                 
                 {/* Highlights */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {product.highlights.map((highlight, idx) => (
+                  {highlights.map((highlight, idx) => (
                     <Badge key={idx} variant="secondary" className="bg-white/10 text-white border-white/20">
                       <CheckCircle2 className="w-3 h-3 mr-1 text-[#3DD4B0]" />
                       {highlight}
@@ -450,18 +448,18 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                     {isProcessing ? (
                       <>
                         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                        Processing...
+                        {t('productDetail.processing')}
                       </>
                     ) : (
                       <>
-                        {product.cta}
+                        {cta}
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </>
                     )}
                   </Button>
                   <Link href="/apps">
                     <Button variant="outline" className="h-14 px-8 text-lg border-white/30 text-white hover:bg-white/10">
-                      Try Free Version
+                      {t('productDetail.tryFreeVersion')}
                     </Button>
                   </Link>
                 </div>
@@ -470,15 +468,15 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 <div className="flex flex-wrap items-center gap-4 mt-6 text-sm text-slate-400">
                   <div className="flex items-center gap-2">
                     <Shield className="w-4 h-4 text-[#3DD4B0]" />
-                    <span>30-Day Guarantee</span>
+                    <span>{t('productDetail.dayGuarantee')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Download className="w-4 h-4 text-[#3DD4B0]" />
-                    <span>Instant Access</span>
+                    <span>{t('productDetail.instantAccess')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Zap className="w-4 h-4 text-[#3DD4B0]" />
-                    <span>Lifetime Updates</span>
+                    <span>{t('productDetail.lifetimeUpdates')}</span>
                   </div>
                 </div>
               </div>
@@ -498,10 +496,10 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 <Card className="border-0 shadow-sm">
                   <CardContent className="p-6 lg:p-8">
                     <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">
-                      About This Product
+                      {t('productDetail.aboutProduct')}
                     </h2>
                     <p className="text-slate-600 leading-relaxed text-lg">
-                      {product.longDescription}
+                      {longDescription}
                     </p>
                   </CardContent>
                 </Card>
@@ -510,10 +508,10 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 <Card className="border-0 shadow-sm">
                   <CardContent className="p-6 lg:p-8">
                     <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-6">
-                      Key Benefits
+                      {t('productDetail.keyBenefits')}
                     </h2>
                     <div className="grid sm:grid-cols-2 gap-6">
-                      {product.benefits.map((benefit, idx) => (
+                      {benefits.map((benefit, idx) => (
                         <div key={idx} className="flex gap-4">
                           <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center">
                             <Check className="w-5 h-5 text-[#3DD4B0]" />
@@ -532,10 +530,10 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 <Card className="border-0 shadow-sm">
                   <CardContent className="p-6 lg:p-8">
                     <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-6">
-                      What&apos;s Included
+                      {t('productDetail.whatsIncluded')}
                     </h2>
                     <div className="grid sm:grid-cols-2 gap-3">
-                      {product.features.map((feature, idx) => (
+                      {features.map((feature, idx) => (
                         <div key={idx} className="flex items-start gap-3">
                           <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
                           <span className="text-slate-700">{feature}</span>
@@ -549,10 +547,10 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 <Card className="border-0 shadow-sm">
                   <CardContent className="p-6 lg:p-8">
                     <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-6">
-                      Apps Included
+                      {t('productDetail.appsIncluded')}
                     </h2>
                     <div className="space-y-4">
-                      {product.apps.map((app, idx) => (
+                      {apps.map((app, idx) => (
                         <div key={idx} className="flex items-start gap-4 p-4 rounded-lg bg-slate-50">
                           <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center">
                             <Sparkles className="w-5 h-5 text-[#3DD4B0]" />
@@ -568,41 +566,45 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 </Card>
                 
                 {/* Testimonials */}
-                <Card className="border-0 shadow-sm">
-                  <CardContent className="p-6 lg:p-8">
-                    <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-6">
-                      What Users Say
-                    </h2>
-                    <div className="space-y-6">
-                      {product.testimonials.map((testimonial, idx) => (
-                        <div key={idx} className="p-4 rounded-lg bg-slate-50 border-l-4 border-[#3DD4B0]">
-                          <p className="text-slate-700 italic mb-3">&ldquo;{testimonial.content}&rdquo;</p>
-                          <div>
-                            <p className="font-semibold text-[#0F1C2E]">{testimonial.name}</p>
-                            <p className="text-sm text-slate-500">{testimonial.role}</p>
+                {testimonials.length > 0 && (
+                  <Card className="border-0 shadow-sm">
+                    <CardContent className="p-6 lg:p-8">
+                      <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-6">
+                        {t('productDetail.whatUsersSay')}
+                      </h2>
+                      <div className="space-y-6">
+                        {testimonials.map((testimonial, idx) => (
+                          <div key={idx} className="p-4 rounded-lg bg-slate-50 border-l-4 border-[#3DD4B0]">
+                            <p className="text-slate-700 italic mb-3">&ldquo;{testimonial.content}&rdquo;</p>
+                            <div>
+                              <p className="font-semibold text-[#0F1C2E]">{testimonial.name}</p>
+                              <p className="text-sm text-slate-500">{testimonial.role}</p>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
                 
                 {/* FAQs */}
-                <Card className="border-0 shadow-sm">
-                  <CardContent className="p-6 lg:p-8">
-                    <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-6">
-                      Frequently Asked Questions
-                    </h2>
-                    <div className="space-y-4">
-                      {product.faqs.map((faq, idx) => (
-                        <div key={idx} className="p-4 rounded-lg bg-slate-50">
-                          <h3 className="font-semibold text-[#0F1C2E] mb-2">{faq.q}</h3>
-                          <p className="text-slate-600 text-sm">{faq.a}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                {faqs.length > 0 && (
+                  <Card className="border-0 shadow-sm">
+                    <CardContent className="p-6 lg:p-8">
+                      <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-6">
+                        {t('productDetail.faq')}
+                      </h2>
+                      <div className="space-y-4">
+                        {faqs.map((faq, idx) => (
+                          <div key={idx} className="p-4 rounded-lg bg-slate-50">
+                            <h3 className="font-semibold text-[#0F1C2E] mb-2">{faq.q}</h3>
+                            <p className="text-slate-600 text-sm">{faq.a}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </div>
               
               {/* Right Column - Sidebar */}
@@ -613,12 +615,12 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                     <CardContent className="p-6">
                       <div className="text-center mb-6">
                         <div className="flex items-baseline justify-center gap-2 mb-2">
-                          <span className="text-4xl font-bold text-[#0F1C2E]">${product.price}</span>
-                          {product.comparePrice > product.price && (
-                            <span className="text-lg text-slate-400 line-through">${product.comparePrice}</span>
+                          <span className="text-4xl font-bold text-[#0F1C2E]">${config.price}</span>
+                          {config.comparePrice > config.price && (
+                            <span className="text-lg text-slate-400 line-through">${config.comparePrice}</span>
                           )}
                         </div>
-                        <p className="text-sm text-slate-500">One-time payment • Lifetime access</p>
+                        <p className="text-sm text-slate-500">{t('productDetail.oneTimePayment')} • {t('productDetail.lifetimeAccess')}</p>
                       </div>
                       
                       <Button 
@@ -630,11 +632,11 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                         {isProcessing ? (
                           <>
                             <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                            Processing...
+                            {t('productDetail.processing')}
                           </>
                         ) : (
                           <>
-                            {product.cta}
+                            {cta}
                             <ArrowRight className="ml-2 h-5 w-5" />
                           </>
                         )}
@@ -644,7 +646,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                       
                       {/* Includes */}
                       <div className="space-y-3">
-                        {product.includes.map((item, idx) => (
+                        {includes.map((item, idx) => (
                           <div key={idx} className="flex justify-between text-sm">
                             <span className="text-slate-600">{item.name}</span>
                             <span className="font-medium text-[#0F1C2E]">{item.value}</span>
@@ -657,8 +659,8 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                       {/* Guarantee */}
                       <div className="text-center">
                         <Shield className="w-10 h-10 text-[#3DD4B0] mx-auto mb-2" />
-                        <p className="text-sm font-semibold text-[#0F1C2E] mb-1">30-Day Money-Back</p>
-                        <p className="text-xs text-slate-500">No questions asked</p>
+                        <p className="text-sm font-semibold text-[#0F1C2E] mb-1">{t('productDetail.dayGuarantee')}</p>
+                        <p className="text-xs text-slate-500">{t('productDetail.noQuestionsAsked')}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -666,9 +668,9 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                   {/* Specifications */}
                   <Card className="border-0 shadow-sm mt-6">
                     <CardContent className="p-6">
-                      <h3 className="font-semibold text-[#0F1C2E] mb-4">Specifications</h3>
+                      <h3 className="font-semibold text-[#0F1C2E] mb-4">{t('productDetail.specifications')}</h3>
                       <div className="space-y-3">
-                        {product.specifications.map((spec, idx) => (
+                        {specifications.map((spec, idx) => (
                           <div key={idx} className="flex justify-between text-sm">
                             <span className="text-slate-600">{spec.name}</span>
                             <span className="font-medium text-[#0F1C2E]">{spec.value}</span>
@@ -689,10 +691,10 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              Ready to Transform Your Identity?
+              {t('productDetail.readyToTransform')}
             </h2>
             <p className="text-slate-300 mb-6">
-              Join thousands who have already discovered their identity gap and started their transformation journey.
+              {t('productDetail.joinThousands')}
             </p>
             <Button 
               onClick={handleBuyNow}
@@ -702,11 +704,11 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               {isProcessing ? (
                 <>
                   <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  Processing...
+                  {t('productDetail.processing')}
                 </>
               ) : (
                 <>
-                  {product.cta}
+                  {cta}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </>
               )}

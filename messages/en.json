@@ -1,4 +1,62 @@
 {
+  "seo": {
+    "home": {
+      "title": "Tamkinly | Return to Your Center - Identity Transformation Tools",
+      "description": "Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, habit formation, and personal development. Start your journey today."
+    },
+    "products": {
+      "title": "Products & Pricing | Identity Transformation Tools - Tamkinly",
+      "description": "Start free with powerful identity tools, then upgrade as you grow. Transparent pricing for identity transformation products. Free tier available with no credit card required."
+    },
+    "apps": {
+      "title": "Interactive Apps | Transformation Tools - Tamkinly",
+      "description": "Access powerful transformation tools including Identity Gap Assessment, Values Clarification, Daily Reflection, and AI Identity Coach. Start free, upgrade anytime."
+    },
+    "quiz": {
+      "title": "Identity Gap Quiz | Free 3-Minute Assessment - Tamkinly",
+      "description": "Take our free 3-minute identity gap assessment. Discover what's holding you back from becoming the person you know you can be. Get instant personalized results."
+    },
+    "about": {
+      "title": "About Tamkinly | Our Mission & Philosophy - Tamkinly",
+      "description": "Tamkinly is a space to rebuild the human from within. Learn about our evidence-based approach to identity transformation and personal development."
+    },
+    "contact": {
+      "title": "Contact Us | Get Support - Tamkinly",
+      "description": "Contact Tamkinly for support, questions, or partnership inquiries. We typically respond within 24-48 hours. Email us at hello@tamkinly.com."
+    },
+    "blog": {
+      "title": "Blog | Research-Backed Insights - Tamkinly",
+      "description": "Research-backed insights, practical frameworks, and transformation tools. Articles on identity transformation, habit formation, and personal development."
+    },
+    "methodology": {
+      "title": "Methodology | Evidence-Based Transformation - Tamkinly",
+      "description": "Our methodology combines neuroscience, psychology, and practical frameworks for lasting identity transformation. Based on Atomic Habits, Self-Authorship, and CBT research."
+    },
+    "faq": {
+      "title": "FAQ | Frequently Asked Questions - Tamkinly",
+      "description": "Find answers to common questions about Tamkinly products, pricing, and methodology. Get help with your transformation journey."
+    },
+    "privacy": {
+      "title": "Privacy Policy | Your Data Protection - Tamkinly",
+      "description": "Learn how Tamkinly protects your privacy and handles your data. We are committed to transparency and security in all our practices."
+    },
+    "terms": {
+      "title": "Terms of Service | Usage Agreement - Tamkinly",
+      "description": "Read our terms of service and usage agreement. Understand your rights and responsibilities when using Tamkinly products and services."
+    },
+    "refund": {
+      "title": "Refund Policy | 30-Day Money Back Guarantee - Tamkinly",
+      "description": "We offer a 30-day money-back guarantee on all products. If you're not satisfied, contact us for a full refund—no questions asked."
+    },
+    "cart": {
+      "title": "Shopping Cart | Complete Your Purchase - Tamkinly",
+      "description": "Review your selected products and complete your purchase. Secure checkout with multiple payment options available."
+    },
+    "account": {
+      "title": "My Account | Manage Your Profile - Tamkinly",
+      "description": "Access your Tamkinly account to manage your profile, view purchases, and track your transformation progress."
+    }
+  },
   "navigation": {
     "home": "Home",
     "products": "Products",
@@ -262,5 +320,537 @@
     "goalSystem": "Goal System",
     "aiCoach": "AI Identity Coach",
     "dailyReflection": "Daily Reflection"
+  },
+  "results": {
+    "badge": "Assessment Complete",
+    "title": "Your Identity Transformation",
+    "titleHighlight": "Roadmap",
+    "subtitle": "Based on your responses, we've identified your key growth areas and created a personalized transformation plan.",
+    "overallScore": "Your Identity Alignment Score",
+    "scoreDescriptions": {
+      "high": "Strong foundation with room for optimization",
+      "medium": "Good potential with clear growth opportunities",
+      "low": "Significant transformation potential",
+      "veryLow": "Major breakthrough opportunity ahead"
+    },
+    "detailedBreakdown": "Your Detailed Breakdown",
+    "dimensions": {
+      "identityClarity": {
+        "title": "Identity Clarity",
+        "description": "How clear are you about who you are and who you want to become"
+      },
+      "environmentalAlignment": {
+        "title": "Environmental Alignment",
+        "description": "Does your environment support or sabotage your growth"
+      },
+      "emotionalRegulation": {
+        "title": "Emotional Regulation",
+        "description": "How well do you process and manage your emotions"
+      },
+      "decisionQuality": {
+        "title": "Decision Quality",
+        "description": "Are your decisions aligned with your true self"
+      },
+      "progressMomentum": {
+        "title": "Progress Momentum",
+        "description": "How consistently do you follow through on your goals"
+      }
+    },
+    "dominantGrowthArea": "Your Dominant Growth Area",
+    "domantGrowthDescription": "Your assessment reveals that {area} is your primary opportunity for transformation. Addressing this area will create the most significant positive impact on your overall identity alignment.",
+    "keyInsight": "Key Insight",
+    "transformationMap": "Personal Transformation Map",
+    "transformationMapDescription": "Your journey from current state to your target identity",
+    "currentState": "Current State",
+    "targetState": "Target State",
+    "recommendedForYou": "Recommended For You",
+    "perfectMatch": "Your Perfect Transformation Match",
+    "products": {
+      "trial": {
+        "name": "7-Day Identity Reset",
+        "description": "A quick-start mini-guide to experience the Tamkinly methodology",
+        "bestFor": "Curious explorers ready to test the waters"
+      },
+      "planner": {
+        "name": "Identity Recode Planner",
+        "description": "The complete 30-day identity transformation system",
+        "bestFor": "Those ready for deep transformation"
+      },
+      "premium": {
+        "name": "Premium Transformation",
+        "description": "Comprehensive transformation with advanced tools",
+        "bestFor": "Committed individuals seeking complete transformation"
+      },
+      "bundle": {
+        "name": "Complete Bundle",
+        "description": "The ultimate identity transformation experience",
+        "bestFor": "Those who want the complete transformation experience"
+      }
+    },
+    "whatsIncluded": "What's Included:",
+    "startTransformation": "Start Your Transformation",
+    "viewAllProducts": "View All Products",
+    "mostPopular": "Most Popular Choice",
+    "save": "Save",
+    "dayGuarantee": "30-Day Guarantee",
+    "instantAccess": "Instant Access",
+    "readyToTransform": "Ready to Transform Your Identity?",
+    "joinThousands": "Join thousands who have already begun their journey back to themselves. Your transformation starts with a single decision.",
+    "beginTransformation": "Begin Your Transformation",
+    "personalizedMessages": {
+      "high": "You have a strong foundation. The Premium Bundle will help you optimize and master your identity transformation with advanced tools and frameworks.",
+      "medium": "You're ready for transformation. The Identity Recode Planner is perfectly suited for your journey - it will guide you through a complete 30-day identity reconstruction.",
+      "low": "There's significant potential waiting to be unlocked. The Planner will help you rebuild your identity foundation from the ground up.",
+      "veryLow": "Your transformation journey starts with a single step. The 7-Day Reset is the perfect introduction to discover what's possible."
+    },
+    "noResults": "No results available. Please complete the assessment first.",
+    "retakeQuiz": "Retake Assessment",
+    "shareResults": "Share Your Results"
+  },
+  "productDetail": {
+    "backToProducts": "Back to Products",
+    "mostPopular": "Most Popular",
+    "save": "Save",
+    "oneTimePayment": "One-time payment",
+    "aboutProduct": "About This Product",
+    "keyBenefits": "Key Benefits",
+    "whatsIncluded": "What's Included",
+    "appsIncluded": "Apps Included",
+    "whatUsersSay": "What Users Say",
+    "faq": "Frequently Asked Questions",
+    "specifications": "Specifications",
+    "readyToTransform": "Ready to Transform Your Identity?",
+    "joinThousands": "Join thousands who have already discovered their identity gap and started their transformation journey.",
+    "tryFreeVersion": "Try Free Version",
+    "dayGuarantee": "30-Day Guarantee",
+    "instantAccess": "Instant Access",
+    "lifetimeUpdates": "Lifetime Updates",
+    "moneyBack": "Money-Back",
+    "noQuestionsAsked": "No questions asked",
+    "lifetimeAccess": "Lifetime Access",
+    "productNotFound": "Product Not Found",
+    "productNotFoundDesc": "The product you're looking for doesn't exist.",
+    "browseAllProducts": "Browse All Products",
+    "redirecting": "Redirecting...",
+    "processing": "Processing...",
+    "redirectToCheckout": "Redirecting to checkout...",
+    "preparingPurchase": "Preparing {name} for purchase",
+    "products": {
+      "trial": {
+        "name": "7-Day Trial",
+        "tier": "TRIAL",
+        "description": "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
+        "longDescription": "Not sure if the Identity Recode system is right for you? Try our 7-day trial to experience the full power of transformation before committing. You'll get access to the core methodology and see real results in just one week.",
+        "cta": "Start 7-Day Trial",
+        "highlights": {
+          "fullAccess": "Full system access",
+          "sevenDays": "7 days",
+          "lowRisk": "Low risk"
+        },
+        "benefits": {
+          "testBeforeCommit": {
+            "title": "Test Before Committing",
+            "description": "Experience the full methodology without a long-term commitment"
+          },
+          "seeResults": {
+            "title": "See Real Results",
+            "description": "Many users report breakthrough insights within the first 3 days"
+          },
+          "fullSystem": {
+            "title": "Full System Access",
+            "description": "Try all core features of the planner system"
+          }
+        },
+        "features": [
+          "7-Day Guided Journey",
+          "Daily identity prompts",
+          "Evidence tracking system",
+          "Progress dashboard",
+          "Email support",
+          "PDF worksheets included"
+        ],
+        "apps": {
+          "trialPlanner": {
+            "name": "7-Day Trial Planner",
+            "description": "A condensed version of our 30-day system"
+          },
+          "identityGap": {
+            "name": "Identity Gap Assessment",
+            "description": "Discover your identity gap score"
+          },
+          "values": {
+            "name": "Values Clarification",
+            "description": "Identify your core values"
+          },
+          "reflection": {
+            "name": "Daily Reflection",
+            "description": "Guided daily prompts"
+          }
+        },
+        "includes": {
+          "duration": "Duration",
+          "durationValue": "7 Days",
+          "appsAccess": "Apps Access",
+          "appsValue": "4 Core Apps",
+          "pdfDownloads": "PDF Downloads",
+          "yes": "Yes",
+          "support": "Support",
+          "email": "Email",
+          "updates": "Updates"
+        },
+        "specs": {
+          "format": "Format",
+          "formatValue": "Digital + Interactive",
+          "device": "Device",
+          "deviceValue": "Any Device",
+          "languages": "Languages",
+          "languagesValue": "English",
+          "access": "Access",
+          "accessValue": "Instant"
+        },
+        "faqs": [
+          {
+            "q": "What happens after 7 days?",
+            "a": "Your access will expire, but you can upgrade to any paid plan to continue your journey."
+          },
+          {
+            "q": "Can I extend the trial?",
+            "a": "The trial is a one-time offer per customer. We recommend upgrading to continue your progress."
+          },
+          {
+            "q": "Is my progress saved?",
+            "a": "Yes! If you upgrade within 30 days, all your trial data will be preserved."
+          }
+        ],
+        "testimonials": [
+          {
+            "name": "Ahmed M.",
+            "role": "Engineer",
+            "content": "The 7-day trial convinced me. I upgraded to the full planner on day 4 because I was already seeing results."
+          },
+          {
+            "name": "Sarah K.",
+            "role": "Teacher",
+            "content": "Perfect way to test the system. The daily prompts were eye-opening."
+          }
+        ]
+      },
+      "planner": {
+        "name": "Identity Recode Planner",
+        "tier": "BASIC",
+        "description": "The complete 30-day transformation system with interactive apps and PDF downloads.",
+        "longDescription": "The Identity Recode Planner is our flagship 30-day transformation system. Based on evidence-based psychology and identity science, this planner guides you through a structured journey of self-discovery and lasting change. Includes both digital interactive apps and printable PDF versions.",
+        "cta": "Get The Planner",
+        "highlights": {
+          "mostPopular": "Most popular",
+          "printIncluded": "Print included",
+          "thirtyDays": "30-day journey"
+        },
+        "benefits": {
+          "structured": {
+            "title": "Structured Transformation",
+            "description": "A clear 30-day roadmap from confusion to clarity"
+          },
+          "evidence": {
+            "title": "Evidence-Based Design",
+            "description": "Built on psychology, neuroscience, and proven methods"
+          },
+          "printDigital": {
+            "title": "Print & Digital",
+            "description": "Use on any device or print for pen-and-paper work"
+          }
+        },
+        "features": [
+          "30-Day Identity Planner",
+          "Executive Manual (50+ pages)",
+          "Identity Baseline Worksheet",
+          "Environmental Audit Template",
+          "Digital + Print PDFs",
+          "Lifetime access",
+          "All future updates included"
+        ],
+        "apps": {
+          "manual": {
+            "name": "Executive Manual",
+            "description": "Comprehensive guide to identity transformation"
+          },
+          "dailyPlanner": {
+            "name": "30-Day Daily Planner",
+            "description": "Interactive daily prompts and tracking"
+          },
+          "baseline": {
+            "name": "Identity Baseline Worksheet",
+            "description": "Establish your starting point"
+          },
+          "audit": {
+            "name": "Environmental Audit",
+            "description": "Assess your surroundings for growth"
+          }
+        },
+        "includes": {
+          "duration": "Duration",
+          "durationValue": "Lifetime",
+          "appsAccess": "Apps Access",
+          "appsValue": "4 Core Apps",
+          "pdfDownloads": "PDF Downloads",
+          "all": "Yes - All",
+          "support": "Support",
+          "email": "Email",
+          "updates": "Updates",
+          "freeForever": "Free Forever"
+        },
+        "specs": {
+          "format": "Format",
+          "formatValue": "Digital + Print PDF",
+          "pages": "Pages",
+          "pagesValue": "50+ Pages",
+          "device": "Device",
+          "deviceValue": "Any Device",
+          "languages": "Languages",
+          "languagesValue": "English"
+        },
+        "faqs": [
+          {
+            "q": "Is this a physical product?",
+            "a": "No, this is a digital product. You'll receive instant access to interactive apps and downloadable PDFs that you can print."
+          },
+          {
+            "q": "How long do I have access?",
+            "a": "Lifetime! Purchase once, access forever, including all future updates."
+          },
+          {
+            "q": "Can I print the materials?",
+            "a": "Yes! All PDFs are print-ready. Many users prefer the pen-and-paper experience."
+          }
+        ],
+        "testimonials": [
+          {
+            "name": "Fatima A.",
+            "role": "Marketing Director",
+            "content": "The 30-day planner became my morning ritual. It's not about motivation—it's about identity. Life-changing."
+          },
+          {
+            "name": "James K.",
+            "role": "Entrepreneur",
+            "content": "I've done many personality tests, but this one actually told me what to DO. Worth every penny."
+          },
+          {
+            "name": "Michael T.",
+            "role": "Software Engineer",
+            "content": "3 months later, I'm a different person. The planner helped me understand my self-sabotage patterns."
+          }
+        ]
+      },
+      "premium": {
+        "name": "Premium Transformation",
+        "tier": "PREMIUM",
+        "description": "Everything in Planner plus advanced analytics and decision tracking tools.",
+        "longDescription": "The Premium package includes everything in the Planner, plus powerful analytics tools to track your transformation journey. Understand your decision patterns, track evidence of your growth, and visualize your progress over time. Perfect for those who want data-driven insights into their transformation.",
+        "cta": "Get Premium",
+        "highlights": {
+          "bestValue": "Best value",
+          "save": "Save $17",
+          "analytics": "Analytics included"
+        },
+        "benefits": {
+          "dataDriven": {
+            "title": "Data-Driven Growth",
+            "description": "See your transformation with clear metrics and trends"
+          },
+          "patterns": {
+            "title": "Pattern Recognition",
+            "description": "Identify decision patterns that help or hinder you"
+          },
+          "evidence": {
+            "title": "Evidence Collection",
+            "description": "Build proof of your growth over time"
+          }
+        },
+        "features": [
+          "Everything in Planner ($17 value)",
+          "Decision Pattern Analysis",
+          "Evidence Tracking System",
+          "Progress Dashboard",
+          "Advanced analytics",
+          "Priority support",
+          "Export your data"
+        ],
+        "apps": {
+          "allPlanner": {
+            "name": "Everything in Planner",
+            "description": "All 4 core apps included"
+          },
+          "decision": {
+            "name": "Decision Pattern Analysis",
+            "description": "Understand how you make choices"
+          },
+          "evidence": {
+            "name": "Evidence Tracking System",
+            "description": "Document your transformation proof"
+          },
+          "dashboard": {
+            "name": "Progress Dashboard",
+            "description": "Visualize your growth journey"
+          }
+        },
+        "includes": {
+          "duration": "Duration",
+          "durationValue": "Lifetime",
+          "appsAccess": "Apps Access",
+          "appsValue": "7 Apps",
+          "pdfDownloads": "PDF Downloads",
+          "all": "Yes - All",
+          "support": "Support",
+          "priorityEmail": "Priority Email",
+          "updates": "Updates",
+          "freeForever": "Free Forever",
+          "analytics": "Analytics",
+          "yes": "Yes"
+        },
+        "specs": {
+          "format": "Format",
+          "formatValue": "Digital + Print PDF",
+          "analytics": "Analytics",
+          "analyticsValue": "Advanced",
+          "export": "Export",
+          "exportValue": "CSV/PDF",
+          "dashboard": "Dashboard",
+          "dashboardValue": "Interactive"
+        },
+        "faqs": [
+          {
+            "q": "What's different from the Planner?",
+            "a": "Premium includes 3 additional apps: Decision Analysis, Evidence Tracking, and Progress Dashboard—perfect for data-driven transformation."
+          },
+          {
+            "q": "Can I upgrade from Planner?",
+            "a": "Yes! Contact us and we'll apply your $17 purchase toward Premium."
+          },
+          {
+            "q": "Is the analytics worth it?",
+            "a": "Users with Premium are 2.5x more likely to complete the 30-day program based on our data."
+          }
+        ],
+        "testimonials": [
+          {
+            "name": "David L.",
+            "role": "Professor",
+            "content": "As someone who studies behavioral psychology, I'm impressed by the scientific grounding. The analytics are powerful."
+          },
+          {
+            "name": "Amira H.",
+            "role": "Therapist",
+            "content": "I recommend this to clients. The decision pattern analysis alone is worth the upgrade."
+          }
+        ]
+      },
+      "bundle": {
+        "name": "Complete Bundle",
+        "tier": "BUNDLE",
+        "description": "The ultimate package: All apps + AI coaching + community access + priority support.",
+        "longDescription": "The Complete Bundle is our most comprehensive offering. Get everything we've built: all products, all apps, AI-powered identity coaching, access to our transformation community, and priority support with 24-hour response time. This is the fastest path to transformation.",
+        "cta": "Get Complete Bundle",
+        "highlights": {
+          "save": "Save $44",
+          "aiCoaching": "AI coaching",
+          "vipAccess": "VIP access"
+        },
+        "benefits": {
+          "complete": {
+            "title": "Complete Transformation",
+            "description": "Every tool, every resource, every support option"
+          },
+          "aiGuidance": {
+            "title": "AI-Powered Guidance",
+            "description": "Get personalized coaching from our AI identity coach"
+          },
+          "community": {
+            "title": "Community Connection",
+            "description": "Connect with others on the same journey"
+          }
+        },
+        "features": [
+          "All PDF products ($44 value)",
+          "All Interactive Apps",
+          "AI Identity Coach (GPT-4 powered)",
+          "Transformation Community",
+          "Emotion Regulation (ERQ)",
+          "Priority Support (24hr response)",
+          "Monthly live Q&A sessions",
+          "Direct founder access",
+          "Early access to new features"
+        ],
+        "apps": {
+          "allPremium": {
+            "name": "All Core Apps",
+            "description": "Everything in Premium (7 apps)"
+          },
+          "aiCoach": {
+            "name": "AI Identity Coach",
+            "description": "GPT-4 powered coaching anytime"
+          },
+          "emotion": {
+            "name": "Emotion Regulation (ERQ)",
+            "description": "Advanced emotional intelligence training"
+          },
+          "community": {
+            "name": "Community Access",
+            "description": "Private transformation community"
+          }
+        },
+        "includes": {
+          "duration": "Duration",
+          "durationValue": "Lifetime",
+          "appsAccess": "Apps Access",
+          "appsValue": "All 15 Apps",
+          "pdfDownloads": "PDF Downloads",
+          "all": "Yes - All",
+          "support": "Support",
+          "priority": "Priority (24hr)",
+          "aiCoach": "AI Coach",
+          "unlimited": "Unlimited",
+          "community": "Community",
+          "lifetimeAccess": "Lifetime Access",
+          "liveQA": "Live Q&A",
+          "monthly": "Monthly"
+        },
+        "specs": {
+          "aiCoach": "AI Coach",
+          "aiCoachValue": "GPT-4 Powered",
+          "community": "Community",
+          "communityValue": "Private Discord",
+          "supportHours": "Support Hours",
+          "supportHoursValue": "24hr Response",
+          "bonus": "Bonus",
+          "bonusValue": "Founder Access"
+        },
+        "faqs": [
+          {
+            "q": "Is the AI Coach actually helpful?",
+            "a": "Our AI Coach uses GPT-4 with custom training on identity transformation. Users report it provides breakthrough insights between sessions."
+          },
+          {
+            "q": "What's the community like?",
+            "a": "A private Discord with 500+ members on transformation journeys. Weekly challenges, accountability partners, and genuine support."
+          },
+          {
+            "q": "How do I contact the founder?",
+            "a": "Bundle members get a direct email line to Abdallah with 48-hour response time."
+          }
+        ],
+        "testimonials": [
+          {
+            "name": "Sarah M.",
+            "role": "Life Coach",
+            "content": "I've recommended the Bundle to 20+ clients. The AI coach alone provides incredible value between sessions."
+          },
+          {
+            "name": "Omar R.",
+            "role": "Executive",
+            "content": "The community and live Q&As made the difference. Worth every dollar for the support alone."
+          }
+        ]
+      }
+    }
   }
 }

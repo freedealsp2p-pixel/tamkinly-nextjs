@@ -47,8 +47,12 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const stored = localStorage.getItem('locale');
     const initialLocale: Locale = (stored === 'ar' || stored === 'en') ? stored : 'en';
-    setLocaleState(initialLocale);
-    setIsHydrated(true);
+    
+    // Use microtask to avoid synchronous setState warning
+    Promise.resolve().then(() => {
+      setLocaleState(initialLocale);
+      setIsHydrated(true);
+    });
 
     // Set initial document attributes
     document.documentElement.lang = initialLocale;

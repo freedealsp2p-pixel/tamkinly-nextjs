@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import { SITE_CONFIG, KEYWORDS } from "@/lib/seo";
+import { SEO_SITE_CONFIG, HOME_METADATA, PAGE_METADATA } from "@/lib/seo-pages";
 import { Analytics } from "@/components/Analytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { LocaleProvider } from '@/components/providers/LocaleProvider';
@@ -35,25 +35,26 @@ export const viewport: Viewport = {
 };
 
 // Comprehensive metadata for SEO - Bilingual support
+// This is the root metadata - child layouts override with their own specific metadata
 export const metadata: Metadata = {
   // Basic metadata
-  metadataBase: new URL(SITE_CONFIG.url),
+  metadataBase: new URL(SEO_SITE_CONFIG.url),
   title: {
-    default: `${SITE_CONFIG.nameEn} | Return to Your Center | عد إلى مركزك`,
-    template: `%s | ${SITE_CONFIG.nameEn}`,
+    default: PAGE_METADATA.home.title,
+    template: `%s | ${SEO_SITE_CONFIG.name}`,
   },
-  description: `Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, habit formation, and personal development. اكتشف فجوة هويتك مع تقييمنا المجاني. أدوات مبنية على الأدلة لتحويل الهوية.`,
-  keywords: [...KEYWORDS.primary, ...KEYWORDS.secondary],
-  authors: [{ name: SITE_CONFIG.author, url: SITE_CONFIG.url }],
-  creator: SITE_CONFIG.author,
-  publisher: SITE_CONFIG.author,
+  description: PAGE_METADATA.home.description,
+  keywords: PAGE_METADATA.home.keywords,
+  authors: [{ name: SEO_SITE_CONFIG.author, url: SEO_SITE_CONFIG.url }],
+  creator: SEO_SITE_CONFIG.author,
+  publisher: SEO_SITE_CONFIG.author,
   
-  // Language and locale
+  // Language and locale - canonical URL points to home page
   alternates: {
-    canonical: SITE_CONFIG.url,
+    canonical: SEO_SITE_CONFIG.url,
     languages: {
-      "en-US": SITE_CONFIG.url,
-      "ar-SA": SITE_CONFIG.url,
+      "en-US": SEO_SITE_CONFIG.url,
+      "ar-SA": SEO_SITE_CONFIG.url,
     },
   },
   
@@ -78,25 +79,25 @@ export const metadata: Metadata = {
   
   // Open Graph - Full configuration with Arabic support
   openGraph: {
-    title: `${SITE_CONFIG.nameEn} | Identity Transformation Tools`,
-    description: `Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, habit formation, and personal development.`,
-    url: SITE_CONFIG.url,
-    siteName: SITE_CONFIG.nameEn,
-    locale: SITE_CONFIG.locale,
+    title: PAGE_METADATA.home.title,
+    description: PAGE_METADATA.home.description,
+    url: SEO_SITE_CONFIG.url,
+    siteName: SEO_SITE_CONFIG.name,
+    locale: 'en_US',
     type: "website",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: `${SITE_CONFIG.nameEn} - Identity Transformation Tools`,
+        alt: `${SEO_SITE_CONFIG.name} - Identity Transformation Tools`,
         type: "image/png",
       },
       {
         url: "/og-image-square.png",
         width: 800,
         height: 800,
-        alt: `${SITE_CONFIG.nameEn} Logo`,
+        alt: `${SEO_SITE_CONFIG.name} Logo`,
         type: "image/png",
       },
     ],
@@ -105,10 +106,10 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    site: SITE_CONFIG.twitterHandle,
-    creator: SITE_CONFIG.twitterHandle,
-    title: `${SITE_CONFIG.nameEn} | Identity Transformation Tools`,
-    description: `Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation.`,
+    site: SEO_SITE_CONFIG.twitterHandle,
+    creator: SEO_SITE_CONFIG.twitterHandle,
+    title: PAGE_METADATA.home.title,
+    description: PAGE_METADATA.home.description,
     images: ["/og-image.png"],
   },
   
@@ -131,10 +132,10 @@ export const metadata: Metadata = {
   category: "Self-Development",
   
   // Application info
-  applicationName: SITE_CONFIG.nameEn,
+  applicationName: SEO_SITE_CONFIG.name,
   appleWebApp: {
     capable: true,
-    title: SITE_CONFIG.nameEn,
+    title: SEO_SITE_CONFIG.name,
     statusBarStyle: "black-translucent",
   },
   
@@ -156,8 +157,8 @@ export const metadata: Metadata = {
     "distribution": "global",
     "geo.region": "Global",
     "geo.placename": "Online",
-    "DC.title": SITE_CONFIG.nameEn,
-    "DC.description": SITE_CONFIG.description,
+    "DC.title": SEO_SITE_CONFIG.name,
+    "DC.description": PAGE_METADATA.home.description,
     "DC.language": "en, ar",
     "msapplication-TileColor": "#0F1C2E",
     "msapplication-config": "/browserconfig.xml",

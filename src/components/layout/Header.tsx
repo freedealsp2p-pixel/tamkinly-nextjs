@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "@/components/providers/LocaleProvider";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, ShoppingCart, Search, Globe } from "lucide-react";
+import { Menu, ShoppingCart, Search, Globe, Loader2 } from "lucide-react";
 
 // Search pages data - comprehensive list for better search
 const searchablePages = [
@@ -175,6 +175,10 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<typeof searchablePages>([]);
   const [showResults, setShowResults] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [isSearching, setIsSearching] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations();
@@ -189,32 +193,114 @@ export function Header() {
     { href: "/contact", label: t("navigation.contact") },
   ];
 
-  // Handle search
-  const handleSearch = (query: string) => {
+  // Handle search with debounce and loading state
+  const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
-    
+    setSelectedIndex(-1);
+
     if (!query.trim()) {
       setSearchResults([]);
       setShowResults(false);
+      setIsSearching(false);
       return;
     }
 
-    const lowerQuery = query.toLowerCase();
-    const results = searchablePages.filter(page => 
-      t(page.titleKey).toLowerCase().includes(lowerQuery) ||
-      page.keywords.some(keyword => keyword.includes(lowerQuery))
-    );
-    
-    setSearchResults(results);
-    setShowResults(true);
-  };
+    // Show loading state
+    setIsSearching(true);
+
+    // Clear previous timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    // Debounce search
+    searchTimeoutRef.current = setTimeout(() => {
+      const lowerQuery = query.toLowerCase();
+      const results = searchablePages.filter(page =>
+        t(page.titleKey).toLowerCase().includes(lowerQuery) ||
+        page.keywords.some(keyword => keyword.includes(lowerQuery))
+      );
+
+      setSearchResults(results);
+      setShowResults(true);
+      setIsSearching(false);
+    }, 150);
+  }, [t]);
 
   // Navigate to result
-  const handleSelectResult = (path: string) => {
+  const handleSelectResult = useCallback((path: string) => {
     setShowResults(false);
     setSearchQuery("");
+    setSearchResults([]);
+    setSelectedIndex(-1);
+    setIsSearching(false);
+    searchInputRef.current?.blur();
     router.push(path);
-  };
+  }, [router]);
+
+  // Handle keyboard navigation
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showResults || searchResults.length === 0) {
+      // If there's a query but no results shown, try searching on Enter
+      if (e.key === 'Enter' && searchQuery.trim()) {
+        e.preventDefault();
+        handleSearch(searchQuery);
+      }
+      return;
+    }
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedIndex(prev =>
+          prev < searchResults.length - 1 ? prev + 1 : 0
+        );
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedIndex(prev =>
+          prev > 0 ? prev - 1 : searchResults.length - 1
+        );
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (selectedIndex >= 0) {
+          handleSelectResult(searchResults[selectedIndex].path);
+        } else if (searchResults.length > 0) {
+          // Navigate to first result if none selected
+          handleSelectResult(searchResults[0].path);
+        }
+        break;
+      case 'Escape':
+        e.preventDefault();
+        setShowResults(false);
+        setSelectedIndex(-1);
+        searchInputRef.current?.blur();
+        break;
+    }
+  }, [showResults, searchResults, selectedIndex, searchQuery, handleSearch, handleSelectResult]);
+
+  // Close search on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchInputRef.current && !searchInputRef.current.contains(e.target as Node)) {
+        setShowResults(false);
+        setSelectedIndex(-1);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md supports-[backdrop-filter]:bg-white/90 border-b border-slate-100/80 shadow-sm">
@@ -254,14 +340,19 @@ export function Header() {
           {/* Search Input with Results */}
           <div className="hidden lg:flex items-center relative">
             <div className="relative">
-              <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              {isSearching ? (
+                <Loader2 className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 animate-spin" />
+              ) : (
+                <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              )}
               <Input
+                ref={searchInputRef}
                 type="search"
                 placeholder={t("common.search")}
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 onFocus={() => searchQuery && setShowResults(true)}
-                onBlur={() => setTimeout(() => setShowResults(false), 200)}
+                onKeyDown={handleKeyDown}
                 className="w-48 ps-9 h-9 bg-slate-50 border-slate-200 focus:border-accent focus:ring-accent/20 text-sm"
               />
             </div>
@@ -273,17 +364,22 @@ export function Header() {
                   <button
                     key={idx}
                     onClick={() => handleSelectResult(result.path)}
-                    className="w-full px-4 py-3 text-start hover:bg-accent/10 transition-colors flex items-center gap-3"
+                    onMouseEnter={() => setSelectedIndex(idx)}
+                    className={`w-full px-4 py-3 text-start transition-colors flex items-center gap-3 ${
+                      selectedIndex === idx
+                        ? 'bg-accent/20 text-primary'
+                        : 'hover:bg-accent/10 text-slate-700'
+                    }`}
                   >
-                    <Search className="h-4 w-4 text-slate-400" />
-                    <span className="text-slate-700">{t(result.titleKey)}</span>
+                    <Search className="h-4 w-4 text-slate-400 flex-shrink-0" />
+                    <span className="truncate">{t(result.titleKey)}</span>
                   </button>
                 ))}
               </div>
             )}
             
             {/* No Results */}
-            {showResults && searchQuery && searchResults.length === 0 && (
+            {showResults && searchQuery && searchResults.length === 0 && !isSearching && (
               <div className="absolute top-full mt-2 start-0 w-64 bg-white rounded-lg shadow-lg border border-slate-200 p-4 z-50">
                 <p className="text-slate-500 text-sm">{t("common.noResults")} &quot;{searchQuery}&quot;</p>
               </div>
