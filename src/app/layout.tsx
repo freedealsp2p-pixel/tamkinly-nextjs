@@ -50,11 +50,11 @@ export const metadata: Metadata = {
   publisher: SEO_SITE_CONFIG.author,
   
   // Language and locale - canonical URL points to home page
+  // Using x-default since we don't have separate language paths yet
   alternates: {
     canonical: SEO_SITE_CONFIG.url,
     languages: {
-      "en-US": SEO_SITE_CONFIG.url,
-      "ar-SA": SEO_SITE_CONFIG.url,
+      "x-default": SEO_SITE_CONFIG.url,
     },
   },
   
@@ -184,11 +184,18 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}
         suppressHydrationWarning
       >
+        {/* Skip Navigation Link for Accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-md focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <LocaleProvider>
           <AuthProvider>
             <div className="min-h-screen flex flex-col">
               <Header />
-              <main className="flex-1">
+              <main id="main-content" className="flex-1">
                 {children}
               </main>
               <Footer />

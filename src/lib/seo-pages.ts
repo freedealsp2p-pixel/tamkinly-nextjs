@@ -261,6 +261,22 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
     ],
     noIndex: true, // Account pages shouldn't be indexed
   },
+  resources: {
+    title: 'Free Resources | Transformation Tools & Guides - Tamkinly',
+    titleAr: 'موارد مجانية | أدوات وإرشادات التحول - تمكينلي',
+    description: 'Access free identity transformation resources including assessments, guides, and research-backed articles. Start your journey without any cost.',
+    descriptionAr: 'الوصول إلى موارد تحويل الهوية المجانية بما في ذلك التقييمات والأدلة والمقالات المبنية على الأبحاث. ابدأ رحلتك بدون أي تكلفة.',
+    path: '/resources',
+    keywords: [
+      'free resources',
+      'identity guides',
+      'transformation tools',
+      'research articles',
+      'موارد مجانية',
+      'أدلة الهوية',
+      'أدوات التحول',
+    ],
+  },
 };
 
 // ============================================
@@ -288,11 +304,11 @@ export function generatePageMetadataFromConfig(pageKey: keyof typeof PAGE_METADA
     keywords: config.keywords,
     
     // Canonical URL with correct path
+    // Using x-default since we don't have separate language paths yet
     alternates: {
       canonical: fullUrl,
       languages: {
-        'en-US': fullUrl,
-        'ar-SA': fullUrl,
+        'x-default': fullUrl,
       },
     },
     
@@ -365,6 +381,7 @@ export const TERMS_METADATA = generatePageMetadataFromConfig('terms');
 export const REFUND_METADATA = generatePageMetadataFromConfig('refund');
 export const CART_METADATA = generatePageMetadataFromConfig('cart');
 export const ACCOUNT_METADATA = generatePageMetadataFromConfig('account');
+export const RESOURCES_METADATA = generatePageMetadataFromConfig('resources');
 
 // ============================================
 // DYNAMIC METADATA GENERATORS

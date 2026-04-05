@@ -199,8 +199,25 @@ export default function PrivacyPolicyPage() {
                 {/* Cookies */}
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Cookies & Tracking</h2>
-                  <p className="text-[#2B2E34] leading-relaxed">
-                    We use essential cookies to maintain your session and remember your preferences. We do not use third-party tracking cookies or sell your data to advertisers. Analytics data is collected anonymously to improve our services.
+                  <p className="text-[#2B2E34] leading-relaxed mb-4">
+                    We use cookies and similar tracking technologies to improve your experience on our website. Here&apos;s what we use:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-sm text-[#2B2E34] mt-3">
+                    <li><strong>Essential Cookies:</strong> Required for the website to function properly (session management, authentication)</li>
+                    <li><strong>Analytics Cookies:</strong> We use Google Analytics to understand how visitors interact with our website. This includes page views, time spent, and navigation patterns. This data helps us improve our services.</li>
+                    <li><strong>Preference Cookies:</strong> Remember your settings and preferences (like language and theme)</li>
+                  </ul>
+                  <div className="mt-4 p-4 bg-[#F6F8FA] rounded-lg">
+                    <h4 className="font-semibold text-[#0F1C2E] text-sm mb-2">Google Analytics</h4>
+                    <p className="text-xs text-[#8A94A6]">
+                      We use Google Analytics 4 to collect anonymous usage data. Google Analytics may collect your IP address, browser type, device information, and browsing behavior. You can opt out of Google Analytics by installing the{' '}
+                      <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-[#3DD4B0] hover:underline">
+                        Google Analytics Opt-out Browser Add-on
+                      </a>.
+                    </p>
+                  </div>
+                  <p className="text-[#2B2E34] leading-relaxed mt-4">
+                    We do not use third-party tracking cookies for advertising purposes or sell your data to advertisers. You can manage cookie preferences through our cookie consent banner or your browser settings.
                   </p>
                 </div>
 
