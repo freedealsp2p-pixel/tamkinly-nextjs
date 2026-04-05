@@ -307,3 +307,58 @@ Fix SEO issues where all pages shared the same SEO title, canonical URLs pointed
 - Dev server running successfully
 - Pages loading correctly with new metadata
 - Lint passed (existing error in LocaleProvider is unrelated to SEO changes)
+
+---
+## Task ID: 4 - Sub-Page SEO Fixes (Blog & Apps)
+### Date: Current Session
+
+### Problem Identified:
+Blog articles and app sub-pages were using parent page SEO metadata instead of their own unique metadata. This is because all these pages use `'use client'` directive which prevents them from exporting `metadata` directly in Next.js.
+
+### Solution Implemented:
+
+1. **Created Blog Articles Data Configuration** (`src/lib/blog-articles.ts`):
+   - Centralized metadata for all 22 blog articles
+   - Each article has: title, description, keywords, datePublished, dateModified, author
+   - `generateBlogArticleMetadata()` function generates full Metadata objects
+   - Helper functions: `getBlogArticleBySlug()`, `getAllBlogArticleSlugs()`, `getFeaturedArticles()`
+
+2. **Created App Pages Data Configuration** (`src/lib/app-pages.ts`):
+   - Centralized metadata for all 20 app pages
+   - Each app has: title, description, tier (FREE/BASIC/BUNDLE), category, keywords
+   - `generateAppPageMetadata()` function generates full Metadata objects
+   - Helper functions: `getAppPageBySlug()`, `getAppsByTier()`, `getAppsByCategory()`
+
+3. **Created Layout Files for All Blog Articles** (22 files):
+   - Each `layout.tsx` exports `metadata` using `generateBlogArticleMetadata('slug')`
+   - Layout wraps the client component and provides server-side SEO
+   - Files created in: `/src/app/blog/[slug]/layout.tsx`
+
+4. **Created Layout Files for All App Pages** (20 files):
+   - Each `layout.tsx` exports `metadata` using `generateAppPageMetadata('slug')`
+   - Layout wraps the client component and provides server-side SEO
+   - Files created in: `/src/app/apps/[slug]/layout.tsx`
+
+5. **Fixed robots.txt**:
+   - Added sitemap reference: `Sitemap: https://tamkinly.com/sitemap.xml`
+
+### Key SEO Improvements:
+- ✅ Each blog article now has unique title, description, and keywords
+- ✅ Each app page now has unique SEO metadata
+- ✅ Canonical URLs correctly point to each page's own URL
+- ✅ OpenGraph data includes article-specific published/modified times
+- ✅ Twitter cards with unique images and descriptions
+- ✅ robots.txt now references sitemap.xml
+
+### Files Created:
+- `src/lib/blog-articles.ts` - Blog articles data configuration
+- `src/lib/app-pages.ts` - App pages data configuration
+- 22 blog article layout files
+- 20 app page layout files
+
+### Files Modified:
+- `public/robots.txt` - Added sitemap reference
+
+### Verification:
+- Lint passed with no errors
+- Dev server running successfully
