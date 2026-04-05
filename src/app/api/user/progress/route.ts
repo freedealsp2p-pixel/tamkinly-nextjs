@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-config';
-import { prisma } from '@/lib/prisma';
+import { db } from '@/lib/db';
 
 export async function GET(request: NextRequest) {
   try {
@@ -31,19 +31,19 @@ export async function GET(request: NextRequest) {
     const userId = (session.user as any).id;
 
     // Fetch user's transformation journey
-    const journey = await prisma.transformationJourney.findUnique({
+    const journey = await db.transformationJourney.findUnique({
       where: { userId },
     });
 
     // Fetch user's achievements
-    const achievements = await prisma.userAchievement.findMany({
+    const achievements = await db.userAchievement.findMany({
       where: { userId },
       orderBy: { completedAt: 'desc' },
       take: 10,
     });
 
     // Fetch assessment results
-    const assessments = await prisma.assessmentResult.findMany({
+    const assessments = await db.assessmentResult.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
       take: 5,
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     
-    const habitCompletions = await prisma.habitCompletion.count({
+    const habitCompletions = await db.habitCompletion.count({
       where: {
         habit: { userId },
         completed: true,
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Fetch journal entries
-    const journalEntries = await prisma.journalEntry.findMany({
+    const journalEntries = await db.journalEntry.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
       take: 10,

@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { db } from '@/lib/db';
 import { hashPassword } from '@/lib/auth-config';
 
 export async function POST(request: NextRequest) {
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await db.user.findUnique({
       where: { email: email.toLowerCase() },
     });
 
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await hashPassword(password);
 
     // Create user
-    const user = await prisma.user.create({
+    const user = await db.user.create({
       data: {
         email: email.toLowerCase(),
         name: name || email.split('@')[0],
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Create initial progress record
-    await prisma.userProgress.create({
+    await db.userProgress.create({
       data: {
         userId: user.id,
         currentDay: 1,
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Create transformation journey
-    await prisma.transformationJourney.create({
+    await db.transformationJourney.create({
       data: {
         userId: user.id,
         currentDay: 1,

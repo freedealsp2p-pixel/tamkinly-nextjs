@@ -1,5 +1,5 @@
 import { WifiOff, Home, RefreshCw } from 'lucide-react';
-import { Link } from '@/components/navigation/LocaleLink';
+import Link from 'next/link';
 
 export default function OfflinePage() {
   return (
@@ -11,7 +11,7 @@ export default function OfflinePage() {
           </div>
           <h1 className="text-3xl font-bold mb-4">You're Offline</h1>
           <p className="text-muted-foreground">
-            It looks like you've lost your internet connection. 
+            It looks like you've lost your internet connection.
             Don't worry - some content may still be available from cache.
           </p>
         </div>
