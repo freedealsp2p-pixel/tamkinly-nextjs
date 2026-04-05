@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Suspense } from "react";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/Header";
@@ -11,6 +12,13 @@ import { Analytics } from "@/components/Analytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { LocaleProvider } from '@/components/providers/LocaleProvider';
+
+// Helper to read locale from cookies (server-side)
+async function getLocaleFromCookies(): Promise<'en' | 'ar'> {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get('NEXT_LOCALE')?.value;
+  return locale === 'ar' ? 'ar' : 'en';
+}
 
 const inter = Inter({
   variable: "--font-inter",
@@ -50,10 +58,13 @@ export const metadata: Metadata = {
   creator: SEO_SITE_CONFIG.author,
   publisher: SEO_SITE_CONFIG.author,
   
-  // Language and locale - canonical URL points to home page
-  // Arabic content not yet available at separate URLs
+  // Language and locale - hreflang alternates for English and Arabic
   alternates: {
     canonical: SEO_SITE_CONFIG.url,
+    languages: {
+      'en': SEO_SITE_CONFIG.url,
+      'ar': `${SEO_SITE_CONFIG.url}/ar`,
+    },
   },
   
   // Icons - Complete favicon configuration for all devices
@@ -163,13 +174,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocaleFromCookies();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <head>
         {/* Preconnect to external resources for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -189,7 +202,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <LocaleProvider>
+        <LocaleProvider initialLocale={locale} urlBased>
           <AuthProvider>
             <div className="min-h-screen flex flex-col">
               <Header />

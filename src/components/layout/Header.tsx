@@ -49,11 +49,18 @@ function useHydrated() {
 
 // Language Switcher Component
 function LanguageSwitcher() {
-  const { locale, setLocale, direction } = useLocale();
+  const { locale, direction } = useLocale();
   const t = useTranslations("language");
+  const pathname = usePathname();
+  const router = useRouter();
 
   const switchLocale = (newLocale: 'en' | 'ar') => {
-    setLocale(newLocale);
+    const pathWithoutLocale = pathname.replace(/^\/ar/, '') || '/';
+    if (newLocale === 'ar') {
+      router.push(`/ar${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`);
+    } else {
+      router.push(pathWithoutLocale);
+    }
   };
 
   return (

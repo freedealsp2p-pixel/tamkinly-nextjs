@@ -4,9 +4,14 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, User, Sparkles, BookOpen, Target, Brain } from "lucide-react";
+import { ArrowRight, Clock, User, Sparkles, BookOpen, Target, Brain, Smartphone, FileText, TrendingUp } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema } from "@/lib/seo";
+import { BLOG_CATEGORIES } from "@/lib/blog-articles";
+
+const categoryIconMap: Record<string, React.ElementType> = {
+  Smartphone, FileText, Sparkles, Brain, TrendingUp,
+};
 
 // All articles organized by category
 const appArticles = [
@@ -227,6 +232,52 @@ export default function BlogPage() {
               Research-backed insights, practical frameworks, and transformation tools. 
               Every article is designed to guide you toward your true identity.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Browse by Category */}
+      <section className="py-12 lg:py-16 bg-slate-50 border-b border-slate-200">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-2">
+                Browse by Category
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base">
+                Explore articles organized by topic for focused learning.
+              </p>
+            </div>
+            <Link 
+              href="/blog/category/app-guides" 
+              className="hidden sm:inline-flex items-center gap-1.5 text-sm text-accent hover:underline font-medium"
+            >
+              View all <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+            {BLOG_CATEGORIES.map((cat) => {
+              const IconComponent = categoryIconMap[cat.icon] || FileText;
+              return (
+                <Link
+                  key={cat.slug}
+                  href={`/blog/category/${cat.slug}`}
+                  className="flex flex-col items-center gap-3 p-4 sm:p-5 bg-white rounded-xl border border-slate-200 hover:border-accent/30 hover:shadow-lg transition-all group text-center"
+                >
+                  <div className={`p-2.5 sm:p-3 rounded-xl bg-gradient-to-r ${cat.color} shadow-md group-hover:scale-110 transition-transform`}>
+                    <IconComponent className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-primary group-hover:text-accent transition-colors">
+                      {cat.name}
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                      {cat.subCategories.length} topics
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

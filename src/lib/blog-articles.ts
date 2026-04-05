@@ -409,3 +409,90 @@ export function getArticlesByCategory(category: string): BlogArticle[] {
 export function getArticlesByTier(tier: 'FREE' | 'BASIC' | 'BUNDLE'): BlogArticle[] {
   return BLOG_ARTICLES.filter(article => article.tier === tier);
 }
+
+// ============================================
+// BLOG CATEGORIES
+// ============================================
+
+export interface BlogCategory {
+  slug: string;
+  name: string;
+  description: string;
+  descriptionAr: string;
+  subCategories: string[];
+  icon: string;
+  color: string;
+}
+
+export const BLOG_CATEGORIES: BlogCategory[] = [
+  {
+    slug: 'app-guides',
+    name: 'App Guides',
+    description: 'Comprehensive guides for Tamkinly\'s identity transformation tools. Learn how to use each app effectively for maximum personal growth.',
+    descriptionAr: 'أدلة شاملة لأدوات تحويل الهوية في تمكنلي. تعلم كيفية استخدام كل تطبيق بفعالية لأقصى نمو شخصي.',
+    subCategories: ['FREE App', 'BASIC App', 'BUNDLE App'],
+    icon: 'Smartphone',
+    color: 'from-emerald-500 to-teal-600',
+  },
+  {
+    slug: 'worksheets',
+    name: 'Worksheets',
+    description: 'Research-backed worksheets for deep self-exploration. Printable tools based on psychology and identity science.',
+    descriptionAr: 'أوراق عمل مدعومة بالبحث للاستكشاف الذاتي العميق. أدوات قابلة للطباعة مبنية على علم النفس وعلم الهوية.',
+    subCategories: ['Worksheet'],
+    icon: 'FileText',
+    color: 'from-blue-500 to-cyan-600',
+  },
+  {
+    slug: 'identity-transformation',
+    name: 'Identity & Transformation',
+    description: 'Deep dives into identity shift, personal transformation, and self-liberation. Science-backed insights for becoming who you want to be.',
+    descriptionAr: 'استكشافات عميقة في تحول الهوية والتحول الشخصي والتحرر الذاتي. رؤى مدعومة بالعلم لتصبح من تريد.',
+    subCategories: ['Identity Shift', 'Transformation', 'Self-Liberation'],
+    icon: 'Sparkles',
+    color: 'from-purple-500 to-violet-600',
+  },
+  {
+    slug: 'mindset-strategy',
+    name: 'Mindset & Strategy',
+    description: 'Strategic thinking, commitment frameworks, and wealth-building through identity. Practical strategies for exceptional living.',
+    descriptionAr: 'التفكير الاستراتيجي وأطر الالتزام وبناء الثروة من خلال الهوية. استراتيجيات عملية لحياة استثنائية.',
+    subCategories: ['Wealth & Identity', 'Commitment', 'Strategy', 'Execution'],
+    icon: 'Brain',
+    color: 'from-amber-500 to-orange-600',
+  },
+  {
+    slug: 'productivity-growth',
+    name: 'Productivity & Growth',
+    description: 'Productivity systems, mental clarity techniques, and excellence frameworks. Practical tools for daily improvement.',
+    descriptionAr: 'أنظمة الإنتاجية وتقنيات الوضوح الذهني وأطر التميز. أدوات عملية للتحسن اليومي.',
+    subCategories: ['Productivity', 'Excellence', 'Mental Clarity'],
+    icon: 'TrendingUp',
+    color: 'from-rose-500 to-pink-600',
+  },
+];
+
+/**
+ * Get category by slug
+ */
+export function getCategoryBySlug(slug: string): BlogCategory | undefined {
+  return BLOG_CATEGORIES.find(cat => cat.slug === slug);
+}
+
+/**
+ * Get all category slugs for static generation
+ */
+export function getAllCategorySlugs(): string[] {
+  return BLOG_CATEGORIES.map(cat => cat.slug);
+}
+
+/**
+ * Get articles for a category (matching sub-categories)
+ */
+export function getArticlesForCategory(categorySlug: string): BlogArticle[] {
+  const category = getCategoryBySlug(categorySlug);
+  if (!category) return [];
+  return BLOG_ARTICLES.filter(article =>
+    category.subCategories.some(sub => article.category === sub)
+  );
+}

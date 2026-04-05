@@ -85,6 +85,16 @@ const CHANGE_FREQ = {
   other: 'monthly' as const,
 }
 
+// Helper to generate hreflang alternates for a given path
+function hreflangAlternates(path: string) {
+  return {
+    languages: {
+      'en': `${SITE_CONFIG.url}${path}`,
+      'ar': `${SITE_CONFIG.url}/ar${path === '/' ? '' : path}`,
+    },
+  };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url
   
@@ -95,45 +105,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: LAST_MODIFIED.home,
       changeFrequency: CHANGE_FREQ.home,
       priority: PRIORITIES.home,
-      alternates: {
-        languages: ['en', 'ar'],
-      },
+      alternates: hreflangAlternates('/'),
     },
     {
       url: `${baseUrl}/products`,
       lastModified: LAST_MODIFIED.products,
       changeFrequency: CHANGE_FREQ.products,
       priority: PRIORITIES.products,
-      alternates: {
-        languages: ['en', 'ar'],
-      },
+      alternates: hreflangAlternates('/products'),
     },
     {
       url: `${baseUrl}/apps`,
       lastModified: LAST_MODIFIED.apps,
       changeFrequency: CHANGE_FREQ.apps,
       priority: PRIORITIES.apps,
-      alternates: {
-        languages: ['en', 'ar'],
-      },
+      alternates: hreflangAlternates('/apps'),
     },
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date().toISOString().split('T')[0],
       changeFrequency: CHANGE_FREQ.blog,
       priority: PRIORITIES.blog,
-      alternates: {
-        languages: ['en', 'ar'],
-      },
+      alternates: hreflangAlternates('/blog'),
     },
     {
       url: `${baseUrl}/quiz`,
       lastModified: LAST_MODIFIED['identity-gap-quiz'],
       changeFrequency: CHANGE_FREQ.apps,
       priority: 0.9,
-      alternates: {
-        languages: ['en', 'ar'],
-      },
+      alternates: hreflangAlternates('/quiz'),
     },
   ]
   
@@ -149,9 +149,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: page.lastModified,
     changeFrequency: CHANGE_FREQ.other,
     priority: PRIORITIES.about,
-    alternates: {
-      languages: ['en', 'ar'],
-    },
+    alternates: hreflangAlternates(page.path),
   }))
   
   // App pages - comprehensive list
@@ -176,9 +174,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: app.lastModified,
     changeFrequency: CHANGE_FREQ.apps,
     priority: app.priority,
-    alternates: {
-      languages: ['en', 'ar'],
-    },
+    alternates: hreflangAlternates(`/apps/${app.slug}`),
   }))
   
   // Blog articles - comprehensive list
@@ -215,9 +211,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: LAST_MODIFIED[item.slug as keyof typeof LAST_MODIFIED] || new Date().toISOString().split('T')[0],
     changeFrequency: CHANGE_FREQ.blogArticles,
     priority: item.priority,
-    alternates: {
-      languages: ['en', 'ar'],
-    },
+    alternates: hreflangAlternates(`/blog/${item.slug}`),
   }))
   
   // Legal pages (low priority but included for completeness)

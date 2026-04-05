@@ -120,5 +120,7 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,
+    // Allow Arabic locale paths
+    additionalSitemaps: [`${baseUrl}/ar/sitemap.xml`],
   }
 }
