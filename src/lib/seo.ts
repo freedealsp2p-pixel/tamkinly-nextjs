@@ -192,13 +192,9 @@ export function generatePageMetadata({
     creator: SITE_CONFIG.author,
     publisher: SITE_CONFIG.author,
     
-    // Canonical URL with alternate languages
+    // Canonical URL - Arabic content not yet available at separate URLs
     alternates: {
       canonical: url,
-      languages: {
-        'x-default': url,
-        'en': url,
-      },
     },
     
     // Open Graph - Full configuration
@@ -306,6 +302,7 @@ export function generateOrganizationSchema() {
 
 /**
  * WebSite Schema with SearchAction
+ * Fixed: Using direct URL string instead of EntryPoint for better compatibility
  */
 export function generateWebSiteSchema() {
   return {
@@ -318,10 +315,7 @@ export function generateWebSiteSchema() {
     inLanguage: ['en', 'ar'],
     potentialAction: {
       '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE_CONFIG.url}/search?q={search_term_string}`,
-      },
+      target: `${SITE_CONFIG.url}/search?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   };

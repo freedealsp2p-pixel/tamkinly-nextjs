@@ -36,12 +36,12 @@ type QuestionType = {
     insight?: string;
     insightAr?: string;
   }[];
-  category: 'identity' | 'environment' | 'emotion' | 'decision' | 'progress';
+  category: 'identity' | 'environment' | 'emotion' | 'decision' | 'progress' | 'alignment';
 };
 
 type QuizPhase = 'intro' | 'questions' | 'analyzing';
 
-// Quiz Questions - 8 Questions Total
+// Quiz Questions - 12 Questions Total
 const quizQuestions: QuestionType[] = [
   {
     id: 1,
@@ -154,6 +154,63 @@ const quizQuestions: QuestionType[] = [
       { text: "Restless and searching - I know I need change but don't know how", textAr: "قلق وباحث - أعرف أنني أحتاج تغييراً لكن لا أعرف كيف", value: 2, insight: "Seeking direction", insightAr: "البحث عن اتجاه" },
       { text: "Lost and overwhelmed - I need a complete reset", textAr: "تائه ومُغرق - أحتاج إعادة ضبط كاملة", value: 1, insight: "Identity reconstruction needed", insightAr: "يحتاج إعادة بناء الهوية" }
     ]
+  },
+  // NEW QUESTIONS 9-12
+  {
+    id: 9,
+    question: "When you think about your core values, how clearly can you articulate them?",
+    questionAr: "عندما تفكر في قيمك الأساسية، ما مدى وضوحك في التعبير عنها؟",
+    subtitle: "Values clarity is the foundation of identity-driven decisions",
+    subtitleAr: "وضوح القيم هو أساس القرارات المبنية على الهوية",
+    category: 'identity',
+    options: [
+      { text: "I can name my top 5 values instantly and live by them daily", textAr: "أستطيع ذكر أهم 5 قيم فوراً وأعيش بها يومياً", value: 5, insight: "Values clarity", insightAr: "وضوح القيم" },
+      { text: "I know some of my values but haven't fully defined them", textAr: "أعرف بعض قيمي لكن لم أحددها بالكامل", value: 3, insight: "Values exploration", insightAr: "استكشاف القيم" },
+      { text: "I have a vague sense but struggle to name specifics", textAr: "لدي إحساس غامض لكن أواجه صعوبة في تحديد التفاصيل", value: 2, insight: "Values confusion", insightAr: "ارتباك القيم" },
+      { text: "I'm not sure what my core values really are", textAr: "لست متأكداً ما هي قيمي الأساسية حقاً", value: 1, insight: "Values disconnect", insightAr: "انفصال القيم" }
+    ]
+  },
+  {
+    id: 10,
+    question: "How well does your daily routine reflect the person you want to become?",
+    questionAr: "ما مدى انعكاس روتينك اليومي على الشخص الذي تريد أن تصبح؟",
+    subtitle: "Your habits reveal your true priorities",
+    subtitleAr: "عاداتك تكشف أولوياتك الحقيقية",
+    category: 'alignment',
+    options: [
+      { text: "Almost every action aligns with my target identity", textAr: "كل تصرف تقريباً يتوافق مع هويتي المستهدفة", value: 5, insight: "Strong alignment", insightAr: "توافق قوي" },
+      { text: "Most days I make progress, but there are gaps", textAr: "معظم الأيام أحرز تقدماً، لكن هناك فجوات", value: 3, insight: "Partial alignment", insightAr: "توافق جزئي" },
+      { text: "My routine often contradicts who I want to be", textAr: "روتيني غالباً يتناقض مع من أريد أن أكون", value: 2, insight: "Alignment gaps", insightAr: "فجوات التوافق" },
+      { text: "There's a big disconnect between my days and my goals", textAr: "هناك انفصال كبير بين أيامي وأهدافي", value: 1, insight: "Misalignment", insightAr: "عدم التوافق" }
+    ]
+  },
+  {
+    id: 11,
+    question: "When someone asks 'Who are you?', how do you typically respond?",
+    questionAr: "عندما يسأل شخص 'من أنت؟'، كيف ترد عادة؟",
+    subtitle: "Self-definition clarity reveals identity strength",
+    subtitleAr: "وضوح تعريف الذات يكشف قوة الهوية",
+    category: 'identity',
+    options: [
+      { text: "I confidently describe my authentic self and aspirations", textAr: "أصف بثقة ذاتي الحقيقية وتطلعاتي", value: 5, insight: "Clear self-concept", insightAr: "مفهوم ذات واضح" },
+      { text: "I give a thoughtful answer but feel it's incomplete", textAr: "أعطي إجابة مدروسة لكن أشعر أنها غير مكتملة", value: 3, insight: "Developing identity", insightAr: "هوية متطورة" },
+      { text: "I mostly describe what I do rather than who I am", textAr: "أصف في الغالب ما أفعله بدلاً من من أنا", value: 2, insight: "Role-based identity", insightAr: "هوية قائمة على الدور" },
+      { text: "I struggle to answer or define myself by others' expectations", textAr: "أواجه صعوبة في الإجابة أو أحدد نفسي بتوقعات الآخرين", value: 1, insight: "Identity confusion", insightAr: "ارتباك الهوية" }
+    ]
+  },
+  {
+    id: 12,
+    question: "How consistently do you keep the promises you make to yourself?",
+    questionAr: "ما مدى التزامك بالوعود التي تقطعها لنفسك؟",
+    subtitle: "Self-trust is built through kept promises",
+    subtitleAr: "الثقة بالنفس تُبنى من خلال الوعود المحفوظة",
+    category: 'progress',
+    options: [
+      { text: "Almost always - my word to myself is sacred", textAr: "دائماً تقريباً - كلمتي لنفسي مقدسة", value: 5, insight: "High self-trust", insightAr: "ثقة عالية بالنفس" },
+      { text: "Usually, but I sometimes let myself down", textAr: "عادةً، لكنني أخذل نفسي أحياناً", value: 3, insight: "Building self-trust", insightAr: "بناء الثقة بالنفس" },
+      { text: "I often break commitments to myself", textAr: "غالباً أنكث التزاماتي مع نفسي", value: 2, insight: "Eroded self-trust", insightAr: "ثقة متآكلة بالنفس" },
+      { text: "I've stopped making promises to myself", textAr: "توقفت عن قطع الوعود لنفسي", value: 1, insight: "Self-trust collapse", insightAr: "انهيار الثقة بالنفس" }
+    ]
   }
 ];
 
@@ -254,7 +311,8 @@ export default function IdentityQuizPage() {
       environment: 0,
       emotion: 0,
       decision: 0,
-      progress: 0
+      progress: 0,
+      alignment: 0
     };
 
     let categoryCounts = { ...categories };
@@ -271,9 +329,12 @@ export default function IdentityQuizPage() {
     const emotionalRegulation = Math.round((categories.emotion / (categoryCounts.emotion * 5)) * 100);
     const decisionQuality = Math.round((categories.decision / (categoryCounts.decision * 5)) * 100);
     const progressMomentum = Math.round((categories.progress / (categoryCounts.progress * 5)) * 100);
+    const alignmentScore = categoryCounts.alignment > 0 ? Math.round((categories.alignment / (categoryCounts.alignment * 5)) * 100) : 0;
 
-    // Calculate overall score (Identity Gap Score)
-    const overallScore = Math.round((identityClarity + environmentalAlignment + emotionalRegulation + decisionQuality + progressMomentum) / 5);
+    // Calculate overall score (Identity Gap Score) - average of all dimensions
+    const activeDimensions = [identityClarity, environmentalAlignment, emotionalRegulation, decisionQuality, progressMomentum];
+    if (alignmentScore > 0) activeDimensions.push(alignmentScore);
+    const overallScore = Math.round(activeDimensions.reduce((a, b) => a + b, 0) / activeDimensions.length);
 
     // Determine dominant challenge
     const scores = [
@@ -283,6 +344,9 @@ export default function IdentityQuizPage() {
       { name: 'Decision Quality', nameAr: 'جودة القرارات', score: decisionQuality },
       { name: 'Progress Momentum', nameAr: 'زخم التقدم', score: progressMomentum }
     ];
+    if (alignmentScore > 0) {
+      scores.push({ name: 'Life Alignment', nameAr: 'التوافق الحياتي', score: alignmentScore });
+    }
     const lowestScore = scores.sort((a, b) => a.score - b.score)[0];
 
     // Determine recommended product based on score
@@ -378,8 +442,8 @@ export default function IdentityQuizPage() {
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
           {getText(
-            'Answer 8 revealing questions to uncover what\'s holding you back from becoming the person you know you can be — and get a personalized transformation roadmap.',
-            'أجب عن 8 أسئلة كاشفة لتكتشف ما يعيقك عن أن تصبح الشخص الذي تعرف أنه يمكنك أن تكون — واحصل على خارطة طريق شخصية للتحول.'
+            'Answer 12 revealing questions to uncover what\'s holding you back from becoming the person you know you can be — and get a personalized transformation roadmap.',
+            'أجب عن 12 سؤال كاشف لتكتشف ما يعيقك عن أن تصبح الشخص الذي تعرف أنه يمكنك أن تكون — واحصل على خارطة طريق شخصية للتحول.'
           )}
         </p>
 
@@ -438,7 +502,8 @@ export default function IdentityQuizPage() {
       environment: '#1F6F78',
       emotion: '#E57373',
       decision: '#64B5F6',
-      progress: '#FFB74D'
+      progress: '#FFB74D',
+      alignment: '#9333EA'
     };
 
     const categoryIcons = {
@@ -446,7 +511,8 @@ export default function IdentityQuizPage() {
       environment: Compass,
       emotion: Heart,
       decision: Brain,
-      progress: TrendingUp
+      progress: TrendingUp,
+      alignment: Target
     };
 
     const categoryNames = {
@@ -454,7 +520,8 @@ export default function IdentityQuizPage() {
       environment: { en: 'Environment', ar: 'البيئة' },
       emotion: { en: 'Emotion', ar: 'العاطفة' },
       decision: { en: 'Decision', ar: 'القرار' },
-      progress: { en: 'Progress', ar: 'التقدم' }
+      progress: { en: 'Progress', ar: 'التقدم' },
+      alignment: { en: 'Alignment', ar: 'التوافق' }
     };
 
     const Icon = categoryIcons[question.category];

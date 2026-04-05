@@ -50,12 +50,9 @@ export const metadata: Metadata = {
   publisher: SEO_SITE_CONFIG.author,
   
   // Language and locale - canonical URL points to home page
-  // Using x-default since we don't have separate language paths yet
+  // Arabic content not yet available at separate URLs
   alternates: {
     canonical: SEO_SITE_CONFIG.url,
-    languages: {
-      "x-default": SEO_SITE_CONFIG.url,
-    },
   },
   
   // Icons - Complete favicon configuration for all devices

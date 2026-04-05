@@ -6,6 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { BrevoEmails, BrevoContacts, BREVO_LISTS } from '@/lib/brevo';
+import { verifyRecaptcha } from '@/components/Recaptcha';
 
 // ============================================
 // VALIDATION TYPES
@@ -16,6 +17,7 @@ interface ContactFormData {
   email: string;
   subject: string;
   message: string;
+  recaptchaToken?: string;
 }
 
 interface ValidationResult {
@@ -253,6 +255,22 @@ export async function POST(request: NextRequest) {
         { success: false, error: 'Invalid JSON in request body' },
         { status: 400 }
       );
+    }
+
+    // Verify reCAPTCHA (if configured)
+    const formDataWithToken = body as Partial<ContactFormData>;
+    const recaptchaResult = await verifyRecaptcha(formDataWithToken.recaptchaToken || '');
+    
+    // If reCAPTCHA verification failed and it's configured, reject
+    if (!recaptchaResult.success && process.env.RECAPTCHA_SECRET_KEY) {
+      console.warn('reCAPTCHA verification failed:', recaptchaResult);
+      // For low scores, we can either reject or flag for review
+      // Here we're lenient - we just log but don't reject
+      // To be more strict, uncomment the following:
+      // return NextResponse.json(
+      //   { success: false, error: 'reCAPTCHA verification failed. Please try again.' },
+      //   { status: 400 }
+      // );
     }
 
     // Validate input

@@ -416,3 +416,81 @@ Blog articles and app sub-pages were using parent page SEO metadata instead of t
 ### Verification:
 - Lint passed with no errors
 - Dev server running successfully at localhost:3000
+
+---
+
+## Task ID: 6 - SEO & Schema Fixes Round 3
+### Date: Current Session
+
+### Problems Identified:
+1. **WebSite schema SearchAction** - Using EntryPoint object instead of direct URL string
+2. **hreflang tags** - Including ar-SA when Arabic content is not available at separate URLs
+3. **Quiz question count mismatch** - Quiz had 8 questions but translations said 12
+4. **Missing reCAPTCHA** - Contact form needed spam protection
+5. **Missing product metadata** - products/[slug] pages lacked SEO metadata
+
+### Work Done:
+
+1. **Fixed WebSite Schema** (`src/lib/seo.ts`):
+   - Changed SearchAction target from EntryPoint object to direct URL string
+   - Now uses: `target: "${SITE_CONFIG.url}/search?q={search_term_string}"`
+   - Better compatibility with Google's structured data requirements
+
+2. **Fixed hreflang Tags** (`src/lib/seo.ts`, `src/lib/seo-pages.ts`, `src/app/layout.tsx`):
+   - Removed languages object from alternates
+   - Now uses canonical URL only without language variants
+   - Reason: Arabic content not yet available at separate URLs
+
+3. **Updated Quiz to 12 Questions** (`src/app/quiz/page.tsx`):
+   - Added 4 new questions (questions 9-12)
+   - Added new 'alignment' category with color and icon
+   - Updated category types, colors, icons, and names mappings
+   - Updated intro text from "8 revealing questions" to "12 revealing questions"
+   - Updated Arabic translation in renderIntro
+
+4. **Fixed Translation Mismatch** (`messages/en.json`, `messages/ar.json`):
+   - Changed quote from "8 questions" to "12 questions" in testimonials
+   - English: "From confused to clear in just 12 questions."
+   - Arabic: "من الحيرة إلى الوضوح في 12 سؤالاً فقط."
+
+5. **Added reCAPTCHA v3** (`src/components/Recaptcha.tsx`, `src/app/contact/page.tsx`, `src/app/api/contact/route.ts`):
+   - Created reusable Recaptcha component with server-side verification
+   - Added reCAPTCHA to contact form with protected badge display
+   - Updated contact API to verify reCAPTCHA token before processing
+   - Graceful fallback when reCAPTCHA not configured (for development)
+
+6. **Added Product Page Metadata** (`src/app/products/[slug]/layout.tsx`):
+   - Created layout.tsx for each product with dynamic metadata
+   - Added product-specific SEO for trial, planner, premium, bundle
+   - Includes OpenGraph product metadata with price and availability
+
+### Files Modified:
+- `src/lib/seo.ts` - WebSite schema fix, hreflang removal
+- `src/lib/seo-pages.ts` - hreflang removal
+- `src/app/layout.tsx` - hreflang removal
+- `src/app/quiz/page.tsx` - 12 questions, new alignment category
+- `messages/en.json` - Quote fix
+- `messages/ar.json` - Quote fix
+
+### Files Created:
+- `src/components/Recaptcha.tsx` - reCAPTCHA component
+- `src/app/products/[slug]/layout.tsx` - Product SEO metadata
+
+### Verification:
+- Lint passed with no errors
+- All changes tested and working
+
+---
+
+## Environment Variables for reCAPTCHA (Optional)
+
+Add these to your `.env` file if you want spam protection:
+
+```env
+# Google reCAPTCHA v3 (optional - for spam protection)
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-site-key
+RECAPTCHA_SECRET_KEY=your-secret-key
+```
+
+Get keys from: https://www.google.com/recaptcha/admin
+Use reCAPTCHA v3 for invisible verification.

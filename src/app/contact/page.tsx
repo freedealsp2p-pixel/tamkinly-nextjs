@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,8 +12,10 @@ import {
   Send,
   CheckCircle2,
   AlertCircle,
-  Loader2
+  Loader2,
+  Shield
 } from "lucide-react";
+import { Recaptcha } from "@/components/Recaptcha";
 
 interface FormState {
   name: string;
@@ -59,6 +61,11 @@ function ContactSection() {
     message: ''
   });
   const [status, setStatus] = useState<FormStatus>({ type: 'idle' });
+  const [recaptchaToken, setRecaptchaToken] = useState<string>('');
+
+  const handleRecaptchaVerify = useCallback((token: string) => {
+    setRecaptchaToken(token);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -79,7 +86,10 @@ function ContactSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken,
+        }),
       });
 
       const data = await response.json();
@@ -91,6 +101,7 @@ function ContactSection() {
         });
         // Reset form on success
         setFormData({ name: '', email: '', subject: '', message: '' });
+        setRecaptchaToken('');
       } else {
         setStatus({ 
           type: 'error', 
@@ -231,6 +242,13 @@ function ContactSection() {
                         className="bg-white resize-none"
                       />
                     </div>
+                    
+                    {/* reCAPTCHA */}
+                    <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
+                      <Shield className="h-4 w-4" />
+                      <span>Protected by reCAPTCHA</span>
+                    </div>
+                    <Recaptcha onVerify={handleRecaptchaVerify} action="contact_form" />
                     
                     <Button 
                       type="submit" 

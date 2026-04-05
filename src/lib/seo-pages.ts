@@ -304,12 +304,9 @@ export function generatePageMetadataFromConfig(pageKey: keyof typeof PAGE_METADA
     keywords: config.keywords,
     
     // Canonical URL with correct path
-    // Using x-default since we don't have separate language paths yet
+    // Using x-default only - Arabic content not yet available at separate URLs
     alternates: {
       canonical: fullUrl,
-      languages: {
-        'x-default': fullUrl,
-      },
     },
     
     // Open Graph with correct URL
