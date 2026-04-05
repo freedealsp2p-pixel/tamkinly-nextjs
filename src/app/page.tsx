@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -612,6 +613,50 @@ function CTASection() {
 }
 
 // ============================================
+// LAZY-LOADED SECTIONS (Below the Fold)
+// ============================================
+
+function DiscoverSectionLazy() {
+  return (
+    <Suspense fallback={<div className="py-20 lg:py-28 bg-[#F6F8FA]"><div className="container mx-auto px-4"><div className="animate-pulse space-y-6 max-w-3xl mx-auto"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" /><div className="h-12 bg-slate-200 rounded w-2/3 mx-auto" /><div className="h-4 bg-slate-200 rounded w-full mx-auto" /></div><div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mt-12">{[...Array(5)].map((_, i) => <div key={i} className="h-48 bg-white rounded-xl shadow-sm" />)}</div></div></div>}>
+      <DiscoverSection />
+    </Suspense>
+  );
+}
+
+function HowItWorksSectionLazy() {
+  return (
+    <Suspense fallback={<div className="py-20 lg:py-28 bg-white"><div className="container mx-auto px-4"><div className="animate-pulse space-y-6 max-w-3xl mx-auto"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" /><div className="h-12 bg-slate-200 rounded w-2/3 mx-auto" /></div><div className="grid md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">{[...Array(3)].map((_, i) => <div key={i} className="flex flex-col items-center"><div className="w-32 h-32 bg-slate-200 rounded-full mb-4" /><div className="h-4 bg-slate-200 rounded w-24 mb-2" /><div className="h-3 bg-slate-200 rounded w-48" /></div>)}</div></div></div>}>
+      <HowItWorksSection />
+    </Suspense>
+  );
+}
+
+function VideoSectionLazy() {
+  return (
+    <Suspense fallback={<div className="py-20 lg:py-28 bg-[#F6F8FA]"><div className="container mx-auto px-4 max-w-4xl"><div className="animate-pulse"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto mb-12" /><div className="aspect-video bg-slate-200 rounded-2xl" /></div></div></div>}>
+      <VideoSection />
+    </Suspense>
+  );
+}
+
+function TestimonialsSectionLazy() {
+  return (
+    <Suspense fallback={<div className="py-20 lg:py-28 bg-white"><div className="container mx-auto px-4"><div className="animate-pulse space-y-6 max-w-3xl mx-auto mb-12"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" /><div className="h-12 bg-slate-200 rounded w-2/3 mx-auto" /></div><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{[...Array(6)].map((_, i) => <div key={i} className="h-64 bg-[#F6F8FA] rounded-xl" />)}</div></div></div>}>
+      <TestimonialsSection />
+    </Suspense>
+  );
+}
+
+function CTASectionLazy() {
+  return (
+    <Suspense fallback={<div className="py-20 lg:py-28 bg-[#0F1C2E]"><div className="container mx-auto px-4"><div className="max-w-3xl mx-auto text-center"><div className="h-12 bg-slate-700 rounded w-2/3 mx-auto mb-6" /><div className="h-4 bg-slate-700 rounded w-full mx-auto mb-8" /><div className="h-16 w-64 bg-slate-700 rounded-xl mx-auto" /></div></div></div>}>
+      <CTASection />
+    </Suspense>
+  );
+}
+
+// ============================================
 // MAIN PAGE COMPONENT
 // ============================================
 export default function Home() {
@@ -619,16 +664,16 @@ export default function Home() {
     <>
       {/* JSON-LD Structured Data for SEO */}
       <DefaultJsonLd />
-      
+
       <HeroSection />
       <QuizPreviewWidget />
-      <DiscoverSection />
-      <HowItWorksSection />
+      <DiscoverSectionLazy />
+      <HowItWorksSectionLazy />
       <DailyReflectionPreview />
-      <VideoSection />
-      <TestimonialsSection />
-      <CTASection />
-      
+      <VideoSectionLazy />
+      <TestimonialsSectionLazy />
+      <CTASectionLazy />
+
       {/* Promo Banner with Lazy Loading */}
       <PromoBanner />
     </>

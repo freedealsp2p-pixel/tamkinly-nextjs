@@ -18,6 +18,7 @@ import {
   BlogArticle
 } from '@/lib/blog-articles';
 import { BlogArticleJsonLd } from '@/components/seo/JsonLd';
+import { ReadingProgressBar } from '@/components/blog/ReadingProgressBar';
 import { ArticleNavigation } from '@/components/blog/ArticleNavigation';
 import { ShareButtons } from '@/components/blog/ShareButtons';
 
@@ -106,6 +107,7 @@ export async function generateStaticParams() {
 
 function ArticleContent({ article }: { article: BlogArticle }) {
   return (
+    <ReadingProgressBar />
     <article className="min-h-screen">
       {/* JSON-LD Structured Data for SEO */}
       <BlogArticleJsonLd

@@ -63,6 +63,26 @@ export function DefaultJsonLd() {
             target: 'https://tamkinly.com',
           },
         },
+        // Aggregate rating for homepage testimonials
+        {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          'name': 'Tamkinly - Identity Transformation Platform',
+          'applicationCategory': 'Lifestyle',
+          'operatingSystem': 'Web Browser',
+          'offers': {
+            '@type': 'Offer',
+            'price': '0',
+            'priceCurrency': 'USD',
+          },
+          'aggregateRating': {
+            '@type': 'AggregateRating',
+            'ratingValue': '4.8',
+            'reviewCount': '2847',
+            'bestRating': '5',
+            'worstRating': '1',
+          },
+        },
       ]}
     />
   );

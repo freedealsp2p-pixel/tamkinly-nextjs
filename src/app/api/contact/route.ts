@@ -58,13 +58,13 @@ function validateContactForm(data: unknown): ValidationResult {
     }
   }
 
-  // Validate subject
-  if (!formData.subject || typeof formData.subject !== 'string') {
-    errors.push('Subject is required');
-  } else if (formData.subject.trim().length < 3) {
-    errors.push('Subject must be at least 3 characters long');
-  } else if (formData.subject.trim().length > 200) {
-    errors.push('Subject must be less than 200 characters');
+  // Validate subject (optional - will generate one if not provided)
+  if (formData.subject && typeof formData.subject === 'string') {
+    if (formData.subject.trim().length < 3) {
+      errors.push('Subject must be at least 3 characters long');
+    } else if (formData.subject.trim().length > 200) {
+      errors.push('Subject must be less than 200 characters');
+    }
   }
 
   // Validate message
@@ -288,9 +288,14 @@ export async function POST(request: NextRequest) {
     const sanitizedData: ContactFormData = {
       name: sanitizeInput(formData.name),
       email: formData.email.trim().toLowerCase(),
-      subject: sanitizeInput(formData.subject),
+      subject: formData.subject ? sanitizeInput(formData.subject) : '',
       message: sanitizeInput(formData.message)
     };
+
+    // Generate subject if not provided
+    if (!sanitizedData.subject) {
+      sanitizedData.subject = `Message from ${sanitizedData.name}`;
+    }
 
     // Check if Brevo is configured
     const isBrevoConfigured = Boolean(process.env.BREVO_API_KEY);

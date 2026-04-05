@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { QUIZ_METADATA } from '@/lib/seo-pages';
 import { FAQPageJsonLd } from '@/components/seo/JsonLd';
+import { QuizFaqSection } from './quiz-faq-section';
 
 export const metadata: Metadata = QUIZ_METADATA;
 
@@ -46,6 +47,7 @@ export default function QuizLayout({
     <>
       <FAQPageJsonLd questions={quizFAQ} />
       {children}
+      <QuizFaqSection />
     </>
   );
 }
