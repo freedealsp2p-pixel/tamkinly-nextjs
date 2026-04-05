@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { getSession } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 // GET /api/progress - Get user's overall progress across all apps
 export async function GET(request: NextRequest) {
   try {
-    const session = await getSession();
+    const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
 
     if (!userId) {
@@ -240,7 +241,7 @@ export async function GET(request: NextRequest) {
 // POST /api/progress - Update progress or save assessment
 export async function POST(request: NextRequest) {
   try {
-    const session = await getSession();
+    const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
     const body = await request.json();
 
