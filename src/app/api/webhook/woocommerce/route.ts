@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import EmailService, { addContactToList } from '@/lib/email-service';
 
 // WooCommerce Product ID mapping to Tamkinly product types
-// Based on WooCommerce Products API (March 2026):
+// Based on WooCommerce Products API (April 2025):
 // 215: 7-Day Trial ($7)
 // 216: Identity Recode Planner ($17)
 // 217: Premium Transformation ($27)

@@ -31,7 +31,7 @@ export default function TermsOfServicePage() {
               Terms of Service
             </h1>
             <p className="text-slate-300">
-              Last updated: March 2026
+              Last updated: April 2025
             </p>
           </div>
         </div>

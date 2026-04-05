@@ -49,7 +49,7 @@ export function getWelcomeEmailHtml(name: string): string {
       <p>Ready to start your transformation journey?</p>
     </div>
     <div class="footer">
-      <p>© 2026 Tamkinly. All rights reserved.</p>
+      <p>© 2025 Tamkinly. All rights reserved.</p>
       <p><a href="${BASE_URL}/privacy-policy/">Privacy Policy</a></p>
     </div>
   </div>
@@ -130,7 +130,7 @@ export function getTrialPurchaseEmailHtml(name: string, accessKey: string): stri
       <p>Questions? Reply to this email or contact us at support@tamkinly.com</p>
     </div>
     <div class="footer">
-      <p>© 2026 Tamkinly. All rights reserved.</p>
+      <p>© 2025 Tamkinly. All rights reserved.</p>
       <p><a href="${BASE_URL}/privacy-policy/">Privacy Policy</a></p>
     </div>
   </div>
@@ -217,7 +217,7 @@ export function getPlannerPurchaseEmailHtml(name: string, accessKey: string): st
       <p>Questions? Reply to this email or contact us at support@tamkinly.com</p>
     </div>
     <div class="footer">
-      <p>© 2026 Tamkinly. All rights reserved.</p>
+      <p>© 2025 Tamkinly. All rights reserved.</p>
       <p><a href="${BASE_URL}/privacy-policy/">Privacy Policy</a></p>
     </div>
   </div>
@@ -306,7 +306,7 @@ export function getPremiumPurchaseEmailHtml(name: string, accessKey: string): st
       <p>Questions? Reply to this email or contact us at support@tamkinly.com</p>
     </div>
     <div class="footer">
-      <p>© 2026 Tamkinly. All rights reserved.</p>
+      <p>© 2025 Tamkinly. All rights reserved.</p>
       <p><a href="${BASE_URL}/privacy-policy/">Privacy Policy</a></p>
     </div>
   </div>
@@ -400,7 +400,7 @@ export function getBundlePurchaseEmailHtml(name: string, accessKey: string): str
       <p>As a VIP member, you also have priority support. Questions? Reply to this email or contact us at support@tamkinly.com</p>
     </div>
     <div class="footer">
-      <p>© 2026 Tamkinly. All rights reserved.</p>
+      <p>© 2025 Tamkinly. All rights reserved.</p>
       <p><a href="${BASE_URL}/privacy-policy/">Privacy Policy</a></p>
     </div>
   </div>

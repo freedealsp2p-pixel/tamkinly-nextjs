@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   // Enable standalone for efficient deployment on memory-constrained server
   output: 'standalone',
 
+  // Remove X-Powered-By header for security
+  poweredByHeader: false,
+
   // TypeScript config
   typescript: {
     ignoreBuildErrors: true,

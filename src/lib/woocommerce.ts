@@ -210,7 +210,7 @@ export function verifyWebhookSignature(
 }
 
 // Product ID mapping for internal use
-// Based on WooCommerce Products API (March 2026):
+// Based on WooCommerce Products API (April 2025):
 // 215: 7-Day Trial ($7)
 // 216: Identity Recode Planner ($17)
 // 217: Premium Transformation ($27)
