@@ -26,7 +26,8 @@ import {
   Zap,
   Shield,
   Clock,
-  Star
+  Star,
+  Wrench
 } from 'lucide-react';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { generateSoftwareAppSchema, generateBreadcrumbSchema } from '@/lib/seo';
@@ -196,7 +197,8 @@ const appsData = [
     tier: 'BUNDLE',
     featured: true,
     freeApp: false,
-    duration: 'Unlimited'
+    duration: 'Unlimited',
+    comingSoon: true
   },
   {
     slug: 'community-access',
@@ -417,15 +419,23 @@ export default function AppsPage() {
 }
 
 // App Card Component
-function AppCard({ app, isLocked }: { app: typeof appsData[0]; isLocked: boolean }) {
+function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: boolean }; isLocked: boolean }) {
   const Icon = app.icon;
   const tierStyle = tierColors[app.tier as keyof typeof tierColors];
 
   return (
     <Card className={`relative overflow-hidden border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white ${
       app.featured ? 'ring-2 ring-[#3DD4B0]/50' : ''
-    }`}>
-      {isLocked && (
+    } ${app.comingSoon ? 'opacity-90' : ''}`}>
+      {app.comingSoon && (
+        <div className="absolute top-4 right-4 z-10">
+          <Badge className="bg-amber-500/20 text-amber-600 border border-amber-500/50 text-xs">
+            <Wrench className="w-3 h-3 mr-1" />
+            Coming Soon
+          </Badge>
+        </div>
+      )}
+      {!app.comingSoon && isLocked && (
         <div className="absolute top-4 right-4 z-10">
           <Lock className="w-5 h-5 text-slate-400" />
         </div>
@@ -463,7 +473,14 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0]; isLocked: boolean
         
         {/* Action */}
         <div className="mt-4">
-          {app.freeApp ? (
+          {app.comingSoon ? (
+            <Link href={`/apps/${app.slug}`}>
+              <Button variant="outline" className="w-full" size="sm">
+                <Wrench className="w-4 h-4 mr-2" />
+                View Details
+              </Button>
+            </Link>
+          ) : app.freeApp ? (
             <Link href={`/apps/${app.slug}`}>
               <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]" size="sm">
                 Start Free
