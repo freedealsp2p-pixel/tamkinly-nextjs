@@ -236,7 +236,7 @@ function FounderSection() {
                       <div className="relative w-52 h-52 lg:w-64 lg:h-64 rounded-full bg-gradient-to-br from-accent to-[#1F6F78] p-1.5 shadow-2xl">
                         <div className="w-full h-full rounded-full overflow-hidden bg-white">
                           <Image 
-                            src="/founder-portrait.png" 
+                            src="/founder-portrait.webp" 
                             alt="Abdallah Chouaf - Founder of Tamkinly" 
                             width={256}
                             height={256}

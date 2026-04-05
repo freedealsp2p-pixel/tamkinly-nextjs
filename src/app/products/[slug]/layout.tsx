@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       type: 'product',
       images: [
         {
-          url: 'https://tamkinly.com/og-image.png',
+          url: 'https://tamkinly.com/og-image.webp',
           width: 1200,
           height: 630,
           alt: product.name,
@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: product.name,
       description: product.description,
       site: '@tamkinly',
-      images: ['https://tamkinly.com/og-image.png'],
+      images: ['https://tamkinly.com/og-image.webp'],
     },
 
     other: {

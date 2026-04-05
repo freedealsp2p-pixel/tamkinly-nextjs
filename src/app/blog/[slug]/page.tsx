@@ -19,6 +19,7 @@ import {
 } from '@/lib/blog-articles';
 import { BlogArticleJsonLd } from '@/components/seo/JsonLd';
 import { ArticleNavigation } from '@/components/blog/ArticleNavigation';
+import { ShareButtons } from '@/components/blog/ShareButtons';
 
 // ============================================
 // DYNAMIC METADATA GENERATION
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   const fullUrl = `https://tamkinly.com/blog/${article.slug}`;
   const imageUrl = article.image
     ? `https://tamkinly.com${article.image}`
-    : 'https://tamkinly.com/og-image.png';
+    : 'https://tamkinly.com/og-image.webp';
 
   return {
     title: `${article.title} | Tamkinly Blog`,
@@ -147,6 +148,30 @@ function ArticleContent({ article }: { article: BlogArticle }) {
           </div>
         </div>
       </section>
+
+      {/* Share Bar - Sticky on desktop */}
+      <div className="sticky top-16 z-10 bg-white/80 backdrop-blur-sm border-b border-slate-200 py-3">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-4 text-sm text-slate-500">
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4" />
+                {article.readTime}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <User className="h-4 w-4" />
+                {article.author}
+              </span>
+              <span className="hidden sm:inline">{article.datePublished}</span>
+            </div>
+            <ShareButtons
+              url={`https://tamkinly.com/blog/${article.slug}`}
+              title={article.title}
+              description={article.description}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Article Content */}
       <section className="py-16 lg:py-20 bg-white">

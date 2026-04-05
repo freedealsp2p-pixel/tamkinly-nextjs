@@ -17,7 +17,7 @@ export const SITE_CONFIG = {
   description: 'A space to rebuild the human from within. Without pressure. Without self-judgment. Without temporary motivation. Digital products for identity transformation and personal development.',
   descriptionAr: 'مساحة لإعادة بناء الإنسان من الداخل. بدون ضغط. بدون حكم على الذات. بدون تحفيز مؤقت. منتجات رقمية لتحويل الهوية والتطوير الشخصي.',
   url: 'https://tamkinly.com',
-  ogImage: '/og-image.png',
+  ogImage: '/og-image.webp',
   twitterHandle: '@tamkinly',
   author: 'Tamkinly',
   language: 'en',
@@ -213,7 +213,7 @@ export function generatePageMetadata({
           alt: title,
         },
         {
-          url: '/og-image-square.png',
+          url: '/og-image-square.webp',
           width: 800,
           height: 800,
           alt: `${title} - ${SITE_CONFIG.nameEn}`,
@@ -277,7 +277,7 @@ export function generateOrganizationSchema() {
     alternateName: SITE_CONFIG.nameAr,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/logo.png`,
+    logo: `${SITE_CONFIG.url}/logo.webp`,
     sameAs: [
       'https://twitter.com/tamkinly',
       'https://instagram.com/tamkinly',
@@ -490,7 +490,7 @@ export function generateArticleSchema({
       name: SITE_CONFIG.nameEn,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_CONFIG.url}/logo.png`,
+        url: `${SITE_CONFIG.url}/logo.webp`,
       },
     },
     mainEntityOfPage: {

@@ -133,7 +133,7 @@ function HeroSection() {
           <div className="hidden lg:block relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-white/10">
               <Image
-                src="/hero-image.jpg"
+                src="/hero-image.webp"
                 alt="Identity Transformation Journey"
                 width={672}
                 height={384}
@@ -352,7 +352,7 @@ function VideoSection() {
           {/* Video Player Placeholder */}
           <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-slate-200 bg-[#0F1C2E]">
             <Image
-              src="/hero-image.jpg"
+              src="/hero-image.webp"
               alt="Identity Gap Explained"
               fill
               className="object-cover opacity-80"
@@ -402,7 +402,7 @@ function TestimonialsSection() {
       contentKey: "testimonials.sarah.content",
       resultKey: "testimonials.sarah.result",
       quoteKey: "testimonials.sarah.quote",
-      image: "/testimonials/sarah.png",
+      image: "/testimonials/sarah.webp",
       rating: 5
     },
     {
@@ -412,7 +412,7 @@ function TestimonialsSection() {
       contentKey: "testimonials.james.content",
       resultKey: "testimonials.james.result",
       quoteKey: "testimonials.james.quote",
-      image: "/testimonials/james.png",
+      image: "/testimonials/james.webp",
       rating: 5
     },
     {
@@ -422,7 +422,7 @@ function TestimonialsSection() {
       contentKey: "testimonials.amira.content",
       resultKey: "testimonials.amira.result",
       quoteKey: "testimonials.amira.quote",
-      image: "/testimonials/amira.png",
+      image: "/testimonials/amira.webp",
       rating: 5
     },
     {
@@ -432,7 +432,7 @@ function TestimonialsSection() {
       contentKey: "testimonials.michael.content",
       resultKey: "testimonials.michael.result",
       quoteKey: "testimonials.michael.quote",
-      image: "/testimonials/michael.png",
+      image: "/testimonials/michael.webp",
       rating: 5
     },
     {
@@ -442,7 +442,7 @@ function TestimonialsSection() {
       contentKey: "testimonials.fatima.content",
       resultKey: "testimonials.fatima.result",
       quoteKey: "testimonials.fatima.quote",
-      image: "/testimonials/fatima.png",
+      image: "/testimonials/fatima.webp",
       rating: 5
     },
     {
@@ -452,7 +452,7 @@ function TestimonialsSection() {
       contentKey: "testimonials.david.content",
       resultKey: "testimonials.david.result",
       quoteKey: "testimonials.david.quote",
-      image: "/testimonials/david.png",
+      image: "/testimonials/david.webp",
       rating: 5
     }
   ];

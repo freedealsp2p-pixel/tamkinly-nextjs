@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Identity vs Behavior Change: Why Willpower Fails | Tamkinly',
+  title: 'Identity vs Behavior Change: Why Willpower Fails',
   description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation. Free guide with practical exercises.',
   keywords: [
     'identity vs behavior change',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     authors: ['Abdallah Chouaf'],
     images: [
       {
-        url: 'https://tamkinly.com/og-image.png',
+        url: 'https://tamkinly.com/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Identity vs Behavior Change Guide',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: 'Identity vs Behavior Change: Why Willpower Always Fails',
     description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation.',
     site: '@tamkinly',
-    images: ['https://tamkinly.com/og-image.png'],
+    images: ['https://tamkinly.com/og-image.webp'],
   },
 };
 

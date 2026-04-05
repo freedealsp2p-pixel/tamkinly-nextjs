@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   const fullUrl = `https://tamkinly.com/apps/${appData.slug}`;
   const imageUrl = appData.image
     ? `https://tamkinly.com${appData.image}`
-    : 'https://tamkinly.com/og-image.png';
+    : 'https://tamkinly.com/og-image.webp';
 
   const isFree = appData.tier === 'FREE';
   const tierDescription = isFree

@@ -446,7 +446,7 @@ export function VideoJsonLd({
             name: 'Tamkinly',
             logo: {
               '@type': 'ImageObject',
-              url: 'https://tamkinly.com/logo.png',
+              url: 'https://tamkinly.com/logo.webp',
             },
           },
         },

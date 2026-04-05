@@ -79,7 +79,7 @@ export function generateProductMetadata(slug: string): Metadata {
       type: 'product',
       images: [
         {
-          url: 'https://tamkinly.com/og-image.png',
+          url: 'https://tamkinly.com/og-image.webp',
           width: 1200,
           height: 630,
           alt: config.name,
@@ -92,7 +92,7 @@ export function generateProductMetadata(slug: string): Metadata {
       title: config.name,
       description: config.description,
       site: '@tamkinly',
-      images: ['https://tamkinly.com/og-image.png'],
+      images: ['https://tamkinly.com/og-image.webp'],
     },
     
     robots: {

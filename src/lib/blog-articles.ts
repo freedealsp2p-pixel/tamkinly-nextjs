@@ -340,7 +340,7 @@ export function generateBlogArticleMetadata(slug: string): Metadata {
   const fullUrl = `https://tamkinly.com/blog/${article.slug}`;
   const imageUrl = article.image 
     ? `https://tamkinly.com${article.image}` 
-    : 'https://tamkinly.com/og-image.png';
+    : 'https://tamkinly.com/og-image.webp';
   
   return {
     title: `${article.title} | Tamkinly Blog`,

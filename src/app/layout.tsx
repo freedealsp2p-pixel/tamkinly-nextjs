@@ -85,18 +85,18 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: `${SEO_SITE_CONFIG.name} - Identity Transformation Tools`,
-        type: "image/png",
+        type: "image/webp",
       },
       {
-        url: "/og-image-square.png",
+        url: "/og-image-square.webp",
         width: 800,
         height: 800,
         alt: `${SEO_SITE_CONFIG.name} Logo`,
-        type: "image/png",
+        type: "image/webp",
       },
     ],
   },
@@ -108,7 +108,7 @@ export const metadata: Metadata = {
     creator: SEO_SITE_CONFIG.twitterHandle,
     title: PAGE_METADATA.home.title,
     description: PAGE_METADATA.home.description,
-    images: ["/og-image.png"],
+    images: ["/og-image.webp"],
   },
   
   // Robots configuration

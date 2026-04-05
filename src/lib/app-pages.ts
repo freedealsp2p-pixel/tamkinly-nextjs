@@ -221,7 +221,7 @@ export function generateAppPageMetadata(slug: string): Metadata {
   const fullUrl = `https://tamkinly.com/apps/${app.slug}`;
   const imageUrl = app.image 
     ? `https://tamkinly.com${app.image}` 
-    : 'https://tamkinly.com/og-image.png';
+    : 'https://tamkinly.com/og-image.webp';
   
   const isFree = app.tier === 'FREE';
   const tierDescription = isFree 

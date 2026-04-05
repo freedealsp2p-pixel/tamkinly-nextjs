@@ -30,7 +30,7 @@ export const SEO_SITE_CONFIG = {
   name: 'Tamkinly',
   nameAr: 'تمكينلي',
   url: 'https://tamkinly.com',
-  defaultImage: '/og-image.png',
+  defaultImage: '/og-image.webp',
   twitterHandle: '@tamkinly',
   author: 'Tamkinly',
 } as const;
@@ -413,7 +413,7 @@ export function generateProductMetadata(
       type: 'product',
       images: [
         {
-          url: `${SEO_SITE_CONFIG.url}/og-image.png`,
+          url: `${SEO_SITE_CONFIG.url}/og-image.webp`,
           width: 1200,
           height: 630,
           alt: productName,
@@ -463,7 +463,7 @@ export function generateBlogPostMetadata(
       authors: [SEO_SITE_CONFIG.author],
       images: [
         {
-          url: image ? `${SEO_SITE_CONFIG.url}${image}` : `${SEO_SITE_CONFIG.url}/og-image.png`,
+          url: image ? `${SEO_SITE_CONFIG.url}${image}` : `${SEO_SITE_CONFIG.url}/og-image.webp`,
           width: 1200,
           height: 630,
           alt: title,
@@ -510,7 +510,7 @@ export function generateAppMetadata(
       type: 'website',
       images: [
         {
-          url: `${SEO_SITE_CONFIG.url}/og-image.png`,
+          url: `${SEO_SITE_CONFIG.url}/og-image.webp`,
           width: 1200,
           height: 630,
           alt: appName,
