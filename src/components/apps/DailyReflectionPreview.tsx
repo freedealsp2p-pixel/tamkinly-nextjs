@@ -101,7 +101,7 @@ export default function DailyReflectionPreview() {
             {t("reflection.badge")}
           </Badge>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-6">
-            {t("reflection.title")} <span className="text-[#3DD4B0]">{t("reflection.titleHighlight")}</span>
+            {t("reflection.title")}&nbsp;<span className="text-[#3DD4B0]">{t("reflection.titleHighlight")}</span>
           </h2>
           <p className="text-lg text-slate-600 leading-relaxed">
             {t("reflection.subtitle")}

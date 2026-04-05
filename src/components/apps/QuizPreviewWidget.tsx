@@ -87,7 +87,7 @@ export default function QuizPreviewWidget() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              {t("quiz.title")} <span className="text-[#3DD4B0]">{t("quiz.titleHighlight")}</span>
+              {t("quiz.title")}&nbsp;<span className="text-[#3DD4B0]">{t("quiz.titleHighlight")}</span>
             </h2>
             <p className="text-slate-300 text-lg">
               {t("quiz.subtitle")}

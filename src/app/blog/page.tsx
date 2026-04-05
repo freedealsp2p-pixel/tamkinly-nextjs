@@ -221,8 +221,7 @@ export default function BlogPage() {
               Knowledge Base
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-              The{" "}
-              <span className="text-accent">Tamkinly</span> Blog
+              The&nbsp;<span className="text-accent">Tamkinly</span> Blog
             </h1>
             <p className="text-lg text-slate-300 leading-relaxed">
               Research-backed insights, practical frameworks, and transformation tools. 

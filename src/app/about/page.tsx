@@ -25,8 +25,7 @@ function HeroSection() {
             Our Story
           </Badge>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            About{" "}
-            <span className="text-accent">Tamkinly</span>
+            About&nbsp;<span className="text-accent">Tamkinly</span>
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed">
             A space born from the understanding that true transformation doesn't come from 

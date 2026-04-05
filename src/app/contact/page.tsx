@@ -38,8 +38,7 @@ function HeroSection() {
             Get in Touch
           </Badge>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Contact{" "}
-            <span className="text-accent">Us</span>
+            Contact&nbsp;<span className="text-accent">Us</span>
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed">
             Have questions about our products or methodology? We're here to help 

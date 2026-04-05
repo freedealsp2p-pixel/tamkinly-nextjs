@@ -71,8 +71,7 @@ function HeroSection() {
             
             {/* Subheadline */}
             <p className="text-lg sm:text-xl text-slate-300 leading-relaxed mb-8">
-              {t("hero.subtitle")}{' '}
-              <span className="text-white font-semibold">{t("hero.subtitleHighlight")}</span>
+              {t("hero.subtitle")}&nbsp;<span className="text-white font-semibold">{t("hero.subtitleHighlight")}</span>
             </p>
             
             {/* Social Proof Bar */}
@@ -215,8 +214,7 @@ function DiscoverSection() {
             {t("discover.badge")}
           </Badge>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-6">
-            {t("discover.title")}
-            <span className="text-[#1F6F78]">{t("discover.titleHighlight")}</span>
+            {t("discover.title")}&nbsp;<span className="text-[#1F6F78]">{t("discover.titleHighlight")}</span>
           </h2>
           <p className="text-lg text-slate-600 leading-relaxed">
             {t("discover.subtitle")}
@@ -290,8 +288,7 @@ function HowItWorksSection() {
             {t("howItWorks.badge")}
           </Badge>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-6">
-            {t("howItWorks.title")}{' '}
-            <span className="text-[#3DD4B0]">{t("howItWorks.titleHighlight")}</span>
+            {t("howItWorks.title")}&nbsp;<span className="text-[#3DD4B0]">{t("howItWorks.titleHighlight")}</span>
           </h2>
         </div>
         
@@ -345,7 +342,7 @@ function VideoSection() {
               {t("video.badge")}
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-4">
-              {t("video.title")} <span className="text-[#3DD4B0]">{t("video.titleHighlight")}</span>{t("video.titleEnd")}
+              {t("video.title")}&nbsp;<span className="text-[#3DD4B0]">{t("video.titleHighlight")}</span>{t("video.titleEnd")}
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
               {t("video.subtitle")}
@@ -560,8 +557,7 @@ function CTASection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            {t("cta.title")}{' '}
-            <span className="text-[#3DD4B0]">{t("cta.titleHighlight")}</span>
+            {t("cta.title")}&nbsp;<span className="text-[#3DD4B0]">{t("cta.titleHighlight")}</span>
           </h2>
           <p className="text-lg text-slate-300 leading-relaxed mb-8">
             {t("cta.subtitle")}

@@ -13,8 +13,9 @@ import {
   FileText,
   AppWindow,
   Sparkles,
+  AlertCircle,
 } from 'lucide-react';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 
 // Searchable content - comprehensive list
 const searchableContent = [
@@ -96,43 +97,20 @@ function getTypeIcon(type: string) {
 
 function SearchContent() {
     const searchParams = useSearchParams();
-    const initialQuery = searchParams.get('q') || '';
-    const [query, setQuery] = useState(initialQuery);
-    const [results, setResults] = useState<typeof searchableContent>([]);
-    const [hasSearched, setHasSearched] = useState(false);
-
+    const urlQuery = searchParams.get('q') || '';
+    const [query, setQuery] = useState(urlQuery);
+    const [hasSearched, setHasSearched] = useState(!!urlQuery);
     
-    useEffect(() => {
-        if (initialQuery) {
-            performSearch(initialQuery);
-        }
-    }, [initialQuery]);
-
-    
-    const performSearch = (searchQuery: string) => {
-        if (!searchQuery.trim()) {
-            setResults([]);
-            setHasSearched(false);
-            return;
-        }
-
-        
-        const lowerQuery = searchQuery.toLowerCase().trim();
-        const matched = searchableContent.filter(item => 
-            item.title.toLowerCase().includes(lowerQuery) ||
-            item.description.toLowerCase().includes(lowerQuery) ||
-            item.keywords.some(keyword => keyword.includes(lowerQuery))
-        );
-
-        
-        setResults(matched);
-        setHasSearched(true);
-    };
-
+    // Compute results based on query
+    const results = query.trim() ? searchableContent.filter(item => 
+        item.title.toLowerCase().includes(query.toLowerCase().trim()) ||
+        item.description.toLowerCase().includes(query.toLowerCase().trim()) ||
+        item.keywords.some(keyword => keyword.includes(query.toLowerCase().trim()))
+    ) : [];
     
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        performSearch(query);
+        setHasSearched(true);
     };
 
     
