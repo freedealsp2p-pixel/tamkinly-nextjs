@@ -3,6 +3,7 @@
 import { Suspense } from 'react';
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from 'next/dynamic';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,10 +28,19 @@ import {
   Lightbulb
 } from "lucide-react";
 import { DefaultJsonLd } from "@/components/seo/JsonLd";
-import DailyReflectionPreview from "@/components/apps/DailyReflectionPreview";
-import QuizPreviewWidget from "@/components/apps/QuizPreviewWidget";
 import { PromoBanner } from "@/components/layout/PromoBanner";
 import { useLocale, useTranslations } from "@/components/providers/LocaleProvider";
+
+// Dynamic imports for heavy interactive components (code-split for performance)
+const DailyReflectionPreview = dynamic(
+  () => import('@/components/apps/DailyReflectionPreview'),
+  { ssr: false, loading: () => <div className="h-96 bg-[#F6F8FA] animate-pulse" /> }
+);
+
+const QuizPreviewWidget = dynamic(
+  () => import('@/components/apps/QuizPreviewWidget'),
+  { ssr: false, loading: () => <div className="h-80 bg-[#F6F8FA] animate-pulse" /> }
+);
 
 // ============================================
 // HERO SECTION - QUIZ FOCUSED

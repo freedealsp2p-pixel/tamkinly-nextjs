@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
     pathname === '/sw.js' ||
     pathname === '/browserconfig.xml' ||
     pathname.includes('/_error') ||
-    // Skip static file extensions
+    pathname.includes('opengraph-image') ||
     /\.(svg|png|jpg|jpeg|gif|webp|ico|css|js|woff|woff2|ttf|eot)$/i.test(pathname)
   ) {
     return;
@@ -31,13 +31,20 @@ export function middleware(request: NextRequest) {
   );
 
   if (localeMatch && localeMatch !== defaultLocale) {
-    // For /ar/ paths, rewrite to the path without locale prefix
-    const pathWithoutLocale = pathname.replace(/^\/ar/, '') || '/';
+    // For exact /ar path (no trailing slash), redirect to /ar/ for consistency
+    if (pathname === `/${localeMatch}`) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${localeMatch}/`;
+      return NextResponse.redirect(url);
+    }
+
+    // For /ar/* paths, rewrite to the path without locale prefix
+    const pathWithoutLocale = pathname.replace(new RegExp(`^/${localeMatch}`), '') || '/';
     const url = request.nextUrl.clone();
     url.pathname = pathWithoutLocale;
 
     const response = NextResponse.rewrite(url);
-    response.cookies.set('NEXT_LOCALE', 'ar', {
+    response.cookies.set('NEXT_LOCALE', localeMatch, {
       maxAge: 365 * 24 * 60 * 60,
       path: '/',
       sameSite: 'lax',
@@ -46,10 +53,8 @@ export function middleware(request: NextRequest) {
   }
 
   // For default locale (en), no prefix needed
-  // Set locale cookie if not already set
   const response = NextResponse.next();
   if (!request.cookies.has('NEXT_LOCALE')) {
-    // Check Accept-Language header
     const acceptLanguage = request.headers.get('accept-language') || '';
     const prefersArabic = acceptLanguage.includes('ar');
     const detectedLocale = prefersArabic ? 'ar' : 'en';

@@ -47,6 +47,22 @@ export default function QuizLayout({
     <>
       <FAQPageJsonLd questions={quizFAQ} />
       {children}
+
+      {/* SEO: noscript FAQ content visible to crawlers */}
+      <noscript>
+        <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            Tamkinly Identity Gap Assessment - FAQ
+          </h2>
+          {quizFAQ.map((q, i) => (
+            <div key={i} style={{ marginBottom: '1.5rem' }}>
+              <h3 style={{ fontWeight: '600', marginBottom: '0.5rem' }}>Q: {q.question}</h3>
+              <p>A: {q.answer}</p>
+            </div>
+          ))}
+        </div>
+      </noscript>
+
       <QuizFaqSection />
     </>
   );

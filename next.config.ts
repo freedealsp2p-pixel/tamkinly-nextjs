@@ -38,15 +38,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-Powered-By',
-            value: '',
-          },
-        ],
-      },
-      {
         source: '/:all*(svg|jpg|png|ico|webp)',
         headers: [
           {
