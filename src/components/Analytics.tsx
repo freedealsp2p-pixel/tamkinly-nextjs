@@ -1,16 +1,14 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { GA_MEASUREMENT_ID, grantConsent, hasConsent, trackPageView } from '@/lib/analytics';
 
 /**
- * Google Analytics 4 Component
- * Only loads analytics scripts after user consent
- * GDPR compliant with privacy-first approach
+ * Inner component that uses useSearchParams
  */
-export function Analytics() {
+function AnalyticsInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -105,10 +103,23 @@ export function Analytics() {
 }
 
 /**
+ * Google Analytics 4 Component
+ * Only loads analytics scripts after user consent
+ * GDPR compliant with privacy-first approach
+ */
+export function Analytics() {
+  return (
+    <Suspense fallback={null}>
+      <AnalyticsInner />
+    </Suspense>
+  );
+}
+
+/**
  * Hook to track page views manually
  * Use this for SPAs or custom page tracking
  */
-export function usePageTracking() {
+function usePageTrackingInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -118,6 +129,11 @@ export function usePageTracking() {
       trackPageView(url);
     }
   }, [pathname, searchParams]);
+}
+
+export function usePageTracking() {
+  // This hook should be used inside a Suspense boundary
+  return usePageTrackingInner();
 }
 
 export default Analytics;
