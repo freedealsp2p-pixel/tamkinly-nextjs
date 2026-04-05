@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "@/components/providers/LocaleProvider";
+import { useLocaleRouter } from "@/hooks/use-locale-router";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu, ShoppingCart, Search, Globe, Loader2 } from "lucide-react";
+import { LocaleLink } from "@/components/navigation/LocaleLink";
 
 // Search pages data - comprehensive list for better search
 const searchablePages = [
@@ -116,7 +118,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center mb-8">
-            <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2.5">
+            <LocaleLink href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2.5">
               <div className="relative w-10 h-10 flex items-center justify-center">
                 <Image
                   src="/logo-icon.png?v=7"
@@ -130,19 +132,19 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
               <span className="font-serif text-xl font-bold text-primary">
                 Tamkinly
               </span>
-            </Link>
+            </LocaleLink>
           </div>
 
           <nav className="flex flex-col space-y-1">
             {navItems.map((item) => (
-              <Link
+              <LocaleLink
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className="px-4 py-3 text-base font-medium text-slate-700 hover:text-primary hover:bg-accent/10 rounded-lg transition-colors"
               >
                 {item.label}
-              </Link>
+              </LocaleLink>
             ))}
           </nav>
 
@@ -152,17 +154,17 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
               <LanguageSwitcher />
             </div>
 
-            <Link href="/cart" onClick={() => setIsOpen(false)}>
+            <LocaleLink href="/cart" onClick={() => setIsOpen(false)}>
               <Button variant="outline" className="w-full justify-start border-primary/20 text-primary hover:bg-primary/5">
                 <ShoppingCart className="h-4 w-4 mx-2 rtl:mr-0 rtl:ml-2" />
                 {t("navigation.cart")} (0)
               </Button>
-            </Link>
-            <Link href="/quiz" onClick={() => setIsOpen(false)}>
+            </LocaleLink>
+            <LocaleLink href="/quiz" onClick={() => setIsOpen(false)}>
               <Button className="w-full bg-accent text-primary hover:bg-accent/90 font-semibold">
                 {t("hero.cta")}
               </Button>
-            </Link>
+            </LocaleLink>
           </div>
         </div>
       </SheetContent>
@@ -179,7 +181,7 @@ export function Header() {
   const [isSearching, setIsSearching] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const router = useRouter();
+  const localeRouter = useLocaleRouter();
   const pathname = usePathname();
   const t = useTranslations();
   const { direction } = useLocale();
@@ -235,8 +237,8 @@ export function Header() {
     setSelectedIndex(-1);
     setIsSearching(false);
     searchInputRef.current?.blur();
-    router.push(path);
-  }, [router]);
+    localeRouter.push(path);
+  }, [localeRouter]);
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -307,7 +309,7 @@ export function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <LocaleLink href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-10 h-10 flex items-center justify-center group-hover:scale-105 transition-transform">
               <Image 
                 src="/logo-icon.png?v=7" 
@@ -322,18 +324,18 @@ export function Header() {
             <span className="font-serif text-xl font-bold text-primary group-hover:text-secondary transition-colors">
               Tamkinly
             </span>
-          </Link>
+          </LocaleLink>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1 rtl:space-x-reverse">
             {navItems.map((item) => (
-              <Link
+              <LocaleLink
                 key={item.href}
                 href={item.href}
                 className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors rounded-lg hover:bg-accent/10"
               >
                 {item.label}
-              </Link>
+              </LocaleLink>
             ))}
           </nav>
 
@@ -391,19 +393,19 @@ export function Header() {
             {/* Language Switcher */}
             <LanguageSwitcher />
             
-            <Link href="/cart">
+            <LocaleLink href="/cart">
               <Button variant="ghost" size="icon" className="relative text-slate-600 hover:text-primary">
                 <ShoppingCart className="h-5 w-5" />
                 <span className="absolute -top-1 -end-1 h-5 w-5 rounded-full bg-accent text-[10px] font-bold text-primary flex items-center justify-center shadow-sm">
                   0
                 </span>
               </Button>
-            </Link>
-            <Link href="/quiz">
+            </LocaleLink>
+            <LocaleLink href="/quiz">
               <Button className="bg-accent text-primary hover:bg-accent/90 font-semibold shadow-sm hover:shadow-md transition-all">
                 {t("hero.cta")}
               </Button>
-            </Link>
+            </LocaleLink>
           </div>
 
           {/* Mobile Menu */}

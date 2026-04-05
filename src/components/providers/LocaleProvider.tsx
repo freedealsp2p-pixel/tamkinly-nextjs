@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, ReactNode, useCallback, useMemo, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import enMessages from '@/../messages/en.json';
 import arMessages from '@/../messages/ar.json';
 
@@ -38,29 +39,53 @@ function getNestedValue(obj: Record<string, unknown>, path: string): string {
   return typeof result === 'string' ? result : path;
 }
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  // Start with 'en' for SSR, then sync with localStorage after hydration
-  const [locale, setLocaleState] = useState<Locale>('en');
+interface LocaleProviderProps {
+  children: ReactNode;
+  initialLocale?: Locale;
+  urlBased?: boolean;
+}
+
+export function LocaleProvider({ children, initialLocale = 'en', urlBased = false }: LocaleProviderProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  // Start with the initial locale from URL (server-provided)
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Handle hydration - read from localStorage after mount
+  // Handle hydration - sync with localStorage after mount (for non-URL based mode)
   useEffect(() => {
-    const stored = localStorage.getItem('locale');
-    const initialLocale: Locale = (stored === 'ar' || stored === 'en') ? stored : 'en';
-    
     // Use microtask to avoid synchronous setState warning
-    Promise.resolve().then(() => {
-      setLocaleState(initialLocale);
+    const timeoutId = setTimeout(() => {
+      // Set initial document attributes based on current locale
+      document.documentElement.lang = locale;
+      document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
+
+      if (urlBased) {
+        // For URL-based mode, just mark as hydrated
+        setIsHydrated(true);
+        return;
+      }
+
+      // For non-URL based mode, read from localStorage
+      const stored = localStorage.getItem('locale');
+      const storedLocale: Locale = (stored === 'ar' || stored === 'en') ? stored : 'en';
+      
+      setLocaleState(storedLocale);
       setIsHydrated(true);
-    });
 
-    // Set initial document attributes
-    document.documentElement.lang = initialLocale;
-    document.documentElement.dir = initialLocale === 'ar' ? 'rtl' : 'ltr';
-  }, []);
+      // Update document attributes
+      document.documentElement.lang = storedLocale;
+      document.documentElement.dir = storedLocale === 'ar' ? 'rtl' : 'ltr';
+    }, 0);
 
-  // Listen for storage changes from other tabs
+    return () => clearTimeout(timeoutId);
+  }, [urlBased, locale]);
+
+  // Listen for storage changes from other tabs (for non-URL based mode)
   useEffect(() => {
+    if (urlBased) return;
+
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'locale' && e.newValue) {
         const newLocale: Locale = (e.newValue === 'ar' || e.newValue === 'en') ? e.newValue : 'en';
@@ -72,17 +97,33 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+  }, [urlBased]);
 
   const setLocale = useCallback((newLocale: Locale) => {
-    localStorage.setItem('locale', newLocale);
-    setLocaleState(newLocale);
-    document.documentElement.lang = newLocale;
-    document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
+    if (urlBased) {
+      // For URL-based mode, navigate to the new locale path
+      // Get current path without locale prefix
+      const pathWithoutLocale = pathname.replace(/^\/(en|ar)/, '') || '/';
+      const newPath = newLocale === 'en' 
+        ? pathWithoutLocale === '/' ? '/' : pathWithoutLocale
+        : `/ar${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
+      
+      // Store preference
+      localStorage.setItem('locale', newLocale);
+      
+      // Navigate to new locale URL
+      router.push(newPath);
+    } else {
+      // For non-URL based mode, use localStorage
+      localStorage.setItem('locale', newLocale);
+      setLocaleState(newLocale);
+      document.documentElement.lang = newLocale;
+      document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
 
-    // Dispatch custom event for same-tab updates
-    window.dispatchEvent(new CustomEvent('localechange', { detail: { locale: newLocale } }));
-  }, []);
+      // Dispatch custom event for same-tab updates
+      window.dispatchEvent(new CustomEvent('localechange', { detail: { locale: newLocale } }));
+    }
+  }, [urlBased, pathname, router]);
 
   const t = useCallback((key: string): string => {
     return getNestedValue(messages[locale] as unknown as Record<string, unknown>, key);
