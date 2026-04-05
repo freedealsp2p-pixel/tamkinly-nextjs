@@ -1,51 +1,18 @@
+/**
+ * User Registration API
+ * Handles new user signup
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
-import bcrypt from 'bcryptjs';
-import { registerUser } from '@/lib/auth-local';
+import { prisma } from '@/lib/prisma';
+import { hashPassword } from '@/lib/auth-config';
 
-// Rate limiting (simple in-memory, consider Redis for production)
-const rateLimit = new Map<string, { count: number; lastRequest: number }>();
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX = 5; // 5 requests per minute
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimit.get(ip);
-  
-  if (!record) {
-    rateLimit.set(ip, { count: 1, lastRequest: now });
-    return true;
-  }
-  
-  if (now - record.lastRequest > RATE_LIMIT_WINDOW) {
-    rateLimit.set(ip, { count: 1, lastRequest: now });
-    return true;
-  }
-  
-  if (record.count >= RATE_LIMIT_MAX) {
-    return false;
-  }
-  
-  record.count++;
-  record.lastRequest = now;
-  return true;
-}
-
-// Register new user
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
-    const ip = request.headers.get('x-forwarded-for') || 'unknown';
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
-    }
+    const body = await request.json();
+    const { email, password, name } = body;
 
-    const { email, password, name } = await request.json();
-
-    // Input validation
+    // Validation
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
@@ -53,25 +20,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (password.length < 6) {
       return NextResponse.json(
-        { error: 'Please enter a valid email address' },
+        { error: 'Password must be at least 6 characters' },
         { status: 400 }
       );
     }
 
-    // Password strength validation
-    if (password.length < 8) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Password must be at least 8 characters long' },
+        { error: 'Invalid email format' },
         { status: 400 }
       );
     }
 
     // Check if user already exists
-    const existingUser = await db.user.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
 
@@ -82,56 +47,51 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Hash password with bcrypt (12 rounds)
-    const hashedPassword = await bcrypt.hash(password, 12);
+    // Hash password
+    const hashedPassword = await hashPassword(password);
 
-    // Create user locally
-    const user = await db.user.create({
+    // Create user
+    const user = await prisma.user.create({
       data: {
         email: email.toLowerCase(),
-        name: name?.trim() || null,
+        name: name || email.split('@')[0],
         password: hashedPassword,
         role: 'CUSTOMER',
       },
     });
 
-    // Check if there are any access codes for this email (from purchases)
-    const existingCodes = await db.appAccess.findMany({
-      where: { email: email.toLowerCase() },
-    });
-
-    // Link existing access codes to the new user
-    if (existingCodes.length > 0) {
-      await db.appAccess.updateMany({
-        where: { email: email.toLowerCase() },
-        data: { userId: user.id },
-      });
-    }
-
-    // Create user progress
-    await db.userProgress.create({
+    // Create initial progress record
+    await prisma.userProgress.create({
       data: {
         userId: user.id,
+        currentDay: 1,
+        currentPhase: 'AWARENESS',
       },
-    }).catch(() => {
-      // Ignore if already exists
+    });
+
+    // Create transformation journey
+    await prisma.transformationJourney.create({
+      data: {
+        userId: user.id,
+        currentDay: 1,
+        currentPhase: 'AWARENESS',
+        accessTier: 'FREE',
+      },
     });
 
     return NextResponse.json({
       success: true,
+      message: 'Account created successfully',
       user: {
         id: user.id,
         email: user.email,
         name: user.name,
-        role: user.role,
-        hasAccess: existingCodes.length > 0,
-        accessCodeCount: existingCodes.length,
       },
     });
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
-      { error: 'Failed to create account. Please try again.' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }
