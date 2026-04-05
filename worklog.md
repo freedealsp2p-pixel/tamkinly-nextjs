@@ -783,6 +783,54 @@ Implement Progressive Web App (PWA) features including service worker for offlin
 - ✅ User dashboard
 - ✅ Payment system (Wise/Crypto/Bank)
 - ✅ Email notifications (Brevo)
-- ✅ Arabic language support at /ar/* routes
+- ✅ Arabic language support (localStorage-based switching)
 - ✅ PWA optimization (manifest, service worker, offline)
 - ✅ Analytics integration (Google Analytics 4 with consent)
+
+---
+## Task ID: 10 - Final Fixes Before Deployment
+### Date: Current Session
+
+### Issues Fixed:
+1. **Auth Config Import Error**: Fixed `@/lib/prisma` import that didn't exist. Changed to use `db` from `@/lib/db`.
+
+2. **API Routes Prisma Import**: Fixed `/api/user/progress/route.ts` and `/api/auth/register/route.ts` to use `db` instead of `prisma`.
+
+3. **Prisma Adapter Removal**: Removed `@auth/prisma-adapter` dependency - now using JWT sessions only without database adapter.
+
+4. **Locale Routing Reverted**: Removed URL-based locale routing (/ar/*) due to routing issues. Returned to localStorage-based locale switching which works reliably.
+
+5. **Header Component Fixed**: Replaced `LocaleLink` with standard Next.js `Link` component.
+
+6. **Offline Page Fixed**: Updated to use standard Link component.
+
+### Files Modified:
+- `src/lib/auth-config.ts` - Fixed imports, removed PrismaAdapter
+- `src/app/api/user/progress/route.ts` - Changed prisma to db
+- `src/app/api/auth/register/route.ts` - Changed prisma to db
+- `src/app/layout.tsx` - Restored full layout with providers
+- `src/components/layout/Header.tsx` - Replaced LocaleLink with Link
+- `src/app/offline/page.tsx` - Fixed Link import
+- `next.config.ts` - Removed next-intl plugin
+- `src/middleware.ts` - Removed (was causing routing issues)
+
+### Files Deleted:
+- `src/app/[locale]/` - Removed locale-based routing folder
+- `src/middleware.ts` - Removed middleware
+
+### Verification:
+- All pages return HTTP 200
+- Lint passes with no errors
+- Dev server runs correctly
+
+### Deployment Package:
+- Created: `/tmp/tamkinly-deploy-20260405.tar.gz`
+- Size: ~12MB (excluding node_modules, .next, .git)
+
+### Deployment Instructions:
+1. Upload the tar.gz file to server
+2. Extract to /var/www/tamkinly
+3. Run: `bun install`
+4. Run: `bun run build`
+5. Restart: `pm2 restart tamkinly-nextjs`
+6. Verify: `curl -I https://tamkinly.com`
