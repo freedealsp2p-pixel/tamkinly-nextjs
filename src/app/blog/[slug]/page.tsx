@@ -107,8 +107,9 @@ export async function generateStaticParams() {
 
 function ArticleContent({ article }: { article: BlogArticle }) {
   return (
-    <ReadingProgressBar />
-    <article className="min-h-screen">
+    <>
+      <ReadingProgressBar />
+      <article className="min-h-screen">
       {/* JSON-LD Structured Data for SEO */}
       <BlogArticleJsonLd
         headline={article.title}
@@ -308,6 +309,7 @@ function ArticleContent({ article }: { article: BlogArticle }) {
         </div>
       </section>
     </article>
+    </>
   );
 }
 
