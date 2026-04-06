@@ -74,13 +74,15 @@ export default function QuizPreviewWidget() {
   const progress = ((currentQuestion + 1) / sampleQuestions.length) * 100;
 
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25px 25px, rgba(61, 212, 176, 0.15) 2px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
+    <section className="py-20 lg:py-28 bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] relative">
+      {/* Background Pattern - contained within overflow wrapper */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 25px 25px, rgba(61, 212, 176, 0.15) 2px, transparent 0)`,
+            backgroundSize: '50px 50px'
+          }} />
+        </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

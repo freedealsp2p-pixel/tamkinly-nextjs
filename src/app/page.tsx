@@ -50,18 +50,19 @@ function HeroSection() {
   const { direction } = useLocale();
 
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-slate-900 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25px 25px, rgba(61, 212, 176, 0.15) 2px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
+    <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-slate-900">
+      {/* Background Pattern & Effects - clipped to section bounds */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 25px 25px, rgba(61, 212, 176, 0.15) 2px, transparent 0)`,
+            backgroundSize: '50px 50px'
+          }} />
+        </div>
+        {/* Animated gradient orbs - contained within overflow wrapper */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#3DD4B0]/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#1F6F78]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
-      
-      {/* Animated gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#3DD4B0]/20 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#1F6F78]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -556,13 +557,15 @@ function CTASection() {
   const { direction } = useLocale();
 
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25px 25px, rgba(61, 212, 176, 0.15) 2px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
+    <section className="py-20 lg:py-28 bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] relative">
+      {/* Background Pattern - contained within overflow wrapper */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 25px 25px, rgba(61, 212, 176, 0.15) 2px, transparent 0)`,
+            backgroundSize: '50px 50px'
+          }} />
+        </div>
       </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
