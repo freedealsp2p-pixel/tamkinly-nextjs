@@ -371,9 +371,11 @@ function VideoSection() {
             />
             {/* Play Button Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <button className="w-20 h-20 rounded-full bg-[#3DD4B0] flex items-center justify-center shadow-lg hover:scale-110 transition-transform group">
-                <Play className="h-8 w-8 text-[#0F1C2E] ml-1 group-hover:scale-110 transition-transform" />
-              </button>
+              <Link href="/methodology" className="inline-block">
+                <span className="w-20 h-20 rounded-full bg-[#3DD4B0] flex items-center justify-center shadow-lg hover:scale-110 transition-transform group">
+                  <Play className="h-8 w-8 text-[#0F1C2E] ml-1 group-hover:scale-110 transition-transform" />
+                </span>
+              </Link>
             </div>
             {/* Duration Badge */}
             <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-lg text-sm">

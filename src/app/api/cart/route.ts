@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
     });
 
     const total = cartItems.reduce((sum, item) => {
-      const price = item.product.comparePrice || item.product.price;
+      const price = item.product.price;
       return sum + price * item.quantity;
     }, 0);
 
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
         comparePrice: item.product.comparePrice,
         image: item.product.image,
         quantity: item.quantity,
-        subtotal: (item.product.comparePrice || item.product.price) * item.quantity,
+        subtotal: item.product.price * item.quantity,
       })),
       total,
       itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0),
@@ -128,7 +128,7 @@ export async function POST(request: NextRequest) {
     });
 
     const total = cartItems.reduce((sum, item) => {
-      const price = item.product.comparePrice || item.product.price;
+      const price = item.product.price;
       return sum + price * item.quantity;
     }, 0);
 
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
         comparePrice: item.product.comparePrice,
         image: item.product.image,
         quantity: item.quantity,
-        subtotal: (item.product.comparePrice || item.product.price) * item.quantity,
+        subtotal: item.product.price * item.quantity,
       })),
       total,
       itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0),
@@ -201,7 +201,7 @@ export async function PUT(request: NextRequest) {
     }) : [];
 
     const total = cartItems.reduce((sum, item) => {
-      const price = item.product.comparePrice || item.product.price;
+      const price = item.product.price;
       return sum + price * item.quantity;
     }, 0);
 
@@ -215,7 +215,7 @@ export async function PUT(request: NextRequest) {
         comparePrice: item.product.comparePrice,
         image: item.product.image,
         quantity: item.quantity,
-        subtotal: (item.product.comparePrice || item.product.price) * item.quantity,
+        subtotal: item.product.price * item.quantity,
       })),
       total,
       itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0),
@@ -252,7 +252,7 @@ export async function DELETE(request: NextRequest) {
     }) : [];
 
     const total = cartItems.reduce((sum, item) => {
-      const price = item.product.comparePrice || item.product.price;
+      const price = item.product.price;
       return sum + price * item.quantity;
     }, 0);
 
@@ -267,7 +267,7 @@ export async function DELETE(request: NextRequest) {
         comparePrice: item.product.comparePrice,
         image: item.product.image,
         quantity: item.quantity,
-        subtotal: (item.product.comparePrice || item.product.price) * item.quantity,
+        subtotal: item.product.price * item.quantity,
       })),
       total,
       itemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0),

@@ -176,11 +176,11 @@ export default function CartPage() {
                       </Link>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-lg font-bold text-[#0F1C2E]">
-                          ${item.comparePrice || item.price}
+                          ${item.price}
                         </span>
                         {item.comparePrice && item.comparePrice > item.price && (
                           <span className="text-sm text-[#8A94A6] line-through">
-                            ${item.price}
+                            ${item.comparePrice}
                           </span>
                         )}
                       </div>

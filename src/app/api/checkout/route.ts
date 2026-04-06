@@ -85,12 +85,12 @@ export async function POST(request: NextRequest) {
       orderItems = cartItems.map(item => ({
         productId: item.productId,
         name: item.product.name,
-        price: item.product.comparePrice || item.product.price,
+        price: item.product.price,
         quantity: item.quantity,
       }));
 
       total = cartItems.reduce((sum, item) => {
-        const itemPrice = item.product.comparePrice || item.product.price;
+        const itemPrice = item.product.price;
         return sum + itemPrice * item.quantity;
       }, 0);
 
@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
         orderNumber,
         customerEmail: email.toLowerCase(),
         customerName: name || null,
-        status: 'COMPLETED',
+        status: 'PENDING',
         subtotal: total,
         total,
         items: {

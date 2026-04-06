@@ -4,14 +4,29 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Lock, Key, Mail, ArrowRight, Loader2, CheckCircle2, XCircle } from 'lucide-react';
+import { Lock, Key, Mail, ArrowRight, Loader2, CheckCircle2, XCircle, AlertTriangle, Shield } from 'lucide-react';
 import Link from 'next/link';
+
+type Tier = 'FREE' | 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE';
 
 interface AccessGateProps {
   onAccessGranted: () => void;
+  requiredTier?: Tier;
 }
 
-const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted }) => {
+const TIER_HIERARCHY: Record<Tier, number> = {
+  FREE: 0,
+  TRIAL: 1,
+  BASIC: 2,
+  PREMIUM: 3,
+  BUNDLE: 4,
+};
+
+function tierMeetsRequirement(userTier: Tier, requiredTier: Tier): boolean {
+  return TIER_HIERARCHY[userTier] >= TIER_HIERARCHY[requiredTier];
+}
+
+const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }) => {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -33,10 +48,22 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted }) => {
       const data = await response.json();
 
       if (response.ok && data.success) {
+        // Check if the returned tier meets the required tier
+        if (requiredTier && data.tier) {
+          const userTier = data.tier as Tier;
+          if (!tierMeetsRequirement(userTier, requiredTier)) {
+            setError(`Your access tier (${data.tier}) does not meet the requirement for this app (${requiredTier}). Please upgrade to a higher plan.`);
+            return;
+          }
+        }
+
         setSuccess(true);
         // Store access in localStorage
         localStorage.setItem('tamkinly_access_email', email);
         localStorage.setItem('tamkinly_access_code', code.toUpperCase());
+        if (data.tier) {
+          localStorage.setItem('tamkinly_access_tier', data.tier);
+        }
         
         setTimeout(() => {
           onAccessGranted();

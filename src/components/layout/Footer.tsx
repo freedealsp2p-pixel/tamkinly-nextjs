@@ -25,9 +25,9 @@ export function Footer() {
 
   const productLinks = [
     { href: "/products", label: t("allProducts") },
-    { href: "/products#starter", label: "Starter Package" },
-    { href: "/products#growth", label: "Growth Package" },
-    { href: "/products#premium", label: "Premium Package" },
+    { href: "/products/trial", label: "7-Day Trial — $7" },
+    { href: "/products/planner", label: "Identity Planner — $17" },
+    { href: "/products/bundle", label: "Complete Bundle — $47" },
   ];
 
   const appsLinks = [

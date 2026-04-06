@@ -94,6 +94,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
   const hydrated = useHydrated();
   const t = useTranslations();
   const { locale, direction } = useLocale();
+  const pathname = usePathname();
 
   if (!hydrated) {
     return (
@@ -146,7 +147,11 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="px-4 py-3 text-base font-medium text-slate-700 hover:text-primary hover:bg-accent/10 rounded-lg transition-colors"
+                className={`px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                  pathname === item.href
+                    ? 'text-primary bg-accent/10'
+                    : 'text-slate-700 hover:text-primary hover:bg-accent/10'
+                }`}
               >
                 {item.label}
               </Link>
@@ -336,7 +341,11 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors rounded-lg hover:bg-accent/10"
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  pathname === item.href
+                    ? 'text-primary font-semibold bg-accent/10'
+                    : 'text-slate-600 hover:text-primary hover:bg-accent/10'
+                }`}
               >
                 {item.label}
               </Link>

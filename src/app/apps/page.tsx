@@ -488,7 +488,13 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: b
               </Button>
             </Link>
           ) : isLocked ? (
-            <Link href="/products">
+            <Link href={
+              app.tier === 'TRIAL' ? '/products/trial' :
+              app.tier === 'BASIC' ? '/products/planner' :
+              app.tier === 'PREMIUM' ? '/products/premium' :
+              app.tier === 'BUNDLE' ? '/products/bundle' :
+              '/products'
+            }>
               <Button variant="secondary" className="w-full shadow-md" size="sm">
                 <Lock className="w-4 h-4 mr-2" />
                 Unlock Access

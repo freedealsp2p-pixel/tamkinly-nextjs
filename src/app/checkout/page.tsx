@@ -99,6 +99,17 @@ const productsData: Record<string, {
   }
 };
 
+type CartCheckoutItem = {
+  id: string;
+  productId: string;
+  name: string;
+  price: number;
+  comparePrice?: number;
+  image?: string;
+  quantity: number;
+  subtotal: number;
+};
+
 function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -111,9 +122,29 @@ function CheckoutContent() {
   const [orderNumber, setOrderNumber] = useState<string>('');
   const [accessCode, setAccessCode] = useState<string>('');
   const [paymentStep, setPaymentStep] = useState<'info' | 'payment' | 'confirm'>('info');
+  const [cartItems, setCartItems] = useState<CartCheckoutItem[]>([]);
+  const [cartTotal, setCartTotal] = useState(0);
+  const [cartLoading, setCartLoading] = useState(false);
 
   // Get product directly from productId (no state needed)
   const product = productId && productsData[productId] ? productsData[productId] : null;
+
+  // If no single product, try to load cart items
+  React.useEffect(() => {
+    if (!product) {
+      setCartLoading(true);
+      fetch('/api/cart')
+        .then(res => res.json())
+        .then(data => {
+          if (data.items && data.items.length > 0) {
+            setCartItems(data.items);
+            setCartTotal(data.total);
+          }
+        })
+        .catch(() => {})
+        .finally(() => setCartLoading(false));
+    }
+  }, [product]);
 
   // Form state
   const [formData, setFormData] = useState(() => {
@@ -150,20 +181,26 @@ function CheckoutContent() {
     setProcessing(true);
 
     try {
-      // Process checkout via API - this creates order AND generates access code
+      // Build request body - for cart checkout, omit productId so API reads from cookie
+      const body: Record<string, string | number | undefined> = {
+        email: formData.email,
+        name: formData.name,
+        transactionId: formData.transactionId || undefined,
+      };
+
+      if (product) {
+        body.productId = product.id;
+        body.productName = product.name;
+        body.price = product.price;
+      }
+
+      // Process checkout via API
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: formData.email,
-          name: formData.name,
-          productId: product?.id,
-          productName: product?.name,
-          price: product?.price,
-          transactionId: formData.transactionId || undefined,
-        }),
+        body: JSON.stringify(body),
       });
 
       const data = await response.json();
@@ -191,8 +228,20 @@ function CheckoutContent() {
     }
   };
 
-  // No product selected
-  if (!product) {
+  // Loading cart
+  if (!product && cartLoading) {
+    return (
+      <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-[#1F6F78] mx-auto mb-4" />
+          <p className="text-[#8A94A6]">Loading checkout...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // No product and no cart items
+  if (!product && cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-[#F6F8FA]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -214,6 +263,11 @@ function CheckoutContent() {
       </div>
     );
   }
+
+  // Determine if this is a cart checkout
+  const isCartCheckout = !product && cartItems.length > 0;
+  // Use cart total for cart checkout, product price for single product
+  const checkoutTotal = isCartCheckout ? cartTotal : (product?.price || 0);
 
   // Success state
   if (success) {
@@ -276,16 +330,16 @@ function CheckoutContent() {
     );
   }
 
-  const Icon = product.icon;
+  const Icon = product?.icon || Package;
 
   return (
     <div className="min-h-screen bg-[#F6F8FA]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <Link href={`/products/${product.id}`} className="inline-flex items-center text-[#1F6F78] hover:text-[#3DD4B0] mb-4">
+          <Link href={product ? `/products/${product.id}` : '/cart'} className="inline-flex items-center text-[#1F6F78] hover:text-[#3DD4B0] mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Product
+            {product ? 'Back to Product' : 'Back to Cart'}
           </Link>
           <h1 className="text-3xl font-bold text-[#0F1C2E]">Checkout</h1>
         </div>
@@ -373,7 +427,7 @@ function CheckoutContent() {
                       <div className="space-y-3">
                         <div className="bg-white/10 rounded-lg p-3">
                           <p className="text-xs text-white/60 mb-1">Amount to send:</p>
-                          <p className="text-2xl font-bold">${product.price} USD</p>
+                          <p className="text-2xl font-bold">${checkoutTotal} USD</p>
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
@@ -396,7 +450,7 @@ function CheckoutContent() {
                           className="w-full bg-[#00B9FF] hover:bg-[#0099DD] text-white h-14 text-lg font-semibold"
                         >
                           <ExternalLink className="w-5 h-5 mr-2" />
-                          Pay ${product.price} with Wise
+                          Pay ${checkoutTotal} with Wise
                         </Button>
                       </a>
 
@@ -467,7 +521,7 @@ function CheckoutContent() {
 
                         <div className="bg-white/10 rounded-lg p-3">
                           <p className="text-xs text-white/60 mb-1">Amount to send:</p>
-                          <p className="text-2xl font-bold">${product.price} USDC/USDT</p>
+                          <p className="text-2xl font-bold">${checkoutTotal} USDC/USDT</p>
                         </div>
                       </div>
                     </div>
@@ -568,7 +622,7 @@ function CheckoutContent() {
 
                         <div className="bg-white/10 rounded-lg p-3">
                           <p className="text-xs text-white/60 mb-1">Amount to send:</p>
-                          <p className="text-2xl font-bold">${product.price} USD</p>
+                          <p className="text-2xl font-bold">${checkoutTotal} USD</p>
                         </div>
                       </div>
                     </div>
@@ -680,24 +734,49 @@ function CheckoutContent() {
                 <CardTitle className="text-[#0F1C2E]">Order Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {/* Product */}
-                <div className="flex gap-4 p-4 bg-slate-50 rounded-lg">
-                  <div className="w-12 h-12 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-6 h-6 text-[#3DD4B0]" />
-                  </div>
-                  <div className="flex-1">
-                    <Badge variant="outline" className="text-xs mb-1">{product.tier}</Badge>
-                    <p className="font-semibold text-[#0F1C2E]">{product.name}</p>
-                    <div className="flex items-baseline gap-2 mt-1">
-                      <span className="font-bold text-[#3DD4B0]">${product.price}</span>
-                      {product.comparePrice > product.price && (
-                        <span className="text-sm text-slate-400 line-through">${product.comparePrice}</span>
-                      )}
+                {/* Product(s) */}
+                {product ? (
+                  <div className="flex gap-4 p-4 bg-slate-50 rounded-lg">
+                    <div className="w-12 h-12 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-6 h-6 text-[#3DD4B0]" />
+                    </div>
+                    <div className="flex-1">
+                      <Badge variant="outline" className="text-xs mb-1">{product.tier}</Badge>
+                      <p className="font-semibold text-[#0F1C2E]">{product.name}</p>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="font-bold text-[#3DD4B0]">${product.price}</span>
+                        {product.comparePrice > product.price && (
+                          <span className="text-sm text-slate-400 line-through">${product.comparePrice}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="space-y-3">
+                    {cartItems.map((item) => (
+                      <div key={item.id} className="flex gap-3 p-3 bg-slate-50 rounded-lg">
+                        <div className="w-10 h-10 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center flex-shrink-0">
+                          <Package className="w-5 h-5 text-[#3DD4B0]" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-[#0F1C2E] text-sm truncate">{item.name}</p>
+                          <div className="flex items-center justify-between mt-1">
+                            <div className="flex items-baseline gap-1">
+                              <span className="font-bold text-[#3DD4B0] text-sm">${item.price}</span>
+                              {item.comparePrice && item.comparePrice > item.price && (
+                                <span className="text-xs text-slate-400 line-through">${item.comparePrice}</span>
+                              )}
+                            </div>
+                            <span className="text-xs text-slate-500">x{item.quantity}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-                {/* Features */}
+                {/* Features - only for single product */}
+                {product && (
                 <div className="space-y-2">
                   <p className="text-sm font-medium text-[#2B2E34]">Includes:</p>
                   {product.features.map((feature, idx) => (
@@ -707,18 +786,19 @@ function CheckoutContent() {
                     </div>
                   ))}
                 </div>
+                )}
 
                 <Separator />
 
                 <div className="flex justify-between text-[#8A94A6]">
                   <span>Subtotal</span>
-                  <span>${product.price.toFixed(2)}</span>
+                  <span>${checkoutTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-[#8A94A6]">
                   <span>Tax</span>
                   <span>$0.00</span>
                 </div>
-                {product.comparePrice > product.price && (
+                {product && product.comparePrice > product.price && (
                   <div className="flex justify-between text-green-600">
                     <span>You Save</span>
                     <span>-${(product.comparePrice - product.price).toFixed(2)}</span>
@@ -727,7 +807,7 @@ function CheckoutContent() {
                 <Separator />
                 <div className="flex justify-between text-lg font-bold text-[#0F1C2E]">
                   <span>Total</span>
-                  <span>${product.price.toFixed(2)} USD</span>
+                  <span>${checkoutTotal.toFixed(2)} USD</span>
                 </div>
 
                 {/* Trust */}

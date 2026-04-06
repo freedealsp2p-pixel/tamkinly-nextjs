@@ -1,31 +1,16 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Sparkles, ArrowRight, Loader2, Copy, Check } from 'lucide-react';
+import { CheckCircle2, Sparkles, ArrowRight, Loader2, Mail } from 'lucide-react';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
   const paymentId = searchParams.get('paymentId');
-
-  // Generate access code using useMemo to avoid effect
-  const accessCode = React.useMemo(() => {
-    return `TMLY-${Math.random().toString(36).substring(2, 6).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-  }, []);
-
-  const [copied, setCopied] = React.useState(false);
-
-  const handleCopy = () => {
-    if (accessCode) {
-      navigator.clipboard.writeText(accessCode);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#F6F8FA] py-16 px-4">
@@ -59,28 +44,18 @@ function SuccessContent() {
           </CardContent>
         </Card>
 
-        {/* Access Code */}
-        {accessCode && (
-          <Card className="border-2 border-[#3DD4B0] shadow-lg mb-6">
-            <CardContent className="p-6">
-              <p className="text-sm text-slate-600 mb-2 text-center">Your Access Code</p>
-              <div className="flex items-center justify-center gap-2">
-                <code className="text-2xl font-bold text-[#0F1C2E] tracking-wider">{accessCode}</code>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleCopy}
-                  className="ml-2"
-                >
-                  {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
-                </Button>
-              </div>
-              <p className="text-xs text-slate-500 text-center mt-3">
-                Save this code to access your products. It was also sent to your email.
-              </p>
-            </CardContent>
-          </Card>
-        )}
+        {/* Access Code Email Notice */}
+        <Card className="border-2 border-[#3DD4B0] shadow-lg mb-6">
+          <CardContent className="p-6 text-center">
+            <div className="w-12 h-12 rounded-full bg-[#3DD4B0]/20 flex items-center justify-center mx-auto mb-3">
+              <Mail className="w-6 h-6 text-[#3DD4B0]" />
+            </div>
+            <p className="text-sm font-medium text-[#0F1C2E] mb-1">Access Code Sent to Your Email</p>
+            <p className="text-xs text-slate-500">
+              Your access code has been sent to the email address used during checkout. Please check your inbox (and spam folder) to find it.
+            </p>
+          </CardContent>
+        </Card>
 
         {/* Next Steps */}
         <Card className="border-0 shadow-lg mb-6">
@@ -97,7 +72,7 @@ function SuccessContent() {
                 <div className="w-6 h-6 rounded-full bg-[#3DD4B0]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-xs font-bold text-[#3DD4B0]">2</span>
                 </div>
-                <p className="text-slate-600">Go to Apps page and enter your access code</p>
+                <p className="text-slate-600">Go to the Apps page and enter your access code</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 rounded-full bg-[#3DD4B0]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -114,7 +89,7 @@ function SuccessContent() {
           <Link href="/apps" className="flex-1">
             <Button className="w-full h-12 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold">
               <Sparkles className="w-4 h-4 mr-2" />
-              Access Your Products
+              Enter Access Code
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>

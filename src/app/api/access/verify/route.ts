@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
       success: true,
       message: 'Access granted',
       productId: access.productId,
+      tier: access.tier,
     });
   } catch (error) {
     console.error('Access verification error:', error);

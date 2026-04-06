@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { QUIZ_METADATA } from '@/lib/seo-pages';
 import { FAQPageJsonLd } from '@/components/seo/JsonLd';
 import { QuizFaqSection } from './quiz-faq-section';
@@ -46,6 +48,15 @@ export default function QuizLayout({
   return (
     <>
       <FAQPageJsonLd questions={quizFAQ} />
+      {/* Back Navigation */}
+      <div className="bg-white border-b border-slate-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-primary transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Home
+          </Link>
+        </div>
+      </div>
       {children}
 
       {/* SEO: noscript FAQ content visible to crawlers */}

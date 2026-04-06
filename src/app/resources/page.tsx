@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -312,6 +313,10 @@ function IdentityResearchSection() {
 
 // Newsletter Section
 function NewsletterSection() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
+
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -329,19 +334,47 @@ function NewsletterSection() {
               </p>
             </div>
             <div className="p-8 lg:p-10 flex flex-col justify-center">
-              <form className="space-y-4">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent"
-                />
-                <Button className="w-full bg-accent text-primary hover:bg-accent/90">
-                  Subscribe
-                </Button>
-                <p className="text-xs text-slate-500 text-center">
-                  No spam. Unsubscribe anytime.
-                </p>
-              </form>
+              {subscribed ? (
+                <div className="text-center space-y-2">
+                  <div className="w-12 h-12 rounded-full bg-accent/20 text-accent flex items-center justify-center mx-auto mb-2">
+                    <CheckCircle2 className="h-6 w-6" />
+                  </div>
+                  <p className="font-semibold text-primary">You&apos;re subscribed!</p>
+                  <p className="text-sm text-slate-500">Check your inbox for a welcome email.</p>
+                </div>
+              ) : (
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (!email) return;
+                  setSubscribing(true);
+                  try {
+                    const res = await fetch('/api/email/subscribe', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ email, source: 'resources-page' })
+                    });
+                    if (res.ok) {
+                      setSubscribed(true);
+                    }
+                  } catch { /* silent fail */ }
+                  finally { setSubscribing(false); }
+                }} className="space-y-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent"
+                  />
+                  <Button disabled={subscribing} className="w-full bg-accent text-primary hover:bg-accent/90">
+                    {subscribing ? 'Subscribing...' : 'Subscribe'}
+                  </Button>
+                  <p className="text-xs text-slate-500 text-center">
+                    No spam. Unsubscribe anytime.
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </Card>

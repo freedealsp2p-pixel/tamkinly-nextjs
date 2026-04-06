@@ -844,3 +844,117 @@ Implement Progressive Web App (PWA) features including service worker for offlin
 ### Backup Created:
 - Location on server: `/var/www/tamkinly-backups/`
 - Instructions: See `BACKUP_INSTRUCTIONS.md`
+
+---
+
+## Task ID: 1-a - Phase 1 Critical Fixes
+### Work Task
+Fix 6 critical issues in the payment, checkout, cart, and access gate systems.
+
+### Work Summary
+
+**1. Fixed payment/success page - Removed fake access code** (`src/app/payment/success/page.tsx`):
+- Removed the `useMemo` with `Math.random()` that generated a random (non-functional) access code client-side
+- Removed the copy-to-clipboard functionality and `copied` state
+- Replaced the fake access code card with an "Access Code Sent to Your Email" notice card with a Mail icon
+- Changed the CTA button text from "Access Your Products" to "Enter Access Code"
+- Kept the order details (orderId, paymentId from URL params) and "What's Next?" onboarding steps
+- Kept the link to /apps page
+
+**2. Fixed checkout API - PENDING state & price bug** (`src/app/api/checkout/route.ts`):
+- Changed `status: 'COMPLETED'` to `status: 'PENDING'` on line 120 so orders aren't auto-completed without payment verification
+- Fixed cart price bug on line 88: changed `item.product.comparePrice || item.product.price` to `item.product.price` (use actual sale price)
+- Fixed total calculation on line 93: same fix - use `item.product.price` instead of comparePrice
+
+**3. Fixed cart page - Display actual prices** (`src/app/cart/page.tsx`):
+- Changed lines 178-185: Now shows `item.price` as the main displayed price (the sale price)
+- Shows `item.comparePrice` as the crossed-out original price (only when `comparePrice > price`)
+- Previously had it inverted: showed comparePrice as main and price as crossed-out
+
+**4. Fixed cart API - Price calculation everywhere** (`src/app/api/cart/route.ts`):
+- Fixed ALL 4 handlers (GET, POST, PUT, DELETE) that used `item.product.comparePrice || item.product.price`
+- Changed total calculations to use `item.product.price` (actual sale price)
+- Changed subtotal calculations from `(item.product.comparePrice || item.product.price) * item.quantity` to `item.product.price * item.quantity`
+- This ensures cart totals, subtotals, and item prices are all consistent and correct
+
+**5. Fixed cart → checkout connection** (`src/app/checkout/page.tsx`):
+- Added `CartCheckoutItem` type for cart items
+- Added state: `cartItems`, `cartTotal`, `cartLoading`
+- Added `useEffect` that fetches `/api/cart` when no product param is provided
+- When no product and no cart items: shows "Select a Product" (original behavior)
+- When no product but cart items exist: shows full checkout flow with cart items
+- Updated `handleConfirmPayment` to build request body conditionally (omits productId for cart checkout so API reads from cookie)
+- Updated Order Summary sidebar to show cart items list (with price, comparePrice, quantity) for cart checkout
+- Updated all payment amount displays to use `checkoutTotal` (either product.price or cartTotal)
+- Updated back link to go to `/cart` for cart checkout, `/products/{id}` for single product
+- Added features section conditional rendering (only for single product)
+
+**6. Added tier verification to AccessGate** (`src/app/api/access/verify/route.ts` + `src/components/apps/AccessGate.tsx`):
+- **API**: Added `tier: access.tier` to the POST response
+- **Component**: Added `requiredTier` optional prop with type `'FREE' | 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE'`
+- Added `TIER_HIERARCHY` mapping: FREE=0, TRIAL=1, BASIC=2, PREMIUM=3, BUNDLE=4
+- Added `tierMeetsRequirement()` function to check if user tier meets required tier
+- After successful verification, checks if user's tier meets `requiredTier` - if not, shows error suggesting upgrade
+- Stores `tamkinly_access_tier` in localStorage on successful verification
+- Added `AlertTriangle` and `Shield` icon imports (available for future use in upgrade messaging)
+
+### Files Modified:
+- `src/app/payment/success/page.tsx` - Removed fake access code, added email notice
+- `src/app/api/checkout/route.ts` - PENDING status, price fix
+- `src/app/cart/page.tsx` - Price display fix
+- `src/app/api/cart/route.ts` - Price calculation fix in all handlers
+- `src/app/checkout/page.tsx` - Cart-based checkout support
+- `src/app/api/access/verify/route.ts` - Return tier field
+- `src/components/apps/AccessGate.tsx` - requiredTier prop with tier hierarchy checking
+
+---
+## Task ID: 1-b - Phase 2 UX Fixes
+### Work Task
+Fix 6 UX issues: active nav state in header, broken footer links, back navigation in quiz, video play button, app tier links, and newsletter form.
+
+### Work Summary
+
+**1. Active Nav State in Header** (`src/components/layout/Header.tsx`):
+- Added `usePathname()` to `MobileMenu` component
+- Desktop nav links (line ~344): Updated className to conditionally highlight active page with `text-primary font-semibold bg-accent/10`
+- Mobile nav links (line ~150): Updated className to conditionally highlight active page with `text-primary bg-accent/10`
+- Non-active links retain original `text-slate-600 hover:text-primary hover:bg-accent/10` styles
+
+**2. Fixed Footer Broken Hash Links** (`src/components/layout/Footer.tsx`):
+- Replaced `productLinks` array entries that used hash anchors (`#starter`, `#growth`, `#premium`)
+- New links point to actual product pages: `/products/trial`, `/products/planner`, `/products/bundle`
+- Updated labels to show actual product names and prices
+
+**3. Added Back Navigation in Quiz Layout** (`src/app/quiz/layout.tsx`):
+- Added imports: `Link` from `next/link`, `ArrowLeft` from `lucide-react`
+- Added a "Back to Home" bar at the top of the quiz layout with ArrowLeft icon
+- Styled with subtle border-bottom and hover color transition
+
+**4. Fixed Video Play Button on Homepage** (`src/app/page.tsx`):
+- Changed the `<button>` element (line ~374) to a `<Link>` pointing to `/methodology`
+- Play button now navigates to the methodology page which explains the approach
+
+**5. Fixed Paid Apps Link to Specific Product Tiers** (`src/app/apps/page.tsx`):
+- Replaced generic `/products` link with tier-to-product mapping in `AppCard` component
+- TRIAL tier → `/products/trial`
+- BASIC tier → `/products/planner`
+- PREMIUM tier → `/products/premium`
+- BUNDLE tier → `/products/bundle`
+- Fallback to `/products` for unknown tiers
+
+**6. Fixed Newsletter Form on Resources Page** (`src/app/resources/page.tsx`):
+- Added `useState` import from React
+- Added state: `email`, `subscribed`, `subscribing`
+- Added `onSubmit` handler that POSTs to `/api/email/subscribe`
+- Added controlled input with value/onChange
+- Added loading state ("Subscribing...") and success state ("You're subscribed!")
+- Added success message with CheckCircle2 icon
+- Button disabled during submission
+
+### Files Modified:
+- `src/components/layout/Header.tsx` - Active nav state (desktop + mobile)
+- `src/components/layout/Footer.tsx` - Fixed product links
+- `src/app/quiz/layout.tsx` - Back navigation bar
+- `src/app/page.tsx` - Video play button → Link
+- `src/app/apps/page.tsx` - Tier-specific product links
+- `src/app/resources/page.tsx` - Newsletter form with state management
