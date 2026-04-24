@@ -312,7 +312,21 @@
     "termsOfService": "Terms of Service",
     "refundPolicy": "Refund Policy",
     "copyright": "© {year} Tamkinly. All rights reserved.",
-    "madeWith": "Made with"
+    "madeWith": "Made with ❤️ for your growth",
+    "blog": "Blog",
+    "trialProduct": "7-Day Trial — $7",
+    "plannerProduct": "Identity Planner — $17",
+    "bundleProduct": "Complete Bundle — $47",
+    "apps": "Apps",
+    "allApps": "All Apps",
+    "identityQuiz": "Identity Quiz",
+    "habitTracker": "Habit Tracker",
+    "goalSystem": "Goal System",
+    "aiCoach": "AI Coach",
+    "newsletterTitle": "Start Your Transformation Journey",
+    "newsletterDescription": "Get free resources and insights delivered to your inbox",
+    "startFreeAssessment": "Start Free Assessment",
+    "viewProducts": "View Products"
   },
   "search": {
     "identityQuiz": "Identity Gap Quiz",
@@ -852,5 +866,41 @@
         ]
       }
     }
+  },
+  "cookieConsent": {
+    "close": "Close cookie consent",
+    "title": "We value your privacy",
+    "description": "We use cookies to analyze site traffic and improve your experience. By clicking \"Accept\", you consent to our use of analytics cookies. You can decline non-essential cookies while still enjoying full access to our content and features.",
+    "privacyLink": "Learn more in our Privacy Policy",
+    "decline": "Decline",
+    "accept": "Accept Cookies",
+    "tracking": "What we track: Page views, feature usage, and conversions to improve our products. We never sell your data or use it for targeted advertising."
+  },
+  "accessGate": {
+    "accessGranted": "Access Granted!",
+    "loadingTools": "Loading your transformation tools...",
+    "unlockTitle": "Unlock Your Apps",
+    "unlockDescription": "Enter your access code to unlock the Identity Recode System",
+    "purchaseEmail": "Purchase Email",
+    "accessCode": "Access Code",
+    "verifying": "Verifying...",
+    "unlockApps": "Unlock Apps",
+    "noCode": "Don't have a code?",
+    "getBundleText": "Get access with the Complete Bundle",
+    "getBundle": "Get Bundle — $47",
+    "tierError": "Your access tier ({tier}) does not meet the requirement for this app ({required}). Please upgrade to a higher plan.",
+    "verifyFailed": "Failed to verify access",
+    "networkError": "Network error. Please try again."
+  },
+  "offline": {
+    "title": "You're Offline",
+    "description": "It looks like you've lost your internet connection. Don't worry — some content may still be available from cache.",
+    "goHome": "Go Home",
+    "tryAgain": "Try Again",
+    "availableOffline": "Available Offline:",
+    "cachedPages": "Previously visited pages",
+    "quizOffline": "Identity Gap Quiz",
+    "reflectionOffline": "Daily Reflection prompts",
+    "savedProgress": "Saved progress"
   }
 }

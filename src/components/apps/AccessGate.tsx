@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Lock, Key, Mail, ArrowRight, Loader2, CheckCircle2, XCircle, AlertTriangle, Shield } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 type Tier = 'FREE' | 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE';
 
@@ -27,6 +28,7 @@ function tierMeetsRequirement(userTier: Tier, requiredTier: Tier): boolean {
 }
 
 const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }) => {
+  const t = useTranslations('accessGate');
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -52,7 +54,7 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
         if (requiredTier && data.tier) {
           const userTier = data.tier as Tier;
           if (!tierMeetsRequirement(userTier, requiredTier)) {
-            setError(`Your access tier (${data.tier}) does not meet the requirement for this app (${requiredTier}). Please upgrade to a higher plan.`);
+            setError(t('tierError', { tier: data.tier, required: requiredTier }));
             return;
           }
         }
@@ -69,10 +71,10 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
           onAccessGranted();
         }, 1500);
       } else {
-        setError(data.error || 'Failed to verify access');
+        setError(data.error || t('verifyFailed'));
       }
     } catch {
-      setError('Network error. Please try again.');
+      setError(t('networkError'));
     } finally {
       setLoading(false);
     }
@@ -86,8 +88,8 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
             <div className="w-16 h-16 rounded-full bg-[#3DD4B0]/20 flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 className="w-8 h-8 text-[#3DD4B0]" />
             </div>
-            <h2 className="text-2xl font-bold text-[#0F1C2E] mb-2">Access Granted!</h2>
-            <p className="text-[#8A94A6]">Loading your transformation tools...</p>
+            <h2 className="text-2xl font-bold text-[#0F1C2E] mb-2">{t('accessGranted')}</h2>
+            <p className="text-[#8A94A6]">{t('loadingTools')}</p>
           </CardContent>
         </Card>
       </div>
@@ -101,9 +103,9 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
           <div className="w-16 h-16 rounded-full bg-[#0F1C2E] flex items-center justify-center mx-auto mb-4">
             <Lock className="w-8 h-8 text-[#3DD4B0]" />
           </div>
-          <CardTitle className="text-2xl text-[#0F1C2E]">Unlock Your Apps</CardTitle>
+          <CardTitle className="text-2xl text-[#0F1C2E]">{t('unlockTitle')}</CardTitle>
           <CardDescription className="text-[#8A94A6]">
-            Enter your access code to unlock the Identity Recode System
+            {t('unlockDescription')}
           </CardDescription>
         </CardHeader>
 
@@ -113,7 +115,7 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
             <div className="space-y-2">
               <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                Purchase Email
+                {t('purchaseEmail')}
               </label>
               <Input
                 type="email"
@@ -129,7 +131,7 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
             <div className="space-y-2">
               <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
                 <Key className="w-4 h-4" />
-                Access Code
+                {t('accessCode')}
               </label>
               <Input
                 type="text"
@@ -159,11 +161,11 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Verifying...
+                  {t('verifying')}
                 </>
               ) : (
                 <>
-                  Unlock Apps
+                  {t('unlockApps')}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </>
               )}
@@ -176,18 +178,18 @@ const AccessGate: React.FC<AccessGateProps> = ({ onAccessGranted, requiredTier }
               <div className="w-full border-t border-[#1F6F78]/20" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-[#8A94A6]">Don't have a code?</span>
+              <span className="bg-white px-2 text-[#8A94A6]">{t('noCode')}</span>
             </div>
           </div>
 
           {/* Purchase CTA */}
           <div className="text-center space-y-3">
             <p className="text-sm text-[#8A94A6]">
-              Get access with the Complete Bundle
+              {t('getBundleText')}
             </p>
             <Link href="/products">
               <Button variant="outline" className="w-full border-[#0F1C2E] text-[#0F1C2E] hover:bg-[#0F1C2E] hover:text-white">
-                Get Bundle — $47
+                {t('getBundle')}
               </Button>
             </Link>
           </div>

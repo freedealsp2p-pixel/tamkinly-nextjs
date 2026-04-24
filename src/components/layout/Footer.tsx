@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Mail, Twitter, Instagram, Linkedin, Youtube, Github } from "lucide-react";
-import { useTranslations } from "@/components/providers/LocaleProvider";
+import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
 
 const socialLinks = [
   { href: "https://twitter.com/tamkinly", icon: Twitter, label: "Twitter / X" },
@@ -14,28 +14,29 @@ const socialLinks = [
 
 export function Footer() {
   const t = useTranslations("footer");
+  const { locale } = useLocale();
 
   const companyLinks = [
     { href: "/about", label: t("aboutUs") },
     { href: "/methodology", label: t("ourMethodology") },
     { href: "/resources", label: t("resources") },
     { href: "/contact", label: t("contact") },
-    { href: "/blog", label: "Blog" },
+    { href: "/blog", label: t("blog") },
   ];
 
   const productLinks = [
     { href: "/products", label: t("allProducts") },
-    { href: "/products/trial", label: "7-Day Trial — $7" },
-    { href: "/products/planner", label: "Identity Planner — $17" },
-    { href: "/products/bundle", label: "Complete Bundle — $47" },
+    { href: "/products/trial", label: t("trialProduct") },
+    { href: "/products/planner", label: t("plannerProduct") },
+    { href: "/products/bundle", label: t("bundleProduct") },
   ];
 
   const appsLinks = [
-    { href: "/apps", label: "All Apps" },
-    { href: "/apps/identity-gap-quiz", label: "Identity Quiz" },
-    { href: "/apps/habit-tracker", label: "Habit Tracker" },
-    { href: "/apps/goal-system", label: "Goal System" },
-    { href: "/apps/ai-identity-coach", label: "AI Coach" },
+    { href: "/apps", label: t("allApps") },
+    { href: "/apps/identity-gap-quiz", label: t("identityQuiz") },
+    { href: "/apps/habit-tracker", label: t("habitTracker") },
+    { href: "/apps/goal-system", label: t("goalSystem") },
+    { href: "/apps/ai-identity-coach", label: t("aiCoach") },
   ];
 
   const supportLinks = [
@@ -52,23 +53,23 @@ export function Footer() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-2xl mx-auto text-center">
             <h3 className="font-serif text-xl font-bold text-accent mb-2">
-              Start Your Transformation Journey
+              {t("newsletterTitle")}
             </h3>
             <p className="text-slate-300 text-sm mb-4">
-              Get free resources and insights delivered to your inbox
+              {t("newsletterDescription")}
             </p>
             <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
               <Link 
                 href="/quiz" 
                 className="flex-1 bg-accent text-primary font-semibold py-2 px-4 rounded-lg hover:bg-accent/90 transition-colors text-center"
               >
-                Start Free Assessment
+                {t("startFreeAssessment")}
               </Link>
               <Link 
                 href="/products" 
                 className="flex-1 border border-accent text-accent font-semibold py-2 px-4 rounded-lg hover:bg-accent/10 transition-colors text-center"
               >
-                View Products
+                {t("viewProducts")}
               </Link>
             </div>
           </div>
@@ -143,7 +144,7 @@ export function Footer() {
 
           {/* Apps Links */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Apps</h3>
+            <h3 className="font-semibold text-white mb-4">{t("apps")}</h3>
             <ul className="space-y-3">
               {appsLinks.map((link) => (
                 <li key={link.href}>
@@ -178,10 +179,10 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-slate-400">
-              © {new Date().getFullYear()} Tamkinly / تمكينلي. All rights reserved.
+              {locale === 'ar' ? `© ${new Date().getFullYear()} تمكينلي. جميع الحقوق محفوظة.` : `© ${new Date().getFullYear()} Tamkinly. All rights reserved.`}
             </p>
             <div className="flex items-center gap-4 text-sm text-slate-400">
-              <span>Made with ❤️ for your growth</span>
+              <span>{t("madeWith")}</span>
             </div>
           </div>
         </div>

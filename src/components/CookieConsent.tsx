@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { X, Cookie } from 'lucide-react';
 import { grantConsent, revokeConsent, shouldShowConsentBanner } from '@/lib/analytics';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 interface CookieConsentProps {
   onAccept?: () => void;
@@ -18,6 +19,7 @@ interface CookieConsentProps {
  * - Privacy-first approach: cookies only set after consent
  */
 export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
+  const t = useTranslations('cookieConsent');
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -86,7 +88,7 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
           <button
             onClick={handleClose}
             className="absolute top-3 right-3 p-1.5 rounded-lg hover:bg-white/10 transition-colors"
-            aria-label="Close cookie consent"
+            aria-label={t('close')}
           >
             <X className="h-4 w-4" />
           </button>
@@ -102,18 +104,15 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
             {/* Content */}
             <div className="flex-1 pr-8">
               <h3 className="text-lg font-semibold mb-2">
-                We value your privacy
+                {t('title')}
               </h3>
               <p className="text-sm text-slate-300 leading-relaxed">
-                We use cookies to analyze site traffic and improve your experience. 
-                By clicking &quot;Accept&quot;, you consent to our use of analytics cookies. 
-                You can decline non-essential cookies while still enjoying full access 
-                to our content and features.{' '}
+                {t('description')}{' '}
                 <a
                   href="/privacy"
                   className="text-[#3DD4B0] hover:underline focus:outline-none focus:ring-2 focus:ring-[#3DD4B0] rounded"
                 >
-                  Learn more in our Privacy Policy
+                  {t('privacyLink')}
                 </a>
               </p>
             </div>
@@ -126,7 +125,7 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
                 onClick={handleDecline}
                 className="border-slate-500 text-white hover:bg-white/10 hover:text-white"
               >
-                Decline
+                {t('decline')}
               </Button>
               <Button
                 variant="accent"
@@ -134,7 +133,7 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
                 onClick={handleAccept}
                 className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]"
               >
-                Accept Cookies
+                {t('accept')}
               </Button>
             </div>
           </div>
@@ -142,8 +141,7 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
           {/* Additional info for transparency */}
           <div className="mt-4 pt-4 border-t border-slate-700/50">
             <p className="text-xs text-slate-400">
-              <strong>What we track:</strong> Page views, feature usage, and conversions 
-              to improve our products. We never sell your data or use it for targeted advertising.
+              {t('tracking')}
             </p>
           </div>
         </div>
