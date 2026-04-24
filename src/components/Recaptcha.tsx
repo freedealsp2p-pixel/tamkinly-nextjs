@@ -25,13 +25,11 @@ export function Recaptcha({ onVerify, action = 'contact_form' }: RecaptchaProps)
     
     if (!siteKey) {
       // If no site key is configured, skip reCAPTCHA (for development)
-      console.warn('reCAPTCHA site key not configured, skipping verification');
       onVerify('');
       return;
     }
 
     if (!isLoaded || !window.grecaptcha) {
-      console.warn('reCAPTCHA not loaded yet');
       onVerify('');
       return;
     }
@@ -58,44 +56,11 @@ export function Recaptcha({ onVerify, action = 'contact_form' }: RecaptchaProps)
         strategy="afterInteractive"
         onLoad={() => setIsLoaded(true)}
       />
-      {/* Hidden field to trigger reCAPTCHA on form submit */}
       <input type="hidden" name="recaptchaAction" value={action} />
-      {/* This component doesn't render anything visible */}
-      {/* The parent form should call executeRecaptcha before submission */}
     </>
   );
 }
 
-// Server-side reCAPTCHA verification helper
-export async function verifyRecaptcha(token: string): Promise<{ success: boolean; score: number }> {
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-  
-  if (!secretKey || !token) {
-    // If no secret key or token, skip verification (for development)
-    console.warn('reCAPTCHA secret key not configured or no token provided, skipping verification');
-    return { success: true, score: 1.0 };
-  }
-
-  try {
-    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        secret: secretKey,
-        response: token,
-      }),
-    });
-
-    const data = await response.json();
-    
-    return {
-      success: data.success === true,
-      score: data.score ?? 0,
-    };
-  } catch (error) {
-    console.error('reCAPTCHA verification error:', error);
-    return { success: false, score: 0 };
-  }
-}
+// Re-export verifyRecaptcha from server-side module for backward compatibility
+// API routes should import from '@/lib/recaptcha' directly
+export { verifyRecaptcha } from '@/lib/recaptcha';

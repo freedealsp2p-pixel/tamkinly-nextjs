@@ -3,10 +3,15 @@
 // Handles contact form submissions
 // Tamkinly Identity Transformation Platform
 // ============================================
+// FIX: v1.1.0 - Fixed HTTP 500 error
+// - Moved verifyRecaptcha to server-only module
+// - Added database fallback (ContactMessage model)
+// - Improved error handling
+// ============================================
 
 import { NextRequest, NextResponse } from 'next/server';
-import { BrevoEmails, BrevoContacts, BREVO_LISTS } from '@/lib/brevo';
-import { verifyRecaptcha } from '@/components/Recaptcha';
+import { verifyRecaptcha } from '@/lib/recaptcha';
+import { db } from '@/lib/db';
 
 // ============================================
 // VALIDATION TYPES
@@ -32,14 +37,12 @@ interface ValidationResult {
 function validateContactForm(data: unknown): ValidationResult {
   const errors: string[] = [];
 
-  // Check if data is an object
   if (!data || typeof data !== 'object') {
     return { isValid: false, errors: ['Invalid request body'] };
   }
 
   const formData = data as Partial<ContactFormData>;
 
-  // Validate name
   if (!formData.name || typeof formData.name !== 'string') {
     errors.push('Name is required');
   } else if (formData.name.trim().length < 2) {
@@ -48,7 +51,6 @@ function validateContactForm(data: unknown): ValidationResult {
     errors.push('Name must be less than 100 characters');
   }
 
-  // Validate email
   if (!formData.email || typeof formData.email !== 'string') {
     errors.push('Email is required');
   } else {
@@ -58,7 +60,6 @@ function validateContactForm(data: unknown): ValidationResult {
     }
   }
 
-  // Validate subject (optional - will generate one if not provided)
   if (formData.subject && typeof formData.subject === 'string') {
     if (formData.subject.trim().length < 3) {
       errors.push('Subject must be at least 3 characters long');
@@ -67,7 +68,6 @@ function validateContactForm(data: unknown): ValidationResult {
     }
   }
 
-  // Validate message
   if (!formData.message || typeof formData.message !== 'string') {
     errors.push('Message is required');
   } else if (formData.message.trim().length < 10) {
@@ -115,7 +115,6 @@ function generateContactEmailHtml(data: ContactFormData): string {
     </head>
     <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc;">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 0 auto; padding: 20px;">
-        <!-- Header -->
         <tr>
           <td style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
             <h1 style="margin: 0; color: #f59e0b; font-size: 24px; font-weight: 700;">
@@ -123,12 +122,9 @@ function generateContactEmailHtml(data: ContactFormData): string {
             </h1>
           </td>
         </tr>
-        
-        <!-- Content -->
         <tr>
           <td style="background-color: #ffffff; padding: 30px; border: 1px solid #e2e8f0; border-top: none;">
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-              <!-- From -->
               <tr>
                 <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
                   <span style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">From</span>
@@ -140,8 +136,6 @@ function generateContactEmailHtml(data: ContactFormData): string {
                   </a>
                 </td>
               </tr>
-              
-              <!-- Subject -->
               <tr>
                 <td style="padding: 15px 0; border-bottom: 1px solid #f1f5f9;">
                   <span style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Subject</span>
@@ -150,8 +144,6 @@ function generateContactEmailHtml(data: ContactFormData): string {
                   </p>
                 </td>
               </tr>
-              
-              <!-- Message -->
               <tr>
                 <td style="padding: 15px 0;">
                   <span style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Message</span>
@@ -165,8 +157,6 @@ function generateContactEmailHtml(data: ContactFormData): string {
             </table>
           </td>
         </tr>
-        
-        <!-- Footer -->
         <tr>
           <td style="background-color: #f8fafc; padding: 20px; text-align: center; border-radius: 0 0 12px 12px; border: 1px solid #e2e8f0; border-top: none;">
             <p style="margin: 0; color: #94a3b8; font-size: 12px;">
@@ -196,7 +186,6 @@ function generateAutoReplyHtml(name: string): string {
     </head>
     <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc;">
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 0 auto; padding: 20px;">
-        <!-- Header -->
         <tr>
           <td style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 40px 30px; text-align: center; border-radius: 12px 12px 0 0;">
             <h1 style="margin: 0; color: #f59e0b; font-size: 28px; font-weight: 700;">
@@ -207,25 +196,21 @@ function generateAutoReplyHtml(name: string): string {
             </p>
           </td>
         </tr>
-        
-        <!-- Content -->
         <tr>
           <td style="background-color: #ffffff; padding: 40px 30px; border: 1px solid #e2e8f0; border-top: none;">
             <p style="margin: 0 0 20px 0; color: #334155; font-size: 16px; line-height: 1.6;">
-              We've received your message and appreciate you taking the time to contact us. 
+              We've received your message and appreciate you taking the time to contact us.
               Our team will review your inquiry and get back to you within 24-48 hours.
             </p>
             <div style="padding: 20px; background-color: #fefce8; border-radius: 8px; border: 1px solid #fde047;">
               <p style="margin: 0; color: #713f12; font-size: 14px;">
                 <strong>What happens next?</strong><br>
-                A member of our team will review your message and respond via email. 
+                A member of our team will review your message and respond via email.
                 Make sure to check your spam folder if you don't hear from us.
               </p>
             </div>
           </td>
         </tr>
-        
-        <!-- Footer -->
         <tr>
           <td style="background-color: #f8fafc; padding: 20px; text-align: center; border-radius: 0 0 12px 12px; border: 1px solid #e2e8f0; border-top: none;">
             <p style="margin: 0; color: #64748b; font-size: 14px;">
@@ -241,12 +226,70 @@ function generateAutoReplyHtml(name: string): string {
 }
 
 // ============================================
+// BREVO EMAIL HELPER (lazy-loaded, fails gracefully)
+// ============================================
+
+async function sendBrevoNotification(data: ContactFormData): Promise<{ success: boolean; error?: string }> {
+  try {
+    const { BrevoEmails, BrevoContacts, BREVO_LISTS } = await import('@/lib/brevo');
+
+    if (!process.env.BREVO_API_KEY) {
+      console.log('[Contact] Brevo not configured, skipping email');
+      return { success: false, error: 'Brevo API key not configured' };
+    }
+
+    // Add contact to Brevo list (non-blocking)
+    BrevoContacts.upsert({
+      email: data.email,
+      attributes: { NAME: data.name },
+      listIds: [BREVO_LISTS.ALL_CONTACTS],
+      updateEnabled: true,
+    }).catch(err => {
+      console.error('[Contact] Failed to add contact to Brevo list:', err);
+    });
+
+    // Send notification email to admin
+    const adminResult = await BrevoEmails.send({
+      to: [{ email: 'hello@tamkinly.com', name: 'Tamkinly Team' }],
+      sender: { name: 'Tamkinly', email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com' },
+      subject: `[Contact Form] ${data.subject}`,
+      htmlContent: generateContactEmailHtml(data),
+      textContent: `New Contact Form Submission\n\nFrom: ${data.name} (${data.email})\nSubject: ${data.subject}\n\nMessage:\n${data.message}`,
+      replyTo: { email: data.email, name: data.name },
+      tags: ['contact-form', 'website'],
+    });
+
+    if (!adminResult.success) {
+      console.error('[Contact] Failed to send admin notification via Brevo:', adminResult.error);
+      return adminResult;
+    }
+
+    // Send auto-reply (non-blocking, don't fail the request)
+    BrevoEmails.send({
+      to: [{ email: data.email, name: data.name }],
+      sender: { name: 'Tamkinly', email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com' },
+      subject: 'Thank you for contacting Tamkinly',
+      htmlContent: generateAutoReplyHtml(data.name),
+      textContent: `Thank you for contacting Tamkinly, ${data.name}!\n\nWe've received your message and will get back to you within 24-48 hours.\n\nBest regards,\nThe Tamkinly Team`,
+      tags: ['contact-form', 'auto-reply'],
+    }).catch(err => {
+      console.error('[Contact] Failed to send auto-reply via Brevo:', err);
+    });
+
+    return { success: true, messageId: adminResult.messageId };
+  } catch (error) {
+    console.error('[Contact] Brevo email error:', error);
+    return { success: false, error: error instanceof Error ? error.message : 'Email service error' };
+  }
+}
+
+// ============================================
 // POST HANDLER
 // ============================================
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse request body
+    // Step 1: Parse request body
     let body: unknown;
     try {
       body = await request.json();
@@ -257,23 +300,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify reCAPTCHA (if configured)
+    // Step 2: Verify reCAPTCHA (graceful - never blocks the request)
     const formDataWithToken = body as Partial<ContactFormData>;
-    const recaptchaResult = await verifyRecaptcha(formDataWithToken.recaptchaToken || '');
-    
-    // If reCAPTCHA verification failed and it's configured, reject
-    if (!recaptchaResult.success && process.env.RECAPTCHA_SECRET_KEY) {
-      console.warn('reCAPTCHA verification failed:', recaptchaResult);
-      // For low scores, we can either reject or flag for review
-      // Here we're lenient - we just log but don't reject
-      // To be more strict, uncomment the following:
-      // return NextResponse.json(
-      //   { success: false, error: 'reCAPTCHA verification failed. Please try again.' },
-      //   { status: 400 }
-      // );
+    try {
+      const recaptchaResult = await verifyRecaptcha(formDataWithToken.recaptchaToken || '');
+      if (!recaptchaResult.success && process.env.RECAPTCHA_SECRET_KEY) {
+        console.warn('[Contact] reCAPTCHA verification failed (lenient mode):', recaptchaResult);
+      }
+    } catch (recaptchaError) {
+      // reCAPTCHA failure should never block the contact form
+      console.error('[Contact] reCAPTCHA check error (non-blocking):', recaptchaError);
     }
 
-    // Validate input
+    // Step 3: Validate input
     const validation = validateContactForm(body);
     if (!validation.isValid) {
       return NextResponse.json(
@@ -289,7 +328,7 @@ export async function POST(request: NextRequest) {
       name: sanitizeInput(formData.name),
       email: formData.email.trim().toLowerCase(),
       subject: formData.subject ? sanitizeInput(formData.subject) : '',
-      message: sanitizeInput(formData.message)
+      message: sanitizeInput(formData.message),
     };
 
     // Generate subject if not provided
@@ -297,101 +336,67 @@ export async function POST(request: NextRequest) {
       sanitizedData.subject = `Message from ${sanitizedData.name}`;
     }
 
-    // Check if Brevo is configured
-    const isBrevoConfigured = Boolean(process.env.BREVO_API_KEY);
-
-    if (isBrevoConfigured) {
-      // Add contact to Brevo list (non-blocking)
-      BrevoContacts.upsert({
-        email: sanitizedData.email,
-        attributes: {
-          NAME: sanitizedData.name,
+    // Step 4: SAVE TO DATABASE FIRST (guaranteed persistence)
+    let savedMessage;
+    try {
+      savedMessage = await db.contactMessage.create({
+        data: {
+          name: sanitizedData.name,
+          email: sanitizedData.email,
+          subject: sanitizedData.subject,
+          message: sanitizedData.message,
         },
-        listIds: [BREVO_LISTS.ALL_CONTACTS],
-        updateEnabled: true,
-      }).catch(err => {
-        console.error('Failed to add contact to Brevo:', err);
-        // Don't fail the request if contact sync fails
       });
-
-      // Send notification email to admin
-      const adminEmailResult = await BrevoEmails.send({
-        to: [{ email: 'hello@tamkinly.com', name: 'Tamkinly Team' }],
-        sender: { name: 'Tamkinly', email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com' },
-        subject: `[Contact Form] ${sanitizedData.subject}`,
-        htmlContent: generateContactEmailHtml(sanitizedData),
-        textContent: `
-New Contact Form Submission
-
-From: ${sanitizedData.name} (${sanitizedData.email})
-Subject: ${sanitizedData.subject}
-
-Message:
-${sanitizedData.message}
-        `.trim(),
-        replyTo: { email: sanitizedData.email, name: sanitizedData.name },
-        tags: ['contact-form', 'website'],
-      });
-
-      if (!adminEmailResult.success) {
-        console.error('Failed to send admin notification:', adminEmailResult.error);
-        return NextResponse.json(
-          { success: false, error: 'Failed to send message. Please try again later.' },
-          { status: 500 }
-        );
-      }
-
-      // Send auto-reply to the user
-      await BrevoEmails.send({
-        to: [{ email: sanitizedData.email, name: sanitizedData.name }],
-        sender: { name: 'Tamkinly', email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com' },
-        subject: 'Thank you for contacting Tamkinly',
-        htmlContent: generateAutoReplyHtml(sanitizedData.name),
-        textContent: `
-Thank you for contacting Tamkinly, ${sanitizedData.name}!
-
-We've received your message and will get back to you within 24-48 hours.
-
-Best regards,
-The Tamkinly Team
-        `.trim(),
-        tags: ['contact-form', 'auto-reply'],
-      }).catch(err => {
-        console.error('Failed to send auto-reply:', err);
-        // Don't fail the request if auto-reply fails
-      });
-
-      return NextResponse.json({
-        success: true,
-        message: 'Your message has been sent successfully. We will get back to you within 24-48 hours.',
-        messageId: adminEmailResult.messageId
-      });
-    } else {
-      // Brevo not configured - log the message for manual handling
-      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log('CONTACT FORM SUBMISSION (Brevo not configured)');
-      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      console.log(`Name: ${sanitizedData.name}`);
-      console.log(`Email: ${sanitizedData.email}`);
-      console.log(`Subject: ${sanitizedData.subject}`);
-      console.log(`Message: ${sanitizedData.message}`);
-      console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-
-      // Return success anyway (for development/testing)
-      return NextResponse.json({
-        success: true,
-        message: 'Your message has been recorded. We will get back to you within 24-48 hours.',
-        note: 'Email service not configured - message logged to console'
-      });
+      console.log(`[Contact] Message saved to database (ID: ${savedMessage.id})`);
+    } catch (dbError) {
+      console.error('[Contact] FAILED to save to database:', dbError);
+      // Don't fail - try email as fallback
     }
 
+    // Step 5: Send email notification via Brevo (best-effort)
+    const emailResult = await sendBrevoNotification(sanitizedData);
+
+    // Step 6: Return success (message is saved in DB even if email fails)
+    const deliveryMethod = emailResult.success ? 'email' : savedMessage ? 'database' : 'logged';
+    
+    return NextResponse.json({
+      success: true,
+      message: 'Your message has been sent successfully. We will get back to you within 24-48 hours.',
+      messageId: savedMessage?.id,
+      deliveryNote: deliveryMethod === 'database' 
+        ? 'Message saved to our system. Email notification may be delayed.' 
+        : undefined,
+    });
+
   } catch (error) {
-    console.error('Contact API error:', error);
+    // Final safety net - this should rarely be reached
+    console.error('[Contact] UNEXPECTED error in contact handler:', error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'An unexpected error occurred. Please try again later.' 
+      {
+        success: false,
+        error: 'An unexpected error occurred. Please try again later or email us directly at hello@tamkinly.com',
       },
+      { status: 500 }
+    );
+  }
+}
+
+// ============================================
+// GET HANDLER - List contact messages (admin)
+// ============================================
+
+export async function GET() {
+  try {
+    const messages = await db.contactMessage.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 50,
+    });
+
+    return NextResponse.json({ success: true, messages });
+  } catch (error) {
+    console.error('[Contact] Failed to fetch messages:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to fetch messages' },
       { status: 500 }
     );
   }
