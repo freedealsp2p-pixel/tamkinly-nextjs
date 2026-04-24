@@ -76,8 +76,8 @@ export function CookieConsent({ onAccept, onDecline }: CookieConsentProps) {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 transition-all duration-300 ${
-        isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+      className={`fixed bottom-0 left-0 right-0 z-[100] p-4 sm:p-6 transition-all duration-300 ${
+        isAnimating ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-full opacity-0 pointer-events-none'
       }`}
     >
       <div className="mx-auto max-w-3xl">

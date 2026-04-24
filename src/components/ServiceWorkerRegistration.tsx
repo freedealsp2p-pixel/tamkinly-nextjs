@@ -106,14 +106,14 @@ export function ServiceWorkerRegistration() {
     <>
       {/* Offline Banner */}
       {isOffline && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-yellow-500 text-yellow-900 px-4 py-2 text-center text-sm font-medium">
+        <div className="fixed top-0 left-0 right-0 z-[100] bg-yellow-500 text-yellow-900 px-4 py-2 text-center text-sm font-medium">
           You are currently offline. Some features may be limited.
         </div>
       )}
 
       {/* PWA Install Prompt */}
       {showInstallPrompt && (
-        <div className="fixed bottom-4 left-4 right-4 z-50 sm:left-auto sm:right-4 sm:max-w-sm">
+        <div className="fixed bottom-4 left-4 right-4 z-[90] sm:left-auto sm:right-4 sm:max-w-sm">
           <div className="bg-card border border-border rounded-lg shadow-lg p-4">
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">

@@ -43,7 +43,7 @@ export function PromoBanner() {
   }
 
   return (
-    <div className="fixed bottom-4 start-4 end-4 md:start-auto md:end-4 md:w-80 z-50 animate-in slide-in-from-bottom-4 duration-500">
+    <div className="fixed bottom-4 start-4 end-4 md:start-auto md:end-4 md:w-80 z-[90] animate-in slide-in-from-bottom-4 duration-500">
       <div className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] text-white p-4 rounded-xl shadow-2xl border border-[#3DD4B0]/20 relative">
         <button
           onClick={handleDismiss}
