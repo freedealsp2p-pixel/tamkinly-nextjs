@@ -188,7 +188,7 @@ const products = [
       "Emotion Regulation (ERQ)",
       "Priority Support (24hr response)",
       "Monthly live Q&A sessions",
-      "Direct founder access"
+      "Direct founding team access"
     ],
     apps: ["executive-manual", "daily-planner", "identity-baseline", "environmental-audit", "decision-analysis", "evidence-tracking", "progress-dashboard", "emotion-regulation", "ai-identity-coach", "community-access", "priority-support"],
     highlights: [

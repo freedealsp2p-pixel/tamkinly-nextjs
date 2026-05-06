@@ -205,7 +205,7 @@ function DifferentSection() {
   );
 }
 
-// Founder Section with Professional Design
+// Founders Section — A Collective Born From Lived Experience
 function FounderSection() {
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-accent/5">
@@ -213,56 +213,42 @@ function FounderSection() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="secondary" className="mb-4">
-              The Founder
+              The Founders
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
-              Built From Experience
+              Born From Experience, Not Theory
             </h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              We didn&apos;t start with a business plan. We started with a shared realization—that the life 
+              we were living wasn&apos;t the one we were capable of.
+            </p>
           </div>
           
           <Card className="border-0 shadow-2xl bg-white overflow-hidden">
             <CardContent className="p-0">
               <div className="flex flex-col lg:flex-row">
-                {/* Image Section with Gradient Background */}
+                {/* Team Image Section */}
                 <div className="lg:w-2/5 bg-gradient-to-br from-primary via-[#1F6F78] to-primary relative">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(61,212,176,0.2),transparent_50%)]" />
-                  <div className="p-8 lg:p-12 flex flex-col items-center justify-center min-h-[400px]">
-                    {/* Professional Image Container */}
-                    <div className="relative">
-                      {/* Animated ring */}
-                      <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-accent via-[#1F6F78] to-accent opacity-30 blur-sm animate-pulse" />
-                      
-                      {/* Main image container */}
-                      <div className="relative w-52 h-52 lg:w-64 lg:h-64 rounded-full bg-gradient-to-br from-accent to-[#1F6F78] p-1.5 shadow-2xl">
-                        <div className="w-full h-full rounded-full overflow-hidden bg-white">
-                          <Image 
-                            src="/founder-portrait.webp" 
-                            alt="Abdallah Chouaf - Founder of Tamkinly" 
-                            width={256}
-                            height={256}
-                            className="w-full h-full object-cover"
-                            priority
-                          />
-                        </div>
-                      </div>
-                      
-                      {/* Status badge */}
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-full px-4 py-1.5 shadow-lg border border-accent/20">
-                        <span className="text-sm font-medium text-primary flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                          Available for Mentorship
-                        </span>
-                      </div>
+                  <div className="p-8 lg:p-10 flex flex-col items-center justify-center min-h-[400px] relative">
+                    {/* Team Photo */}
+                    <div className="relative w-full max-w-[320px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20">
+                      <Image 
+                        src="/founders-team.webp" 
+                        alt="Tamkinly Founding Team - Young visionaries planning together" 
+                        width={672}
+                        height={384}
+                        className="w-full h-auto object-cover"
+                        priority
+                      />
                     </div>
                     
-                    {/* Name overlay on mobile */}
-                    <div className="mt-8 text-center lg:hidden">
-                      <p className="text-white font-serif text-2xl font-bold">
-                        Abdallah Chouaf
-                      </p>
-                      <p className="text-accent font-medium">
-                        Founder, Tamkinly
-                      </p>
+                    {/* Floating badge */}
+                    <div className="mt-6 bg-white rounded-full px-5 py-2 shadow-lg border border-accent/20">
+                      <span className="text-sm font-medium text-primary flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        Building the future of self-transformation
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -274,28 +260,37 @@ function FounderSection() {
                   
                   <blockquote className="text-slate-700 leading-relaxed mb-6 text-lg">
                     <p className="mb-4">
-                      After years of trying every self-improvement method out there—journals, courses, 
-                      retreats, coaching—I realized something was missing. Everything was trying to make me 
-                      into someone &apos;better,&apos; but no one was asking who I actually was underneath it all.
+                      Each of us had spent years chasing a &ldquo;better&rdquo; version of ourselves—reading the books, 
+                      attending the workshops, following the gurus. We tried every method available, and while some 
+                      things worked temporarily, nothing created lasting change. Because they were all trying to 
+                      &apos;fix&apos; us, as if we were broken.
+                    </p>
+                    <p className="mb-4">
+                      What we discovered—through our own struggles, failures, and breakthroughs—was that the answer 
+                      wasn&apos;t about becoming someone new. It was about stripping away everything that wasn&apos;t 
+                      truly us. Not the complete version, but the version that lives with meaning, purpose, and 
+                      authenticity. The strongest, healthiest, most beautiful version that was always there beneath 
+                      the noise.
                     </p>
                     <p>
-                      Tamkinly was born from that question. Not &apos;How can I improve?&apos; but &apos;Who am I 
-                      when I stop trying to improve?&apos; The answer changed everything.
+                      Tamkinly was born from that shared journey. We didn&apos;t create it from textbooks—we built it 
+                      from the scars and wisdom of our own transformation. And we&apos;re here to walk that path 
+                      with you.
                     </p>
                   </blockquote>
                   
-                  {/* Signature */}
+                  {/* Founders Info */}
                   <div className="border-t border-slate-200 pt-6 mt-auto">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
-                        <span className="text-accent font-serif font-bold text-xl">A</span>
+                        <Users className="h-6 w-6 text-accent" />
                       </div>
                       <div>
                         <p className="font-semibold text-primary text-xl">
-                          Abdallah Chouaf
+                          The Tamkinly Founders
                         </p>
                         <p className="text-[#1F6F78] font-medium">
-                          Founder, Tamkinly
+                          A collective of lived experiences
                         </p>
                       </div>
                     </div>
@@ -309,8 +304,13 @@ function FounderSection() {
                     </div>
                     <div className="w-px h-10 bg-slate-200" />
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-primary">10+</p>
-                      <p className="text-sm text-slate-500">Research & Development</p>
+                      <p className="text-2xl font-bold text-primary">15+</p>
+                      <p className="text-sm text-slate-500">Years of Combined Research</p>
+                    </div>
+                    <div className="w-px h-10 bg-slate-200" />
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-primary">4</p>
+                      <p className="text-sm text-slate-500">Founding Members</p>
                     </div>
                   </div>
                 </div>

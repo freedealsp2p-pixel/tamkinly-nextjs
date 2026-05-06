@@ -791,7 +791,7 @@
           "Emotion Regulation (ERQ)",
           "Priority Support (24hr response)",
           "Monthly live Q&A sessions",
-          "Direct founder access",
+          "Direct founding team access",
           "Early access to new features"
         ],
         "apps": {
@@ -836,7 +836,7 @@
           "supportHours": "Support Hours",
           "supportHoursValue": "24hr Response",
           "bonus": "Bonus",
-          "bonusValue": "Founder Access"
+          "bonusValue": "Founding Team Access"
         },
         "faqs": [
           {
@@ -848,8 +848,8 @@
             "a": "A private Discord with 500+ members on transformation journeys. Weekly challenges, accountability partners, and genuine support."
           },
           {
-            "q": "How do I contact the founder?",
-            "a": "Bundle members get a direct email line to Abdallah with 48-hour response time."
+            "q": "How do I contact the founding team?",
+            "a": "Bundle members get a direct email line to the founding team with 48-hour response time."
           }
         ],
         "testimonials": [

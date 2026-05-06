@@ -24,7 +24,7 @@ const searchableContent = [
   { title: 'Products & Pricing', path: '/products', type: 'page', description: 'Start free with powerful identity tools, then upgrade as you grow', keywords: ['pricing', 'buy', 'purchase', 'planner', 'bundle', 'premium', 'trial'] },
   { title: 'Apps', path: '/apps', type: 'page', description: 'Interactive transformation tools', keywords: ['tools', 'applications', 'apps'] },
   { title: 'Methodology', path: '/methodology', type: 'page', description: 'Our evidence-based transformation approach', keywords: ['method', 'approach', 'how', 'process'] },
-  { title: 'About Us', path: '/about', type: 'page', description: 'Learn about Tamkinly and our mission', keywords: ['about', 'team', 'founder', 'story', 'mission'] },
+  { title: 'About Us', path: '/about', type: 'page', description: 'Learn about Tamkinly and our mission', keywords: ['about', 'team', 'founders', 'story', 'mission'] },
   { title: 'Contact', path: '/contact', type: 'page', description: 'Get in touch with us', keywords: ['contact', 'support', 'help', 'email'] },
   { title: 'Blog', path: '/blog', type: 'page', description: 'Research-backed insights and articles', keywords: ['blog', 'articles', 'posts', 'news'] },
   

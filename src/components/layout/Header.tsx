@@ -23,7 +23,7 @@ const searchablePages = [
   { titleKey: "navigation.apps", path: "/apps", keywords: ["tools", "applications", "quiz", "assessment", "التطبيقات", "الأدوات"] },
   { titleKey: "navigation.quiz", path: "/quiz", keywords: ["quiz", "assessment", "test", "identity", "gap", "اختبار", "تقييم", "فجوة"] },
   { titleKey: "navigation.methodology", path: "/methodology", keywords: ["method", "approach", "how", "process", "المنهجية"] },
-  { titleKey: "navigation.about", path: "/about", keywords: ["about", "team", "founder", "story", "mission", "من نحن"] },
+  { titleKey: "navigation.about", path: "/about", keywords: ["about", "team", "founders", "story", "mission", "من نحن"] },
   { titleKey: "navigation.contact", path: "/contact", keywords: ["contact", "support", "help", "email", "تواصل"] },
   { titleKey: "navigation.resources", path: "/resources", keywords: ["resources", "blog", "articles", "guides", "الموارد"] },
   { titleKey: "navigation.blog", path: "/blog", keywords: ["blog", "articles", "posts", "news", "المدونة"] },
