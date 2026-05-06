@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, ShoppingCart, Search, Globe, Loader2 } from "lucide-react";
+import { Menu, ShoppingCart, Search, Globe, Loader2, User, LogIn } from "lucide-react";
 
 // Search pages data - comprehensive list for better search
 const searchablePages = [
@@ -45,6 +45,40 @@ function useHydrated() {
   }, []);
   
   return hydrated;
+}
+
+// Cart count hook - reads from localStorage for client-side cart
+function useCartCount() {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    const updateCount = () => {
+      try {
+        const cartData = localStorage.getItem('tamkinly_cart');
+        if (cartData) {
+          const cart = JSON.parse(cartData);
+          setCount(cart.items?.length || 0);
+        } else {
+          setCount(0);
+        }
+      } catch {
+        setCount(0);
+      }
+    };
+    
+    updateCount();
+    
+    // Listen for cart updates
+    window.addEventListener('cart-updated', updateCount);
+    window.addEventListener('storage', updateCount);
+    
+    return () => {
+      window.removeEventListener('cart-updated', updateCount);
+      window.removeEventListener('storage', updateCount);
+    };
+  }, []);
+  
+  return count;
 }
 
 // Language Switcher Component
@@ -167,7 +201,13 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
             <Link href="/cart" onClick={() => setIsOpen(false)}>
               <Button variant="outline" className="w-full justify-start border-primary/20 text-primary hover:bg-primary/5">
                 <ShoppingCart className="h-4 w-4 mx-2 rtl:mr-0 rtl:ml-2" />
-                {t("navigation.cart")} (0)
+                {t("navigation.cart")}
+              </Button>
+            </Link>
+            <Link href="/auth/signin" onClick={() => setIsOpen(false)}>
+              <Button variant="outline" className="w-full justify-start border-primary/20 text-primary hover:bg-primary/5">
+                <LogIn className="h-4 w-4 mx-2 rtl:mr-0 rtl:ml-2" />
+                {t("navigation.signIn") || "Sign In"}
               </Button>
             </Link>
             <Link href="/quiz" onClick={() => setIsOpen(false)}>
@@ -314,6 +354,8 @@ export function Header() {
     };
   }, []);
 
+  const cartCount = useCartCount();
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md supports-[backdrop-filter]:bg-white/90 border-b border-slate-100/80 shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -409,9 +451,16 @@ export function Header() {
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative text-slate-600 hover:text-primary">
                 <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -end-1 h-5 w-5 rounded-full bg-accent text-[10px] font-bold text-primary flex items-center justify-center shadow-sm">
-                  0
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -end-1 h-5 w-5 rounded-full bg-accent text-[10px] font-bold text-primary flex items-center justify-center shadow-sm">
+                    {cartCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
+            <Link href="/auth/signin">
+              <Button variant="ghost" size="icon" className="text-slate-600 hover:text-primary">
+                <User className="h-5 w-5" />
               </Button>
             </Link>
             <Link href="/quiz">

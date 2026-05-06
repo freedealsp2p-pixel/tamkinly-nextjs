@@ -9,11 +9,11 @@ const nextConfig: NextConfig = {
 
   // TypeScript config
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
 
-  // Disable strict mode for better compatibility
-  reactStrictMode: false,
+  // Enable strict mode for better error detection
+  reactStrictMode: true,
 
   // Image optimization - disabled for memory savings
   images: {

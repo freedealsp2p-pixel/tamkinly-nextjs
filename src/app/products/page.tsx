@@ -32,9 +32,12 @@ import {
   User,
   Home,
   GitBranch,
-  BarChart3
+  BarChart3,
+  ShoppingCart,
+  Check
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { addToCart } from "@/lib/cart-client";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateProductSchema, generateFAQSchema, generateBreadcrumbSchema } from "@/lib/seo";
 
@@ -397,6 +400,23 @@ function ProductCard({ product }: {
 }) {
   const Icon = product.icon;
   const isFree = product.price === 0;
+  const { toast } = useToast();
+  
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart({
+      id: `cart-${product.id}-${Date.now()}`,
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      comparePrice: product.comparePrice || undefined,
+    });
+    toast({
+      title: 'Added to Cart!',
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
   
   return (
     <Card className={`relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white ${
@@ -493,17 +513,27 @@ function ProductCard({ product }: {
             </Button>
           </Link>
         ) : (
-          <Link href={PRODUCT_URLS[product.id] || '/products'} className="block">
-            <Button 
-              className={`w-full h-12 font-semibold ${product.popular 
-                  ? 'bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]' 
-                  : 'bg-[#0F1C2E] text-white hover:bg-[#1a2d47]'}`}
-              size="lg"
+          <div className="space-y-2">
+            <Link href={PRODUCT_URLS[product.id] || '/products'} className="block">
+              <Button 
+                className={`w-full h-12 font-semibold ${product.popular 
+                    ? 'bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]' 
+                    : 'bg-[#0F1C2E] text-white hover:bg-[#1a2d47]'}`}
+                size="lg"
+              >
+                View Details - ${product.price}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Button
+              onClick={handleAddToCart}
+              variant="outline"
+              className="w-full h-10 font-medium border-[#3DD4B0]/30 text-[#3DD4B0] hover:bg-[#3DD4B0]/10"
             >
-              View Details - ${product.price}
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ShoppingCart className="mr-2 h-4 w-4" />
+              Add to Cart
             </Button>
-          </Link>
+          </div>
         )}
       </CardContent>
     </Card>

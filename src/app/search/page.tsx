@@ -111,6 +111,12 @@ function SearchContent() {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         setHasSearched(true);
+        // Update URL with search query
+        if (query.trim()) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('q', query.trim());
+            window.history.replaceState({}, '', url.toString());
+        }
     };
 
     
@@ -155,7 +161,7 @@ function SearchContent() {
                             <div className="mb-8">
                                 <p className="text-slate-600">
                                     {results.length > 0 
-                                        ? `Found {results.length} result${results.length !== 1 ? 's' : ''} for "${query}"`
+                                        ? `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"`
                                         : `No results found for "${query}"`
                                     }
                                 </p>

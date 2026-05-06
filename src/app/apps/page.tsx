@@ -481,7 +481,7 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: b
               </Button>
             </Link>
           ) : app.freeApp ? (
-            <Link href={`/apps/${app.slug}`}>
+            <Link href={app.slug === 'identity-gap-quiz' ? '/quiz' : `/apps/${app.slug}`}>
               <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]" size="sm">
                 Start Free
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -495,9 +495,9 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: b
               app.tier === 'BUNDLE' ? '/products/bundle' :
               '/products'
             }>
-              <Button variant="secondary" className="w-full shadow-md" size="sm">
+              <Button className="w-full bg-[#0F1C2E] text-white hover:bg-[#1a2d47] shadow-md" size="sm">
                 <Lock className="w-4 h-4 mr-2" />
-                Unlock Access
+                Open Access - ${app.tier === 'TRIAL' ? '7' : app.tier === 'BASIC' ? '17' : app.tier === 'PREMIUM' ? '27' : '47'}
               </Button>
             </Link>
           ) : (

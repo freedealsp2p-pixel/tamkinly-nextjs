@@ -20,10 +20,12 @@ import {
   Monitor,
   Loader2,
   Check,
-  Sparkles
+  Sparkles,
+  ShoppingCart
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
+import { addToCart } from "@/lib/cart-client";
 
 // Product configuration with prices and icons only (translatable content comes from translations)
 const productsConfig: Record<string, {
@@ -338,15 +340,39 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const handleBuyNow = async () => {
     setIsProcessing(true);
     
+    // Add to cart and redirect to checkout
+    addToCart({
+      id: `cart-${config.id}-${Date.now()}`,
+      productId: config.id,
+      name: name,
+      price: config.price,
+      comparePrice: config.comparePrice,
+    });
+    
     toast({
-      title: t('productDetail.redirectToCheckout'),
-      description: t('productDetail.preparingPurchase', { name }),
+      title: t('productDetail.addedToCart'),
+      description: t('productDetail.redirectToCheckout'),
     });
 
     // Redirect to checkout with product info
     setTimeout(() => {
       window.location.href = `/checkout?product=${config.id}`;
     }, 500);
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: `cart-${config.id}-${Date.now()}`,
+      productId: config.id,
+      name: name,
+      price: config.price,
+      comparePrice: config.comparePrice,
+    });
+    
+    toast({
+      title: t('productDetail.addedToCart'),
+      description: t('productDetail.addedToCartDesc', { name }),
+    });
   };
 
   const highlights = getHighlights();
@@ -456,6 +482,15 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </>
                     )}
+                  </Button>
+                  <Button 
+                    onClick={handleAddToCart}
+                    variant="outline"
+                    className="h-14 px-8 text-lg border-white/30 text-white hover:bg-white/10"
+                    size="lg"
+                  >
+                    <ShoppingCart className="mr-2 h-5 w-5" />
+                    {t('productDetail.addToCart') || 'Add to Cart'}
                   </Button>
                   <Link href="/apps">
                     <Button variant="outline" className="h-14 px-8 text-lg border-white/30 text-white hover:bg-white/10">

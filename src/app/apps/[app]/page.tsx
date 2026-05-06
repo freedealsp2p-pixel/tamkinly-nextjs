@@ -231,9 +231,9 @@ function AppContent({ appData }: { appData: AppPage }) {
 
               {/* Action Button */}
               {isFree ? (
-                <Link href={`/apps/${appData.slug}`}>
+                <Link href={`/quiz`}>
                   <Button className="w-full sm:w-auto bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-12 font-semibold">
-                    Start Free
+                    Start Free Assessment
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>

@@ -52,6 +52,14 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
+  // Handle /en/ prefix - redirect to bare path (English is default, no prefix needed)
+  if (localeMatch === defaultLocale) {
+    const pathWithoutLocale = pathname.replace(new RegExp(`^/${defaultLocale}`), '') || '/';
+    const url = request.nextUrl.clone();
+    url.pathname = pathWithoutLocale;
+    return NextResponse.redirect(url);
+  }
+
   // For default locale (en), no prefix needed
   const response = NextResponse.next();
   if (!request.cookies.has('NEXT_LOCALE')) {

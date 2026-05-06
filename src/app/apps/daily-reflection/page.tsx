@@ -14,8 +14,10 @@ import {
   Calendar,
   RefreshCw,
   BookOpen,
-  Lightbulb
+  Lightbulb,
+  CheckCircle2
 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const reflectionPrompts = [
   {
@@ -131,6 +133,8 @@ export default function DailyReflectionPage() {
     return [];
   });
   const [showHistory, setShowHistory] = useState(false);
+  const [saveConfirmation, setSaveConfirmation] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     // Save to localStorage when pastReflections changes
@@ -159,6 +163,15 @@ export default function DailyReflectionPage() {
     const updated = [newReflection, ...pastReflections].slice(0, 30); // Keep last 30
     setPastReflections(updated);
     localStorage.setItem('daily-reflections', JSON.stringify(updated));
+    
+    // Show visual confirmation
+    setSaveConfirmation(true);
+    toast({
+      title: '✅ Reflection Saved!',
+      description: 'Your reflection has been saved successfully. Keep building your identity!',
+      duration: 3000,
+    });
+    setTimeout(() => setSaveConfirmation(false), 3000);
     
     // Clear for next entry
     setReflection('');
@@ -207,6 +220,16 @@ export default function DailyReflectionPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8 max-w-3xl">
+        {/* Save Confirmation Banner */}
+        {saveConfirmation && (
+          <div className="mb-6 bg-[#3DD4B0]/20 border border-[#3DD4B0]/50 rounded-xl p-4 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+            <CheckCircle2 className="w-6 h-6 text-[#3DD4B0] flex-shrink-0" />
+            <div>
+              <p className="text-white font-semibold">Reflection Saved Successfully!</p>
+              <p className="text-slate-300 text-sm">Your reflection has been saved locally. Keep building your identity!</p>
+            </div>
+          </div>
+        )}
         {showHistory ? (
           <>
             <h2 className="text-2xl font-bold text-white mb-6">Reflection History</h2>

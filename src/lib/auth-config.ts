@@ -53,6 +53,7 @@ export const authOptions: NextAuthOptions = {
             email: user.email,
             name: user.name,
             role: user.role,
+            accessTier: (user as any).accessTier || 'FREE',
           };
         } catch (error) {
           console.error('Auth error:', error);
@@ -78,6 +79,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = (user as any).role;
+        token.accessTier = (user as any).accessTier || 'FREE';
       }
       return token;
     },
@@ -85,6 +87,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         (session.user as any).id = token.id;
         (session.user as any).role = token.role;
+        (session.user as any).accessTier = token.accessTier || 'FREE';
       }
       return session;
     },
