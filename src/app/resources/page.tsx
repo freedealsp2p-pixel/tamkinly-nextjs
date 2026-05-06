@@ -20,23 +20,24 @@ import {
   CheckCircle2,
   Clock
 } from "lucide-react";
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 // Hero Section
 function HeroSection() {
+  const t = useTranslations('resourcesPage');
   return (
     <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <Badge variant="outline" className="mb-6 px-4 py-2 border-accent/30 text-accent bg-accent/10">
-            Free Resources
+            {t('heroBadge')}
           </Badge>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Resources for Your{" "}
-            <span className="text-accent">Journey</span>
+            {t('heroTitle')}{" "}
+            <span className="text-accent">{t('heroTitleHighlight')}</span>
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed">
-            Free tools, guides, and content to support your transformation. 
-            No email required (unless noted).
+            {t('heroSubtitle')}
           </p>
         </div>
       </div>
@@ -46,31 +47,32 @@ function HeroSection() {
 
 // Free Resources Section
 function ResourcesSection() {
+  const t = useTranslations('resourcesPage');
   const resources = [
     {
       icon: FileText,
-      category: "Assessment",
-      title: "Identity Assessment Quiz",
-      description: "Discover where you are on your identity journey with our free 20-question assessment. Get personalized insights instantly.",
-      action: "Take Quiz",
+      category: t('categoryAssessment'),
+      title: t('resourceQuizTitle'),
+      description: t('resourceQuizDesc'),
+      action: t('takeQuiz'),
       href: "/quiz",
       free: true
     },
     {
       icon: BookOpen,
-      category: "Guide",
-      title: "Identity vs. Behavior Change",
-      description: "A deep dive into why traditional self-improvement fails and the identity-first approach that creates lasting transformation.",
-      action: "Read Guide",
+      category: t('categoryGuide'),
+      title: t('resourceGuideTitle'),
+      description: t('resourceGuideDesc'),
+      action: t('readGuide'),
       href: "#identity-research",
       free: true
     },
     {
       icon: Video,
-      category: "Video Series",
-      title: "The Four Phases Explained",
-      description: "Watch our 4-part video series breaking down each phase of the Identity Reconstruction Framework.",
-      action: "Coming Soon",
+      category: t('categoryVideo'),
+      title: t('resourceVideoTitle'),
+      description: t('resourceVideoDesc'),
+      action: t('comingSoon'),
       href: "#",
       free: true,
       comingSoon: true
@@ -97,7 +99,7 @@ function ResourcesSection() {
                       </Badge>
                       {resource.comingSoon && (
                         <Badge className="bg-amber-100 text-amber-700 text-xs">
-                          Coming Soon
+                          {t('comingSoon')}
                         </Badge>
                       )}
                     </div>
@@ -110,7 +112,7 @@ function ResourcesSection() {
                     {resource.comingSoon ? (
                       <span className="text-slate-400 text-sm flex items-center gap-1">
                         <Clock className="h-4 w-4" />
-                        Available Soon
+                        {t('availableSoon')}
                       </span>
                     ) : (
                       <Button asChild variant="link" className="p-0 h-auto text-accent">
@@ -133,6 +135,7 @@ function ResourcesSection() {
 
 // Identity vs Behavior Change Research Section
 function IdentityResearchSection() {
+  const t = useTranslations('resourcesPage');
   const keyInsights = [
     {
       title: "Habits and Identity: Behavioral, Cognitive, Affective, and Motivational Aspects",
@@ -167,59 +170,43 @@ function IdentityResearchSection() {
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-accent/10 text-accent">
               <BookOpen className="w-3 h-3 mr-1" />
-              Research-Based Guide
+              {t('researchBasedGuide')}
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
-              Identity vs. Behavior Change
+              {t('identityVsBehavior')}
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Why traditional self-improvement often fails, and what the science says about lasting transformation.
+              {t('identityVsBehaviorDesc')}
             </p>
           </div>
 
           {/* Main Content */}
           <div className="prose prose-lg max-w-none mb-12">
             <div className="bg-white rounded-xl p-8 shadow-sm mb-8">
-              <h3 className="font-serif text-2xl font-bold text-primary mb-4">What is Behavior Change?</h3>
+              <h3 className="font-serif text-2xl font-bold text-primary mb-4">{t('whatIsBehavior')}</h3>
               <p className="text-slate-600 leading-relaxed">
-                Behavior change means altering what a person does: waking up earlier, exercising, journaling, 
-                or reducing procrastination. It often relies on goals, reminders, habit loops, and willpower. 
-                That approach can work, but it may remain fragile if it is not connected to a deeper self-concept.
+                {t('behaviorChangeDesc')}
               </p>
             </div>
 
             <div className="bg-white rounded-xl p-8 shadow-sm mb-8">
-              <h3 className="font-serif text-2xl font-bold text-primary mb-4">What is Identity Change?</h3>
+              <h3 className="font-serif text-2xl font-bold text-primary mb-4">{t('whatIsIdentity')}</h3>
               <p className="text-slate-600 leading-relaxed">
-                Identity change means shifting the internal story of &quot;who I am.&quot; Instead of only asking, 
-                &quot;What should I do?&quot; the person begins asking, &quot;What would someone like me do?&quot; 
-                Research on habit and identity shows that when habits feel tied to the true self, 
-                they are associated with stronger cognitive self-integration, higher self-esteem, 
-                and a stronger striving toward an ideal self.
+                {t('identityChangeDesc')}
               </p>
             </div>
 
             <div className="bg-gradient-to-br from-primary to-[#1F6F78] rounded-xl p-8 shadow-sm mb-8">
-              <h3 className="font-serif text-2xl font-bold text-white mb-4">Why Identity Change is More Durable</h3>
+              <h3 className="font-serif text-2xl font-bold text-white mb-4">{t('whyDurable')}</h3>
               <p className="text-slate-300 leading-relaxed">
-                Behavior change can produce short-term results, but identity change tends to make the behavior 
-                easier to maintain under stress. Caldwell et al. describe &quot;centered identity transformation&quot; 
-                as a process in which the new behavior becomes integrated into a person&apos;s roles, values, 
-                and self-representations, reducing reliance on effortful executive control over time.
+                {t('whyDurableDesc')}
               </p>
             </div>
 
             <div className="bg-white rounded-xl p-8 shadow-sm">
-              <h3 className="font-serif text-2xl font-bold text-primary mb-4">How the Two Are Connected</h3>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                Behavior is the visible expression of identity, and identity is reinforced by repeated behavior. 
-                A person does not usually transform by thinking alone; they transform by repeated action that 
-                becomes evidence for a new self-view.
-              </p>
+              <h3 className="font-serif text-2xl font-bold text-primary mb-4">{t('howConnected')}</h3>
               <p className="text-slate-600 leading-relaxed">
-                The 2025 PMC study on identity and behavior notes that identity is associated with behavior 
-                at both within-person and between-person levels, and that intention, self-determined motivation, 
-                and habit all interact with identity in long-term change.
+                {t('howConnectedDesc')}
               </p>
             </div>
           </div>
@@ -227,7 +214,7 @@ function IdentityResearchSection() {
           {/* Research Insights */}
           <div className="mb-12">
             <h3 className="font-serif text-2xl font-bold text-primary mb-6 text-center">
-              Key Research Findings
+              {t('keyResearchFindings')}
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
               {keyInsights.map((insight, idx) => (
@@ -258,50 +245,46 @@ function IdentityResearchSection() {
           {/* Practical Application */}
           <div className="bg-white rounded-xl p-8 shadow-sm">
             <h3 className="font-serif text-2xl font-bold text-primary mb-6">
-              Practical Meaning for Tamkinly
+              {t('practicalMeaning')}
             </h3>
             <p className="text-slate-600 leading-relaxed mb-6">
-              For an app like Tamkinly, the best model is not &quot;track habits only,&quot; but reverse-engineer 
-              the identity behind the goal. That means:
+              {t('practicalMeaningDesc')}
             </p>
             <ol className="space-y-4">
               <li className="flex gap-4">
                 <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Define the Target Identity</h4>
-                  <p className="text-sm text-slate-600">Who must you become for the behavior to be natural?</p>
+                  <h4 className="font-semibold text-primary">{t('step1Title')}</h4>
+                  <p className="text-sm text-slate-600">{t('step1Desc')}</p>
                 </div>
               </li>
               <li className="flex gap-4">
                 <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Identify Supporting Behaviors</h4>
-                  <p className="text-sm text-slate-600">What would that identity repeatedly do?</p>
+                  <h4 className="font-semibold text-primary">{t('step2Title')}</h4>
+                  <p className="text-sm text-slate-600">{t('step2Desc')}</p>
                 </div>
               </li>
               <li className="flex gap-4">
                 <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Design the Environment</h4>
-                  <p className="text-sm text-slate-600">Create conditions that support those behaviors.</p>
+                  <h4 className="font-semibold text-primary">{t('step3Title')}</h4>
+                  <p className="text-sm text-slate-600">{t('step3Desc')}</p>
                 </div>
               </li>
               <li className="flex gap-4">
                 <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
                 <div>
-                  <h4 className="font-semibold text-primary">Track Evidence</h4>
-                  <p className="text-sm text-slate-600">Build proof until the new identity becomes believable.</p>
+                  <h4 className="font-semibold text-primary">{t('step4Title')}</h4>
+                  <p className="text-sm text-slate-600">{t('step4Desc')}</p>
                 </div>
               </li>
             </ol>
 
             <div className="mt-8 p-6 bg-accent/5 rounded-lg border-l-4 border-accent">
-              <h4 className="font-semibold text-primary mb-2">Key Takeaway</h4>
+              <h4 className="font-semibold text-primary mb-2">{t('keyTakeaway')}</h4>
               <p className="text-slate-600 leading-relaxed">
-                If behavior change asks, &quot;What should I do tomorrow?&quot;, identity change asks, 
-                &quot;Who must I become for tomorrow&apos;s behavior to be natural?&quot; 
-                Sources on habits and identity consistently show that linking behavior to self-concept 
-                supports stronger self-integration, better persistence, and more effective long-term change.
+                {t('keyTakeawayDesc')}
               </p>
             </div>
           </div>
@@ -316,6 +299,7 @@ function NewsletterSection() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
+  const t = useTranslations('resourcesPage');
 
   return (
     <section className="py-16 lg:py-24 bg-white">
@@ -327,10 +311,10 @@ function NewsletterSection() {
                 <Mail className="h-6 w-6" />
               </div>
               <h3 className="font-serif text-xl font-bold text-white mb-2">
-                Weekly Insights
+                {t('weeklyInsights')}
               </h3>
               <p className="text-slate-300 text-sm">
-                Join thousands receiving weekly identity insights, journal prompts, and transformation tools.
+                {t('weeklyInsightsDesc')}
               </p>
             </div>
             <div className="p-8 lg:p-10 flex flex-col justify-center">
@@ -339,8 +323,8 @@ function NewsletterSection() {
                   <div className="w-12 h-12 rounded-full bg-accent/20 text-accent flex items-center justify-center mx-auto mb-2">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
-                  <p className="font-semibold text-primary">You&apos;re subscribed!</p>
-                  <p className="text-sm text-slate-500">Check your inbox for a welcome email.</p>
+                  <p className="font-semibold text-primary">{t('subscribed')}</p>
+                  <p className="text-sm text-slate-500">{t('checkInbox')}</p>
                 </div>
               ) : (
                 <form onSubmit={async (e) => {
@@ -368,10 +352,10 @@ function NewsletterSection() {
                     className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent"
                   />
                   <Button disabled={subscribing} className="w-full bg-accent text-primary hover:bg-accent/90">
-                    {subscribing ? 'Subscribing...' : 'Subscribe'}
+                    {subscribing ? t('subscribing') : t('subscribe')}
                   </Button>
                   <p className="text-xs text-slate-500 text-center">
-                    No spam. Unsubscribe anytime.
+                    {t('noSpam')}
                   </p>
                 </form>
               )}
@@ -384,7 +368,25 @@ function NewsletterSection() {
 }
 
 // Articles Section
+const resourcesArticleCategoryMap: Record<string, string> = {
+  'Identity Shift': 'categoryIdentityShift',
+  'Transformation': 'categoryTransformation',
+  'Wealth & Identity': 'categoryWealthIdentity',
+  'Self-Liberation': 'categorySelfLiberation',
+  'Self-Image': 'categorySelfImage',
+  'Mental Clarity': 'categoryMentalClarity',
+};
+
+function formatReadTime(readTime: string, t: (key: string) => string): string {
+  const match = readTime.match(/^(\d+)\s+min\s+read$/);
+  if (match) {
+    return `${match[1]} ${t('minRead')}`;
+  }
+  return readTime;
+}
+
 function ArticlesSection() {
+  const t = useTranslations('resourcesPage');
   const articles = [
     {
       title: "The Physics of Momentum: Why 18 Minutes Changes Everything",
@@ -435,10 +437,10 @@ function ArticlesSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <Badge variant="secondary" className="mb-4">
-            Latest Articles
+            {t('latestArticles')}
           </Badge>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
-            Deep Dives
+            {t('deepDives')}
           </h2>
         </div>
         
@@ -448,7 +450,7 @@ function ArticlesSection() {
               <Card className="border-0 shadow-sm hover:shadow-md transition-all cursor-pointer group h-full">
                 <CardContent className="p-6">
                   <Badge variant="outline" className="mb-2 text-xs text-[#1F6F78] border-[#1F6F78]/30">
-                    {article.category}
+                    {resourcesArticleCategoryMap[article.category] ? t(resourcesArticleCategoryMap[article.category]) : article.category}
                   </Badge>
                   <h3 className="font-semibold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
                     {article.title}
@@ -457,9 +459,9 @@ function ArticlesSection() {
                     {article.excerpt}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-slate-500">{article.readTime}</span>
+                    <span className="text-xs text-slate-500">{formatReadTime(article.readTime, t)}</span>
                     <span className="text-accent text-sm flex items-center gap-1">
-                      Read <ExternalLink className="h-3 w-3" />
+                      {t('readGuide')} <ExternalLink className="h-3 w-3" />
                     </span>
                   </div>
                 </CardContent>
@@ -474,20 +476,20 @@ function ArticlesSection() {
 
 // CTA Section
 function CTASection() {
+  const t = useTranslations('resourcesPage');
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-primary via-primary to-slate-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready for the Full Experience?
+            {t('ctaTitle')}
           </h2>
           <p className="text-lg text-slate-300 mb-8">
-            The Identity Recode Planner brings all these concepts together in a practical, 
-            30-day transformation journey.
+            {t('ctaSubtitle')}
           </p>
           <Link href="/products">
             <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-              View Products
+              {t('viewProducts')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>

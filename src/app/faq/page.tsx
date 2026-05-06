@@ -23,102 +23,34 @@ import {
   Shield,
   Clock
 } from 'lucide-react';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
-const faqCategories = [
-  {
-    title: 'Products & Purchases',
-    icon: Package,
-    questions: [
-      {
-        q: 'What products does Tamkinly offer?',
-        a: 'Tamkinly offers digital products focused on identity transformation and personal development. Our flagship product is the Identity Recode Planner, a 30-day guided journey to help you rediscover and reconstruct your authentic self. We also offer worksheets, daily planners, and bundle packages.'
-      },
-      {
-        q: 'How do I access my purchased products?',
-        a: 'After purchase, you will receive an access code via email. Enter this code on our Apps page along with your email to unlock full access. You can also create an account with the same email to automatically link all your purchases.'
-      },
-      {
-        q: 'What format are the products in?',
-        a: 'All our products are digital and can be accessed directly through our web application. The planners and worksheets are interactive and can be used on any device with a web browser. You can also print them for personal use.'
-      }
-    ]
-  },
-  {
-    title: 'Payments & Pricing',
-    icon: CreditCard,
-    questions: [
-      {
-        q: 'What payment methods do you accept?',
-        a: 'We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and other secure payment methods through our payment processor. All transactions are encrypted and secure.'
-      },
-      {
-        q: 'Is there a subscription fee?',
-        a: 'No! All our products are one-time purchases. You pay once and get lifetime access, including any future updates to the product. No hidden fees, no recurring charges.'
-      },
-      {
-        q: 'Do you offer discounts?',
-        a: 'We occasionally run promotions and offer bundle discounts. Sign up for our newsletter to stay informed about special offers. We also offer special pricing for educational institutions and therapists.'
-      }
-    ]
-  },
-  {
-    title: 'Access & Downloads',
-    icon: Download,
-    questions: [
-      {
-        q: 'How long does my access last?',
-        a: 'Your access is lifetime! Once you purchase a product, you can access it forever through our web application. This includes any updates or improvements we make to the product.'
-      },
-      {
-        q: 'Can I access my products on multiple devices?',
-        a: 'Yes! Our web application works on any device with a browser - desktop, tablet, or mobile. Your progress is synced across devices when you log in to your account.'
-      },
-      {
-        q: 'Can I download the products for offline use?',
-        a: 'Our interactive web tools require an internet connection. However, many worksheets and templates can be printed or exported for offline use. We are working on offline-capable versions for future releases.'
-      }
-    ]
-  },
-  {
-    title: 'Returns & Refunds',
-    icon: RefreshCw,
-    questions: [
-      {
-        q: 'What is your refund policy?',
-        a: 'We offer a 30-day money-back guarantee on all products. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked.'
-      },
-      {
-        q: 'How do I request a refund?',
-        a: 'Simply contact our support team at hello@tamkinly.com with your order details and reason for refund. We process refunds within 3-5 business days.'
-      }
-    ]
-  }
-];
-
-const quickAnswers = [
-  {
-    icon: Clock,
-    title: 'Instant Access',
-    description: 'Get immediate access to your products after purchase'
-  },
-  {
-    icon: Shield,
-    title: 'Secure Payments',
-    description: 'All transactions are encrypted and secure'
-  },
-  {
-    icon: RefreshCw,
-    title: '30-Day Guarantee',
-    description: 'Full refund within 30 days, no questions asked'
-  },
-  {
-    icon: Download,
-    title: 'Lifetime Updates',
-    description: 'Get all future product updates for free'
-  }
-];
+const categoryIcons = [Package, CreditCard, Download, RefreshCw];
+const quickAnswerIcons = [Clock, Shield, RefreshCw, Download];
 
 export default function FAQPage() {
+  const t = useTranslations("faqPage");
+
+  // Build FAQ categories from translation data
+  const faqCategories = [0, 1, 2, 3].map((catIndex) => {
+    const questionCount = catIndex === 3 ? 2 : 3; // Returns & Refunds has 2 questions
+    return {
+      title: t(`categories.${catIndex}.title`),
+      icon: categoryIcons[catIndex],
+      questions: Array.from({ length: questionCount }, (_, qIndex) => ({
+        q: t(`categories.${catIndex}.questions.${qIndex}.q`),
+        a: t(`categories.${catIndex}.questions.${qIndex}.a`)
+      }))
+    };
+  });
+
+  // Build quick answers from translation data
+  const quickAnswers = [0, 1, 2, 3].map((index) => ({
+    icon: quickAnswerIcons[index],
+    title: t(`quickAnswers.${index}.title`),
+    description: t(`quickAnswers.${index}.description`)
+  }));
+
   return (
     <div className="min-h-screen bg-[#F6F8FA]">
       {/* Hero Section */}
@@ -127,14 +59,13 @@ export default function FAQPage() {
           <div className="max-w-3xl mx-auto text-center">
             <Badge className="mb-6 px-4 py-2 bg-[#3DD4B0]/10 text-[#3DD4B0] border border-[#3DD4B0]/30">
               <HelpCircle className="w-3.5 h-3.5 mr-2" />
-              Frequently Asked Questions
+              {t("heroBadge")}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">
-              How Can We Help You?
+              {t("heroTitle")}
             </h1>
             <p className="text-lg text-slate-300 leading-relaxed">
-              Find answers to common questions about our products, purchases, and services.
-              Can't find what you're looking for? Contact our support team.
+              {t("heroSubtitle")}
             </p>
           </div>
         </div>
@@ -201,16 +132,16 @@ export default function FAQPage() {
               <MessageCircle className="w-8 h-8 text-[#3DD4B0]" />
             </div>
             <h2 className="font-serif text-3xl font-bold text-[#0F1C2E] mb-4">
-              Still Have Questions?
+              {t("stillHaveQuestions")}
             </h2>
             <p className="text-[#8A94A6] mb-8">
-              Our support team is here to help. We typically respond within 24 hours.
+              {t("supportTeamHere")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/contact">
                 <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-8">
                   <Mail className="w-4 h-4 mr-2" />
-                  Contact Support
+                  {t("contactSupport")}
                 </Button>
               </Link>
               <a href="mailto:hello@tamkinly.com">

@@ -16,26 +16,29 @@ import {
   ArrowRight,
   AlertCircle
 } from 'lucide-react';
-
-const refundSteps = [
-  {
-    step: 1,
-    title: 'Contact Us',
-    description: 'Email us at hello@tamkinly.com within 30 days of purchase'
-  },
-  {
-    step: 2,
-    title: 'Provide Details',
-    description: 'Include your order number and reason for refund request'
-  },
-  {
-    step: 3,
-    title: 'Receive Refund',
-    description: 'We process refunds within 3-5 business days'
-  }
-];
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 export default function RefundPolicyPage() {
+  const t = useTranslations('refundPage');
+
+  const refundSteps = [
+    {
+      step: 1,
+      title: t('step1Title'),
+      description: t('step1Desc')
+    },
+    {
+      step: 2,
+      title: t('step2Title'),
+      description: t('step2Desc')
+    },
+    {
+      step: 3,
+      title: t('step3Title'),
+      description: t('step3Desc')
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-[#F6F8FA]">
       {/* Hero Section */}
@@ -44,13 +47,13 @@ export default function RefundPolicyPage() {
           <div className="max-w-3xl mx-auto text-center">
             <Badge className="mb-6 px-4 py-2 bg-[#3DD4B0]/10 text-[#3DD4B0] border border-[#3DD4B0]/30">
               <RefreshCw className="w-3.5 h-3.5 mr-2" />
-              Refund Policy
+              {t('badge')}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">
-              30-Day Money Back Guarantee
+              {t('title')}
             </h1>
             <p className="text-slate-300">
-              Not satisfied? Get a full refund within 30 days, no questions asked.
+              {t('subtitle')}
             </p>
           </div>
         </div>
@@ -62,15 +65,15 @@ export default function RefundPolicyPage() {
           <div className="flex flex-wrap items-center justify-center gap-6">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-[#3DD4B0]" />
-              <span className="text-sm font-medium text-[#0F1C2E]">100% Satisfaction Guaranteed</span>
+              <span className="text-sm font-medium text-[#0F1C2E]">{t('satisfactionGuaranteed')}</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5 text-[#1F6F78]" />
-              <span className="text-sm font-medium text-[#0F1C2E]">30-Day Refund Window</span>
+              <span className="text-sm font-medium text-[#0F1C2E]">{t('thirtyDayRefund')}</span>
             </div>
             <div className="flex items-center gap-2">
               <CreditCard className="w-5 h-5 text-[#0F1C2E]" />
-              <span className="text-sm font-medium text-[#0F1C2E]">Full Refund to Original Payment</span>
+              <span className="text-sm font-medium text-[#0F1C2E]">{t('fullRefundOriginal')}</span>
             </div>
           </div>
         </div>
@@ -83,7 +86,7 @@ export default function RefundPolicyPage() {
             {/* How to Request Refund */}
             <div className="mb-12">
               <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-8 text-center">
-                How to Request a Refund
+                {t('howToRequest')}
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
                 {refundSteps.map((item) => (
@@ -110,9 +113,9 @@ export default function RefundPolicyPage() {
                       <CheckCircle2 className="w-6 h-6 text-[#3DD4B0]" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-[#0F1C2E] mb-2">Our Promise</h3>
+                      <h3 className="font-semibold text-[#0F1C2E] mb-2">{t('ourPromise')}</h3>
                       <p className="text-[#2B2E34] leading-relaxed">
-                        We stand behind our products 100%. If you&apos;re not completely satisfied with your purchase, we&apos;ll refund your money in full. No questions asked, no hard feelings.
+                        {t('ourPromiseDesc')}
                       </p>
                     </div>
                   </div>
@@ -122,27 +125,27 @@ export default function RefundPolicyPage() {
 
                 {/* Eligibility */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Refund Eligibility</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('refundEligibility')}</h2>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-[#0F1C2E]">All Products Eligible</h4>
-                        <p className="text-sm text-[#8A94A6]">Every product we sell is covered by our 30-day guarantee</p>
+                        <h4 className="font-medium text-[#0F1C2E]">{t('allProductsEligible')}</h4>
+                        <p className="text-sm text-[#8A94A6]">{t('allProductsEligibleDesc')}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-[#0F1C2E]">No Reason Required</h4>
-                        <p className="text-sm text-[#8A94A6]">You don&apos;t need to explain why - just let us know you want a refund</p>
+                        <h4 className="font-medium text-[#0F1C2E]">{t('noReasonRequired')}</h4>
+                        <p className="text-sm text-[#8A94A6]">{t('noReasonRequiredDesc')}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-[#0F1C2E]">Keep Your Progress</h4>
-                        <p className="text-sm text-[#8A94A6]">Any work you&apos;ve completed is yours to keep</p>
+                        <h4 className="font-medium text-[#0F1C2E]">{t('keepYourProgress')}</h4>
+                        <p className="text-sm text-[#8A94A6]">{t('keepYourProgressDesc')}</p>
                       </div>
                     </div>
                   </div>
@@ -152,28 +155,28 @@ export default function RefundPolicyPage() {
 
                 {/* Timeline */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Refund Timeline</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('refundTimeline')}</h2>
                   <div className="space-y-3">
                     <div className="flex items-center gap-4 p-4 bg-[#F6F8FA] rounded-lg">
                       <div className="w-20 text-center">
                         <span className="text-2xl font-bold text-[#3DD4B0]">1-2</span>
-                        <p className="text-xs text-[#8A94A6]">days</p>
+                        <p className="text-xs text-[#8A94A6]">{t('days')}</p>
                       </div>
-                      <p className="text-[#2B2E34]">Request reviewed and approved</p>
+                      <p className="text-[#2B2E34]">{t('reviewApproved')}</p>
                     </div>
                     <div className="flex items-center gap-4 p-4 bg-[#F6F8FA] rounded-lg">
                       <div className="w-20 text-center">
                         <span className="text-2xl font-bold text-[#1F6F78]">3-5</span>
-                        <p className="text-xs text-[#8A94A6]">days</p>
+                        <p className="text-xs text-[#8A94A6]">{t('days')}</p>
                       </div>
-                      <p className="text-[#2B2E34]">Refund processed to original payment method</p>
+                      <p className="text-[#2B2E34]">{t('refundProcessed')}</p>
                     </div>
                     <div className="flex items-center gap-4 p-4 bg-[#F6F8FA] rounded-lg">
                       <div className="w-20 text-center">
                         <span className="text-2xl font-bold text-[#0F1C2E]">5-10</span>
-                        <p className="text-xs text-[#8A94A6]">days</p>
+                        <p className="text-xs text-[#8A94A6]">{t('days')}</p>
                       </div>
-                      <p className="text-[#2B2E34]">Funds appear in your account (varies by bank)</p>
+                      <p className="text-[#2B2E34]">{t('fundsAppear')}</p>
                     </div>
                   </div>
                 </div>
@@ -182,14 +185,14 @@ export default function RefundPolicyPage() {
 
                 {/* Non-Refundable */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Exceptions</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('exceptions')}</h2>
                   <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                     <div className="flex items-start gap-3">
                       <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-amber-800 mb-1">After 30 Days</h4>
+                        <h4 className="font-medium text-amber-800 mb-1">{t('afterThirtyDays')}</h4>
                         <p className="text-sm text-amber-700">
-                          Refund requests made after the 30-day window may be considered on a case-by-case basis but are not guaranteed.
+                          {t('afterThirtyDaysDesc')}
                         </p>
                       </div>
                     </div>
@@ -200,22 +203,22 @@ export default function RefundPolicyPage() {
 
                 {/* How Refunds Work */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">How Refunds Are Processed</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('howRefundsProcessed')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed mb-4">
-                    Refunds are processed back to the original payment method used for the purchase:
+                    {t('howRefundsDesc')}
                   </p>
                   <ul className="space-y-2 text-sm text-[#2B2E34]">
                     <li className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-[#1F6F78]" />
-                      <span><strong>Credit/Debit Cards:</strong> Refunded to the same card (5-10 business days)</span>
+                      <span><strong>{t('creditDebitCards')}</strong></span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-[#1F6F78]" />
-                      <span><strong>PayPal:</strong> Refunded to your PayPal account (3-5 business days)</span>
+                      <span><strong>{t('paypal')}</strong></span>
                     </li>
                     <li className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-[#1F6F78]" />
-                      <span><strong>Other Methods:</strong> Refunded to the original payment source</span>
+                      <span><strong>{t('otherMethods')}</strong></span>
                     </li>
                   </ul>
                 </div>
@@ -225,15 +228,15 @@ export default function RefundPolicyPage() {
                 {/* Contact */}
                 <div className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] -mx-8 lg:-mx-10 px-8 lg:px-10 py-8 rounded-b-lg">
                   <div className="text-center">
-                    <h2 className="font-serif text-2xl font-bold text-white mb-3">Need a Refund?</h2>
+                    <h2 className="font-serif text-2xl font-bold text-white mb-3">{t('needRefund')}</h2>
                     <p className="text-slate-300 mb-6">
-                      Contact our support team and we&apos;ll process your refund promptly
+                      {t('needRefundDesc')}
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                       <Link href="/contact">
                         <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
                           <Mail className="w-4 h-4 mr-2" />
-                          Request Refund
+                          {t('requestRefund')}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </Link>

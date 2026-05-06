@@ -16,6 +16,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { useState, Suspense } from 'react';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 // Searchable content - comprehensive list
 const searchableContent = [
@@ -100,6 +101,7 @@ function SearchContent() {
     const urlQuery = searchParams.get('q') || '';
     const [query, setQuery] = useState(urlQuery);
     const [hasSearched, setHasSearched] = useState(!!urlQuery);
+    const t = useTranslations('searchPage');
     
     // Compute results based on query
     const results = query.trim() ? searchableContent.filter(item => 
@@ -128,20 +130,20 @@ function SearchContent() {
                     <div className="max-w-2xl mx-auto text-center">
                         <Badge variant="outline" className="mb-6 px-4 py-2 border-[#3DD4B0]/30 text-[#3DD4B0] bg-[#3DD4B0]/10">
                             <Search className="w-3.5 h-3.5 mr-2" />
-                            Search
+                            {t('badge')}
                         </Badge>
                         <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">
-                            Find What You Need
+                            {t('title')}
                         </h1>
                         <p className="text-lg text-slate-300 mb-8">
-                            Search across our apps, articles, products, and resources
+                            {t('subtitle')}
                         </p>
                         
                         {/* Search Form */}
                         <form onSubmit={handleSearch} className="relative">
                             <Input
                                 type="search"
-                                placeholder="Search for apps, articles, topics..."
+                                placeholder={t('placeholder')}
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                                 className="w-full h-14 pl-12 pr-4 text-lg bg-white rounded-xl border-0 shadow-lg"
@@ -161,8 +163,8 @@ function SearchContent() {
                             <div className="mb-8">
                                 <p className="text-slate-600">
                                     {results.length > 0 
-                                        ? `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"`
-                                        : `No results found for "${query}"`
+                                        ? t('foundResults').replace('{count}', String(results.length)).replace('{query}', query)
+                                        : t('noResultsFor').replace('{query}', query)
                                     }
                                 </p>
                             </div>
@@ -175,24 +177,24 @@ function SearchContent() {
                                     <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                         <AlertCircle className="h-8 w-8 text-slate-400" />
                                     </div>
-                                    <h2 className="text-xl font-bold text-[#0F1C2E] mb-2">No Results Found</h2>
+                                    <h2 className="text-xl font-bold text-[#0F1C2E] mb-2">{t('noResultsTitle')}</h2>
                                     <p className="text-slate-600 mb-6">
-                                        We couldn&apos;t find anything matching your search. Try different keywords or browse our popular pages.
+                                        {t('noResultsSubtitle')}
                                     </p>
                                     <div className="flex flex-wrap justify-center gap-2">
                                         <Link href="/quiz">
                                             <Button variant="outline" className="border-[#3DD4B0] text-[#3DD4B0]">
-                                                Take this Quiz
+                                                {t('takeQuiz')}
                                             </Button>
                                         </Link>
                                         <Link href="/apps">
                                             <Button variant="outline" className="border-[#1F6F78] text-[#1F6F78]">
-                                                Browse Apps
+                                                {t('browseApps')}
                                             </Button>
                                         </Link>
                                         <Link href="/blog">
                                             <Button variant="outline">
-                                                Read Blog
+                                                {t('readBlog')}
                                             </Button>
                                         </Link>
                                     </div>
@@ -235,13 +237,13 @@ function SearchContent() {
                         {/* Initial State - Popular Pages */}
                         {!hasSearched && (
                             <div>
-                                <h2 className="text-xl font-bold text-[#0F1C2E] mb-6">Popular Pages</h2>
+                                <h2 className="text-xl font-bold text-[#0F1C2E] mb-6">{t('popularPages')}</h2>
                                 <div className="grid sm:grid-cols-2 gap-4">
                                     {[
-                                        { title: 'Identity Gap Quiz', path: '/quiz', description: 'Free 5-minute assessment' },
-                                        { title: 'All Apps', path: '/apps', description: 'Interactive transformation tools' },
-                                        { title: 'Products', path: '/products', description: 'Transformation packages' },
-                                        { title: 'Blog', path: '/blog', description: 'Articles and guides' },
+                                        { title: t('popularQuizTitle'), path: '/quiz', description: t('popularQuizDesc') },
+                                        { title: t('popularAppsTitle'), path: '/apps', description: t('popularAppsDesc') },
+                                        { title: t('popularProductsTitle'), path: '/products', description: t('popularProductsDesc') },
+                                        { title: t('popularBlogTitle'), path: '/blog', description: t('popularBlogDesc') },
                                     ].map((item, index) => (
                                         <Link key={index} href={item.path}>
                                             <Card className="border-0 shadow-sm bg-white hover:shadow-md transition-all cursor-pointer group h-full">
@@ -265,10 +267,11 @@ function SearchContent() {
 }
 
 export default function SearchPage() {
+    const t = useTranslations('searchPage');
     return (
         <Suspense fallback={
             <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
-                <div className="animate-pulse">Loading...</div>
+                <div className="animate-pulse">{t('loading')}</div>
             </div>
         }>
             <SearchContent />

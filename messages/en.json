@@ -67,7 +67,9 @@
     "blog": "Blog",
     "resources": "Resources",
     "faq": "FAQ",
-    "cart": "Cart"
+    "cart": "Cart",
+    "signIn": "Sign In",
+    "quiz": "Identity Quiz"
   },
   "hero": {
     "badge": "Free Identity Assessment — 5 Minutes",
@@ -287,7 +289,11 @@
     "noResults": "No results found for",
     "saveBundle": "Save $44 on Bundle (Limited)",
     "loading": "Loading...",
-    "translate": "Translate"
+    "translate": "Translate",
+    "promoDescription": "Limited time offer: Save $44 on the complete Identity Transformation Bundle",
+    "viewBundle": "View Bundle",
+    "dismiss": "Dismiss",
+    "skipToContent": "Skip to main content"
   },
   "language": {
     "switch": "Switch Language",
@@ -326,7 +332,12 @@
     "newsletterTitle": "Start Your Transformation Journey",
     "newsletterDescription": "Get free resources and insights delivered to your inbox",
     "startFreeAssessment": "Start Free Assessment",
-    "viewProducts": "View Products"
+    "viewProducts": "View Products",
+    "socialTwitter": "Twitter / X",
+    "socialInstagram": "Instagram",
+    "socialLinkedin": "LinkedIn",
+    "socialYoutube": "YouTube",
+    "socialEmail": "Email"
   },
   "search": {
     "identityQuiz": "Identity Gap Quiz",
@@ -902,5 +913,1076 @@
     "quizOffline": "Identity Gap Quiz",
     "reflectionOffline": "Daily Reflection prompts",
     "savedProgress": "Saved progress"
+  },
+  "about": {
+    "heroBadge": "Our Story",
+    "heroTitle": "About",
+    "heroTitleHighlight": "Tamkinly",
+    "heroSubtitle": "A space born from the understanding that true transformation doesn't come from fixing what's broken—but from returning to what's always been there.",
+    "missionBadge": "Our Mission",
+    "missionTitle": "Return to Who You Already Are",
+    "missionP1": "In a world obsessed with self-improvement, we forgot something essential: you're not a project to be completed. You're not a problem to be solved. You're not broken.",
+    "missionP2": "Tamkinly was created from a simple but radical idea—that the path forward isn't about becoming someone new, but about returning to who you've always been beneath the layers of expectations, conditioning, and self-judgment.",
+    "missionP3": "We don't offer quick fixes or temporary motivation. We provide frameworks for deep identity work that creates lasting transformation from the inside out.",
+    "missionQuote": "The journey isn't about adding more. It's about removing everything that isn't truly you.",
+    "missionQuoteAttrib": "— The Tamkinly Philosophy",
+    "valuesBadge": "Our Values",
+    "valuesTitle": "What We Believe",
+    "valuesSubtitle": "These aren't just words on a page. They're the principles that guide every product we create.",
+    "value1Title": "No Self-Judgment",
+    "value1Desc": "We meet you where you are, not where you 'should' be. Growth without shame.",
+    "value2Title": "Identity-First",
+    "value2Desc": "Lasting change starts at the identity level, not the behavior level.",
+    "value3Title": "Human-Centered",
+    "value3Desc": "We design for real humans with real complexities, not idealized versions.",
+    "value4Title": "Clarity Over Complexity",
+    "value4Desc": "Simple doesn't mean shallow. Deep work can be beautifully simple.",
+    "value5Title": "Self-Direction",
+    "value5Desc": "We provide the map, but you choose the path. Your journey is yours.",
+    "value6Title": "Evidence-Informed",
+    "value6Desc": "Grounded in psychology, neuroscience, and proven transformation principles.",
+    "differentBadge": "What Makes Us Different",
+    "differentTitle": "Not Your Typical Self-Help Brand",
+    "diff1Title": "Not Another Planner",
+    "diff1Desc": "We don't just give you empty pages to fill. Every prompt, every exercise is strategically designed to guide you deeper into self-understanding.",
+    "diff2Title": "No Toxic Positivity",
+    "diff2Desc": "We won't tell you to 'just think positive' or 'manifest your dreams.' Real transformation requires honest self-confrontation.",
+    "diff3Title": "Depth Over Hacks",
+    "diff3Desc": "Quick tips don't create lasting change. We go deep, because that's where real transformation happens.",
+    "diff4Title": "One-Time Purchase",
+    "diff4Desc": "No subscriptions. No upsells. No hidden fees. Buy once, own forever—including all future updates.",
+    "foundersBadge": "The Founders",
+    "foundersTitle": "Born From Experience, Not Theory",
+    "foundersSubtitle": "We didn't start with a business plan. We started with a shared realization—that the life we were living wasn't the one we were capable of.",
+    "foundersLive": "Building the future of self-transformation",
+    "foundersQuoteP1": "Each of us had spent years chasing a “better” version of ourselves—reading the books, attending the workshops, following the gurus. We tried every method available, and while some things worked temporarily, nothing created lasting change. Because they were all trying to 'fix' us, as if we were broken.",
+    "foundersQuoteP2": "What we discovered—through our own struggles, failures, and breakthroughs—was that the answer wasn't about becoming someone new. It was about stripping away everything that wasn't truly us. Not the complete version, but the version that lives with meaning, purpose, and authenticity. The strongest, healthiest, most beautiful version that was always there beneath the noise.",
+    "foundersQuoteP3": "Tamkinly was born from that shared journey. We didn't create it from textbooks—we built it from the scars and wisdom of our own transformation. And we're here to walk that path with you.",
+    "foundersName": "The Tamkinly Founders",
+    "foundersRole": "A collective of lived experiences",
+    "stat1Value": "500+",
+    "stat1Label": "Transformations",
+    "stat2Value": "15+",
+    "stat2Label": "Years of Combined Research",
+    "stat3Value": "4",
+    "stat3Label": "Founding Members",
+    "foundersImageAlt": "Tamkinly Founding Team - Young visionaries planning together",
+    "ctaTitleBefore": "Ready to Return to ",
+    "ctaTitleHighlight": "Yourself",
+    "ctaTitleAfter": "?",
+    "ctaSubtitle": "Start your journey of identity reconstruction today.",
+    "ctaExploreProducts": "Explore Products",
+    "ctaOurMethodology": "Our Methodology"
+  },
+  "productsPage": {
+    "heroBadge": "Start Free — Upgrade When Ready",
+    "heroTitle": "Choose Your ",
+    "heroTitleHighlight": "Transformation Path",
+    "heroSubtitle": "Start free with powerful identity tools, then upgrade as you grow. ",
+    "heroSubtitleBold": "No pressure. No commitment.",
+    "heroSubtitleEnd": " Real transformation at your pace.",
+    "heroAppsCount": "Interactive Apps",
+    "trustMoneyBack": "30-Day Money Back",
+    "trustInstantAccess": "Instant Access",
+    "trustLifetimeAccess": "Lifetime Access",
+    "free": "Free",
+    "trial": "Trial",
+    "basic": "BASIC",
+    "premium": "Premium",
+    "bundle": "Bundle",
+    "mostPopular": "Most Popular",
+    "bestValue": "Best Value",
+    "startFreeNow": "Start Free Now",
+    "viewDetails": "View Details",
+    "addToCart": "Add to Cart",
+    "addedToCart": "Added to Cart!",
+    "addedToCartDesc": "{name} has been added to your cart.",
+    "matrixBadge": "App Access Matrix",
+    "matrixTitle": "See What's Included in Each Package",
+    "matrixSubtitle": "Transparent pricing. Know exactly what you're getting before you buy.",
+    "matrixAppsTools": "Apps / Tools",
+    "valueLadderBadge": "Value Ladder",
+    "valueLadderTitle": "Choose Your Transformation Path",
+    "valueLadderSubtitle": "Start free and upgrade as you grow. Each tier unlocks more powerful tools.",
+    "secureCheckout": "Secure checkout powered by Tamkinly. Multiple payment options available.",
+    "sslSecured": "SSL Secured",
+    "refundPolicy": "30-Day Refund Policy",
+    "guaranteeTitle": "30-Day Money-Back Guarantee",
+    "guaranteeDesc": "We're confident in our products. If you're not completely satisfied within 30 days, simply email us for a full refund — no questions asked, no hard feelings.",
+    "noQuestionsAsked": "No questions asked",
+    "fullRefund": "Full refund",
+    "keepProduct": "Keep the product",
+    "faqBadge": "FAQ",
+    "faqTitle": "Frequently Asked Questions",
+    "ctaTitle": "Start Your Transformation ",
+    "ctaTitleHighlight": "Today",
+    "ctaSubtitle": "Begin with our free tools. No credit card required. Upgrade when you're ready for deeper transformation.",
+    "takeFreeAssessment": "Take Free Assessment",
+    "save": "Save",
+    "products": {
+      "free": {
+        "name": "Free Starter",
+        "shortName": "Free",
+        "description": "Start your transformation journey with free powerful tools. No credit card required.",
+        "features": [
+          "Identity Gap Assessment",
+          "Values Clarification Tool",
+          "Daily Reflection Prompt",
+          "Basic progress tracking",
+          "Email support"
+        ],
+        "highlights": [
+          "Free forever",
+          "No credit card",
+          "Instant access"
+        ],
+        "cta": "Start Free"
+      },
+      "trial": {
+        "name": "7-Day Trial",
+        "shortName": "Trial",
+        "description": "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
+        "features": [
+          "7-Day Guided Journey",
+          "Daily identity prompts",
+          "Evidence tracking",
+          "Progress dashboard",
+          "Email support"
+        ],
+        "highlights": [
+          "Full system access",
+          "7 days",
+          "Low risk"
+        ]
+      },
+      "planner": {
+        "name": "Identity Recode Planner",
+        "shortName": "The Planner",
+        "description": "The complete 30-day transformation system with interactive apps and PDF downloads.",
+        "features": [
+          "30-Day Identity Planner",
+          "Executive Manual",
+          "Identity Baseline Worksheet",
+          "Environmental Audit",
+          "Digital + Print PDFs",
+          "Lifetime access"
+        ],
+        "highlights": [
+          "Most popular",
+          "Print included",
+          "30-day journey"
+        ]
+      },
+      "premium": {
+        "name": "Premium Transformation",
+        "shortName": "Premium",
+        "description": "Everything in Planner plus advanced analytics and decision tracking tools.",
+        "features": [
+          "Everything in Planner ($17 value)",
+          "Decision Pattern Analysis",
+          "Evidence Tracking System",
+          "Progress Dashboard",
+          "Advanced analytics",
+          "Priority support"
+        ],
+        "highlights": [
+          "Best value",
+          "Save $17",
+          "Analytics included"
+        ]
+      },
+      "bundle": {
+        "name": "Complete Bundle",
+        "shortName": "Bundle",
+        "description": "The ultimate package: All apps + AI coaching + community access + priority support.",
+        "features": [
+          "All PDF products ($44 value)",
+          "All Interactive Apps",
+          "AI Identity Coach",
+          "Transformation Community",
+          "Emotion Regulation (ERQ)",
+          "Priority Support (24hr response)",
+          "Monthly live Q&A sessions",
+          "Direct founding team access"
+        ],
+        "highlights": [
+          "Save $44",
+          "AI coaching",
+          "VIP access"
+        ]
+      }
+    },
+    "faqs": [
+      {
+        "q": "Can I start for free?",
+        "a": "Yes! Our Free Starter tier includes 3 powerful apps: Identity Gap Assessment, Values Clarification, and Daily Reflection. No credit card required."
+      },
+      {
+        "q": "What's the difference between tiers?",
+        "a": "FREE: 3 basic apps. TRIAL: 7-day full access. BASIC ($17): 4 core apps + PDFs. PREMIUM ($27): 7 apps + analytics. BUNDLE ($47): All 11 apps + AI Coach + Community + Priority Support."
+      },
+      {
+        "q": "How do I access the apps after purchase?",
+        "a": "After purchasing, you'll receive immediate access via your access key. Simply go to /apps and enter your key, or create an account with the same email."
+      },
+      {
+        "q": "Is there a money-back guarantee?",
+        "a": "Yes! We offer a 30-day money-back guarantee on all paid products. If you're not satisfied, simply contact us for a full refund—no questions asked."
+      },
+      {
+        "q": "Can I upgrade later?",
+        "a": "Absolutely! Start with any tier and upgrade anytime. You'll only pay the difference between your current and new tier."
+      }
+    ],
+    "matrixApps": [
+      "Identity Gap Assessment",
+      "Values Clarification",
+      "Daily Reflection",
+      "7-Day Trial Planner",
+      "Executive Manual",
+      "30-Day Identity Planner",
+      "Identity Baseline Worksheet",
+      "Environmental Audit",
+      "Decision Pattern Analysis",
+      "Evidence Tracking System",
+      "Progress Dashboard",
+      "Emotion Regulation (ERQ)",
+      "AI Identity Coach",
+      "Transformation Community",
+      "Priority Support"
+    ]
+  },
+  "appsPage": {
+    "headerTitle": "Tamkinly Apps",
+    "headerSubtitle": "Choose your transformation path",
+    "viewPackages": "View Packages",
+    "heroBadge": "Transformation Tools",
+    "heroTitle": "Start with Free, Upgrade Anytime",
+    "heroSubtitle": "Access powerful transformation tools based on your package. Start free and unlock more as you grow.",
+    "allApps": "All Apps ({count})",
+    "freeForever": "Free Forever - No Purchase Required",
+    "startFree": "Start Free",
+    "unlock": "Unlock",
+    "comingSoon": "Coming Soon",
+    "openApp": "Open App",
+    "openAccess": "Open Access",
+    "viewDetails": "View Details",
+    "ctaTitle": "Ready to Unlock All Apps?",
+    "ctaSubtitle": "Get the Complete Bundle for full access to all 15+ transformation tools, plus AI coaching and community.",
+    "tierLabels": {
+      "FREE": "Free",
+      "TRIAL": "Trial",
+      "BASIC": "Basic",
+      "PREMIUM": "Premium",
+      "BUNDLE": "Bundle"
+    },
+    "apps": {
+      "identityGapQuiz": {
+        "name": "Identity Gap Assessment",
+        "description": "Discover the gap between who you are and who you want to become. This 3-minute assessment reveals your dominant growth area.",
+        "category": "Assessment"
+      },
+      "valuesClarification": {
+        "name": "Values Clarification Tool",
+        "description": "Free interactive tool to identify your top 5 core values. Understand what truly drives your decisions.",
+        "category": "Assessment"
+      },
+      "dailyReflection": {
+        "name": "Daily Reflection Prompt",
+        "description": "Get a free daily identity-focused reflection prompt to build self-awareness. No account required.",
+        "category": "Tracking"
+      },
+      "trialPlanner": {
+        "name": "7-Day Trial Planner",
+        "description": "Experience the full Identity Recode system for 7 days with guided daily prompts and evidence tracking.",
+        "category": "Planning"
+      },
+      "executiveManual": {
+        "name": "Executive Manual",
+        "description": "Complete implementation framework with 6 core protocols for identity transformation.",
+        "category": "Worksheet"
+      },
+      "dailyPlanner": {
+        "name": "30-Day Identity Planner",
+        "description": "Interactive 30-day planner with identity prompts, non-negotiable actions, and evidence tracking.",
+        "category": "Planning"
+      },
+      "identityBaseline": {
+        "name": "Identity Baseline Worksheet",
+        "description": "Comprehensive assessment of your identity across 8 key dimensions with personalized insights.",
+        "category": "Worksheet"
+      },
+      "environmentalAudit": {
+        "name": "Environmental Audit",
+        "description": "Analyze how your physical, digital, and social environment supports or hinders your goals.",
+        "category": "Worksheet"
+      },
+      "decisionAnalysis": {
+        "name": "Decision Pattern Analysis",
+        "description": "Track and analyze your decisions to identify patterns, biases, and improve decision quality.",
+        "category": "Analytics"
+      },
+      "evidenceTracking": {
+        "name": "Evidence Tracking System",
+        "description": "Log and track behavioral evidence that supports your identity transformation.",
+        "category": "Tracking"
+      },
+      "progressDashboard": {
+        "name": "Progress Dashboard",
+        "description": "Advanced analytics dashboard tracking your transformation metrics and milestones.",
+        "category": "Analytics"
+      },
+      "emotionRegulation": {
+        "name": "Emotion Regulation (ERQ)",
+        "description": "Assess your emotional regulation strategies based on the validated ERQ questionnaire.",
+        "category": "Worksheet"
+      },
+      "aiIdentityCoach": {
+        "name": "AI Identity Coach",
+        "description": "Get personalized coaching insights and recommendations powered by AI. Your 24/7 transformation companion.",
+        "category": "Coaching"
+      },
+      "communityAccess": {
+        "name": "Transformation Community",
+        "description": "Connect with others on the same journey. Share wins, get support, and stay accountable.",
+        "category": "Community"
+      },
+      "prioritySupport": {
+        "name": "Priority Support",
+        "description": "Get priority access to our support team with guaranteed 24-hour response time.",
+        "category": "Coaching"
+      }
+    }
+  },
+  "contactPage": {
+    "heroBadge": "Get in Touch",
+    "heroTitle": "Contact",
+    "heroHighlight": "Us",
+    "heroSubtitle": "Have questions about our products or need help? We're here to help you on your journey of transformation.",
+    "formTitle": "Send Us a Message",
+    "formSubtitle": "Fill out the form below and we'll respond as soon as possible.",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "subjectLabel": "Subject",
+    "messageLabel": "Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@example.com",
+    "subjectPlaceholder": "How can we help?",
+    "messagePlaceholder": "Tell us more about your question or feedback...",
+    "sendButton": "Send Message",
+    "sending": "Sending...",
+    "messageSent": "Message Sent!",
+    "thankYou": "Thank you for reaching out. We'll get back to you within 24-48 hours.",
+    "sendAnother": "Send Another Message",
+    "errorTitle": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred. Please try again later.",
+    "protectedByRecaptcha": "Protected by reCAPTCHA",
+    "otherWaysTitle": "Other Ways to Reach Us",
+    "emailCard": "Email",
+    "responseTimeCard": "Response Time",
+    "responseTimeDesc": "We typically respond within 24-48 hours during business days."
+  },
+  "faqPage": {
+    "heroBadge": "Frequently Asked Questions",
+    "heroTitle": "How Can We Help You?",
+    "heroSubtitle": "Find answers to common questions about our products, purchases, and services. Can't find what you're looking for? Contact our support team.",
+    "quickAnswers": [
+      {
+        "title": "Instant Access",
+        "description": "Get immediate access to your products after purchase"
+      },
+      {
+        "title": "Secure Payments",
+        "description": "All transactions are encrypted and secure"
+      },
+      {
+        "title": "30-Day Guarantee",
+        "description": "Full refund within 30 days, no questions asked"
+      },
+      {
+        "title": "Lifetime Updates",
+        "description": "Get all future product updates for free"
+      }
+    ],
+    "categories": [
+      {
+        "title": "Products & Purchases",
+        "questions": [
+          {
+            "q": "What products does Tamkinly offer?",
+            "a": "Tamkinly offers digital products focused on identity transformation and personal development. Our flagship product is the Identity Recode Planner, a 30-day guided journey to help you rediscover and reconstruct your authentic self. We also offer worksheets, daily planners, and bundle packages."
+          },
+          {
+            "q": "How do I access my purchased products?",
+            "a": "After purchase, you will receive an access code via email. Enter this code on our Apps page along with your email to unlock full access. You can also create an account with the same email to automatically link all your purchases."
+          },
+          {
+            "q": "What format are the products in?",
+            "a": "All our products are digital and can be accessed directly through our web application. The planners and worksheets are interactive and can be used on any device with a web browser. You can also print them for personal use."
+          }
+        ]
+      },
+      {
+        "title": "Payments & Pricing",
+        "questions": [
+          {
+            "q": "What payment methods do you accept?",
+            "a": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and other secure payment methods through our payment processor. All transactions are encrypted and secure."
+          },
+          {
+            "q": "Is there a subscription fee?",
+            "a": "No! All our products are one-time purchases. You pay once and get lifetime access, including any future updates to the product. No hidden fees, no recurring charges."
+          },
+          {
+            "q": "Do you offer discounts?",
+            "a": "We occasionally run promotions and offer bundle discounts. Sign up for our newsletter to stay informed about special offers. We also offer special pricing for educational institutions and therapists."
+          }
+        ]
+      },
+      {
+        "title": "Access & Downloads",
+        "questions": [
+          {
+            "q": "How long does my access last?",
+            "a": "Your access is lifetime! Once you purchase a product, you can access it forever through our web application. This includes any updates or improvements we make to the product."
+          },
+          {
+            "q": "Can I access my products on multiple devices?",
+            "a": "Yes! Our web application works on any device with a browser - desktop, tablet, or mobile. Your progress is synced across devices when you log in to your account."
+          },
+          {
+            "q": "Can I download the products for offline use?",
+            "a": "Our interactive web tools require an internet connection. However, many worksheets and templates can be printed or exported for offline use. We are working on offline-capable versions for future releases."
+          }
+        ]
+      },
+      {
+        "title": "Returns & Refunds",
+        "questions": [
+          {
+            "q": "What is your refund policy?",
+            "a": "We offer a 30-day money-back guarantee on all products. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked."
+          },
+          {
+            "q": "How do I request a refund?",
+            "a": "Simply contact our support team at hello@tamkinly.com with your order details and reason for refund. We process refunds within 3-5 business days."
+          }
+        ]
+      }
+    ],
+    "stillHaveQuestions": "Still Have Questions?",
+    "supportTeamHere": "Our support team is here to help. We typically respond within 24 hours.",
+    "contactSupport": "Contact Support"
+  },
+  "methodologyPage": {
+    "heroBadge": "The Framework",
+    "heroTitle": "The Methodology",
+    "heroSubtitle": "A science-backed approach to identity transformation. Four questions. Four phases. Lasting change.",
+    "whyBadge": "WHY",
+    "whyTitle": "Why does this matter?",
+    "whyMainQuestionPrefix": "Have you ever wondered",
+    "whyMainQuestion": " why some changes feel effortless while others feel like a constant battle?",
+    "whyP1Prefix": "Traditional self-improvement focuses on",
+    "whyP1Highlight": " what you do",
+    "whyP1Suffix": "—habits, routines, behaviors. But here's what research shows:",
+    "whyQuote": "Executive function is crucial for initiation but unsustainable long-term due to stress and impulses; identity integration makes behaviors more automatic and resilient.",
+    "whyQuoteAttrib": "— Maintain IT model, Journal of Behavioral Medicine",
+    "whyStats": [
+      {
+        "value": "92%",
+        "label": "of habits fail within 90 days"
+      },
+      {
+        "value": "75%",
+        "label": "of change efforts rely on willpower"
+      },
+      {
+        "value": "3x",
+        "label": "more effective when identity-based"
+      }
+    ],
+    "whyInsightP1Prefix": "The problem isn't your willpower or motivation.",
+    "whyInsightP1Highlight": " The problem is you're trying to change behavior without changing identity.",
+    "whyInsightP2": "Identity-based change works because it doesn't require effort to maintain. When your actions align with who you believe you are, they become automatic.",
+    "whatBadge": "WHAT",
+    "whatTitle": "What is the methodology?",
+    "whatMainDef1": "The",
+    "whatMainDefHighlight": " Identity Recode Methodology",
+    "whatMainDef2": " is a four-phase framework for transforming who you are—not just what you do.",
+    "whatMainDef3": "It's built on peer-reviewed research in psychology and neuroscience, including the Maintain IT Model, Erikson's identity formation theory, and neuroplasticity research.",
+    "concepts": [
+      {
+        "title": "Identity vs Behavior",
+        "description": "Behavior is what you do. Identity is who you are. Lasting change happens at the identity level."
+      },
+      {
+        "title": "The Maintain IT Model",
+        "description": "A research framework showing how centered identity reduces executive function burden for sustainable change."
+      },
+      {
+        "title": "Neuroplasticity",
+        "description": "Your brain can rewire itself. Repeated identity-aligned actions create new neural pathways that become automatic."
+      },
+      {
+        "title": "Self-Authorship",
+        "description": "Moving from external influence to internal voice—consciously designing who you become."
+      }
+    ],
+    "coreShiftFrom": "From",
+    "coreShiftFromText": "I want to exercise more",
+    "coreShiftTo": "To",
+    "coreShiftToText": "I am someone who moves my body",
+    "howBadge": "HOW",
+    "howTitle": "How does it work?",
+    "timelineHeader": "30-Day Transformation Protocol",
+    "timelinePhases": "4 Phases",
+    "phases": [
+      {
+        "number": "01",
+        "title": "Discover",
+        "subtitle": "Days 1-7",
+        "description": "Understand where you truly are—not where you think you should be. Identity audit, values excavation, pattern recognition.",
+        "activities": [
+          "Identity baseline assessment",
+          "Values exploration",
+          "Current pattern mapping"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "Deconstruct",
+        "subtitle": "Days 8-14",
+        "description": "Peel back layers of conditioning, expectations, and inherited beliefs. Release what isn't authentically you.",
+        "activities": [
+          "Identify borrowed identities",
+          "Challenge should narratives",
+          "Release outdated beliefs"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "Reconstruct",
+        "subtitle": "Days 15-21",
+        "description": "Build your authentic identity. Create new narratives, align values with actions, establish identity-based habits.",
+        "activities": [
+          "Define core identity",
+          "Create empowering narratives",
+          "Build evidence log"
+        ]
+      },
+      {
+        "number": "04",
+        "title": "Integrate",
+        "subtitle": "Days 22-30",
+        "description": "Make your new identity automatic. Environment alignment, daily practices, resilience protocols.",
+        "activities": [
+          "Daily embodiment",
+          "Environment optimization",
+          "Setback recovery plan"
+        ]
+      }
+    ],
+    "dailyStructure": [
+      {
+        "title": "Morning",
+        "description": "5-10 min intention"
+      },
+      {
+        "title": "Afternoon",
+        "description": "15-20 min core work"
+      },
+      {
+        "title": "Evening",
+        "description": "10-15 min reflection"
+      }
+    ],
+    "whatIfBadge": "WHAT IF",
+    "whatIfTitle": "What if you applied this?",
+    "scenarios": [
+      {
+        "question": "What if you could change without relying on willpower?",
+        "outcome": "Identity-based behaviors become automatic—they don't require effort to maintain."
+      },
+      {
+        "question": "What if setbacks became signals instead of failures?",
+        "outcome": "The methodology includes recovery protocols that make you stronger after each challenge."
+      },
+      {
+        "question": "What if 30 days could reshape your neural pathways?",
+        "outcome": "Neuroplasticity research shows measurable brain changes from repeated identity-aligned actions."
+      },
+      {
+        "question": "What if you stopped fighting yourself?",
+        "outcome": "When actions align with identity, there's no internal conflict—only natural flow."
+      }
+    ],
+    "questionsForYou": "Questions for You",
+    "reflectionQuestions": [
+      "Which area of your life feels like constant effort?",
+      "What would change if that effort became automatic?",
+      "What's stopping you from starting today?"
+    ],
+    "communityEvidence": "Evidence-based approach",
+    "communityProtocol": "30-day protocol",
+    "communitySelfPaced": "Self-paced",
+    "ctaTitle": "Ready to begin?",
+    "ctaSubtitle": "The Identity Recode Planner guides you through all four phases in 30 days. Science-backed. Intentionally designed.",
+    "ctaButton1": "Start Your Transformation",
+    "ctaButton2": "Try Interactive Tools"
+  },
+  "cartPage": {
+    "emptyTitle": "Your Cart is Empty",
+    "emptySubtitle": "Looks like you haven't added any products yet. Start your transformation journey today!",
+    "browseProducts": "Browse Products",
+    "takeFreeAssessment": "Take Free Assessment",
+    "continueShopping": "Continue Shopping",
+    "shoppingCart": "Shopping Cart",
+    "itemCount": "{count} item(s) in your cart",
+    "clearCart": "Clear Cart",
+    "digitalProductLifetime": "Digital Product • Lifetime Access",
+    "orderSummary": "Order Summary",
+    "tax": "Tax",
+    "total": "Total",
+    "proceedToCheckout": "Proceed to Checkout",
+    "secureCheckout": "Secure checkout with SSL encryption",
+    "moneyBackGuarantee": "30-day money-back guarantee",
+    "instantDigitalAccess": "Instant digital access",
+    "itemRemoved": "Item Removed",
+    "itemRemovedDesc": "{name} has been removed from your cart.",
+    "cartCleared": "Cart Cleared",
+    "cartClearedDesc": "All items have been removed from your cart.",
+    "loading": "Loading cart...",
+    "save": "Save"
+  },
+  "checkoutPage": {
+    "selectProduct": "Select a Product",
+    "selectProductDesc": "Please select a product from our products page to continue with checkout.",
+    "browseProducts": "Browse Products",
+    "customerInfo": "Customer Information",
+    "fullName": "Full Name",
+    "namePlaceholder": "Your name",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "your@email.com",
+    "emailNote": "Your access code will be sent to this email.",
+    "continueToPayment": "Continue to Payment",
+    "paymentViaWise": "Payment via Wise",
+    "wisePayment": "Wise Payment",
+    "wiseFastLowCost": "Fast, Low-cost Transfers",
+    "amountToSend": "Amount to send:",
+    "accountHolder": "Account Holder:",
+    "payWithWise": "Pay ${amount} with Wise",
+    "openWiseTab": "Click to open Wise payment page in a new tab",
+    "or": "OR",
+    "payWithCrypto": "Pay with Crypto",
+    "cryptoInstant": "USDC/USDT • Instant & Global",
+    "network": "Network:",
+    "amountToSendCrypto": "Amount to send:",
+    "sendCryptoNote": "Send USDC or USDT (BEP20) to the wallet address above",
+    "bankTransfer": "Bank Transfer",
+    "bankWire": "International Wire / ACH",
+    "accountName": "Account Name:",
+    "accountNumber": "Account Number:",
+    "routingNumber": "Routing Number (ACH):",
+    "swiftBic": "SWIFT/BIC (International):",
+    "bankName": "Bank Name:",
+    "bankTransferTime": "International wire transfers may take 1-3 business days",
+    "alreadyPaid": "Already paid?",
+    "confirmPayment": "Confirm Your Payment",
+    "transactionId": "Transaction ID / TX Hash (Optional)",
+    "transactionPlaceholder": "Wise transaction ID or crypto TX hash",
+    "transactionNote": "Found in your Wise transaction history or wallet transaction",
+    "additionalNotes": "Additional Notes (Optional)",
+    "notesPlaceholder": "Any notes about your order...",
+    "processing": "Processing...",
+    "confirmOrder": "Confirm Order",
+    "backToCustomerInfo": "Back to Customer Info",
+    "securePayment": "Secure payment",
+    "thirtyDayMoneyBack": "30-day money-back",
+    "verifiedByWise": "Verified by Wise",
+    "orderSummary": "Order Summary",
+    "includes": "Includes:",
+    "subtotal": "Subtotal",
+    "youSave": "You Save",
+    "instantAccessAfter": "Instant access after payment",
+    "accessCodeSent": "Access code sent via email",
+    "lifetimeAccess": "Lifetime access",
+    "loadingCheckout": "Loading checkout...",
+    "backToProduct": "Back to Product",
+    "backToCart": "Back to Cart",
+    "checkout": "Checkout",
+    "orderCompleted": "Order Completed!",
+    "thankYouPurchase": "Thank you for your purchase! Your order has been processed successfully.",
+    "yourAccessCode": "Your Access Code",
+    "saveCode": "Save this code to access your products",
+    "orderReference": "Order Reference",
+    "saveReference": "Save this reference for support",
+    "accessYourApps": "Access Your Apps",
+    "continueShopping": "Continue Shopping",
+    "submitError": "Failed to submit order. Please try again."
+  },
+  "searchPage": {
+    "badge": "Search",
+    "title": "Find What You Need",
+    "subtitle": "Search across our apps, articles, products, and resources",
+    "placeholder": "Search for apps, articles, topics...",
+    "foundResults": "Found {count} result(s) for \"{query}\"",
+    "noResultsFor": "No results found for \"{query}\"",
+    "noResultsTitle": "No Results Found",
+    "noResultsSubtitle": "We couldn't find anything matching your search. Try different keywords or browse our popular pages.",
+    "popularPages": "Popular Pages",
+    "takeQuiz": "Take this Quiz",
+    "browseApps": "Browse Apps",
+    "readBlog": "Read Blog",
+    "loading": "Loading...",
+    "popularQuizTitle": "Identity Gap Quiz",
+    "popularQuizDesc": "Free 5-minute assessment",
+    "popularAppsTitle": "All Apps",
+    "popularAppsDesc": "Interactive transformation tools",
+    "popularProductsTitle": "Products",
+    "popularProductsDesc": "Transformation packages",
+    "popularBlogTitle": "Blog",
+    "popularBlogDesc": "Articles and guides"
+  },
+  "blogPage": {
+    "heroBadge": "Knowledge Base",
+    "heroTitle": "The ",
+    "heroTitleHighlight": "Tamkinly",
+    "heroTitleEnd": " Blog",
+    "heroSubtitle": "Research-backed insights, practical frameworks, and transformation tools. Every article is designed to guide you toward your true identity.",
+    "browseByCategory": "Browse by Category",
+    "browseByCategoryDesc": "Explore articles organized by topic for focused learning.",
+    "viewAll": "View all",
+    "interactiveTools": "Interactive Tools",
+    "appGuides": "App Guides",
+    "appGuidesDesc": "Deep dives into each Tamkinly app—how they work, the science behind them, and how to maximize your results.",
+    "practicalExercises": "Practical Exercises",
+    "worksheetGuides": "Worksheet Guides",
+    "worksheetGuidesDesc": "Step-by-step guides for each worksheet, including the research behind them and how to use them effectively.",
+    "insights": "Insights",
+    "transformationPhilosophy": "Transformation Philosophy",
+    "philosophyDesc": "Inspiring articles on identity, growth, and transformation—connecting timeless wisdom with modern science.",
+    "read": "Read",
+    "latestArticles": "Latest Articles",
+    "deepDives": "Deep Dives",
+    "ctaTitle": "Ready to Transform Your ",
+    "ctaTitleHighlight": "Identity",
+    "ctaTitleEnd": "?",
+    "ctaSubtitle": "These insights are just the beginning. Start your structured transformation journey today.",
+    "tryFreeApps": "Try Free Apps",
+    "viewProducts": "View Products",
+    "topics": "topics",
+    "minRead": "min read",
+    "categoryAppGuides": "App Guides",
+    "categoryWorksheets": "Worksheets",
+    "categoryIdentityTransformation": "Identity & Transformation",
+    "categoryMindsetStrategy": "Mindset & Strategy",
+    "categoryProductivityGrowth": "Productivity & Growth",
+    "categoryFreeApp": "FREE App",
+    "categoryBasicApp": "BASIC App",
+    "categoryBundleApp": "BUNDLE App",
+    "categoryWorksheet": "Worksheet",
+    "categoryIdentityShift": "Identity Shift",
+    "categoryTransformation": "Transformation",
+    "categoryWealthIdentity": "Wealth & Identity",
+    "categoryCommitment": "Commitment",
+    "categorySelfLiberation": "Self-Liberation",
+    "categoryStrategy": "Strategy",
+    "categoryExecution": "Execution",
+    "categoryProductivity": "Productivity",
+    "categorySelfImage": "Self-Image",
+    "categoryExcellence": "Excellence",
+    "categoryMentalClarity": "Mental Clarity",
+    "tierFree": "FREE",
+    "tierBasic": "BASIC",
+    "tierBundle": "BUNDLE"
+  },
+  "resourcesPage": {
+    "heroBadge": "Free Resources",
+    "heroTitle": "Resources for Your ",
+    "heroTitleHighlight": "Journey",
+    "heroSubtitle": "Free tools, guides, and content to support your transformation. No email required (unless noted).",
+    "categoryAssessment": "Assessment",
+    "resourceQuizTitle": "Identity Assessment Quiz",
+    "resourceQuizDesc": "Discover where you are on your identity journey with our free 20-question assessment. Get personalized insights instantly.",
+    "takeQuiz": "Take Quiz",
+    "categoryGuide": "Guide",
+    "resourceGuideTitle": "Identity vs. Behavior Change",
+    "resourceGuideDesc": "A deep dive into why traditional self-improvement fails and the identity-first approach that creates lasting transformation.",
+    "readGuide": "Read Guide",
+    "categoryVideo": "Video Series",
+    "resourceVideoTitle": "The Four Phases Explained",
+    "resourceVideoDesc": "Watch our 4-part video series breaking down each phase of the Identity Reconstruction Framework.",
+    "comingSoon": "Coming Soon",
+    "availableSoon": "Available Soon",
+    "researchBasedGuide": "Research-Based Guide",
+    "identityVsBehavior": "Identity vs. Behavior Change",
+    "identityVsBehaviorDesc": "Why traditional self-improvement often fails, and what the science says about lasting transformation.",
+    "whatIsBehavior": "What is Behavior Change?",
+    "behaviorChangeDesc": "Behavior change means altering what a person does: waking up earlier, exercising, journaling, or reducing procrastination. It often relies on goals, reminders, habit loops, and willpower. That approach can work, but it may remain fragile if it is not connected to a deeper self-concept.",
+    "whatIsIdentity": "What is Identity Change?",
+    "identityChangeDesc": "Identity change means shifting the internal story of \"who I am.\" Instead of only asking, \"What should I do?\" the person begins asking, \"What would someone like me do?\" Research on habit and identity shows that when habits feel tied to the true self, they are associated with stronger cognitive self-integration, higher self-esteem, and a stronger striving toward an ideal self.",
+    "whyDurable": "Why Identity Change is More Durable",
+    "whyDurableDesc": "Behavior change can produce short-term results, but identity change tends to make the behavior easier to maintain under stress. Caldwell et al. describe \"centered identity transformation\" as a process in which the new behavior becomes integrated into a person's roles, values, and self-representations, reducing reliance on effortful executive control over time.",
+    "howConnected": "How the Two Are Connected",
+    "howConnectedDesc": "Behavior is the visible expression of identity, and identity is reinforced by repeated behavior. A person does not usually transform by thinking alone; they transform by repeated action that becomes evidence for a new self-view.",
+    "keyResearchFindings": "Key Research Findings",
+    "practicalMeaning": "Practical Meaning for Tamkinly",
+    "practicalMeaningDesc": "For an app like Tamkinly, the best model is not \"track habits only,\" but reverse-engineer the identity behind the goal. That means:",
+    "step1Title": "Define the Target Identity",
+    "step1Desc": "Who must you become for the behavior to be natural?",
+    "step2Title": "Identify Supporting Behaviors",
+    "step2Desc": "What would that identity repeatedly do?",
+    "step3Title": "Design the Environment",
+    "step3Desc": "Create conditions that support those behaviors.",
+    "step4Title": "Track Evidence",
+    "step4Desc": "Build proof until the new identity becomes believable.",
+    "keyTakeaway": "Key Takeaway",
+    "keyTakeawayDesc": "If behavior change asks, \"What should I do tomorrow?\", identity change asks, \"Who must I become for tomorrow's behavior to be natural?\" Sources on habits and identity consistently show that linking behavior to self-concept supports stronger self-integration, better persistence, and more effective long-term change.",
+    "weeklyInsights": "Weekly Insights",
+    "weeklyInsightsDesc": "Join thousands receiving weekly identity insights, journal prompts, and transformation tools.",
+    "subscribed": "You're subscribed!",
+    "checkInbox": "Check your inbox for a welcome email.",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing...",
+    "noSpam": "No spam. Unsubscribe anytime.",
+    "ctaTitle": "Ready for the Full Experience?",
+    "ctaSubtitle": "The Identity Recode Planner brings all these concepts together in a practical, 30-day transformation journey.",
+    "viewProducts": "View Products",
+    "latestArticles": "Latest Articles",
+    "deepDives": "Deep Dives",
+    "minRead": "min read",
+    "categoryIdentityShift": "Identity Shift",
+    "categoryTransformation": "Transformation",
+    "categoryWealthIdentity": "Wealth & Identity",
+    "categorySelfLiberation": "Self-Liberation",
+    "categorySelfImage": "Self-Image",
+    "categoryMentalClarity": "Mental Clarity"
+  },
+  "dashboardPage": {
+    "welcomeBack": "Welcome back, {name}!",
+    "yourDashboard": "Your Dashboard",
+    "trackJourney": "Track your transformation journey and see your progress.",
+    "identityScore": "Identity Score",
+    "currentStreak": "Current Streak",
+    "totalVotes": "Total Votes",
+    "habitsDone": "Habits Done",
+    "days": "days",
+    "createAccountTitle": "Create a free account to save your progress",
+    "createAccountDesc": "Your quiz results and achievements will be saved permanently",
+    "createFreeAccount": "Create Free Account",
+    "premium": "Premium",
+    "free": "Free",
+    "signOut": "Sign Out",
+    "signInToSave": "Sign In to Save Progress",
+    "yourTransformationPhase": "Your Transformation Phase",
+    "overallProgress": "Overall Progress",
+    "awareness": "Awareness",
+    "recoding": "Recoding",
+    "integration": "Integration",
+    "continueJourney": "Continue Your Journey",
+    "achievements": "Achievements",
+    "viewAllAchievements": "View All Achievements",
+    "unlockFullPotential": "Unlock Full Potential",
+    "unlockDesc": "Get access to all 15+ apps, AI coaching, and premium features",
+    "viewProducts": "View Products",
+    "quickLinks": "Quick Links",
+    "takeAssessment": "Take Assessment",
+    "viewAllApps": "View All Apps",
+    "productsAndPricing": "Products & Pricing",
+    "helpAndFaq": "Help & FAQ",
+    "recentActivity": "Recent Activity",
+    "score": "Score",
+    "words": "words",
+    "loading": "Loading...",
+    "identityGapQuiz": "Identity Gap Quiz",
+    "dailyReflectionApp": "Daily Reflection",
+    "valuesClarificationApp": "Values Clarification",
+    "progressDashboardApp": "Progress Dashboard",
+    "freeTier": "FREE",
+    "firstStep": "First Step",
+    "firstStepDesc": "Complete your first habit",
+    "weekWarrior": "Week Warrior",
+    "weekWarriorDesc": "7-day streak",
+    "identityGapAssessment": "Identity Gap Assessment",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "twoDaysAgo": "2 days ago",
+    "morningRoutine": "Morning Routine",
+    "day15Reflection": "Day 15 Reflection",
+    "phaseRange1": "0-29%",
+    "phaseRange2": "30-59%",
+    "phaseRange3": "60%+",
+    "phaseRecoding": "Recoding"
+  },
+  "guidesPage": {
+    "heroBadge": "Deep Dives",
+    "heroTitle": "Transformation ",
+    "heroTitleHighlight": "Guides",
+    "heroSubtitle": "Comprehensive, research-backed guides that go beyond surface-level tips. Each guide walks you through a complete framework for lasting identity change.",
+    "allGuides": "All Guides",
+    "availableGuides": "Available Guides",
+    "availableGuidesDesc": "Choose a guide and dive deep into the science and practice of identity transformation.",
+    "readGuide": "Read Guide",
+    "ctaTitle": "Ready to Transform Your ",
+    "ctaTitleHighlight": "Identity",
+    "ctaTitleEnd": "?",
+    "ctaSubtitle": "These guides are just the beginning. Start your structured transformation journey today.",
+    "tryFreeApps": "Try Free Apps",
+    "viewProducts": "View Products",
+    "minRead": "min read",
+    "categoryIdentityShift": "Identity Shift",
+    "guide1Title": "Identity vs Behavior Change: Why Willpower Fails",
+    "guide1Excerpt": "The hidden reason most self-improvement efforts don't last — and the identity-first approach that creates permanent transformation. Includes practical exercises.",
+    "guide1Category": "Identity Shift",
+    "guide1ReadTime": "12 min read"
+  },
+  "privacyPage": {
+    "badge": "Privacy Policy",
+    "title": "Your Privacy Matters",
+    "lastUpdated": "Last updated: April 2025",
+    "dataEncryption": "Data Encryption",
+    "dataEncryptionDesc": "All data is encrypted in transit and at rest",
+    "transparency": "Transparency",
+    "transparencyDesc": "Clear about what we collect and why",
+    "yourRights": "Your Rights",
+    "yourRightsDesc": "Control over your personal data",
+    "introduction": "Introduction",
+    "introductionDesc": "Tamkinly (\"we,\" \"our,\" or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website tamkinly.com or use our products and services.",
+    "informationWeCollect": "Information We Collect",
+    "personalInfo": "Personal Information",
+    "personalInfo1": "Name and email address (when you create an account or make a purchase)",
+    "personalInfo2": "Payment information (processed securely through our payment processor)",
+    "personalInfo3": "Access codes and purchase history",
+    "usageData": "Usage Data",
+    "usageData1": "Pages visited and features used within our products",
+    "usageData2": "Device type, browser type, and operating system",
+    "usageData3": "Referring website and visit timestamps",
+    "progressData": "Progress Data",
+    "progressData1": "Your responses and progress in our interactive worksheets",
+    "progressData2": "Saved data in planners and journals",
+    "progressData3": "Quiz results and assessments",
+    "howWeUse": "How We Use Your Information",
+    "useProvide": "Provide Services: Deliver products you purchased and maintain your account",
+    "useSave": "Save Progress: Store your work and sync across devices",
+    "useCommunicate": "Communicate: Send purchase confirmations and support responses",
+    "useImprove": "Improve: Analyze usage to enhance our products",
+    "dataSecurity": "Data Security",
+    "dataSecurityDesc": "We implement industry-standard security measures including:",
+    "security1": "SSL/TLS encryption for all data transmission",
+    "security2": "Encrypted storage of sensitive information",
+    "security3": "Secure payment processing through trusted providers",
+    "security4": "Regular security audits and updates",
+    "yourRightsTitle": "Your Rights",
+    "yourRightsIntro": "You have the right to:",
+    "rightAccess": "Access",
+    "rightAccessDesc": "Request a copy of your personal data",
+    "rightCorrection": "Correction",
+    "rightCorrectionDesc": "Update or correct your information",
+    "rightDeletion": "Deletion",
+    "rightDeletionDesc": "Request deletion of your data",
+    "rightPortability": "Portability",
+    "rightPortabilityDesc": "Export your data in a readable format",
+    "cookiesTracking": "Cookies & Tracking",
+    "cookiesDesc": "We use cookies and similar tracking technologies to improve your experience on our website. Here's what we use:",
+    "essentialCookies": "Essential Cookies: Required for the website to function properly (session management, authentication)",
+    "analyticsCookies": "Analytics Cookies: We use Google Analytics to understand how visitors interact with our website. This includes page views, time spent, and navigation patterns. This data helps us improve our services.",
+    "preferenceCookies": "Preference Cookies: Remember your settings and preferences (like language and theme)",
+    "googleAnalytics": "Google Analytics",
+    "googleAnalyticsDesc": "We use Google Analytics 4 to collect anonymous usage data. Google Analytics may collect your IP address, browser type, device information, and browsing behavior. You can opt out of Google Analytics by installing the",
+    "googleAnalyticsOptOut": "Google Analytics Opt-out Browser Add-on",
+    "noThirdParty": "We do not use third-party tracking cookies for advertising purposes or sell your data to advertisers. You can manage cookie preferences through our cookie consent banner or your browser settings.",
+    "childrenPrivacy": "Children's Privacy",
+    "childrenDesc": "Our services are not intended for children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child, please contact us.",
+    "questionsPrivacy": "Questions About Privacy?",
+    "questionsDesc": "Contact us at any time for privacy-related inquiries",
+    "contactPrivacyTeam": "Contact Privacy Team"
+  },
+  "termsPage": {
+    "badge": "Terms of Service",
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: April 2025",
+    "youMay": "You May",
+    "youMay1": "Use products for personal use",
+    "youMay2": "Print for personal use",
+    "youMay3": "Access updates forever",
+    "youMayNot": "You May Not",
+    "youMayNot1": "Share access codes",
+    "youMayNot2": "Resell or redistribute",
+    "youMayNot3": "Remove copyright notices",
+    "important": "Important",
+    "important1": "Products are \"as is\"",
+    "important2": "Not professional advice",
+    "important3": "We may update terms",
+    "agreementToTerms": "Agreement to Terms",
+    "agreementDesc": "By accessing or using Tamkinly's website and products, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.",
+    "licenseToUse": "License to Use",
+    "licenseDesc": "When you purchase a product from Tamkinly, you receive a personal, non-exclusive, non-transferable license to:",
+    "license1": "Access and use the digital product for your personal, non-commercial purposes",
+    "license2": "Print copies for your own personal use",
+    "license3": "Receive all future updates to the purchased product at no additional cost",
+    "restrictions": "Restrictions",
+    "restrictionsDesc": "You may not:",
+    "restriction1": "Share, sell, rent, lease, or distribute access codes to others",
+    "restriction2": "Copy, reproduce, or redistribute the content for commercial purposes",
+    "restriction3": "Modify, create derivative works, or remove copyright notices",
+    "restriction4": "Use the products in a way that violates applicable laws",
+    "intellectualProperty": "Intellectual Property",
+    "intellectualPropertyDesc": "All content on this website, including text, graphics, logos, images, and software, is the property of Tamkinly and is protected by international copyright laws. The Tamkinly name, logo, and all related names, logos, product and service names, designs, and slogans are trademarks of Tamkinly.",
+    "disclaimer": "Disclaimer",
+    "disclaimerImportant": "Important: Our products are for personal development purposes only and are not a substitute for professional mental health advice, diagnosis, or treatment.",
+    "disclaimerDesc": "The products and services provided by Tamkinly are on an \"as is\" and \"as available\" basis without warranties of any kind, either express or implied. We do not guarantee specific results from using our products.",
+    "limitationOfLiability": "Limitation of Liability",
+    "limitationDesc": "To the maximum extent permitted by law, Tamkinly shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses. Our total liability shall not exceed the amount you paid for the product.",
+    "accountSecurity": "Account Security",
+    "accountSecurityDesc": "You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. You agree to notify us immediately of any unauthorized use of your account.",
+    "termination": "Termination",
+    "terminationDesc": "We reserve the right to terminate or suspend your access to our services at our sole discretion, without prior notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason.",
+    "changesToTerms": "Changes to Terms",
+    "changesDesc": "We may modify these terms at any time. We will notify users of significant changes via email or through our website. Your continued use of our services after changes constitutes acceptance of the updated terms.",
+    "governingLaw": "Governing Law",
+    "governingLawDesc": "These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.",
+    "questionsTerms": "Questions About Terms?",
+    "questionsTermsDesc": "Contact us for any questions regarding these terms",
+    "contactUs": "Contact Us"
+  },
+  "refundPage": {
+    "badge": "Refund Policy",
+    "title": "30-Day Money Back Guarantee",
+    "subtitle": "Not satisfied? Get a full refund within 30 days, no questions asked.",
+    "satisfactionGuaranteed": "100% Satisfaction Guaranteed",
+    "thirtyDayRefund": "30-Day Refund Window",
+    "fullRefundOriginal": "Full Refund to Original Payment",
+    "howToRequest": "How to Request a Refund",
+    "step1Title": "Contact Us",
+    "step1Desc": "Email us at hello@tamkinly.com within 30 days of purchase",
+    "step2Title": "Provide Details",
+    "step2Desc": "Include your order number and reason for refund request",
+    "step3Title": "Receive Refund",
+    "step3Desc": "We process refunds within 3-5 business days",
+    "ourPromise": "Our Promise",
+    "ourPromiseDesc": "We stand behind our products 100%. If you're not completely satisfied with your purchase, we'll refund your money in full. No questions asked, no hard feelings.",
+    "refundEligibility": "Refund Eligibility",
+    "allProductsEligible": "All Products Eligible",
+    "allProductsEligibleDesc": "Every product we sell is covered by our 30-day guarantee",
+    "noReasonRequired": "No Reason Required",
+    "noReasonRequiredDesc": "You don't need to explain why - just let us know you want a refund",
+    "keepYourProgress": "Keep Your Progress",
+    "keepYourProgressDesc": "Any work you've completed is yours to keep",
+    "refundTimeline": "Refund Timeline",
+    "days": "days",
+    "reviewApproved": "Request reviewed and approved",
+    "refundProcessed": "Refund processed to original payment method",
+    "fundsAppear": "Funds appear in your account (varies by bank)",
+    "exceptions": "Exceptions",
+    "afterThirtyDays": "After 30 Days",
+    "afterThirtyDaysDesc": "Refund requests made after the 30-day window may be considered on a case-by-case basis but are not guaranteed.",
+    "howRefundsProcessed": "How Refunds Are Processed",
+    "howRefundsDesc": "Refunds are processed back to the original payment method used for the purchase:",
+    "creditDebitCards": "Credit/Debit Cards: Refunded to the same card (5-10 business days)",
+    "paypal": "PayPal: Refunded to your PayPal account (3-5 business days)",
+    "otherMethods": "Other Methods: Refunded to the original payment source",
+    "needRefund": "Need a Refund?",
+    "needRefundDesc": "Contact our support team and we'll process your refund promptly",
+    "requestRefund": "Request Refund"
   }
 }

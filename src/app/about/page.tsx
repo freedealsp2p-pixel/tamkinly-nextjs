@@ -14,22 +14,25 @@ import {
   Compass,
   Scale
 } from "lucide-react";
+import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
 
 // Hero Section
 function HeroSection() {
+  const t = useTranslations("about");
+  const { locale } = useLocale();
+
   return (
     <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <Badge variant="outline" className="mb-6 px-4 py-2 border-accent/30 text-accent bg-accent/10">
-            Our Story
+            {t("heroBadge")}
           </Badge>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            About&nbsp;<span className="text-accent">Tamkinly</span>
+            {t("heroTitle")}{locale === 'ar' ? '' : '\u00A0'}<span className="text-accent">{t("heroTitleHighlight")}</span>
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed">
-            A space born from the understanding that true transformation doesn't come from 
-            fixing what's broken—but from returning to what's always been there.
+            {t("heroSubtitle")}
           </p>
         </div>
       </div>
@@ -39,31 +42,28 @@ function HeroSection() {
 
 // Mission Section
 function MissionSection() {
+  const t = useTranslations("about");
+
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <Badge variant="secondary" className="mb-4">
-              Our Mission
+              {t("missionBadge")}
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-6">
-              Return to Who You Already Are
+              {t("missionTitle")}
             </h2>
             <div className="space-y-4 text-slate-600 leading-relaxed">
               <p>
-                In a world obsessed with self-improvement, we forgot something essential: 
-                you&apos;re not a project to be completed. You&apos;re not a problem to be solved. 
-                You&apos;re not broken.
+                {t("missionP1")}
               </p>
               <p>
-                Tamkinly was created from a simple but radical idea—that the path forward 
-                isn&apos;t about becoming someone new, but about returning to who you&apos;ve always been 
-                beneath the layers of expectations, conditioning, and self-judgment.
+                {t("missionP2")}
               </p>
               <p>
-                We don&apos;t offer quick fixes or temporary motivation. We provide frameworks 
-                for deep identity work that creates lasting transformation from the inside out.
+                {t("missionP3")}
               </p>
             </div>
           </div>
@@ -73,10 +73,10 @@ function MissionSection() {
               <CardContent className="p-8 lg:p-10">
                 <div className="text-6xl text-accent/30 font-serif mb-4">&ldquo;</div>
                 <blockquote className="font-serif text-2xl text-primary leading-relaxed mb-6">
-                  The journey isn&apos;t about adding more. It&apos;s about removing everything that isn&apos;t truly you.
+                  {t("missionQuote")}
                 </blockquote>
                 <p className="text-sm text-slate-500">
-                  — The Tamkinly Philosophy
+                  {t("missionQuoteAttrib")}
                 </p>
               </CardContent>
             </Card>
@@ -89,36 +89,38 @@ function MissionSection() {
 
 // Values Section
 function ValuesSection() {
+  const t = useTranslations("about");
+
   const values = [
     {
       icon: Heart,
-      title: "No Self-Judgment",
-      description: "We meet you where you are, not where you 'should' be. Growth without shame."
+      title: t("value1Title"),
+      description: t("value1Desc")
     },
     {
       icon: Target,
-      title: "Identity-First",
-      description: "Lasting change starts at the identity level, not the behavior level."
+      title: t("value2Title"),
+      description: t("value2Desc")
     },
     {
       icon: Users,
-      title: "Human-Centered",
-      description: "We design for real humans with real complexities, not idealized versions."
+      title: t("value3Title"),
+      description: t("value3Desc")
     },
     {
       icon: Lightbulb,
-      title: "Clarity Over Complexity",
-      description: "Simple doesn't mean shallow. Deep work can be beautifully simple."
+      title: t("value4Title"),
+      description: t("value4Desc")
     },
     {
       icon: Compass,
-      title: "Self-Direction",
-      description: "We provide the map, but you choose the path. Your journey is yours."
+      title: t("value5Title"),
+      description: t("value5Desc")
     },
     {
       icon: Scale,
-      title: "Evidence-Informed",
-      description: "Grounded in psychology, neuroscience, and proven transformation principles."
+      title: t("value6Title"),
+      description: t("value6Desc")
     }
   ];
 
@@ -127,13 +129,13 @@ function ValuesSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <Badge variant="secondary" className="mb-4">
-            Our Values
+            {t("valuesBadge")}
           </Badge>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
-            What We Believe
+            {t("valuesTitle")}
           </h2>
           <p className="text-slate-600">
-            These aren&apos;t just words on a page. They&apos;re the principles that guide every product we create.
+            {t("valuesSubtitle")}
           </p>
         </div>
         
@@ -157,22 +159,24 @@ function ValuesSection() {
 
 // What Makes Us Different
 function DifferentSection() {
+  const t = useTranslations("about");
+
   const differences = [
     {
-      title: "Not Another Planner",
-      description: "We don't just give you empty pages to fill. Every prompt, every exercise is strategically designed to guide you deeper into self-understanding."
+      title: t("diff1Title"),
+      description: t("diff1Desc")
     },
     {
-      title: "No Toxic Positivity",
-      description: "We won't tell you to 'just think positive' or 'manifest your dreams.' Real transformation requires honest self-confrontation."
+      title: t("diff2Title"),
+      description: t("diff2Desc")
     },
     {
-      title: "Depth Over Hacks",
-      description: "Quick tips don't create lasting change. We go deep, because that's where real transformation happens."
+      title: t("diff3Title"),
+      description: t("diff3Desc")
     },
     {
-      title: "One-Time Purchase",
-      description: "No subscriptions. No upsells. No hidden fees. Buy once, own forever—including all future updates."
+      title: t("diff4Title"),
+      description: t("diff4Desc")
     }
   ];
 
@@ -182,10 +186,10 @@ function DifferentSection() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="secondary" className="mb-4">
-              What Makes Us Different
+              {t("differentBadge")}
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
-              Not Your Typical Self-Help Brand
+              {t("differentTitle")}
             </h2>
           </div>
           
@@ -207,20 +211,21 @@ function DifferentSection() {
 
 // Founders Section — A Collective Born From Lived Experience
 function FounderSection() {
+  const t = useTranslations("about");
+
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-accent/5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="secondary" className="mb-4">
-              The Founders
+              {t("foundersBadge")}
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
-              Born From Experience, Not Theory
+              {t("foundersTitle")}
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              We didn&apos;t start with a business plan. We started with a shared realization—that the life 
-              we were living wasn&apos;t the one we were capable of.
+              {t("foundersSubtitle")}
             </p>
           </div>
           
@@ -235,7 +240,7 @@ function FounderSection() {
                     <div className="relative w-full max-w-[320px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20">
                       <Image 
                         src="/founders-team.webp" 
-                        alt="Tamkinly Founding Team - Young visionaries planning together" 
+                        alt={t("foundersImageAlt")} 
                         width={672}
                         height={384}
                         className="w-full h-auto object-cover"
@@ -247,7 +252,7 @@ function FounderSection() {
                     <div className="mt-6 bg-white rounded-full px-5 py-2 shadow-lg border border-accent/20">
                       <span className="text-sm font-medium text-primary flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        Building the future of self-transformation
+                        {t("foundersLive")}
                       </span>
                     </div>
                   </div>
@@ -260,22 +265,13 @@ function FounderSection() {
                   
                   <blockquote className="text-slate-700 leading-relaxed mb-6 text-lg">
                     <p className="mb-4">
-                      Each of us had spent years chasing a &ldquo;better&rdquo; version of ourselves—reading the books, 
-                      attending the workshops, following the gurus. We tried every method available, and while some 
-                      things worked temporarily, nothing created lasting change. Because they were all trying to 
-                      &apos;fix&apos; us, as if we were broken.
+                      {t("foundersQuoteP1")}
                     </p>
                     <p className="mb-4">
-                      What we discovered—through our own struggles, failures, and breakthroughs—was that the answer 
-                      wasn&apos;t about becoming someone new. It was about stripping away everything that wasn&apos;t 
-                      truly us. Not the complete version, but the version that lives with meaning, purpose, and 
-                      authenticity. The strongest, healthiest, most beautiful version that was always there beneath 
-                      the noise.
+                      {t("foundersQuoteP2")}
                     </p>
                     <p>
-                      Tamkinly was born from that shared journey. We didn&apos;t create it from textbooks—we built it 
-                      from the scars and wisdom of our own transformation. And we&apos;re here to walk that path 
-                      with you.
+                      {t("foundersQuoteP3")}
                     </p>
                   </blockquote>
                   
@@ -287,10 +283,10 @@ function FounderSection() {
                       </div>
                       <div>
                         <p className="font-semibold text-primary text-xl">
-                          The Tamkinly Founders
+                          {t("foundersName")}
                         </p>
                         <p className="text-[#1F6F78] font-medium">
-                          A collective of lived experiences
+                          {t("foundersRole")}
                         </p>
                       </div>
                     </div>
@@ -299,18 +295,18 @@ function FounderSection() {
                   {/* Social proof */}
                   <div className="flex items-center gap-6 mt-6 pt-6 border-t border-slate-100">
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-primary">500+</p>
-                      <p className="text-sm text-slate-500">Transformations</p>
+                      <p className="text-2xl font-bold text-primary">{t("stat1Value")}</p>
+                      <p className="text-sm text-slate-500">{t("stat1Label")}</p>
                     </div>
                     <div className="w-px h-10 bg-slate-200" />
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-primary">15+</p>
-                      <p className="text-sm text-slate-500">Years of Combined Research</p>
+                      <p className="text-2xl font-bold text-primary">{t("stat2Value")}</p>
+                      <p className="text-sm text-slate-500">{t("stat2Label")}</p>
                     </div>
                     <div className="w-px h-10 bg-slate-200" />
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-primary">4</p>
-                      <p className="text-sm text-slate-500">Founding Members</p>
+                      <p className="text-2xl font-bold text-primary">{t("stat3Value")}</p>
+                      <p className="text-sm text-slate-500">{t("stat3Label")}</p>
                     </div>
                   </div>
                 </div>
@@ -325,27 +321,29 @@ function FounderSection() {
 
 // CTA Section
 function CTASection() {
+  const t = useTranslations("about");
+
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-primary via-primary to-slate-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Return to{" "}
-            <span className="text-accent">Yourself</span>?
+            {t("ctaTitleBefore")}
+            <span className="text-accent">{t("ctaTitleHighlight")}</span>{t("ctaTitleAfter")}
           </h2>
           <p className="text-lg text-slate-300 mb-8">
-            Start your journey of identity reconstruction today.
+            {t("ctaSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/products">
               <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                Explore Products
+                {t("ctaExploreProducts")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link href="/methodology">
               <Button variant="white" size="lg" className="px-8 font-semibold">
-                Our Methodology
+                {t("ctaOurMethodology")}
               </Button>
             </Link>
           </div>

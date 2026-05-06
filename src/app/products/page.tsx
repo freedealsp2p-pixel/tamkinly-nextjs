@@ -40,6 +40,7 @@ import { useToast } from "@/hooks/use-toast";
 import { addToCart } from "@/lib/cart-client";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateProductSchema, generateFAQSchema, generateBreadcrumbSchema } from "@/lib/seo";
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 // Product URLs mapping
 const PRODUCT_URLS: Record<string, string> = {
@@ -67,144 +68,8 @@ const appIcons: Record<string, React.ElementType> = {
   'FileText': FileText,
 };
 
-// Product data with access tiers
-const products = [
-  {
-    id: "free",
-    name: "Free Starter",
-    shortName: "Free",
-    price: 0,
-    comparePrice: 0,
-    tier: "FREE",
-    description: "Start your transformation journey with free powerful tools. No credit card required.",
-    features: [
-      "Identity Gap Assessment",
-      "Values Clarification Tool", 
-      "Daily Reflection Prompt",
-      "Basic progress tracking",
-      "Email support"
-    ],
-    apps: ["identity-gap-quiz", "values-clarification", "daily-reflection"],
-    highlights: [
-      "Free forever",
-      "No credit card",
-      "Instant access"
-    ],
-    icon: Sparkles,
-    color: "#3DD4B0",
-    cta: "Start Free",
-    popular: false
-  },
-  {
-    id: "trial",
-    name: "7-Day Trial",
-    shortName: "Trial",
-    price: 7,
-    comparePrice: 15,
-    tier: "TRIAL",
-    description: "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
-    features: [
-      "7-Day Guided Journey",
-      "Daily identity prompts",
-      "Evidence tracking",
-      "Progress dashboard",
-      "Email support"
-    ],
-    apps: ["trial-planner", "identity-gap-quiz", "values-clarification", "daily-reflection"],
-    highlights: [
-      "Full system access",
-      "7 days",
-      "Low risk"
-    ],
-    icon: Clock,
-    featured: false,
-    popular: false
-  },
-  {
-    id: "planner",
-    name: "Identity Recode Planner",
-    shortName: "The Planner",
-    price: 17,
-    comparePrice: 29,
-    tier: "BASIC",
-    description: "The complete 30-day transformation system with interactive apps and PDF downloads.",
-    features: [
-      "30-Day Identity Planner",
-      "Executive Manual",
-      "Identity Baseline Worksheet",
-      "Environmental Audit",
-      "Digital + Print PDFs",
-      "Lifetime access"
-    ],
-    apps: ["executive-manual", "daily-planner", "identity-baseline", "environmental-audit"],
-    highlights: [
-      "Most popular",
-      "Print included",
-      "30-day journey"
-    ],
-    icon: Calendar,
-    featured: true,
-    popular: true
-  },
-  {
-    id: "premium",
-    name: "Premium Transformation",
-    shortName: "Premium",
-    price: 27,
-    comparePrice: 44,
-    tier: "PREMIUM",
-    description: "Everything in Planner plus advanced analytics and decision tracking tools.",
-    features: [
-      "Everything in Planner ($17 value)",
-      "Decision Pattern Analysis",
-      "Evidence Tracking System",
-      "Progress Dashboard",
-      "Advanced analytics",
-      "Priority support"
-    ],
-    apps: ["executive-manual", "daily-planner", "identity-baseline", "environmental-audit", "decision-analysis", "evidence-tracking", "progress-dashboard"],
-    highlights: [
-      "Best value",
-      "Save $17",
-      "Analytics included"
-    ],
-    icon: Award,
-    featured: true,
-    popular: false
-  },
-  {
-    id: "bundle",
-    name: "Complete Bundle",
-    shortName: "Bundle",
-    price: 47,
-    comparePrice: 91,
-    tier: "BUNDLE",
-    description: "The ultimate package: All apps + AI coaching + community access + priority support.",
-    features: [
-      "All PDF products ($44 value)",
-      "All Interactive Apps",
-      "AI Identity Coach",
-      "Transformation Community",
-      "Emotion Regulation (ERQ)",
-      "Priority Support (24hr response)",
-      "Monthly live Q&A sessions",
-      "Direct founding team access"
-    ],
-    apps: ["executive-manual", "daily-planner", "identity-baseline", "environmental-audit", "decision-analysis", "evidence-tracking", "progress-dashboard", "emotion-regulation", "ai-identity-coach", "community-access", "priority-support"],
-    highlights: [
-      "Save $44",
-      "AI coaching",
-      "VIP access"
-    ],
-    icon: Monitor,
-    featured: true,
-    popular: false,
-    isBundle: true
-  }
-];
-
 // Hero Section
-function HeroSection() {
+function HeroSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   return (
     <section className="bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] py-16 lg:py-24 relative overflow-hidden">
       {/* Background Pattern */}
@@ -219,18 +84,18 @@ function HeroSection() {
         <div className="max-w-4xl mx-auto text-center">
           <Badge className="mb-6 px-4 py-2 border-[#3DD4B0]/30 text-[#3DD4B0] bg-[#3DD4B0]/10">
             <Zap className="w-3.5 h-3.5 mr-2" />
-            Start Free — Upgrade When Ready
+            {t('heroBadge')}
           </Badge>
           
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Choose Your 
-            <span className="text-[#3DD4B0]"> Transformation Path</span>
+            {t('heroTitle')}
+            <span className="text-[#3DD4B0]">{t('heroTitleHighlight')}</span>
           </h1>
           
           <p className="text-lg sm:text-xl text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto">
-            Start free with powerful identity tools, then upgrade as you grow. 
-            <span className="text-white font-semibold">No pressure. No commitment.</span> 
-            Real transformation at your pace.
+            {t('heroSubtitle')}
+            <span className="text-white font-semibold">{t('heroSubtitleBold')}</span>
+            {t('heroSubtitleEnd')}
           </p>
           
           {/* Quick Stats */}
@@ -238,7 +103,7 @@ function HeroSection() {
             <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm">
               <Users className="h-5 w-5 text-[#3DD4B0]" />
               <span className="text-white text-sm">
-                <span className="font-bold">15</span> Interactive Apps
+                <span className="font-bold">15</span> {t('heroAppsCount')}
               </span>
             </div>
           </div>
@@ -247,15 +112,15 @@ function HeroSection() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-[#3DD4B0]" />
-              <span>30-Day Money Back</span>
+              <span>{t('trustMoneyBack')}</span>
             </div>
             <div className="flex items-center gap-2">
               <Download className="h-4 w-4 text-[#3DD4B0]" />
-              <span>Instant Access</span>
+              <span>{t('trustInstantAccess')}</span>
             </div>
             <div className="flex items-center gap-2">
               <Zap className="h-4 w-4 text-[#3DD4B0]" />
-              <span>Lifetime Access</span>
+              <span>{t('trustLifetimeAccess')}</span>
             </div>
           </div>
         </div>
@@ -265,23 +130,33 @@ function HeroSection() {
 }
 
 // App Access Matrix Section
-function AppMatrixSection() {
+function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
+  // Build allApps using translations - access flags are not translatable
   const allApps = [
-    { name: "Identity Gap Assessment", free: true, trial: true, basic: true, premium: true, bundle: true },
-    { name: "Values Clarification", free: true, trial: true, basic: true, premium: true, bundle: true },
-    { name: "Daily Reflection", free: true, trial: true, basic: true, premium: true, bundle: true },
-    { name: "7-Day Trial Planner", free: false, trial: true, basic: true, premium: true, bundle: true },
-    { name: "Executive Manual", free: false, trial: false, basic: true, premium: true, bundle: true },
-    { name: "30-Day Identity Planner", free: false, trial: false, basic: true, premium: true, bundle: true },
-    { name: "Identity Baseline Worksheet", free: false, trial: false, basic: true, premium: true, bundle: true },
-    { name: "Environmental Audit", free: false, trial: false, basic: true, premium: true, bundle: true },
-    { name: "Decision Pattern Analysis", free: false, trial: false, basic: false, premium: true, bundle: true },
-    { name: "Evidence Tracking System", free: false, trial: false, basic: false, premium: true, bundle: true },
-    { name: "Progress Dashboard", free: false, trial: false, basic: false, premium: true, bundle: true },
-    { name: "Emotion Regulation (ERQ)", free: false, trial: false, basic: false, premium: false, bundle: true },
-    { name: "AI Identity Coach", free: false, trial: false, basic: false, premium: false, bundle: true },
-    { name: "Transformation Community", free: false, trial: false, basic: false, premium: false, bundle: true },
-    { name: "Priority Support", free: false, trial: false, basic: false, premium: false, bundle: true },
+    { nameKey: '0', free: true, trial: true, basic: true, premium: true, bundle: true },
+    { nameKey: '1', free: true, trial: true, basic: true, premium: true, bundle: true },
+    { nameKey: '2', free: true, trial: true, basic: true, premium: true, bundle: true },
+    { nameKey: '3', free: false, trial: true, basic: true, premium: true, bundle: true },
+    { nameKey: '4', free: false, trial: false, basic: true, premium: true, bundle: true },
+    { nameKey: '5', free: false, trial: false, basic: true, premium: true, bundle: true },
+    { nameKey: '6', free: false, trial: false, basic: true, premium: true, bundle: true },
+    { nameKey: '7', free: false, trial: false, basic: true, premium: true, bundle: true },
+    { nameKey: '8', free: false, trial: false, basic: false, premium: true, bundle: true },
+    { nameKey: '9', free: false, trial: false, basic: false, premium: true, bundle: true },
+    { nameKey: '10', free: false, trial: false, basic: false, premium: true, bundle: true },
+    { nameKey: '11', free: false, trial: false, basic: false, premium: false, bundle: true },
+    { nameKey: '12', free: false, trial: false, basic: false, premium: false, bundle: true },
+    { nameKey: '13', free: false, trial: false, basic: false, premium: false, bundle: true },
+    { nameKey: '14', free: false, trial: false, basic: false, premium: false, bundle: true },
+  ];
+
+  // Product data for the matrix (non-translatable parts)
+  const productsForMatrix = [
+    { id: "free", tier: 'FREE', color: "#3DD4B0", price: 0, popular: false, nameKey: 'free' },
+    { id: "trial", tier: 'TRIAL', color: "#1F6F78", price: 7, popular: false, nameKey: 'trial' },
+    { id: "planner", tier: 'BASIC', color: "#3DD4B0", price: 17, popular: true, nameKey: 'planner' },
+    { id: "premium", tier: 'PREMIUM', color: "#1F6F78", price: 27, popular: false, nameKey: 'premium' },
+    { id: "bundle", tier: 'BUNDLE', color: "#0F1C2E", price: 47, popular: false, nameKey: 'bundle' },
   ];
 
   return (
@@ -291,25 +166,25 @@ function AppMatrixSection() {
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-[#3DD4B0]/10 text-[#3DD4B0]">
               <Monitor className="w-3 h-3 mr-1" />
-              App Access Matrix
+              {t('matrixBadge')}
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F1C2E] mb-4">
-              See What&apos;s Included in Each Package
+              {t('matrixTitle')}
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Transparent pricing. Know exactly what you&apos;re getting before you buy.
+              {t('matrixSubtitle')}
             </p>
           </div>
           
           {/* Mobile View */}
           <div className="lg:hidden space-y-4">
-            {products.map((product) => (
+            {productsForMatrix.map((product) => (
               <Card key={product.id} className={`border-2 ${product.popular ? 'border-[#3DD4B0]' : 'border-slate-200'}`}>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-bold text-[#0F1C2E]">{product.name}</h3>
+                    <h3 className="font-bold text-[#0F1C2E]">{t(`products.${product.nameKey}.name`)}</h3>
                     <Badge style={{ backgroundColor: product.color, color: product.id === 'free' ? '#0F1C2E' : 'white' }}>
-                      {product.price === 0 ? 'Free' : `$${product.price}`}
+                      {product.price === 0 ? t('free') : `$${product.price}`}
                     </Badge>
                   </div>
                   <div className="space-y-2">
@@ -326,7 +201,7 @@ function AppMatrixSection() {
                           ) : (
                             <Lock className="w-4 h-4 text-slate-300" />
                           )}
-                          <span>{app.name}</span>
+                          <span>{t(`matrixApps.${idx}`)}</span>
                         </div>
                       );
                     })}
@@ -341,25 +216,25 @@ function AppMatrixSection() {
             <table className="w-full">
               <thead>
                 <tr className="border-b-2 border-slate-200">
-                  <th className="text-left py-4 px-4 font-semibold text-[#0F1C2E]">Apps / Tools</th>
+                  <th className="text-left py-4 px-4 font-semibold text-[#0F1C2E]">{t('matrixAppsTools')}</th>
                   <th className="text-center py-4 px-4">
-                    <div className="text-[#3DD4B0] font-bold">Free</div>
+                    <div className="text-[#3DD4B0] font-bold">{t('free')}</div>
                     <div className="text-sm text-slate-500">$0</div>
                   </th>
                   <th className="text-center py-4 px-4">
-                    <div className="text-slate-600 font-bold">Trial</div>
+                    <div className="text-slate-600 font-bold">{t('trial')}</div>
                     <div className="text-sm text-slate-500">$7</div>
                   </th>
                   <th className="text-center py-4 px-4 bg-[#3DD4B0]/5 border-2 border-[#3DD4B0] rounded-t-lg">
-                    <div className="text-[#3DD4B0] font-bold">BASIC</div>
+                    <div className="text-[#3DD4B0] font-bold">{t('basic')}</div>
                     <div className="text-sm text-slate-500">$17</div>
                   </th>
                   <th className="text-center py-4 px-4">
-                    <div className="text-[#1F6F78] font-bold">Premium</div>
+                    <div className="text-[#1F6F78] font-bold">{t('premium')}</div>
                     <div className="text-sm text-slate-500">$27</div>
                   </th>
                   <th className="text-center py-4 px-4">
-                    <div className="text-[#0F1C2E] font-bold">Bundle</div>
+                    <div className="text-[#0F1C2E] font-bold">{t('bundle')}</div>
                     <div className="text-sm text-slate-500">$47</div>
                   </th>
                 </tr>
@@ -367,7 +242,7 @@ function AppMatrixSection() {
               <tbody>
                 {allApps.map((app, idx) => (
                   <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="py-3 px-4 text-slate-700">{app.name}</td>
+                    <td className="py-3 px-4 text-slate-700">{t(`matrixApps.${idx}`)}</td>
                     <td className="text-center py-3 px-4">
                       {app.free ? <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] mx-auto" /> : <span className="text-slate-300">—</span>}
                     </td>
@@ -395,12 +270,25 @@ function AppMatrixSection() {
 }
 
 // Product Card Component
-function ProductCard({ product }: { 
-  product: typeof products[0]; 
+function ProductCard({ product, t }: { 
+  product: {
+    id: string;
+    nameKey: string;
+    price: number;
+    comparePrice: number;
+    tier: string;
+    icon: React.ElementType;
+    popular: boolean;
+    isBundle?: boolean;
+    featured?: boolean;
+  };
+  t: ReturnType<typeof useTranslations>;
 }) {
   const Icon = product.icon;
   const isFree = product.price === 0;
   const { toast } = useToast();
+  
+  const productName = t(`products.${product.nameKey}.name`);
   
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -408,15 +296,40 @@ function ProductCard({ product }: {
     addToCart({
       id: `cart-${product.id}-${Date.now()}`,
       productId: product.id,
-      name: product.name,
+      name: productName,
       price: product.price,
       comparePrice: product.comparePrice || undefined,
     });
     toast({
-      title: 'Added to Cart!',
-      description: `${product.name} has been added to your cart.`,
+      title: t('addedToCart'),
+      description: t('addedToCartDesc').replace('{name}', productName),
     });
   };
+
+  // Get features and highlights from translations
+  const features: string[] = [];
+  const highlights: string[] = [];
+  
+  // We need to iterate over array indices in the translation
+  let idx = 0;
+  while (true) {
+    try {
+      const feature = t(`products.${product.nameKey}.features.${idx}`);
+      if (feature === `products.${product.nameKey}.features.${idx}`) break; // key not found
+      features.push(feature);
+      idx++;
+    } catch { break; }
+  }
+  
+  idx = 0;
+  while (true) {
+    try {
+      const highlight = t(`products.${product.nameKey}.highlights.${idx}`);
+      if (highlight === `products.${product.nameKey}.highlights.${idx}`) break;
+      highlights.push(highlight);
+      idx++;
+    } catch { break; }
+  }
   
   return (
     <Card className={`relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white ${
@@ -427,7 +340,7 @@ function ProductCard({ product }: {
         <div className="absolute top-4 right-4 z-10">
           <Badge className="bg-[#3DD4B0] text-[#0F1C2E] font-semibold">
             <Star className="w-3 h-3 mr-1 fill-current" />
-            Most Popular
+            {t('mostPopular')}
           </Badge>
         </div>
       )}
@@ -437,7 +350,7 @@ function ProductCard({ product }: {
         <div className="absolute top-4 right-4 z-10">
           <Badge className="bg-[#0F1C2E] text-white font-semibold">
             <Monitor className="w-3 h-3 mr-1" />
-            Best Value
+            {t('bestValue')}
           </Badge>
         </div>
       )}
@@ -451,20 +364,20 @@ function ProductCard({ product }: {
         {/* Header */}
         <div className="mb-4">
           <Badge variant="outline" className="mb-3 text-xs">
-            {product.shortName}
+            {t(`products.${product.nameKey}.shortName`)}
           </Badge>
           <h3 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-2">
-            {product.name}
+            {productName}
           </h3>
           <p className="text-slate-600 leading-relaxed text-sm">
-            {product.description}
+            {t(`products.${product.nameKey}.description`)}
           </p>
         </div>
         
         {/* Price */}
         <div className="flex items-baseline gap-2 mb-4">
           {isFree ? (
-            <span className="text-4xl font-bold text-[#3DD4B0]">Free</span>
+            <span className="text-4xl font-bold text-[#3DD4B0]">{t('free')}</span>
           ) : (
             <>
               <span className="text-4xl font-bold text-[#0F1C2E]">${product.price}</span>
@@ -478,13 +391,13 @@ function ProductCard({ product }: {
         {/* Savings Badge */}
         {!isFree && product.comparePrice && product.comparePrice > product.price && (
           <Badge className="bg-green-100 text-green-700 mb-4">
-            Save ${product.comparePrice - product.price}
+            {t('save')} ${product.comparePrice - product.price}
           </Badge>
         )}
         
         {/* Highlights */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {product.highlights.map((highlight, idx) => (
+          {highlights.map((highlight, idx) => (
             <Badge key={idx} variant="secondary" className="text-xs">
               {highlight}
             </Badge>
@@ -493,7 +406,7 @@ function ProductCard({ product }: {
         
         {/* Features */}
         <ul className="space-y-2 mb-6">
-          {product.features.map((feature, idx) => (
+          {features.map((feature, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <CheckCircle2 className="h-4 w-4 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
               <span className="text-slate-700 text-sm">{feature}</span>
@@ -508,7 +421,7 @@ function ProductCard({ product }: {
               className={`w-full h-12 font-semibold bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]`}
               size="lg"
             >
-              Start Free Now
+              {t('startFreeNow')}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
@@ -521,7 +434,7 @@ function ProductCard({ product }: {
                     : 'bg-[#0F1C2E] text-white hover:bg-[#1a2d47]'}`}
                 size="lg"
               >
-                View Details - ${product.price}
+                {t('viewDetails')} - ${product.price}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -531,7 +444,7 @@ function ProductCard({ product }: {
               className="w-full h-10 font-medium border-[#3DD4B0]/30 text-[#3DD4B0] hover:bg-[#3DD4B0]/10"
             >
               <ShoppingCart className="mr-2 h-4 w-4" />
-              Add to Cart
+              {t('addToCart')}
             </Button>
           </div>
         )}
@@ -541,20 +454,29 @@ function ProductCard({ product }: {
 }
 
 // Products Grid Section
-function ProductsSection() {
+function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
+  // Product data with non-translatable fields
+  const products = [
+    { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, color: "#3DD4B0", popular: false, isBundle: false },
+    { id: "trial", nameKey: "trial", price: 7, comparePrice: 15, tier: "TRIAL", icon: Clock, featured: false, popular: false, isBundle: false },
+    { id: "planner", nameKey: "planner", price: 17, comparePrice: 29, tier: "BASIC", icon: Calendar, featured: true, popular: true, isBundle: false },
+    { id: "premium", nameKey: "premium", price: 27, comparePrice: 44, tier: "PREMIUM", icon: Award, featured: true, popular: false, isBundle: false },
+    { id: "bundle", nameKey: "bundle", price: 47, comparePrice: 91, tier: "BUNDLE", icon: Monitor, featured: true, popular: false, isBundle: true },
+  ];
+
   return (
     <section className="py-16 lg:py-24 bg-[#F6F8FA]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <Badge className="mb-4 bg-[#3DD4B0]/10 text-[#3DD4B0]">
             <TrendingUp className="w-3.5 h-3.5 mr-1" />
-            Value Ladder
+            {t('valueLadderBadge')}
           </Badge>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F1C2E] mb-4">
-            Choose Your Transformation Path
+            {t('valueLadderTitle')}
           </h2>
           <p className="text-slate-600">
-            Start free and upgrade as you grow. Each tier unlocks more powerful tools.
+            {t('valueLadderSubtitle')}
           </p>
         </div>
         
@@ -562,7 +484,8 @@ function ProductsSection() {
           {products.map((product) => (
             <ProductCard 
               key={product.id} 
-              product={product} 
+              product={product}
+              t={t}
             />
           ))}
         </div>
@@ -570,17 +493,17 @@ function ProductsSection() {
         {/* Payment Methods Note */}
         <div className="text-center mt-12">
           <p className="text-sm text-slate-500 mb-4">
-            Secure checkout powered by Tamkinly. Multiple payment options available.
+            {t('secureCheckout')}
           </p>
           <div className="flex items-center justify-center gap-4 text-xs text-slate-400">
             <span className="flex items-center gap-1">
               <Shield className="w-4 h-4" />
-              SSL Secured
+              {t('sslSecured')}
             </span>
             <span>|</span>
             <span>Wise • Crypto • Bank Transfer (Coming Soon)</span>
             <span>|</span>
-            <span>30-Day Refund Policy</span>
+            <span>{t('refundPolicy')}</span>
           </div>
         </div>
       </div>
@@ -589,7 +512,7 @@ function ProductsSection() {
 }
 
 // Guarantee Section
-function GuaranteeSection() {
+function GuaranteeSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   return (
     <section className="py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -600,24 +523,23 @@ function GuaranteeSection() {
                 <Shield className="h-8 w-8" />
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-                30-Day Money-Back Guarantee
+                {t('guaranteeTitle')}
               </h2>
               <p className="text-slate-300 leading-relaxed mb-6">
-                We&apos;re confident in our products. If you&apos;re not completely satisfied within 30 days, 
-                simply email us for a full refund — no questions asked, no hard feelings.
+                {t('guaranteeDesc')}
               </p>
               <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#3DD4B0]" />
-                  <span>No questions asked</span>
+                  <span>{t('noQuestionsAsked')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#3DD4B0]" />
-                  <span>Full refund</span>
+                  <span>{t('fullRefund')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#3DD4B0]" />
-                  <span>Keep the product</span>
+                  <span>{t('keepProduct')}</span>
                 </div>
               </div>
             </CardContent>
@@ -629,29 +551,18 @@ function GuaranteeSection() {
 }
 
 // FAQ Section
-function FAQSection() {
-  const faqs = [
-    {
-      q: "Can I start for free?",
-      a: "Yes! Our Free Starter tier includes 3 powerful apps: Identity Gap Assessment, Values Clarification, and Daily Reflection. No credit card required."
-    },
-    {
-      q: "What's the difference between tiers?",
-      a: "FREE: 3 basic apps. TRIAL: 7-day full access. BASIC ($17): 4 core apps + PDFs. PREMIUM ($27): 7 apps + analytics. BUNDLE ($47): All 11 apps + AI Coach + Community + Priority Support."
-    },
-    {
-      q: "How do I access the apps after purchase?",
-      a: "After purchasing, you'll receive immediate access via your access key. Simply go to /apps and enter your key, or create an account with the same email."
-    },
-    {
-      q: "Is there a money-back guarantee?",
-      a: "Yes! We offer a 30-day money-back guarantee on all paid products. If you're not satisfied, simply contact us for a full refund—no questions asked."
-    },
-    {
-      q: "Can I upgrade later?",
-      a: "Absolutely! Start with any tier and upgrade anytime. You'll only pay the difference between your current and new tier."
-    }
-  ];
+function FAQSection({ t }: { t: ReturnType<typeof useTranslations> }) {
+  // Get FAQ items from translations
+  const faqs: { q: string; a: string }[] = [];
+  let idx = 0;
+  while (true) {
+    const q = t(`faqs.${idx}.q`);
+    const a = t(`faqs.${idx}.a`);
+    // If the key returned is the same as the lookup key, it means it wasn't found
+    if (q === `faqs.${idx}.q` || a === `faqs.${idx}.a`) break;
+    faqs.push({ q, a });
+    idx++;
+  }
 
   return (
     <section className="py-16 lg:py-24 bg-[#F6F8FA]">
@@ -659,10 +570,10 @@ function FAQSection() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="secondary" className="mb-4">
-              FAQ
+              {t('faqBadge')}
             </Badge>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F1C2E]">
-              Frequently Asked Questions
+              {t('faqTitle')}
             </h2>
           </div>
           
@@ -683,18 +594,17 @@ function FAQSection() {
 }
 
 // CTA Section
-function CTASection() {
+function CTASection({ t }: { t: ReturnType<typeof useTranslations> }) {
   return (
     <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Start Your Transformation 
-            <span className="text-[#3DD4B0]"> Today</span>
+            {t('ctaTitle')}
+            <span className="text-[#3DD4B0]">{t('ctaTitleHighlight')}</span>
           </h2>
           <p className="text-lg text-slate-300 mb-8">
-            Begin with our free tools. No credit card required. 
-            Upgrade when you&apos;re ready for deeper transformation.
+            {t('ctaSubtitle')}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -703,13 +613,13 @@ function CTASection() {
                 size="lg" 
                 className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-14 font-semibold shadow-xl"
               >
-                Start Free Now
+                {t('startFreeNow')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link href="/quiz">
               <Button variant="white" size="lg" className="px-8 h-14 font-semibold">
-                Take Free Assessment
+                {t('takeFreeAssessment')}
               </Button>
             </Link>
           </div>
@@ -721,11 +631,21 @@ function CTASection() {
 
 // Main Page
 export default function ProductsPage() {
+  const t = useTranslations("productsPage");
+
   // Generate product schemas for SEO
-  const productSchemas = products.map((product) =>
+  const productData = [
+    { nameKey: "free", price: 0 },
+    { nameKey: "trial", price: 7 },
+    { nameKey: "planner", price: 17 },
+    { nameKey: "premium", price: 27 },
+    { nameKey: "bundle", price: 47 },
+  ];
+
+  const productSchemas = productData.map((product) =>
     generateProductSchema({
-      name: product.name,
-      description: product.description,
+      name: t(`products.${product.nameKey}.name`),
+      description: t(`products.${product.nameKey}.description`),
       price: product.price,
       url: `/products`,
       category: 'Digital Product',
@@ -735,16 +655,16 @@ export default function ProductsPage() {
   // FAQ schema for pricing questions
   const faqSchema = generateFAQSchema([
     {
-      question: "Can I start for free?",
-      answer: "Yes! Our Free Starter tier includes 3 powerful apps: Identity Gap Assessment, Values Clarification, and Daily Reflection. No credit card required.",
+      question: t('faqs.0.q'),
+      answer: t('faqs.0.a'),
     },
     {
-      question: "What's the difference between tiers?",
-      answer: "FREE: 3 basic apps. TRIAL: 7-day full access. BASIC ($17): 4 core apps + PDFs. PREMIUM ($27): 7 apps + analytics. BUNDLE ($47): All 11 apps + AI Coach + Community + Priority Support.",
+      question: t('faqs.1.q'),
+      answer: t('faqs.1.a'),
     },
     {
-      question: "Is there a money-back guarantee?",
-      answer: "Yes! We offer a 30-day money-back guarantee on all paid products. If you're not satisfied, simply contact us for a full refund—no questions asked.",
+      question: t('faqs.3.q'),
+      answer: t('faqs.3.a'),
     },
   ]);
 
@@ -759,12 +679,12 @@ export default function ProductsPage() {
       {/* JSON-LD Structured Data for SEO */}
       <JsonLd data={[...productSchemas, faqSchema, breadcrumbSchema]} />
       
-      <HeroSection />
-      <AppMatrixSection />
-      <ProductsSection />
-      <GuaranteeSection />
-      <FAQSection />
-      <CTASection />
+      <HeroSection t={t} />
+      <AppMatrixSection t={t} />
+      <ProductsSection t={t} />
+      <GuaranteeSection t={t} />
+      <FAQSection t={t} />
+      <CTASection t={t} />
     </>
   );
 }

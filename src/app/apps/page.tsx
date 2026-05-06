@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { generateSoftwareAppSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 // Access Tier Colors - High contrast for readability
 const tierColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -41,189 +42,42 @@ const tierColors: Record<string, { bg: string; text: string; border: string }> =
   BUNDLE: { bg: 'bg-[#0F1C2E]', text: 'text-[#3DD4B0]', border: 'border-[#3DD4B0]' }
 };
 
-// App data
+// App icons mapping
+const appIconMap: Record<string, React.ElementType> = {
+  'identity-gap-quiz': Brain,
+  'values-clarification': Heart,
+  'daily-reflection': Sun,
+  'trial-planner': Calendar,
+  'executive-manual': BookOpen,
+  'daily-planner': Calendar,
+  'identity-baseline': User,
+  'environmental-audit': Home,
+  'decision-analysis': TrendingUp,
+  'evidence-tracking': BarChart3,
+  'progress-dashboard': BarChart3,
+  'emotion-regulation': Heart,
+  'ai-identity-coach': Sparkles,
+  'community-access': Users,
+  'priority-support': Headphones,
+};
+
+// App data (non-translatable fields only)
 const appsData = [
-  {
-    slug: 'identity-gap-quiz',
-    name: 'Identity Gap Assessment',
-    description: 'Discover the gap between who you are and who you want to become. This 3-minute assessment reveals your dominant growth area.',
-    icon: Brain,
-    color: '#3DD4B0',
-    category: 'Assessment',
-    tier: 'FREE',
-    featured: true,
-    freeApp: true,
-    duration: '3 min'
-  },
-  {
-    slug: 'values-clarification',
-    name: 'Values Clarification Tool',
-    description: 'Free interactive tool to identify your top 5 core values. Understand what truly drives your decisions.',
-    icon: Heart,
-    color: '#E57373',
-    category: 'Assessment',
-    tier: 'FREE',
-    featured: false,
-    freeApp: true,
-    duration: '5 min'
-  },
-  {
-    slug: 'daily-reflection',
-    name: 'Daily Reflection Prompt',
-    description: 'Get a free daily identity-focused reflection prompt to build self-awareness. No account required.',
-    icon: Sun,
-    color: '#FFB74D',
-    category: 'Tracking',
-    tier: 'FREE',
-    featured: false,
-    freeApp: true,
-    duration: 'Daily'
-  },
-  {
-    slug: 'trial-planner',
-    name: '7-Day Trial Planner',
-    description: 'Experience the full Identity Recode system for 7 days with guided daily prompts and evidence tracking.',
-    icon: Calendar,
-    color: '#1F6F78',
-    category: 'Planning',
-    tier: 'TRIAL',
-    featured: false,
-    freeApp: false,
-    duration: '7 days'
-  },
-  {
-    slug: 'executive-manual',
-    name: 'Executive Manual',
-    description: 'Complete implementation framework with 6 core protocols for identity transformation.',
-    icon: BookOpen,
-    color: '#1F6F78',
-    category: 'Worksheet',
-    tier: 'BASIC',
-    featured: true,
-    freeApp: false,
-    duration: 'PDF'
-  },
-  {
-    slug: 'daily-planner',
-    name: '30-Day Identity Planner',
-    description: 'Interactive 30-day planner with identity prompts, non-negotiable actions, and evidence tracking.',
-    icon: Calendar,
-    color: '#3DD4B0',
-    category: 'Planning',
-    tier: 'BASIC',
-    featured: true,
-    freeApp: false,
-    duration: '30 days'
-  },
-  {
-    slug: 'identity-baseline',
-    name: 'Identity Baseline Worksheet',
-    description: 'Comprehensive assessment of your identity across 8 key dimensions with personalized insights.',
-    icon: User,
-    color: '#3DD4B0',
-    category: 'Worksheet',
-    tier: 'BASIC',
-    featured: false,
-    freeApp: false,
-    duration: '15 min'
-  },
-  {
-    slug: 'environmental-audit',
-    name: 'Environmental Audit',
-    description: 'Analyze how your physical, digital, and social environment supports or hinders your goals.',
-    icon: Home,
-    color: '#1F6F78',
-    category: 'Worksheet',
-    tier: 'BASIC',
-    featured: false,
-    freeApp: false,
-    duration: '10 min'
-  },
-  {
-    slug: 'decision-analysis',
-    name: 'Decision Pattern Analysis',
-    description: 'Track and analyze your decisions to identify patterns, biases, and improve decision quality.',
-    icon: TrendingUp,
-    color: '#64B5F6',
-    category: 'Analytics',
-    tier: 'PREMIUM',
-    featured: false,
-    freeApp: false,
-    duration: 'Ongoing'
-  },
-  {
-    slug: 'evidence-tracking',
-    name: 'Evidence Tracking System',
-    description: 'Log and track behavioral evidence that supports your identity transformation.',
-    icon: BarChart3,
-    color: '#FFB74D',
-    category: 'Tracking',
-    tier: 'PREMIUM',
-    featured: false,
-    freeApp: false,
-    duration: 'Daily'
-  },
-  {
-    slug: 'progress-dashboard',
-    name: 'Progress Dashboard',
-    description: 'Advanced analytics dashboard tracking your transformation metrics and milestones.',
-    icon: BarChart3,
-    color: '#8A94A6',
-    category: 'Analytics',
-    tier: 'PREMIUM',
-    featured: false,
-    freeApp: false,
-    duration: 'Always'
-  },
-  {
-    slug: 'emotion-regulation',
-    name: 'Emotion Regulation (ERQ)',
-    description: 'Assess your emotional regulation strategies based on the validated ERQ questionnaire.',
-    icon: Heart,
-    color: '#E57373',
-    category: 'Worksheet',
-    tier: 'BUNDLE',
-    featured: false,
-    freeApp: false,
-    duration: '10 min'
-  },
-  {
-    slug: 'ai-identity-coach',
-    name: 'AI Identity Coach',
-    description: 'Get personalized coaching insights and recommendations powered by AI. Your 24/7 transformation companion.',
-    icon: Sparkles,
-    color: '#3DD4B0',
-    category: 'Coaching',
-    tier: 'BUNDLE',
-    featured: true,
-    freeApp: false,
-    duration: 'Unlimited',
-    comingSoon: true
-  },
-  {
-    slug: 'community-access',
-    name: 'Transformation Community',
-    description: 'Connect with others on the same journey. Share wins, get support, and stay accountable.',
-    icon: Users,
-    color: '#1F6F78',
-    category: 'Community',
-    tier: 'BUNDLE',
-    featured: false,
-    freeApp: false,
-    duration: 'Unlimited'
-  },
-  {
-    slug: 'priority-support',
-    name: 'Priority Support',
-    description: 'Get priority access to our support team with guaranteed 24-hour response time.',
-    icon: Headphones,
-    color: '#0F1C2E',
-    category: 'Coaching',
-    tier: 'BUNDLE',
-    featured: false,
-    freeApp: false,
-    duration: 'Unlimited'
-  }
+  { slug: 'identity-gap-quiz', icon: Brain, color: '#3DD4B0', tier: 'FREE', featured: true, freeApp: true, duration: '3 min', comingSoon: false, appKey: 'identityGapQuiz' },
+  { slug: 'values-clarification', icon: Heart, color: '#E57373', tier: 'FREE', featured: false, freeApp: true, duration: '5 min', comingSoon: false, appKey: 'valuesClarification' },
+  { slug: 'daily-reflection', icon: Sun, color: '#FFB74D', tier: 'FREE', featured: false, freeApp: true, duration: 'Daily', comingSoon: false, appKey: 'dailyReflection' },
+  { slug: 'trial-planner', icon: Calendar, color: '#1F6F78', tier: 'TRIAL', featured: false, freeApp: false, duration: '7 days', comingSoon: false, appKey: 'trialPlanner' },
+  { slug: 'executive-manual', icon: BookOpen, color: '#1F6F78', tier: 'BASIC', featured: true, freeApp: false, duration: 'PDF', comingSoon: false, appKey: 'executiveManual' },
+  { slug: 'daily-planner', icon: Calendar, color: '#3DD4B0', tier: 'BASIC', featured: true, freeApp: false, duration: '30 days', comingSoon: false, appKey: 'dailyPlanner' },
+  { slug: 'identity-baseline', icon: User, color: '#3DD4B0', tier: 'BASIC', featured: false, freeApp: false, duration: '15 min', comingSoon: false, appKey: 'identityBaseline' },
+  { slug: 'environmental-audit', icon: Home, color: '#1F6F78', tier: 'BASIC', featured: false, freeApp: false, duration: '10 min', comingSoon: false, appKey: 'environmentalAudit' },
+  { slug: 'decision-analysis', icon: TrendingUp, color: '#64B5F6', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Ongoing', comingSoon: false, appKey: 'decisionAnalysis' },
+  { slug: 'evidence-tracking', icon: BarChart3, color: '#FFB74D', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Daily', comingSoon: false, appKey: 'evidenceTracking' },
+  { slug: 'progress-dashboard', icon: BarChart3, color: '#8A94A6', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Always', comingSoon: false, appKey: 'progressDashboard' },
+  { slug: 'emotion-regulation', icon: Heart, color: '#E57373', tier: 'BUNDLE', featured: false, freeApp: false, duration: '10 min', comingSoon: false, appKey: 'emotionRegulation' },
+  { slug: 'ai-identity-coach', icon: Sparkles, color: '#3DD4B0', tier: 'BUNDLE', featured: true, freeApp: false, duration: 'Unlimited', comingSoon: true, appKey: 'aiIdentityCoach' },
+  { slug: 'community-access', icon: Users, color: '#1F6F78', tier: 'BUNDLE', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'communityAccess' },
+  { slug: 'priority-support', icon: Headphones, color: '#0F1C2E', tier: 'BUNDLE', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'prioritySupport' },
 ];
 
 // Tier order for priority
@@ -234,6 +88,7 @@ const sortedApps = [...appsData].sort((a, b) => tierOrder.indexOf(a.tier) - tier
 
 export default function AppsPage() {
   const [selectedTier, setSelectedTier] = useState<string | null>('ALL');
+  const t = useTranslations("appsPage");
 
   // Filter apps based on selected tier
   const filteredApps = selectedTier === 'ALL' 
@@ -251,20 +106,20 @@ export default function AppsPage() {
 
   // Get tier stats
   const tierStats = {
-    FREE: { count: appsByTier.FREE.length, label: 'Free', price: '$0' },
-    TRIAL: { count: appsByTier.TRIAL.length, label: 'Trial', price: '$7' },
-    BASIC: { count: appsByTier.BASIC.length, label: 'Basic', price: '$17' },
-    PREMIUM: { count: appsByTier.PREMIUM.length, label: 'Premium', price: '$27' },
-    BUNDLE: { count: appsByTier.BUNDLE.length, label: 'Bundle', price: '$47' },
+    FREE: { count: appsByTier.FREE.length, label: t('tierLabels.FREE'), price: '$0' },
+    TRIAL: { count: appsByTier.TRIAL.length, label: t('tierLabels.TRIAL'), price: '$7' },
+    BASIC: { count: appsByTier.BASIC.length, label: t('tierLabels.BASIC'), price: '$17' },
+    PREMIUM: { count: appsByTier.PREMIUM.length, label: t('tierLabels.PREMIUM'), price: '$27' },
+    BUNDLE: { count: appsByTier.BUNDLE.length, label: t('tierLabels.BUNDLE'), price: '$47' },
   };
 
   // Generate SoftwareApplication schemas for SEO
   const appSchemas = appsData.map((app) =>
     generateSoftwareAppSchema({
-      name: app.name,
-      description: app.description,
+      name: t(`apps.${app.appKey}.name`),
+      description: t(`apps.${app.appKey}.description`),
       url: `/apps/${app.slug}`,
-      category: app.category,
+      category: t(`apps.${app.appKey}.category`),
       offers: {
         price: app.tier === 'FREE' ? 0 : app.tier === 'TRIAL' ? 7 : app.tier === 'BASIC' ? 17 : app.tier === 'PREMIUM' ? 27 : 47,
       },
@@ -288,12 +143,12 @@ export default function AppsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Tamkinly Apps</h1>
-              <p className="text-slate-300 text-sm">Choose your transformation path</p>
+              <h1 className="text-2xl font-bold">{t('headerTitle')}</h1>
+              <p className="text-slate-300 text-sm">{t('headerSubtitle')}</p>
             </div>
             <Link href="/products">
               <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
-                View Packages
+                {t('viewPackages')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -313,7 +168,7 @@ export default function AppsPage() {
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
-              All Apps ({appsData.length})
+              {t('allApps').replace('{count}', String(appsData.length))}
             </Button>
             {Object.entries(tierStats).map(([tier, stats]) => (
               <Button
@@ -338,13 +193,13 @@ export default function AppsPage() {
         <div className="text-center mb-12">
           <Badge className="mb-4 bg-[#3DD4B0]/10 text-[#3DD4B0]">
             <Sparkles className="w-3.5 h-3.5 mr-1" />
-            Transformation Tools
+            {t('heroBadge')}
           </Badge>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Start with Free, Upgrade Anytime
+            {t('heroTitle')}
           </h1>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-            Access powerful transformation tools based on your package. Start free and unlock more as you grow.
+            {t('heroSubtitle')}
           </p>
         </div>
 
@@ -354,17 +209,17 @@ export default function AppsPage() {
             <div className="flex items-center gap-3 mb-6">
               <Badge className={`${tierColors.FREE.bg} ${tierColors.FREE.text} ${tierColors.FREE.border}`}>
                 <Sparkles className="w-3.5 h-3.5 mr-1" />
-                Free Forever - No Purchase Required
+                {t('freeForever')}
               </Badge>
               <Link href="/products">
                 <Button variant="link" className="text-[#3DD4B0]">
-                  Start Free <ArrowRight className="w-4 h-4 ml-1" />
+                  {t('startFree')} <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {appsByTier.FREE.map((app) => (
-                <AppCard key={app.slug} app={app} isLocked={false} />
+                <AppCard key={app.slug} app={app} isLocked={false} t={t} />
               ))}
             </div>
           </div>
@@ -381,13 +236,13 @@ export default function AppsPage() {
                 </Badge>
                 <Link href="/products">
                   <Button variant="link" className="text-[#3DD4B0]">
-                    Unlock <ArrowRight className="w-4 h-4 ml-1" />
+                    {t('unlock')} <ArrowRight className="w-4 h-4 ml-1" />
                   </Button>
                 </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {apps.map((app) => (
-                  <AppCard key={app.slug} app={app} isLocked={true} />
+                  <AppCard key={app.slug} app={app} isLocked={true} t={t} />
                 ))}
               </div>
             </div>
@@ -399,14 +254,14 @@ export default function AppsPage() {
         <Card className="bg-gradient-to-r from-[#1F6F78] to-[#0F1C2E] border-0">
           <CardContent className="p-8 lg:p-12 text-center">
             <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-              Ready to Unlock All Apps?
+              {t('ctaTitle')}
             </h2>
             <p className="text-slate-200 mb-6 max-w-xl mx-auto">
-              Get the Complete Bundle for full access to all 15+ transformation tools, plus AI coaching and community.
+              {t('ctaSubtitle')}
             </p>
             <Link href="/products">
               <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-12 font-semibold">
-                View Packages
+                {t('viewPackages')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -419,7 +274,11 @@ export default function AppsPage() {
 }
 
 // App Card Component
-function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: boolean }; isLocked: boolean }) {
+function AppCard({ app, isLocked, t }: { 
+  app: typeof appsData[0]; 
+  isLocked: boolean;
+  t: ReturnType<typeof useTranslations>;
+}) {
   const Icon = app.icon;
   const tierStyle = tierColors[app.tier as keyof typeof tierColors];
 
@@ -431,7 +290,7 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: b
         <div className="absolute top-4 right-4 z-10">
           <Badge className="bg-amber-500/20 text-amber-600 border border-amber-500/50 text-xs">
             <Wrench className="w-3 h-3 mr-1" />
-            Coming Soon
+            {t('comingSoon')}
           </Badge>
         </div>
       )}
@@ -452,17 +311,17 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: b
         
         {/* Badge */}
         <Badge className={`${tierStyle.bg} ${tierStyle.text} mb-3`}>
-          {app.tier}
+          {t(`tierLabels.${app.tier}`)}
         </Badge>
         
         {/* Title */}
         <h3 className="font-semibold text-lg text-[#0F1C2E] mb-2">
-          {app.name}
+          {t(`apps.${app.appKey}.name`)}
         </h3>
         
         {/* Description */}
         <p className="text-sm text-slate-600 mb-4 line-clamp-2">
-          {app.description}
+          {t(`apps.${app.appKey}.description`)}
         </p>
         
         {/* Duration */}
@@ -477,13 +336,13 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: b
             <Link href={`/apps/${app.slug}`}>
               <Button variant="outline" className="w-full" size="sm">
                 <Wrench className="w-4 h-4 mr-2" />
-                View Details
+                {t('viewDetails')}
               </Button>
             </Link>
           ) : app.freeApp ? (
             <Link href={app.slug === 'identity-gap-quiz' ? '/quiz' : `/apps/${app.slug}`}>
               <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]" size="sm">
-                Start Free
+                {t('startFree')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -497,13 +356,13 @@ function AppCard({ app, isLocked }: { app: typeof appsData[0] & { comingSoon?: b
             }>
               <Button className="w-full bg-[#0F1C2E] text-white hover:bg-[#1a2d47] shadow-md" size="sm">
                 <Lock className="w-4 h-4 mr-2" />
-                Open Access - ${app.tier === 'TRIAL' ? '7' : app.tier === 'BASIC' ? '17' : app.tier === 'PREMIUM' ? '27' : '47'}
+                {t('openAccess')} - ${app.tier === 'TRIAL' ? '7' : app.tier === 'BASIC' ? '17' : app.tier === 'PREMIUM' ? '27' : '47'}
               </Button>
             </Link>
           ) : (
             <Link href={`/apps/${app.slug}`}>
               <Button className="w-full" size="sm" style={{ backgroundColor: app.color, color: 'white' }}>
-                Open App
+                {t('openApp')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>

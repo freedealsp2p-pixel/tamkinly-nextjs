@@ -7,19 +7,29 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, Sparkles, BookOpen } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema } from "@/lib/seo";
+import { useTranslations } from "@/components/providers/LocaleProvider";
+
+function formatReadTime(readTime: string, t: (key: string) => string): string {
+  const match = readTime.match(/^(\d+)\s+min\s+read$/);
+  if (match) {
+    return `${match[1]} ${t('minRead')}`;
+  }
+  return readTime;
+}
 
 const guides = [
   {
     slug: "identity-vs-behavior-change",
-    title: "Identity vs Behavior Change: Why Willpower Fails",
-    excerpt: "The hidden reason most self-improvement efforts don't last — and the identity-first approach that creates permanent transformation. Includes practical exercises.",
-    category: "Identity Shift",
-    readTime: "12 min read",
+    titleKey: "guide1Title",
+    excerptKey: "guide1Excerpt",
+    categoryKey: "guide1Category",
+    readTimeKey: "guide1ReadTime",
     featured: true,
   },
 ];
 
 export default function GuidesPage() {
+  const t = useTranslations('guidesPage');
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Guides', url: '/guides' },
@@ -36,14 +46,13 @@ export default function GuidesPage() {
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="outline" className="mb-6 px-4 py-2 border-accent/30 text-accent bg-accent/10">
               <BookOpen className="w-3.5 h-3.5 mr-2" />
-              Deep Dives
+              {t('heroBadge')}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Transformation <span className="text-accent">Guides</span>
+              {t('heroTitle')}<span className="text-accent">{t('heroTitleHighlight')}</span>
             </h1>
             <p className="text-lg text-slate-300 leading-relaxed">
-              Comprehensive, research-backed guides that go beyond surface-level tips. 
-              Each guide walks you through a complete framework for lasting identity change.
+              {t('heroSubtitle')}
             </p>
           </div>
         </div>
@@ -59,15 +68,15 @@ export default function GuidesPage() {
               </div>
               <div>
                 <Badge variant="secondary" className="mb-1">
-                  All Guides
+                  {t('allGuides')}
                 </Badge>
                 <h2 className="font-serif text-3xl font-bold text-primary">
-                  Available Guides
+                  {t('availableGuides')}
                 </h2>
               </div>
             </div>
             <p className="text-slate-600 max-w-2xl">
-              Choose a guide and dive deep into the science and practice of identity transformation.
+              {t('availableGuidesDesc')}
             </p>
           </div>
 
@@ -80,22 +89,22 @@ export default function GuidesPage() {
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-3">
                       <Badge variant="outline" className="text-xs text-[#1F6F78] border-[#1F6F78]/30">
-                        {guide.category}
+                        {t(guide.categoryKey)}
                       </Badge>
                     </div>
                     <h3 className="font-semibold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
-                      {guide.title}
+                      {t(guide.titleKey)}
                     </h3>
                     <p className="text-sm text-slate-600 mb-4 line-clamp-3">
-                      {guide.excerpt}
+                      {t(guide.excerptKey)}
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-slate-500 flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        {guide.readTime}
+                        {formatReadTime(t(guide.readTimeKey), t)}
                       </span>
                       <span className="text-accent text-sm flex items-center gap-1">
-                        Read Guide <ArrowRight className="h-3 w-3" />
+                        {t('readGuide')} <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
                   </CardContent>
@@ -111,22 +120,21 @@ export default function GuidesPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
-              Ready to Transform Your{" "}
-              <span className="text-accent">Identity</span>?
+              {t('ctaTitle')}<span className="text-accent">{t('ctaTitleHighlight')}</span>{t('ctaTitleEnd')}
             </h2>
             <p className="text-lg text-slate-300 mb-8">
-              These guides are just the beginning. Start your structured transformation journey today.
+              {t('ctaSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/apps">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  Try Free Apps
+                  {t('tryFreeApps')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/products">
                 <Button variant="white" size="lg" className="px-8 font-semibold">
-                  View Products
+                  {t('viewProducts')}
                 </Button>
               </Link>
             </div>

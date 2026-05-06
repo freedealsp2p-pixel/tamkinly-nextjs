@@ -20,25 +20,27 @@ import {
   Lightbulb,
   HelpCircle
 } from "lucide-react";
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 // ═══════════════════════════════════════════════════════════════
 // HERO SECTION - Minimal & Calm
 // ═══════════════════════════════════════════════════════════════
 
 function HeroSection() {
+  const t = useTranslations("methodologyPage");
+
   return (
     <section className="bg-[#0F1C2E] py-20 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <Badge className="mb-6 bg-[#3DD4B0]/10 text-[#3DD4B0] border-0 px-4 py-2">
-            The Framework
+            {t("heroBadge")}
           </Badge>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            The Methodology
+            {t("heroTitle")}
           </h1>
           <p className="text-lg text-[#8A94A6] leading-relaxed max-w-2xl mx-auto">
-            A science-backed approach to identity transformation. 
-            Four questions. Four phases. Lasting change.
+            {t("heroSubtitle")}
           </p>
         </div>
       </div>
@@ -51,11 +53,12 @@ function HeroSection() {
 // ═══════════════════════════════════════════════════════════════
 
 function WhySection() {
-  const stats = [
-    { value: "92%", label: "of habits fail within 90 days" },
-    { value: "75%", label: "of change efforts rely on willpower" },
-    { value: "3x", label: "more effective when identity-based" }
-  ];
+  const t = useTranslations("methodologyPage");
+
+  const stats = [0, 1, 2].map((idx) => ({
+    value: t(`whyStats.${idx}.value`),
+    label: t(`whyStats.${idx}.label`)
+  }));
 
   return (
     <section className="py-20 lg:py-28 bg-white">
@@ -67,9 +70,9 @@ function WhySection() {
               1
             </div>
             <div>
-              <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0] border-0 mb-1">WHY</Badge>
+              <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0] border-0 mb-1">{t("whyBadge")}</Badge>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#0F1C2E]">
-                Why does this matter?
+                {t("whyTitle")}
               </h2>
             </div>
           </div>
@@ -77,27 +80,23 @@ function WhySection() {
           {/* Main Question */}
           <div className="mb-12 p-6 bg-[#F6F8FA] rounded-2xl border-l-4 border-[#3DD4B0]">
             <p className="text-xl text-[#0F1C2E] leading-relaxed">
-              <span className="font-semibold">Have you ever wondered</span> why some changes 
-              feel effortless while others feel like a constant battle?
+              <span className="font-semibold">{t("whyMainQuestionPrefix")}</span>{t("whyMainQuestion")}
             </p>
           </div>
 
           {/* The Problem */}
           <div className="space-y-6 mb-12">
             <p className="text-lg text-[#2B2E34] leading-relaxed">
-              Traditional self-improvement focuses on <span className="font-semibold">what you do</span>—habits, 
-              routines, behaviors. But here's what research shows:
+              {t("whyP1Prefix")}<span className="font-semibold">{t("whyP1Highlight")}</span>{t("whyP1Suffix")}
             </p>
             
             <Card className="border-0 bg-[#0F1C2E]">
               <CardContent className="p-8">
                 <p className="text-lg text-white leading-relaxed italic">
-                  "Executive function is crucial for initiation but unsustainable long-term 
-                  due to stress and impulses; identity integration makes behaviors 
-                  more automatic and resilient."
+                  &ldquo;{t("whyQuote")}&rdquo;
                 </p>
                 <p className="text-sm text-[#8A94A6] mt-4">
-                  — Maintain IT Model, Journal of Behavioral Medicine
+                  {t("whyQuoteAttrib")}
                 </p>
               </CardContent>
             </Card>
@@ -118,13 +117,11 @@ function WhySection() {
           {/* The Insight */}
           <div className="space-y-4">
             <p className="text-lg text-[#2B2E34] leading-relaxed">
-              The problem isn't your willpower or motivation. 
-              <span className="font-semibold text-[#0F1C2E]"> The problem is you're trying to change 
-              behavior without changing identity.</span>
+              {t("whyInsightP1Prefix")}
+              <span className="font-semibold text-[#0F1C2E]">{t("whyInsightP1Highlight")}</span>
             </p>
             <p className="text-lg text-[#2B2E34] leading-relaxed">
-              Identity-based change works because it doesn't require effort to maintain. 
-              When your actions align with who you believe you are, they become automatic.
+              {t("whyInsightP2")}
             </p>
           </div>
         </div>
@@ -138,28 +135,14 @@ function WhySection() {
 // ═══════════════════════════════════════════════════════════════
 
 function WhatSection() {
-  const concepts = [
-    {
-      title: "Identity vs Behavior",
-      description: "Behavior is what you do. Identity is who you are. Lasting change happens at the identity level.",
-      icon: Brain
-    },
-    {
-      title: "The Maintain IT Model",
-      description: "A research framework showing how centered identity reduces executive function burden for sustainable change.",
-      icon: Target
-    },
-    {
-      title: "Neuroplasticity",
-      description: "Your brain can rewire itself. Repeated identity-aligned actions create new neural pathways that become automatic.",
-      icon: Sparkles
-    },
-    {
-      title: "Self-Authorship",
-      description: "Moving from external influence to internal voice—consciously designing who you become.",
-      icon: Compass
-    }
-  ];
+  const t = useTranslations("methodologyPage");
+
+  const conceptIcons = [Brain, Target, Sparkles, Compass];
+  const concepts = [0, 1, 2, 3].map((idx) => ({
+    title: t(`concepts.${idx}.title`),
+    description: t(`concepts.${idx}.description`),
+    icon: conceptIcons[idx]
+  }));
 
   return (
     <section className="py-20 lg:py-28 bg-[#F6F8FA]">
@@ -171,9 +154,9 @@ function WhatSection() {
               2
             </div>
             <div>
-              <Badge className="bg-[#1F6F78]/10 text-[#1F6F78] border-0 mb-1">WHAT</Badge>
+              <Badge className="bg-[#1F6F78]/10 text-[#1F6F78] border-0 mb-1">{t("whatBadge")}</Badge>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#0F1C2E]">
-                What is the methodology?
+                {t("whatTitle")}
               </h2>
             </div>
           </div>
@@ -181,12 +164,10 @@ function WhatSection() {
           {/* Main Definition */}
           <div className="mb-12 p-8 bg-white rounded-2xl shadow-sm">
             <p className="text-xl text-[#0F1C2E] leading-relaxed mb-6">
-              The <span className="font-semibold">Identity Recode Methodology</span> is a 
-              four-phase framework for transforming who you are—not just what you do.
+              {t("whatMainDef1")}<span className="font-semibold">{t("whatMainDefHighlight")}</span>{t("whatMainDef2")}
             </p>
             <p className="text-[#2B2E34] leading-relaxed">
-              It's built on peer-reviewed research in psychology and neuroscience, including 
-              the Maintain IT Model, Erikson's identity formation theory, and neuroplasticity research.
+              {t("whatMainDef3")}
             </p>
           </div>
 
@@ -213,13 +194,13 @@ function WhatSection() {
           <div className="mt-12 p-6 bg-[#0F1C2E] rounded-2xl">
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
               <div>
-                <p className="text-[#8A94A6] text-sm mb-2">From</p>
-                <p className="text-white text-lg font-medium">"I want to exercise more"</p>
+                <p className="text-[#8A94A6] text-sm mb-2">{t("coreShiftFrom")}</p>
+                <p className="text-white text-lg font-medium">&ldquo;{t("coreShiftFromText")}&rdquo;</p>
               </div>
               <ArrowRight className="w-6 h-6 text-[#3DD4B0] rotate-90 md:rotate-0" />
               <div>
-                <p className="text-[#8A94A6] text-sm mb-2">To</p>
-                <p className="text-[#3DD4B0] text-lg font-medium">"I am someone who moves my body"</p>
+                <p className="text-[#8A94A6] text-sm mb-2">{t("coreShiftTo")}</p>
+                <p className="text-[#3DD4B0] text-lg font-medium">&ldquo;{t("coreShiftToText")}&rdquo;</p>
               </div>
             </div>
           </div>
@@ -234,40 +215,24 @@ function WhatSection() {
 // ═══════════════════════════════════════════════════════════════
 
 function HowSection() {
-  const phases = [
-    {
-      number: "01",
-      icon: Compass,
-      title: "Discover",
-      subtitle: "Days 1-7",
-      description: "Understand where you truly are—not where you think you should be. Identity audit, values excavation, pattern recognition.",
-      activities: ["Identity baseline assessment", "Values exploration", "Current pattern mapping"]
-    },
-    {
-      number: "02",
-      icon: Layers,
-      title: "Deconstruct",
-      subtitle: "Days 8-14",
-      description: "Peel back layers of conditioning, expectations, and inherited beliefs. Release what isn't authentically you.",
-      activities: ["Identify borrowed identities", "Challenge 'should' narratives", "Release outdated beliefs"]
-    },
-    {
-      number: "03",
-      icon: RefreshCw,
-      title: "Reconstruct",
-      subtitle: "Days 15-21",
-      description: "Build your authentic identity. Create new narratives, align values with actions, establish identity-based habits.",
-      activities: ["Define core identity", "Create empowering narratives", "Build evidence log"]
-    },
-    {
-      number: "04",
-      icon: Target,
-      title: "Integrate",
-      subtitle: "Days 22-30",
-      description: "Make your new identity automatic. Environment alignment, daily practices, resilience protocols.",
-      activities: ["Daily embodiment", "Environment optimization", "Setback recovery plan"]
-    }
-  ];
+  const t = useTranslations("methodologyPage");
+
+  const phaseIcons = [Compass, Layers, RefreshCw, Target];
+  const phases = [0, 1, 2, 3].map((idx) => ({
+    number: t(`phases.${idx}.number`),
+    icon: phaseIcons[idx],
+    title: t(`phases.${idx}.title`),
+    subtitle: t(`phases.${idx}.subtitle`),
+    description: t(`phases.${idx}.description`),
+    activities: [0, 1, 2].map((aIdx) => t(`phases.${idx}.activities.${aIdx}`))
+  }));
+
+  const dailyStructureIcons = [Clock, Brain, TrendingUp];
+  const dailyStructure = [0, 1, 2].map((idx) => ({
+    icon: dailyStructureIcons[idx],
+    title: t(`dailyStructure.${idx}.title`),
+    description: t(`dailyStructure.${idx}.description`)
+  }));
 
   return (
     <section className="py-20 lg:py-28 bg-white">
@@ -279,9 +244,9 @@ function HowSection() {
               3
             </div>
             <div>
-              <Badge className="bg-[#0F1C2E]/10 text-[#0F1C2E] border-0 mb-1">HOW</Badge>
+              <Badge className="bg-[#0F1C2E]/10 text-[#0F1C2E] border-0 mb-1">{t("howBadge")}</Badge>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#0F1C2E]">
-                How does it work?
+                {t("howTitle")}
               </h2>
             </div>
           </div>
@@ -289,8 +254,8 @@ function HowSection() {
           {/* Timeline Header */}
           <div className="mb-8 p-6 bg-[#F6F8FA] rounded-xl">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-[#8A94A6]">30-Day Transformation Protocol</span>
-              <span className="text-sm font-medium text-[#0F1C2E]">4 Phases</span>
+              <span className="text-sm text-[#8A94A6]">{t("timelineHeader")}</span>
+              <span className="text-sm font-medium text-[#0F1C2E]">{t("timelinePhases")}</span>
             </div>
             <Progress value={0} className="h-2 bg-gray-200" />
           </div>
@@ -334,27 +299,15 @@ function HowSection() {
 
           {/* Daily Structure */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="border border-gray-200">
-              <CardContent className="p-5 text-center">
-                <Clock className="w-6 h-6 text-[#3DD4B0] mx-auto mb-2" />
-                <p className="text-sm font-medium text-[#0F1C2E] mb-1">Morning</p>
-                <p className="text-xs text-[#8A94A6]">5-10 min intention</p>
-              </CardContent>
-            </Card>
-            <Card className="border border-gray-200">
-              <CardContent className="p-5 text-center">
-                <Brain className="w-6 h-6 text-[#1F6F78] mx-auto mb-2" />
-                <p className="text-sm font-medium text-[#0F1C2E] mb-1">Afternoon</p>
-                <p className="text-xs text-[#8A94A6]">15-20 min core work</p>
-              </CardContent>
-            </Card>
-            <Card className="border border-gray-200">
-              <CardContent className="p-5 text-center">
-                <TrendingUp className="w-6 h-6 text-[#FFB74D] mx-auto mb-2" />
-                <p className="text-sm font-medium text-[#0F1C2E] mb-1">Evening</p>
-                <p className="text-xs text-[#8A94A6]">10-15 min reflection</p>
-              </CardContent>
-            </Card>
+            {dailyStructure.map((item, idx) => (
+              <Card key={idx} className="border border-gray-200">
+                <CardContent className="p-5 text-center">
+                  <item.icon className="w-6 h-6 text-[#3DD4B0] mx-auto mb-2" />
+                  <p className="text-sm font-medium text-[#0F1C2E] mb-1">{item.title}</p>
+                  <p className="text-xs text-[#8A94A6]">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
@@ -367,30 +320,14 @@ function HowSection() {
 // ═══════════════════════════════════════════════════════════════
 
 function WhatIfSection() {
-  const scenarios = [
-    {
-      question: "What if you could change without relying on willpower?",
-      outcome: "Identity-based behaviors become automatic—they don't require effort to maintain."
-    },
-    {
-      question: "What if setbacks became signals instead of failures?",
-      outcome: "The methodology includes recovery protocols that make you stronger after each challenge."
-    },
-    {
-      question: "What if 30 days could reshape your neural pathways?",
-      outcome: "Neuroplasticity research shows measurable brain changes from repeated identity-aligned actions."
-    },
-    {
-      question: "What if you stopped fighting yourself?",
-      outcome: "When actions align with identity, there's no internal conflict—only natural flow."
-    }
-  ];
+  const t = useTranslations("methodologyPage");
 
-  const questions = [
-    "Which area of your life feels like constant effort?",
-    "What would change if that effort became automatic?",
-    "What's stopping you from starting today?"
-  ];
+  const scenarios = [0, 1, 2, 3].map((idx) => ({
+    question: t(`scenarios.${idx}.question`),
+    outcome: t(`scenarios.${idx}.outcome`)
+  }));
+
+  const questions = [0, 1, 2].map((idx) => t(`reflectionQuestions.${idx}`));
 
   return (
     <section className="py-20 lg:py-28 bg-[#F6F8FA]">
@@ -402,9 +339,9 @@ function WhatIfSection() {
               4
             </div>
             <div>
-              <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0] border-0 mb-1">WHAT IF</Badge>
+              <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0] border-0 mb-1">{t("whatIfBadge")}</Badge>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#0F1C2E]">
-                What if you applied this?
+                {t("whatIfTitle")}
               </h2>
             </div>
           </div>
@@ -427,7 +364,7 @@ function WhatIfSection() {
             <CardContent className="p-8">
               <div className="flex items-center gap-3 mb-6">
                 <Lightbulb className="w-6 h-6 text-[#3DD4B0]" />
-                <h3 className="font-semibold text-xl text-[#0F1C2E]">Questions for You</h3>
+                <h3 className="font-semibold text-xl text-[#0F1C2E]">{t("questionsForYou")}</h3>
               </div>
               <div className="space-y-4">
                 {questions.map((q, idx) => (
@@ -446,15 +383,15 @@ function WhatIfSection() {
           <div className="mt-12 flex items-center justify-center gap-8 text-center flex-wrap">
             <div className="flex items-center gap-2 text-[#8A94A6]">
               <Users className="w-5 h-5" />
-              <span className="text-sm">Evidence-based approach</span>
+              <span className="text-sm">{t("communityEvidence")}</span>
             </div>
             <div className="flex items-center gap-2 text-[#8A94A6]">
               <CheckCircle2 className="w-5 h-5" />
-              <span className="text-sm">30-day protocol</span>
+              <span className="text-sm">{t("communityProtocol")}</span>
             </div>
             <div className="flex items-center gap-2 text-[#8A94A6]">
               <Clock className="w-5 h-5" />
-              <span className="text-sm">Self-paced</span>
+              <span className="text-sm">{t("communitySelfPaced")}</span>
             </div>
           </div>
         </div>
@@ -468,27 +405,28 @@ function WhatIfSection() {
 // ═══════════════════════════════════════════════════════════════
 
 function CTASection() {
+  const t = useTranslations("methodologyPage");
+
   return (
     <section className="py-20 lg:py-28 bg-[#0F1C2E]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to begin?
+            {t("ctaTitle")}
           </h2>
           <p className="text-lg text-[#8A94A6] mb-8 leading-relaxed">
-            The Identity Recode Planner guides you through all four phases 
-            in 30 days. Science-backed. Intentionally designed.
+            {t("ctaSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/products">
               <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-14 font-semibold">
-                Start Your Transformation
+                {t("ctaButton1")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link href="/apps">
               <Button variant="white" size="lg" className="px-8 h-14 font-medium">
-                Try Interactive Tools
+                {t("ctaButton2")}
               </Button>
             </Link>
           </div>

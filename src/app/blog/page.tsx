@@ -8,10 +8,51 @@ import { ArrowRight, Clock, User, Sparkles, BookOpen, Target, Brain, Smartphone,
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema } from "@/lib/seo";
 import { BLOG_CATEGORIES } from "@/lib/blog-articles";
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 const categoryIconMap: Record<string, React.ElementType> = {
   Smartphone, FileText, Sparkles, Brain, TrendingUp,
 };
+
+const categoryNameMap: Record<string, string> = {
+  'App Guides': 'categoryAppGuides',
+  'Worksheets': 'categoryWorksheets',
+  'Identity & Transformation': 'categoryIdentityTransformation',
+  'Mindset & Strategy': 'categoryMindsetStrategy',
+  'Productivity & Growth': 'categoryProductivityGrowth',
+};
+
+const articleCategoryMap: Record<string, string> = {
+  'FREE App': 'categoryFreeApp',
+  'BASIC App': 'categoryBasicApp',
+  'BUNDLE App': 'categoryBundleApp',
+  'Worksheet': 'categoryWorksheet',
+  'Identity Shift': 'categoryIdentityShift',
+  'Transformation': 'categoryTransformation',
+  'Wealth & Identity': 'categoryWealthIdentity',
+  'Commitment': 'categoryCommitment',
+  'Self-Liberation': 'categorySelfLiberation',
+  'Strategy': 'categoryStrategy',
+  'Execution': 'categoryExecution',
+  'Productivity': 'categoryProductivity',
+  'Self-Image': 'categorySelfImage',
+  'Excellence': 'categoryExcellence',
+  'Mental Clarity': 'categoryMentalClarity',
+};
+
+const tierMap: Record<string, string> = {
+  'FREE': 'tierFree',
+  'BASIC': 'tierBasic',
+  'BUNDLE': 'tierBundle',
+};
+
+function formatReadTime(readTime: string, t: (key: string) => string): string {
+  const match = readTime.match(/^(\d+)\s+min\s+read$/);
+  if (match) {
+    return `${match[1]} ${t('minRead')}`;
+  }
+  return readTime;
+}
 
 // All articles organized by category
 const appArticles = [
@@ -207,6 +248,8 @@ const philosophyArticles = [
 const allFeatured = [...appArticles, ...worksheetArticles, ...philosophyArticles].filter(a => a.featured);
 
 export default function BlogPage() {
+  const t = useTranslations('blogPage');
+
   // Breadcrumb schema
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -223,14 +266,13 @@ export default function BlogPage() {
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="outline" className="mb-6 px-4 py-2 border-accent/30 text-accent bg-accent/10">
               <BookOpen className="w-3.5 h-3.5 mr-2" />
-              Knowledge Base
+              {t('heroBadge')}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-              The&nbsp;<span className="text-accent">Tamkinly</span> Blog
+              {t('heroTitle')}<span className="text-accent">{t('heroTitleHighlight')}</span>{t('heroTitleEnd')}
             </h1>
             <p className="text-lg text-slate-300 leading-relaxed">
-              Research-backed insights, practical frameworks, and transformation tools. 
-              Every article is designed to guide you toward your true identity.
+              {t('heroSubtitle')}
             </p>
           </div>
         </div>
@@ -242,17 +284,17 @@ export default function BlogPage() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-2">
-                Browse by Category
+                {t('browseByCategory')}
               </h2>
               <p className="text-slate-600 text-sm sm:text-base">
-                Explore articles organized by topic for focused learning.
+                {t('browseByCategoryDesc')}
               </p>
             </div>
             <Link 
               href="/blog/category/app-guides" 
               className="hidden sm:inline-flex items-center gap-1.5 text-sm text-accent hover:underline font-medium"
             >
-              View all <ArrowRight className="h-4 w-4" />
+              {t('viewAll')} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
@@ -269,10 +311,10 @@ export default function BlogPage() {
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold text-primary group-hover:text-accent transition-colors">
-                      {cat.name}
+                      {categoryNameMap[cat.name] ? t(categoryNameMap[cat.name]) : cat.name}
                     </h3>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      {cat.subCategories.length} topics
+                      {cat.subCategories.length} {t('topics')}
                     </p>
                   </div>
                 </Link>
@@ -292,15 +334,15 @@ export default function BlogPage() {
               </div>
               <div>
                 <Badge variant="secondary" className="mb-1">
-                  Interactive Tools
+                  {t('interactiveTools')}
                 </Badge>
                 <h2 className="font-serif text-3xl font-bold text-primary">
-                  App Guides
+                  {t('appGuides')}
                 </h2>
               </div>
             </div>
             <p className="text-slate-600 max-w-2xl">
-              Deep dives into each Tamkinly app—how they work, the science behind them, and how to maximize your results.
+              {t('appGuidesDesc')}
             </p>
           </div>
 
@@ -317,10 +359,10 @@ export default function BlogPage() {
                         article.tier === 'BASIC' ? 'text-blue-600 border-blue-200' :
                         'text-purple-600 border-purple-200'
                       }`}>
-                        {article.tier}
+                        {tierMap[article.tier || ''] ? t(tierMap[article.tier || '']) : article.tier}
                       </Badge>
                       <Badge variant="outline" className="text-xs text-[#1F6F78] border-[#1F6F78]/30">
-                        {article.category}
+                        {articleCategoryMap[article.category] ? t(articleCategoryMap[article.category]) : article.category}
                       </Badge>
                     </div>
                     <h3 className="font-semibold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
@@ -332,10 +374,10 @@ export default function BlogPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-slate-500 flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        {article.readTime}
+                        {formatReadTime(article.readTime, t)}
                       </span>
                       <span className="text-accent text-sm flex items-center gap-1">
-                        Read <ArrowRight className="h-3 w-3" />
+                        {t('read')} <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
                   </CardContent>
@@ -356,15 +398,15 @@ export default function BlogPage() {
               </div>
               <div>
                 <Badge variant="secondary" className="mb-1">
-                  Practical Exercises
+                  {t('practicalExercises')}
                 </Badge>
                 <h2 className="font-serif text-3xl font-bold text-primary">
-                  Worksheet Guides
+                  {t('worksheetGuides')}
                 </h2>
               </div>
             </div>
             <p className="text-slate-600 max-w-2xl">
-              Step-by-step guides for each worksheet, including the research behind them and how to use them effectively.
+              {t('worksheetGuidesDesc')}
             </p>
           </div>
 
@@ -374,7 +416,7 @@ export default function BlogPage() {
                 <Card className="h-full border-0 shadow-sm bg-white hover:shadow-md transition-all cursor-pointer group">
                   <CardContent className="p-6">
                     <Badge variant="outline" className="mb-3 text-xs text-[#1F6F78] border-[#1F6F78]/30">
-                      {article.category}
+                      {articleCategoryMap[article.category] ? t(articleCategoryMap[article.category]) : article.category}
                     </Badge>
                     <h3 className="font-semibold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
                       {article.title}
@@ -385,10 +427,10 @@ export default function BlogPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-slate-500 flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        {article.readTime}
+                        {formatReadTime(article.readTime, t)}
                       </span>
                       <span className="text-accent text-sm flex items-center gap-1">
-                        Read <ArrowRight className="h-3 w-3" />
+                        {t('read')} <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
                   </CardContent>
@@ -409,15 +451,15 @@ export default function BlogPage() {
               </div>
               <div>
                 <Badge variant="secondary" className="mb-1">
-                  Insights
+                  {t('insights')}
                 </Badge>
                 <h2 className="font-serif text-3xl font-bold text-primary">
-                  Transformation Philosophy
+                  {t('transformationPhilosophy')}
                 </h2>
               </div>
             </div>
             <p className="text-slate-600 max-w-2xl">
-              Inspiring articles on identity, growth, and transformation—connecting timeless wisdom with modern science.
+              {t('philosophyDesc')}
             </p>
           </div>
 
@@ -429,7 +471,7 @@ export default function BlogPage() {
                 }`}>
                   <CardContent className="p-6">
                     <Badge variant="outline" className="mb-3 text-xs text-[#1F6F78] border-[#1F6F78]/30">
-                      {article.category}
+                      {articleCategoryMap[article.category] ? t(articleCategoryMap[article.category]) : article.category}
                     </Badge>
                     <h3 className="font-semibold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
                       {article.title}
@@ -440,10 +482,10 @@ export default function BlogPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-slate-500 flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        {article.readTime}
+                        {formatReadTime(article.readTime, t)}
                       </span>
                       <span className="text-accent text-sm flex items-center gap-1">
-                        Read <ArrowRight className="h-3 w-3" />
+                        {t('read')} <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
                   </CardContent>
@@ -459,22 +501,21 @@ export default function BlogPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
-              Ready to Transform Your{" "}
-              <span className="text-accent">Identity</span>?
+              {t('ctaTitle')}<span className="text-accent">{t('ctaTitleHighlight')}</span>{t('ctaTitleEnd')}
             </h2>
             <p className="text-lg text-slate-300 mb-8">
-              These insights are just the beginning. Start your structured transformation journey today.
+              {t('ctaSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/apps">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  Try Free Apps
+                  {t('tryFreeApps')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/products">
                 <Button variant="white" size="lg" className="px-8 font-semibold">
-                  View Products
+                  {t('viewProducts')}
                 </Button>
               </Link>
             </div>

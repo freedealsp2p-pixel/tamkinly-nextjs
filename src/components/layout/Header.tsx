@@ -162,7 +162,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
               <div className="relative w-10 h-10 flex items-center justify-center">
                 <Image
                   src="/logo-icon.png"
-                  alt="Tamkinly Logo"
+                  alt={locale === 'ar' ? 'شعار تمكينلي' : 'Tamkinly Logo'}
                   width={40}
                   height={40}
                   className="object-contain"
@@ -207,7 +207,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
             <Link href="/auth/signin" onClick={() => setIsOpen(false)}>
               <Button variant="outline" className="w-full justify-start border-primary/20 text-primary hover:bg-primary/5">
                 <LogIn className="h-4 w-4 mx-2 rtl:mr-0 rtl:ml-2" />
-                {t("navigation.signIn") || "Sign In"}
+                {t("navigation.signIn")}
               </Button>
             </Link>
             <Link href="/quiz" onClick={() => setIsOpen(false)}>
@@ -234,7 +234,7 @@ export function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations();
-  const { direction } = useLocale();
+  const { locale, direction } = useLocale();
 
   const navItems = [
     { href: "/", label: t("navigation.home") },
@@ -365,7 +365,7 @@ export function Header() {
             <div className="relative w-10 h-10 flex items-center justify-center group-hover:scale-105 transition-transform">
               <Image 
                 src="/logo-icon.png" 
-                alt="Tamkinly Logo" 
+                alt={locale === 'ar' ? 'شعار تمكينلي' : 'Tamkinly Logo'} 
                 width={40}
                 height={40}
                 className="object-contain"

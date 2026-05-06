@@ -15,8 +15,11 @@ import {
   Mail,
   ArrowRight
 } from 'lucide-react';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 export default function TermsOfServicePage() {
+  const t = useTranslations('termsPage');
+
   return (
     <div className="min-h-screen bg-[#F6F8FA]">
       {/* Hero Section */}
@@ -25,13 +28,13 @@ export default function TermsOfServicePage() {
           <div className="max-w-3xl mx-auto text-center">
             <Badge className="mb-6 px-4 py-2 bg-[#3DD4B0]/10 text-[#3DD4B0] border border-[#3DD4B0]/30">
               <FileText className="w-3.5 h-3.5 mr-2" />
-              Terms of Service
+              {t('badge')}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">
-              Terms of Service
+              {t('title')}
             </h1>
             <p className="text-slate-300">
-              Last updated: April 2025
+              {t('lastUpdated')}
             </p>
           </div>
         </div>
@@ -46,33 +49,33 @@ export default function TermsOfServicePage() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
                   <CheckCircle2 className="w-10 h-10 text-[#3DD4B0] mx-auto mb-3" />
-                  <h3 className="font-semibold text-[#0F1C2E] mb-2">You May</h3>
+                  <h3 className="font-semibold text-[#0F1C2E] mb-2">{t('youMay')}</h3>
                   <ul className="text-sm text-[#8A94A6] space-y-1 text-left">
-                    <li>• Use products for personal use</li>
-                    <li>• Print for personal use</li>
-                    <li>• Access updates forever</li>
+                    <li>• {t('youMay1')}</li>
+                    <li>• {t('youMay2')}</li>
+                    <li>• {t('youMay3')}</li>
                   </ul>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
                   <XCircle className="w-10 h-10 text-red-500 mx-auto mb-3" />
-                  <h3 className="font-semibold text-[#0F1C2E] mb-2">You May Not</h3>
+                  <h3 className="font-semibold text-[#0F1C2E] mb-2">{t('youMayNot')}</h3>
                   <ul className="text-sm text-[#8A94A6] space-y-1 text-left">
-                    <li>• Share access codes</li>
-                    <li>• Resell or redistribute</li>
-                    <li>• Remove copyright notices</li>
+                    <li>• {t('youMayNot1')}</li>
+                    <li>• {t('youMayNot2')}</li>
+                    <li>• {t('youMayNot3')}</li>
                   </ul>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
                   <AlertTriangle className="w-10 h-10 text-amber-500 mx-auto mb-3" />
-                  <h3 className="font-semibold text-[#0F1C2E] mb-2">Important</h3>
+                  <h3 className="font-semibold text-[#0F1C2E] mb-2">{t('important')}</h3>
                   <ul className="text-sm text-[#8A94A6] space-y-1 text-left">
-                    <li>• Products are &quot;as is&quot;</li>
-                    <li>• Not professional advice</li>
-                    <li>• We may update terms</li>
+                    <li>• {t('important1')}</li>
+                    <li>• {t('important2')}</li>
+                    <li>• {t('important3')}</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -82,9 +85,9 @@ export default function TermsOfServicePage() {
               <CardContent className="p-8 lg:p-10 space-y-8">
                 {/* Introduction */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Agreement to Terms</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('agreementToTerms')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    By accessing or using Tamkinly&apos;s website and products, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                    {t('agreementDesc')}
                   </p>
                 </div>
 
@@ -94,23 +97,23 @@ export default function TermsOfServicePage() {
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4 flex items-center gap-2">
                     <Scale className="w-5 h-5 text-[#3DD4B0]" />
-                    License to Use
+                    {t('licenseToUse')}
                   </h2>
                   <p className="text-[#2B2E34] leading-relaxed mb-4">
-                    When you purchase a product from Tamkinly, you receive a personal, non-exclusive, non-transferable license to:
+                    {t('licenseDesc')}
                   </p>
                   <ul className="space-y-3 text-[#2B2E34]">
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
-                      <span>Access and use the digital product for your personal, non-commercial purposes</span>
+                      <span>{t('license1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
-                      <span>Print copies for your own personal use</span>
+                      <span>{t('license2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
-                      <span>Receive all future updates to the purchased product at no additional cost</span>
+                      <span>{t('license3')}</span>
                     </li>
                   </ul>
                 </div>
@@ -119,26 +122,26 @@ export default function TermsOfServicePage() {
 
                 {/* Restrictions */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Restrictions</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('restrictions')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed mb-4">
-                    You may not:
+                    {t('restrictionsDesc')}
                   </p>
                   <ul className="space-y-3 text-[#2B2E34]">
                     <li className="flex items-start gap-3">
                       <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <span>Share, sell, rent, lease, or distribute access codes to others</span>
+                      <span>{t('restriction1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <span>Copy, reproduce, or redistribute the content for commercial purposes</span>
+                      <span>{t('restriction2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <span>Modify, create derivative works, or remove copyright notices</span>
+                      <span>{t('restriction3')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                      <span>Use the products in a way that violates applicable laws</span>
+                      <span>{t('restriction4')}</span>
                     </li>
                   </ul>
                 </div>
@@ -147,9 +150,9 @@ export default function TermsOfServicePage() {
 
                 {/* Intellectual Property */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Intellectual Property</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('intellectualProperty')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    All content on this website, including text, graphics, logos, images, and software, is the property of Tamkinly and is protected by international copyright laws. The Tamkinly name, logo, and all related names, logos, product and service names, designs, and slogans are trademarks of Tamkinly.
+                    {t('intellectualPropertyDesc')}
                   </p>
                 </div>
 
@@ -157,17 +160,17 @@ export default function TermsOfServicePage() {
 
                 {/* Disclaimer */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Disclaimer</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('disclaimer')}</h2>
                   <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
                     <div className="flex items-start gap-3">
                       <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
                       <p className="text-sm text-amber-800">
-                        <strong>Important:</strong> Our products are for personal development purposes only and are not a substitute for professional mental health advice, diagnosis, or treatment.
+                        <strong>{t('disclaimerImportant')}</strong>
                       </p>
                     </div>
                   </div>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    The products and services provided by Tamkinly are on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, either express or implied. We do not guarantee specific results from using our products.
+                    {t('disclaimerDesc')}
                   </p>
                 </div>
 
@@ -175,9 +178,9 @@ export default function TermsOfServicePage() {
 
                 {/* Limitation of Liability */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Limitation of Liability</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('limitationOfLiability')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    To the maximum extent permitted by law, Tamkinly shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses. Our total liability shall not exceed the amount you paid for the product.
+                    {t('limitationDesc')}
                   </p>
                 </div>
 
@@ -185,9 +188,9 @@ export default function TermsOfServicePage() {
 
                 {/* Account */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Account Security</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('accountSecurity')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. You agree to notify us immediately of any unauthorized use of your account.
+                    {t('accountSecurityDesc')}
                   </p>
                 </div>
 
@@ -195,9 +198,9 @@ export default function TermsOfServicePage() {
 
                 {/* Termination */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Termination</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('termination')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    We reserve the right to terminate or suspend your access to our services at our sole discretion, without prior notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason.
+                    {t('terminationDesc')}
                   </p>
                 </div>
 
@@ -205,9 +208,9 @@ export default function TermsOfServicePage() {
 
                 {/* Changes */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Changes to Terms</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('changesToTerms')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    We may modify these terms at any time. We will notify users of significant changes via email or through our website. Your continued use of our services after changes constitutes acceptance of the updated terms.
+                    {t('changesDesc')}
                   </p>
                 </div>
 
@@ -215,9 +218,9 @@ export default function TermsOfServicePage() {
 
                 {/* Governing Law */}
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">Governing Law</h2>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('governingLaw')}</h2>
                   <p className="text-[#2B2E34] leading-relaxed">
-                    These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.
+                    {t('governingLawDesc')}
                   </p>
                 </div>
 
@@ -226,14 +229,14 @@ export default function TermsOfServicePage() {
                 {/* Contact */}
                 <div className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] -mx-8 lg:-mx-10 px-8 lg:px-10 py-8 rounded-b-lg">
                   <div className="text-center">
-                    <h2 className="font-serif text-2xl font-bold text-white mb-3">Questions About Terms?</h2>
+                    <h2 className="font-serif text-2xl font-bold text-white mb-3">{t('questionsTerms')}</h2>
                     <p className="text-slate-300 mb-6">
-                      Contact us for any questions regarding these terms
+                      {t('questionsTermsDesc')}
                     </p>
                     <Link href="/contact">
                       <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
                         <Mail className="w-4 h-4 mr-2" />
-                        Contact Us
+                        {t('contactUs')}
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     </Link>

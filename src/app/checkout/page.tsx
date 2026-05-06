@@ -29,6 +29,7 @@ import {
   ExternalLink,
   CreditCard
 } from 'lucide-react';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 // Payment Configuration
 const WISE_CONFIG = {
@@ -114,6 +115,7 @@ function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const productId = searchParams.get('product');
+  const t = useTranslations('checkoutPage');
 
   const [copied, setCopied] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -222,7 +224,7 @@ function CheckoutContent() {
       setSuccess(true);
     } catch (err) {
       console.error('Confirmation error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to submit order. Please try again.');
+      setError(err instanceof Error ? err.message : t('submitError'));
     } finally {
       setProcessing(false);
     }
@@ -234,7 +236,7 @@ function CheckoutContent() {
       <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-[#1F6F78] mx-auto mb-4" />
-          <p className="text-[#8A94A6]">Loading checkout...</p>
+          <p className="text-[#8A94A6]">{t('loadingCheckout')}</p>
         </div>
       </div>
     );
@@ -249,13 +251,13 @@ function CheckoutContent() {
             <div className="w-24 h-24 rounded-full bg-[#1F6F78]/10 flex items-center justify-center mx-auto mb-6">
               <Package className="w-12 h-12 text-[#1F6F78]" />
             </div>
-            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">Select a Product</h1>
+            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">{t('selectProduct')}</h1>
             <p className="text-[#8A94A6] mb-8">
-              Please select a product from our products page to continue with checkout.
+              {t('selectProductDesc')}
             </p>
             <Link href="/products">
               <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-8">
-                Browse Products
+                {t('browseProducts')}
               </Button>
             </Link>
           </div>
@@ -278,16 +280,16 @@ function CheckoutContent() {
             <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-12 h-12 text-green-600" />
             </div>
-            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">Order Completed!</h1>
+            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">{t('orderCompleted')}</h1>
             <p className="text-[#8A94A6] mb-8">
-              Thank you for your purchase! Your order has been processed successfully.
+              {t('thankYouPurchase')}
             </p>
 
             {/* Access Code Section */}
             {accessCode && (
               <Card className="border-2 border-[#3DD4B0] shadow-sm mb-6">
                 <CardContent className="p-6">
-                  <p className="text-sm font-medium text-[#1F6F78] mb-2">Your Access Code</p>
+                  <p className="text-sm font-medium text-[#1F6F78] mb-2">{t('yourAccessCode')}</p>
                   <div className="flex items-center justify-center gap-2">
                     <p className="text-2xl font-mono font-bold text-[#0F1C2E]">{accessCode}</p>
                     <Button
@@ -299,28 +301,28 @@ function CheckoutContent() {
                       {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
                     </Button>
                   </div>
-                  <p className="text-xs text-[#8A94A6] mt-2">Save this code to access your products</p>
+                  <p className="text-xs text-[#8A94A6] mt-2">{t('saveCode')}</p>
                 </CardContent>
               </Card>
             )}
 
             <Card className="border-0 shadow-sm mb-8">
               <CardContent className="p-6">
-                <p className="text-sm text-[#8A94A6] mb-2">Order Reference</p>
+                <p className="text-sm text-[#8A94A6] mb-2">{t('orderReference')}</p>
                 <p className="text-xl font-mono font-bold text-[#0F1C2E]">{orderNumber}</p>
-                <p className="text-xs text-[#8A94A6] mt-2">Save this reference for support</p>
+                <p className="text-xs text-[#8A94A6] mt-2">{t('saveReference')}</p>
               </CardContent>
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/apps">
                 <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-8">
-                  Access Your Apps
+                  {t('accessYourApps')}
                 </Button>
               </Link>
               <Link href="/products">
                 <Button variant="outline" className="h-12 px-8">
-                  Continue Shopping
+                  {t('continueShopping')}
                 </Button>
               </Link>
             </div>
@@ -339,9 +341,9 @@ function CheckoutContent() {
         <div className="mb-8">
           <Link href={product ? `/products/${product.id}` : '/cart'} className="inline-flex items-center text-[#1F6F78] hover:text-[#3DD4B0] mb-4">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            {product ? 'Back to Product' : 'Back to Cart'}
+            {product ? t('backToProduct') : t('backToCart')}
           </Link>
-          <h1 className="text-3xl font-bold text-[#0F1C2E]">Checkout</h1>
+          <h1 className="text-3xl font-bold text-[#0F1C2E]">{t('checkout')}</h1>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -355,16 +357,16 @@ function CheckoutContent() {
                     <div className="w-8 h-8 rounded-full bg-[#3DD4B0] text-[#0F1C2E] flex items-center justify-center font-bold">1</div>
                     <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                       <User className="w-5 h-5 text-[#3DD4B0]" />
-                      Customer Information
+                      {t('customerInfo')}
                     </CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#2B2E34]">Full Name</label>
+                    <label className="text-sm font-medium text-[#2B2E34]">{t('fullName')}</label>
                     <Input
                       type="text"
-                      placeholder="Your name"
+                      placeholder={t('namePlaceholder')}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
@@ -373,17 +375,17 @@ function CheckoutContent() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#2B2E34]">Email Address</label>
+                    <label className="text-sm font-medium text-[#2B2E34]">{t('emailAddress')}</label>
                     <Input
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder={t('emailPlaceholder')}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
                       className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
                     />
                     <p className="text-xs text-[#8A94A6]">
-                      Your access code will be sent to this email.
+                      {t('emailNote')}
                     </p>
                   </div>
 
@@ -392,7 +394,7 @@ function CheckoutContent() {
                     disabled={!formData.name || !formData.email}
                     className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12"
                   >
-                    Continue to Payment
+                    {t('continueToPayment')}
                   </Button>
                 </CardContent>
               </Card>
@@ -407,7 +409,7 @@ function CheckoutContent() {
                       <div className="w-8 h-8 rounded-full bg-[#3DD4B0] text-[#0F1C2E] flex items-center justify-center font-bold">2</div>
                       <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                         <CreditCard className="w-5 h-5 text-[#3DD4B0]" />
-                        Payment via Wise
+                        {t('paymentViaWise')}
                       </CardTitle>
                     </div>
                   </CardHeader>
@@ -419,19 +421,19 @@ function CheckoutContent() {
                           <span className="text-2xl font-bold">W</span>
                         </div>
                         <div>
-                          <p className="font-bold text-lg">Wise Payment</p>
-                          <p className="text-white/70 text-sm">Fast, Low-cost Transfers</p>
+                          <p className="font-bold text-lg">{t('wisePayment')}</p>
+                          <p className="text-white/70 text-sm">{t('wiseFastLowCost')}</p>
                         </div>
                       </div>
 
                       <div className="space-y-3">
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Amount to send:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('amountToSend')}</p>
                           <p className="text-2xl font-bold">${checkoutTotal} USD</p>
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Account Holder:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('accountHolder')}</p>
                           <p className="font-semibold">{WISE_CONFIG.accountName}</p>
                         </div>
                       </div>
@@ -450,12 +452,12 @@ function CheckoutContent() {
                           className="w-full bg-[#00B9FF] hover:bg-[#0099DD] text-white h-14 text-lg font-semibold"
                         >
                           <ExternalLink className="w-5 h-5 mr-2" />
-                          Pay ${checkoutTotal} with Wise
+                          {t('payWithWise').replace('{amount}', String(checkoutTotal))}
                         </Button>
                       </a>
 
                       <p className="text-center text-sm text-[#8A94A6]">
-                        Click to open Wise payment page in a new tab
+                        {t('openWiseTab')}
                       </p>
                     </div>
 
@@ -463,7 +465,7 @@ function CheckoutContent() {
                     <div className="relative my-6">
                       <Separator />
                       <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm font-medium text-[#0F1C2E]">
-                        OR
+                        {t('or')}
                       </span>
                     </div>
 
@@ -474,8 +476,8 @@ function CheckoutContent() {
                           <span className="text-2xl">⚡</span>
                         </div>
                         <div>
-                          <p className="font-bold text-lg">Pay with Crypto</p>
-                          <p className="text-white/70 text-sm">USDC/USDT • Instant & Global</p>
+                          <p className="font-bold text-lg">{t('payWithCrypto')}</p>
+                          <p className="text-white/70 text-sm">{t('cryptoInstant')}</p>
                         </div>
                       </div>
 
@@ -515,26 +517,26 @@ function CheckoutContent() {
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Network:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('network')}</p>
                           <p className="font-semibold text-sm">{CRYPTO_CONFIG.network}</p>
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Amount to send:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('amountToSendCrypto')}</p>
                           <p className="text-2xl font-bold">${checkoutTotal} USDC/USDT</p>
                         </div>
                       </div>
                     </div>
 
                     <p className="text-center text-sm text-[#8A94A6] mt-2">
-                      Send USDC or USDT (BEP20) to the wallet address above
+                      {t('sendCryptoNote')}
                     </p>
 
                     {/* OR Divider */}
                     <div className="relative my-6">
                       <Separator />
                       <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm font-medium text-[#0F1C2E]">
-                        OR
+                        {t('or')}
                       </span>
                     </div>
 
@@ -545,14 +547,14 @@ function CheckoutContent() {
                           <span className="text-2xl font-bold">🏦</span>
                         </div>
                         <div>
-                          <p className="font-bold text-lg">Bank Transfer</p>
-                          <p className="text-white/70 text-sm">International Wire / ACH</p>
+                          <p className="font-bold text-lg">{t('bankTransfer')}</p>
+                          <p className="text-white/70 text-sm">{t('bankWire')}</p>
                         </div>
                       </div>
 
                       <div className="space-y-3">
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Account Name:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('accountName')}</p>
                           <div className="flex items-center justify-between gap-2">
                             <p className="font-semibold">{BANK_CONFIG.accountName}</p>
                             <Button
@@ -568,7 +570,7 @@ function CheckoutContent() {
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Account Number:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('accountNumber')}</p>
                           <div className="flex items-center justify-between gap-2">
                             <p className="font-mono font-semibold">{BANK_CONFIG.accountNumber}</p>
                             <Button
@@ -584,7 +586,7 @@ function CheckoutContent() {
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Routing Number (ACH):</p>
+                          <p className="text-xs text-white/60 mb-1">{t('routingNumber')}</p>
                           <div className="flex items-center justify-between gap-2">
                             <p className="font-mono font-semibold">{BANK_CONFIG.routingNumber}</p>
                             <Button
@@ -600,7 +602,7 @@ function CheckoutContent() {
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">SWIFT/BIC (International):</p>
+                          <p className="text-xs text-white/60 mb-1">{t('swiftBic')}</p>
                           <div className="flex items-center justify-between gap-2">
                             <p className="font-mono font-semibold">{BANK_CONFIG.swiftBic}</p>
                             <Button
@@ -616,51 +618,51 @@ function CheckoutContent() {
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Bank Name:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('bankName')}</p>
                           <p className="font-semibold text-sm">{BANK_CONFIG.bankName}</p>
                         </div>
 
                         <div className="bg-white/10 rounded-lg p-3">
-                          <p className="text-xs text-white/60 mb-1">Amount to send:</p>
+                          <p className="text-xs text-white/60 mb-1">{t('amountToSend')}</p>
                           <p className="text-2xl font-bold">${checkoutTotal} USD</p>
                         </div>
                       </div>
                     </div>
 
                     <p className="text-center text-sm text-[#8A94A6] mt-2">
-                      International wire transfers may take 1-3 business days
+                      {t('bankTransferTime')}
                     </p>
 
                     {/* Divider */}
                     <div className="relative">
                       <Separator />
                       <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-sm text-[#8A94A6]">
-                        Already paid?
+                        {t('alreadyPaid')}
                       </span>
                     </div>
 
                     {/* Confirmation Section */}
                     <div className="space-y-4">
-                      <p className="font-medium text-[#0F1C2E]">Confirm Your Payment</p>
+                      <p className="font-medium text-[#0F1C2E]">{t('confirmPayment')}</p>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-[#2B2E34]">Transaction ID / TX Hash (Optional)</label>
+                        <label className="text-sm font-medium text-[#2B2E34]">{t('transactionId')}</label>
                         <Input
                           type="text"
-                          placeholder="Wise transaction ID or crypto TX hash"
+                          placeholder={t('transactionPlaceholder')}
                           value={formData.transactionId}
                           onChange={(e) => setFormData({ ...formData, transactionId: e.target.value })}
                           className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
                         />
                         <p className="text-xs text-[#8A94A6]">
-                          Found in your Wise transaction history or wallet transaction
+                          {t('transactionNote')}
                         </p>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-[#2B2E34]">Additional Notes (Optional)</label>
+                        <label className="text-sm font-medium text-[#2B2E34]">{t('additionalNotes')}</label>
                         <Textarea
-                          placeholder="Any notes about your order..."
+                          placeholder={t('notesPlaceholder')}
                           value={formData.notes}
                           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                           className="border-[#1F6F78]/20 focus:border-[#3DD4B0] min-h-[80px]"
@@ -685,12 +687,12 @@ function CheckoutContent() {
                       {processing ? (
                         <>
                           <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                          Processing...
+                          {t('processing')}
                         </>
                       ) : (
                         <>
                           <CheckCircle2 className="w-4 h-4 mr-2" />
-                          Confirm Order
+                          {t('confirmOrder')}
                         </>
                       )}
                     </Button>
@@ -703,7 +705,7 @@ function CheckoutContent() {
                       className="w-full"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Customer Info
+                      {t('backToCustomerInfo')}
                     </Button>
                   </CardContent>
                 </Card>
@@ -714,15 +716,15 @@ function CheckoutContent() {
             <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-sm text-[#8A94A6]">
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-[#3DD4B0]" />
-                <span>Secure payment</span>
+                <span>{t('securePayment')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[#3DD4B0]" />
-                <span>30-day money-back</span>
+                <span>{t('thirtyDayMoneyBack')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Lock className="h-4 w-4 text-[#3DD4B0]" />
-                <span>Verified by Wise</span>
+                <span>{t('verifiedByWise')}</span>
               </div>
             </div>
           </div>
@@ -731,7 +733,7 @@ function CheckoutContent() {
           <div className="lg:col-span-1">
             <Card className="border-0 shadow-sm sticky top-24">
               <CardHeader>
-                <CardTitle className="text-[#0F1C2E]">Order Summary</CardTitle>
+                <CardTitle className="text-[#0F1C2E]">{t('orderSummary')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Product(s) */}
@@ -778,7 +780,7 @@ function CheckoutContent() {
                 {/* Features - only for single product */}
                 {product && (
                 <div className="space-y-2">
-                  <p className="text-sm font-medium text-[#2B2E34]">Includes:</p>
+                  <p className="text-sm font-medium text-[#2B2E34]">{t('includes')}</p>
                   {product.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm text-slate-600">
                       <CheckCircle2 className="w-4 h-4 text-[#3DD4B0]" />
@@ -791,22 +793,22 @@ function CheckoutContent() {
                 <Separator />
 
                 <div className="flex justify-between text-[#8A94A6]">
-                  <span>Subtotal</span>
+                  <span>{t('subtotal')}</span>
                   <span>${checkoutTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-[#8A94A6]">
-                  <span>Tax</span>
+                  <span>{t('tax')}</span>
                   <span>$0.00</span>
                 </div>
                 {product && product.comparePrice > product.price && (
                   <div className="flex justify-between text-green-600">
-                    <span>You Save</span>
+                    <span>{t('youSave')}</span>
                     <span>-${(product.comparePrice - product.price).toFixed(2)}</span>
                   </div>
                 )}
                 <Separator />
                 <div className="flex justify-between text-lg font-bold text-[#0F1C2E]">
-                  <span>Total</span>
+                  <span>{t('total')}</span>
                   <span>${checkoutTotal.toFixed(2)} USD</span>
                 </div>
 
@@ -814,15 +816,15 @@ function CheckoutContent() {
                 <div className="pt-4 space-y-3 border-t">
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]">
                     <CheckCircle2 className="w-4 w-4 text-[#3DD4B0]" />
-                    <span>Instant access after payment</span>
+                    <span>{t('instantAccessAfter')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]">
                     <Shield className="w-4 w-4 text-[#3DD4B0]" />
-                    <span>Access code sent via email</span>
+                    <span>{t('accessCodeSent')}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]">
                     <Sparkles className="w-4 w-4 text-[#3DD4B0]" />
-                    <span>Lifetime access</span>
+                    <span>{t('lifetimeAccess')}</span>
                   </div>
                 </div>
               </CardContent>
@@ -835,12 +837,13 @@ function CheckoutContent() {
 }
 
 export default function CheckoutPage() {
+  const t = useTranslations('checkoutPage');
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-[#1F6F78] mx-auto mb-4" />
-          <p className="text-[#8A94A6]">Loading checkout...</p>
+          <p className="text-[#8A94A6]">{t('loadingCheckout')}</p>
         </div>
       </div>
     }>

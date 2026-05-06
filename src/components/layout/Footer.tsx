@@ -1,20 +1,19 @@
 'use client';
 
 import Link from "next/link";
-import { Mail, Twitter, Instagram, Linkedin, Youtube, Github } from "lucide-react";
-import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
+import { Mail, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
-const socialLinks = [
-  { href: "https://twitter.com/tamkinly", icon: Twitter, label: "Twitter / X" },
-  { href: "https://instagram.com/tamkinly", icon: Instagram, label: "Instagram" },
-  { href: "https://linkedin.com/company/tamkinly", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://youtube.com/@tamkinly", icon: Youtube, label: "YouTube" },
-  { href: "mailto:hello@tamkinly.com", icon: Mail, label: "Email" },
+const socialLinkData = [
+  { href: "https://twitter.com/tamkinly", icon: Twitter, labelKey: "socialTwitter" as const },
+  { href: "https://instagram.com/tamkinly", icon: Instagram, labelKey: "socialInstagram" as const },
+  { href: "https://linkedin.com/company/tamkinly", icon: Linkedin, labelKey: "socialLinkedin" as const },
+  { href: "https://youtube.com/@tamkinly", icon: Youtube, labelKey: "socialYoutube" as const },
+  { href: "mailto:hello@tamkinly.com", icon: Mail, labelKey: "socialEmail" as const },
 ];
 
 export function Footer() {
   const t = useTranslations("footer");
-  const { locale } = useLocale();
 
   const companyLinks = [
     { href: "/about", label: t("aboutUs") },
@@ -45,6 +44,11 @@ export function Footer() {
     { href: "/terms", label: t("termsOfService") },
     { href: "/refund", label: t("refundPolicy") },
   ];
+
+  const socialLinks = socialLinkData.map((s) => ({
+    ...s,
+    label: t(s.labelKey),
+  }));
 
   return (
     <footer className="bg-primary text-white">
@@ -179,7 +183,7 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-slate-400">
-              {locale === 'ar' ? `© ${new Date().getFullYear()} تمكينلي. جميع الحقوق محفوظة.` : `© ${new Date().getFullYear()} Tamkinly. All rights reserved.`}
+              {t("copyright").replace('{year}', String(new Date().getFullYear()))}
             </p>
             <div className="flex items-center gap-4 text-sm text-slate-400">
               <span>{t("madeWith")}</span>

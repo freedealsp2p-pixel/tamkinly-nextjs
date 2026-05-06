@@ -48,7 +48,7 @@ export function PromoBanner() {
         <button
           onClick={handleDismiss}
           className="absolute top-2 end-2 text-white/60 hover:text-white transition-colors"
-          aria-label="Dismiss"
+          aria-label={t('common.dismiss')}
         >
           <X className="h-4 w-4" />
         </button>
@@ -62,14 +62,14 @@ export function PromoBanner() {
               {t('common.saveBundle')}
             </h4>
             <p className="text-xs text-slate-300 mb-3">
-              Limited time offer: Save $44 on the complete Identity Transformation Bundle
+              {t('common.promoDescription')}
             </p>
             <Link href="/products">
               <Button
                 size="sm"
                 className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] w-full"
               >
-                View Bundle
+                {t('common.viewBundle')}
               </Button>
             </Link>
           </div>

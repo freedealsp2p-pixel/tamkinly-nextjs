@@ -16,6 +16,7 @@ import {
   Shield
 } from "lucide-react";
 import { Recaptcha } from "@/components/Recaptcha";
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 interface FormState {
   name: string;
@@ -32,19 +33,20 @@ interface FormStatus {
 
 // Hero Section
 function HeroSection() {
+  const t = useTranslations("contactPage");
+  
   return (
     <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <Badge variant="outline" className="mb-6 px-4 py-2 border-accent/30 text-accent bg-accent/10">
-            Get in Touch
+            {t("heroBadge")}
           </Badge>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Contact&nbsp;<span className="text-accent">Us</span>
+            {t("heroTitle")}&nbsp;<span className="text-accent">{t("heroHighlight")}</span>
           </h1>
           <p className="text-lg text-slate-300 leading-relaxed">
-            Have questions about our products or methodology? We're here to help 
-            you on your journey of transformation.
+            {t("heroSubtitle")}
           </p>
         </div>
       </div>
@@ -54,6 +56,8 @@ function HeroSection() {
 
 // Contact Form Section
 function ContactSection() {
+  const t = useTranslations("contactPage");
+  
   const [formData, setFormData] = useState<FormState>({
     name: '',
     email: '',
@@ -97,7 +101,7 @@ function ContactSection() {
       if (data.success) {
         setStatus({ 
           type: 'success', 
-          message: data.message || 'Your message has been sent successfully!' 
+          message: data.message || t("messageSent")
         });
         // Reset form on success
         setFormData({ name: '', email: '', subject: '', message: '' });
@@ -113,7 +117,7 @@ function ContactSection() {
       console.error('Contact form error:', error);
       setStatus({ 
         type: 'error', 
-        message: 'An unexpected error occurred. Please try again later.' 
+        message: t("unexpectedError")
       });
     }
   };
@@ -135,23 +139,23 @@ function ContactSection() {
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
                   <h2 className="font-serif text-2xl font-bold text-primary mb-2">
-                    Message Sent!
+                    {t("messageSent")}
                   </h2>
                   <p className="text-slate-600 mb-6">
-                    {status.message || "Thank you for reaching out. We'll get back to you within 24-48 hours."}
+                    {status.message || t("thankYou")}
                   </p>
                   <Button onClick={resetForm} variant="outline">
-                    Send Another Message
+                    {t("sendAnother")}
                   </Button>
                 </div>
               ) : (
                 <>
                   <div className="text-center mb-8">
                     <h2 className="font-serif text-2xl font-bold text-primary mb-2">
-                      Send Us a Message
+                      {t("formTitle")}
                     </h2>
                     <p className="text-slate-600">
-                      Fill out the form below and we'll respond as soon as possible.
+                      {t("formSubtitle")}
                     </p>
                   </div>
                   
@@ -161,7 +165,7 @@ function ContactSection() {
                         <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
                         <div>
                           <p className="font-medium text-red-800">
-                            {status.message || 'Something went wrong'}
+                            {status.message || t("errorTitle")}
                           </p>
                           {status.errors && status.errors.length > 0 && (
                             <ul className="mt-2 text-sm text-red-600 list-disc list-inside">
@@ -179,14 +183,14 @@ function ContactSection() {
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <label htmlFor="name" className="text-sm font-medium text-slate-700">
-                          Name
+                          {t("nameLabel")}
                         </label>
                         <Input 
                           id="name" 
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
-                          placeholder="Your name"
+                          placeholder={t("namePlaceholder")}
                           required
                           disabled={status.type === 'loading'}
                           className="bg-white"
@@ -194,7 +198,7 @@ function ContactSection() {
                       </div>
                       <div className="space-y-2">
                         <label htmlFor="email" className="text-sm font-medium text-slate-700">
-                          Email
+                          {t("emailLabel")}
                         </label>
                         <Input 
                           id="email" 
@@ -202,7 +206,7 @@ function ContactSection() {
                           type="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          placeholder="you@example.com"
+                          placeholder={t("emailPlaceholder")}
                           required
                           disabled={status.type === 'loading'}
                           className="bg-white"
@@ -212,14 +216,14 @@ function ContactSection() {
                     
                     <div className="space-y-2">
                       <label htmlFor="subject" className="text-sm font-medium text-slate-700">
-                        Subject
+                        {t("subjectLabel")}
                       </label>
                       <Input 
                         id="subject" 
                         name="subject"
                         value={formData.subject}
                         onChange={handleInputChange}
-                        placeholder="How can we help?"
+                        placeholder={t("subjectPlaceholder")}
                         required
                         disabled={status.type === 'loading'}
                         className="bg-white"
@@ -228,14 +232,14 @@ function ContactSection() {
                     
                     <div className="space-y-2">
                       <label htmlFor="message" className="text-sm font-medium text-slate-700">
-                        Message
+                        {t("messageLabel")}
                       </label>
                       <Textarea 
                         id="message" 
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        placeholder="Tell us more about your question or feedback..."
+                        placeholder={t("messagePlaceholder")}
                         rows={6}
                         required
                         disabled={status.type === 'loading'}
@@ -246,7 +250,7 @@ function ContactSection() {
                     {/* reCAPTCHA */}
                     <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
                       <Shield className="h-4 w-4" />
-                      <span>Protected by reCAPTCHA</span>
+                      <span>{t("protectedByRecaptcha")}</span>
                     </div>
                     <Recaptcha onVerify={handleRecaptchaVerify} action="contact_form" />
                     
@@ -259,12 +263,12 @@ function ContactSection() {
                       {status.type === 'loading' ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Sending...
+                          {t("sending")}
                         </>
                       ) : (
                         <>
                           <Send className="mr-2 h-4 w-4" />
-                          Send Message
+                          {t("sendButton")}
                         </>
                       )}
                     </Button>
@@ -281,12 +285,14 @@ function ContactSection() {
 
 // Alternative Contact Methods
 function AlternativeSection() {
+  const t = useTranslations("contactPage");
+  
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="font-serif text-2xl font-bold text-primary mb-4">
-            Other Ways to Reach Us
+            {t("otherWaysTitle")}
           </h2>
         </div>
         
@@ -296,7 +302,7 @@ function AlternativeSection() {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 text-accent mb-4">
                 <Mail className="h-6 w-6" />
               </div>
-              <h3 className="font-semibold text-primary mb-2">Email</h3>
+              <h3 className="font-semibold text-primary mb-2">{t("emailCard")}</h3>
               <a href="mailto:hello@tamkinly.com" className="text-accent hover:underline">
                 hello@tamkinly.com
               </a>
@@ -308,9 +314,9 @@ function AlternativeSection() {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 text-accent mb-4">
                 <MessageSquare className="h-6 w-6" />
               </div>
-              <h3 className="font-semibold text-primary mb-2">Response Time</h3>
+              <h3 className="font-semibold text-primary mb-2">{t("responseTimeCard")}</h3>
               <p className="text-slate-600 text-sm">
-                We typically respond within 24-48 hours during business days.
+                {t("responseTimeDesc")}
               </p>
             </CardContent>
           </Card>
