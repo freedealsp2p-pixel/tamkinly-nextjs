@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   try {
     const password = request.nextUrl.searchParams.get('password');
     
-    if (!verifyAdminPassword(password)) {
+    if (!password || !verifyAdminPassword(password)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Worksheets count from database
-    const worksheetsCount = await db.worksheetData.count();
+    const worksheetsCount = await db.worksheetResponse.count();
 
     // Contact messages
     const contactMessages = await db.contactMessage.findMany({

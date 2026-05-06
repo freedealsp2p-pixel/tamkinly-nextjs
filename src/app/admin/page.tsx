@@ -416,7 +416,7 @@ export default function AdminPage() {
             <div className="flex items-center gap-3">
               <Link href="/" target="_blank">
                 <Button variant="secondary"><Globe className="w-4 h-4 mr-2" />View Site</Button></Link>
-              <Button variant="secondary" onClick={fetchCodes} disabled={loadingCodes}>
+              <Button variant="secondary" onClick={() => fetchCodes()} disabled={loadingCodes}>
                 <RefreshCw className={`w-4 h-4 mr-2 ${loadingCodes ? 'animate-spin' : ''}`} />Refresh</Button>
               <Button variant="destructive" onClick={handleLogout}>
                 <LogOut className="w-4 h-4 mr-2" />Logout</Button>

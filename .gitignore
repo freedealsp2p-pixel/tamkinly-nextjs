@@ -47,5 +47,7 @@ test
 prompt
 
 server.log
+package-lock.json
+db/*.db
 # Skills directory
 /skills/
