@@ -30,6 +30,7 @@ import {
   CreditCard
 } from 'lucide-react';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
+import { getCart, type CartData } from '@/lib/cart-client';
 
 // Payment Configuration
 const WISE_CONFIG = {
@@ -143,15 +144,36 @@ function CheckoutContent() {
   const [paymentStep, setPaymentStep] = useState<'info' | 'payment' | 'confirm'>('info');
   const [cartItems, setCartItems] = useState<CartCheckoutItem[]>([]);
   const [cartTotal, setCartTotal] = useState(0);
-  const [cartLoading, setCartLoading] = useState(false);
+  const [cartLoading, setCartLoading] = useState(true);
 
   // Get product directly from productId (no state needed)
   const product = productId && productsData[productId] ? productsData[productId] : null;
 
-  // If no single product, try to load cart items
+  // Load cart items from localStorage on mount
   React.useEffect(() => {
     if (!product) {
-      setCartLoading(true);
+      // Try localStorage cart first
+      try {
+        const cartData: CartData = getCart();
+        if (cartData.items && cartData.items.length > 0) {
+          setCartItems(cartData.items.map(item => ({
+            id: item.id || item.productId,
+            productId: item.productId,
+            name: item.name,
+            price: item.price,
+            comparePrice: item.comparePrice,
+            quantity: item.quantity || 1,
+            subtotal: item.price * (item.quantity || 1),
+          })));
+          setCartTotal(cartData.total);
+          setCartLoading(false);
+          return;
+        }
+      } catch (e) {
+        console.error('Failed to load localStorage cart:', e);
+      }
+
+      // Fallback: try server cart API
       fetch('/api/cart')
         .then(res => res.json())
         .then(data => {
@@ -162,6 +184,8 @@ function CheckoutContent() {
         })
         .catch(() => {})
         .finally(() => setCartLoading(false));
+    } else {
+      setCartLoading(false);
     }
   }, [product]);
 
@@ -200,17 +224,27 @@ function CheckoutContent() {
     setProcessing(true);
 
     try {
-      // Build request body - for cart checkout, omit productId so API reads from cookie
-      const body: Record<string, string | number | undefined> = {
+      // Build request body
+      const body: Record<string, unknown> = {
         email: formData.email,
         name: formData.name,
         transactionId: formData.transactionId || undefined,
+        notes: formData.notes || undefined,
       };
 
       if (product) {
+        // Direct product purchase
         body.productId = product.id;
-        body.productName = product.name;
+        body.productName = getText(product.name, product.nameAr);
         body.price = product.price;
+      } else if (cartItems.length > 0) {
+        // Cart-based purchase - send cart items from localStorage
+        body.cartItems = cartItems.map(item => ({
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity || 1,
+        }));
       }
 
       // Process checkout via API
@@ -234,6 +268,14 @@ function CheckoutContent() {
         email: formData.email
       }));
 
+      // Clear localStorage cart after successful checkout
+      try {
+        localStorage.removeItem('tamkinly_cart');
+        window.dispatchEvent(new CustomEvent('cart-updated'));
+      } catch (e) {
+        console.error('Failed to clear cart:', e);
+      }
+
       setOrderNumber(data.orderNumber);
       if (data.accessCode) {
         setAccessCode(data.accessCode);
@@ -248,7 +290,7 @@ function CheckoutContent() {
   };
 
   // Loading cart
-  if (!product && cartLoading) {
+  if (cartLoading) {
     return (
       <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
         <div className="text-center">
@@ -773,7 +815,7 @@ function CheckoutContent() {
                 ) : (
                   <div className="space-y-3">
                     {cartItems.map((item) => (
-                      <div key={item.id} className="flex gap-3 p-3 bg-slate-50 rounded-lg">
+                      <div key={item.productId} className="flex gap-3 p-3 bg-slate-50 rounded-lg">
                         <div className="w-10 h-10 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center flex-shrink-0">
                           <Package className="w-5 h-5 text-[#3DD4B0]" />
                         </div>

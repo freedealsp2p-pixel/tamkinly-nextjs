@@ -6,7 +6,7 @@
  */
 
 // Default password for development and fallback
-const DEFAULT_ADMIN_PASSWORD = 'tamkinly2024';
+const DEFAULT_ADMIN_PASSWORD = 'Tamkinly@26';
 
 /**
  * Verify admin password against environment variable

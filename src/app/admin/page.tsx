@@ -262,6 +262,15 @@ export default function AdminPage() {
     setGeneratedCode(null);
     setCopiedCode(false);
 
+    // Map tier to proper product ID
+    const tierToProductId: Record<string, string> = {
+      'FREE': 'free',
+      'TRIAL': 'trial',
+      'BASIC': 'planner',
+      'PREMIUM': 'premium',
+      'BUNDLE': 'bundle',
+    };
+
     try {
       const response = await fetch('/api/access/generate', {
         method: 'POST',
@@ -271,7 +280,7 @@ export default function AdminPage() {
           customerName: newCustomerName || undefined,
           orderId: newOrderId || undefined,
           tier: newTier,
-          productId: newTier.toLowerCase(),
+          productId: tierToProductId[newTier] || newTier.toLowerCase(),
           password,
         }),
       });

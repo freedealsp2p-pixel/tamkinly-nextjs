@@ -28,11 +28,19 @@ const productTierMap: Record<string, 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE'> =
   'bundle': 'BUNDLE',
 };
 
-// POST - Process checkout (supports both cart and direct product purchase)
+// Product names map
+const productNames: Record<string, string> = {
+  'trial': '7-Day Trial',
+  'planner': 'Identity Recode Planner',
+  'premium': 'Premium Transformation',
+  'bundle': 'Complete Bundle',
+};
+
+// POST - Process checkout (supports direct product, localStorage cart, and server cart)
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, productId, productName, price } = body;
+    const { name, email, productId, productName, price, cartItems: clientCartItems } = body;
 
     if (!email) {
       return NextResponse.json(
@@ -41,71 +49,118 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!name) {
+      return NextResponse.json(
+        { error: 'Name is required' },
+        { status: 400 }
+      );
+    }
+
     let orderItems: { productId: string; name: string; price: number; quantity: number }[] = [];
     let total = 0;
     let accessTier: 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE' | null = null;
+    let bestProductId: string | null = null;
 
-    // Check if this is a direct product purchase
-    if (productId && productName && price !== undefined) {
-      // Direct product purchase
+    // Priority 1: Direct product purchase from query params
+    if (productId && price !== undefined) {
       orderItems = [{
         productId,
-        name: productName,
+        name: productName || productNames[productId] || 'Transformation Package',
         price,
         quantity: 1,
       }];
       total = price;
       accessTier = productTierMap[productId] || null;
-    } else {
-      // Cart-based checkout
+      bestProductId = productId;
+    }
+    // Priority 2: Cart items from localStorage (sent from client)
+    else if (clientCartItems && Array.isArray(clientCartItems) && clientCartItems.length > 0) {
+      orderItems = clientCartItems.map((item: { productId: string; name: string; price: number; quantity?: number }) => ({
+        productId: item.productId,
+        name: item.name || productNames[item.productId] || 'Transformation Package',
+        price: item.price,
+        quantity: item.quantity || 1,
+      }));
+      total = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      // Find the highest tier product in cart for access
+      const tierOrder: Record<string, number> = { 'trial': 1, 'planner': 2, 'premium': 3, 'bundle': 4 };
+      let bestTier = 0;
+      for (const item of orderItems) {
+        const tierLevel = tierOrder[item.productId] || 0;
+        if (tierLevel > bestTier) {
+          bestTier = tierLevel;
+          bestProductId = item.productId;
+        }
+      }
+      if (bestProductId) {
+        accessTier = productTierMap[bestProductId] || null;
+      }
+    }
+    // Priority 3: Server-side cart via cookie
+    else {
       const cartCookie = request.cookies.get('tamkinly_cart');
       const cartId = cartCookie?.value;
 
       if (!cartId) {
         return NextResponse.json(
-          { error: 'No product or cart found' },
+          { error: 'No product or cart found. Please add a product to your cart first.' },
           { status: 400 }
         );
       }
 
-      // Get cart items
-      const cartItems = await db.cartItem.findMany({
-        where: { cartId },
-        include: { product: true },
-      });
+      // Get cart items from database
+      try {
+        const dbCartItems = await db.cartItem.findMany({
+          where: { cartId },
+          include: { product: true },
+        });
 
-      if (cartItems.length === 0) {
+        if (dbCartItems.length === 0) {
+          return NextResponse.json(
+            { error: 'Cart is empty' },
+            { status: 400 }
+          );
+        }
+
+        orderItems = dbCartItems.map(item => ({
+          productId: item.productId,
+          name: item.product.name,
+          price: item.product.price,
+          quantity: item.quantity,
+        }));
+
+        total = dbCartItems.reduce((sum, item) => {
+          return sum + item.product.price * item.quantity;
+        }, 0);
+
+        // Find access tier
+        const bundleItem = dbCartItems.find(item => 
+          ['trial', 'planner', 'premium', 'bundle'].includes(item.productId)
+        );
+        if (bundleItem) {
+          accessTier = productTierMap[bundleItem.productId] || null;
+          bestProductId = bundleItem.productId;
+        }
+
+        // Clear cart items
+        await db.cartItem.deleteMany({
+          where: { cartId },
+        });
+      } catch (dbError) {
+        console.error('Database cart error:', dbError);
         return NextResponse.json(
-          { error: 'Cart is empty' },
+          { error: 'Could not load cart. Please try adding the product directly.' },
           { status: 400 }
         );
       }
+    }
 
-      // Calculate total and prepare items
-      orderItems = cartItems.map(item => ({
-        productId: item.productId,
-        name: item.product.name,
-        price: item.product.price,
-        quantity: item.quantity,
-      }));
-
-      total = cartItems.reduce((sum, item) => {
-        const itemPrice = item.product.price;
-        return sum + itemPrice * item.quantity;
-      }, 0);
-
-      // Find access tier from cart items
-      const bundleItem = cartItems.find(item => 
-        ['trial', 'planner', 'premium', 'bundle'].includes(item.productId)
+    if (orderItems.length === 0) {
+      return NextResponse.json(
+        { error: 'No items to checkout' },
+        { status: 400 }
       );
-      if (bundleItem) {
-        accessTier = productTierMap[bundleItem.productId] || null;
-      }
-
-      // Clear cart
-      await db.cartItem.deleteMany({
-        where: { cartId },
-      });
     }
 
     // Generate order number
@@ -132,16 +187,18 @@ export async function POST(request: NextRequest) {
     });
 
     // Generate access code for products that grant app access
-    const accessCode = generateAccessCode();
+    let accessCode: string | null = null;
 
     if (accessTier) {
+      accessCode = generateAccessCode();
+      
       await db.appAccess.create({
         data: {
           code: accessCode,
           email: email.toLowerCase(),
           customerName: name || null,
-          productId: productId || 'bundle',
-          productName: productName || 'Transformation Package',
+          productId: bestProductId || 'bundle',
+          productName: productNames[bestProductId || 'bundle'] || 'Transformation Package',
           tier: accessTier,
           isUsed: false,
           isActive: true,
@@ -150,21 +207,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Send purchase confirmation email
-    if (accessTier) {
+    if (accessTier && accessCode) {
       try {
-        // Map productId to productType for email
         const productTypeMap: Record<string, 'trial' | 'planner' | 'premium' | 'bundle'> = {
           'trial': 'trial',
           'planner': 'planner',
           'premium': 'premium',
           'bundle': 'bundle',
         };
-        const productType = productTypeMap[productId || 'bundle'] || 'bundle';
+        const productType = productTypeMap[bestProductId || 'bundle'] || 'bundle';
         
         const emailResult = await EmailService.sendPurchaseConfirmationEmail({
           to: email,
           name: name || 'Friend',
-          productName: productName || 'Transformation Package',
+          productName: productNames[bestProductId || 'bundle'] || 'Transformation Package',
           productType,
           accessKey: accessCode,
         });
@@ -177,7 +233,7 @@ export async function POST(request: NextRequest) {
       // Add to Brevo for email sequences
       try {
         await addContactToList(email, name || 'Friend', {
-          type: (productId || 'bundle') as 'trial' | 'planner' | 'premium' | 'bundle',
+          type: (bestProductId || 'bundle') as 'trial' | 'planner' | 'premium' | 'bundle',
           accessKey: accessCode,
         });
       } catch (brevoError) {
@@ -190,7 +246,7 @@ export async function POST(request: NextRequest) {
       success: true,
       orderId: order.id,
       orderNumber: order.orderNumber,
-      accessCode: accessTier ? accessCode : null,
+      accessCode: accessCode,
       message: 'Order completed successfully',
     });
 

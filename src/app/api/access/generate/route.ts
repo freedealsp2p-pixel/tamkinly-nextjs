@@ -80,6 +80,7 @@ function generateAccessCode(): string {
 function getTierFromProductId(productId: string): AccessTier {
   const tierMap: Record<string, AccessTier> = {
     'trial': 'TRIAL',
+    'planner': 'BASIC',
     'basic': 'BASIC',
     'premium': 'PREMIUM',
     'bundle': 'BUNDLE',
