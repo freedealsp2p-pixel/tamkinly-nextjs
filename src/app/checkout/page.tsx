@@ -29,7 +29,7 @@ import {
   ExternalLink,
   CreditCard
 } from 'lucide-react';
-import { useTranslations } from '@/components/providers/LocaleProvider';
+import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
 
 // Payment Configuration
 const WISE_CONFIG = {
@@ -52,51 +52,66 @@ const BANK_CONFIG = {
   bankAddress: '89-16 Jamaica Ave, Woodhaven, NY, 11421, United States'
 };
 
-// Product data
+// Product data with bilingual support
 const productsData: Record<string, {
   id: string;
   name: string;
+  nameAr: string;
   price: number;
   comparePrice: number;
   icon: React.ElementType;
   tier: string;
+  tierAr: string;
   features: string[];
+  featuresAr: string[];
 }> = {
   'trial': {
     id: "trial",
     name: "7-Day Trial",
+    nameAr: "تجربة 7 أيام",
     price: 7,
     comparePrice: 15,
     icon: Clock,
     tier: "TRIAL",
-    features: ["7-Day Guided Journey", "Daily identity prompts", "Evidence tracking", "Progress dashboard"]
+    tierAr: "تجربة",
+    features: ["7-Day Guided Journey", "Daily identity prompts", "Evidence tracking", "Progress dashboard"],
+    featuresAr: ["رحلة موجهة لمدة 7 أيام", "مطالبات الهوية اليومية", "تتبع الأدلة", "لوحة تتبع التقدم"]
   },
   'planner': {
     id: "planner",
     name: "Identity Recode Planner",
+    nameAr: "مخطط إعادة صياغة الهوية",
     price: 17,
     comparePrice: 29,
     icon: Calendar,
     tier: "BASIC",
-    features: ["30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs"]
+    tierAr: "أساسي",
+    features: ["30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs"],
+    featuresAr: ["مخطط الهوية لمدة 30 يوم", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "PDF رقمي + للطباعة"]
   },
   'premium': {
     id: "premium",
     name: "Premium Transformation",
+    nameAr: "التحول المتميز",
     price: 27,
     comparePrice: 44,
     icon: Award,
     tier: "PREMIUM",
-    features: ["Everything in Planner", "Decision Pattern Analysis", "Evidence Tracking System", "Progress Dashboard"]
+    tierAr: "متميز",
+    features: ["Everything in Planner", "Decision Pattern Analysis", "Evidence Tracking System", "Progress Dashboard"],
+    featuresAr: ["كل ما في المخطط", "تحليل أنماط القرارات", "نظام تتبع الأدلة", "لوحة تتبع التقدم"]
   },
   'bundle': {
     id: "bundle",
     name: "Complete Bundle",
+    nameAr: "الحزمة الكاملة",
     price: 47,
     comparePrice: 91,
     icon: Monitor,
     tier: "BUNDLE",
-    features: ["All PDF products", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support"]
+    tierAr: "حزمة",
+    features: ["All PDF products", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support"],
+    featuresAr: ["جميع منتجات PDF", "جميع التطبيقات التفاعلية", "مدرب الهوية AI", "مجتمع التحول", "دعم ذو أولوية"]
   }
 };
 
@@ -116,6 +131,8 @@ function CheckoutContent() {
   const searchParams = useSearchParams();
   const productId = searchParams.get('product');
   const t = useTranslations('checkoutPage');
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const [copied, setCopied] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -743,8 +760,8 @@ function CheckoutContent() {
                       <Icon className="w-6 h-6 text-[#3DD4B0]" />
                     </div>
                     <div className="flex-1">
-                      <Badge variant="outline" className="text-xs mb-1">{product.tier}</Badge>
-                      <p className="font-semibold text-[#0F1C2E]">{product.name}</p>
+                      <Badge variant="outline" className="text-xs mb-1">{getText(product.tier, product.tierAr)}</Badge>
+                      <p className="font-semibold text-[#0F1C2E]">{getText(product.name, product.nameAr)}</p>
                       <div className="flex items-baseline gap-2 mt-1">
                         <span className="font-bold text-[#3DD4B0]">${product.price}</span>
                         {product.comparePrice > product.price && (
@@ -781,7 +798,7 @@ function CheckoutContent() {
                 {product && (
                 <div className="space-y-2">
                   <p className="text-sm font-medium text-[#2B2E34]">{t('includes')}</p>
-                  {product.features.map((feature, idx) => (
+                  {(locale === 'ar' ? product.featuresAr : product.features).map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm text-slate-600">
                       <CheckCircle2 className="w-4 h-4 text-[#3DD4B0]" />
                       <span>{feature}</span>

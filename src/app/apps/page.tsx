@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { generateSoftwareAppSchema, generateBreadcrumbSchema } from '@/lib/seo';
-import { useTranslations } from '@/components/providers/LocaleProvider';
+import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
 
 // Access Tier Colors - High contrast for readability
 const tierColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -89,6 +89,16 @@ const sortedApps = [...appsData].sort((a, b) => tierOrder.indexOf(a.tier) - tier
 export default function AppsPage() {
   const [selectedTier, setSelectedTier] = useState<string | null>('ALL');
   const t = useTranslations("appsPage");
+  const { locale } = useLocale();
+
+  // Get translated duration
+  const getDuration = (duration: string) => {
+    try {
+      const translated = t(`durationLabels.${duration}`);
+      if (translated && !translated.startsWith('durationLabels.')) return translated;
+    } catch {}
+    return duration;
+  };
 
   // Filter apps based on selected tier
   const filteredApps = selectedTier === 'ALL' 
@@ -327,7 +337,7 @@ function AppCard({ app, isLocked, t }: {
         {/* Duration */}
         <div className="flex items-center gap-2 text-xs text-slate-500">
           <Clock className="w-3 h-3" />
-          {app.duration}
+          {getDuration(app.duration)}
         </div>
         
         {/* Action */}

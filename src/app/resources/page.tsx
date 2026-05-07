@@ -20,7 +20,7 @@ import {
   CheckCircle2,
   Clock
 } from "lucide-react";
-import { useTranslations } from "@/components/providers/LocaleProvider";
+import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
 
 // Hero Section
 function HeroSection() {
@@ -136,29 +136,43 @@ function ResourcesSection() {
 // Identity vs Behavior Change Research Section
 function IdentityResearchSection() {
   const t = useTranslations('resourcesPage');
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
   const keyInsights = [
     {
       title: "Habits and Identity: Behavioral, Cognitive, Affective, and Motivational Aspects",
+      titleAr: "العادات والهوية: الجوانب السلوكية والمعرفية والعاطفية والتحفيزية",
       source: "Verplanken & Sui",
+      authorAr: "فيربلانكن وسوي",
       insight: "Explains how habits become linked to identity and the \"true self,\" showing that connecting behavior to identity strengthens self-esteem and self-integration. This is one of the best sources for understanding why change becomes more durable when it becomes \"part of who I am\" rather than just a new habit.",
+      descriptionAr: "يشرح كيف ترتبط العادات بالهوية و'الذات الحقيقية'، مبيناً أن ربط السلوك بالهوية يعزز تقدير الذات والتكامل الذاتي. هذا أحد أفضل المصادر لفهم سبب استدامة التغيير عندما يصبح 'جزءاً من هويتي' بدلاً من مجرد عادة جديدة.",
       icon: Brain
     },
     {
       title: "Centered Identity Transformation to Reduce Executive Function Burden",
+      titleAr: "تحويل الهوية المتمركز لتقليل عبء الوظائف التنفيذية",
       source: "Caldwell et al.",
+      authorAr: "كالدويل وآخرون",
       insight: "Research demonstrating that identity transformation can reduce the executive burden required to maintain behavior change. When behavior is integrated into identity, it requires less willpower and conscious effort to sustain.",
+      descriptionAr: "بحث يوضح أن تحويل الهوية يمكن أن يقلل العبء التنفيذي المطلوب للحفاظ على تغيير السلوك. عندما يندمج السلوك في الهوية، يتطلب قوة إرادة وجهداً واعياً أقل للحفاظ عليه.",
       icon: Target
     },
     {
       title: "The Influence of Identity Within-Person and Between Behaviours",
+      titleAr: "تأثير الهوية بين الأشخاص والسلوكيات",
       source: "PMC Study (2025)",
+      authorAr: "دراسة PMC (2025)",
       insight: "Discusses the relationship between identity and behavior, showing that identity may be difficult to change, but is highly valuable when designing behavioral interventions. Identity interacts with intention, habit, and self-determined motivation.",
+      descriptionAr: "يناقش العلاقة بين الهوية والسلوك، مبيناً أن الهوية قد يصعب تغييرها، لكنها ذات قيمة عالية عند تصميم التدخلات السلوكية. تتفاعل الهوية مع النية والعادة والتحفيز الذاتي.",
       icon: TrendingUp
     },
     {
       title: "Does Monitoring Goal Progress Promote Goal Attainment?",
+      titleAr: "هل مراقبة تقدم الأهداف تعزز تحقيقها؟",
       source: "Harkin et al. (Meta-Analysis)",
+      authorAr: "هاركين وآخرون (تحليل تلوي)",
       insight: "Shows that progress monitoring supports goal achievement. This is crucial because identity-based change needs a practical system to see behavioral evidence over time—exactly what tracking provides.",
+      descriptionAr: "يوضح أن مراقبة التقدم تدعم تحقيق الأهداف. هذا أمر حاسم لأن التغيير القائم على الهوية يحتاج إلى نظام عملي لرؤية الأدلة السلوكية بمرور الوقت—وهو بالضبط ما توفره المتابعة.",
       icon: CheckCircle2
     }
   ];
@@ -228,11 +242,11 @@ function IdentityResearchSection() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-primary text-sm mb-1">
-                          {insight.title}
+                          {getText(insight.title, insight.titleAr)}
                         </h4>
-                        <p className="text-xs text-accent mb-2">{insight.source}</p>
+                        <p className="text-xs text-accent mb-2">{getText(insight.source, insight.authorAr)}</p>
                         <p className="text-sm text-slate-600 leading-relaxed">
-                          {insight.insight}
+                          {getText(insight.insight, insight.descriptionAr)}
                         </p>
                       </div>
                     </div>
@@ -387,45 +401,59 @@ function formatReadTime(readTime: string, t: (key: string) => string): string {
 
 function ArticlesSection() {
   const t = useTranslations('resourcesPage');
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
   const articles = [
     {
       title: "The Physics of Momentum: Why 18 Minutes Changes Everything",
+      titleAr: "فيزياء الزخم: لماذا تغير 18 دقيقة كل شيء",
       excerpt: "Discover how the science of momentum and habit formation can transform your identity.",
+      excerptAr: "اكتشف كيف يمكن لعلم الزخم وتكوين العادات أن يحوّل هويتك.",
       readTime: "8 min read",
       category: "Identity Shift",
       slug: "physics-of-momentum"
     },
     {
       title: "The Magic Is in the Work You Avoid",
+      titleAr: "السحر في العمل الذي تتجنبه",
       excerpt: "That uncomfortable task you keep putting off? It holds the key to your transformation.",
+      excerptAr: "تلك المهمة غير المريحة التي تؤجلها باستمرار؟ إنها تحمل مفتاح تحولك.",
       readTime: "6 min read",
       category: "Transformation",
       slug: "magic-in-work-you-avoid"
     },
     {
       title: "The Identity Millionaire: Building Wealth Through Self-Transformation",
+      titleAr: "المليونير بالهوية: بناء الثروة من خلال التحول الذاتي",
       excerpt: "True wealth starts with who you become, not what you acquire.",
+      excerptAr: "الثروة الحقيقية تبدأ بمن تصبح، وليس بما تمتلك.",
       readTime: "9 min read",
       category: "Wealth & Identity",
       slug: "identity-millionaire"
     },
     {
       title: "Five Steps to Miracles: A Framework for Identity Liberation",
+      titleAr: "خمس خطوات نحو المعجزات: إطار لتحرير الهوية",
       excerpt: "Surrender the old versions of yourself. Step into who you were meant to be.",
+      excerptAr: "استسلم للنسخ القديمة من نفسك. خمس خطوات تكسر الأنماط وتفتح الباب لمن كنت مقدراً أن تكونه.",
       readTime: "10 min read",
       category: "Self-Liberation",
       slug: "five-steps-to-miracles"
     },
     {
       title: "Work on Yourself: The Psycho-Cybernetics of Identity",
+      titleAr: "اعمل على نفسك: السيبرانيكا النفسية للهوية",
       excerpt: "Your self-image controls everything. Change the inner image, change everything.",
+      excerptAr: "صورتك الذاتية تتحكم في كل شيء. غيّر الصورة الداخلية، يتغير كل شيء.",
       readTime: "10 min read",
       category: "Self-Image",
       slug: "work-on-yourself"
     },
     {
       title: "The 24-Hour Dopamine Reset: Reclaiming Your Focus",
+      titleAr: "إعادة ضبط الدوبامين في 24 ساعة: استعد تركيزك",
       excerpt: "Reset your motivation system in just one day and rediscover natural drive.",
+      excerptAr: "أعد ضبط نظام التحفيز لديك في يوم واحد فقط واستعد دافعك الطبيعي.",
       readTime: "12 min read",
       category: "Mental Clarity",
       slug: "dopamine-reset"
@@ -453,10 +481,10 @@ function ArticlesSection() {
                     {resourcesArticleCategoryMap[article.category] ? t(resourcesArticleCategoryMap[article.category]) : article.category}
                   </Badge>
                   <h3 className="font-semibold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
-                    {article.title}
+                    {getText(article.title, article.titleAr)}
                   </h3>
                   <p className="text-sm text-slate-600 mb-3">
-                    {article.excerpt}
+                    {getText(article.excerpt, article.excerptAr)}
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-slate-500">{formatReadTime(article.readTime, t)}</span>
@@ -501,14 +529,15 @@ function CTASection() {
 
 // Main Page
 export default function ResourcesPage() {
+  const { locale } = useLocale();
   return (
-    <>
+    <div dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <HeroSection />
       <ResourcesSection />
       <IdentityResearchSection />
       <NewsletterSection />
       <ArticlesSection />
       <CTASection />
-    </>
+    </div>
   );
 }

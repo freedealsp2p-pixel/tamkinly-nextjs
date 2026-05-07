@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
 import {
   User,
   Mail,
@@ -65,18 +66,21 @@ const subscribeToStorage = (callback: () => void) => {
 
 // Account Dashboard Component (for logged-in users)
 function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => void }) {
+  const t = useTranslations('accountPage');
+  const { locale } = useLocale();
+
   const getProductLabel = (productId: string) => {
-    const products: Record<string, string> = {
-      'identity-recode': 'Identity Recode Planner',
-      'daily-planner': 'Daily Planner',
-      'bundle': 'Complete Bundle',
-      'worksheet': 'Worksheets Package',
-    };
-    return products[productId] || productId;
+    const key = `productLabels.${productId}`;
+    try {
+      const label = t(key);
+      // If the key doesn't exist, it returns the key itself
+      if (label && !label.startsWith('productLabels.')) return label;
+    } catch {}
+    return productId;
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F8FA]">
+    <div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header */}
       <div className="bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] text-white py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,7 +93,7 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                   </div>
                   <div>
                     <h1 className="text-2xl font-bold">
-                      {user.name || 'Welcome Back'}
+                      {user.name || t('welcomeBack')}
                     </h1>
                     <p className="text-[#8A94A6] text-sm">{user.email}</p>
                   </div>
@@ -99,7 +103,7 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                 <Link href="/apps">
                   <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
                     <ExternalLink className="w-4 h-4 mr-2" />
-                    Open Apps
+                    {t('openApps')}
                   </Button>
                 </Link>
                 <Button
@@ -107,7 +111,7 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                   onClick={onLogout}
                 >
                   <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
+                  {t('signOut')}
                 </Button>
               </div>
             </div>
@@ -128,7 +132,7 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                     <Package className="w-6 h-6 text-[#3DD4B0]" />
                   </div>
                   <div>
-                    <p className="text-sm text-[#8A94A6]">Products</p>
+                    <p className="text-sm text-[#8A94A6]">{t('products')}</p>
                     <p className="text-2xl font-bold text-[#0F1C2E]">
                       {user.accessCodes?.length || 0}
                     </p>
@@ -144,8 +148,8 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                     <Shield className="w-6 h-6 text-[#1F6F78]" />
                   </div>
                   <div>
-                    <p className="text-sm text-[#8A94A6]">Account Status</p>
-                    <p className="text-2xl font-bold text-[#0F1C2E]">Active</p>
+                    <p className="text-sm text-[#8A94A6]">{t('accountStatus')}</p>
+                    <p className="text-2xl font-bold text-[#0F1C2E]">{t('active')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -158,8 +162,8 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                     <Calendar className="w-6 h-6 text-[#0F1C2E]" />
                   </div>
                   <div>
-                    <p className="text-sm text-[#8A94A6]">Member Since</p>
-                    <p className="text-lg font-bold text-[#0F1C2E]">Today</p>
+                    <p className="text-sm text-[#8A94A6]">{t('memberSince')}</p>
+                    <p className="text-lg font-bold text-[#0F1C2E]">{t('today')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -171,10 +175,10 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <Key className="w-5 h-5 text-[#3DD4B0]" />
-                Your Access Codes
+                {t('yourAccessCodes')}
               </CardTitle>
               <CardDescription>
-                Products you have purchased and their access codes
+                {t('accessCodesDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -203,11 +207,11 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                           variant={code.isUsed ? "default" : "secondary"}
                           className={code.isUsed ? "bg-[#3DD4B0] text-[#0F1C2E]" : ""}
                         >
-                          {code.isUsed ? 'Activated' : 'Ready to Use'}
+                          {code.isUsed ? t('activated') : t('readyToUse')}
                         </Badge>
                         <Link href="/apps">
                           <Button size="sm" variant="outline">
-                            Access
+                            {t('access')}
                             <ArrowRight className="w-4 h-4 ml-1" />
                           </Button>
                         </Link>
@@ -218,10 +222,10 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
               ) : (
                 <div className="text-center py-8">
                   <Package className="w-12 h-12 text-[#8A94A6] mx-auto mb-4" />
-                  <p className="text-[#8A94A6] mb-4">No products purchased yet</p>
+                  <p className="text-[#8A94A6] mb-4">{t('noProducts')}</p>
                   <Link href="/products">
                     <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
-                      Browse Products
+                      {t('browseProducts')}
                     </Button>
                   </Link>
                 </div>
@@ -234,22 +238,22 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <Settings className="w-5 h-5 text-[#1F6F78]" />
-                Profile Settings
+                {t('profileSettings')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-[#2B2E34]">Name</label>
+                  <label className="text-sm font-medium text-[#2B2E34]">{t('name')}</label>
                   <Input
                     value={user.name || ''}
-                    placeholder="Not set"
+                    placeholder={t('notSet')}
                     disabled
                     className="bg-slate-50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-[#2B2E34]">Email</label>
+                  <label className="text-sm font-medium text-[#2B2E34]">{t('emailLabel')}</label>
                   <Input
                     value={user.email}
                     disabled
@@ -263,15 +267,15 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
               <div className="flex flex-wrap gap-3">
                 <Button variant="outline" disabled>
                   <Bell className="w-4 h-4 mr-2" />
-                  Notification Settings
+                  {t('notificationSettings')}
                 </Button>
                 <Button variant="outline" disabled>
                   <CreditCard className="w-4 h-4 mr-2" />
-                  Payment Methods
+                  {t('paymentMethods')}
                 </Button>
                 <Button variant="outline" disabled>
                   <Lock className="w-4 h-4 mr-2" />
-                  Change Password
+                  {t('changePassword')}
                 </Button>
               </div>
             </CardContent>
@@ -286,15 +290,15 @@ function AccountDashboard({ user, onLogout }: { user: UserData; onLogout: () => 
                     <Sparkles className="w-6 h-6 text-[#3DD4B0]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white">Need Help?</h3>
+                    <h3 className="font-semibold text-white">{t('needHelp')}</h3>
                     <p className="text-sm text-[#8A94A6]">
-                      Our support team is here to assist you
+                      {t('supportTeamHere')}
                     </p>
                   </div>
                 </div>
                 <Link href="/contact">
                   <Button className="bg-white text-[#0F1C2E] hover:bg-white/90">
-                    Contact Support
+                    {t('contactSupport')}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
@@ -318,6 +322,9 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
+  const t = useTranslations('accountPage');
+  const { locale } = useLocale();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -339,14 +346,14 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || 'Something went wrong');
+        setError(data.error || t('somethingWentWrong'));
         return;
       }
 
       localStorage.setItem('tamkinly_user', JSON.stringify(data.user));
       
       if (mode === 'register') {
-        setSuccess('Account created successfully!');
+        setSuccess(t('accountCreated'));
         setTimeout(() => {
           onLogin(data.user);
         }, 1500);
@@ -354,19 +361,19 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
         onLogin(data.user);
       }
     } catch {
-      setError('Network error. Please try again.');
+      setError(t('networkError'));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] flex items-center justify-center p-4" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
             <h1 className="text-3xl font-bold text-white">Tamkinly</h1>
-            <p className="text-[#8A94A6] text-sm">Identity Transformation Platform</p>
+            <p className="text-[#8A94A6] text-sm">{t('identityPlatform')}</p>
           </Link>
         </div>
 
@@ -376,12 +383,12 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
               <User className="w-8 h-8 text-[#3DD4B0]" />
             </div>
             <CardTitle className="text-2xl text-[#0F1C2E]">
-              {mode === 'login' ? 'Welcome Back' : 'Create Account'}
+              {mode === 'login' ? t('welcomeBackTitle') : t('createAccount')}
             </CardTitle>
             <CardDescription className="text-[#8A94A6]">
               {mode === 'login' 
-                ? 'Sign in to access your products'
-                : 'Register to get started with your transformation journey'
+                ? t('signInDesc')
+                : t('registerDesc')
               }
             </CardDescription>
           </CardHeader>
@@ -395,7 +402,7 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
                   mode === 'login' ? 'bg-white text-[#0F1C2E] shadow-sm' : 'text-[#8A94A6] hover:text-[#0F1C2E]'
                 }`}
               >
-                Sign In
+                {t('signIn')}
               </button>
               <button
                 type="button"
@@ -404,7 +411,7 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
                   mode === 'register' ? 'bg-white text-[#0F1C2E] shadow-sm' : 'text-[#8A94A6] hover:text-[#0F1C2E]'
                 }`}
               >
-                Register
+                {t('register')}
               </button>
             </div>
 
@@ -425,10 +432,10 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
 
               {mode === 'register' && (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-[#2B2E34]">Name (optional)</label>
+                  <label className="text-sm font-medium text-[#2B2E34]">{t('nameOptional')}</label>
                   <Input
                     type="text"
-                    placeholder="Your name"
+                    placeholder={t('yourName')}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
@@ -439,7 +446,7 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  Email Address
+                  {t('emailAddress')}
                 </label>
                 <Input
                   type="email"
@@ -454,7 +461,7 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
                   <Lock className="w-4 h-4" />
-                  Password
+                  {t('password')}
                 </label>
                 <Input
                   type="password"
@@ -475,11 +482,11 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
                 {loading ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    {mode === 'login' ? 'Signing in...' : 'Creating account...'}
+                    {mode === 'login' ? t('signingIn') : t('creatingAccount')}
                   </>
                 ) : (
                   <>
-                    {mode === 'login' ? 'Sign In' : 'Create Account'}
+                    {mode === 'login' ? t('signIn') : t('createAccount')}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </>
                 )}
@@ -491,14 +498,14 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
                 <div className="w-full border-t border-slate-200"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-[#8A94A6]">or</span>
+                <span className="px-2 bg-white text-[#8A94A6]">{t('or')}</span>
               </div>
             </div>
 
             <Link href="/apps">
               <Button variant="outline" className="w-full border-[#1F6F78]/30 hover:bg-[#1F6F78]/10 h-12">
                 <Key className="w-4 h-4 mr-2" />
-                Use Access Code Instead
+                {t('useAccessCode')}
               </Button>
             </Link>
 
@@ -507,9 +514,9 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
                 <div className="flex items-start gap-3">
                   <Sparkles className="w-5 h-5 text-[#3DD4B0] mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-[#0F1C2E]">Already purchased?</p>
+                    <p className="text-sm font-medium text-[#0F1C2E]">{t('alreadyPurchased')}</p>
                     <p className="text-xs text-[#8A94A6] mt-1">
-                      Register with the same email to automatically link your access codes.
+                      {t('alreadyPurchasedDesc')}
                     </p>
                   </div>
                 </div>
@@ -520,9 +527,9 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
 
         <div className="text-center mt-6">
           <p className="text-[#8A94A6] text-sm">
-            Need help?{' '}
+            {t('needHelpQ')}{' '}
             <Link href="/contact" className="text-[#3DD4B0] hover:underline">
-              Contact Support
+              {t('contactSupport')}
             </Link>
           </p>
         </div>

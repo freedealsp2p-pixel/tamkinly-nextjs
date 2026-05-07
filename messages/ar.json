@@ -1253,6 +1253,19 @@
         "description": "احصل على وصول ذو أولوية لفريق الدعم لدينا مع وقت استجابة مضمون خلال 24 ساعة.",
         "category": "تدريب"
       }
+    },
+    "durationLabels": {
+      "3 min": "3 دقائق",
+      "5 min": "5 دقائق",
+      "7 days": "7 أيام",
+      "10 min": "10 دقائق",
+      "15 min": "15 دقيقة",
+      "30 days": "30 يوم",
+      "Daily": "يومي",
+      "PDF": "PDF",
+      "Ongoing": "مستمر",
+      "Always": "دائماً",
+      "Unlimited": "غير محدود"
     }
   },
   "contactPage": {
@@ -1644,7 +1657,13 @@
     "popularProductsTitle": "المنتجات",
     "popularProductsDesc": "حزم التحول",
     "popularBlogTitle": "المدونة",
-    "popularBlogDesc": "مقالات وأدلة"
+    "popularBlogDesc": "مقالات وأدلة",
+    "typeLabels": {
+      "page": "صفحة",
+      "app": "تطبيق",
+      "article": "مقال",
+      "product": "منتج"
+    }
   },
   "blogPage": {
     "heroBadge": "قاعدة المعرفة",
@@ -2055,11 +2074,133 @@
       "helpDesc": "إذا واجهت أي مشاكل أثناء الدفع، لا تتردد في التواصل مع فريق الدعم لدينا. نحن هنا لمساعدتك في إتمام شرائك.",
       "backToProducts": "العودة إلى المنتجات",
       "contactSupport": "تواصل مع الدعم"
+    },
+    "demo": {
+      "paymentSuccessful": "تم الدفع بنجاح!",
+      "redirecting": "جارٍ التوجيه إلى صفحة التأكيد...",
+      "securePaymentGateway": "بوابة دفع آمنة",
+      "orderId": "رقم الطلب",
+      "emailLabel": "البريد الإلكتروني",
+      "total": "الإجمالي",
+      "paymentMethod": "طريقة الدفع",
+      "card": "بطاقة",
+      "bankTransfer": "تحويل بنكي",
+      "securePaymentBy": "دفع آمن عبر Tahweel",
+      "cardNumber": "رقم البطاقة",
+      "expiry": "تاريخ الانتهاء",
+      "cvv": "رمز الأمان",
+      "nameOnCard": "الاسم على البطاقة",
+      "demoNotice": "وضع تجريبي: هذا دفع اختباري. استخدم البطاقة 4242 4242 4242 4242 مع أي تاريخ انتهاء مستقبلي.",
+      "bankTransferDetails": "تفاصيل التحويل البنكي",
+      "transferAmount": "قم بتحويل المبلغ إلى الحساب التالي:",
+      "bankName": "اسم البنك:",
+      "demoBank": "بنك تجريبي",
+      "accountNumber": "رقم الحساب:",
+      "iban": "الآيبان:",
+      "reference": "المرجع:",
+      "processing": "جارٍ المعالجة...",
+      "pay": "ادفع",
+      "sslSecured": "محمي بـ SSL",
+      "encrypted": "مشفر",
+      "cancelPayment": "إلغاء الدفع",
+      "paymentFailed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
+      "paymentError": "خطأ في معالجة الدفع. يرجى المحاولة مرة أخرى."
     }
   },
   "homePage": {
     "heroImageAlt": "رحلة تحويل الهوية",
     "min": "دقيقة",
     "videoDuration": "3:24"
+  },
+  "accountPage": {
+    "welcomeBack": "مرحباً بعودتك",
+    "openApps": "فتح التطبيقات",
+    "signOut": "تسجيل الخروج",
+    "products": "المنتجات",
+    "accountStatus": "حالة الحساب",
+    "active": "نشط",
+    "memberSince": "عضو منذ",
+    "today": "اليوم",
+    "yourAccessCodes": "رموز الوصول الخاصة بك",
+    "accessCodesDesc": "المنتجات التي اشتريتها ورموز الوصول الخاصة بها",
+    "activated": "مفعّل",
+    "readyToUse": "جاهز للاستخدام",
+    "access": "الوصول",
+    "noProducts": "لم يتم شراء منتجات بعد",
+    "browseProducts": "تصفح المنتجات",
+    "profileSettings": "إعدادات الملف الشخصي",
+    "name": "الاسم",
+    "notSet": "غير محدد",
+    "emailLabel": "البريد الإلكتروني",
+    "notificationSettings": "إعدادات الإشعارات",
+    "paymentMethods": "طرق الدفع",
+    "changePassword": "تغيير كلمة المرور",
+    "needHelp": "تحتاج مساعدة؟",
+    "supportTeamHere": "فريق الدعم هنا لمساعدتك",
+    "contactSupport": "تواصل مع الدعم",
+    "signIn": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "welcomeBackTitle": "مرحباً بعودتك",
+    "createAccount": "إنشاء حساب",
+    "signInDesc": "سجّل الدخول للوصول إلى منتجاتك",
+    "registerDesc": "سجّل للبدء في رحلة تحولك",
+    "nameOptional": "الاسم (اختياري)",
+    "yourName": "اسمك",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "signingIn": "جارٍ تسجيل الدخول...",
+    "creatingAccount": "جارٍ إنشاء الحساب...",
+    "or": "أو",
+    "useAccessCode": "استخدم رمز الوصول بدلاً من ذلك",
+    "alreadyPurchased": "سبق الشراء؟",
+    "alreadyPurchasedDesc": "سجّل بنفس البريد الإلكتروني لربط رموز الوصول تلقائياً.",
+    "needHelpQ": "تحتاج مساعدة؟",
+    "somethingWentWrong": "حدث خطأ ما",
+    "networkError": "خطأ في الشبكة. يرجى المحاولة مرة أخرى.",
+    "accountCreated": "تم إنشاء الحساب بنجاح!",
+    "identityPlatform": "منصة تحويل الهوية",
+    "productLabels": {
+      "identity-recode": "مخطط إعادة صياغة الهوية",
+      "daily-planner": "المخطط اليومي",
+      "bundle": "الحزمة الكاملة",
+      "worksheet": "حزمة أوراق العمل"
+    }
+  },
+  "downloadsPage": {
+    "badge": "منتجات تمكينلي",
+    "title": "مخطط إعادة صياغة الهوية",
+    "subtitle": "نظام تحويل الهوية على مدار 30 يوم — 6 مستندات للتحميل",
+    "files": "ملفات",
+    "pages": "صفحة",
+    "totalSize": "الحجم الكلي",
+    "downloadFile": "تحميل الملف",
+    "downloadAllNote": "اضغط على كل زر لتحميل الملف بشكل منفصل",
+    "products": {
+      "executiveManual": {
+        "name": "الدليل التنفيذي",
+        "description": "دليل تشغيلي لنظام إعادة صياغة الهوية - المنهجية، القواعد، ومسار الـ 30 يوم"
+      },
+      "identityBaseline": {
+        "name": "ورقة عمل خط الأساس للهوية",
+        "description": "ورقة عمل لقياس حالة الهوية الحالية عبر 8 أبعاد رئيسية"
+      },
+      "environmentalAudit": {
+        "name": "التدقيق البيئي",
+        "description": "تدقيق البيئة لتحديد العوامل الداعمة والمعيقة للتحول"
+      },
+      "decisionPattern": {
+        "name": "تحليل أنماط القرار",
+        "description": "تحليل أنماط القرار لكشف التحيزات المتكررة"
+      },
+      "evidenceTracking": {
+        "name": "نظام تتبع الأدلة",
+        "description": "نظام تتبع الأدلة السلوكية لإثبات التغيير"
+      },
+      "progressDashboard": {
+        "name": "دليل لوحة التقدم",
+        "description": "دليل لوحة المتابعة لعرض التقدم عبر الوقت"
+      }
+    },
+    "pagesLabel": "صفحات"
   }
 }

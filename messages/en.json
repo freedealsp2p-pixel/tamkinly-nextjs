@@ -1253,6 +1253,19 @@
         "description": "Get priority access to our support team with guaranteed 24-hour response time.",
         "category": "Coaching"
       }
+    },
+    "durationLabels": {
+      "3 min": "3 دقائق",
+      "5 min": "5 دقائق",
+      "7 days": "7 أيام",
+      "10 min": "10 دقائق",
+      "15 min": "15 دقيقة",
+      "30 days": "30 يوم",
+      "Daily": "يومي",
+      "PDF": "PDF",
+      "Ongoing": "مستمر",
+      "Always": "دائماً",
+      "Unlimited": "غير محدود"
     }
   },
   "contactPage": {
@@ -1644,7 +1657,13 @@
     "popularProductsTitle": "Products",
     "popularProductsDesc": "Transformation packages",
     "popularBlogTitle": "Blog",
-    "popularBlogDesc": "Articles and guides"
+    "popularBlogDesc": "Articles and guides",
+    "typeLabels": {
+      "page": "Page",
+      "app": "App",
+      "article": "Article",
+      "product": "Product"
+    }
   },
   "blogPage": {
     "heroBadge": "Knowledge Base",
@@ -2055,11 +2074,133 @@
       "helpDesc": "If you experienced any issues during checkout, please don't hesitate to contact our support team. We're here to help you complete your purchase.",
       "backToProducts": "Back to Products",
       "contactSupport": "Contact Support"
+    },
+    "demo": {
+      "paymentSuccessful": "Payment Successful!",
+      "redirecting": "Redirecting to confirmation page...",
+      "securePaymentGateway": "Secure Payment Gateway",
+      "orderId": "Order ID",
+      "emailLabel": "Email",
+      "total": "Total",
+      "paymentMethod": "Payment Method",
+      "card": "Card",
+      "bankTransfer": "Bank Transfer",
+      "securePaymentBy": "Secure payment powered by Tahweel",
+      "cardNumber": "Card Number",
+      "expiry": "Expiry",
+      "cvv": "CVV",
+      "nameOnCard": "Name on Card",
+      "demoNotice": "Demo Mode: This is a test payment. Use card 4242 4242 4242 4242 with any future expiry date.",
+      "bankTransferDetails": "Bank Transfer Details",
+      "transferAmount": "Transfer the amount to the following account:",
+      "bankName": "Bank Name:",
+      "demoBank": "Demo Bank",
+      "accountNumber": "Account Number:",
+      "iban": "IBAN:",
+      "reference": "Reference:",
+      "processing": "Processing...",
+      "pay": "Pay",
+      "sslSecured": "SSL Secured",
+      "encrypted": "Encrypted",
+      "cancelPayment": "Cancel Payment",
+      "paymentFailed": "Payment failed. Please try again.",
+      "paymentError": "Payment processing error. Please try again."
     }
   },
   "homePage": {
     "heroImageAlt": "Identity Transformation Journey",
     "min": "min",
     "videoDuration": "3:24"
+  },
+  "accountPage": {
+    "welcomeBack": "Welcome Back",
+    "openApps": "Open Apps",
+    "signOut": "Sign Out",
+    "products": "Products",
+    "accountStatus": "Account Status",
+    "active": "Active",
+    "memberSince": "Member Since",
+    "today": "Today",
+    "yourAccessCodes": "Your Access Codes",
+    "accessCodesDesc": "Products you have purchased and their access codes",
+    "activated": "Activated",
+    "readyToUse": "Ready to Use",
+    "access": "Access",
+    "noProducts": "No products purchased yet",
+    "browseProducts": "Browse Products",
+    "profileSettings": "Profile Settings",
+    "name": "Name",
+    "notSet": "Not set",
+    "emailLabel": "Email",
+    "notificationSettings": "Notification Settings",
+    "paymentMethods": "Payment Methods",
+    "changePassword": "Change Password",
+    "needHelp": "Need Help?",
+    "supportTeamHere": "Our support team is here to assist you",
+    "contactSupport": "Contact Support",
+    "signIn": "Sign In",
+    "register": "Register",
+    "welcomeBackTitle": "Welcome Back",
+    "createAccount": "Create Account",
+    "signInDesc": "Sign in to access your products",
+    "registerDesc": "Register to get started with your transformation journey",
+    "nameOptional": "Name (optional)",
+    "yourName": "Your name",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "signingIn": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "or": "or",
+    "useAccessCode": "Use Access Code Instead",
+    "alreadyPurchased": "Already purchased?",
+    "alreadyPurchasedDesc": "Register with the same email to automatically link your access codes.",
+    "needHelpQ": "Need help?",
+    "somethingWentWrong": "Something went wrong",
+    "networkError": "Network error. Please try again.",
+    "accountCreated": "Account created successfully!",
+    "identityPlatform": "Identity Transformation Platform",
+    "productLabels": {
+      "identity-recode": "Identity Recode Planner",
+      "daily-planner": "Daily Planner",
+      "bundle": "Complete Bundle",
+      "worksheet": "Worksheets Package"
+    }
+  },
+  "downloadsPage": {
+    "badge": "Tamkinly Products",
+    "title": "Identity Recode Planner",
+    "subtitle": "The 30-day identity transformation system — 6 documents to download",
+    "files": "files",
+    "pages": "pages",
+    "totalSize": "Total Size",
+    "downloadFile": "Download File",
+    "downloadAllNote": "Click each button to download the file separately",
+    "products": {
+      "executiveManual": {
+        "name": "Executive Manual",
+        "description": "Operational guide for the Identity Recode system - methodology, rules, and the 30-day path"
+      },
+      "identityBaseline": {
+        "name": "Identity Baseline Worksheet",
+        "description": "Worksheet to measure current identity state across 8 key dimensions"
+      },
+      "environmentalAudit": {
+        "name": "Environmental Audit",
+        "description": "Environmental audit to identify factors that support or hinder transformation"
+      },
+      "decisionPattern": {
+        "name": "Decision Pattern Analysis",
+        "description": "Decision pattern analysis to reveal recurring biases"
+      },
+      "evidenceTracking": {
+        "name": "Evidence Tracking System",
+        "description": "Behavioral evidence tracking system to prove change"
+      },
+      "progressDashboard": {
+        "name": "Progress Dashboard Guide",
+        "description": "Progress dashboard guide to visualize improvement over time"
+      }
+    },
+    "pagesLabel": "pages"
   }
 }

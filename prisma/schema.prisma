@@ -69,12 +69,12 @@ model AppAccess {
   code         String     @unique  // Access code like TMLY-XXXX-XXXX
   tier         AccessTier @default(BASIC)
   
-  // Customer info (from WooCommerce)
+  // Customer info
   email        String
   customerName String?
   productName  String?
   productId    String?   // Product identifier (basic, premium, bundle)
-  orderId      String?   // WooCommerce Order ID
+  orderId      String?   // Order ID
   
   // Status
   isActive     Boolean    @default(true)
