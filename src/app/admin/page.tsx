@@ -167,6 +167,13 @@ export default function AdminPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
   const [rememberMe, setRememberMe] = useState(false);
+  // Batch generation state
+  const [batchCount, setBatchCount] = useState('10');
+  const [batchTier, setBatchTier] = useState('BASIC');
+  const [batchPrefix, setBatchPrefix] = useState('early');
+  const [batchGenerating, setBatchGenerating] = useState(false);
+  const [batchResults, setBatchResults] = useState<string[] | null>(null);
+  const [batchCopied, setBatchCopied] = useState(false);
 
   // Check for saved session on mount
   useEffect(() => {
@@ -586,59 +593,157 @@ export default function AdminPage() {
           {/* Access Codes Tab */}
           <TabsContent value="codes">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="border-0 shadow-sm lg:col-span-1">
-                <CardHeader>
-                  <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-                    <Plus className="w-5 h-5 text-[#3DD4B0]" />Generate New Code</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleGenerate} className="space-y-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
-                        <Mail className="w-4 h-4" />Customer Email *</label>
-                      <Input type="email" placeholder="customer@email.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} required className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-[#2B2E34]">Customer Name</label>
-                      <Input type="text" placeholder="John Doe" value={newCustomerName} onChange={(e) => setNewCustomerName(e.target.value)} className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-[#2B2E34]">Access Tier</label>
-                      <Select value={newTier} onValueChange={setNewTier}>
-                        <SelectTrigger className="border-[#1F6F78]/20"><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="FREE">FREE - Lead Magnet</SelectItem>
-                          <SelectItem value="TRIAL">TRIAL - 7 Day ($7)</SelectItem>
-                          <SelectItem value="BASIC">BASIC - Planner ($17)</SelectItem>
-                          <SelectItem value="PREMIUM">PREMIUM - Premium ($27)</SelectItem>
-                          <SelectItem value="BUNDLE">BUNDLE - Complete ($47)</SelectItem>
-                        </SelectContent>
-                      </Select></div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-[#2B2E34]">Order ID (optional)</label>
-                      <Input type="text" placeholder="ORD-12345" value={newOrderId} onChange={(e) => setNewOrderId(e.target.value)} className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>
-                    <Button type="submit" disabled={generating || !newEmail} className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12">
-                      {generating ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Generating...</> : <><Key className="w-4 h-4 mr-2" />Generate Code</>}</Button>
-                  </form>
+              <div className="space-y-6">
+                {/* Single Code Generation */}
+                <Card className="border-0 shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
+                      <Plus className="w-5 h-5 text-[#3DD4B0]" />Generate New Code</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleGenerate} className="space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2">
+                          <Mail className="w-4 h-4" />Customer Email *</label>
+                        <Input type="email" placeholder="customer@email.com" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} required className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Customer Name</label>
+                        <Input type="text" placeholder="John Doe" value={newCustomerName} onChange={(e) => setNewCustomerName(e.target.value)} className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Access Tier</label>
+                        <Select value={newTier} onValueChange={setNewTier}>
+                          <SelectTrigger className="border-[#1F6F78]/20"><SelectValue /></SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="FREE">FREE - Lead Magnet</SelectItem>
+                            <SelectItem value="TRIAL">TRIAL - 7 Day ($7)</SelectItem>
+                            <SelectItem value="BASIC">BASIC - Planner ($17)</SelectItem>
+                            <SelectItem value="PREMIUM">PREMIUM - Premium ($27)</SelectItem>
+                            <SelectItem value="BUNDLE">BUNDLE - Complete ($47)</SelectItem>
+                          </SelectContent>
+                        </Select></div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Order ID (optional)</label>
+                        <Input type="text" placeholder="ORD-12345" value={newOrderId} onChange={(e) => setNewOrderId(e.target.value)} className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>
+                      <Button type="submit" disabled={generating || !newEmail} className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12">
+                        {generating ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Generating...</> : <><Key className="w-4 h-4 mr-2" />Generate Code</>}</Button>
+                    </form>
 
-                  {generatedCode && (
-                    <div className="mt-6 p-4 bg-[#3DD4B0]/10 rounded-lg border border-[#3DD4B0]/30">
-                      <p className="text-sm text-[#8A94A6] mb-2">✅ Code generated successfully!</p>
-                      <div className="flex items-center justify-between bg-white p-3 rounded-md">
-                        <code className="text-lg font-mono font-bold text-[#0F1C2E]">{generatedCode}</code>
-                        <Button 
-                          onClick={() => copyToClipboard(generatedCode)} 
-                          className={`${copiedCode ? 'bg-green-500 text-white' : 'bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]'} h-10 px-4`}
-                        >
-                          {copiedCode ? (
-                            <><CheckCircle2 className="w-4 h-4 mr-2" />Copied!</>
-                          ) : (
-                            <><Copy className="w-4 h-4 mr-2" />Copy</>
-                          )}
-                        </Button>
+                    {generatedCode && (
+                      <div className="mt-6 p-4 bg-[#3DD4B0]/10 rounded-lg border border-[#3DD4B0]/30">
+                        <p className="text-sm text-[#8A94A6] mb-2">Code generated successfully!</p>
+                        <div className="flex items-center justify-between bg-white p-3 rounded-md">
+                          <code className="text-lg font-mono font-bold text-[#0F1C2E]">{generatedCode}</code>
+                          <Button 
+                            onClick={() => copyToClipboard(generatedCode)} 
+                            className={`${copiedCode ? 'bg-green-500 text-white' : 'bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]'} h-10 px-4`}
+                          >
+                            {copiedCode ? (
+                              <><CheckCircle2 className="w-4 h-4 mr-2" />Copied!</>
+                            ) : (
+                              <><Copy className="w-4 h-4 mr-2" />Copy</>
+                            )}
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                    )}
+                  </CardContent>
+                </Card>
+
+                {/* Batch Code Generation */}
+                <Card className="border-0 shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
+                      <Zap className="w-5 h-5 text-[#3DD4B0]" />Batch Generate</CardTitle>
+                    <CardDescription>Generate multiple codes for first 200 customers</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={async (e) => {
+                      e.preventDefault();
+                      setBatchGenerating(true);
+                      setBatchResults(null);
+                      setBatchCopied(false);
+                      try {
+                        const response = await fetch('/api/access/batch-generate', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            count: parseInt(batchCount) || 10,
+                            tier: batchTier,
+                            prefix: batchPrefix || undefined,
+                            password,
+                          }),
+                        });
+                        const data = await response.json();
+                        if (data.success) {
+                          setBatchResults(data.codes);
+                          fetchCodes();
+                        } else {
+                          setError(data.error || 'Failed to generate batch');
+                        }
+                      } catch {
+                        setError('Network error. Please try again.');
+                      } finally {
+                        setBatchGenerating(false);
+                      }
+                    }} className="space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Number of Codes</label>
+                        <Input type="number" min="1" max="200" placeholder="10" value={batchCount} onChange={(e) => setBatchCount(e.target.value)} required className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" />
+                        <p className="text-xs text-slate-500">Max 200 codes per batch</p>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Access Tier</label>
+                        <Select value={batchTier} onValueChange={setBatchTier}>
+                          <SelectTrigger className="border-[#1F6F78]/20"><SelectValue /></SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="FREE">FREE - Lead Magnet</SelectItem>
+                            <SelectItem value="TRIAL">TRIAL - 7 Day ($7)</SelectItem>
+                            <SelectItem value="BASIC">BASIC - Planner ($17)</SelectItem>
+                            <SelectItem value="PREMIUM">PREMIUM - Premium ($27)</SelectItem>
+                            <SelectItem value="BUNDLE">BUNDLE - Complete ($47)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-[#2B2E34]">Prefix (optional)</label>
+                        <Input type="text" placeholder="early" value={batchPrefix} onChange={(e) => setBatchPrefix(e.target.value)} className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" />
+                        <p className="text-xs text-slate-500">Used for placeholder email: {batchPrefix || 'batch'}-1@tamkinly.com</p>
+                      </div>
+                      <Button type="submit" disabled={batchGenerating} className="w-full bg-[#0F1C2E] text-white hover:bg-[#0F1C2E]/90 h-12">
+                        {batchGenerating ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Generating...</> : <><Zap className="w-4 h-4 mr-2" />Generate {batchCount} Codes</>}
+                      </Button>
+                    </form>
+
+                    {batchResults && (
+                      <div className="mt-6 p-4 bg-[#0F1C2E]/5 rounded-lg border border-[#0F1C2E]/20">
+                        <div className="flex items-center justify-between mb-3">
+                          <p className="text-sm font-medium text-[#0F1C2E]">Generated {batchResults.length} codes:</p>
+                          <Button 
+                            onClick={() => {
+                              navigator.clipboard.writeText(batchResults.join('\n'));
+                              setBatchCopied(true);
+                              setTimeout(() => setBatchCopied(false), 3000);
+                            }}
+                            size="sm"
+                            className={`${batchCopied ? 'bg-green-500 text-white' : 'bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]'}`}
+                          >
+                            {batchCopied ? <><CheckCircle2 className="w-3 h-3 mr-1" />Copied All!</> : <><Copy className="w-3 h-3 mr-1" />Copy All</>}
+                          </Button>
+                        </div>
+                        <div className="max-h-60 overflow-y-auto bg-white rounded-md p-3 space-y-1">
+                          {batchResults.map((code, idx) => (
+                            <div key={idx} className="flex items-center justify-between py-1 px-2 rounded hover:bg-slate-50">
+                              <span className="text-xs text-slate-500 w-8">{idx + 1}.</span>
+                              <code className="font-mono text-sm font-bold text-[#0F1C2E] flex-1">{code}</code>
+                              <button onClick={() => copyToClipboard(code)} className="text-[#1F6F78] hover:text-[#0F1C2E] p-1"><Copy className="w-3 h-3" /></button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
 
               <Card className="border-0 shadow-sm lg:col-span-2">
                 <CardHeader>

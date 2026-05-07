@@ -388,6 +388,170 @@ async function main() {
   console.log(`💎 BUNDLE ($47): ${tierCounts.BUNDLE} apps`);
   console.log('━'.repeat(50));
   console.log(`   TOTAL: ${apps.length} apps`);
+
+  // ============================================
+  // PRODUCTS DATA
+  // ============================================
+
+  console.log('\n🌱 Seeding products...');
+
+  const products = [
+    {
+      slug: 'trial',
+      name: '7-Day Identity Reset Trial',
+      nameAr: 'تجربة إعادة ضبط الهوية لمدة 7 أيام',
+      description: 'Experience the full Identity Recode system for 7 days with daily identity prompts, evidence tracking, and progress dashboard.',
+      descriptionAr: 'جرب نظام إعادة صياغة الهوية الكامل لمدة 7 أيام مع المطالبات اليومية وتتبع الأدلة ولوحة التقدم.',
+      shortDesc: '7-day trial of the full system',
+      price: 7,
+      comparePrice: 15,
+      originalPrice: 15,
+      currency: 'USD',
+      type: 'TRIAL' as const,
+      category: 'trial',
+      accessTier: AccessTier.TRIAL,
+      includedApps: JSON.stringify(['trial-planner', 'identity-gap-quiz', 'values-clarification', 'daily-reflection']),
+      features: JSON.stringify([
+        '7-Day Guided Journey',
+        'Daily identity prompts',
+        'Evidence tracking',
+        'Progress dashboard',
+        'PDF downloads'
+      ]),
+      featuresAr: JSON.stringify([
+        'رحلة موجهة لمدة 7 أيام',
+        'مطالبات الهوية اليومية',
+        'تتبع الأدلة',
+        'لوحة تتبع التقدم',
+        'تحميل PDF'
+      ]),
+      sortOrder: 1,
+      isActive: true,
+      isFeatured: false,
+      isPopular: false,
+    },
+    {
+      slug: 'planner',
+      name: 'Identity Recode Planner',
+      nameAr: 'مخطط إعادة صياغة الهوية',
+      description: 'The complete 30-day identity transformation system with interactive apps, daily prompts, and PDF downloads.',
+      descriptionAr: 'نظام تحول الهوية الكامل لمدة 30 يوم مع تطبيقات تفاعلية ومطالبات يومية وتحميلات PDF.',
+      shortDesc: 'Complete 30-day transformation planner',
+      price: 17,
+      comparePrice: 29,
+      originalPrice: 29,
+      currency: 'USD',
+      type: 'INTERACTIVE_APP' as const,
+      category: 'planner',
+      accessTier: AccessTier.BASIC,
+      includedApps: JSON.stringify(['executive-manual', 'daily-planner', 'identity-baseline', 'environmental-audit']),
+      features: JSON.stringify([
+        '30-Day Identity Planner',
+        'Executive Manual (PDF)',
+        'Identity Baseline Worksheet',
+        'Environmental Audit',
+        'Daily prompts & tracking',
+        'Print + Digital PDFs'
+      ]),
+      featuresAr: JSON.stringify([
+        'مخطط الهوية لمدة 30 يوم',
+        'الدليل التنفيذي (PDF)',
+        'ورقة عمل خط الأساس للهوية',
+        'تدقيق البيئة',
+        'مطالبات وتتبع يومي',
+        'PDF رقمي + للطباعة'
+      ]),
+      sortOrder: 2,
+      isActive: true,
+      isFeatured: true,
+      isPopular: true,
+    },
+    {
+      slug: 'premium',
+      name: 'Premium Transformation Package',
+      nameAr: 'باقة التحول المتميزة',
+      description: 'Comprehensive transformation with advanced analytics, decision tracking, and evidence collection tools.',
+      descriptionAr: 'تحول شامل مع تحليلات متقدمة وتتبع القرارات وأدوات جمع الأدلة.',
+      shortDesc: 'Advanced analytics and decision tracking',
+      price: 27,
+      comparePrice: 44,
+      originalPrice: 44,
+      currency: 'USD',
+      type: 'INTERACTIVE_APP' as const,
+      category: 'premium',
+      accessTier: AccessTier.PREMIUM,
+      includedApps: JSON.stringify(['daily-planner', 'decision-analysis', 'evidence-tracking', 'progress-dashboard']),
+      features: JSON.stringify([
+        'Everything in Planner',
+        'Decision Pattern Analysis',
+        'Evidence Tracking System',
+        'Progress Dashboard',
+        'Advanced analytics',
+        'Export capabilities'
+      ]),
+      featuresAr: JSON.stringify([
+        'كل ما في المخطط',
+        'تحليل أنماط القرارات',
+        'نظام تتبع الأدلة',
+        'لوحة تتبع التقدم',
+        'تحليلات متقدمة',
+        'قدرات التصدير'
+      ]),
+      sortOrder: 3,
+      isActive: true,
+      isFeatured: true,
+      isPopular: false,
+    },
+    {
+      slug: 'bundle',
+      name: 'Complete Transformation Bundle',
+      nameAr: 'باقة التحول الكاملة',
+      description: 'The ultimate identity transformation experience: All apps + AI coaching + community access + priority support.',
+      descriptionAr: 'تجربة تحول الهوية المثالية: جميع التطبيقات + تدريب AI + وصول المجتمع + دعم ذو أولوية.',
+      shortDesc: 'Everything included - All apps + AI coaching',
+      price: 47,
+      comparePrice: 91,
+      originalPrice: 91,
+      currency: 'USD',
+      type: 'BUNDLE' as const,
+      category: 'bundle',
+      accessTier: AccessTier.BUNDLE,
+      includedApps: JSON.stringify(['daily-planner', 'decision-analysis', 'evidence-tracking', 'progress-dashboard', 'emotion-regulation', 'ai-identity-coach', 'community-access', 'priority-support']),
+      features: JSON.stringify([
+        'All PDF products',
+        'All Interactive Apps',
+        'AI Identity Coach',
+        'Emotion Regulation (ERQ)',
+        'Transformation Community',
+        'Priority Support',
+        'Monthly live Q&A'
+      ]),
+      featuresAr: JSON.stringify([
+        'جميع منتجات PDF',
+        'جميع التطبيقات التفاعلية',
+        'مدرب الهوية AI',
+        'تنظيم العواطف (ERQ)',
+        'مجتمع التحول',
+        'دعم ذو أولوية',
+        'جلسات أسئلة وأجوبة شهرية'
+      ]),
+      sortOrder: 4,
+      isActive: true,
+      isFeatured: true,
+      isPopular: false,
+    },
+  ];
+
+  // Clear existing products
+  await prisma.product.deleteMany({});
+
+  // Seed products
+  for (const product of products) {
+    await prisma.product.create({ data: product });
+    console.log(`✅ Created product: ${product.name}`);
+  }
+
+  console.log(`\n🎉 Successfully seeded ${products.length} products!`);
 }
 
 main()
