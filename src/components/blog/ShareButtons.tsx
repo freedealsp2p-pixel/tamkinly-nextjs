@@ -3,6 +3,7 @@
 import { Twitter, Linkedin, Facebook, Link2, Check } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useLocale } from '@/components/providers/LocaleProvider';
 
 interface ShareButtonsProps {
   url: string;
@@ -12,6 +13,8 @@ interface ShareButtonsProps {
 
 export function ShareButtons({ url, title, description }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -20,18 +23,21 @@ export function ShareButtons({ url, title, description }: ShareButtonsProps) {
   const shareLinks = [
     {
       name: 'Twitter / X',
+      nameAr: 'تويتر / X',
       icon: Twitter,
       href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
       color: 'hover:text-slate-900 hover:bg-slate-100',
     },
     {
       name: 'LinkedIn',
+      nameAr: 'لينكدإن',
       icon: Linkedin,
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
       color: 'hover:text-blue-600 hover:bg-blue-50',
     },
     {
       name: 'Facebook',
+      nameAr: 'فيسبوك',
       icon: Facebook,
       href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
       color: 'hover:text-blue-700 hover:bg-blue-50',
@@ -58,7 +64,7 @@ export function ShareButtons({ url, title, description }: ShareButtonsProps) {
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-sm text-slate-500 font-medium mr-1">Share:</span>
+      <span className="text-sm text-slate-500 font-medium mr-1">{getText('Share:', 'مشاركة:')}</span>
       {shareLinks.map((link) => (
         <Button
           key={link.name}
@@ -66,11 +72,11 @@ export function ShareButtons({ url, title, description }: ShareButtonsProps) {
           size="sm"
           asChild
           className={`h-9 px-3 text-slate-500 ${link.color}`}
-          aria-label={`Share on ${link.name}`}
+          aria-label={getText(`Share on ${link.name}`, `مشاركة على ${link.nameAr}`)}
         >
           <a href={link.href} target="_blank" rel="noopener noreferrer">
             <link.icon className="h-4 w-4" />
-            <span className="hidden sm:inline ml-1.5 text-xs">{link.name}</span>
+            <span className="hidden sm:inline ml-1.5 text-xs">{locale === 'ar' ? link.nameAr : link.name}</span>
           </a>
         </Button>
       ))}
@@ -79,11 +85,11 @@ export function ShareButtons({ url, title, description }: ShareButtonsProps) {
         size="sm"
         onClick={copyLink}
         className="h-9 px-3 text-slate-500 hover:text-green-600 hover:bg-green-50"
-        aria-label="Copy link"
+        aria-label={getText('Copy link', 'نسخ الرابط')}
       >
         {copied ? <Check className="h-4 w-4 text-green-600" /> : <Link2 className="h-4 w-4" />}
         <span className="hidden sm:inline ml-1.5 text-xs">
-          {copied ? 'Copied!' : 'Copy Link'}
+          {copied ? getText('Copied!', 'تم النسخ!') : getText('Copy Link', 'نسخ الرابط')}
         </span>
       </Button>
     </div>
