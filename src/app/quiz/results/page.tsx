@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { useLocale } from '@/components/providers/LocaleProvider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -112,14 +113,14 @@ const DimensionBar = ({
   value, 
   color, 
   icon: Icon,
-  isRTL 
+  locale 
 }: { 
   label: string; 
   labelAr: string; 
   value: number; 
   color: string; 
   icon: React.ElementType;
-  isRTL: boolean;
+  locale: 'en' | 'ar';
 }) => (
   <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
     <div className="flex items-center gap-3 mb-3">
@@ -130,7 +131,7 @@ const DimensionBar = ({
         <Icon className="w-5 h-5" style={{ color }} />
       </div>
       <div className="flex-1">
-        <h4 className="font-semibold text-[#0F1C2E]">{isRTL ? labelAr : label}</h4>
+        <h4 className="font-semibold text-[#0F1C2E]">{locale === 'ar' ? labelAr : label}</h4>
         <p className="text-sm text-[#8A94A6]">{value}%</p>
       </div>
       <div 
@@ -155,21 +156,22 @@ const DimensionBar = ({
 // Transformation map visualization
 const TransformationMap = ({ 
   scores, 
-  isRTL 
+  locale 
 }: { 
   scores: { overall: number; dimensions: { name: string; nameAr: string; value: number; color: string }[] };
-  isRTL: boolean;
+  locale: 'en' | 'ar';
 }) => {
-  const currentStateLabel = isRTL ? 'الحالة الحالية' : 'Current State';
-  const targetStateLabel = isRTL ? 'الحالة المستهدفة' : 'Target State';
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+  const currentStateLabel = getText('Current State', 'الحالة الحالية');
+  const targetStateLabel = getText('Target State', 'الحالة المستهدفة');
   
   return (
     <div className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] rounded-2xl p-6 md:p-8 text-white">
       <h3 className="text-xl font-bold mb-2">
-        {isRTL ? 'خارطة التحول الشخصية' : 'Personal Transformation Map'}
+        {getText('Personal Transformation Map', 'خارطة التحول الشخصية')}
       </h3>
       <p className="text-slate-300 mb-6">
-        {isRTL ? 'رحلتك من الحالة الحالية إلى هويتك المستهدفة' : 'Your journey from current state to your target identity'}
+        {getText('Your journey from current state to your target identity', 'رحلتك من الحالة الحالية إلى هويتك المستهدفة')}
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -182,14 +184,14 @@ const TransformationMap = ({
           <div className="space-y-3">
             {scores.dimensions.map((dim) => (
               <div key={dim.name} className="flex items-center justify-between">
-                <span className="text-sm text-slate-300">{isRTL ? dim.nameAr : dim.name}</span>
+                <span className="text-sm text-slate-300">{getText(dim.name, dim.nameAr)}</span>
                 <span className="font-semibold" style={{ color: dim.color }}>{dim.value}%</span>
               </div>
             ))}
           </div>
           <div className="mt-4 pt-4 border-t border-white/20">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-300">{isRTL ? 'درجة الهوية العامة' : 'Overall Identity Score'}</span>
+              <span className="text-sm text-slate-300">{getText('Overall Identity Score', 'درجة الهوية العامة')}</span>
               <span className="text-xl font-bold text-[#3DD4B0]">{scores.overall}%</span>
             </div>
           </div>
@@ -204,14 +206,14 @@ const TransformationMap = ({
           <div className="space-y-3">
             {scores.dimensions.map((dim) => (
               <div key={dim.name} className="flex items-center justify-between">
-                <span className="text-sm text-slate-300">{isRTL ? dim.nameAr : dim.name}</span>
+                <span className="text-sm text-slate-300">{getText(dim.name, dim.nameAr)}</span>
                 <span className="font-semibold text-[#3DD4B0]">85%+</span>
               </div>
             ))}
           </div>
           <div className="mt-4 pt-4 border-t border-white/20">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-300">{isRTL ? 'الهدف المثالي' : 'Target Goal'}</span>
+              <span className="text-sm text-slate-300">{getText('Target Goal', 'الهدف المثالي')}</span>
               <span className="text-xl font-bold text-[#3DD4B0]">85%+</span>
             </div>
           </div>
@@ -222,12 +224,12 @@ const TransformationMap = ({
       <div className="mt-6 flex items-center justify-center gap-4">
         <div className="text-center">
           <div className="text-3xl font-bold text-white">{85 - scores.overall}%</div>
-          <div className="text-sm text-slate-300">{isRTL ? 'فجوة التحول' : 'Transformation Gap'}</div>
+          <div className="text-sm text-slate-300">{getText('Transformation Gap', 'فجوة التحول')}</div>
         </div>
         <div className="h-12 w-px bg-white/30" />
         <div className="text-center">
           <div className="text-3xl font-bold text-[#3DD4B0]">{Math.ceil((85 - scores.overall) / 5)}</div>
-          <div className="text-sm text-slate-300">{isRTL ? 'أسابيع مقدرة' : 'Est. Weeks'}</div>
+          <div className="text-sm text-slate-300">{getText('Est. Weeks', 'أسابيع مقدرة')}</div>
         </div>
       </div>
     </div>
@@ -239,21 +241,7 @@ export default function QuizResultsPage() {
   const router = useRouter();
   const [results, setResults] = useState<QuizResults | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isRTL, setIsRTL] = useState(false);
-
-  // Check language direction and load results
-  useEffect(() => {
-    const checkRTL = () => {
-      const lang = document.documentElement.lang || 'en';
-      setIsRTL(lang === 'ar');
-    };
-    checkRTL();
-    
-    const observer = new MutationObserver(checkRTL);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-    
-    return () => observer.disconnect();
-  }, []);
+  const { locale, direction } = useLocale();
 
   useEffect(() => {
     // Load results from localStorage
@@ -279,7 +267,7 @@ export default function QuizResultsPage() {
   }, []);
 
   // Get text based on language
-  const getText = (en: string, ar: string) => isRTL ? ar : en;
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   // Get score description
   const getScoreDescription = (score: number) => {
@@ -392,7 +380,7 @@ export default function QuizResultsPage() {
                   <div key={dim.name} className="text-center p-4 rounded-xl bg-slate-50">
                     <dim.icon className="w-8 h-8 mx-auto mb-2" style={{ color: dim.color }} />
                     <div className="text-2xl font-bold text-[#0F1C2E]">{dim.value}%</div>
-                    <div className="text-sm text-[#8A94A6]">{isRTL ? dim.nameAr : dim.name}</div>
+                    <div className="text-sm text-[#8A94A6]">{locale === 'ar' ? dim.nameAr : dim.name}</div>
                     <Progress value={dim.value} className="h-1.5 mt-2" />
                   </div>
                 ))}
@@ -416,7 +404,7 @@ export default function QuizResultsPage() {
                   value={dim.value}
                   color={dim.color}
                   icon={dim.icon}
-                  isRTL={isRTL}
+                  locale={locale}
                 />
               ))}
             </div>
@@ -430,7 +418,7 @@ export default function QuizResultsPage() {
               overall: results.overallScore,
               dimensions: dimensionScores.map(d => ({ name: d.name, nameAr: d.nameAr, value: d.value, color: d.color }))
             }} 
-            isRTL={isRTL} 
+            locale={locale} 
           />
         </div>
 
@@ -515,7 +503,7 @@ export default function QuizResultsPage() {
                     {getText("What's Included:", 'ماذا يتضمن:')}
                   </h4>
                   <ul className="space-y-3 mb-8">
-                    {(isRTL ? recommendedProduct.featuresAr : recommendedProduct.features).map((feature, idx) => (
+                    {(locale === 'ar' ? recommendedProduct.featuresAr : recommendedProduct.features).map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3">
                         <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0" />
                         <span className="text-[#2B2E34]">{feature}</span>
@@ -603,8 +591,8 @@ export default function QuizResultsPage() {
             onClick={() => {
               if (navigator.share) {
                 navigator.share({
-                  title: isRTL ? 'نتائج تقييم هويتي' : 'My Identity Assessment Results',
-                  text: isRTL 
+                  title: locale === 'ar' ? 'نتائج تقييم هويتي' : 'My Identity Assessment Results',
+                  text: locale === 'ar' 
                     ? `حصلت على ${results.overallScore}% في تقييم فجوة الهوية!` 
                     : `I scored ${results.overallScore}% on the Identity Gap Assessment!`,
                   url: window.location.origin + '/quiz'

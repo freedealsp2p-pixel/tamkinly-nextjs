@@ -47,6 +47,7 @@ const QuizPreviewWidget = dynamic(
 // ============================================
 function HeroSection() {
   const t = useTranslations();
+  const tHome = useTranslations("homePage");
   const { direction } = useLocale();
 
   return (
@@ -146,7 +147,7 @@ function HeroSection() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-white/10">
               <Image
                 src="/hero-image.webp"
-                alt="Identity Transformation Journey"
+                alt={tHome("heroImageAlt")}
                 width={672}
                 height={384}
                 className="w-full h-auto object-cover"
@@ -343,6 +344,7 @@ function HowItWorksSection() {
 // ============================================
 function VideoSection() {
   const t = useTranslations();
+  const tHome = useTranslations("homePage");
 
   return (
     <section className="py-20 lg:py-28 bg-[#F6F8FA]">
@@ -365,7 +367,7 @@ function VideoSection() {
           <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-slate-200 bg-[#0F1C2E]">
             <Image
               src="/hero-image.webp"
-              alt="Identity Gap Explained"
+              alt={tHome("heroImageAlt")}
               fill
               className="object-cover opacity-80"
             />
@@ -556,6 +558,7 @@ function TestimonialsSection() {
 // ============================================
 function CTASection() {
   const t = useTranslations();
+  const tHome = useTranslations("homePage");
   const { direction } = useLocale();
 
   return (
@@ -591,7 +594,7 @@ function CTASection() {
             </div>
             <div className="text-center px-6 py-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
               <div className="text-3xl font-bold text-[#3DD4B0]">3 {t("cta.averageTime")}</div>
-              <div className="text-slate-400 text-sm">min</div>
+              <div className="text-slate-400 text-sm">{tHome("min")}</div>
             </div>
           </div>
           

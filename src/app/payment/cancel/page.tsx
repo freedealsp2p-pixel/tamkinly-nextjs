@@ -6,10 +6,12 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { XCircle, ArrowLeft, Loader2 } from 'lucide-react';
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 function CancelContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
+  const t = useTranslations("payment.cancel");
 
   return (
     <div className="min-h-screen bg-[#F6F8FA] py-16 px-4">
@@ -19,9 +21,9 @@ function CancelContent() {
           <div className="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-6">
             <XCircle className="w-12 h-12 text-red-500" />
           </div>
-          <h1 className="text-3xl font-bold text-[#0F1C2E] mb-2">Payment Cancelled</h1>
+          <h1 className="text-3xl font-bold text-[#0F1C2E] mb-2">{t('title')}</h1>
           <p className="text-slate-600">
-            Your payment was cancelled. No charges were made.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -30,7 +32,7 @@ function CancelContent() {
           <Card className="border-0 shadow-lg mb-6">
             <CardContent className="p-6">
               <div className="flex justify-between items-center">
-                <span className="text-slate-600">Order ID</span>
+                <span className="text-slate-600">{t('orderId')}</span>
                 <span className="font-mono text-sm">{orderId}</span>
               </div>
             </CardContent>
@@ -40,10 +42,9 @@ function CancelContent() {
         {/* Help Text */}
         <Card className="border-0 shadow-lg mb-6">
           <CardContent className="p-6">
-            <h3 className="font-semibold text-[#0F1C2E] mb-3">Need Help?</h3>
+            <h3 className="font-semibold text-[#0F1C2E] mb-3">{t('needHelp')}</h3>
             <p className="text-slate-600 text-sm leading-relaxed">
-              If you experienced any issues during checkout, please don&apos;t hesitate to contact our 
-              support team. We&apos;re here to help you complete your purchase.
+              {t('helpDesc')}
             </p>
           </CardContent>
         </Card>
@@ -53,12 +54,12 @@ function CancelContent() {
           <Link href="/products" className="flex-1">
             <Button className="w-full h-12 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Products
+              {t('backToProducts')}
             </Button>
           </Link>
           <Link href="/contact" className="flex-1">
             <Button variant="outline" className="w-full h-12 font-semibold">
-              Contact Support
+              {t('contactSupport')}
             </Button>
           </Link>
         </div>

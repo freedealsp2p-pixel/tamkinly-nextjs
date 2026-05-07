@@ -501,7 +501,7 @@ function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
               {t('sslSecured')}
             </span>
             <span>|</span>
-            <span>Wise • Crypto • Bank Transfer (Coming Soon)</span>
+            <span>{t('comingSoonPayment')}</span>
             <span>|</span>
             <span>{t('refundPolicy')}</span>
           </div>

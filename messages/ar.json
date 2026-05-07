@@ -1150,7 +1150,8 @@
       "مدرب الهوية بالذكاء الاصطناعي",
       "مجتمع التحول",
       "الدعم ذو الأولوية"
-    ]
+    ],
+    "comingSoonPayment": "طرق دفع قريباً: وايز • كريبتو • تحويل بنكي"
   },
   "appsPage": {
     "headerTitle": "تطبيقات تمكينلي",
@@ -1280,7 +1281,8 @@
     "otherWaysTitle": "طرق أخرى للتواصل معنا",
     "emailCard": "البريد الإلكتروني",
     "responseTimeCard": "وقت الاستجابة",
-    "responseTimeDesc": "نرد عادةً خلال 24-48 ساعة في أيام العمل."
+    "responseTimeDesc": "نرد عادةً خلال 24-48 ساعة في أيام العمل.",
+    "sendFailed": "فشل إرسال الرسالة"
   },
   "faqPage": {
     "heroBadge": "الأسئلة الشائعة",
@@ -1618,7 +1620,8 @@
     "saveReference": "احفظ هذا المرجع للدعم",
     "accessYourApps": "الدخول إلى تطبيقاتك",
     "continueShopping": "متابعة التسوق",
-    "submitError": "فشل إرسال الطلب. يرجى المحاولة مرة أخرى."
+    "submitError": "فشل إرسال الطلب. يرجى المحاولة مرة أخرى.",
+    "failedCreateOrder": "فشل إنشاء الطلب"
   },
   "searchPage": {
     "badge": "البحث",
@@ -1756,7 +1759,8 @@
     "categoryWealthIdentity": "الثروة والهوية",
     "categorySelfLiberation": "التحرر الذاتي",
     "categorySelfImage": "الصورة الذاتية",
-    "categoryMentalClarity": "الوضوح الذهني"
+    "categoryMentalClarity": "الوضوح الذهني",
+    "enterEmail": "أدخل بريدك الإلكتروني"
   },
   "dashboardPage": {
     "welcomeBack": "مرحباً بعودتك، {name}!",
@@ -1812,7 +1816,8 @@
     "phaseRange1": "0-29%",
     "phaseRange2": "30-59%",
     "phaseRange3": "60%+",
-    "phaseRecoding": "إعادة البرمجة"
+    "phaseRecoding": "إعادة البرمجة",
+    "there": "هناك"
   },
   "guidesPage": {
     "heroBadge": "دراسات معمقة",
@@ -1984,5 +1989,77 @@
     "needRefund": "تحتاج استرداد؟",
     "needRefundDesc": "تواصل مع فريق الدعم وسنعالج استردادك بسرعة",
     "requestRefund": "طلب استرداد"
+  },
+  "auth": {
+    "signin": {
+      "welcomeBack": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول لمتابعة تحولك",
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      "errorOccurred": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "emailPlaceholder": "you@example.com",
+      "signingIn": "جارٍ تسجيل الدخول...",
+      "signIn": "تسجيل الدخول",
+      "or": "أو",
+      "continueFree": "متابعة مع التقييم المجاني",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "إنشاء حساب"
+    },
+    "signup": {
+      "createAccount": "إنشاء حساب",
+      "createAccountBtn": "إنشاء حساب",
+      "subtitle": "ابدأ رحلة تحولك",
+      "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+      "passwordsNoMatch": "كلمات المرور غير متطابقة",
+      "registrationFailed": "فشل التسجيل",
+      "errorOccurred": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+      "name": "الاسم (اختياري)",
+      "namePlaceholder": "اسمك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "6 أحرف على الأقل",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أكّد كلمة مرورك",
+      "creatingAccount": "جارٍ إنشاء الحساب...",
+      "freeAccountBenefits": "ما تحصل عليه مع حساب مجاني:",
+      "benefit1": "حفظ نتائج الاختبار",
+      "benefit2": "تتبع تقدمك",
+      "benefit3": "كسب الإنجازات",
+      "benefit4": "الوصول للتطبيقات المجانية",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول"
+    }
+  },
+  "payment": {
+    "success": {
+      "title": "تم الدفع بنجاح!",
+      "subtitle": "شكراً لشرائك. تم تأكيد طلبك.",
+      "orderId": "رقم الطلب",
+      "paymentId": "رقم الدفع",
+      "accessCodeSent": "تم إرسال رمز الوصول إلى بريدك الإلكتروني",
+      "accessCodeDesc": "تم إرسال رمز الوصول إلى عنوان البريد الإلكتروني المستخدم أثناء الدفع. يرجى التحقق من صندوق الوارد (ومجلد الرسائل غير المرغوب فيها) للعثور عليه.",
+      "whatsNext": "ماذا بعد؟",
+      "step1": "تحقق من بريدك الإلكتروني للتأكيد ورمز الوصول",
+      "step2": "اذهب إلى صفحة التطبيقات وأدخل رمز الوصول",
+      "step3": "ابدأ رحلة تحولك!",
+      "enterAccessCode": "إدخال رمز الوصول",
+      "viewAccount": "عرض الحساب"
+    },
+    "cancel": {
+      "title": "تم إلغاء الدفع",
+      "subtitle": "تم إلغاء دفعتك. لم يتم خصم أي مبالغ.",
+      "orderId": "رقم الطلب",
+      "needHelp": "تحتاج مساعدة؟",
+      "helpDesc": "إذا واجهت أي مشاكل أثناء الدفع، لا تتردد في التواصل مع فريق الدعم لدينا. نحن هنا لمساعدتك في إتمام شرائك.",
+      "backToProducts": "العودة إلى المنتجات",
+      "contactSupport": "تواصل مع الدعم"
+    }
+  },
+  "homePage": {
+    "heroImageAlt": "رحلة تحويل الهوية",
+    "min": "دقيقة",
+    "videoDuration": "3:24"
   }
 }

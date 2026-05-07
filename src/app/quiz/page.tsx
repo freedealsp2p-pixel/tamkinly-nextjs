@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useLocale } from '@/components/providers/LocaleProvider';
 import { 
   ArrowRight, 
   Sparkles, 
@@ -287,22 +288,7 @@ export default function IdentityQuizPage() {
   const [answers, setAnswers] = useState<number[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [analyzingProgress, setAnalyzingProgress] = useState(0);
-  const [isRTL, setIsRTL] = useState(false);
-
-  // Check language direction
-  useEffect(() => {
-    const checkRTL = () => {
-      const lang = document.documentElement.lang || 'en';
-      setIsRTL(lang === 'ar');
-    };
-    checkRTL();
-    
-    // Listen for language changes
-    const observer = new MutationObserver(checkRTL);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-    
-    return () => observer.disconnect();
-  }, []);
+  const { locale, direction } = useLocale();
 
   // Calculate user profile and navigate to results
   const calculateAndNavigate = () => {
@@ -421,7 +407,7 @@ export default function IdentityQuizPage() {
   };
 
   // Get text based on language
-  const getText = (en: string, ar: string) => isRTL ? ar : en;
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   // Render intro section
   const renderIntro = () => (
@@ -577,7 +563,7 @@ export default function IdentityQuizPage() {
                     <button
                       key={index}
                       onClick={() => handleAnswer(option.value)}
-                      className={`w-full text-left p-4 md:p-5 rounded-xl border-2 transition-all duration-300 group
+                      className={`w-full ${direction === 'rtl' ? 'text-right' : 'text-left'} p-4 md:p-5 rounded-xl border-2 transition-all duration-300 group
                         ${selectedAnswer === option.value 
                           ? 'border-[#3DD4B0] bg-[#3DD4B0]/10 shadow-lg' 
                           : 'border-slate-200 hover:border-[#3DD4B0]/50 hover:bg-slate-50'

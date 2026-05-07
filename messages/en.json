@@ -1150,7 +1150,8 @@
       "AI Identity Coach",
       "Transformation Community",
       "Priority Support"
-    ]
+    ],
+    "comingSoonPayment": "Wise • Crypto • Bank Transfer (Coming Soon)"
   },
   "appsPage": {
     "headerTitle": "Tamkinly Apps",
@@ -1280,7 +1281,8 @@
     "otherWaysTitle": "Other Ways to Reach Us",
     "emailCard": "Email",
     "responseTimeCard": "Response Time",
-    "responseTimeDesc": "We typically respond within 24-48 hours during business days."
+    "responseTimeDesc": "We typically respond within 24-48 hours during business days.",
+    "sendFailed": "Failed to send message"
   },
   "faqPage": {
     "heroBadge": "Frequently Asked Questions",
@@ -1618,7 +1620,8 @@
     "saveReference": "Save this reference for support",
     "accessYourApps": "Access Your Apps",
     "continueShopping": "Continue Shopping",
-    "submitError": "Failed to submit order. Please try again."
+    "submitError": "Failed to submit order. Please try again.",
+    "failedCreateOrder": "Failed to create order"
   },
   "searchPage": {
     "badge": "Search",
@@ -1756,7 +1759,8 @@
     "categoryWealthIdentity": "Wealth & Identity",
     "categorySelfLiberation": "Self-Liberation",
     "categorySelfImage": "Self-Image",
-    "categoryMentalClarity": "Mental Clarity"
+    "categoryMentalClarity": "Mental Clarity",
+    "enterEmail": "Enter your email"
   },
   "dashboardPage": {
     "welcomeBack": "Welcome back, {name}!",
@@ -1812,7 +1816,8 @@
     "phaseRange1": "0-29%",
     "phaseRange2": "30-59%",
     "phaseRange3": "60%+",
-    "phaseRecoding": "Recoding"
+    "phaseRecoding": "Recoding",
+    "there": "there"
   },
   "guidesPage": {
     "heroBadge": "Deep Dives",
@@ -1984,5 +1989,77 @@
     "needRefund": "Need a Refund?",
     "needRefundDesc": "Contact our support team and we'll process your refund promptly",
     "requestRefund": "Request Refund"
+  },
+  "auth": {
+    "signin": {
+      "welcomeBack": "Welcome Back",
+      "subtitle": "Sign in to continue your transformation",
+      "invalidCredentials": "Invalid email or password",
+      "errorOccurred": "An error occurred. Please try again.",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "you@example.com",
+      "signingIn": "Signing in...",
+      "signIn": "Sign In",
+      "or": "Or",
+      "continueFree": "Continue with Free Assessment",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "signup": {
+      "createAccount": "Create Account",
+      "createAccountBtn": "Create Account",
+      "subtitle": "Start your transformation journey",
+      "passwordTooShort": "Password must be at least 6 characters",
+      "passwordsNoMatch": "Passwords do not match",
+      "registrationFailed": "Registration failed",
+      "errorOccurred": "An error occurred. Please try again.",
+      "name": "Name (optional)",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Min. 6 characters",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "creatingAccount": "Creating account...",
+      "freeAccountBenefits": "What you get with a free account:",
+      "benefit1": "Save your quiz results",
+      "benefit2": "Track your progress",
+      "benefit3": "Earn achievements",
+      "benefit4": "Access free apps",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in"
+    }
+  },
+  "payment": {
+    "success": {
+      "title": "Payment Successful!",
+      "subtitle": "Thank you for your purchase. Your order has been confirmed.",
+      "orderId": "Order ID",
+      "paymentId": "Payment ID",
+      "accessCodeSent": "Access Code Sent to Your Email",
+      "accessCodeDesc": "Your access code has been sent to the email address used during checkout. Please check your inbox (and spam folder) to find it.",
+      "whatsNext": "What's Next?",
+      "step1": "Check your email for confirmation and access code",
+      "step2": "Go to the Apps page and enter your access code",
+      "step3": "Start your transformation journey!",
+      "enterAccessCode": "Enter Access Code",
+      "viewAccount": "View Account"
+    },
+    "cancel": {
+      "title": "Payment Cancelled",
+      "subtitle": "Your payment was cancelled. No charges were made.",
+      "orderId": "Order ID",
+      "needHelp": "Need Help?",
+      "helpDesc": "If you experienced any issues during checkout, please don't hesitate to contact our support team. We're here to help you complete your purchase.",
+      "backToProducts": "Back to Products",
+      "contactSupport": "Contact Support"
+    }
+  },
+  "homePage": {
+    "heroImageAlt": "Identity Transformation Journey",
+    "min": "min",
+    "videoDuration": "3:24"
   }
 }

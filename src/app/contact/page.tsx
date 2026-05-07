@@ -109,7 +109,7 @@ function ContactSection() {
       } else {
         setStatus({ 
           type: 'error', 
-          message: data.error || 'Failed to send message',
+          message: data.error || t("sendFailed"),
           errors: data.errors 
         });
       }

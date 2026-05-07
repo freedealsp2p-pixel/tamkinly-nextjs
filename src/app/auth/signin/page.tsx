@@ -8,11 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Mail, Lock, Loader2, ArrowRight } from 'lucide-react';
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const t = useTranslations("auth.signin");
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,13 +34,13 @@ function SignInForm() {
       });
 
       if (result?.error) {
-        setError('Invalid email or password');
+        setError(t('invalidCredentials'));
       } else {
         router.push(callbackUrl);
         router.refresh();
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError(t('errorOccurred'));
     } finally {
       setIsLoading(false);
     }
@@ -52,8 +54,8 @@ function SignInForm() {
           <Link href="/" className="text-2xl font-bold text-[#3DD4B0]">
             Tamkinly
           </Link>
-          <h1 className="text-2xl font-bold text-[#0F1C2E] mt-4">Welcome Back</h1>
-          <p className="text-slate-600 mt-2">Sign in to continue your transformation</p>
+          <h1 className="text-2xl font-bold text-[#0F1C2E] mt-4">{t('welcomeBack')}</h1>
+          <p className="text-slate-600 mt-2">{t('subtitle')}</p>
         </div>
 
         {/* Error Message */}
@@ -68,7 +70,7 @@ function SignInForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-slate-700">
-              Email
+              {t('email')}
             </label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -77,7 +79,7 @@ function SignInForm() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder={t('emailPlaceholder')}
                 required
                 disabled={isLoading}
                 className="pl-10"
@@ -87,7 +89,7 @@ function SignInForm() {
 
           <div className="space-y-2">
             <label htmlFor="password" className="text-sm font-medium text-slate-700">
-              Password
+              {t('password')}
             </label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -112,11 +114,11 @@ function SignInForm() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Signing in...
+                {t('signingIn')}
               </>
             ) : (
               <>
-                Sign In
+                {t('signIn')}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </>
             )}
@@ -129,22 +131,22 @@ function SignInForm() {
             <div className="w-full border-t border-slate-200" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-slate-500">Or</span>
+            <span className="bg-white px-2 text-slate-500">{t('or')}</span>
           </div>
         </div>
 
         {/* Continue without account */}
         <Link href="/quiz">
           <Button variant="outline" className="w-full h-12">
-            Continue with Free Assessment
+            {t('continueFree')}
           </Button>
         </Link>
 
         {/* Sign Up Link */}
         <p className="text-center text-slate-600 mt-6">
-          Don&apos;t have an account?{' '}
+          {t('noAccount')}{' '}
           <Link href="/auth/signup" className="text-[#3DD4B0] hover:underline font-medium">
-            Sign up
+            {t('signUp')}
           </Link>
         </p>
       </CardContent>

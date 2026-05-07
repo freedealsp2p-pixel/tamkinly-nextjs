@@ -163,7 +163,7 @@ export default function DashboardPage() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-[#0F1C2E] mb-2">
             {status === 'authenticated' 
-              ? t('welcomeBack').replace('{name}', session?.user?.name || 'there')
+              ? t('welcomeBack').replace('{name}', session?.user?.name || t('there'))
               : t('yourDashboard')
             }
           </h1>

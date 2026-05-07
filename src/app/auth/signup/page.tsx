@@ -7,9 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Mail, Lock, User, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useTranslations } from "@/components/providers/LocaleProvider";
 
 export default function SignUpPage() {
   const router = useRouter();
+  const t = useTranslations("auth.signup");
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,12 +26,12 @@ export default function SignUpPage() {
 
     // Validation
     if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError(t('passwordTooShort'));
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('passwordsNoMatch'));
       return;
     }
 
@@ -45,13 +47,13 @@ export default function SignUpPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || 'Registration failed');
+        setError(data.error || t('registrationFailed'));
       } else {
         // Redirect to sign in with success message
         router.push('/auth/signin?registered=true');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError(t('errorOccurred'));
     } finally {
       setIsLoading(false);
     }
@@ -66,8 +68,8 @@ export default function SignUpPage() {
             <Link href="/" className="text-2xl font-bold text-[#3DD4B0]">
               Tamkinly
             </Link>
-            <h1 className="text-2xl font-bold text-[#0F1C2E] mt-4">Create Account</h1>
-            <p className="text-slate-600 mt-2">Start your transformation journey</p>
+            <h1 className="text-2xl font-bold text-[#0F1C2E] mt-4">{t('createAccount')}</h1>
+            <p className="text-slate-600 mt-2">{t('subtitle')}</p>
           </div>
 
           {/* Error Message */}
@@ -82,7 +84,7 @@ export default function SignUpPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium text-slate-700">
-                Name (optional)
+                {t('name')}
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -91,7 +93,7 @@ export default function SignUpPage() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Your name"
+                  placeholder={t('namePlaceholder')}
                   disabled={isLoading}
                   className="pl-10"
                 />
@@ -100,7 +102,7 @@ export default function SignUpPage() {
 
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium text-slate-700">
-                Email
+                {t('email')}
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -109,7 +111,7 @@ export default function SignUpPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder={t('emailPlaceholder')}
                   required
                   disabled={isLoading}
                   className="pl-10"
@@ -119,7 +121,7 @@ export default function SignUpPage() {
 
             <div className="space-y-2">
               <label htmlFor="password" className="text-sm font-medium text-slate-700">
-                Password
+                {t('password')}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -128,7 +130,7 @@ export default function SignUpPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Min. 6 characters"
+                  placeholder={t('passwordPlaceholder')}
                   required
                   disabled={isLoading}
                   className="pl-10"
@@ -138,7 +140,7 @@ export default function SignUpPage() {
 
             <div className="space-y-2">
               <label htmlFor="confirmPassword" className="text-sm font-medium text-slate-700">
-                Confirm Password
+                {t('confirmPassword')}
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -147,7 +149,7 @@ export default function SignUpPage() {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm your password"
+                  placeholder={t('confirmPasswordPlaceholder')}
                   required
                   disabled={isLoading}
                   className="pl-10"
@@ -163,11 +165,11 @@ export default function SignUpPage() {
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creating account...
+                  {t('creatingAccount')}
                 </>
               ) : (
                 <>
-                  Create Account
+                  {t('createAccountBtn')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </>
               )}
@@ -176,14 +178,9 @@ export default function SignUpPage() {
 
           {/* Benefits */}
           <div className="mt-6 p-4 bg-slate-50 rounded-lg">
-            <h3 className="text-sm font-semibold text-[#0F1C2E] mb-2">What you get with a free account:</h3>
+            <h3 className="text-sm font-semibold text-[#0F1C2E] mb-2">{t('freeAccountBenefits')}</h3>
             <ul className="space-y-1">
-              {[
-                'Save your quiz results',
-                'Track your progress',
-                'Earn achievements',
-                'Access free apps',
-              ].map((benefit, idx) => (
+              {[t('benefit1'), t('benefit2'), t('benefit3'), t('benefit4')].map((benefit, idx) => (
                 <li key={idx} className="flex items-center gap-2 text-sm text-slate-600">
                   <CheckCircle2 className="h-4 w-4 text-[#3DD4B0]" />
                   {benefit}
@@ -194,9 +191,9 @@ export default function SignUpPage() {
 
           {/* Sign In Link */}
           <p className="text-center text-slate-600 mt-6">
-            Already have an account?{' '}
+            {t('hasAccount')}{' '}
             <Link href="/auth/signin" className="text-[#3DD4B0] hover:underline font-medium">
-              Sign in
+              {t('signIn')}
             </Link>
           </p>
         </CardContent>
