@@ -6,34 +6,38 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, AlertTriangle, Lightbulb, XCircle, CheckCircle } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
-
-const relatedArticles = [
-  { slug: "identity-millionaire", title: "The Identity Millionaire", readTime: "9 min read" },
-  { slug: "ten-minute-block-system", title: "The 10-Minute Block System", readTime: "9 min read" },
-  { slug: "speed-as-strategy", title: "Speed as Strategy", readTime: "7 min read" }
-];
+import { useLocale } from '@/components/providers/LocaleProvider';
 
 export default function InversionThinkingArticle() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+
+  const relatedArticles = [
+    { slug: "identity-millionaire", title: getText("The Identity Millionaire", "المليونير بالهوية"), readTime: getText("9 min read", "٩ دقائق قراءة") },
+    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل ذات العشر دقائق"), readTime: getText("9 min read", "٩ دقائق قراءة") },
+    { slug: "speed-as-strategy", title: getText("Speed as Strategy", "السرعة كاستراتيجية"), readTime: getText("7 min read", "٧ دقائق قراءة") }
+  ];
+
   return (
-    <article className="min-h-screen">
+    <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <Badge variant="outline" className="mb-4 px-4 py-2 border-accent/30 text-accent bg-accent/10">
-              Strategy
+              {getText("Strategy", "استراتيجية")}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              Inversion Thinking: How to Win by Avoiding Failure
+              {getText("Inversion Thinking: How to Win by Avoiding Failure", "التفكير العكسي: كيف تفوز بتجنب الفشل")}
             </h1>
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                8 min read
+                {getText("8 min read", "٨ دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Tamkinly Team
+                {getText("Tamkinly Team", "فريق تمكنلي")}
               </span>
             </div>
           </div>
@@ -45,87 +49,75 @@ export default function InversionThinkingArticle() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
-              &quot;All I want to know is where I&apos;m going to die, so I&apos;ll never go there.&quot; 
-              — Charlie Munger
+              {getText("\"All I want to know is where I'm going to die, so I'll never go there.\" — Charlie Munger", "\"كل ما أريد معرفته هو أين سأموت، حتى لا أذهب إلى هناك أبداً.\" — تشارلي مانجر")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              This single quote from billionaire investor Charlie Munger reveals one of 
-              the most powerful thinking frameworks available. While everyone else asks 
-              &quot;How do I succeed?&quot; Munger asks &quot;How do I fail?&quot;—then simply avoids doing that.
+              {getText("This single quote from billionaire investor Charlie Munger reveals one of the most powerful thinking frameworks available. While everyone else asks \"How do I succeed?\" Munger asks \"How do I fail?\"—then simply avoids doing that.", "يكشف هذا الاقتباس الوحيد من المستثمر الملياردير تشارلي مانجر عن أحد أقوى أطر التفكير المتاحة. بينما يسأل الجميع \"كيف أنجح؟\" يسأل مانجر \"كيف أفشل؟\" — ثم يتجنب ببساطة القيام بذلك.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              It sounds simple. But this inversion principle built two of the most 
-              successful investment track records in history. And you don&apos;t need to be 
-              the smartest person in the room to use it.
+              {getText("It sounds simple. But this inversion principle built two of the most successful investment track records in history. And you don't need to be the smartest person in the room to use it.", "يبدو بسيطاً. لكن مبدأ الانعكاس هذا بنى اثنين من أنجح سجلات الاستثمار في التاريخ. ولا تحتاج أن تكون أذكى شخص في الغرفة لاستخدامه.")}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Inversion Principle
+              {getText("The Inversion Principle", "مبدأ الانعكاس")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Most failures don&apos;t come from a lack of intelligence or opportunity. 
-              They come from obvious, avoidable mistakes: overspending, chasing shiny 
-              objects, ignoring what&apos;s working, neglecting relationships, avoiding 
-              difficult conversations.
+              {getText("Most failures don't come from a lack of intelligence or opportunity. They come from obvious, avoidable mistakes: overspending, chasing shiny objects, ignoring what's working, neglecting relationships, avoiding difficult conversations.", "معظم الإخفاقات لا تأتي من نقص الذكاء أو الفرص. تأتي من أخطاء واضحة يمكن تجنبها: الإنفاق المفرط، مطاردة البريق، تجاهل ما ينجح، إهمال العلاقات، تجنب المحادثات الصعبة.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Instead of trying to be brilliant, focus on not being stupid. 
-              Instead of chasing success, focus on avoiding failure. 
-              The results are often the same—but the approach is far more reliable.
+              {getText("Instead of trying to be brilliant, focus on not being stupid. Instead of chasing success, focus on avoiding failure. The results are often the same—but the approach is far more reliable.", "بدلاً من محاولة أن تكون عبقرياً، ركز على ألا تكون غبياً. بدلاً من مطاردة النجاح، ركز على تجنب الفشل. النتائج غالباً واحدة — لكن المنهج أكثر موثوقية بكثير.")}
             </p>
 
             <div className="bg-accent/5 border-l-4 border-accent p-6 my-8 rounded-r-lg">
               <p className="text-slate-700 italic">
-                &quot;Instead of asking how to win, ask how to lose—then make sure you 
-                don&apos;t do those things.&quot;
+                {getText("\"Instead of asking how to win, ask how to lose—then make sure you don't do those things.\"", "\"بدلاً من أن تسأل كيف تفوز، اسأل كيف تخسر — ثم تأكد من ألا تفعل تلك الأشياء.\"")}
               </p>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Anti-Goal Exercise
+              {getText("The Anti-Goal Exercise", "تمرين الأهداف العكسية")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Here&apos;s how to apply inversion thinking to any area of your life:
+              {getText("Here's how to apply inversion thinking to any area of your life:", "إليك كيف تطبق التفكير العكسي في أي مجال من حياتك:")}
             </p>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
-              <h3 className="font-semibold text-primary mb-4">Step 1: Define Failure</h3>
+              <h3 className="font-semibold text-primary mb-4">{getText("Step 1: Define Failure", "الخطوة ١: حدد الفشل")}</h3>
               <p className="text-slate-600 mb-4">
-                Instead of writing your goals, write exactly how you would fail:
+                {getText("Instead of writing your goals, write exactly how you would fail:", "بدلاً من كتابة أهدافك، اكتب بالضبط كيف ستفشل:")}
               </p>
               <ul className="space-y-2 text-slate-600">
-                <li>• How would you go bankrupt?</li>
-                <li>• How would you destroy your health?</li>
-                <li>• How would you ruin your relationships?</li>
-                <li>• How would you ensure you never achieve your dreams?</li>
+                <li>{getText("• How would you go bankrupt?", "• كيف ستُفلس؟")}</li>
+                <li>{getText("• How would you destroy your health?", "• كيف ستدمر صحتك؟")}</li>
+                <li>{getText("• How would you ruin your relationships?", "• كيف ستخرب علاقاتك؟")}</li>
+                <li>{getText("• How would you ensure you never achieve your dreams?", "• كيف ستضمن ألا تحقق أحلامك أبداً؟")}</li>
               </ul>
             </div>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
-              <h3 className="font-semibold text-primary mb-4">Step 2: Invert the List</h3>
+              <h3 className="font-semibold text-primary mb-4">{getText("Step 2: Invert the List", "الخطوة ٢: اعكس القائمة")}</h3>
               <p className="text-slate-600 mb-4">
-                Take your failure list and avoid every item on it:
+                {getText("Take your failure list and avoid every item on it:", "خذ قائمة الفشل وتجنب كل بند فيها:")}
               </p>
               <ul className="space-y-2 text-slate-600">
-                <li>• To avoid bankruptcy: spend less than you earn, build reserves.</li>
-                <li>• To avoid health collapse: move daily, sleep enough, manage stress.</li>
-                <li>• To avoid relationship ruin: communicate, show up, apologize.</li>
-                <li>• To avoid dream death: take action, persist, stay focused.</li>
+                <li>{getText("• To avoid bankruptcy: spend less than you earn, build reserves.", "• لتجنب الإفلاس: أنفق أقل مما تكسب، ابنِ احتياطيات.")}</li>
+                <li>{getText("• To avoid health collapse: move daily, sleep enough, manage stress.", "• لتجنب انهيار الصحة: تحرك يومياً، نم بما يكفي، أدر التوتر.")}</li>
+                <li>{getText("• To avoid relationship ruin: communicate, show up, apologize.", "• لتجنب تدمير العلاقات: تواصل، احضر، اعتذر.")}</li>
+                <li>{getText("• To avoid dream death: take action, persist, stay focused.", "• لتجنب موت الأحلام: اتخذ إجراءً، استمر، ابقَ مركزاً.")}</li>
               </ul>
             </div>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              This isn&apos;t about pessimism. It&apos;s about clarity. When you see clearly 
-              what leads to failure, the path to success becomes obvious.
+              {getText("This isn't about pessimism. It's about clarity. When you see clearly what leads to failure, the path to success becomes obvious.", "هذا ليس تشاؤماً. إنه وضوح. عندما ترى بوضوح ما يقود إلى الفشل، يصبح طريق النجاح واضحاً.")}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              Common Failure Patterns
+              {getText("Common Failure Patterns", "أنماط الفشل الشائعة")}
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6 my-8">
@@ -133,13 +125,13 @@ export default function InversionThinkingArticle() {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <XCircle className="h-5 w-5 text-red-500" />
-                    <h3 className="font-semibold text-primary">Financial Failure</h3>
+                    <h3 className="font-semibold text-primary">{getText("Financial Failure", "الفشل المالي")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">
-                    <li>• Lifestyle inflation with income</li>
-                    <li>• No emergency fund</li>
-                    <li>• High-interest debt</li>
-                    <li>• No income diversification</li>
+                    <li>{getText("• Lifestyle inflation with income", "• تضخم نمط الحياة مع الدخل")}</li>
+                    <li>{getText("• No emergency fund", "• لا صندوق طوارئ")}</li>
+                    <li>{getText("• High-interest debt", "• ديون ذات فائدة عالية")}</li>
+                    <li>{getText("• No income diversification", "• لا تنويع في مصادر الدخل")}</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -147,13 +139,13 @@ export default function InversionThinkingArticle() {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <CheckCircle className="h-5 w-5 text-accent" />
-                    <h3 className="font-semibold text-primary">Financial Safety</h3>
+                    <h3 className="font-semibold text-primary">{getText("Financial Safety", "الأمان المالي")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">
-                    <li>• Live below your means</li>
-                    <li>• Build 6-month reserves</li>
-                    <li>• Eliminate bad debt</li>
-                    <li>• Create multiple income streams</li>
+                    <li>{getText("• Live below your means", "• عش دون إمكانياتك")}</li>
+                    <li>{getText("• Build 6-month reserves", "• ابنِ احتياطيات ستة أشهر")}</li>
+                    <li>{getText("• Eliminate bad debt", "• تخلص من الديون السيئة")}</li>
+                    <li>{getText("• Create multiple income streams", "• أنشئ مصادر دخل متعددة")}</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -164,13 +156,13 @@ export default function InversionThinkingArticle() {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <XCircle className="h-5 w-5 text-red-500" />
-                    <h3 className="font-semibold text-primary">Identity Failure</h3>
+                    <h3 className="font-semibold text-primary">{getText("Identity Failure", "فشل الهوية")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">
-                    <li>• Living others&apos; expectations</li>
-                    <li>• Never defining your values</li>
-                    <li>• Avoiding self-reflection</li>
-                    <li>• Blaming circumstances</li>
+                    <li>{getText("• Living others' expectations", "• العيش وفق توقعات الآخرين")}</li>
+                    <li>{getText("• Never defining your values", "• عدم تحديد قيمك أبداً")}</li>
+                    <li>{getText("• Avoiding self-reflection", "• تجنب التأمل الذاتي")}</li>
+                    <li>{getText("• Blaming circumstances", "• لوم الظروف")}</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -178,68 +170,64 @@ export default function InversionThinkingArticle() {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <CheckCircle className="h-5 w-5 text-accent" />
-                    <h3 className="font-semibold text-primary">Identity Clarity</h3>
+                    <h3 className="font-semibold text-primary">{getText("Identity Clarity", "وضوح الهوية")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">
-                    <li>• Define who you are</li>
-                    <li>• Clarify core values</li>
-                    <li>• Regular self-examination</li>
-                    <li>• Take radical responsibility</li>
+                    <li>{getText("• Define who you are", "• حدد من أنت")}</li>
+                    <li>{getText("• Clarify core values", "•وضح القيم الأساسية")}</li>
+                    <li>{getText("• Regular self-examination", "• فحص ذاتي منتظم")}</li>
+                    <li>{getText("• Take radical responsibility", "• تحمل المسؤولية الكاملة")}</li>
                   </ul>
                 </CardContent>
               </Card>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              Applying Inversion to Identity
+              {getText("Applying Inversion to Identity", "تطبيق الانعكاس على الهوية")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Inversion thinking applies beautifully to identity transformation. 
-              Instead of asking &quot;How do I become the person I want to be?&quot; ask 
-              &quot;What would ensure I stay the person I don&apos;t want to be?&quot;
+              {getText("Inversion thinking applies beautifully to identity transformation. Instead of asking \"How do I become the person I want to be?\" ask \"What would ensure I stay the person I don't want to be?\"", "ينطبق التفكير العكسي بشكل رائع على تحول الهوية. بدلاً من أن تسأل \"كيف أصبح الشخص الذي أريد أن أكونه؟\" اسأل \"ما الذي سيضمن أن أبقى الشخص الذي لا أريد أن أكونه؟\"")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The answers are often uncomfortable but clarifying:
+              {getText("The answers are often uncomfortable but clarifying:", "الإجابات غالباً غير مريحة لكنها توضح الأمور:")}
             </p>
 
             <ul className="space-y-3 text-slate-600 my-6">
               <li className="flex gap-3">
                 <AlertTriangle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span>Keep consuming content without taking action</span>
+                <span>{getText("Keep consuming content without taking action", "استمر في استهلاك المحتوى دون اتخاذ إجراء")}</span>
               </li>
               <li className="flex gap-3">
                 <AlertTriangle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span>Stay in environments that don&apos;t support your growth</span>
+                <span>{getText("Stay in environments that don't support your growth", "ابقَ في بيئات لا تدعم نموك")}</span>
               </li>
               <li className="flex gap-3">
                 <AlertTriangle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span>Neglect the daily practices that build new neural pathways</span>
+                <span>{getText("Neglect the daily practices that build new neural pathways", "أهمل الممارسات اليومية التي تبني مسارات عصبية جديدة")}</span>
               </li>
               <li className="flex gap-3">
                 <AlertTriangle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span>Avoid difficult conversations with yourself</span>
+                <span>{getText("Avoid difficult conversations with yourself", "تجنب المحادثات الصعبة مع نفسك")}</span>
               </li>
               <li className="flex gap-3">
                 <AlertTriangle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
-                <span>Wait for motivation instead of building discipline</span>
+                <span>{getText("Wait for motivation instead of building discipline", "انتظر الحماس بدلاً من بناء الانضباط")}</span>
               </li>
             </ul>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Now invert: Do the opposite of each. That&apos;s your transformation plan.
+              {getText("Now invert: Do the opposite of each. That's your transformation plan.", "الآن اعكس: افعل عكس كل منها. هذه خطة تحولك.")}
             </p>
 
             <div className="flex items-center gap-2 text-accent mt-12 mb-8">
               <Lightbulb className="h-5 w-5" />
-              <span className="font-semibold">The Key Insight</span>
+              <span className="font-semibold">{getText("The Key Insight", "الفكرة المفتاحية")}</span>
             </div>
 
             <p className="text-slate-600 leading-relaxed">
-              You don&apos;t need a perfect plan to succeed. You just need to avoid the 
-              obvious ways to fail. Stay away from where you don&apos;t want to end up, 
-              and you&apos;ll naturally move toward where you do.
+              {getText("You don't need a perfect plan to succeed. You just need to avoid the obvious ways to fail. Stay away from where you don't want to end up, and you'll naturally move toward where you do.", "لست بحاجة إلى خطة مثالية لتنجح. أنت فقط بحاجة لتجنب الطرق الواضحة للفشل. ابقَ بعيداً عن المكان الذي لا تريد أن تنتهي فيه، وستتحرك بشكل طبيعي نحو المكان الذي تريده.")}
             </p>
           </div>
         </div>
@@ -252,7 +240,7 @@ export default function InversionThinkingArticle() {
       <section className="py-12 bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
-            <h3 className="font-semibold text-primary mb-6">Related Articles</h3>
+            <h3 className="font-semibold text-primary mb-6">{getText("Related Articles", "مقالات ذات صلة")}</h3>
             <div className="grid md:grid-cols-3 gap-4">
               {relatedArticles.map((article) => (
                 <Link key={article.slug} href={`/blog/${article.slug}`}>
@@ -276,14 +264,14 @@ export default function InversionThinkingArticle() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              Avoid Failure. Achieve Transformation.
+              {getText("Avoid Failure. Achieve Transformation.", "تجنب الفشل. حقق التحول.")}
             </h2>
             <p className="text-slate-300 mb-6">
-              Get the frameworks to see clearly and avoid what&apos;s holding you back.
+              {getText("Get the frameworks to see clearly and avoid what's holding you back.", "احصل على الأطر لترى بوضوح وتتجنب ما يعيقك.")}
             </p>
             <Link href="/products">
               <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                Explore Products
+                {getText("Explore Products", "استكشف المنتجات")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useLocale } from '@/components/providers/LocaleProvider';
 import { 
   Target, Plus, Trophy, Star, Zap, Rocket, Briefcase, 
   Heart, Users, DollarSign, BookOpen, Sparkles, 
@@ -35,6 +36,16 @@ const categoryColors: Record<string, { bg: string; text: string; light: string }
   PERSONAL_GROWTH: { bg: 'bg-emerald-500', text: 'text-emerald-700', light: 'bg-emerald-100' },
   FINANCIAL: { bg: 'bg-amber-500', text: 'text-amber-700', light: 'bg-amber-100' },
   SPIRITUAL: { bg: 'bg-cyan-500', text: 'text-cyan-700', light: 'bg-cyan-100' },
+};
+
+const categoryNamesAr: Record<string, string> = {
+  IDENTITY: 'الهوية',
+  CAREER: 'المسيرة المهنية',
+  HEALTH: 'الصحة',
+  RELATIONSHIPS: 'العلاقات',
+  PERSONAL_GROWTH: 'النمو الشخصي',
+  FINANCIAL: 'المالية',
+  SPIRITUAL: 'الروحانية',
 };
 
 interface Milestone {
@@ -93,12 +104,14 @@ const demoGoals: Goal[] = [
 ];
 
 export default function GoalSystemPage() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+
   const [goals, setGoals] = useState<Goal[]>(demoGoals);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
-  // Handle hydration - load from localStorage after mount
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
     const saved = localStorage.getItem('tamkinly-goals');
@@ -109,14 +122,12 @@ export default function GoalSystemPage() {
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
   
-  // New goal form
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newCategory, setNewCategory] = useState('PERSONAL_GROWTH');
   const [newTargetDate, setNewTargetDate] = useState('');
   const [newMilestones, setNewMilestones] = useState<string[]>(['']);
 
-  // Save to localStorage when goals change
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('tamkinly-goals', JSON.stringify(goals));
@@ -145,7 +156,7 @@ export default function GoalSystemPage() {
     setNewDescription('');
     setNewMilestones(['']);
     setIsAddDialogOpen(false);
-    toast.success('🎯 New goal created! You\'re on your way!');
+    toast.success(getText('🎯 New goal created! You\'re on your way!', '🎯 تم إنشاء هدف جديد! أنت في طريقك!'));
   };
 
   const toggleMilestone = (goalId: string, milestoneId: string) => {
@@ -173,14 +184,14 @@ export default function GoalSystemPage() {
     const milestone = goal?.milestones.find(m => m.id === milestoneId);
     
     if (milestone && !milestone.completed) {
-      toast.success('🎉 Milestone completed! Great progress!');
+      toast.success(getText('🎉 Milestone completed! Great progress!', '🎉 تم إنجاز المعلم! تقدم رائع!'));
     }
   };
 
   const deleteGoal = (id: string) => {
     setGoals(prev => prev.filter(g => g.id !== id));
     setSelectedGoal(null);
-    toast.success('Goal removed');
+    toast.success(getText('Goal removed', 'تم إزالة الهدف'));
   };
 
   const getDaysRemaining = (targetDate: string) => {
@@ -195,19 +206,18 @@ export default function GoalSystemPage() {
   if (!hydrated) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50/30" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <Badge variant="secondary" className="mb-4 bg-violet-100 text-violet-700 hover:bg-violet-200">
-            Achievement System
+            {getText('Achievement System', 'نظام الإنجاز')}
           </Badge>
           <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-            Goal Tracker
+            {getText('Goal Tracker', 'متتبع الأهداف')}
           </h1>
           <p className="text-slate-600 max-w-lg mx-auto">
-            Transform your identity through meaningful goals. 
-            Break them down into milestones and track your progress.
+            {getText('Transform your identity through meaningful goals. Break them down into milestones and track your progress.', 'حوّل هويتك من خلال أهداف ذات معنى. قسمها إلى معالم وتتبع تقدمك.')}
           </p>
         </div>
 
@@ -219,7 +229,7 @@ export default function GoalSystemPage() {
                 <Trophy className="h-6 w-6" />
               </div>
               <p className="text-3xl font-bold text-emerald-700">{completedGoals}</p>
-              <p className="text-sm text-emerald-600">Completed</p>
+              <p className="text-sm text-emerald-600">{getText('Completed', 'مكتمل')}</p>
             </CardContent>
           </Card>
 
@@ -229,7 +239,7 @@ export default function GoalSystemPage() {
                 <Target className="h-6 w-6" />
               </div>
               <p className="text-3xl font-bold text-violet-700">{inProgressGoals}</p>
-              <p className="text-sm text-violet-600">In Progress</p>
+              <p className="text-sm text-violet-600">{getText('In Progress', 'قيد التنفيذ')}</p>
             </CardContent>
           </Card>
 
@@ -239,7 +249,7 @@ export default function GoalSystemPage() {
                 <Flag className="h-6 w-6" />
               </div>
               <p className="text-3xl font-bold text-amber-700">{goals.length}</p>
-              <p className="text-sm text-amber-600">Total Goals</p>
+              <p className="text-sm text-amber-600">{getText('Total Goals', 'إجمالي الأهداف')}</p>
             </CardContent>
           </Card>
         </div>
@@ -307,7 +317,7 @@ export default function GoalSystemPage() {
                       {goal.status === 'COMPLETED' && (
                         <Badge className="bg-emerald-500 text-white">
                           <CheckCircle2 className="h-3 w-3 mr-1" />
-                          Complete
+                          {getText('Complete', 'مكتمل')}
                         </Badge>
                       )}
                     </div>
@@ -316,12 +326,12 @@ export default function GoalSystemPage() {
                     <div className="flex items-center gap-4 mt-3">
                       <div className="flex items-center gap-1 text-sm text-slate-500">
                         <Flag className="h-4 w-4" />
-                        <span>{completedMilestones}/{goal.milestones.length} milestones</span>
+                        <span>{completedMilestones}/{goal.milestones.length} {getText('milestones', 'معالم')}</span>
                       </div>
                       {daysLeft !== null && daysLeft > 0 && (
                         <div className="flex items-center gap-1 text-sm text-slate-500">
                           <Calendar className="h-4 w-4" />
-                          <span>{daysLeft} days left</span>
+                          <span>{daysLeft} {getText('days left', 'أيام متبقية')}</span>
                         </div>
                       )}
                     </div>
@@ -349,26 +359,26 @@ export default function GoalSystemPage() {
               className="w-full h-14 text-lg bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 shadow-lg"
             >
               <Plus className="h-5 w-5 mr-2" />
-              Create New Goal
+              {getText('Create New Goal', 'إنشاء هدف جديد')}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
-              <DialogTitle>Create New Goal</DialogTitle>
+              <DialogTitle>{getText('Create New Goal', 'إنشاء هدف جديد')}</DialogTitle>
               <DialogDescription>
-                Set a meaningful goal that aligns with your identity.
+                {getText('Set a meaningful goal that aligns with your identity.', 'حدد هدفًا ذا معنى يتوافق مع هويتك.')}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <Input
-                placeholder="Goal title"
+                placeholder={getText('Goal title', 'عنوان الهدف')}
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 className="h-12"
               />
               
               <Textarea
-                placeholder="Describe your goal..."
+                placeholder={getText('Describe your goal...', 'صف هدفك...')}
                 value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
                 className="min-h-[80px]"
@@ -384,7 +394,7 @@ export default function GoalSystemPage() {
                       <SelectItem key={cat} value={cat}>
                         <div className="flex items-center gap-2">
                           {categoryIcons[cat]}
-                          <span>{cat.replace('_', ' ')}</span>
+                          <span>{locale === 'ar' ? (categoryNamesAr[cat] || cat.replace('_', ' ')) : cat.replace('_', ' ')}</span>
                         </div>
                       </SelectItem>
                     ))}
@@ -401,11 +411,11 @@ export default function GoalSystemPage() {
 
               {/* Milestones */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700">Milestones</label>
+                <label className="text-sm font-medium text-slate-700">{getText('Milestones', 'المعالم')}</label>
                 {newMilestones.map((m, i) => (
                   <div key={i} className="flex gap-2">
                     <Input
-                      placeholder={`Milestone ${i + 1}`}
+                      placeholder={`${getText('Milestone', 'معلم')} ${i + 1}`}
                       value={m}
                       onChange={(e) => {
                         const updated = [...newMilestones];
@@ -432,7 +442,7 @@ export default function GoalSystemPage() {
                 disabled={!newTitle.trim()}
               >
                 <Target className="h-4 w-4 mr-2" />
-                Create Goal
+                {getText('Create Goal', 'إنشاء الهدف')}
               </Button>
             </div>
           </DialogContent>
@@ -455,13 +465,13 @@ export default function GoalSystemPage() {
                 
                 <div className="space-y-4 pt-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-500">Progress</span>
+                    <span className="text-sm text-slate-500">{getText('Progress', 'التقدم')}</span>
                     <span className="font-semibold">{selectedGoal.progress}%</span>
                   </div>
                   <Progress value={selectedGoal.progress} className="h-3" />
 
                   <div className="space-y-2">
-                    <h4 className="font-medium text-slate-700">Milestones</h4>
+                    <h4 className="font-medium text-slate-700">{getText('Milestones', 'المعالم')}</h4>
                     {selectedGoal.milestones.map((milestone) => (
                       <div 
                         key={milestone.id}
@@ -489,7 +499,7 @@ export default function GoalSystemPage() {
                     className="w-full"
                     onClick={() => deleteGoal(selectedGoal.id)}
                   >
-                    Delete Goal
+                    {getText('Delete Goal', 'حذف الهدف')}
                   </Button>
                 </div>
               </>
@@ -501,7 +511,7 @@ export default function GoalSystemPage() {
         <Card className="border-0 shadow-lg mt-8 bg-gradient-to-r from-violet-500 to-purple-600 text-white">
           <CardContent className="pt-6 text-center">
             <p className="text-lg font-medium mb-2">
-              "A goal without a plan is just a wish."
+              {getText('"A goal without a plan is just a wish."', '"الهدف بلا خطة مجرد أمنية."')}
             </p>
             <p className="text-sm text-violet-200">— Antoine de Saint-Exupéry</p>
           </CardContent>

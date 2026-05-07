@@ -15,6 +15,7 @@ import {
   CheckCircle2, Circle, TrendingUp, Award, Sparkles
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useLocale } from '@/components/providers/LocaleProvider';
 
 // Habit icons mapping
 const habitIcons: Record<string, React.ReactNode> = {
@@ -54,7 +55,8 @@ interface Habit {
   votes: number;
 }
 
-const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const daysEn = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const daysAr = ['إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت', 'أحد'];
 
 // Demo habits for initial state
 const demoHabits: Habit[] = [
@@ -63,6 +65,14 @@ const demoHabits: Habit[] = [
   { id: '3', name: 'Read 30 mins', icon: 'book', color: 'Emerald', streak: 3, longestStreak: 8, completedDays: [], completedToday: false, votes: 15 },
   { id: '4', name: 'Drink 8 glasses', icon: 'droplets', color: 'Cyan', streak: 10, longestStreak: 15, completedDays: [], completedToday: false, votes: 50 },
 ];
+
+// Demo habits Arabic names
+const demoHabitsAr: Record<string, string> = {
+  '1': 'تأمّل الصباح',
+  '2': 'تمرين رياضي',
+  '3': 'قراءة 30 دقيقة',
+  '4': 'شرب 8 أكواب',
+};
 
 // Initialize from localStorage
 const getInitialHabits = (): Habit[] => {
@@ -83,6 +93,10 @@ const getInitialHabits = (): Habit[] => {
 };
 
 export default function HabitTrackerPage() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+  const days = locale === 'ar' ? daysAr : daysEn;
+
   const [habits, setHabits] = useState<Habit[]>(getInitialHabits);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [newHabitName, setNewHabitName] = useState('');
@@ -125,7 +139,7 @@ export default function HabitTrackerPage() {
     
     const habit = habits.find(h => h.id === id);
     if (!habit?.completedToday) {
-      toast.success('🎉 Great job! +1 vote for your identity!', {
+      toast.success(getText('🎉 Great job! +1 vote for your identity!', '🎉 أحسنت! +1 صوت لهويتك!'), {
         duration: 3000,
       });
     }
@@ -149,12 +163,12 @@ export default function HabitTrackerPage() {
     setHabits(prev => [...prev, newHabit]);
     setNewHabitName('');
     setIsAddDialogOpen(false);
-    toast.success('✨ New habit added! Start building your identity!');
+    toast.success(getText('✨ New habit added! Start building your identity!', '✨ تمت إضافة عادة جديدة! ابدأ ببناء هويتك!'));
   };
 
   const deleteHabit = (id: string) => {
     setHabits(prev => prev.filter(h => h.id !== id));
-    toast.success('Habit removed');
+    toast.success(getText('Habit removed', 'تمت إزالة العادة'));
   };
 
   const completedToday = habits.filter(h => h.completedToday).length;
@@ -165,20 +179,29 @@ export default function HabitTrackerPage() {
   const currentDay = new Date().getDay();
   const adjustedDay = currentDay === 0 ? 6 : currentDay - 1;
 
+  const getHabitName = (habit: Habit) => {
+    if (locale === 'ar' && demoHabitsAr[habit.id]) {
+      return demoHabitsAr[habit.id];
+    }
+    return habit.name;
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-teal-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-teal-50/30" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <Badge variant="secondary" className="mb-4 bg-teal-100 text-teal-700 hover:bg-teal-200">
-            Identity Building Tool
+            {getText('Identity Building Tool', 'أداة بناء الهوية')}
           </Badge>
           <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
-            Habit Tracker
+            {getText('Habit Tracker', 'متتبّع العادات')}
           </h1>
           <p className="text-slate-600 max-w-lg mx-auto">
-            Every action is a vote for the person you want to become. 
-            Build your identity one habit at a time.
+            {getText(
+              'Every action is a vote for the person you want to become. Build your identity one habit at a time.',
+              'كل فعل هو تصويت للشخص الذي تريد أن تصبحه. ابنِ هويتك عادةً واحدة في كل مرة.'
+            )}
           </p>
         </div>
 
@@ -192,7 +215,7 @@ export default function HabitTrackerPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-amber-700">{maxStreak}</p>
-                  <p className="text-xs text-amber-600">Best Streak</p>
+                  <p className="text-xs text-amber-600">{getText('Best Streak', 'أفضل سلسلة')}</p>
                 </div>
               </div>
             </CardContent>
@@ -206,7 +229,7 @@ export default function HabitTrackerPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-emerald-700">{completedToday}/{habits.length}</p>
-                  <p className="text-xs text-emerald-600">Today</p>
+                  <p className="text-xs text-emerald-600">{getText('Today', 'اليوم')}</p>
                 </div>
               </div>
             </CardContent>
@@ -220,7 +243,7 @@ export default function HabitTrackerPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-violet-700">{totalVotes}</p>
-                  <p className="text-xs text-violet-600">Identity Votes</p>
+                  <p className="text-xs text-violet-600">{getText('Identity Votes', 'أصوات الهوية')}</p>
                 </div>
               </div>
             </CardContent>
@@ -234,7 +257,7 @@ export default function HabitTrackerPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-rose-700">{habits.length}</p>
-                  <p className="text-xs text-rose-600">Active Habits</p>
+                  <p className="text-xs text-rose-600">{getText('Active Habits', 'عادات نشطة')}</p>
                 </div>
               </div>
             </CardContent>
@@ -245,9 +268,9 @@ export default function HabitTrackerPage() {
         <Card className="border-0 shadow-lg mb-8 overflow-hidden">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-slate-700">This Week</h3>
+              <h3 className="font-semibold text-slate-700">{getText('This Week', 'هذا الأسبوع')}</h3>
               <Badge variant="secondary" className="bg-teal-100 text-teal-700">
-                {completedToday} done today
+                {completedToday} {getText('done today', 'مكتمل اليوم')}
               </Badge>
             </div>
             <div className="grid grid-cols-7 gap-2">
@@ -306,16 +329,16 @@ export default function HabitTrackerPage() {
                         </div>
                         <div>
                           <h3 className={`font-semibold ${habit.completedToday ? 'text-emerald-700' : 'text-slate-700'}`}>
-                            {habit.name}
+                            {getHabitName(habit)}
                           </h3>
                           <div className="flex items-center gap-3 text-sm text-slate-500">
                             <span className="flex items-center gap-1">
                               <Flame className="h-3 w-3 text-amber-500" />
-                              {habit.streak} day streak
+                              {habit.streak} {getText('day streak', 'أيام متتالية')}
                             </span>
                             <span className="flex items-center gap-1">
                               <Star className="h-3 w-3 text-violet-500" />
-                              {habit.votes} votes
+                              {habit.votes} {getText('votes', 'أصوات')}
                             </span>
                           </div>
                         </div>
@@ -356,26 +379,26 @@ export default function HabitTrackerPage() {
               className="w-full h-14 text-lg bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 shadow-lg"
             >
               <Plus className="h-5 w-5 mr-2" />
-              Add New Habit
+              {getText('Add New Habit', 'إضافة عادة جديدة')}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Create New Habit</DialogTitle>
+              <DialogTitle>{getText('Create New Habit', 'إنشاء عادة جديدة')}</DialogTitle>
               <DialogDescription>
-                Choose a habit that represents the person you want to become.
+                {getText('Choose a habit that represents the person you want to become.', 'اختر عادة تمثّل الشخص الذي تريد أن تصبحه.')}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <Input
-                placeholder="e.g., Morning meditation"
+                placeholder={getText('e.g., Morning meditation', 'مثال: تأمّل الصباح')}
                 value={newHabitName}
                 onChange={(e) => setNewHabitName(e.target.value)}
                 className="h-12"
               />
               
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700">Icon</label>
+                <label className="text-sm font-medium text-slate-700">{getText('Icon', 'الأيقونة')}</label>
                 <div className="flex flex-wrap gap-2">
                   {Object.entries(habitIcons).map(([key, icon]) => (
                     <button
@@ -394,7 +417,7 @@ export default function HabitTrackerPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700">Color</label>
+                <label className="text-sm font-medium text-slate-700">{getText('Color', 'اللون')}</label>
                 <div className="flex flex-wrap gap-2">
                   {habitColors.map((color) => (
                     <button
@@ -416,7 +439,7 @@ export default function HabitTrackerPage() {
                 disabled={!newHabitName.trim()}
               >
                 <Sparkles className="h-4 w-4 mr-2" />
-                Add Habit
+                {getText('Add Habit', 'إضافة عادة')}
               </Button>
             </div>
           </DialogContent>
@@ -426,9 +449,12 @@ export default function HabitTrackerPage() {
         <Card className="border-0 shadow-lg mt-8 bg-gradient-to-r from-violet-500 to-purple-600 text-white">
           <CardContent className="pt-6 text-center">
             <p className="text-lg font-medium mb-2">
-              "Every action is a vote for the type of person you wish to become."
+              {getText(
+                '"Every action is a vote for the type of person you wish to become."',
+                '"كل فعل هو تصويت لنوع الشخص الذي ترغب في أن تصبحه."'
+              )}
             </p>
-            <p className="text-sm text-violet-200">— James Clear, Atomic Habits</p>
+            <p className="text-sm text-violet-200">{getText('— James Clear, Atomic Habits', '— جيمس كلير، العادات الذرية')}</p>
           </CardContent>
         </Card>
       </div>

@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useLocale } from '@/components/providers/LocaleProvider';
 import { 
   Home, 
   ArrowRight, 
@@ -40,38 +41,10 @@ interface EnvironmentData {
   };
 }
 
-const frictionPoints = [
-  'Cluttered workspace',
-  'Phone distractions',
-  'Noise interruptions',
-  'Poor lighting',
-  'Uncomfortable seating',
-  'Easy access to temptations',
-  'Lack of organized tools',
-  'No designated workspace'
-];
-
-const cueSuggestions = [
-  'Leave notebook open on desk',
-  'Place water bottle visible',
-  'Set phone in another room',
-  'Create morning playlist',
-  'Prepare clothes the night before',
-  'Visual reminder of target identity',
-  'Calendar blocking visible',
-  'Environment reset ritual'
-];
-
-const initialChecklist = [
-  { id: '1', text: 'Remove distractions from desk', checked: false },
-  { id: '2', text: 'Turn off non-essential notifications', checked: false },
-  { id: '3', text: 'Add visual reminder of target identity', checked: false },
-  { id: '4', text: 'Place tools within reach', checked: false },
-  { id: '5', text: 'Create friction for bad habits', checked: false },
-  { id: '6', text: 'Reduce friction for good habits', checked: false },
-];
-
 export default function EnvironmentalAuditPage() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+
   const [step, setStep] = useState(1);
   const [showResults, setShowResults] = useState(false);
   const [data, setData] = useState<EnvironmentData>({
@@ -88,8 +61,37 @@ export default function EnvironmentalAuditPage() {
       cueToAdd: ''
     }
   });
-  const [checklist, setChecklist] = useState(initialChecklist);
+  const [checklist, setChecklist] = useState([
+    { id: '1', text: getText('Remove distractions from desk', 'أزِل المشتّات من المكتب'), checked: false },
+    { id: '2', text: getText('Turn off non-essential notifications', 'أوقِف الإشارات غير الضرورية'), checked: false },
+    { id: '3', text: getText('Add visual reminder of target identity', 'أضِف تذكيرًا بصريًا للهويّة المستهدفة'), checked: false },
+    { id: '4', text: getText('Place tools within reach', 'ضَع الأدوات في متناول اليد'), checked: false },
+    { id: '5', text: getText('Create friction for bad habits', 'أنشئ عائقًا للعادات السيئة'), checked: false },
+    { id: '6', text: getText('Reduce friction for good habits', 'قلّل العوائق للعادات الجيدة'), checked: false },
+  ]);
   const [customItem, setCustomItem] = useState('');
+
+  const frictionPoints = [
+    getText('Cluttered workspace', 'مساحة عمل فوضوية'),
+    getText('Phone distractions', 'مشتّتات الهاتف'),
+    getText('Noise interruptions', 'مقاطعات الضوضاء'),
+    getText('Poor lighting', 'إضاءة سيئة'),
+    getText('Uncomfortable seating', 'جلوس غير مريح'),
+    getText('Easy access to temptations', 'سهولة الوصول إلى المغريات'),
+    getText('Lack of organized tools', 'نقص الأدوات المنظمة'),
+    getText('No designated workspace', 'عدم وجود مساحة عمل مخصصة')
+  ];
+
+  const cueSuggestions = [
+    getText('Leave notebook open on desk', 'اترك الدفتر مفتوحًا على المكتب'),
+    getText('Place water bottle visible', 'ضَع زجاجة الماء في مكان مرئي'),
+    getText('Set phone in another room', 'ضَع الهاتف في غرفة أخرى'),
+    getText('Create morning playlist', 'أنشئ قائمة تشغيل صباحية'),
+    getText('Prepare clothes the night before', 'جهّز الملابس من الليلة السابقة'),
+    getText('Visual reminder of target identity', 'تذكير بصري للهويّة المستهدفة'),
+    getText('Calendar blocking visible', 'حجب التقويم مرئي'),
+    getText('Environment reset ritual', 'طقس إعادة ضبط البيئة')
+  ];
 
   const toggleChecklistItem = (id: string) => {
     setChecklist(prev => 
@@ -154,7 +156,14 @@ export default function EnvironmentalAuditPage() {
         cueToAdd: ''
       }
     });
-    setChecklist(initialChecklist);
+    setChecklist([
+      { id: '1', text: getText('Remove distractions from desk', 'أزِل المشتّات من المكتب'), checked: false },
+      { id: '2', text: getText('Turn off non-essential notifications', 'أوقِف الإشارات غير الضرورية'), checked: false },
+      { id: '3', text: getText('Add visual reminder of target identity', 'أضِف تذكيرًا بصريًا للهويّة المستهدفة'), checked: false },
+      { id: '4', text: getText('Place tools within reach', 'ضَع الأدوات في متناول اليد'), checked: false },
+      { id: '5', text: getText('Create friction for bad habits', 'أنشئ عائقًا للعادات السيئة'), checked: false },
+      { id: '6', text: getText('Reduce friction for good habits', 'قلّل العوائق للعادات الجيدة'), checked: false },
+    ]);
   };
 
   const totalSteps = 4;
@@ -164,20 +173,20 @@ export default function EnvironmentalAuditPage() {
     const score = calculateEnvironmentScore();
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]">
+      <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         {/* Header */}
         <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <Link href="/apps" className="text-[#3DD4B0] hover:underline text-sm mb-4 inline-block">
-              ← Back to Apps
+              {getText('← Back to Apps', 'العودة إلى التطبيقات →')}
             </Link>
             <div className="flex items-center gap-3 mt-2">
               <div className="w-10 h-10 rounded-xl bg-[#3DD4B0]/20 flex items-center justify-center">
                 <Home className="w-5 h-5 text-[#3DD4B0]" />
               </div>
               <div>
-                <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#1F6F78]/50">BASIC</Badge>
-                <h1 className="text-xl font-bold">Environmental Audit Results</h1>
+                <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#1F6F78]/50">{getText('BASIC', 'أساسي')}</Badge>
+                <h1 className="text-xl font-bold">{getText('Environmental Audit Results', 'نتائج التدقيق البيئي')}</h1>
               </div>
             </div>
           </div>
@@ -189,20 +198,20 @@ export default function EnvironmentalAuditPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#3DD4B0]/10 text-[#3DD4B0] mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">Your Environment Score</h2>
-            <p className="text-slate-400">How supportive is your environment for change?</p>
+            <h2 className="text-3xl font-bold text-white mb-2">{getText('Your Environment Score', 'درجة بيئتك')}</h2>
+            <p className="text-slate-400">{getText('How supportive is your environment for change?', 'ما مدى دعم بيئتك للتغيير؟')}</p>
           </div>
 
           {/* Overall Score */}
           <Card className="bg-white mb-8">
             <CardContent className="p-8 text-center">
-              <h3 className="text-[#8A94A6] text-sm uppercase tracking-wide mb-4">Environment Support Score</h3>
+              <h3 className="text-[#8A94A6] text-sm uppercase tracking-wide mb-4">{getText('Environment Support Score', 'درجة دعم البيئة')}</h3>
               <div className="text-6xl font-bold text-[#0F1C2E] mb-2">{score}%</div>
               <p className="text-[#8A94A6] mb-6">
-                {score >= 80 ? 'Excellent environment for transformation!' :
-                 score >= 60 ? 'Good foundation with some friction points.' :
-                 score >= 40 ? 'Significant environmental barriers exist.' :
-                 'Major environmental redesign needed.'}
+                {score >= 80 ? getText('Excellent environment for transformation!', 'بيئة ممتازة للتحوّل!') :
+                 score >= 60 ? getText('Good foundation with some friction points.', 'أساس جيد مع بعض نقاط الاحتكاك.') :
+                 score >= 40 ? getText('Significant environmental barriers exist.', 'توجد حواجز بيئية كبيرة.') :
+                 getText('Major environmental redesign needed.', 'يتطلب إعادة تصميم بيئي كبير.')}
               </p>
               <Progress value={score} className="h-3" />
             </CardContent>
@@ -214,9 +223,9 @@ export default function EnvironmentalAuditPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Home className="w-5 h-5 text-[#3DD4B0]" />
-                  <h4 className="font-semibold text-[#0F1C2E]">Physical Space</h4>
+                  <h4 className="font-semibold text-[#0F1C2E]">{getText('Physical Space', 'المساحة المادية')}</h4>
                 </div>
-                <p className="text-sm text-[#2B2E34]">{data.physicalSpace || 'Not provided'}</p>
+                <p className="text-sm text-[#2B2E34]">{data.physicalSpace || getText('Not provided', 'لم يُقدَّم')}</p>
               </CardContent>
             </Card>
 
@@ -224,9 +233,9 @@ export default function EnvironmentalAuditPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Monitor className="w-5 h-5 text-[#1F6F78]" />
-                  <h4 className="font-semibold text-[#0F1C2E]">Digital Environment</h4>
+                  <h4 className="font-semibold text-[#0F1C2E]">{getText('Digital Environment', 'البيئة الرقمية')}</h4>
                 </div>
-                <p className="text-sm text-[#2B2E34]">{data.digitalEnvironment || 'Not provided'}</p>
+                <p className="text-sm text-[#2B2E34]">{data.digitalEnvironment || getText('Not provided', 'لم يُقدَّم')}</p>
               </CardContent>
             </Card>
 
@@ -234,9 +243,9 @@ export default function EnvironmentalAuditPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Users className="w-5 h-5 text-[#FFB74D]" />
-                  <h4 className="font-semibold text-[#0F1C2E]">Social Circle</h4>
+                  <h4 className="font-semibold text-[#0F1C2E]">{getText('Social Circle', 'الدائرة الاجتماعية')}</h4>
                 </div>
-                <p className="text-sm text-[#2B2E34]">{data.socialCircle || 'Not provided'}</p>
+                <p className="text-sm text-[#2B2E34]">{data.socialCircle || getText('Not provided', 'لم يُقدَّم')}</p>
               </CardContent>
             </Card>
 
@@ -244,9 +253,9 @@ export default function EnvironmentalAuditPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Wrench className="w-5 h-5 text-[#0F1C2E]" />
-                  <h4 className="font-semibold text-[#0F1C2E]">Resource Access</h4>
+                  <h4 className="font-semibold text-[#0F1C2E]">{getText('Resource Access', 'الوصول إلى الموارد')}</h4>
                 </div>
-                <p className="text-sm text-[#2B2E34]">{data.resourceAccess || 'Not provided'}</p>
+                <p className="text-sm text-[#2B2E34]">{data.resourceAccess || getText('Not provided', 'لم يُقدَّم')}</p>
               </CardContent>
             </Card>
           </div>
@@ -257,9 +266,9 @@ export default function EnvironmentalAuditPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <AlertTriangle className="w-5 h-5 text-[#FFB74D]" />
-                  <h4 className="font-semibold text-[#0F1C2E]">Main Friction Point</h4>
+                  <h4 className="font-semibold text-[#0F1C2E]">{getText('Main Friction Point', 'نقطة الاحتكاك الرئيسية')}</h4>
                 </div>
-                <p className="text-sm text-[#2B2E34]">{data.mainFriction || 'Not identified'}</p>
+                <p className="text-sm text-[#2B2E34]">{data.mainFriction || getText('Not identified', 'لم تُحدَّد')}</p>
               </CardContent>
             </Card>
 
@@ -267,9 +276,9 @@ export default function EnvironmentalAuditPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="w-5 h-5 text-[#3DD4B0]" />
-                  <h4 className="font-semibold text-[#0F1C2E]">Best Cue to Add</h4>
+                  <h4 className="font-semibold text-[#0F1C2E]">{getText('Best Cue to Add', 'أفضل إشارة لإضافتها')}</h4>
                 </div>
-                <p className="text-sm text-[#2B2E34]">{data.bestCue || 'Not defined'}</p>
+                <p className="text-sm text-[#2B2E34]">{data.bestCue || getText('Not defined', 'لم تُحدَّد')}</p>
               </CardContent>
             </Card>
           </div>
@@ -279,10 +288,10 @@ export default function EnvironmentalAuditPage() {
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-[#3DD4B0]" />
-                Environment Action Checklist
+                {getText('Environment Action Checklist', 'قائمة إجراءات البيئة')}
               </CardTitle>
               <CardDescription>
-                Track your environment improvements
+                {getText('Track your environment improvements', 'تتبّع تحسينات بيئتك')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -313,15 +322,19 @@ export default function EnvironmentalAuditPage() {
             <CardContent className="p-6">
               <h4 className="text-white font-medium mb-2 flex items-center gap-2">
                 <Lightbulb className="w-4 h-4 text-[#FFB74D]" />
-                Why Environment Matters
+                {getText('Why Environment Matters', 'لماذا البيئة مهمة')}
               </h4>
               <p className="text-slate-400 text-sm mb-3">
-                Research shows that environmental friction and action cues significantly impact behavior change. 
-                The psychology of habits demonstrates that reducing friction for desired behaviors and adding 
-                visual cues can dramatically improve follow-through.
+                {getText(
+                  'Research shows that environmental friction and action cues significantly impact behavior change. The psychology of habits demonstrates that reducing friction for desired behaviors and adding visual cues can dramatically improve follow-through.',
+                  'تُظهر الأبحاث أن الاحتكاك البيئي وإشارات الفعل تؤثر بشكل كبير على تغيير السلوك. يُثبت علم نفس العادات أن تقليل العوائق للسلوكيات المرغوبة وإضافة إشارات بصرية يمكن أن يحسّن المتابعة بشكل كبير.'
+                )}
               </p>
               <p className="text-xs text-[#3DD4B0]">
-                Reference: Mazar, et al. "Using the psychology of habits to promote sustainability"
+                {getText(
+                  'Reference: Mazar, et al. "Using the psychology of habits to promote sustainability"',
+                  'مرجع: مازار وآخرون "استخدام علم نفس العادات لتعزيز الاستدامة"'
+                )}
               </p>
             </CardContent>
           </Card>
@@ -330,11 +343,11 @@ export default function EnvironmentalAuditPage() {
           <div className="flex gap-4 justify-center">
             <Button onClick={handleReset} variant="secondary" className="shadow-md">
               <RotateCcw className="w-4 h-4 mr-2" />
-              Retake Audit
+              {getText('Retake Audit', 'إعادة التدقيق')}
             </Button>
             <Button onClick={handleExport} className="bg-[#1F6F78] text-white hover:bg-[#1a5a62]">
               <Download className="w-4 h-4 mr-2" />
-              Export Audit
+              {getText('Export Audit', 'تصدير التدقيق')}
             </Button>
           </div>
         </div>
@@ -343,21 +356,21 @@ export default function EnvironmentalAuditPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header */}
       <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link href="/apps" className="text-[#3DD4B0] hover:underline text-sm mb-4 inline-block">
-            ← Back to Apps
+            {getText('← Back to Apps', 'العودة إلى التطبيقات →')}
           </Link>
           <div className="flex items-center gap-3 mt-2">
             <div className="w-10 h-10 rounded-xl bg-[#3DD4B0]/20 flex items-center justify-center">
               <Home className="w-5 h-5 text-[#3DD4B0]" />
             </div>
             <div>
-              <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#1F6F78]/50">BASIC</Badge>
-              <h1 className="text-xl font-bold">Environmental Audit</h1>
-              <p className="text-slate-400 text-sm">Identify what supports or blocks change</p>
+              <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#1F6F78]/50">{getText('BASIC', 'أساسي')}</Badge>
+              <h1 className="text-xl font-bold">{getText('Environmental Audit', 'التدقيق البيئي')}</h1>
+              <p className="text-slate-400 text-sm">{getText('Identify what supports or blocks change', 'حدّد ما يدعم التغيير أو يعيقه')}</p>
             </div>
           </div>
         </div>
@@ -366,7 +379,7 @@ export default function EnvironmentalAuditPage() {
       {/* Progress */}
       <div className="container mx-auto px-4 py-4 max-w-2xl">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-slate-400">Step {step} of {totalSteps}</span>
+          <span className="text-sm text-slate-400">{getText('Step', 'الخطوة')} {step} {getText('of', 'من')} {totalSteps}</span>
           <span className="text-sm text-[#3DD4B0]">{Math.round(progress)}%</span>
         </div>
         <Progress value={progress} className="h-2 bg-white/10 [&>div]:bg-[#3DD4B0]" />
@@ -379,39 +392,39 @@ export default function EnvironmentalAuditPage() {
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <Home className="w-5 h-5 text-[#3DD4B0]" />
-                Physical & Digital Environment
+                {getText('Physical & Digital Environment', 'البيئة المادية والرقمية')}
               </CardTitle>
               <CardDescription>
-                Assess your physical workspace and digital distractions
+                {getText('Assess your physical workspace and digital distractions', 'قيّم مساحة عملك المادية والمشتّتات الرقمية')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
                   <Home className="w-4 h-4 text-[#3DD4B0]" />
-                  Physical space
+                  {getText('Physical space', 'المساحة المادية')}
                 </label>
                 <Textarea
-                  placeholder="My desk is... My workspace... Physical cues present..."
+                  placeholder={getText("My desk is... My workspace... Physical cues present...", "مكتبي... مساحة عملي... الإشارات المادية الموجودة...")}
                   value={data.physicalSpace}
                   onChange={(e) => setData(prev => ({ ...prev, physicalSpace: e.target.value }))}
                   className="min-h-[100px]"
                 />
-                <p className="text-xs text-[#8A94A6] mt-1">Describe your workspace and physical environment</p>
+                <p className="text-xs text-[#8A94A6] mt-1">{getText('Describe your workspace and physical environment', 'صِف مساحة عملك وبيئتك المادية')}</p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
                   <Monitor className="w-4 h-4 text-[#1F6F78]" />
-                  Digital environment
+                  {getText('Digital environment', 'البيئة الرقمية')}
                 </label>
                 <Textarea
-                  placeholder="Notifications... Apps... Screen time... Digital distractions..."
+                  placeholder={getText("Notifications... Apps... Screen time... Digital distractions...", "الإشارات... التطبيقات... وقت الشاشة... المشتّتات الرقمية...")}
                   value={data.digitalEnvironment}
                   onChange={(e) => setData(prev => ({ ...prev, digitalEnvironment: e.target.value }))}
                   className="min-h-[100px]"
                 />
-                <p className="text-xs text-[#8A94A6] mt-1">What digital elements compete for your attention?</p>
+                <p className="text-xs text-[#8A94A6] mt-1">{getText('What digital elements compete for your attention?', 'ما العناصر الرقمية التي تتنافس على انتباهك؟')}</p>
               </div>
 
               <Button
@@ -419,7 +432,7 @@ export default function EnvironmentalAuditPage() {
                 disabled={!data.physicalSpace || !data.digitalEnvironment}
                 className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-50"
               >
-                Continue
+                {getText('Continue', 'متابعة')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </CardContent>
@@ -431,51 +444,51 @@ export default function EnvironmentalAuditPage() {
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <Users className="w-5 h-5 text-[#FFB74D]" />
-                Social & Resources
+                {getText('Social & Resources', 'الاجتماعي والموارد')}
               </CardTitle>
               <CardDescription>
-                Assess your social environment and available resources
+                {getText('Assess your social environment and available resources', 'قيّم بيئتك الاجتماعية والموارد المتاحة')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
                   <Users className="w-4 h-4 text-[#FFB74D]" />
-                  Social circle
+                  {getText('Social circle', 'الدائرة الاجتماعية')}
                 </label>
                 <Textarea
-                  placeholder="Who supports my goals? Who normalizes unwanted behaviors..."
+                  placeholder={getText("Who supports my goals? Who normalizes unwanted behaviors...", "من يدعم أهدافي؟ من يُشرعن السلوكيات غير المرغوبة...")}
                   value={data.socialCircle}
                   onChange={(e) => setData(prev => ({ ...prev, socialCircle: e.target.value }))}
                   className="min-h-[100px]"
                 />
-                <p className="text-xs text-[#8A94A6] mt-1">How do people around you influence your behavior?</p>
+                <p className="text-xs text-[#8A94A6] mt-1">{getText('How do people around you influence your behavior?', 'كيف يؤثر من حولك على سلوكك؟')}</p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
                   <Wrench className="w-4 h-4 text-[#0F1C2E]" />
-                  Resource access
+                  {getText('Resource access', 'الوصول إلى الموارد')}
                 </label>
                 <Textarea
-                  placeholder="Tools available... Resources organized... Access to what I need..."
+                  placeholder={getText("Tools available... Resources organized... Access to what I need...", "الأدوات المتاحة... الموارد المنظمة... الوصول لما أحتاجه...")}
                   value={data.resourceAccess}
                   onChange={(e) => setData(prev => ({ ...prev, resourceAccess: e.target.value }))}
                   className="min-h-[100px]"
                 />
-                <p className="text-xs text-[#8A94A6] mt-1">What tools and resources do you have access to?</p>
+                <p className="text-xs text-[#8A94A6] mt-1">{getText('What tools and resources do you have access to?', 'ما الأدوات والموارد التي يمكنك الوصول إليها؟')}</p>
               </div>
 
               <div className="flex gap-4">
                 <Button onClick={() => setStep(1)} variant="outline" className="flex-1">
-                  ← Back
+                  {getText('← Back', '→ رجوع')}
                 </Button>
                 <Button
                   onClick={() => setStep(3)}
                   disabled={!data.socialCircle || !data.resourceAccess}
                   className="flex-1 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-50"
                 >
-                  Continue
+                  {getText('Continue', 'متابعة')}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -488,20 +501,20 @@ export default function EnvironmentalAuditPage() {
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <Zap className="w-5 h-5 text-[#FFB74D]" />
-                Friction & Cues
+                {getText('Friction & Cues', 'الاحتكاك والإشارات')}
               </CardTitle>
               <CardDescription>
-                Identify friction points and design new cues
+                {getText('Identify friction points and design new cues', 'حدّد نقاط الاحتكاك وصمّم إشارات جديدة')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-[#FFB74D]" />
-                  Main friction point
+                  {getText('Main friction point', 'نقطة الاحتكاك الرئيسية')}
                 </label>
                 <Textarea
-                  placeholder="What makes starting difficult? What consistently blocks progress?"
+                  placeholder={getText("What makes starting difficult? What consistently blocks progress?", "ما الذي يجعل البدء صعبًا؟ ما الذي يعيق التقدم باستمرار؟")}
                   value={data.mainFriction}
                   onChange={(e) => setData(prev => ({ ...prev, mainFriction: e.target.value }))}
                   className="min-h-[80px]"
@@ -523,10 +536,10 @@ export default function EnvironmentalAuditPage() {
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
                   <Plus className="w-4 h-4 text-[#3DD4B0]" />
-                  Best cue to add
+                  {getText('Best cue to add', 'أفضل إشارة لإضافتها')}
                 </label>
                 <Textarea
-                  placeholder="What visual or environmental cue could trigger the desired behavior?"
+                  placeholder={getText("What visual or environmental cue could trigger the desired behavior?", "أيّ إشارة بصرية أو بيئية يمكن أن تحفّز السلوك المطلوب؟")}
                   value={data.bestCue}
                   onChange={(e) => setData(prev => ({ ...prev, bestCue: e.target.value }))}
                   className="min-h-[80px]"
@@ -547,14 +560,14 @@ export default function EnvironmentalAuditPage() {
 
               <div className="flex gap-4">
                 <Button onClick={() => setStep(2)} variant="outline" className="flex-1">
-                  ← Back
+                  {getText('← Back', '→ رجوع')}
                 </Button>
                 <Button
                   onClick={() => setStep(4)}
                   disabled={!data.mainFriction || !data.bestCue}
                   className="flex-1 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-50"
                 >
-                  Continue
+                  {getText('Continue', 'متابعة')}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -567,15 +580,15 @@ export default function EnvironmentalAuditPage() {
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-[#3DD4B0]" />
-                Action Checklist
+                {getText('Action Checklist', 'قائمة الإجراءات')}
               </CardTitle>
               <CardDescription>
-                Create your environment improvement checklist
+                {getText('Create your environment improvement checklist', 'أنشئ قائمة تحسين بيئتك')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm text-[#8A94A6] mb-4">
-                Check off the actions you'll take to optimize your environment:
+                {getText("Check off the actions you'll take to optimize your environment:", "حدّد الإجراءات التي ستتخذها لتحسين بيئتك:")}
               </p>
               
               <div className="space-y-3">
@@ -596,7 +609,7 @@ export default function EnvironmentalAuditPage() {
               <div className="flex gap-2 mt-4">
                 <input
                   type="text"
-                  placeholder="Add custom action..."
+                  placeholder={getText("Add custom action...", "أضِف إجراءً مخصصًا...")}
                   value={customItem}
                   onChange={(e) => setCustomItem(e.target.value)}
                   className="flex-1 px-3 py-2 border rounded-lg text-sm"
@@ -609,14 +622,14 @@ export default function EnvironmentalAuditPage() {
 
               <div className="flex gap-4 mt-6">
                 <Button onClick={() => setStep(3)} variant="outline" className="flex-1">
-                  ← Back
+                  {getText('← Back', '→ رجوع')}
                 </Button>
                 <Button
                   onClick={() => setShowResults(true)}
                   className="flex-1 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]"
                 >
                   <CheckCircle2 className="w-4 h-4 mr-2" />
-                  Complete Audit
+                  {getText('Complete Audit', 'إكمال التدقيق')}
                 </Button>
               </div>
             </CardContent>

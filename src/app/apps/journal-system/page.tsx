@@ -12,16 +12,17 @@ import {
   Star, Flame, Plus, Eye, EyeOff
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useLocale } from '@/components/providers/LocaleProvider';
 
 const moods = [
-  { value: 'GREAT', label: 'Amazing', icon: <Star className="h-5 w-5" />, color: 'text-amber-500', bg: 'bg-amber-100' },
-  { value: 'GOOD', label: 'Good', icon: <Sun className="h-5 w-5" />, color: 'text-emerald-500', bg: 'bg-emerald-100' },
-  { value: 'NEUTRAL', label: 'Okay', icon: <CloudSun className="h-5 w-5" />, color: 'text-slate-500', bg: 'bg-slate-100' },
-  { value: 'LOW', label: 'Low', icon: <Cloud className="h-5 w-5" />, color: 'text-blue-500', bg: 'bg-blue-100' },
-  { value: 'DIFFICULT', label: 'Tough', icon: <Moon className="h-5 w-5" />, color: 'text-violet-500', bg: 'bg-violet-100' },
+  { value: 'GREAT', labelEn: 'Amazing', labelAr: 'مذهل', icon: <Star className="h-5 w-5" />, color: 'text-amber-500', bg: 'bg-amber-100' },
+  { value: 'GOOD', labelEn: 'Good', labelAr: 'جيد', icon: <Sun className="h-5 w-5" />, color: 'text-emerald-500', bg: 'bg-emerald-100' },
+  { value: 'NEUTRAL', labelEn: 'Okay', labelAr: 'عادي', icon: <CloudSun className="h-5 w-5" />, color: 'text-slate-500', bg: 'bg-slate-100' },
+  { value: 'LOW', labelEn: 'Low', labelAr: 'منخفض', icon: <Cloud className="h-5 w-5" />, color: 'text-blue-500', bg: 'bg-blue-100' },
+  { value: 'DIFFICULT', labelEn: 'Tough', labelAr: 'صعب', icon: <Moon className="h-5 w-5" />, color: 'text-violet-500', bg: 'bg-violet-100' },
 ];
 
-const prompts = [
+const promptsEn = [
   "What identity did you embody today?",
   "What's one small win you had today?",
   "What challenged you today, and what did you learn?",
@@ -37,6 +38,24 @@ const prompts = [
   "How did you show up for yourself today?",
   "What's draining your energy, and what's fueling it?",
   "If today was a chapter in your story, what would it be called?",
+];
+
+const promptsAr = [
+  "ما الهوية التي تجسّدتها اليوم؟",
+  "ما هو الانتصار الصغير الذي حققته اليوم؟",
+  "ما الذي تحدّاك اليوم، وماذا تعلّمت؟",
+  "على ما أنت ممتن الآن؟",
+  "ما الذي سيجعل يوم غد يومًا رائعًا؟",
+  "كما اعتنيت بنفسك اليوم؟",
+  "ما العادة التي مارستها وتتوافق مع أهدافك؟",
+  "ماذا سيفعل ذاتك المثالية في موقف الغد؟",
+  "ما المعتقد عن نفسك الذي عزّزته اليوم؟",
+  "ما الشيء الذي تتطلع إليه؟",
+  "اكتب عن لحظة صفاء ذهني مررت بها مؤخرًا.",
+  "ما الحدود التي وضعتها أو حافظت عليها اليوم؟",
+  "كما ظهرت لنفسك اليوم؟",
+  "ما الذي يستنزف طاقتك، وما الذي يغذّيها؟",
+  "لو كان اليوم فصلًا في قصتك، فماذا سيكون اسمه؟",
 ];
 
 interface JournalEntry {
@@ -78,15 +97,19 @@ const getInitialEntries = (): JournalEntry[] => {
 };
 
 export default function JournalSystemPage() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
   const [entries, setEntries] = useState<JournalEntry[]>(getInitialEntries);
   const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
-  const [currentPrompt, setCurrentPrompt] = useState(() => 
-    prompts[Math.floor(Math.random() * prompts.length)]
+  const [currentPromptIndex, setCurrentPromptIndex] = useState(() => 
+    Math.floor(Math.random() * promptsEn.length)
   );
   const [newContent, setNewContent] = useState('');
   const [newMood, setNewMood] = useState('');
   const [isWriting, setIsWriting] = useState(false);
   const streak = calculateStreak(entries);
+
+  const currentPrompt = locale === 'ar' ? promptsAr[currentPromptIndex] : promptsEn[currentPromptIndex];
 
   // Save to localStorage when entries change
   useEffect(() => {
@@ -117,9 +140,9 @@ export default function JournalSystemPage() {
     setNewContent('');
     setNewMood('');
     setIsWriting(false);
-    setCurrentPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
+    setCurrentPromptIndex(Math.floor(Math.random() * promptsEn.length));
     
-    toast.success('📝 Journal entry saved! Keep building your story!');
+    toast.success(getText('📝 Journal entry saved! Keep building your story!', '📝 تم حفظ المدونة! استمر في بناء قصتك!'));
   };
 
   const formatDate = (dateStr: string) => {
@@ -128,10 +151,10 @@ export default function JournalSystemPage() {
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
 
-    if (date.toDateString() === today.toDateString()) return 'Today';
-    if (date.toDateString() === yesterday.toDateString()) return 'Yesterday';
+    if (date.toDateString() === today.toDateString()) return getText('Today', 'اليوم');
+    if (date.toDateString() === yesterday.toDateString()) return getText('Yesterday', 'أمس');
     
-    return date.toLocaleDateString('en-US', { 
+    return date.toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', { 
       weekday: 'short', 
       month: 'short', 
       day: 'numeric' 
@@ -141,19 +164,25 @@ export default function JournalSystemPage() {
   const totalWords = entries.reduce((acc, e) => acc + e.wordCount, 0);
   const totalEntries = entries.length;
 
+  const getMoodLabel = (moodValue: string) => {
+    const mood = moods.find(m => m.value === moodValue);
+    if (!mood) return '';
+    return locale === 'ar' ? mood.labelAr : mood.labelEn;
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-rose-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-rose-50/30" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <Badge variant="secondary" className="mb-4 bg-rose-100 text-rose-700 hover:bg-rose-200">
-            Self-Reflection Tool
+            {getText('Self-Reflection Tool', 'أداة التأمّل الذاتي')}
           </Badge>
           <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">
-            Journal
+            {getText('Journal', 'المذكرة')}
           </h1>
           <p className="text-slate-600 max-w-lg mx-auto">
-            Your thoughts shape your identity. Write to discover, reflect, and grow.
+            {getText('Your thoughts shape your identity. Write to discover, reflect, and grow.', 'أفكارك تشكّل هويتك. اكتب لتكتشف، وتتأمّل، وتنمو.')}
           </p>
         </div>
 
@@ -165,7 +194,7 @@ export default function JournalSystemPage() {
                 <Flame className="h-6 w-6" />
               </div>
               <p className="text-3xl font-bold text-rose-700">{streak}</p>
-              <p className="text-sm text-rose-600">Day Streak</p>
+              <p className="text-sm text-rose-600">{getText('Day Streak', 'أيام متتالية')}</p>
             </CardContent>
           </Card>
 
@@ -175,7 +204,7 @@ export default function JournalSystemPage() {
                 <BookOpen className="h-6 w-6" />
               </div>
               <p className="text-3xl font-bold text-amber-700">{totalEntries}</p>
-              <p className="text-sm text-amber-600">Entries</p>
+              <p className="text-sm text-amber-600">{getText('Entries', 'المدوّنات')}</p>
             </CardContent>
           </Card>
 
@@ -185,7 +214,7 @@ export default function JournalSystemPage() {
                 <PenLine className="h-6 w-6" />
               </div>
               <p className="text-3xl font-bold text-violet-700">{totalWords.toLocaleString()}</p>
-              <p className="text-sm text-violet-600">Words Written</p>
+              <p className="text-sm text-violet-600">{getText('Words Written', 'كلمة مكتوبة')}</p>
             </CardContent>
           </Card>
         </div>
@@ -200,14 +229,14 @@ export default function JournalSystemPage() {
               {hasEntryToday ? (
                 <div className="text-center py-4">
                   <Sparkles className="h-8 w-8 mx-auto mb-3" />
-                  <p className="text-lg font-medium">You've journaled today!</p>
-                  <p className="text-sm text-rose-200">Come back tomorrow to continue your streak.</p>
+                  <p className="text-lg font-medium">{getText("You've journaled today!", 'لقد كتبت في مذكّرتك اليوم!')}</p>
+                  <p className="text-sm text-rose-200">{getText('Come back tomorrow to continue your streak.', 'عُد غدًا لمواصلة سلسلتك.')}</p>
                 </div>
               ) : (
                 <div className="text-center py-4">
                   <Plus className="h-8 w-8 mx-auto mb-3" />
-                  <p className="text-lg font-medium">Write Today's Entry</p>
-                  <p className="text-sm text-rose-200">Take a moment to reflect on your day.</p>
+                  <p className="text-lg font-medium">{getText("Write Today's Entry", 'اكتب مدوّنة اليوم')}</p>
+                  <p className="text-sm text-rose-200">{getText('Take a moment to reflect on your day.', 'خذ لحظة للتأمّل في يومك.')}</p>
                 </div>
               )}
             </CardContent>
@@ -218,10 +247,10 @@ export default function JournalSystemPage() {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <PenLine className="h-5 w-5 text-rose-500" />
-                  New Entry
+                  {getText('New Entry', 'مدوّنة جديدة')}
                 </CardTitle>
                 <Button variant="ghost" size="sm" onClick={() => setIsWriting(false)}>
-                  Cancel
+                  {getText('Cancel', 'إلغاء')}
                 </Button>
               </div>
               <div className="p-4 rounded-xl bg-gradient-to-r from-rose-50 to-pink-50 border border-rose-100">
@@ -233,7 +262,7 @@ export default function JournalSystemPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <Textarea
-                placeholder="Start writing your thoughts..."
+                placeholder={getText('Start writing your thoughts...', 'ابدأ بكتابة أفكارك...')}
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
                 className="min-h-[200px] text-lg border-0 bg-slate-50 focus:bg-white"
@@ -241,7 +270,7 @@ export default function JournalSystemPage() {
               
               {/* Mood Selection */}
               <div className="space-y-2">
-                <p className="text-sm font-medium text-slate-600">How are you feeling?</p>
+                <p className="text-sm font-medium text-slate-600">{getText('How are you feeling?', 'كيف تشعر؟')}</p>
                 <div className="flex gap-2">
                   {moods.map((mood) => (
                     <button
@@ -254,7 +283,7 @@ export default function JournalSystemPage() {
                       }`}
                     >
                       {mood.icon}
-                      <span className="text-sm">{mood.label}</span>
+                      <span className="text-sm">{locale === 'ar' ? mood.labelAr : mood.labelEn}</span>
                     </button>
                   ))}
                 </div>
@@ -266,7 +295,7 @@ export default function JournalSystemPage() {
                 disabled={!newContent.trim()}
               >
                 <Heart className="h-4 w-4 mr-2" />
-                Save Entry
+                {getText('Save Entry', 'حفظ المدوّنة')}
               </Button>
             </CardContent>
           </Card>
@@ -276,14 +305,14 @@ export default function JournalSystemPage() {
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-slate-800 flex items-center gap-2">
             <Calendar className="h-5 w-5 text-rose-500" />
-            Past Entries
+            {getText('Past Entries', 'المدوّنات السابقة')}
           </h2>
           
           {entries.length === 0 ? (
             <Card className="border-0 shadow-lg bg-slate-50">
               <CardContent className="pt-6 text-center py-12">
                 <BookOpen className="h-12 w-12 text-slate-300 mx-auto mb-4" />
-                <p className="text-slate-500">No entries yet. Start writing!</p>
+                <p className="text-slate-500">{getText('No entries yet. Start writing!', 'لا توجد مدوّنات بعد. ابدأ الكتابة!')}</p>
               </CardContent>
             </Card>
           ) : (
@@ -308,7 +337,7 @@ export default function JournalSystemPage() {
                         <p className="text-sm text-slate-500">{entry.prompt}</p>
                       </div>
                       <Badge variant="secondary" className="bg-slate-100">
-                        {entry.wordCount} words
+                        {entry.wordCount} {getText('words', 'كلمة')}
                       </Badge>
                     </div>
                     <p className="text-slate-600 line-clamp-3">{entry.content}</p>
@@ -335,7 +364,7 @@ export default function JournalSystemPage() {
                 <div className="space-y-4 pt-4">
                   <div className="flex items-center gap-4">
                     <span className="text-sm text-slate-500">
-                      {selectedEntry.wordCount} words
+                      {selectedEntry.wordCount} {getText('words', 'كلمة')}
                     </span>
                     <span className={`flex items-center gap-1 px-2 py-1 rounded-lg ${
                       moods.find(m => m.value === selectedEntry.mood)?.bg || 'bg-slate-100'
@@ -343,7 +372,7 @@ export default function JournalSystemPage() {
                       moods.find(m => m.value === selectedEntry.mood)?.color || 'text-slate-600'
                     }`}>
                       {moods.find(m => m.value === selectedEntry.mood)?.icon}
-                      {moods.find(m => m.value === selectedEntry.mood)?.label}
+                      {getMoodLabel(selectedEntry.mood)}
                     </span>
                   </div>
                   
@@ -357,10 +386,10 @@ export default function JournalSystemPage() {
                     onClick={() => {
                       setEntries(prev => prev.filter(e => e.id !== selectedEntry.id));
                       setSelectedEntry(null);
-                      toast.success('Entry deleted');
+                      toast.success(getText('Entry deleted', 'تم حذف المدوّنة'));
                     }}
                   >
-                    Delete Entry
+                    {getText('Delete Entry', 'حذف المدوّنة')}
                   </Button>
                 </div>
               </>
@@ -372,9 +401,9 @@ export default function JournalSystemPage() {
         <Card className="border-0 shadow-lg mt-8 bg-gradient-to-r from-rose-500 to-pink-600 text-white">
           <CardContent className="pt-6 text-center">
             <p className="text-lg font-medium mb-2">
-              "Writing is the painting of the voice."
+              {getText('"Writing is the painting of the voice."', '"الكتابة رسم الصوت."')}
             </p>
-            <p className="text-sm text-rose-200">— Voltaire</p>
+            <p className="text-sm text-rose-200">{getText('— Voltaire', '— فولتير')}</p>
           </CardContent>
         </Card>
       </div>

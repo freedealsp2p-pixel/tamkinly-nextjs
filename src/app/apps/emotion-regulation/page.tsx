@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+import { useLocale } from '@/components/providers/LocaleProvider';
 import { 
   Heart, 
   ArrowRight, 
@@ -21,32 +22,23 @@ import {
 
 interface ERQQuestion {
   id: number;
-  text: string;
+  textEn: string;
+  textAr: string;
   dimension: 'reappraisal' | 'suppression';
   reverse?: boolean;
 }
 
 const erqQuestions: ERQQuestion[] = [
-  { id: 1, text: 'I control my emotions by changing the way I think about the situation I\'m in.', dimension: 'reappraisal' },
-  { id: 2, text: 'I keep my emotions to myself.', dimension: 'suppression' },
-  { id: 3, text: 'When I want to feel more positive emotion, I change the way I\'m thinking about the situation.', dimension: 'reappraisal' },
-  { id: 4, text: 'When I am feeling negative emotions, I make sure not to express them.', dimension: 'suppression' },
-  { id: 5, text: 'When I\'m faced with a stressful situation, I make myself think about it in a way that helps me stay calm.', dimension: 'reappraisal' },
-  { id: 6, text: 'I control my emotions by not expressing them.', dimension: 'suppression' },
-  { id: 7, text: 'When I want to feel less negative emotion, I change the way I\'m thinking about the situation.', dimension: 'reappraisal' },
-  { id: 8, text: 'When I want to feel more positive emotion, I change what I\'m thinking about.', dimension: 'reappraisal' },
-  { id: 9, text: 'I control my emotions by changing how I think about a situation.', dimension: 'reappraisal' },
-  { id: 10, text: 'When I am feeling positive emotions, I am careful not to express them.', dimension: 'suppression' },
-];
-
-const scaleLabels = [
-  { value: 1, label: 'Strongly Disagree' },
-  { value: 2, label: 'Disagree' },
-  { value: 3, label: 'Neutral' },
-  { value: 4, label: 'Agree' },
-  { value: 5, label: 'Strongly Agree' },
-  { value: 6, label: 'Very Strongly Agree' },
-  { value: 7, label: 'Completely Agree' },
+  { id: 1, textEn: 'I control my emotions by changing the way I think about the situation I\'m in.', textAr: 'أتحكم في مشاعري بتغيير طريقة تفكيري في الموقف الذي أمر به.', dimension: 'reappraisal' },
+  { id: 2, textEn: 'I keep my emotions to myself.', textAr: 'أحتفظ بمشاعري لنفسي.', dimension: 'suppression' },
+  { id: 3, textEn: 'When I want to feel more positive emotion, I change the way I\'m thinking about the situation.', textAr: 'عندما أريد الشعور بمشاعر أكثر إيجابية، أغيّر طريقة تفكيري في الموقف.', dimension: 'reappraisal' },
+  { id: 4, textEn: 'When I am feeling negative emotions, I make sure not to express them.', textAr: 'عندما أشعر بمشاعر سلبية، أتأكد من عدم التعبير عنها.', dimension: 'suppression' },
+  { id: 5, textEn: 'When I\'m faced with a stressful situation, I make myself think about it in a way that helps me stay calm.', textAr: 'عندما أواجه موقفًا مرهقًا، أجعل نفسي أفكر فيه بطريقة تساعدني على البقاء هادئًا.', dimension: 'reappraisal' },
+  { id: 6, textEn: 'I control my emotions by not expressing them.', textAr: 'أتحكم في مشاعري بعدم التعبير عنها.', dimension: 'suppression' },
+  { id: 7, textEn: 'When I want to feel less negative emotion, I change the way I\'m thinking about the situation.', textAr: 'عندما أريد الشعور بمشاعر سلبية أقل، أغيّر طريقة تفكيري في الموقف.', dimension: 'reappraisal' },
+  { id: 8, textEn: 'When I want to feel more positive emotion, I change what I\'m thinking about.', textAr: 'عندما أريد الشعور بمشاعر أكثر إيجابية، أغيّر ما أفكر فيه.', dimension: 'reappraisal' },
+  { id: 9, textEn: 'I control my emotions by changing how I think about a situation.', textAr: 'أتحكم في مشاعري بتغيير كيف أفكر في الموقف.', dimension: 'reappraisal' },
+  { id: 10, textEn: 'When I am feeling positive emotions, I am careful not to express them.', textAr: 'عندما أشعر بمشاعر إيجابية، أكون حريصًا على عدم التعبير عنها.', dimension: 'suppression' },
 ];
 
 const getFromStorage = <T,>(key: string, defaultValue: T): T => {
@@ -56,6 +48,19 @@ const getFromStorage = <T,>(key: string, defaultValue: T): T => {
 };
 
 export default function EmotionRegulationPage() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+
+  const scaleLabels = [
+    { value: 1, labelEn: 'Strongly Disagree', labelAr: 'أرفض بشدة' },
+    { value: 2, labelEn: 'Disagree', labelAr: 'أرفض' },
+    { value: 3, labelEn: 'Neutral', labelAr: 'محايد' },
+    { value: 4, labelEn: 'Agree', labelAr: 'أوافق' },
+    { value: 5, labelEn: 'Strongly Agree', labelAr: 'أوافق بشدة' },
+    { value: 6, labelEn: 'Very Strongly Agree', labelAr: 'أوافق بقوة شديدة' },
+    { value: 7, labelEn: 'Completely Agree', labelAr: 'أوافق تمامًا' },
+  ];
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState(false);
@@ -98,11 +103,9 @@ export default function EmotionRegulationPage() {
   };
 
   const calculateScores = () => {
-    // Reappraisal items: 1, 3, 5, 7, 8, 9 (indices 0, 2, 4, 6, 7, 8)
     const reappraisalItems = erqQuestions.filter(q => q.dimension === 'reappraisal');
     const reappraisalScore = reappraisalItems.reduce((sum, q) => sum + (answers[q.id] || 0), 0);
     
-    // Suppression items: 2, 4, 6, 10 (indices 1, 3, 5, 9)
     const suppressionItems = erqQuestions.filter(q => q.dimension === 'suppression');
     const suppressionScore = suppressionItems.reduce((sum, q) => sum + (answers[q.id] || 0), 0);
     
@@ -118,18 +121,27 @@ export default function EmotionRegulationPage() {
     const reappraisalLevel = scores.reappraisal > 30 ? 'high' : scores.reappraisal > 18 ? 'moderate' : 'low';
     const suppressionLevel = scores.suppression > 20 ? 'high' : scores.suppression > 12 ? 'moderate' : 'low';
     
-    let interpretation = '';
     if (reappraisalLevel === 'high' && suppressionLevel === 'low') {
-      interpretation = 'You tend to reframe situations positively and express emotions authentically. This is associated with better emotional well-being.';
+      return getText(
+        'You tend to reframe situations positively and express emotions authentically. This is associated with better emotional well-being.',
+        'تميل إلى إعادة صياغة المواقف بإيجابية والتعبير عن المشاعر بأصالة. يرتبط هذا برفاهية عاطفية أفضل.'
+      );
     } else if (reappraisalLevel === 'high' && suppressionLevel === 'high') {
-      interpretation = 'You use both reappraisal and suppression. While reappraisal is adaptive, consider expressing emotions more freely.';
+      return getText(
+        'You use both reappraisal and suppression. While reappraisal is adaptive, consider expressing emotions more freely.',
+        'تستخدم كل من إعادة التقييم والكبت. بينما إعادة التقييم تكيفية، فكر في التعبير عن المشاعر بحرية أكبر.'
+      );
     } else if (reappraisalLevel === 'low' && suppressionLevel === 'high') {
-      interpretation = 'You tend to suppress emotions rather than reframe them. This pattern may increase stress. Consider developing reappraisal skills.';
+      return getText(
+        'You tend to suppress emotions rather than reframe them. This pattern may increase stress. Consider developing reappraisal skills.',
+        'تميل إلى كبت المشاعر بدلاً من إعادة صياغتها. قد يزيد هذا النمط من التوتر. فكر في تطوير مهارات إعادة التقييم.'
+      );
     } else {
-      interpretation = 'You use a balanced approach to emotion regulation. Developing more reappraisal strategies could enhance emotional resilience.';
+      return getText(
+        'You use a balanced approach to emotion regulation. Developing more reappraisal strategies could enhance emotional resilience.',
+        'تستخدم نهجًا متوازنًا في تنظيم المشاعر. يمكن لتطوير المزيد من استراتيجيات إعادة التقييم أن يعزز المرونة العاطفية.'
+      );
     }
-    
-    return interpretation;
   };
 
   const handleReset = () => {
@@ -166,20 +178,20 @@ export default function EmotionRegulationPage() {
     const interpretation = getInterpretation(scores);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]">
+      <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         {/* Header */}
         <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <Link href="/apps" className="text-[#3DD4B0] hover:underline text-sm mb-4 inline-block">
-              ← Back to Apps
+              {getText('← Back to Apps', '→ العودة للتطبيقات')}
             </Link>
             <div className="flex items-center gap-3 mt-2">
               <div className="w-10 h-10 rounded-xl bg-[#3DD4B0]/20 flex items-center justify-center">
                 <Heart className="w-5 h-5 text-[#3DD4B0]" />
               </div>
               <div>
-                <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">BUNDLE</Badge>
-                <h1 className="text-xl font-bold">ERQ Results</h1>
+                <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('BUNDLE', 'حزمة')}</Badge>
+                <h1 className="text-xl font-bold">{getText('ERQ Results', 'نتائج ERQ')}</h1>
               </div>
             </div>
           </div>
@@ -191,8 +203,8 @@ export default function EmotionRegulationPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#3DD4B0]/10 text-[#3DD4B0] mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">Your Emotion Regulation Profile</h2>
-            <p className="text-slate-400">Based on the ERQ by Gross & John (2003)</p>
+            <h2 className="text-3xl font-bold text-white mb-2">{getText('Your Emotion Regulation Profile', 'ملفك الشخصي في تنظيم المشاعر')}</h2>
+            <p className="text-slate-400">{getText('Based on the ERQ by Gross & John (2003)', 'بناءً على استبيان ERQ لغروس وجون (2003)')}</p>
           </div>
 
           {/* Score Cards */}
@@ -204,17 +216,17 @@ export default function EmotionRegulationPage() {
                     <TrendingUp className="w-6 h-6 text-[#3DD4B0]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[#0F1C2E]">Reappraisal</h3>
-                    <p className="text-xs text-[#8A94A6]">Cognitive Reframing</p>
+                    <h3 className="font-semibold text-[#0F1C2E]">{getText('Reappraisal', 'إعادة التقييم')}</h3>
+                    <p className="text-xs text-[#8A94A6]">{getText('Cognitive Reframing', 'إعادة الصياغة المعرفية')}</p>
                   </div>
                 </div>
                 <div className="text-4xl font-bold text-[#0F1C2E] mb-2">{scores.reappraisal}</div>
                 <Progress value={scores.reappraisalAvg} className="h-2 mb-2" />
                 <p className="text-xs text-[#8A94A6]">
-                  {scores.reappraisalAvg}% of maximum score
+                  {scores.reappraisalAvg}% {getText('of maximum score', 'من الدرجة القصوى')}
                 </p>
                 <p className="text-sm text-[#2B2E34] mt-3">
-                  How often you reframe situations to change emotional impact
+                  {getText('How often you reframe situations to change emotional impact', 'مدى تكرار إعادة صياغة المواقف لتغيير التأثير العاطفي')}
                 </p>
               </CardContent>
             </Card>
@@ -226,17 +238,17 @@ export default function EmotionRegulationPage() {
                     <TrendingDown className="w-6 h-6 text-[#FFB74D]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[#0F1C2E]">Suppression</h3>
-                    <p className="text-xs text-[#8A94A6]">Expressive Inhibition</p>
+                    <h3 className="font-semibold text-[#0F1C2E]">{getText('Suppression', 'الكبت')}</h3>
+                    <p className="text-xs text-[#8A94A6]">{getText('Expressive Inhibition', 'كبح التعبير')}</p>
                   </div>
                 </div>
                 <div className="text-4xl font-bold text-[#0F1C2E] mb-2">{scores.suppression}</div>
                 <Progress value={scores.suppressionAvg} className="h-2 mb-2" />
                 <p className="text-xs text-[#8A94A6]">
-                  {scores.suppressionAvg}% of maximum score
+                  {scores.suppressionAvg}% {getText('of maximum score', 'من الدرجة القصوى')}
                 </p>
                 <p className="text-sm text-[#2B2E34] mt-3">
-                  How often you inhibit emotional expression
+                  {getText('How often you inhibit emotional expression', 'مدى تكرار كبح التعبير العاطفي')}
                 </p>
               </CardContent>
             </Card>
@@ -247,23 +259,27 @@ export default function EmotionRegulationPage() {
             <CardContent className="p-6">
               <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
                 <Lightbulb className="w-5 h-5 text-[#FFB74D]" />
-                Interpretation
+                {getText('Interpretation', 'التفسير')}
               </h3>
               <p className="text-slate-300 mb-4">{interpretation}</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div className="p-4 bg-[#3DD4B0]/10 rounded-lg">
-                  <h4 className="text-[#3DD4B0] font-medium mb-2">Reappraisal (Adaptive)</h4>
+                  <h4 className="text-[#3DD4B0] font-medium mb-2">{getText('Reappraisal (Adaptive)', 'إعادة التقييم (تكيفي)')}</h4>
                   <p className="text-sm text-slate-400">
-                    Changing how you think about a situation to alter its emotional impact. 
-                    Associated with better mental health and relationship satisfaction.
+                    {getText(
+                      'Changing how you think about a situation to alter its emotional impact. Associated with better mental health and relationship satisfaction.',
+                      'تغيير طريقة تفكيرك في الموقف لتغيير تأثيره العاطفي. يرتبط بصحة نفسية أفضل ورضا أكبر عن العلاقات.'
+                    )}
                   </p>
                 </div>
                 <div className="p-4 bg-[#FFB74D]/10 rounded-lg">
-                  <h4 className="text-[#FFB74D] font-medium mb-2">Suppression (Caution)</h4>
+                  <h4 className="text-[#FFB74D] font-medium mb-2">{getText('Suppression (Caution)', 'الكبت (تحذير)')}</h4>
                   <p className="text-sm text-slate-400">
-                    Inhibiting emotional expression. While sometimes useful, 
-                    chronic suppression may increase stress and reduce authenticity.
+                    {getText(
+                      'Inhibiting emotional expression. While sometimes useful, chronic suppression may increase stress and reduce authenticity.',
+                      'كبح التعبير العاطفي. بينما قد يكون مفيدًا أحيانًا، قد يزيد الكبت المزمن من التوتر ويقلل الأصالة.'
+                    )}
                   </p>
                 </div>
               </div>
@@ -276,7 +292,7 @@ export default function EmotionRegulationPage() {
               <CardHeader>
                 <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                   <Scale className="w-5 h-5 text-[#1F6F78]" />
-                  Progress Over Time
+                  {getText('Progress Over Time', 'التقدم بمرور الوقت')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -288,10 +304,10 @@ export default function EmotionRegulationPage() {
                       </span>
                       <div className="flex gap-4">
                         <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0]">
-                          R: {result.reappraisal}
+                          {getText('R', 'إ')}: {result.reappraisal}
                         </Badge>
                         <Badge className="bg-[#FFB74D]/10 text-[#FFB74D]">
-                          S: {result.suppression}
+                          {getText('S', 'ك')}: {result.suppression}
                         </Badge>
                       </div>
                     </div>
@@ -305,11 +321,11 @@ export default function EmotionRegulationPage() {
           <div className="flex gap-4 justify-center">
             <Button onClick={handleReset} variant="secondary" className="shadow-md">
               <RotateCcw className="w-4 h-4 mr-2" />
-              Retake Questionnaire
+              {getText('Retake Questionnaire', 'إعادة الاستبيان')}
             </Button>
             <Button onClick={handleExport} className="bg-[#1F6F78] text-white hover:bg-[#1a5a62]">
               <Download className="w-4 h-4 mr-2" />
-              Export Results
+              {getText('Export Results', 'تصدير النتائج')}
             </Button>
           </div>
         </div>
@@ -321,21 +337,21 @@ export default function EmotionRegulationPage() {
   const dimensionColor = question.dimension === 'reappraisal' ? '#3DD4B0' : '#FFB74D';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header */}
       <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link href="/apps" className="text-[#3DD4B0] hover:underline text-sm mb-4 inline-block">
-            ← Back to Apps
+            {getText('← Back to Apps', '→ العودة للتطبيقات')}
           </Link>
           <div className="flex items-center gap-3 mt-2">
             <div className="w-10 h-10 rounded-xl bg-[#3DD4B0]/20 flex items-center justify-center">
               <Heart className="w-5 h-5 text-[#3DD4B0]" />
             </div>
             <div>
-              <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">BUNDLE</Badge>
-              <h1 className="text-xl font-bold">Emotion Regulation Questionnaire</h1>
-              <p className="text-slate-400 text-sm">ERQ - Gross & John (2003)</p>
+              <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('BUNDLE', 'حزمة')}</Badge>
+              <h1 className="text-xl font-bold">{getText('Emotion Regulation Questionnaire', 'استبيان تنظيم المشاعر')}</h1>
+              <p className="text-slate-400 text-sm">{getText('ERQ - Gross & John (2003)', 'ERQ - غروس وجون (2003)')}</p>
             </div>
           </div>
         </div>
@@ -346,7 +362,7 @@ export default function EmotionRegulationPage() {
         {/* Progress */}
         <div className="flex items-center justify-between mb-6">
           <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0] border-0">
-            Question {currentQuestion + 1} of {erqQuestions.length}
+            {getText('Question', 'سؤال')} {currentQuestion + 1} {getText('of', 'من')} {erqQuestions.length}
           </Badge>
           <Progress 
             value={((currentQuestion + 1) / erqQuestions.length) * 100} 
@@ -364,18 +380,18 @@ export default function EmotionRegulationPage() {
                 color: dimensionColor 
               }}
             >
-              {question.dimension === 'reappraisal' ? 'Reappraisal' : 'Suppression'}
+              {question.dimension === 'reappraisal' ? getText('Reappraisal', 'إعادة التقييم') : getText('Suppression', 'الكبت')}
             </Badge>
             
             <h2 className="text-xl font-bold text-[#0F1C2E] mb-6 leading-relaxed">
-              {question.text}
+              {locale === 'ar' ? question.textAr : question.textEn}
             </h2>
 
             {/* Rating Scale */}
             <div className="space-y-3">
               <div className="flex justify-between text-xs text-[#8A94A6] px-1">
-                <span>Strongly Disagree</span>
-                <span>Completely Agree</span>
+                <span>{getText('Strongly Disagree', 'أرفض بشدة')}</span>
+                <span>{getText('Completely Agree', 'أوافق تمامًا')}</span>
               </div>
               <div className="grid grid-cols-7 gap-2">
                 {scaleLabels.map((label) => (
@@ -397,7 +413,7 @@ export default function EmotionRegulationPage() {
               </div>
               {answers[question.id] && (
                 <p className="text-center text-sm text-[#8A94A6]">
-                  {scaleLabels.find(l => l.value === answers[question.id])?.label}
+                  {locale === 'ar' ? scaleLabels.find(l => l.value === answers[question.id])?.labelAr : scaleLabels.find(l => l.value === answers[question.id])?.labelEn}
                 </p>
               )}
             </div>
@@ -411,7 +427,7 @@ export default function EmotionRegulationPage() {
             disabled={currentQuestion === 0}
             variant="white" className="disabled:opacity-50"
           >
-            ← Previous
+            {getText('← Previous', '→ السابق')}
           </Button>
           
           <div className="flex items-center gap-1">
@@ -432,7 +448,7 @@ export default function EmotionRegulationPage() {
             disabled={!answers[question.id]}
             className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-50"
           >
-            {currentQuestion === erqQuestions.length - 1 ? 'See Results' : 'Next →'}
+            {currentQuestion === erqQuestions.length - 1 ? getText('See Results', 'عرض النتائج') : getText('Next →', 'التالي ←')}
           </Button>
         </div>
 
@@ -441,15 +457,18 @@ export default function EmotionRegulationPage() {
           <CardContent className="p-6">
             <h4 className="text-white font-medium mb-2 flex items-center gap-2">
               <Brain className="w-4 h-4 text-[#3DD4B0]" />
-              About the ERQ
+              {getText('About the ERQ', 'عن استبيان ERQ')}
             </h4>
             <p className="text-slate-400 text-sm mb-3">
-              The Emotion Regulation Questionnaire measures two strategies: 
-              <strong className="text-[#3DD4B0]"> Reappraisal</strong> (changing how you think) and 
-              <strong className="text-[#FFB74D]"> Suppression</strong> (hiding emotions).
+              {getText(
+                'The Emotion Regulation Questionnaire measures two strategies:',
+                'يقيس استبيان تنظيم المشاعر استراتيجيتين:'
+              )}
+              <strong className="text-[#3DD4B0]"> {getText('Reappraisal', 'إعادة التقييم')}</strong> {getText('(changing how you think)', '(تغيير طريقة تفكيرك)')} {getText('and', 'و')}
+              <strong className="text-[#FFB74D]"> {getText('Suppression', 'الكبت')}</strong> {getText('(hiding emotions).', '(إخفاء المشاعر).')}
             </p>
             <p className="text-xs text-[#8A94A6]">
-              Reference: Gross, J.J., & John, O.P. (2003). Individual differences in two emotion regulation processes.
+              {getText('Reference: Gross, J.J., & John, O.P. (2003). Individual differences in two emotion regulation processes.', 'المرجع: غروس، ج.ج.، وجون، أ.ب. (2003). الاختلافات الفردية في عمليتي تنظيم المشاعر.')}
             </p>
           </CardContent>
         </Card>

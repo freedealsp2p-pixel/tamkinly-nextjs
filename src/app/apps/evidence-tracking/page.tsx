@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
+import { useLocale } from '@/components/providers/LocaleProvider';
 import { 
   BarChart3, 
   ArrowRight, 
@@ -35,17 +36,6 @@ interface Evidence {
   notes: string;
 }
 
-const identityProofs = [
-  'I acted like a disciplined person',
-  'I acted like a growth-focused person',
-  'I acted like a healthy person',
-  'I acted like a creative person',
-  'I acted like a confident person',
-  'I acted like a reliable person',
-  'I acted like an organized person',
-  'I acted like a mindful person'
-];
-
 const getFromStorage = <T,>(key: string, defaultValue: T): T => {
   if (typeof window === 'undefined') return defaultValue;
   const saved = localStorage.getItem(key);
@@ -53,6 +43,20 @@ const getFromStorage = <T,>(key: string, defaultValue: T): T => {
 };
 
 export default function EvidenceTrackingPage() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+
+  const identityProofs = [
+    getText('I acted like a disciplined person', 'تصرفت كشخص منضبط'),
+    getText('I acted like a growth-focused person', 'تصرفت كشخص يركز على النمو'),
+    getText('I acted like a healthy person', 'تصرفت كشخص صحي'),
+    getText('I acted like a creative person', 'تصرفت كشخص مبدع'),
+    getText('I acted like a confident person', 'تصرفت كشخص واثق'),
+    getText('I acted like a reliable person', 'تصرفت كشخص موثوق'),
+    getText('I acted like an organized person', 'تصرفت كشخص منظم'),
+    getText('I acted like a mindful person', 'تصرفت كشخص واعٍ')
+  ];
+
   const [showForm, setShowForm] = useState(false);
   const [evidence, setEvidence] = useState<Evidence[]>(() => getFromStorage('tamkinly-evidence', []));
   
@@ -94,7 +98,6 @@ export default function EvidenceTrackingPage() {
   const calculateStats = () => {
     if (evidence.length === 0) return { totalActions: 0, streak: 0, avgStrength: 0, identityProofs: {} };
     
-    // Calculate streak
     let streak = 0;
     const sortedEvidence = [...evidence].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     let checkDate = new Date();
@@ -108,12 +111,10 @@ export default function EvidenceTrackingPage() {
       } else break;
     }
     
-    // Calculate average strength
     const avgStrength = Math.round(
       evidence.reduce((sum, e) => sum + e.strength, 0) / evidence.length * 10
     );
     
-    // Count identity proofs
     const proofs: Record<string, number> = {};
     evidence.forEach(e => {
       proofs[e.identityProof] = (proofs[e.identityProof] || 0) + 1;
@@ -149,7 +150,6 @@ export default function EvidenceTrackingPage() {
     a.click();
   };
 
-  // Group evidence by date
   const groupedEvidence = evidence.reduce((groups, e) => {
     const date = new Date(e.date).toLocaleDateString();
     if (!groups[date]) groups[date] = [];
@@ -158,12 +158,12 @@ export default function EvidenceTrackingPage() {
   }, {} as Record<string, Evidence[]>);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header */}
       <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link href="/apps" className="text-[#3DD4B0] hover:underline text-sm mb-4 inline-block">
-            ← Back to Apps
+            {getText('← Back to Apps', '→ العودة للتطبيقات')}
           </Link>
           <div className="flex items-center justify-between mt-2">
             <div className="flex items-center gap-3">
@@ -172,9 +172,9 @@ export default function EvidenceTrackingPage() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#1F6F78]/50">PREMIUM</Badge>
+                  <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#1F6F78]/50">{getText('PREMIUM', 'متميز')}</Badge>
                 </div>
-                <h1 className="text-xl font-bold">Evidence Tracker</h1>
+                <h1 className="text-xl font-bold">{getText('Evidence Tracker', 'متتبع الأدلة')}</h1>
               </div>
             </div>
             <Button
@@ -182,7 +182,7 @@ export default function EvidenceTrackingPage() {
               className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]"
             >
               <Plus className="w-4 h-4 mr-2" />
-              Log Evidence
+              {getText('Log Evidence', 'تسجيل دليل')}
             </Button>
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function EvidenceTrackingPage() {
                 <Flame className="w-5 h-5 text-[#FFB74D]" />
               </div>
               <div className="text-3xl font-bold text-[#0F1C2E]">{stats.streak}</div>
-              <p className="text-xs text-[#8A94A6]">Day Streak</p>
+              <p className="text-xs text-[#8A94A6]">{getText('Day Streak', 'سلسلة الأيام')}</p>
             </CardContent>
           </Card>
           <Card className="bg-white">
@@ -206,7 +206,7 @@ export default function EvidenceTrackingPage() {
                 <Target className="w-5 h-5 text-[#3DD4B0]" />
               </div>
               <div className="text-3xl font-bold text-[#0F1C2E]">{stats.totalActions}</div>
-              <p className="text-xs text-[#8A94A6]">Evidence Logged</p>
+              <p className="text-xs text-[#8A94A6]">{getText('Evidence Logged', 'أدلة مسجلة')}</p>
             </CardContent>
           </Card>
           <Card className="bg-white">
@@ -215,7 +215,7 @@ export default function EvidenceTrackingPage() {
                 <TrendingUp className="w-5 h-5 text-[#1F6F78]" />
               </div>
               <div className="text-3xl font-bold text-[#0F1C2E]">{stats.avgStrength}%</div>
-              <p className="text-xs text-[#8A94A6]">Avg Strength</p>
+              <p className="text-xs text-[#8A94A6]">{getText('Avg Strength', 'متوسط القوة')}</p>
             </CardContent>
           </Card>
           <Card className="bg-white">
@@ -226,7 +226,7 @@ export default function EvidenceTrackingPage() {
               <div className="text-3xl font-bold text-[#0F1C2E]">
                 {evidence.filter(e => e.followedThrough).length}
               </div>
-              <p className="text-xs text-[#8A94A6]">Follow-throughs</p>
+              <p className="text-xs text-[#8A94A6]">{getText('Follow-throughs', 'المتابعات')}</p>
             </CardContent>
           </Card>
         </div>
@@ -237,19 +237,19 @@ export default function EvidenceTrackingPage() {
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <Eye className="w-5 h-5 text-[#3DD4B0]" />
-                Log Today's Evidence
+                {getText("Log Today's Evidence", 'سجّل دليل اليوم')}
               </CardTitle>
               <CardDescription>
-                Record concrete proof of behavior change - based on self-monitoring research
+                {getText('Record concrete proof of behavior change - based on self-monitoring research', 'سجّل دليلًا ملموسًا على التغيير السلوكي - بناءً على أبحاث المراقبة الذاتية')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2">
-                  Today's action
+                  {getText("Today's action", 'إجراء اليوم')}
                 </label>
                 <Textarea
-                  placeholder="What action did you take today?"
+                  placeholder={getText('What action did you take today?', 'ما الإجراء الذي اتخذته اليوم؟')}
                   value={formData.action}
                   onChange={(e) => setFormData(prev => ({ ...prev, action: e.target.value }))}
                   className="min-h-[80px]"
@@ -258,20 +258,20 @@ export default function EvidenceTrackingPage() {
 
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2">
-                  Evidence
+                  {getText('Evidence', 'الدليل')}
                 </label>
                 <Textarea
-                  placeholder="What concrete proof do you have? Be specific."
+                  placeholder={getText('What concrete proof do you have? Be specific.', 'ما الدليل الملموس الذي لديك؟ كن محددًا.')}
                   value={formData.evidence}
                   onChange={(e) => setFormData(prev => ({ ...prev, evidence: e.target.value }))}
                   className="min-h-[80px]"
                 />
-                <p className="text-xs text-[#8A94A6] mt-1">Example: "I wrote my top 3 priorities before checking my phone"</p>
+                <p className="text-xs text-[#8A94A6] mt-1">{getText('Example: "I wrote my top 3 priorities before checking my phone"', 'مثال: "كتبت أهم ٣ أولويات قبل التحقق من هاتفي"')}</p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2">
-                  Identity proof
+                  {getText('Identity proof', 'دليل الهوية')}
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {identityProofs.map((proof, i) => (
@@ -289,7 +289,7 @@ export default function EvidenceTrackingPage() {
 
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2">
-                  Did you follow through?
+                  {getText('Did you follow through?', 'هل التزمت بالتنفيذ؟')}
                 </label>
                 <div className="flex gap-4">
                   <Badge
@@ -297,21 +297,21 @@ export default function EvidenceTrackingPage() {
                     className={`cursor-pointer py-2 px-4 ${formData.followedThrough ? 'bg-[#3DD4B0] text-[#0F1C2E]' : 'hover:bg-[#3DD4B0]/10 border-[#3DD4B0] text-[#3DD4B0]'}`}
                     onClick={() => setFormData(prev => ({ ...prev, followedThrough: true }))}
                   >
-                    <CheckCircle2 className="w-4 h-4 mr-1" /> Yes
+                    <CheckCircle2 className="w-4 h-4 mr-1" /> {getText('Yes', 'نعم')}
                   </Badge>
                   <Badge
                     variant={!formData.followedThrough ? 'default' : 'outline'}
                     className={`cursor-pointer py-2 px-4 ${!formData.followedThrough ? 'bg-[#E57373] text-white' : 'hover:bg-[#E57373]/10 border-[#E57373] text-[#E57373]'}`}
                     onClick={() => setFormData(prev => ({ ...prev, followedThrough: false }))}
                   >
-                    Not fully
+                    {getText('Not fully', 'ليس بالكامل')}
                   </Badge>
                 </div>
               </div>
 
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <label className="font-medium text-[#0F1C2E]">Strength of evidence</label>
+                  <label className="font-medium text-[#0F1C2E]">{getText('Strength of evidence', 'قوة الدليل')}</label>
                   <span className="text-[#8A94A6]">{formData.strength}/10</span>
                 </div>
                 <Slider
@@ -321,15 +321,15 @@ export default function EvidenceTrackingPage() {
                   min={1}
                   step={1}
                 />
-                <p className="text-xs text-[#8A94A6] mt-1">How strong is this proof of your identity change?</p>
+                <p className="text-xs text-[#8A94A6] mt-1">{getText('How strong is this proof of your identity change?', 'ما مدى قوة هذا الدليل على تغيير هويتك؟')}</p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2">
-                  Notes (optional)
+                  {getText('Notes (optional)', 'ملاحظات (اختياري)')}
                 </label>
                 <Textarea
-                  placeholder="Any additional reflections..."
+                  placeholder={getText('Any additional reflections...', 'أي تأملات إضافية...')}
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
                   className="min-h-[60px]"
@@ -338,7 +338,7 @@ export default function EvidenceTrackingPage() {
 
               <div className="flex gap-4">
                 <Button onClick={() => setShowForm(false)} variant="outline" className="flex-1">
-                  Cancel
+                  {getText('Cancel', 'إلغاء')}
                 </Button>
                 <Button
                   onClick={handleAddEvidence}
@@ -346,7 +346,7 @@ export default function EvidenceTrackingPage() {
                   className="flex-1 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-50"
                 >
                   <CheckCircle2 className="w-4 h-4 mr-2" />
-                  Log Evidence
+                  {getText('Log Evidence', 'تسجيل دليل')}
                 </Button>
               </div>
             </CardContent>
@@ -359,7 +359,7 @@ export default function EvidenceTrackingPage() {
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[#3DD4B0]" />
-                Identity Evidence Summary
+                {getText('Identity Evidence Summary', 'ملخص أدلة الهوية')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -371,7 +371,7 @@ export default function EvidenceTrackingPage() {
                       <div className="flex-1">
                         <div className="flex justify-between text-sm mb-1">
                           <span className="text-white">{proof}</span>
-                          <span className="text-[#3DD4B0]">{count} actions</span>
+                          <span className="text-[#3DD4B0]">{count} {getText('actions', 'إجراءات')}</span>
                         </div>
                         <Progress 
                           value={(count / stats.totalActions) * 100} 
@@ -389,23 +389,23 @@ export default function EvidenceTrackingPage() {
         <Card className="bg-white">
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-[#0F1C2E]">Evidence Log</CardTitle>
+              <CardTitle className="text-[#0F1C2E]">{getText('Evidence Log', 'سجل الأدلة')}</CardTitle>
               {evidence.length > 0 && (
                 <Button onClick={handleExport} variant="outline" size="sm">
                   <Download className="w-4 h-4 mr-2" />
-                  Export
+                  {getText('Export', 'تصدير')}
                 </Button>
               )}
             </div>
             <CardDescription>
-              Each entry is proof of who you're becoming
+              {getText('Each entry is proof of who you\'re becoming', 'كل إدخال هو دليل على من تصبح')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             {evidence.length === 0 ? (
               <div className="text-center py-12">
                 <BarChart3 className="w-12 h-12 text-[#8A94A6] mx-auto mb-4" />
-                <p className="text-[#8A94A6]">No evidence logged yet. Start recording proof of your transformation.</p>
+                <p className="text-[#8A94A6]">{getText('No evidence logged yet. Start recording proof of your transformation.', 'لم يتم تسجيل أدلة بعد. ابدأ بتسجيل دليل تحولك.')}</p>
               </div>
             ) : (
               <div className="space-y-6 max-h-96 overflow-y-auto">
@@ -414,7 +414,7 @@ export default function EvidenceTrackingPage() {
                     <div className="flex items-center gap-2 mb-3">
                       <Calendar className="w-4 h-4 text-[#3DD4B0]" />
                       <span className="text-sm font-medium text-[#0F1C2E]">{date}</span>
-                      <Badge variant="secondary" className="text-xs">{items.length} actions</Badge>
+                      <Badge variant="secondary" className="text-xs">{items.length} {getText('actions', 'إجراءات')}</Badge>
                     </div>
                     <div className="space-y-3">
                       {items.map((e) => (
@@ -467,15 +467,16 @@ export default function EvidenceTrackingPage() {
           <CardContent className="p-6">
             <h4 className="font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#3DD4B0]" />
-              Why Evidence Tracking Works
+              {getText('Why Evidence Tracking Works', 'لماذا يعمل تتبع الأدلة')}
             </h4>
             <p className="text-sm text-[#2B2E34] mb-3">
-              Research shows that monitoring goal progress significantly promotes goal attainment. 
-              Self-monitoring is a key element in behavior change, helping you see patterns and 
-              build evidence for your new identity.
+              {getText(
+                'Research shows that monitoring goal progress significantly promotes goal attainment. Self-monitoring is a key element in behavior change, helping you see patterns and build evidence for your new identity.',
+                'تظهر الأبحاث أن مراقبة تقدم الأهداف يعزز بشكل كبير تحقيق الأهداف. المراقبة الذاتية هي عنصر أساسي في التغيير السلوكي، تساعدك على رؤية الأنماط وبناء الأدلة لهويتك الجديدة.'
+              )}
             </p>
             <p className="text-xs text-[#1F6F78]">
-              Reference: Harkin et al. "Does Monitoring Goal Progress Promote Goal Attainment?"
+              {getText('Reference: Harkin et al. "Does Monitoring Goal Progress Promote Goal Attainment?"', 'المرجع: هاركين وآخرون. "هل تعزز مراقبة تقدم الأهداف تحقيقها؟"')}
             </p>
           </CardContent>
         </Card>

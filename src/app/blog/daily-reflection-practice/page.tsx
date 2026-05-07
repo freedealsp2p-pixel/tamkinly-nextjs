@@ -6,34 +6,38 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sun, BookOpen, Brain, Sparkles, Calendar, CheckCircle2, PenLine } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
-
-const relatedArticles = [
-  { slug: "physics-of-momentum", title: "The Physics of Momentum: Why 18 Minutes Changes Everything", readTime: "8 min read" },
-  { slug: "values-clarification-tool", title: "Values Clarification: The Foundation of Authentic Identity", readTime: "9 min read" },
-  { slug: "becoming-exceptional", title: "Becoming Exceptional", readTime: "8 min read" }
-];
+import { useLocale } from '@/components/providers/LocaleProvider';
 
 export default function DailyReflectionPracticeArticle() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+
+  const relatedArticles = [
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغير 18 دقيقة كل شيء"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "values-clarification-tool", title: getText("Values Clarification: The Foundation of Authentic Identity", "توضيح القيم: أساس الهوية الأصيلة"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "becoming-exceptional", title: getText("Becoming Exceptional", "الصعود نحو التميز"), readTime: getText("8 min read", "8 دقائق قراءة") }
+  ];
+
   return (
-    <article className="min-h-screen">
+    <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <Badge variant="outline" className="mb-4 px-4 py-2 border-accent/30 text-accent bg-accent/10">
-              Daily Practice
+              {getText("Daily Practice", "ممارسة يومية")}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              Daily Reflection Practice: The Neuroscience of Identity Integration
+              {getText("Daily Reflection Practice: The Neuroscience of Identity Integration", "ممارسة التأمل اليومي: علم الأعصاب لتكامل الهوية")}
             </h1>
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                9 min read
+                {getText("9 min read", "9 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Tamkinly Team
+                {getText("Tamkinly Team", "فريق تمكنلي")}
               </span>
             </div>
           </div>
@@ -45,65 +49,66 @@ export default function DailyReflectionPracticeArticle() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
-              Every identity transformation in history has one thing in common: conscious 
-              reflection. The daily practice of examining your thoughts, actions, and choices 
-              isn&apos;t just therapeutic—it&apos;s how you actively construct who you&apos;re becoming.
+              {getText(
+                "Every identity transformation in history has one thing in common: conscious reflection. The daily practice of examining your thoughts, actions, and choices isn't just therapeutic—it's how you actively construct who you're becoming.",
+                "كل تحول هوية في التاريخ له شيء مشترك: التأمل الواعي. الممارسة اليومية لفحص أفكارك وأفعالك واختياراتك ليست علاجية فحسب—إنها كيف تبني بنشاط من تصبح."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Research in neuroscience and psychology has transformed our understanding of 
-              journaling and reflection. What was once seen as a simple self-help practice 
-              is now recognized as a powerful tool for neural pathway reinforcement, emotional 
-              regulation, and identity construction.
+              {getText(
+                "Research in neuroscience and psychology has transformed our understanding of journaling and reflection. What was once seen as a simple self-help practice is now recognized as a powerful tool for neural pathway reinforcement, emotional regulation, and identity construction.",
+                "لقد غيّرت الأبحاث في علم الأعصاب وعلم النفس فهمنا لكتابة اليوميات والتأمل. ما كان يُنظر إليه سابقًا كممارسة بسيطة للمساعدة الذاتية يُعترف به الآن كأداة قوية لتعزيز المسارات العصبية والتنظيم العاطفي وبناء الهوية."
+              )}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Science of Reflection and Journaling
+              {getText("The Science of Reflection and Journaling", "علم التأمل وكتابة اليوميات")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              A landmark study by psychologist James Pennebaker at the University of Texas 
-              found that expressive writing—just 15-20 minutes a day for four days—produced 
-              measurable improvements in both physical and mental health. Participants showed 
-              enhanced immune function, reduced stress levels, and better overall well-being.
+              {getText(
+                "A landmark study by psychologist James Pennebaker at the University of Texas found that expressive writing—just 15-20 minutes a day for four days—produced measurable improvements in both physical and mental health. Participants showed enhanced immune function, reduced stress levels, and better overall well-being.",
+                "وجدت دراسة رائدة لعالم النفس جيمس بينيباكر في جامعة تكساس أن الكتابة التعبيرية—15-20 دقيقة فقط يوميًا لمدة أربعة أيام—أحدثت تحسينات قابلة للقياس في كل من الصحة الجسدية والنفسية. أظهر المشاركون تعزيزًا في وظائف المناعة وانخفاض مستويات التوتر وتحسنًا عامًا في الرفاهية."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              But the benefits extend beyond health. Research published in the <em>Journal 
-              of Experimental Psychology</em> demonstrated that reflection enhances learning 
-              and performance. When we reflect on experiences, we extract meaning from them, 
-              integrating new information into our existing knowledge structures—what 
-              neuroscientists call &quot;memory consolidation.&quot;
+              {getText(
+                "But the benefits extend beyond health. Research published in the Journal of Experimental Psychology demonstrated that reflection enhances learning and performance. When we reflect on experiences, we extract meaning from them, integrating new information into our existing knowledge structures—what neuroscientists call \"memory consolidation.\"",
+                "لكن الفوائد تمتد إلى ما هو أبعد من الصحة. أظهرت أبحاث منشورة في مجلة علم النفس التجريبي أن التأمل يعزز التعلم والأداء. عندما نتأمل في التجارب، نستخرج المعنى منها، مما يدمج المعلومات الجديدة في هياكل معرفتنا الحالية—ما يسميه علماء الأعصاب \"تعزيز الذاكرة\"."
+              )}
             </p>
 
             <div className="bg-accent/5 border-l-4 border-accent p-6 my-8 rounded-r-lg">
               <p className="text-slate-700 italic">
-                &quot;We do not learn from experience... we learn from reflecting on experience.&quot; 
-                — John Dewey
+                {getText(
+                  "\"We do not learn from experience... we learn from reflecting on experience.\" — John Dewey",
+                  "\"نحن لا نتعلم من التجربة... نحن نتعلم من التأمل في التجربة.\" — جون ديوي"
+                )}
               </p>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              Reflection as Identity Construction
+              {getText("Reflection as Identity Construction", "التأمل كبناء للهوية")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Identity isn&apos;t something you have—it&apos;s something you actively create through 
-              narrative. Psychologist Dan McAdams, a leading researcher in narrative identity, 
-              argues that we construct our identities through the stories we tell about ourselves. 
-              Daily reflection is the process of editing that story.
+              {getText(
+                "Identity isn't something you have—it's something you actively create through narrative. Psychologist Dan McAdams, a leading researcher in narrative identity, argues that we construct our identities through the stories we tell about ourselves. Daily reflection is the process of editing that story.",
+                "الهوية ليست شيئًا تمتلكه—إنها شيء تصنعه بنشاط من خلال السرد. يجادل عالم النفس دان ماكادامز، الباحث الرائد في الهوية السردية، أننا نبني هوياتنا من خلال القصص التي نرويها عن أنفسنا. التأمل اليومي هو عملية تحرير تلك القصة."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Each time you reflect on your day through the lens of your target identity, 
-              you&apos;re doing something powerful: you&apos;re selecting which experiences to emphasize, 
-              which patterns to notice, and which version of yourself to reinforce. This 
-              narrative selection shapes your neural pathways and your self-concept.
+              {getText(
+                "Each time you reflect on your day through the lens of your target identity, you're doing something powerful: you're selecting which experiences to emphasize, which patterns to notice, and which version of yourself to reinforce. This narrative selection shapes your neural pathways and your self-concept.",
+                "في كل مرة تتأمل فيها في يومك من خلال عدسة هويتك المستهدفة، أنت تفعل شيئًا قويًا: أنت تختار أي التجارب تبرزها، وأي الأنماط تلاحظها، وأي نسخة من نفسك تعززها. هذا الاختيار السردي يشكل مساراتك العصبية ومفهومك عن ذاتك."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The Daily Reflection Practice tool provides structured prompts across seven 
-              themes designed to support identity transformation:
+              {getText("The Daily Reflection Practice tool provides structured prompts across seven themes designed to support identity transformation:", "توفر أداة ممارسة التأمل اليومي موجهات منظمة عبر سبعة مواضيع مصممة لدعم تحويل الهوية:")}
             </p>
 
             <div className="grid md:grid-cols-2 gap-4 my-10">
@@ -113,9 +118,9 @@ export default function DailyReflectionPracticeArticle() {
                     <div className="w-8 h-8 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center">
                       <Brain className="h-4 w-4 text-[#3DD4B0]" />
                     </div>
-                    <h3 className="font-semibold text-primary">Self-Awareness</h3>
+                    <h3 className="font-semibold text-primary">{getText("Self-Awareness", "الوعي الذاتي")}</h3>
                   </div>
-                  <p className="text-sm text-slate-600">Deepen understanding of your patterns and choices</p>
+                  <p className="text-sm text-slate-600">{getText("Deepen understanding of your patterns and choices", "تعميق فهم أنماطك واختياراتك")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -124,9 +129,9 @@ export default function DailyReflectionPracticeArticle() {
                     <div className="w-8 h-8 rounded-lg bg-[#1F6F78]/10 flex items-center justify-center">
                       <Sparkles className="h-4 w-4 text-[#1F6F78]" />
                     </div>
-                    <h3 className="font-semibold text-primary">Identity Shift</h3>
+                    <h3 className="font-semibold text-primary">{getText("Identity Shift", "التحول في الهوية")}</h3>
                   </div>
-                  <p className="text-sm text-slate-600">Track evidence supporting your new identity</p>
+                  <p className="text-sm text-slate-600">{getText("Track evidence supporting your new identity", "تتبع الأدلة الداعمة لهويتك الجديدة")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -135,9 +140,9 @@ export default function DailyReflectionPracticeArticle() {
                     <div className="w-8 h-8 rounded-lg bg-[#64B5F6]/10 flex items-center justify-center">
                       <Sun className="h-4 w-4 text-[#64B5F6]" />
                     </div>
-                    <h3 className="font-semibold text-primary">Growth Mindset</h3>
+                    <h3 className="font-semibold text-primary">{getText("Growth Mindset", "عقلية النمو")}</h3>
                   </div>
-                  <p className="text-sm text-slate-600">Reframe challenges as opportunities</p>
+                  <p className="text-sm text-slate-600">{getText("Reframe challenges as opportunities", "إعادة صياغة التحديات كفرص")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -146,9 +151,9 @@ export default function DailyReflectionPracticeArticle() {
                     <div className="w-8 h-8 rounded-lg bg-[#E57373]/10 flex items-center justify-center">
                       <BookOpen className="h-4 w-4 text-[#E57373]" />
                     </div>
-                    <h3 className="font-semibold text-primary">Values Alignment</h3>
+                    <h3 className="font-semibold text-primary">{getText("Values Alignment", "توافق القيم")}</h3>
                   </div>
-                  <p className="text-sm text-slate-600">Examine alignment between actions and values</p>
+                  <p className="text-sm text-slate-600">{getText("Examine alignment between actions and values", "فحص التوافق بين الأفعال والقيم")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -157,9 +162,9 @@ export default function DailyReflectionPracticeArticle() {
                     <div className="w-8 h-8 rounded-lg bg-[#BA68C8]/10 flex items-center justify-center">
                       <Calendar className="h-4 w-4 text-[#BA68C8]" />
                     </div>
-                    <h3 className="font-semibold text-primary">Emotional Intelligence</h3>
+                    <h3 className="font-semibold text-primary">{getText("Emotional Intelligence", "الذكاء العاطفي")}</h3>
                   </div>
-                  <p className="text-sm text-slate-600">Develop awareness of emotional patterns</p>
+                  <p className="text-sm text-slate-600">{getText("Develop awareness of emotional patterns", "تطوير الوعي بالأنماط العاطفية")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -168,132 +173,130 @@ export default function DailyReflectionPracticeArticle() {
                     <div className="w-8 h-8 rounded-lg bg-[#FFB74D]/10 flex items-center justify-center">
                       <PenLine className="h-4 w-4 text-[#FFB74D]" />
                     </div>
-                    <h3 className="font-semibold text-primary">Environmental Design</h3>
+                    <h3 className="font-semibold text-primary">{getText("Environmental Design", "تصميم البيئة")}</h3>
                   </div>
-                  <p className="text-sm text-slate-600">Optimize your environment for success</p>
+                  <p className="text-sm text-slate-600">{getText("Optimize your environment for success", "تحسين بيئتك لتحقيق النجاح")}</p>
                 </CardContent>
               </Card>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Neural Pathway Connection
+              {getText("The Neural Pathway Connection", "الارتباط بالمسارات العصبية")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Every time you reflect on your target identity and find evidence of progress, 
-              you&apos;re strengthening specific neural pathways. This is neuroplasticity in action. 
-              Research shows that the brain&apos;s architecture literally changes with repeated 
-              mental activity—the neurons that fire together, wire together.
+              {getText(
+                "Every time you reflect on your target identity and find evidence of progress, you're strengthening specific neural pathways. This is neuroplasticity in action. Research shows that the brain's architecture literally changes with repeated mental activity—the neurons that fire together, wire together.",
+                "في كل مرة تتأمل فيها في هويتك المستهدفة وتجد دليلًا على التقدم، فإنك تعزز مسارات عصبية محددة. هذا هو اللدونة العصبية في العمل. تُظهر الأبحاث أن بنية الدماغ تتغير حرفيًا مع النشاط العقلي المتكرر—الخلايا العصبية التي تنطلق معًا، تتصل معًا."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Dr. Carol Dweck&apos;s research on mindset demonstrates this principle. When you 
-              reflect through a growth mindset lens—asking what you learned rather than 
-              whether you succeeded—you reinforce neural patterns that support learning and 
-              resilience. The daily reflection practice is designed to activate this mindset 
-              consistently.
+              {getText(
+                "Dr. Carol Dweck's research on mindset demonstrates this principle. When you reflect through a growth mindset lens—asking what you learned rather than whether you succeeded—you reinforce neural patterns that support learning and resilience. The daily reflection practice is designed to activate this mindset consistently.",
+                "تُظهر أبحاث الدكتورة كارول دويك عن العقلية هذا المبدأ. عندما تتأمل من خلال عدسة عقلية النمو—سائلاً نفسك ماذا تعلمت بدلاً من هل نجحت—فإنك تعزز الأنماط العصبية التي تدعم التعلم والمرونة. ممارسة التأمل اليومي مصممة لتنشيط هذه العقلية باستمرار."
+              )}
             </p>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
-              <h3 className="font-semibold text-primary mb-4">The 7 Reflection Themes</h3>
+              <h3 className="font-semibold text-primary mb-4">{getText("The 7 Reflection Themes", "مواضيع التأمل السبعة")}</h3>
               <div className="space-y-3 text-slate-600">
                 <div className="flex items-center gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
-                  <span><strong>Self-Awareness:</strong> Understanding your patterns, triggers, and choices</span>
+                  <span><strong>{getText("Self-Awareness:", "الوعي الذاتي:")}</strong> {getText("Understanding your patterns, triggers, and choices", "فهم أنماطك ومحفزاتك واختياراتك")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
-                  <span><strong>Identity Shift:</strong> Collecting evidence of your new identity in action</span>
+                  <span><strong>{getText("Identity Shift:", "التحول في الهوية:")}</strong> {getText("Collecting evidence of your new identity in action", "جمع الأدلة على هويتك الجديدة في العمل")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
-                  <span><strong>Growth Mindset:</strong> Reframing challenges as opportunities for development</span>
+                  <span><strong>{getText("Growth Mindset:", "عقلية النمو:")}</strong> {getText("Reframing challenges as opportunities for development", "إعادة صياغة التحديات كفرص للتطوير")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
-                  <span><strong>Values Alignment:</strong> Examining consistency between values and actions</span>
+                  <span><strong>{getText("Values Alignment:", "توافق القيم:")}</strong> {getText("Examining consistency between values and actions", "فحص الاتساق بين القيم والأفعال")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">5</span>
-                  <span><strong>Emotional Intelligence:</strong> Developing awareness of emotional patterns</span>
+                  <span><strong>{getText("Emotional Intelligence:", "الذكاء العاطفي:")}</strong> {getText("Developing awareness of emotional patterns", "تطوير الوعي بالأنماط العاطفية")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">6</span>
-                  <span><strong>Environmental Design:</strong> Optimizing surroundings for success</span>
+                  <span><strong>{getText("Environmental Design:", "تصميم البيئة:")}</strong> {getText("Optimizing surroundings for success", "تحسين المحيط لتحقيق النجاح")}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">7</span>
-                  <span><strong>Future Self:</strong> Connecting with who you&apos;re becoming</span>
+                  <span><strong>{getText("Future Self:", "الذات المستقبلية:")}</strong> {getText("Connecting with who you're becoming", "التواصل مع من تصبح")}</span>
                 </div>
               </div>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Habit Loop of Reflection
+              {getText("The Habit Loop of Reflection", "حلقة عادة التأمل")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Building a daily reflection habit follows the same principles as any habit 
-              formation. James Clear&apos;s research identifies the habit loop: cue, craving, 
-              response, reward. The Daily Reflection Practice is designed with this loop in mind.
+              {getText(
+                "Building a daily reflection habit follows the same principles as any habit formation. James Clear's research identifies the habit loop: cue, craving, response, reward. The Daily Reflection Practice is designed with this loop in mind.",
+                "بناء عادة التأمل اليومي يتبع نفس مبادئ تكوين أي عادة. يحدد بحث جيمس كلير حلقة العادة: الإشارة، الشغف، الاستجابة، المكافأة. ممارسة التأمل اليومي مصممة مع مراعاة هذه الحلقة."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The tool provides a daily prompt based on the date, creating a natural cue. 
-              The prompts are designed to trigger curiosity (craving), leading you to write 
-              your reflection (response), and the insight you gain provides intrinsic reward. 
-              Over time, this loop strengthens until reflection becomes automatic.
+              {getText(
+                "The tool provides a daily prompt based on the date, creating a natural cue. The prompts are designed to trigger curiosity (craving), leading you to write your reflection (response), and the insight you gain provides intrinsic reward. Over time, this loop strengthens until reflection becomes automatic.",
+                "توفر الأداة موجهة يومية بناءً على التاريخ، مما يخلق إشارة طبيعية. الموجهات مصممة لتحفيز الفضول (الشغف)، مما يقودك لكتابة تأملك (الاستجابة)، والبصيرة التي تكتسبها توفر مكافأة ذاتية. بمرور الوقت، تصبح هذه الحلقة أقوى حتى يصبح التأمل تلقائيًا."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Research shows that habits form through consistent repetition—approximately 
-              21 days of daily practice creates noticeable momentum. By 66 days, the habit 
-              becomes largely automatic. The tool tracks your streak and history, providing 
-              visual feedback that reinforces the behavior.
+              {getText(
+                "Research shows that habits form through consistent repetition—approximately 21 days of daily practice creates noticeable momentum. By 66 days, the habit becomes largely automatic. The tool tracks your streak and history, providing visual feedback that reinforces the behavior.",
+                "تُظهر الأبحاث أن العادات تتشكل من خلال التكرار المنتظم—حوالي 21 يومًا من الممارسة اليومية يخلق زخمًا ملحوظًا. بحلول 66 يومًا، تصبح العادة تلقائية إلى حد كبير. تتبع الأداة سلسلتك وسجلك، مما يوفر ملاحظات بصرية تعزز السلوك."
+              )}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              Why Structured Prompts Work Better Than Free Writing
+              {getText("Why Structured Prompts Work Better Than Free Writing", "لماذا تعمل الموجهات المنظمة أفضل من الكتابة الحرة")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              While free-form journaling has benefits, research suggests that structured 
-              reflection produces more consistent outcomes. A study in <em>Academic Medicine</em> 
-              found that students using structured reflection prompts showed greater improvement 
-              in critical thinking and self-awareness compared to those who journaled freely.
+              {getText(
+                "While free-form journaling has benefits, research suggests that structured reflection produces more consistent outcomes. A study in Academic Medicine found that students using structured reflection prompts showed greater improvement in critical thinking and self-awareness compared to those who journaled freely.",
+                "بينما لكتابة اليوميات الحرة فوائدها، تشير الأبحاث إلى أن التأمل المنظم ينتج نتائج أكثر اتساقًا. وجدت دراسة في التعليم الأكاديمي أن الطلاب الذين استخدموا موجهات تأمل منظمة أظهروا تحسنًا أكبر في التفكير النقدي والوعي الذاتي مقارنة بمن كتبوا بحرية."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Structured prompts serve several functions:
+              {getText("Structured prompts serve several functions:", "تخدم الموجهات المنظمة عدة وظائف:")}
             </p>
 
             <ul className="space-y-3 my-6">
               <li className="flex items-start gap-3">
                 <ArrowRight className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                <span className="text-slate-600">They direct attention to specific aspects of identity</span>
+                <span className="text-slate-600">{getText("They direct attention to specific aspects of identity", "توجه الانتباه إلى جوانب محددة من الهوية")}</span>
               </li>
               <li className="flex items-start gap-3">
                 <ArrowRight className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                <span className="text-slate-600">They reduce the cognitive load of deciding what to write</span>
+                <span className="text-slate-600">{getText("They reduce the cognitive load of deciding what to write", "تقلل الحمل المعرفي لاتخاذ قرار ماذا تكتب")}</span>
               </li>
               <li className="flex items-start gap-3">
                 <ArrowRight className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                <span className="text-slate-600">They ensure coverage of all important dimensions over time</span>
+                <span className="text-slate-600">{getText("They ensure coverage of all important dimensions over time", "تضمن تغطية جميع الأبعاد المهمة بمرور الوقت")}</span>
               </li>
               <li className="flex items-start gap-3">
                 <ArrowRight className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                <span className="text-slate-600">They connect daily experiences to larger identity goals</span>
+                <span className="text-slate-600">{getText("They connect daily experiences to larger identity goals", "تربط التجارب اليومية بأهداف الهوية الأكبر")}</span>
               </li>
             </ul>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Compound Effect of Daily Reflection
+              {getText("The Compound Effect of Daily Reflection", "التأثير التراكمي للتأمل اليومي")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              One day of reflection is valuable. A week creates insight. A month builds 
-              awareness. But the true power emerges over longer periods. Research on 
-              longitudinal journaling shows that sustained practice leads to:
+              {getText("One day of reflection is valuable. A week creates insight. A month builds awareness. But the true power emerges over longer periods. Research on longitudinal journaling shows that sustained practice leads to:", "يوم واحد من التأمل قيّم. أسبوع يخلق بصيرة. شهر يبني وعيًا. لكن القوة الحقيقية تظهر على فترات أطول. تُظهر الأبحاث حول كتابة اليوميات الطولية أن الممارسة المستمرة تؤدي إلى:")}
             </p>
 
             <div className="space-y-4 my-8">
@@ -302,8 +305,8 @@ export default function DailyReflectionPracticeArticle() {
                   <CheckCircle2 className="h-4 w-4 text-accent" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Enhanced Self-Awareness</h4>
-                  <p className="text-slate-600 text-sm">Greater recognition of patterns, triggers, and automatic behaviors</p>
+                  <h4 className="font-semibold text-primary">{getText("Enhanced Self-Awareness", "وعي ذاتي معزز")}</h4>
+                  <p className="text-slate-600 text-sm">{getText("Greater recognition of patterns, triggers, and automatic behaviors", "تعزيز التعرف على الأنماط والمحفزات والسلوكيات التلقائية")}</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -311,8 +314,8 @@ export default function DailyReflectionPracticeArticle() {
                   <CheckCircle2 className="h-4 w-4 text-accent" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Emotional Regulation</h4>
-                  <p className="text-slate-600 text-sm">Improved ability to process and manage difficult emotions</p>
+                  <h4 className="font-semibold text-primary">{getText("Emotional Regulation", "التنظيم العاطفي")}</h4>
+                  <p className="text-slate-600 text-sm">{getText("Improved ability to process and manage difficult emotions", "تحسين القدرة على معالجة وإدارة المشاعر الصعبة")}</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -320,8 +323,8 @@ export default function DailyReflectionPracticeArticle() {
                   <CheckCircle2 className="h-4 w-4 text-accent" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Identity Clarity</h4>
-                  <p className="text-slate-600 text-sm">Stronger sense of who you are and who you&apos;re becoming</p>
+                  <h4 className="font-semibold text-primary">{getText("Identity Clarity", "وضوح الهوية")}</h4>
+                  <p className="text-slate-600 text-sm">{getText("Stronger sense of who you are and who you're becoming", "إحساس أقوى بمن أنت ومن تصبح")}</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -329,41 +332,42 @@ export default function DailyReflectionPracticeArticle() {
                   <CheckCircle2 className="h-4 w-4 text-accent" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Goal Progress</h4>
-                  <p className="text-slate-600 text-sm">Better alignment between intentions and actions</p>
+                  <h4 className="font-semibold text-primary">{getText("Goal Progress", "تقدم الأهداف")}</h4>
+                  <p className="text-slate-600 text-sm">{getText("Better alignment between intentions and actions", "توافق أفضل بين النوايا والأفعال")}</p>
                 </div>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-accent mt-12 mb-4">
               <CheckCircle2 className="h-5 w-5" />
-              <span className="font-semibold">FREE Daily Practice Available</span>
+              <span className="font-semibold">{getText("FREE Daily Practice Available", "ممارسة يومية مجانية متاحة")}</span>
             </div>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The Daily Reflection Practice is available at no cost. Start today with a 
-              fresh prompt, save your reflections locally, and build a history of insights 
-              that compounds over time.
+              {getText(
+                "The Daily Reflection Practice is available at no cost. Start today with a fresh prompt, save your reflections locally, and build a history of insights that compounds over time.",
+                "ممارسة التأمل اليومي متاحة بدون تكلفة. ابدأ اليوم بموجهة جديدة، احفظ تأملاتك محليًا، وابنِ سجلًا من البصائر يتراكم بمرور الوقت."
+              )}
             </p>
 
             <div className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] p-8 rounded-xl my-10 text-center">
-              <h3 className="text-white text-xl font-bold mb-3">Start Your Daily Practice</h3>
+              <h3 className="text-white text-xl font-bold mb-3">{getText("Start Your Daily Practice", "ابدأ ممارستك اليومية")}</h3>
               <p className="text-slate-300 mb-6">
-                Begin with today&apos;s prompt. Your reflections are saved locally on your device.
+                {getText("Begin with today's prompt. Your reflections are saved locally on your device.", "ابدأ بموجهة اليوم. يتم حفظ تأملاتك محليًا على جهازك.")}
               </p>
               <Link href="/apps/daily-reflection">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  Start Reflecting
+                  {getText("Start Reflecting", "ابدأ التأمل")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
             </div>
 
             <p className="text-slate-600 leading-relaxed">
-              Identity is built one day at a time, one reflection at a time. The question 
-              isn&apos;t whether you&apos;re changing—you are, constantly. The question is whether 
-              you&apos;re directing that change consciously. Daily reflection gives you that 
-              direction.
+              {getText(
+                "Identity is built one day at a time, one reflection at a time. The question isn't whether you're changing—you are, constantly. The question is whether you're directing that change consciously. Daily reflection gives you that direction.",
+                "الهوية تُبنى يومًا بعد يوم، وتأملًا بعد تأمل. السؤال ليس هل أنت تتغير—أنت تتغير باستمرار. السؤال هو هل توجه ذلك التغيير بوعي. التأمل اليومي يمنحك هذا الاتجاه."
+              )}
             </p>
           </div>
         </div>
@@ -376,7 +380,7 @@ export default function DailyReflectionPracticeArticle() {
       <section className="py-12 bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
-            <h3 className="font-semibold text-primary mb-6">Related Articles</h3>
+            <h3 className="font-semibold text-primary mb-6">{getText("Related Articles", "مقالات ذات صلة")}</h3>
             <div className="grid md:grid-cols-3 gap-4">
               {relatedArticles.map((article) => (
                 <Link key={article.slug} href={`/blog/${article.slug}`}>
@@ -399,23 +403,23 @@ export default function DailyReflectionPracticeArticle() {
       <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <Badge className="mb-4 bg-accent/20 text-accent border-0">FREE Tool</Badge>
+            <Badge className="mb-4 bg-accent/20 text-accent border-0">{getText("FREE Tool", "أداة مجانية")}</Badge>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              Begin Your Daily Reflection Journey
+              {getText("Begin Your Daily Reflection Journey", "ابدأ رحلة التأمل اليومي")}
             </h2>
             <p className="text-slate-300 mb-6">
-              Start today. Your future self will thank you.
+              {getText("Start today. Your future self will thank you.", "ابدأ اليوم. ذاتك المستقبلية ستشكرك.")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/apps/daily-reflection">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  Start Daily Reflection
+                  {getText("Start Daily Reflection", "ابدأ التأمل اليومي")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/products">
                 <Button variant="white" size="lg" className="px-8">
-                  View All Products
+                  {getText("View All Products", "عرض جميع المنتجات")}
                 </Button>
               </Link>
             </div>

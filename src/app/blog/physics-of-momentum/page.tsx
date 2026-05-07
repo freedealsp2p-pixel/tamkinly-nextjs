@@ -7,8 +7,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Zap, Target, TrendingUp } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { useLocale } from '@/components/providers/LocaleProvider';
 
 export default function PhysicsOfMomentumArticle() {
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+
   return (
     <>
       {/* JSON-LD Structured Data for SEO */}
@@ -21,25 +25,25 @@ export default function PhysicsOfMomentumArticle() {
         author="Tamkinly Team"
         keywords={["habit formation", "identity transformation", "momentum", "personal development", "18 minutes"]}
       />
-    <article className="min-h-screen">
+    <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <Badge variant="outline" className="mb-4 px-4 py-2 border-accent/30 text-accent bg-accent/10">
-              Identity Shift
+              {getText("Identity Shift", "تحول الهوية")}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              The Physics of Momentum: Why 18 Minutes Changes Everything
+              {getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغيّر ١٨ دقيقة كل شيء")}
             </h1>
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                8 min read
+                {getText("8 min read", "٨ دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Tamkinly Team
+                {getText("Tamkinly Team", "فريق تمكنلي")}
               </span>
             </div>
           </div>
@@ -51,54 +55,62 @@ export default function PhysicsOfMomentumArticle() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
-              If you want to become an expert in anything, it takes three months of 18 minutes each day. 
-              If you want to become a master, it takes 18 minutes a day for a year.
+              {getText(
+                "If you want to become an expert in anything, it takes three months of 18 minutes each day. If you want to become a master, it takes 18 minutes a day for a year.",
+                "إذا أردت أن تصبح خبيراً في أي شيء، يلزمك ثلاثة أشهر بمعدل ١٨ دقيقة يومياً. وإذا أردت أن تصبح ماهراً، يلزمك ١٨ دقيقة يومياً لمدة عام."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              This simple truth reveals something profound about transformation. The gap between where you are 
-              and who you want to become isn&apos;t measured in years—it&apos;s measured in consistent, focused minutes.
+              {getText(
+                "This simple truth reveals something profound about transformation. The gap between where you are and who you want to become isn't measured in years—it's measured in consistent, focused minutes.",
+                "هذه الحقيقة البسيطة تكشف شيئاً عميقاً عن التحول. الفجوة بين مكانك ومن تريد أن تصبح لا تُقاس بالسنوات — بل تُقاس بالدقائق المركزة والمتسقة."
+              )}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Law of Identity Momentum
+              {getText("The Law of Identity Momentum", "قانون زخم الهوية")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              In physics, a body in motion stays in motion unless acted upon by an external force. 
-              This isn&apos;t just a law of mechanics—it&apos;s a law of transformation. Once you begin moving 
-              toward a new identity, the hardest part isn&apos;t maintaining momentum. The hardest part is starting.
+              {getText(
+                "In physics, a body in motion stays in motion unless acted upon by an external force. This isn't just a law of mechanics—it's a law of transformation. Once you begin moving toward a new identity, the hardest part isn't maintaining momentum. The hardest part is starting.",
+                "في الفيزياء، الجسم المتحرك يبقى متحركاً ما لم تؤثر عليه قوة خارجية. هذا ليس مجرد قانون ميكانيكي — بل هو قانون للتحول. بمجرد أن تبدأ بالتحرك نحو هوية جديدة، أصعب جزء ليس الحفاظ على الزخم. أصعب جزء هو البدء."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Science tells us that habit formation takes approximately 21 days. After three weeks of 
-              consistent practice, your new behavior becomes &quot;carved in stone.&quot; It becomes something 
-              you simply do—without negotiation, without motivation, without the internal debate that 
-              kills most transformations before they begin.
+              {getText(
+                "Science tells us that habit formation takes approximately 21 days. After three weeks of consistent practice, your new behavior becomes \"carved in stone.\" It becomes something you simply do—without negotiation, without motivation, without the internal debate that kills most transformations before they begin.",
+                "العلم يخبرنا أن تكوين العادات يستغرق حوالي ٢١ يوماً. بعد ثلاثة أسابيع من الممارسة المتسقة، يصبح سلوكك الجديد \"محفوراً في الحجر\". يصبح شيئاً تفعله ببساطة — بدون تفاوض، بدون تحفيز، بدون الجدال الداخلي الذي يقتل معظم التحولات قبل أن تبدأ."
+              )}
             </p>
 
             <div className="bg-accent/5 border-l-4 border-accent p-6 my-8 rounded-r-lg">
               <p className="text-slate-700 italic">
-                &quot;After 21 days, you&apos;re already in motion. You won&apos;t stop unless something catastrophic 
-                happens—a tragedy or trauma that pulls you off course. After 21 days, you have so much 
-                momentum that motivation becomes irrelevant. You simply do it without a second thought.&quot;
+                {getText(
+                  "\"After 21 days, you're already in motion. You won't stop unless something catastrophic happens—a tragedy or trauma that pulls you off course. After 21 days, you have so much momentum that motivation becomes irrelevant. You simply do it without a second thought.\"",
+                  "\"بعد ٢١ يوماً، أنت بالفعل في حركة. لن تتوقف ما لم يحدث شيء كارثي — مأساة أو صدمة تخرجك عن مسارك. بعد ٢١ يوماً، يكون لديك زخم كبير لدرجة أن التحفيز يصبح غير ذي صلة. أنت ببساطة تفعله دون تفكير.\""
+                )}
               </p>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              Why 18 Minutes?
+              {getText("Why 18 Minutes?", "لماذا ١٨ دقيقة؟")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Eighteen minutes isn&apos;t arbitrary. It&apos;s long enough to create meaningful engagement with 
-              your new identity, yet short enough to eliminate excuses. Anyone can find 18 minutes. 
-              The busy executive, the overwhelmed parent, the skeptical beginner—everyone has 18 minutes.
+              {getText(
+                "Eighteen minutes isn't arbitrary. It's long enough to create meaningful engagement with your new identity, yet short enough to eliminate excuses. Anyone can find 18 minutes. The busy executive, the overwhelmed parent, the skeptical beginner—everyone has 18 minutes.",
+                "ثماني عشرة دقيقة ليست عشوائية. إنها طويلة بما يكفي لخلق تفاعل حقيقي مع هويتك الجديدة، وقصيرة بما يكفي للقضاء على الأعذار. أي شخص يمكنه أن يجد ١٨ دقيقة. المدير المشغول، الوالد المنهك، المبتدئ المتشكك — الجميع لديه ١٨ دقيقة."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              But here&apos;s what makes this timeframe powerful: it bypasses your brain&apos;s resistance system. 
-              Your mind can&apos;t mount a serious objection to 18 minutes. It can&apos;t generate the fear and 
-              overwhelm that stops most transformation efforts before they start.
+              {getText(
+                "But here's what makes this timeframe powerful: it bypasses your brain's resistance system. Your mind can't mount a serious objection to 18 minutes. It can't generate the fear and overwhelm that stops most transformation efforts before they start.",
+                "لكن هذا ما يجعل هذا الإطار الزمني قوياً: إنه يتجاوز نظام المقاومة في دماغك. عقلك لا يستطيع أن يبدي اعتراضاً جاداً على ١٨ دقيقة. لا يمكنه توليد الخوف والإرهاق الذي يوقف معظم جهود التحول قبل أن تبدأ."
+              )}
             </p>
 
             <div className="grid md:grid-cols-3 gap-6 my-10">
@@ -107,8 +119,8 @@ export default function PhysicsOfMomentumArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Zap className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">21 Days</h3>
-                  <p className="text-sm text-slate-600">Habit formation, momentum takes over</p>
+                  <h3 className="font-semibold text-primary mb-2">{getText("21 Days", "٢١ يوماً")}</h3>
+                  <p className="text-sm text-slate-600">{getText("Habit formation, momentum takes over", "تكوين العادات، الزخم يتولى الأمر")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -116,8 +128,8 @@ export default function PhysicsOfMomentumArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Sparkles className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">3 Months</h3>
-                  <p className="text-sm text-slate-600">Expert level proficiency in any skill</p>
+                  <h3 className="font-semibold text-primary mb-2">{getText("3 Months", "٣ أشهر")}</h3>
+                  <p className="text-sm text-slate-600">{getText("Expert level proficiency in any skill", "مستوى الخبرة في أي مهارة")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -125,111 +137,123 @@ export default function PhysicsOfMomentumArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Target className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">1 Year</h3>
-                  <p className="text-sm text-slate-600">Mastery, complete identity integration</p>
+                  <h3 className="font-semibold text-primary mb-2">{getText("1 Year", "عام واحد")}</h3>
+                  <p className="text-sm text-slate-600">{getText("Mastery, complete identity integration", "الإتقان، اندماج الهوية بالكامل")}</p>
                 </CardContent>
               </Card>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Identity Connection
+              {getText("The Identity Connection", "الارتباط بالهوية")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              This principle extends far beyond skill acquisition. It&apos;s the foundation of identity 
-              transformation. Every day you show up for those 18 minutes, you&apos;re not just practicing 
-              a skill—you&apos;re practicing a new version of yourself.
+              {getText(
+                "This principle extends far beyond skill acquisition. It's the foundation of identity transformation. Every day you show up for those 18 minutes, you're not just practicing a skill—you're practicing a new version of yourself.",
+                "هذا المبدأ يمتد إلى أبعد من اكتساب المهارات. إنه أساس تحول الهوية. كل يوم تحضر فيه ل تلك الـ ١٨ دقيقة، لست تتدرب فقط على مهارة — بل تتدرب على نسخة جديدة من نفسك."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              When you write for 18 minutes, you&apos;re not &quot;trying to write.&quot; You&apos;re a writer. 
-              When you meditate for 18 minutes, you&apos;re not &quot;attempting meditation.&quot; You&apos;re a meditator. 
-              When you exercise for 18 minutes, you&apos;re not &quot;trying to get fit.&quot; You&apos;re an athlete.
+              {getText(
+                "When you write for 18 minutes, you're not \"trying to write.\" You're a writer. When you meditate for 18 minutes, you're not \"attempting meditation.\" You're a meditator. When you exercise for 18 minutes, you're not \"trying to get fit.\" You're an athlete.",
+                "عندما تكتب لمدة ١٨ دقيقة، لست \"تحاول الكتابة.\" أنت كاتب. عندما تتأمل لمدة ١٨ دقيقة، لست \"تحاول التأمل.\" أنت متأمل. عندما تمارس الرياضة لمدة ١٨ دقيقة، لست \"تحاول أن تصبح لائقاً.\" أنت رياضي."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The behavior comes first. The identity follows. And after 21 days, the behavior is 
-              automatic—meaning the identity becomes automatic too.
+              {getText(
+                "The behavior comes first. The identity follows. And after 21 days, the behavior is automatic—meaning the identity becomes automatic too.",
+                "السلوك يأتي أولاً. الهوية تتبعه. وبعد ٢١ يوماً، يصبح السلوك تلقائياً — مما يعني أن الهوية تصبح تلقائية أيضاً."
+              )}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              Breaking the Inertia
+              {getText("Breaking the Inertia", "كسر القصور الذاتي")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Most people never start because they&apos;re waiting for motivation. They&apos;re waiting to feel 
-              ready. They&apos;re waiting for the perfect circumstances. But physics teaches us another truth: 
-              static objects tend to stay static.
+              {getText(
+                "Most people never start because they're waiting for motivation. They're waiting to feel ready. They're waiting for the perfect circumstances. But physics teaches us another truth: static objects tend to stay static.",
+                "معظم الناس لا يبدأون أبداً لأنهم ينتظرون التحفيز. ينتظرون الشعور بالجاهزية. ينتظرون الظروف المثالية. لكن الفيزياء تعلمنا حقيقة أخرى: الأجسام الساكنة تميل إلى البقاء ساكنة."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The answer isn&apos;t motivation. The answer is movement. Small, consistent, almost 
-              embarrassingly small movement. Because once you&apos;re moving, continuing becomes easier 
-              than stopping.
+              {getText(
+                "The answer isn't motivation. The answer is movement. Small, consistent, almost embarrassingly small movement. Because once you're moving, continuing becomes easier than stopping.",
+                "الجواب ليس التحفيز. الجواب هو الحركة. حركة صغيرة، متسقة، صغيرة بشكل محرج تقريباً. لأنه بمجرد أن تبدأ بالحركة، يصبح الاستمرار أسهل من التوقف."
+              )}
             </p>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
-              <h3 className="font-semibold text-primary mb-4">The Momentum Protocol</h3>
+              <h3 className="font-semibold text-primary mb-4">{getText("The Momentum Protocol", "بروتوكول الزخم")}</h3>
               <ol className="space-y-3 text-slate-600">
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
-                  <span>Choose your new identity. What do you want to become?</span>
+                  <span>{getText("Choose your new identity. What do you want to become?", "اختر هويتك الجديدة. ماذا تريد أن تصبح؟")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
-                  <span>Define the smallest daily action that represents that identity.</span>
+                  <span>{getText("Define the smallest daily action that represents that identity.", "حدد أصغر فعل يومي يمثل تلك الهوية.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
-                  <span>Commit to 18 minutes. No more, no less.</span>
+                  <span>{getText("Commit to 18 minutes. No more, no less.", "التزم بـ ١٨ دقيقة. لا أكثر ولا أقل.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
-                  <span>Mark each day complete. Build the chain.</span>
+                  <span>{getText("Mark each day complete. Build the chain.", "سجل كل يوم كمكتمل. ابنِ السلسلة.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">5</span>
-                  <span>After 21 days, notice that the resistance has disappeared.</span>
+                  <span>{getText("After 21 days, notice that the resistance has disappeared.", "بعد ٢١ يوماً، لاحظ أن المقاومة قد اختفت.")}</span>
                 </li>
               </ol>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              The Compound Effect
+              {getText("The Compound Effect", "التأثير التراكمي")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              Three months of 18-minute days equals 27 hours of focused practice. That&apos;s enough 
-              to become an expert in almost anything. A year equals 109 hours—enough for mastery.
+              {getText(
+                "Three months of 18-minute days equals 27 hours of focused practice. That's enough to become an expert in almost anything. A year equals 109 hours—enough for mastery.",
+                "ثلاثة أشهر من أيام الـ ١٨ دقيقة تساوي ٢٧ ساعة من الممارسة المركزة. هذا يكفي لتصبح خبيراً في أي شيء تقريباً. سنة تساوي ١٠٩ ساعات — تكفي للإتقان."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              But the real compound effect isn&apos;t in the hours. It&apos;s in the identity. Every day 
-              you show up, you reinforce the neural pathways of your new self. You become the 
-              person who does this thing. And that identity shift ripples into every area of 
-              your life.
+              {getText(
+                "But the real compound effect isn't in the hours. It's in the identity. Every day you show up, you reinforce the neural pathways of your new self. You become the person who does this thing. And that identity shift ripples into every area of your life.",
+                "لكن التأثير التراكمي الحقيقي ليس في الساعات. إنه في الهوية. كل يوم تحضر فيه، تعزز المسارات العصبية لذاتك الجديدة. تصبح الشخص الذي يفعل هذا الشيء. ويتسع تحول الهوية ليشمل كل مجالات حياتك."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The writer becomes more observant. The athlete becomes more disciplined. The 
-              meditator becomes more present. The new identity doesn&apos;t just add a skill—it 
-              transforms how you show up in the world.
+              {getText(
+                "The writer becomes more observant. The athlete becomes more disciplined. The meditator becomes more present. The new identity doesn't just add a skill—it transforms how you show up in the world.",
+                "الكاتب يصبح أكثر ملاحظة. الرياضي يصبح أكثر انضباطاً. المتأمل يصبح أكثر حضوراً. الهوية الجديدة لا تضيف فقط مهارة — بل تحول طريقة ظهورك في العالم."
+              )}
             </p>
 
             <div className="flex items-center gap-2 text-accent mt-12 mb-8">
               <TrendingUp className="h-5 w-5" />
-              <span className="font-semibold">The Key Insight</span>
+              <span className="font-semibold">{getText("The Key Insight", "الفكرة الأساسية")}</span>
             </div>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              The transformation you&apos;re seeking isn&apos;t hiding in a dramatic life overhaul. 
-              It&apos;s hiding in 18 minutes. The question isn&apos;t whether you have time. The 
-              question is whether you&apos;re willing to start small enough to actually start.
+              {getText(
+                "The transformation you're seeking isn't hiding in a dramatic life overhaul. It's hiding in 18 minutes. The question isn't whether you have time. The question is whether you're willing to start small enough to actually start.",
+                "التحول الذي تبحث عنه ليس مخبأً في إصلاح جذري للحياة. إنه مخبأٌ في ١٨ دقيقة. السؤال ليس ما إذا كان لديك وقت. السؤال هو هل أنت مستعد أن تبدأ بصغر يكفي لتبدأ فعلاً."
+              )}
             </p>
 
             <p className="text-slate-600 leading-relaxed">
-              A body in motion stays in motion. The hardest part is the first push. 
-              After that, momentum does the work for you.
+              {getText(
+                "A body in motion stays in motion. The hardest part is the first push. After that, momentum does the work for you.",
+                "الجسم المتحرك يبقى متحركاً. أصعب جزء هو الدفعة الأولى. بعد ذلك، الزخم يقوم بالعمل نيابة عنك."
+              )}
             </p>
           </div>
         </div>
@@ -243,14 +267,14 @@ export default function PhysicsOfMomentumArticle() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              Start Your 18-Minute Transformation
+              {getText("Start Your 18-Minute Transformation", "ابدأ تحولك بـ ١٨ دقيقة")}
             </h2>
             <p className="text-slate-300 mb-6">
-              Get the tools and structure to build momentum toward your new identity.
+              {getText("Get the tools and structure to build momentum toward your new identity.", "احصل على الأدوات والهيكل لبناء الزخم نحو هويتك الجديدة.")}
             </p>
             <Link href="/products">
               <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                Explore Products
+                {getText("Explore Products", "استكشف المنتجات")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

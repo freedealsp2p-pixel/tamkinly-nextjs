@@ -18,8 +18,9 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useLocale } from '@/components/providers/LocaleProvider';
 
-const reflectionPrompts = [
+const reflectionPromptsEn = [
   {
     theme: 'Self-Awareness',
     prompts: [
@@ -84,7 +85,7 @@ const reflectionPrompts = [
     theme: 'Future Self',
     prompts: [
       'What would my future self thank me for doing today?',
-      'If I continued today\'s patterns for a year, where would I be?',
+      "If I continued today's patterns for a year, where would I be?",
       'What small action today moved me closer to my vision?',
       'What does my ideal tomorrow look like?',
       'What habit would my future self want me to start today?'
@@ -92,16 +93,90 @@ const reflectionPrompts = [
   }
 ];
 
+const reflectionPromptsAr = [
+  {
+    theme: 'الوعي الذاتي',
+    prompts: [
+      'ماذا سيفعل شخص يحمل هويتي المستهدفة أول شيء كل صباح؟',
+      'كيف عكست أفعالي اليوم الشخص الذي أريد أن أصبحه؟',
+      'ماذا تعلّمت عن نفسي اليوم؟',
+      'متى شعرت بأكبر انسجام مع قيمي اليوم؟',
+      'ما القرار الذي أفخر به أكثر اليوم، ولماذا؟'
+    ]
+  },
+  {
+    theme: 'تحوّل الهوية',
+    prompts: [
+      'كيف تستجيب هويتي المستهدفة للتحديات غير المتوقعة؟',
+      'ما الدليل الذي جمعته اليوم الذي يدعم هويتي الجديدة؟',
+      'ما النمط القديم الذي لاحظته واخترت مختلفًا اليوم؟',
+      'كيف سيتعامل الشخص الذي أريد أن أصبحه مع هذا الموقف؟',
+      'ما المعتقد الهويّاتي الذي تحدّيته اليوم؟'
+    ]
+  },
+  {
+    theme: 'عقلية النمو',
+    prompts: [
+      'ما التحدي اليوم الذي كان في الحقيقة فرصة مقنّعة؟',
+      'كيف خرجت من منطقة راحتي اليوم؟',
+      'ماذا سأفعل بشكل مختلف لو عرفت أنني لا أستطيع الفشل؟',
+      'ما المهارة أو المعرفة التي طوّرتها اليوم؟',
+      'كما استجبت للنكسة أو الصعوبة؟'
+    ]
+  },
+  {
+    theme: 'محاذاة القيم',
+    prompts: [
+      'هل طابقت أفعالي اليوم قيمي المعلنة؟ أين كانت الفجوة؟',
+      'ما القيمة التي كرّمتها أكثر اليوم؟',
+      'متى شعرت بتعارض بين قيمي وأفعالي؟',
+      'ما الحد الذي حافظت عليه (أو أحتاج للحفاظ عليه) اليوم؟',
+      'كما عبّرت عن قيمي الجوهرية من خلال سلوكي؟'
+    ]
+  },
+  {
+    theme: 'الذكاء العاطفي',
+    prompts: [
+      'ما العاطفة التي فاجأتني اليوم؟ ما الذي أثارها؟',
+      'كما نظّمت مشاعري عندما واجهت تحديًا؟',
+      'ما الحاجة الكامنة التي كنت أحاول تلبيتها من خلال سلوكي؟',
+      'كيف أثرت حالتي العاطفية على قراراتي اليوم؟',
+      'ماذا سأقول لصديق شعر بنفس ما شعرت به اليوم؟'
+    ]
+  },
+  {
+    theme: 'التصميم البيئي',
+    prompts: [
+      'ما الذي في بيئتي ساعد أو أعاق تقدّمي اليوم؟',
+      'كيف يمكنني إعادة تصميم بيئتي لتسهيل الغد؟',
+      'ما نقاط الاحتكاك التي واجهتها، وكيف يمكنني إزالتها؟',
+      'ما المحفّز الذي أطلق عادة إيجابية اليوم؟',
+      'كيف أثر الأشخاص من حولي على سلوكي؟'
+    ]
+  },
+  {
+    theme: 'الذات المستقبلية',
+    prompts: [
+      'ما الذي سيشكرني عليه ذاتي المستقبلية لفعله اليوم؟',
+      'لو استمريت في أنماط اليوم لمدة سنة، أين سأكون؟',
+      'ما الفعل الصغير اليوم الذي قرّبني من رؤيتي؟',
+      'كيف يبدو غدي المثالي؟',
+      'ما العادة التي تريد ذاتي المستقبلية أن أبدأها اليوم؟'
+    ]
+  }
+];
+
 // Function to get today's prompt based on date
-function getTodaysPrompt() {
+function getTodaysPrompt(locale: string) {
+  const prompts = locale === 'ar' ? reflectionPromptsAr : reflectionPromptsEn;
   const today = new Date();
   const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / 86400000);
-  const totalPrompts = reflectionPrompts.reduce((sum, cat) => sum + cat.prompts.length, 0);
+  const totalPrompts = prompts.reduce((sum, cat) => sum + cat.prompts.length, 0);
   
   let promptIndex = dayOfYear % totalPrompts;
   let currentCount = 0;
   
-  for (const category of reflectionPrompts) {
+  for (const category of prompts) {
     if (promptIndex < currentCount + category.prompts.length) {
       const localIndex = promptIndex - currentCount;
       return {
@@ -112,18 +187,21 @@ function getTodaysPrompt() {
     currentCount += category.prompts.length;
   }
   
-  return { prompt: reflectionPrompts[0].prompts[0], theme: reflectionPrompts[0].theme };
+  return { prompt: prompts[0].prompts[0], theme: prompts[0].theme };
 }
 
 // Function to get random prompt
-function getRandomPrompt() {
-  const category = reflectionPrompts[Math.floor(Math.random() * reflectionPrompts.length)];
+function getRandomPrompt(locale: string) {
+  const prompts = locale === 'ar' ? reflectionPromptsAr : reflectionPromptsEn;
+  const category = prompts[Math.floor(Math.random() * prompts.length)];
   const prompt = category.prompts[Math.floor(Math.random() * category.prompts.length)];
   return { prompt, theme: category.theme };
 }
 
 export default function DailyReflectionPage() {
-  const [currentPrompt, setCurrentPrompt] = useState<{ prompt: string; theme: string } | null>(() => getTodaysPrompt());
+  const { locale } = useLocale();
+  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+  const [currentPrompt, setCurrentPrompt] = useState<{ prompt: string; theme: string } | null>(() => getTodaysPrompt(locale));
   const [reflection, setReflection] = useState('');
   const [pastReflections, setPastReflections] = useState<{ date: string; prompt: string; reflection: string; theme: string }[]>(() => {
     if (typeof window !== 'undefined') {
@@ -142,12 +220,12 @@ export default function DailyReflectionPage() {
   }, [pastReflections]);
 
   const handleNewPrompt = () => {
-    setCurrentPrompt(getRandomPrompt());
+    setCurrentPrompt(getRandomPrompt(locale));
     setReflection('');
   };
 
   const handleTodaysPrompt = () => {
-    setCurrentPrompt(getTodaysPrompt());
+    setCurrentPrompt(getTodaysPrompt(locale));
   };
 
   const handleSaveReflection = () => {
@@ -167,34 +245,41 @@ export default function DailyReflectionPage() {
     // Show visual confirmation
     setSaveConfirmation(true);
     toast({
-      title: '✅ Reflection Saved!',
-      description: 'Your reflection has been saved successfully. Keep building your identity!',
+      title: getText('✅ Reflection Saved!', '✅ تم حفظ التأمّل!'),
+      description: getText('Your reflection has been saved successfully. Keep building your identity!', 'تم حفظ تأمّلك بنجاح. استمر في بناء هويتك!'),
       duration: 3000,
     });
     setTimeout(() => setSaveConfirmation(false), 3000);
     
     // Clear for next entry
     setReflection('');
-    setCurrentPrompt(getRandomPrompt());
+    setCurrentPrompt(getRandomPrompt(locale));
   };
 
   const themeColors: Record<string, string> = {
     'Self-Awareness': '#3DD4B0',
+    'الوعي الذاتي': '#3DD4B0',
     'Identity Shift': '#1F6F78',
+    'تحوّل الهوية': '#1F6F78',
     'Growth Mindset': '#64B5F6',
+    'عقلية النمو': '#64B5F6',
     'Values Alignment': '#E57373',
+    'محاذاة القيم': '#E57373',
     'Emotional Intelligence': '#BA68C8',
+    'الذكاء العاطفي': '#BA68C8',
     'Environmental Design': '#FFB74D',
-    'Future Self': '#81C784'
+    'التصميم البيئي': '#FFB74D',
+    'Future Self': '#81C784',
+    'الذات المستقبلية': '#81C784'
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header */}
       <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link href="/apps" className="text-[#3DD4B0] hover:underline text-sm mb-4 inline-block">
-            ← Back to Apps
+            {locale === 'ar' ? '→ العودة للتطبيقات' : '← Back to Apps'}
           </Link>
           <div className="flex items-center justify-between mt-2">
             <div className="flex items-center gap-3">
@@ -202,8 +287,8 @@ export default function DailyReflectionPage() {
                 <Sun className="w-5 h-5 text-[#FFB74D]" />
               </div>
               <div>
-                <h1 className="text-xl font-bold">Daily Reflection Prompt</h1>
-                <p className="text-slate-400 text-sm">FREE • Daily identity-focused reflection</p>
+                <h1 className="text-xl font-bold">{getText('Daily Reflection Prompt', 'محفّز التأمّل اليومي')}</h1>
+                <p className="text-slate-400 text-sm">{getText('FREE • Daily identity-focused reflection', 'مجاني • تأمّل يومي مركّز على الهوية')}</p>
               </div>
             </div>
             <Button
@@ -212,7 +297,7 @@ export default function DailyReflectionPage() {
               className="shadow-md"
             >
               <Calendar className="w-4 h-4 mr-2" />
-              {showHistory ? 'Today\'s Prompt' : 'History'}
+              {showHistory ? getText("Today's Prompt", 'محفّز اليوم') : getText('History', 'السجل')}
             </Button>
           </div>
         </div>
@@ -225,14 +310,14 @@ export default function DailyReflectionPage() {
           <div className="mb-6 bg-[#3DD4B0]/20 border border-[#3DD4B0]/50 rounded-xl p-4 flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
             <CheckCircle2 className="w-6 h-6 text-[#3DD4B0] flex-shrink-0" />
             <div>
-              <p className="text-white font-semibold">Reflection Saved Successfully!</p>
-              <p className="text-slate-300 text-sm">Your reflection has been saved locally. Keep building your identity!</p>
+              <p className="text-white font-semibold">{getText('Reflection Saved Successfully!', 'تم حفظ التأمّل بنجاح!')}</p>
+              <p className="text-slate-300 text-sm">{getText('Your reflection has been saved locally. Keep building your identity!', 'تم حفظ تأمّلك محليًا. استمر في بناء هويتك!')}</p>
             </div>
           </div>
         )}
         {showHistory ? (
           <>
-            <h2 className="text-2xl font-bold text-white mb-6">Reflection History</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">{getText('Reflection History', 'سجل التأمّلات')}</h2>
             
             {pastReflections.length > 0 ? (
               <div className="space-y-4">
@@ -244,7 +329,7 @@ export default function DailyReflectionPage() {
                           {entry.theme}
                         </Badge>
                         <span className="text-sm text-[#8A94A6]">
-                          {new Date(entry.date).toLocaleDateString('en-US', { 
+                          {new Date(entry.date).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', { 
                             weekday: 'short', 
                             month: 'short', 
                             day: 'numeric' 
@@ -261,8 +346,8 @@ export default function DailyReflectionPage() {
               <Card className="bg-white/10 border-white/20">
                 <CardContent className="p-8 text-center">
                   <BookOpen className="w-12 h-12 text-[#8A94A6] mx-auto mb-4" />
-                  <h3 className="text-white font-semibold mb-2">No reflections yet</h3>
-                  <p className="text-slate-400">Start reflecting to build your history.</p>
+                  <h3 className="text-white font-semibold mb-2">{getText('No reflections yet', 'لا توجد تأمّلات بعد')}</h3>
+                  <p className="text-slate-400">{getText('Start reflecting to build your history.', 'ابدأ بالتأمّل لبناء سجلك.')}</p>
                 </CardContent>
               </Card>
             )}
@@ -281,7 +366,7 @@ export default function DailyReflectionPage() {
               disabled={pastReflections.length === 0}
             >
               <Download className="w-4 h-4 mr-2" />
-              Export Reflections
+              {getText('Export Reflections', 'تصدير التأمّلات')}
             </Button>
           </>
         ) : (
@@ -303,7 +388,7 @@ export default function DailyReflectionPage() {
                         onClick={handleTodaysPrompt}
                         variant="outline"
                         size="sm"
-                        title="Today's assigned prompt"
+                        title={getText("Today's assigned prompt", 'محفّز اليوم المحدد')}
                       >
                         <Calendar className="w-4 h-4" />
                       </Button>
@@ -311,7 +396,7 @@ export default function DailyReflectionPage() {
                         onClick={handleNewPrompt}
                         variant="outline"
                         size="sm"
-                        title="Get random prompt"
+                        title={getText('Get random prompt', 'الحصول على محفّز عشوائي')}
                       >
                         <RefreshCw className="w-4 h-4" />
                       </Button>
@@ -323,8 +408,8 @@ export default function DailyReflectionPage() {
                   </h2>
                   
                   <div className="space-y-2 mb-4">
-                    <p className="text-sm text-[#8A94A6]">Take a moment to reflect deeply on this question.</p>
-                    <p className="text-xs text-[#8A94A6]">Your reflection is saved locally on your device.</p>
+                    <p className="text-sm text-[#8A94A6]">{getText('Take a moment to reflect deeply on this question.', 'خذ لحظة للتأمّل بعمق في هذا السؤال.')}</p>
+                    <p className="text-xs text-[#8A94A6]">{getText('Your reflection is saved locally on your device.', 'يتم حفظ تأمّلك محليًا على جهازك.')}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -334,22 +419,22 @@ export default function DailyReflectionPage() {
             <Card className="bg-white/10 border-white/20 mb-6">
               <CardContent className="p-6">
                 <label className="text-sm font-medium text-white mb-2 block">
-                  Your Reflection
+                  {getText('Your Reflection', 'تأمّلك')}
                 </label>
                 <Textarea
-                  placeholder="Write your thoughts here... Be honest with yourself. This is for your growth."
+                  placeholder={getText('Write your thoughts here... Be honest with yourself. This is for your growth.', 'اكتب أفكارك هنا... كن صادقًا مع نفسك. هذا من أجل نموّك.')}
                   value={reflection}
                   onChange={(e) => setReflection(e.target.value)}
                   className="min-h-[200px] bg-white border-white/20 text-[#0F1C2E] placeholder:text-[#8A94A6]"
                 />
                 <div className="flex justify-between items-center mt-4">
-                  <span className="text-xs text-slate-400">{reflection.length} characters</span>
+                  <span className="text-xs text-slate-400">{reflection.length} {getText('characters', 'حرف')}</span>
                   <Button
                     onClick={handleSaveReflection}
                     disabled={!reflection.trim()}
                     className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-50"
                   >
-                    Save Reflection
+                    {getText('Save Reflection', 'حفظ التأمّل')}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
@@ -359,11 +444,11 @@ export default function DailyReflectionPage() {
             {/* Quick Stats */}
             <Card className="bg-[#0F1C2E] border-[#1F6F78]/30">
               <CardContent className="p-6">
-                <h3 className="text-white font-semibold mb-4">Your Reflection Stats</h3>
+                <h3 className="text-white font-semibold mb-4">{getText('Your Reflection Stats', 'إحصائيات تأمّلاتك')}</h3>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <div className="text-3xl font-bold text-[#3DD4B0]">{pastReflections.length}</div>
-                    <div className="text-xs text-slate-400">Total Reflections</div>
+                    <div className="text-xs text-slate-400">{getText('Total Reflections', 'إجمالي التأمّلات')}</div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-[#3DD4B0]">
@@ -371,13 +456,13 @@ export default function DailyReflectionPage() {
                         new Date(r.date).toDateString() === new Date().toDateString()
                       ).length}
                     </div>
-                    <div className="text-xs text-slate-400">Today</div>
+                    <div className="text-xs text-slate-400">{getText('Today', 'اليوم')}</div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-[#3DD4B0]">
                       {new Set(pastReflections.map(r => r.theme)).size}
                     </div>
-                    <div className="text-xs text-slate-400">Themes Explored</div>
+                    <div className="text-xs text-slate-400">{getText('Themes Explored', 'المواضيع المستكشفة')}</div>
                   </div>
                 </div>
               </CardContent>
