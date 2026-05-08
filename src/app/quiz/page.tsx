@@ -20,6 +20,7 @@ import {
   Star,
   Lock,
   ChevronRight,
+  Target,
   Play
 } from 'lucide-react';
 
