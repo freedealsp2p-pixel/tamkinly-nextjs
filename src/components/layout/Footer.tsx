@@ -62,18 +62,12 @@ export function Footer() {
             <p className="text-slate-300 text-sm mb-4">
               {t("newsletterDescription")}
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+            <div className="max-w-md mx-auto">
               <Link 
                 href="/quiz" 
-                className="flex-1 bg-accent text-primary font-semibold py-2 px-4 rounded-lg hover:bg-accent/90 transition-colors text-center"
+                className="block bg-accent text-primary font-semibold py-3 px-6 rounded-lg hover:bg-accent/90 transition-colors text-center"
               >
                 {t("startFreeAssessment")}
-              </Link>
-              <Link 
-                href="/products" 
-                className="flex-1 border border-accent text-accent font-semibold py-2 px-4 rounded-lg hover:bg-accent/10 transition-colors text-center"
-              >
-                {t("viewProducts")}
               </Link>
             </div>
           </div>

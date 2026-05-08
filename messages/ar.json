@@ -876,7 +876,8 @@
           }
         ]
       }
-    }
+    },
+    "addToCart": "أضف إلى السلة"
   },
   "cookieConsent": {
     "close": "إغلاق موافقة ملفات تعريف الارتباط",
@@ -1266,7 +1267,11 @@
       "Ongoing": "مستمر",
       "Always": "دائماً",
       "Unlimited": "غير محدود"
-    }
+    },
+    "haveAccessCode": "لديك رمز وصول؟",
+    "enterCodeDesc": "أدخل رمزك لفتح التطبيقات المميزة",
+    "activateCode": "تفعيل",
+    "codeActivated": "تم تفعيل الرمز! جارِ التحديث..."
   },
   "contactPage": {
     "heroBadge": "تواصل معنا",
@@ -1634,7 +1639,9 @@
     "accessYourApps": "الدخول إلى تطبيقاتك",
     "continueShopping": "متابعة التسوق",
     "submitError": "فشل إرسال الطلب. يرجى المحاولة مرة أخرى.",
-    "failedCreateOrder": "فشل إنشاء الطلب"
+    "failedCreateOrder": "فشل إنشاء الطلب",
+    "tax": "الضريبة",
+    "total": "المجموع"
   },
   "searchPage": {
     "badge": "البحث",

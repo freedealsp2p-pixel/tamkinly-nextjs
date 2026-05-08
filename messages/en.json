@@ -876,7 +876,8 @@
           }
         ]
       }
-    }
+    },
+    "addToCart": "Add to Cart"
   },
   "cookieConsent": {
     "close": "Close cookie consent",
@@ -1266,7 +1267,11 @@
       "Ongoing": "مستمر",
       "Always": "دائماً",
       "Unlimited": "غير محدود"
-    }
+    },
+    "haveAccessCode": "Have an access code?",
+    "enterCodeDesc": "Enter your code to unlock premium apps",
+    "activateCode": "Activate",
+    "codeActivated": "Code activated! Refreshing..."
   },
   "contactPage": {
     "heroBadge": "Get in Touch",
@@ -1634,7 +1639,9 @@
     "accessYourApps": "Access Your Apps",
     "continueShopping": "Continue Shopping",
     "submitError": "Failed to submit order. Please try again.",
-    "failedCreateOrder": "Failed to create order"
+    "failedCreateOrder": "Failed to create order",
+    "tax": "Tax",
+    "total": "Total"
   },
   "searchPage": {
     "badge": "Search",

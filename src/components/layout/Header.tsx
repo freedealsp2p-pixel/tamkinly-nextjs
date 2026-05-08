@@ -83,18 +83,12 @@ function useCartCount() {
 
 // Language Switcher Component
 function LanguageSwitcher() {
-  const { locale, direction } = useLocale();
+  const { locale, direction, setLocale } = useLocale();
   const t = useTranslations("language");
-  const pathname = usePathname();
-  const router = useRouter();
 
   const switchLocale = (newLocale: 'en' | 'ar') => {
-    const pathWithoutLocale = pathname.replace(/^\/ar/, '') || '/';
-    if (newLocale === 'ar') {
-      router.push(`/ar${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`);
-    } else {
-      router.push(pathWithoutLocale);
-    }
+    // Use setLocale for full page reload to re-initialize locale
+    setLocale(newLocale);
   };
 
   return (

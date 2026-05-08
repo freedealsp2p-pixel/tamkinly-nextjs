@@ -106,43 +106,13 @@ export function ServiceWorkerRegistration() {
     }
   }, []);
 
+  // PWA install prompt disabled - no longer showing install banner
+  // Service worker still registered for offline support
   return (
     <>
       {isOffline && (
         <div className="fixed top-0 left-0 right-0 z-[100] bg-yellow-500 text-yellow-900 px-4 py-2 text-center text-sm font-medium">
           You are currently offline. Some features may be limited.
-        </div>
-      )}
-
-      {showInstallPrompt && (
-        <div className="fixed bottom-4 left-4 right-4 z-[90] sm:left-auto sm:right-4 sm:max-w-sm">
-          <div className="bg-card border border-border rounded-lg shadow-lg p-4">
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                <Download className="w-5 h-5 text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-sm">Install Tamkinly</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Install our app for a better experience with offline access and faster loading.
-                </p>
-              </div>
-              <button
-                onClick={handleDismissInstall}
-                className="flex-shrink-0 text-muted-foreground hover:text-foreground"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex gap-2 mt-3">
-              <Button onClick={handleInstall} size="sm" className="flex-1">
-                Install
-              </Button>
-              <Button onClick={handleDismissInstall} size="sm" variant="ghost">
-                Not now
-              </Button>
-            </div>
-          </div>
         </div>
       )}
     </>

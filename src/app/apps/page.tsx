@@ -32,6 +32,7 @@ import {
 import { JsonLd } from '@/components/seo/JsonLd';
 import { generateSoftwareAppSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
+import { AccessCodeInput } from '@/components/AccessCodeInput';
 
 // Access Tier Colors - High contrast for readability
 const tierColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -184,6 +185,8 @@ export default function AppsPage() {
           </div>
         </div>
       </div>
+
+      <AccessCodeInput />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
