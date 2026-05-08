@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { getCategoryBySlug, getArticlesForCategory, BLOG_CATEGORIES } from '@/lib/blog-articles';
+import { getCategoryBySlug, getArticlesForCategory, BLOG_CATEGORIES, BLOG_ARTICLES } from '@/lib/blog-articles';
 import { 
   Smartphone, FileText, Sparkles, Brain, TrendingUp, 
   ArrowRight, Clock, Tag, ChevronRight 
@@ -12,6 +12,89 @@ const iconMap: Record<string, React.ElementType> = {
   Smartphone, FileText, Sparkles, Brain, TrendingUp,
 };
 
+// Slug aliases: map common short slugs to their full category slugs
+const CATEGORY_ALIASES: Record<string, string> = {
+  'identity': 'identity-transformation',
+  'mindset': 'mindset-strategy',
+  'growth': 'productivity-growth',
+  'apps': 'app-guides',
+  'tools': 'app-guides',
+};
+
+// Map sub-category names to their icon
+const subCategoryIconMap: Record<string, string> = {
+  'FREE App': 'Smartphone',
+  'BASIC App': 'Smartphone',
+  'BUNDLE App': 'Smartphone',
+  'Worksheet': 'FileText',
+  'Identity Shift': 'Sparkles',
+  'Transformation': 'Sparkles',
+  'Self-Liberation': 'Sparkles',
+  'Wealth & Identity': 'Brain',
+  'Commitment': 'Brain',
+  'Strategy': 'Brain',
+  'Execution': 'Brain',
+  'Productivity': 'TrendingUp',
+  'Excellence': 'TrendingUp',
+  'Mental Clarity': 'TrendingUp',
+  'Self-Image': 'Sparkles',
+};
+
+// Convert a sub-category name to a URL slug
+function categoryToSlug(category: string): string {
+  return category.toLowerCase().replace(/[&]/g, 'and').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
+
+// Resolve slug aliases
+function resolveSlug(slug: string): string {
+  return CATEGORY_ALIASES[slug] || slug;
+}
+
+// Find matching articles for a given URL slug
+function findArticlesForSlug(slug: string) {
+  const resolvedSlug = resolveSlug(slug);
+
+  // 1. Try predefined BLOG_CATEGORIES first
+  const predefinedCat = getCategoryBySlug(resolvedSlug);
+  if (predefinedCat) {
+    return {
+      category: predefinedCat,
+      articles: getArticlesForCategory(resolvedSlug),
+      isPredefined: true,
+    };
+  }
+
+  // 2. Try matching article sub-categories by slug
+  const matchingArticles = BLOG_ARTICLES.filter(article => {
+    return categoryToSlug(article.category) === slug;
+  });
+
+  if (matchingArticles.length > 0) {
+    const categoryEn = matchingArticles[0].category;
+    const categoryAr = matchingArticles[0].categoryAr;
+    
+    const parentCategory = BLOG_CATEGORIES.find(cat => 
+      cat.subCategories.some(sub => sub === categoryEn)
+    );
+
+    return {
+      category: {
+        slug: slug,
+        name: categoryEn,
+        description: parentCategory?.description || `Articles about ${categoryEn}`,
+        descriptionAr: parentCategory?.descriptionAr || `مقالات عن ${categoryAr}`,
+        subCategories: [categoryEn],
+        icon: subCategoryIconMap[categoryEn] || 'FileText',
+        color: parentCategory?.color || 'from-primary to-primary/80',
+      },
+      articles: matchingArticles,
+      isPredefined: false,
+    };
+  }
+
+  return null;
+}
+
 interface CategoryPageClientProps {
   category: string;
 }
@@ -20,10 +103,10 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
-  const cat = getCategoryBySlug(category);
-  if (!cat) return null;
+  const result = findArticlesForSlug(category);
+  if (!result) return null;
 
-  const articles = getArticlesForCategory(category);
+  const { category: cat, articles } = result;
   const IconComponent = iconMap[cat.icon] || FileText;
 
   return (
@@ -39,7 +122,7 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
               <li><ChevronRight className="h-4 w-4" /></li>
               <li><Link href="/blog" className="hover:text-white transition-colors">{getText("Blog", "المدونة")}</Link></li>
               <li><ChevronRight className="h-4 w-4" /></li>
-              <li className="text-[#3DD4B0] font-medium">{cat.name}</li>
+              <li className="text-[#3DD4B0] font-medium">{getText(cat.name, articles.length > 0 ? articles[0].categoryAr : cat.name)}</li>
             </ol>
           </nav>
 
@@ -56,7 +139,7 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
           </div>
           
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white mb-4">
-            {cat.name}
+            {getText(cat.name, articles.length > 0 ? articles[0].categoryAr : cat.name)}
           </h1>
           <p className="text-lg text-slate-300 max-w-2xl">
             {locale === 'ar' && cat.descriptionAr ? cat.descriptionAr : cat.description}
@@ -67,16 +150,18 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
       {/* Articles Grid */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         {/* Sub-categories Tags */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {cat.subCategories.map((sub) => (
-            <span 
-              key={sub}
-              className="inline-flex items-center px-3 py-1.5 rounded-full bg-primary/5 text-primary text-sm font-medium border border-primary/10"
-            >
-              {sub}
-            </span>
-          ))}
-        </div>
+        {cat.subCategories.length > 1 && (
+          <div className="flex flex-wrap gap-2 mb-10">
+            {cat.subCategories.map((sub) => (
+              <span 
+                key={sub}
+                className="inline-flex items-center px-3 py-1.5 rounded-full bg-primary/5 text-primary text-sm font-medium border border-primary/10"
+              >
+                {sub}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Articles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -89,7 +174,7 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/5 text-primary text-xs font-semibold">
-                    {article.category}
+                    {getText(article.category, article.categoryAr)}
                   </span>
                   {article.featured && (
                     <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold">
@@ -99,17 +184,17 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
                 </div>
                 
                 <h2 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                  {article.title}
+                  {getText(article.title, article.titleAr)}
                 </h2>
                 
                 <p className="text-sm text-slate-500 mb-4 line-clamp-2">
-                  {article.description}
+                  {getText(article.description, article.descriptionAr)}
                 </p>
                 
                 <div className="flex items-center justify-between text-xs text-slate-400">
                   <div className="flex items-center gap-1.5">
                     <Clock className="h-3.5 w-3.5" />
-                    <span>{article.readTime}</span>
+                    <span>{getText(article.readTime, article.readTimeAr)}</span>
                   </div>
                   <time dateTime={article.datePublished}>
                     {new Date(article.datePublished).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', { 
@@ -139,7 +224,7 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <h2 className="text-2xl font-serif font-bold text-slate-900 mb-8">{getText("Browse All Categories", "تصفح جميع الفئات")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {BLOG_CATEGORIES.filter(c => c.slug !== category).map((otherCat) => {
+            {BLOG_CATEGORIES.filter(c => c.slug !== resolveSlug(category)).map((otherCat) => {
               const OtherIcon = iconMap[otherCat.icon] || FileText;
               const otherCount = getArticlesForCategory(otherCat.slug).length;
               return (
@@ -167,3 +252,4 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
     </div>
   );
 }
+

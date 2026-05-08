@@ -148,10 +148,22 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('AI Coach error:', error);
+    const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+    // Check if it's a configuration/connection error
+    if (errorMsg.includes('Configuration file not found') || errorMsg.includes('fetch failed')) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'AI Coach is temporarily unavailable. Please try again later.',
+          unavailable: true,
+        },
+        { status: 503 }
+      );
+    }
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: errorMsg,
       },
       { status: 500 }
     );

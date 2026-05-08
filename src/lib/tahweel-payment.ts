@@ -194,8 +194,13 @@ class TahweelPaymentService {
   private createDemoPayment(data: PaymentRequest): PaymentResponse {
     const paymentId = `DEMO-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
     
+    // Ensure amount is safely converted to a string
+    const safeAmount = String(Number(data.amount) || 0);
+
     // In demo mode, create a mock payment URL that simulates the payment flow
-    const demoPaymentUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/payment/demo?paymentId=${paymentId}&orderId=${data.orderId}&amount=${data.amount}&email=${encodeURIComponent(data.customerEmail)}`;
+    // Use encodeURIComponent for all dynamic URL parameters to prevent ByteString errors
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const demoPaymentUrl = `${baseUrl}/payment/demo?paymentId=${encodeURIComponent(paymentId)}&orderId=${encodeURIComponent(data.orderId)}&amount=${encodeURIComponent(safeAmount)}&email=${encodeURIComponent(data.customerEmail)}`;
 
     return {
       success: true,

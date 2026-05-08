@@ -90,7 +90,7 @@
   "discover": {
     "badge": "ما ستكتشفه",
     "title": "5 أبعاد رئيسية لهويتك",
-    "titleHighlight": "",
+    "titleHighlight": "الهوية",
     "subtitle": "يقيس تقييمنا خمسة مجالات حاسمة تحدد قدرتك على إحداث تغيير دائم في حياتك.",
     "identityClarity": {
       "title": "درجة وضوح الهوية",
@@ -984,7 +984,7 @@
     "heroTitle": "اختر مسار ",
     "heroTitleHighlight": "تحولك",
     "heroSubtitle": "بدون ضغط. بدون التزام. ",
-    "heroSubtitleBold": "",
+    "heroSubtitleBold": "بدون ضغط. بدون التزام.",
     "heroSubtitleEnd": " تحول حقيقي على سرعتك.",
     "heroAppsCount": "تطبيق تفاعلي",
     "trustMoneyBack": "ضمان 30 يوم",
@@ -1680,7 +1680,7 @@
     "heroBadge": "قاعدة المعرفة",
     "heroTitle": "مدونة ",
     "heroTitleHighlight": "تمكينلي",
-    "heroTitleEnd": "",
+    "heroTitleEnd": " المدونة",
     "heroSubtitle": "رؤى مبنية على الأبحاث ونصائح عملية وأدوات تحول تفاعلية. كل مقال مصمم لتوجيهك نحو هويتك الحقيقية.",
     "browseByCategory": "تصفح حسب الفئة",
     "browseByCategoryDesc": "استكشف المقالات المنظمة حسب الموضوع للتعلم المركز.",
@@ -1732,7 +1732,7 @@
   "resourcesPage": {
     "heroBadge": "موارد مجانية",
     "heroTitle": "موارد لرحلتك",
-    "heroTitleHighlight": "",
+    "heroTitleHighlight": "الرحلة",
     "heroSubtitle": "أدوات وأدلة ومحتوى مجاني لدعم تحولك. لا يتطلب بريداً إلكترونياً (إلا إذا ذُكر ذلك).",
     "categoryAssessment": "تقييم",
     "resourceQuizTitle": "اختبار تقييم الهوية",
@@ -1853,7 +1853,7 @@
   "guidesPage": {
     "heroBadge": "دراسات معمقة",
     "heroTitle": "أدلة التحول",
-    "heroTitleHighlight": "",
+    "heroTitleHighlight": "الأدلة",
     "heroSubtitle": "أدلة شاملة مبنية على الأبحاث تتجاوز النصائح السطحية. كل دليل يرشدك عبر إطار كامل لتغيير هوية دائم.",
     "allGuides": "جميع الأدلة",
     "availableGuides": "الأدلة المتاحة",
