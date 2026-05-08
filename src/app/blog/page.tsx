@@ -320,6 +320,51 @@ const philosophyArticles = [
     readTime: "9 min read",
     featured: true
   },
+  {
+    slug: "automatic-change",
+    title: "Automatic Change: How to Outsmart Your Brain and Make Positive Habits Stick",
+    titleAr: "التغيير التلقائي: كيف تتفوق على دماغك وتجعل العادات الإيجابية تلقائية",
+    excerpt: "Your brain is a prediction engine. Procrastination is not laziness. The real secret is understanding the predictive language of your nervous system.",
+    excerptAr: "دماغك محرك تنبؤ. المماطلة ليست كسلا. السر الحقيقي في فهم اللغة التنبؤية لجهازك العصبي.",
+    category: "Identity Shift",
+    categoryAr: "تحول الهوية",
+    readTime: "10 min read",
+    featured: true
+  },
+  {
+    slug: "physics-of-consciousness",
+    title: "The Physics of Consciousness: How Repetition Rewrites Your Identity",
+    titleAr: "فيزياء الوعي: كيف يعيد التكرار كتابة هويتك",
+    excerpt: "Reality does not happen to you. It happens within you. Your brain uses repetition to pave neural pathways defining your identity.",
+    excerptAr: "الواقع لا يحدث لك. يحدث داخلك. دماغك يستخدم التكرار لرصف المسارات العصبية التي تحدد هويتك.",
+    category: "Identity Shift",
+    categoryAr: "تحول الهوية",
+    readTime: "11 min read",
+    featured: false
+  },
+  {
+    slug: "redefining-discipline",
+    title: "Redefining Discipline: The Highest Form of Self-Love",
+    titleAr: "إعادة تعريف الانضباط: أعلى أشكال حب الذات",
+    excerpt: "Discipline is not punishment. It is not a cage. It is the highest form of self-love and the prerequisite for freedom.",
+    excerptAr: "الانضباط ليس عقابا. ليس قفصا. هو أعلى أشكال حب الذات وشرط الحرية المسبق.",
+    category: "Commitment",
+    categoryAr: "الالتزام",
+    readTime: "10 min read",
+    featured: true
+  },
+  {
+    slug: "vagus-nerve-breathing",
+    title: "The Vagus Nerve Protocol: How 4-2-8-2 Breathing Rewires Your Stress Response",
+    titleAr: "بروتوكول العصب المبهم: كيف يعيد التنفس 4-2-8-2 تشكيل استجابتك للتوتر",
+    excerpt: "The Vagus Nerve is the master safety switch. The 4-2-8-2 breathing technique leverages biomechanics to demand systemic calm.",
+    excerptAr: "العصب المبهم هو مفتاح الأمان الرئيسي. تقنية التنفس 4-2-8-2 تستخدم البيوميكانيكا للمطالبة بالهدوء المنهجي.",
+    category: "Mental Clarity",
+    categoryAr: "الوضوح الذهني",
+    readTime: "10 min read",
+    featured: false
+  },
+
 ];
 
 const allFeatured = [...appArticles, ...worksheetArticles, ...philosophyArticles].filter(a => a.featured);
