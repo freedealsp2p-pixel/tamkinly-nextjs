@@ -315,7 +315,7 @@ const allFeatured = [...appArticles, ...worksheetArticles, ...philosophyArticles
 
 export default function BlogPage() {
   const t = useTranslations('blogPage');
-  const locale = useLocale();
+  const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   // Breadcrumb schema

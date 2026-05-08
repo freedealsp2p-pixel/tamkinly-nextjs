@@ -83,22 +83,10 @@ const appsData = [
 // Tier order for priority
 const tierOrder = ['BUNDLE', 'PREMIUM', 'BASIC', 'TRIAL', 'FREE'];
 
-// Sort apps by tier
-const sortedApps = [...appsData].sort((a, b) => tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier));
-
 export default function AppsPage() {
   const [selectedTier, setSelectedTier] = useState<string | null>('ALL');
   const t = useTranslations("appsPage");
   const { locale } = useLocale();
-
-  // Get translated duration
-  const getDuration = (duration: string) => {
-    try {
-      const translated = t(`durationLabels.${duration}`);
-      if (translated && !translated.startsWith('durationLabels.')) return translated;
-    } catch {}
-    return duration;
-  };
 
   // Filter apps based on selected tier
   const filteredApps = selectedTier === 'ALL' 
@@ -229,7 +217,7 @@ export default function AppsPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {appsByTier.FREE.map((app) => (
-                <AppCard key={app.slug} app={app} isLocked={false} t={t} />
+                <AppCard key={app.slug} app={app} isLocked={false} t={t} locale={locale} />
               ))}
             </div>
           </div>
@@ -252,7 +240,7 @@ export default function AppsPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {apps.map((app) => (
-                  <AppCard key={app.slug} app={app} isLocked={true} t={t} />
+                  <AppCard key={app.slug} app={app} isLocked={true} t={t} locale={locale} />
                 ))}
               </div>
             </div>
@@ -284,13 +272,23 @@ export default function AppsPage() {
 }
 
 // App Card Component
-function AppCard({ app, isLocked, t }: { 
+function AppCard({ app, isLocked, t, locale }: { 
   app: typeof appsData[0]; 
   isLocked: boolean;
   t: ReturnType<typeof useTranslations>;
+  locale: string;
 }) {
   const Icon = app.icon;
   const tierStyle = tierColors[app.tier as keyof typeof tierColors];
+
+  // Get translated duration
+  const getDuration = (duration: string) => {
+    try {
+      const translated = t(`durationLabels.${duration}`);
+      if (translated && !translated.startsWith('durationLabels.')) return translated;
+    } catch {}
+    return duration;
+  };
 
   return (
     <Card className={`relative overflow-hidden border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white ${

@@ -31,14 +31,7 @@ export function middleware(request: NextRequest) {
   );
 
   if (localeMatch && localeMatch !== defaultLocale) {
-    // For exact /ar path (no trailing slash), redirect to /ar/ for consistency
-    if (pathname === `/${localeMatch}`) {
-      const url = request.nextUrl.clone();
-      url.pathname = `/${localeMatch}/`;
-      return NextResponse.redirect(url);
-    }
-
-    // For /ar/* paths, rewrite to the path without locale prefix
+    // For /ar paths, rewrite to the path without locale prefix (no redirect needed)
     const pathWithoutLocale = pathname.replace(new RegExp(`^/${localeMatch}`), '') || '/';
     const url = request.nextUrl.clone();
     url.pathname = pathWithoutLocale;
