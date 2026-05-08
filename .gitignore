@@ -51,3 +51,6 @@ package-lock.json
 db/*.db
 # Skills directory
 /skills/
+# Database files
+db/custom.db
+prisma/db/

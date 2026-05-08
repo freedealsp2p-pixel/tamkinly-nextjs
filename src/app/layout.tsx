@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Suspense } from "react";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/Header";
@@ -13,8 +13,20 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { LocaleProvider } from '@/components/providers/LocaleProvider';
 
-// Helper to read locale from cookies (server-side)
+// Helper to read locale from URL header (set by middleware) and cookies (server-side)
 async function getLocaleFromCookies(): Promise<'en' | 'ar'> {
+  // Priority 1: Check x-locale header set by middleware (from URL path /ar)
+  try {
+    const headersList = await headers();
+    const urlLocale = headersList.get('x-locale');
+    if (urlLocale === 'ar' || urlLocale === 'en') {
+      return urlLocale;
+    }
+  } catch {
+    // headers() not available in some contexts
+  }
+  
+  // Priority 2: Check cookie
   const cookieStore = await cookies();
   const locale = cookieStore.get('NEXT_LOCALE')?.value;
   return locale === 'ar' ? 'ar' : 'en';
@@ -225,3 +237,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

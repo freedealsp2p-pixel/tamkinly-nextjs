@@ -311,24 +311,23 @@ function ProductCard({ product, t }: {
   const highlights: string[] = [];
   
   // We need to iterate over array indices in the translation
-  let idx = 0;
-  while (true) {
-    try {
-      const feature = t(`products.${product.nameKey}.features.${idx}`);
-      if (feature === `products.${product.nameKey}.features.${idx}`) break; // key not found
-      features.push(feature);
-      idx++;
-    } catch { break; }
+  // Iterate with a reasonable max count to avoid infinite loops
+  // The translation function returns the full key path when not found (includes namespace)
+  // So we detect not-found by checking if the result still contains the local key part
+  for (let idx = 0; idx < 20; idx++) {
+    const localKey = `products.${product.nameKey}.features.${idx}`;
+    const feature = t(localKey);
+    // If translation not found, t() returns the full key like "productsPage.products.free.features.999"
+    // Check if the result is the not-found case (contains the local key but is not a real translation)
+    if (!feature || feature.endsWith(localKey) || feature === localKey) break;
+    features.push(feature);
   }
   
-  idx = 0;
-  while (true) {
-    try {
-      const highlight = t(`products.${product.nameKey}.highlights.${idx}`);
-      if (highlight === `products.${product.nameKey}.highlights.${idx}`) break;
-      highlights.push(highlight);
-      idx++;
-    } catch { break; }
+  for (let idx = 0; idx < 10; idx++) {
+    const localKey = `products.${product.nameKey}.highlights.${idx}`;
+    const highlight = t(localKey);
+    if (!highlight || highlight.endsWith(localKey) || highlight === localKey) break;
+    highlights.push(highlight);
   }
   
   return (
@@ -554,14 +553,14 @@ function GuaranteeSection({ t }: { t: ReturnType<typeof useTranslations> }) {
 function FAQSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   // Get FAQ items from translations
   const faqs: { q: string; a: string }[] = [];
-  let idx = 0;
-  while (true) {
-    const q = t(`faqs.${idx}.q`);
-    const a = t(`faqs.${idx}.a`);
-    // If the key returned is the same as the lookup key, it means it wasn't found
-    if (q === `faqs.${idx}.q` || a === `faqs.${idx}.a`) break;
+  for (let idx = 0; idx < 20; idx++) {
+    const localKeyQ = `faqs.${idx}.q`;
+    const localKeyA = `faqs.${idx}.a`;
+    const q = t(localKeyQ);
+    const a = t(localKeyA);
+    // If translation not found, t() returns the full key path (includes namespace)
+    if (!q || !a || q.endsWith(localKeyQ) || a.endsWith(localKeyA)) break;
     faqs.push({ q, a });
-    idx++;
   }
 
   return (
@@ -688,3 +687,5 @@ export default function ProductsPage() {
     </>
   );
 }
+
+

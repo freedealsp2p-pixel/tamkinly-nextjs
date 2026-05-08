@@ -8,9 +8,9 @@ module.exports = {
       instances: 1,
       exec_mode: 'fork',
       
-      // Memory management for 1GB RAM server
-      max_memory_restart: '400M',
-      node_args: '--max-old-space-size=384',
+      // Memory management - increased for better stability
+      max_memory_restart: '512M',
+      node_args: '--max-old-space-size=512',
       
       // Auto restart
       watch: false,
@@ -41,3 +41,4 @@ module.exports = {
     },
   ],
 };
+

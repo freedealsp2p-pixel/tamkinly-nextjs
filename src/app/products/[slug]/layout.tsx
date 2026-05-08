@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: product.description,
       url: fullUrl,
       siteName: 'Tamkinly',
-      type: 'product',
+      type: 'website',
       images: [
         {
           url: 'https://tamkinly.com/og-image.webp',

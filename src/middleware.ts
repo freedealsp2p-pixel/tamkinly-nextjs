@@ -31,12 +31,20 @@ export function middleware(request: NextRequest) {
   );
 
   if (localeMatch && localeMatch !== defaultLocale) {
-    // For /ar paths, rewrite to the path without locale prefix (no redirect needed)
+    // For /ar paths, rewrite to the path without locale prefix
     const pathWithoutLocale = pathname.replace(new RegExp(`^/${localeMatch}`), '') || '/';
     const url = request.nextUrl.clone();
     url.pathname = pathWithoutLocale;
 
-    const response = NextResponse.rewrite(url);
+    // Set x-locale header so server components can read the locale from URL
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set('x-locale', localeMatch);
+
+    const response = NextResponse.rewrite(url, {
+      request: {
+        headers: requestHeaders,
+      }
+    });
     response.cookies.set('NEXT_LOCALE', localeMatch, {
       maxAge: 365 * 24 * 60 * 60,
       path: '/',
@@ -72,3 +80,4 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: ['/((?!api|_next|images|favicon|robots|sitemap|manifest|sw|workbox|browserconfig).*)'],
 };
+
