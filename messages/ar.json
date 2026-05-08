@@ -1836,7 +1836,8 @@
     "phaseRange2": "30-59%",
     "phaseRange3": "60%+",
     "phaseRecoding": "إعادة البرمجة",
-    "there": "هناك"
+    "there": "هناك",
+    "activateCode": "تفعيل"
   },
   "guidesPage": {
     "heroBadge": "دراسات معمقة",
@@ -2164,7 +2165,9 @@
       "daily-planner": "المخطط اليومي",
       "bundle": "الحزمة الكاملة",
       "worksheet": "حزمة أوراق العمل"
-    }
+    },
+    "activateCode": "تفعيل الكود",
+    "enterCodeDesc": "أدخل كود الوصول TMLY لتفعيل منتجك"
   },
   "downloadsPage": {
     "badge": "منتجات تمكينلي",

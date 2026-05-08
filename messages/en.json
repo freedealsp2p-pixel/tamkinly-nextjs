@@ -1836,7 +1836,8 @@
     "phaseRange2": "30-59%",
     "phaseRange3": "60%+",
     "phaseRecoding": "Recoding",
-    "there": "there"
+    "there": "there",
+    "activateCode": "Activate"
   },
   "guidesPage": {
     "heroBadge": "Deep Dives",
@@ -2164,7 +2165,9 @@
       "daily-planner": "Daily Planner",
       "bundle": "Complete Bundle",
       "worksheet": "Worksheets Package"
-    }
+    },
+    "activateCode": "Activate Code",
+    "enterCodeDesc": "Enter your TMLY access code to activate your product"
   },
   "downloadsPage": {
     "badge": "Tamkinly Products",

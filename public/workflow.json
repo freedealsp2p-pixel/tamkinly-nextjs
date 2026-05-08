@@ -1,0 +1,74 @@
+{
+  "name": "Tamkinly Content OS",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tamkinly",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-512, 16],
+      "name": "Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const topic = $json.body?.message?.text || $json.body?.message?.caption || $json.query?.topic || \"Self-Trust\";\nif (topic.startsWith(\"/\") || topic.toLowerCase() === \"start\") {\n  return [{ json: { skip: true } }];\n}\nconst dayIndex = Math.floor(Date.now() / 86400000) % 7;\nconst angles = [\"Identity Shift\", \"Emotional Intelligence\", \"Decision Clarity\", \"Daily Architecture\", \"Self-Trust\", \"Relational Power\", \"Legacy Mindset\"];\nconst prompt = `You are Tamkinly, the voice of RESONANT CLARITY. You write identity-level content, not generic self-help.\n\nMANDATORY TERMINOLOGY: self-confidence=Self-Trust, identity crisis=Identity Gap, self-esteem=Self-Trust, self-doubt=Trust Gap, personal growth=Identity Evolution, self-improvement=Intentional Recoding, self-help=Identity Work.\n\nFORBIDDEN: Journey, Embark, Unlock your potential, Level up, Game-changer, Secret, Hack, Pro tip, You deserve, You are enough, Be authentic, Life-changing, Transformative, Revolutionary, In today's world, Picture this, Imagine, What if I told you, Real talk.\n\nBRAND PRINCIPLES: 1) Identity Before Action 2) Intentional Architecture 3) Emotional Precision 4) Legacy Over Comfort\n\nPRODUCTS: Identity Recode Planner (90-day identity transformation protocol), Intentional Planner (daily architecture for intentional living)\n\nTODAY'S ANGLE: ${angles[dayIndex]}\nTOPIC: ${topic}\n\nGenerate ALL 8 sections with EXACT headers:\n\n===== INSTAGRAM CAPTION =====\nStart with \"🔥 Slide 1:\" then hook. 5-7 lines body. 3-4 value bullets with ➡️. CTA + hashtags. DEFAULT: #SelfTrust #IdentityEvolution #IntentionalLiving #Tamkinly #IntentionalRecoding #IdentityRecode\n\n===== LINKEDIN POST =====\n8-15 lines. Hook-insight-framework-CTA. DEFAULT: #SelfTrust #IdentityEvolution #IntentionalLiving\n\n===== TWITTER/X POST =====\nUnder 280 chars. No 🧵: prefix. DEFAULT: #SelfTrust #Tamkinly\n\n===== FACEBOOK POST =====\n6-10 lines. Story-driven. DEFAULT: #SelfTrust #IntentionalLiving\n\n===== PINTEREST PIN =====\nSEO title + description. DEFAULT: #SelfTrust #IdentityEvolution\n\n===== VIDEO SCRIPT (15-30 sec) =====\nVISUAL: [NO \"a person\" or \"a woman\" or \"a man\". Use environment shots like \"Close-up of hands\", \"Wide shot of workspace\"]\nVOICEOVER: [spoken words]\nTEXT OVERLAY: [on-screen text]\n\n===== VOICE OVER =====\n8-15 sec spoken content. No prefix label. Just the text directly.\n\n===== IMAGE PROMPT =====\nMust include ALL 6: 1) Subject 2) Scene 3) Lighting 4) Mood 5) Style 6) Brand Colors (navy #1B2A4A, gold #C8A961, white #FFFFFF, charcoal #2D2D2D). No \"a person\". Single paragraph.\n\n===== VIDEO SPECS =====\nAspect Ratio, Duration, Format, Font, Lower Third, End Card, Color Grading\n\nRULES: English ONLY. Real content. No filler. Apply terminology. Deduplicate hashtags. No 🧵 on Twitter.`;\n\nreturn [{ json: { prompt: prompt, chatId: $json.body?.message?.chat?.id || 259365333, topic: topic } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-352, -48],
+      "name": "Prepare Prompt"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.prompt }}",
+        "messages": {"messageValues": []},
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [-176, 0],
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [-208, 160],
+      "name": "Groq Chat Model"
+    },
+    {
+      "parameters": {
+        "jsCode": "let text = $json.text || $json.response || $json.output || JSON.stringify($json);\nif (typeof text !== 'string') { text = JSON.stringify(text); }\nconst forbidden = [\n  [/\\bself[- ]?confidence\\b/gi, \"Self-Trust\"],\n  [/\\bidentity[- ]?crisis\\b/gi, \"Identity Gap\"],\n  [/\\bself[- ]?esteem\\b/gi, \"Self-Trust\"],\n  [/\\bself[- ]?doubt\\b/gi, \"Trust Gap\"],\n  [/\\bpersonal[- ]?growth\\b/gi, \"Identity Evolution\"],\n  [/\\bself[- ]?improvement\\b/gi, \"Intentional Recoding\"],\n  [/\\bself[- ]?help\\b/gi, \"Identity Work\"],\n  [/\\bjourney\\b/gi, \"Path\"],\n  [/\\bembark\\b/gi, \"Begin\"],\n  [/\\bgame[- ]?changer\\b/gi, \"Catalyst\"],\n  [/\\bsecret\\b/gi, \"Insight\"],\n  [/\\bhack\\b/gi, \"Method\"],\n  [/\\byou deserve\\b/gi, \"You have the capacity for\"],\n  [/\\byou are enough\\b/gi, \"You possess what you need\"],\n  [/\\bbe authentic\\b/gi, \"Operate from your design\"],\n  [/\\blife[- ]?changing\\b/gi, \"Identity-shifting\"],\n  [/\\btransformative\\b/gi, \"Recalibrating\"],\n  [/\\brevolutionary\\b/gi, \"Definitive\"],\n  [/\\bhabit tracker\\b/gi, \"identity transformation protocol\"],\n  [/\\bplanner\\b/gi, \"Identity Recode system\"]\n];\nfor (const [regex, replacement] of forbidden) { text = text.replace(regex, replacement); }\ntext = text.replace(/\\ba\\s+person\\b\\s*[^\\n,;]*/gi, \"Close-up of hands writing in journal\");\ntext = text.replace(/\\ba\\s+woman\\b\\s*[^\\n,;]*/gi, \"Wide shot of workspace with morning light\");\ntext = text.replace(/\\ba\\s+man\\b\\s*[^\\n,;]*/gi, \"Overhead shot of journal and coffee\");\ntext = text.replace(/\\bsomeone\\b\\s*[^\\n,;]*/gi, \"Close-up of pen on paper\");\ntext = text.replace(/\\n{3,}/g, \"\\n\\n\");\ntext = text.trim();\nreturn [{ json: { cleanedContent: text, chatId: $json.chatId || 259365333, topic: $json.topic || \"\" } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [96, -112],
+      "name": "Clean Output"
+    },
+    {
+      "parameters": {
+        "jsCode": "const content = $json.cleanedContent || \"\";\nconst chatId = $json.chatId || 259365333;\nconst topic = $json.topic || \"\";\nif (!content || content.length < 50) {\n  return [{ json: { method: \"sendMessage\", chat_id: chatId, text: \"Error: No content\", parse_mode: \"Markdown\" } }];\n}\nconst patterns = [\n  /([📱💼𝕏📘📌🎬🎙🖼📹])\\s*([^:\\n]+):([\\s\\S]*?)(?=[📱💼𝕏📘📌🎬🎙🖼📹]\\s*[^:\\n]+:|$)/g,\n  /(INSTAGRAM|LINKEDIN|TWITTER|FACEBOOK|PINTEREST|VIDEO SCRIPT|VOICE OVER|IMAGE PROMPT|VIDEO SPECS)[^:\\n]*:([\\s\\S]*?)(?=(?:INSTAGRAM|LINKEDIN|TWITTER|FACEBOOK|PINTEREST|VIDEO SCRIPT|VOICE OVER|IMAGE PROMPT|VIDEO SPECS)[^:\\n]*:|$)/gi\n];\nlet sections = [];\nfor (const pattern of patterns) {\n  let match;\n  while ((match = pattern.exec(content)) !== null) {\n    let icon = \"\", header = \"\", body = \"\";\n    if (match.length === 4) { icon = match[1] || \"\"; header = match[2] ? match[2].trim() : \"\"; body = match[3] ? match[3].trim() : \"\"; }\n    else if (match.length === 3) { header = match[1] ? match[1].trim() : \"\"; body = match[2] ? match[2].trim() : \"\"; }\n    if (header && body) sections.push({ icon, header, body });\n  }\n  if (sections.length >= 7) break;\n}\nif (sections.length === 0) {\n  return [{ json: { method: \"sendMessage\", chat_id: chatId, text: content, parse_mode: \"Markdown\" } }];\n}\nconst iconMap = { instagram: \"📱\", linkedin: \"💼\", twitter: \"𝕏\", x: \"𝕏\", facebook: \"📘\", pinterest: \"📌\", \"video script\": \"🎬\", \"voice over\": \"🎙️\", \"image prompt\": \"🖼️\", \"video specs\": \"📹\" };\nconst defaultTags = { instagram: [\"#SelfTrust\", \"#IdentityEvolution\", \"#IntentionalLiving\", \"#Tamkinly\", \"#IntentionalRecoding\", \"#IdentityRecode\"], linkedin: [\"#SelfTrust\", \"#IdentityEvolution\", \"#IntentionalLiving\"], twitter: [\"#SelfTrust\", \"#Tamkinly\"], facebook: [\"#SelfTrust\", \"#IntentionalLiving\"], pinterest: [\"#SelfTrust\", \"#IdentityEvolution\"] };\nfunction getKey(h) {\n  h = h.toLowerCase();\n  if (h.includes(\"instagram\")) return \"instagram\";\n  if (h.includes(\"linkedin\")) return \"linkedin\";\n  if (h.includes(\"twitter\") || h.includes(\"x\")) return \"twitter\";\n  if (h.includes(\"facebook\")) return \"facebook\";\n  if (h.includes(\"pinterest\")) return \"pinterest\";\n  if (h.includes(\"video script\")) return \"video script\";\n  if (h.includes(\"voice over\")) return \"voice over\";\n  if (h.includes(\"image prompt\")) return \"image prompt\";\n  if (h.includes(\"video specs\")) return \"video specs\";\n  return h;\n}\nfunction dedup(body, key) {\n  const defs = defaultTags[key]; if (!defs) return body;\n  const ex = []; const re = /#[\\w]+/g; let m;\n  while ((m = re.exec(body)) !== null) ex.push(m[0]);\n  const all = [...ex];\n  for (const d of defs) { if (!all.some(t => t.toLowerCase() === d.toLowerCase())) all.push(d); }\n  if (ex.length === 0) return body.trim() + \"\\n\\n\" + all.join(\" \");\n  const lines = body.split(\"\\n\");\n  let idx = -1;\n  for (let i = lines.length - 1; i >= 0; i--) { if (lines[i].includes(\"#\")) { idx = i; break; } }\n  if (idx >= 0) lines[idx] = lines[idx].replace(/#[\\w]+/g, \"\").trim() + \" \" + all.join(\" \");\n  return lines.join(\"\\n\");\n}\nfunction clean(header, body, key) {\n  let c = body;\n  if (key === \"twitter\") { c = c.replace(/🧵\\s*:?\\s*/g, \"\"); c = c.replace(/^Thread\\s*:?\\s*/i, \"\"); }\n  if (key === \"voice over\") { c = c.replace(/^VOICE\\s*OVER\\s*:?\\s*/i, \"\"); c = c.replace(/^V\\.?O\\.?\\s*:?\\s*/i, \"\"); }\n  if (key === \"instagram\") { if (!c.includes(\"🔥 Slide 1:\")) c = \"🔥 Slide 1: \" + c.trim(); }\n  if ([\"instagram\",\"linkedin\",\"twitter\",\"facebook\",\"pinterest\"].includes(key)) c = dedup(c, key);\n  c = c.replace(/\\bhabit\\s+tracker\\b/gi, \"identity transformation protocol\");\n  c = c.replace(/\\bdaily\\s+planner\\b/gi, \"Intentional Planner\");\n  return c.trim();\n}\nconst results = [];\nfor (const s of sections) {\n  const key = getKey(s.header);\n  const icon = iconMap[key] || s.icon || \"📋\";\n  const cl = clean(s.header, s.body, key);\n  results.push({ json: { method: \"sendMessage\", chat_id: chatId, text: icon + \" *\" + s.header.trim() + \"*\\n\\n\" + cl, parse_mode: \"Markdown\" } });\n}\nreturn results.length ? results : [{ json: { method: \"sendMessage\", chat_id: chatId, text: content, parse_mode: \"Markdown\" } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [272, 16],
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{"node": "Prepare Prompt", "type": "main", "index": 0}]] },
+    "Prepare Prompt": { "main": [[{"node": "Basic LLM Chain", "type": "main", "index": 0}]] },
+    "Basic LLM Chain": { "main": [[{"node": "Clean Output", "type": "main", "index": 0}]] },
+    "Groq Chat Model": { "ai_languageModel": [[{"node": "Basic LLM Chain", "type": "ai_languageModel", "index": 0}]] },
+    "Clean Output": { "main": [[{"node": "Code in JavaScript", "type": "main", "index": 0}]] },
+    "Code in JavaScript": { "main": [[]] }
+  }
+}

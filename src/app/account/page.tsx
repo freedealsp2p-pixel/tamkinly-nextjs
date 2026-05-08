@@ -321,9 +321,44 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [accessCodeInput, setAccessCodeInput] = useState('');
+  const [accessCodeLoading, setAccessCodeLoading] = useState(false);
+  const [accessCodeError, setAccessCodeError] = useState<string | null>(null);
+  const [accessCodeSuccess, setAccessCodeSuccess] = useState<string | null>(null);
 
   const t = useTranslations('accountPage');
   const { locale } = useLocale();
+
+  const handleAccessCode = async () => {
+    if (!accessCodeInput.trim()) return;
+    setAccessCodeLoading(true);
+    setAccessCodeError(null);
+    setAccessCodeSuccess(null);
+    try {
+      const response = await fetch('/api/access/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: accessCodeInput.trim(), email }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setAccessCodeError(data.error || 'Invalid code');
+        return;
+      }
+      setAccessCodeSuccess('Access granted! Redirecting...');
+      const accessInfo = JSON.parse(localStorage.getItem('tamkinly_access') || '{}');
+      accessInfo[accessCodeInput.trim()] = { tier: data.tier, productId: data.productId, activatedAt: new Date().toISOString() };
+      localStorage.setItem('tamkinly_access', JSON.stringify(accessInfo));
+      setAccessCodeInput('');
+      setTimeout(() => {
+        onLogin({ id: 'access-' + Date.now(), email, name: '', role: 'customer', accessCodes: [{ code: accessCodeInput.trim(), productId: data.productId, isUsed: true, createdAt: new Date().toISOString() }] });
+      }, 1500);
+    } catch {
+      setAccessCodeError('Network error');
+    } finally {
+      setAccessCodeLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -502,12 +537,35 @@ function AuthForm({ onLogin }: { onLogin: (user: UserData) => void }) {
               </div>
             </div>
 
-            <Link href="/apps">
-              <Button variant="outline" className="w-full border-[#1F6F78]/30 hover:bg-[#1F6F78]/10 h-12">
-                <Key className="w-4 h-4 mr-2" />
-                {t('useAccessCode')}
-              </Button>
-            </Link>
+            {/* Access Code Entry Form */}
+            <div className="space-y-3">
+              <div className="flex gap-2">
+                <Input
+                  type="text"
+                  placeholder="TMLY-XXXX-XXXX"
+                  value={accessCodeInput}
+                  onChange={(e) => setAccessCodeInput(e.target.value.toUpperCase())}
+                  className="flex-1 h-12 border-[#1F6F78]/30 focus:border-[#3DD4B0] font-mono text-center tracking-wider"
+                  maxLength={18}
+                />
+                <Button
+                  type="button"
+                  onClick={handleAccessCode}
+                  disabled={accessCodeLoading || !accessCodeInput.trim()}
+                  className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-6"
+                >
+                  {accessCodeLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Key className="w-4 h-4 mr-2" />}
+                  {t('activateCode')}
+                </Button>
+              </div>
+              {accessCodeError && (
+                <p className="text-red-500 text-xs text-center">{accessCodeError}</p>
+              )}
+              {accessCodeSuccess && (
+                <p className="text-green-600 text-xs text-center">{accessCodeSuccess}</p>
+              )}
+              <p className="text-center text-xs text-[#8A94A6]">{t('enterCodeDesc')}</p>
+            </div>
 
             {mode === 'register' && (
               <div className="mt-6 p-4 bg-[#3DD4B0]/10 rounded-lg border border-[#3DD4B0]/30">

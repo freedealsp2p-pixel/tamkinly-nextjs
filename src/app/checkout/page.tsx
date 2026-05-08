@@ -543,10 +543,10 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
                 )}
                 <Separator />
                 <div className="flex justify-between text-[#8A94A6]"><span>{t('subtotal')}</span><span>${checkoutTotal.toFixed(2)}</span></div>
-                <div className="flex justify-between text-[#8A94A6]"><span>{t('tax')}</span><span>$0.00</span></div>
+                <div className="flex justify-between text-[#8A94A6]"><span>{getText('Tax', 'الضريبة')}</span><span>$0.00</span></div>
                 {product && product.comparePrice > product.price && <div className="flex justify-between text-green-600"><span>{t('youSave')}</span><span>-${(product.comparePrice - product.price).toFixed(2)}</span></div>}
                 <Separator />
-                <div className="flex justify-between text-lg font-bold text-[#0F1C2E]"><span>{t('total')}</span><span>${checkoutTotal.toFixed(2)} USD</span></div>
+                <div className="flex justify-between text-lg font-bold text-[#0F1C2E]"><span>{getText('Total', 'الإجمالي')}</span><span>${checkoutTotal.toFixed(2)} USD</span></div>
                 <div className="pt-4 space-y-3 border-t">
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><CheckCircle2 className="w-4 w-4 text-[#3DD4B0]" /><span>{t('instantAccessAfter')}</span></div>
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><Shield className="w-4 w-4 text-[#3DD4B0]" /><span>{t('accessCodeSent')}</span></div>

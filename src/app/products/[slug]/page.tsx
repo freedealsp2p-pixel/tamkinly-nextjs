@@ -79,7 +79,7 @@ const productsConfig: Record<string, {
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const t = useTranslations();
-  const { direction } = useLocale();
+  const { direction, locale } = useLocale();
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   
@@ -490,7 +490,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                     size="lg"
                   >
                     <ShoppingCart className="mr-2 h-5 w-5" />
-                    {t('productDetail.addToCart') || 'Add to Cart'}
+                    {locale === 'ar' ? 'أضف إلى السلة' : 'Add to Cart'}
                   </Button>
                   <Link href="/apps">
                     <Button variant="outline" className="h-14 px-8 text-lg border-white/30 text-white hover:bg-white/10">

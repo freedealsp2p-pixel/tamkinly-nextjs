@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import {
   Brain,
@@ -30,7 +31,7 @@ import {
   Shield
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
-import { useTranslations } from '@/components/providers/LocaleProvider';
+import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
 
 // Demo data keys - translated at render time
 const getDemoData = (t: (key: string) => string) => ({
@@ -56,8 +57,13 @@ export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const t = useTranslations('dashboardPage');
+  const { locale } = useLocale();
   const [data, setData] = useState(getDemoData(t));
   const [isLoading, setIsLoading] = useState(true);
+  const [accessCode, setAccessCode] = useState('');
+  const [codeLoading, setCodeLoading] = useState(false);
+  const [codeError, setCodeError] = useState<string | null>(null);
+  const [codeSuccess, setCodeSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -69,12 +75,42 @@ export default function DashboardPage() {
     }
   }, [status]);
 
+  const handleActivateCode = async () => {
+    if (!accessCode.trim()) return;
+    setCodeLoading(true);
+    setCodeError(null);
+    setCodeSuccess(null);
+    try {
+      const sessionEmail = session?.user?.email || '';
+      const response = await fetch('/api/access/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: accessCode.trim(), email: sessionEmail }),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        setCodeError(result.error || 'Invalid code');
+        return;
+      }
+      setCodeSuccess('Access granted! Tier: ' + result.tier);
+      const accessInfo = JSON.parse(localStorage.getItem('tamkinly_access') || '{}');
+      accessInfo[accessCode.trim()] = { tier: result.tier, productId: result.productId, activatedAt: new Date().toISOString() };
+      localStorage.setItem('tamkinly_access', JSON.stringify(accessInfo));
+      setAccessCode('');
+      fetchUserData();
+    } catch {
+      setCodeError('Network error');
+    } finally {
+      setCodeLoading(false);
+    }
+  };
+
   const fetchUserData = async () => {
     try {
       const response = await fetch('/api/user/progress');
       if (response.ok) {
         const userData = await response.json();
-        setData({ ...demoData, ...userData });
+        setData({ ...data, ...userData });
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -148,6 +184,27 @@ export default function DashboardPage() {
                     {t('createAccountDesc')}
                   </p>
                 </div>
+                {/* Access Code Input */}
+                <div className="flex gap-2 mb-4">
+                  <Input
+                    type="text"
+                    placeholder="TMLY-XXXX-XXXX"
+                    value={accessCode}
+                    onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
+                    className="flex-1 h-10 bg-white/10 border-white/20 text-white placeholder:text-white/40 font-mono text-center tracking-wider"
+                    maxLength={18}
+                  />
+                  <Button
+                    onClick={handleActivateCode}
+                    disabled={codeLoading || !accessCode.trim()}
+                    className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]"
+                  >
+                    {codeLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : t('activateCode')}
+                  </Button>
+                </div>
+                {codeError && <p className="text-red-400 text-xs mb-2">{codeError}</p>}
+                {codeSuccess && <p className="text-green-400 text-xs mb-2">{codeSuccess}</p>}
+
                 <Link href="/auth/signup?callbackUrl=/dashboard">
                   <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
                     {t('createFreeAccount')}
