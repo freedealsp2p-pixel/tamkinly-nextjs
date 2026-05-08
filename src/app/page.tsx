@@ -111,16 +111,25 @@ function HeroSection() {
               </div>
             </div>
             
-            {/* Primary CTA */}
-            <div className="flex flex-col items-center lg:items-start gap-4 mb-10">
+            {/* Primary CTA - Two side-by-side buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+              <Link href="/products" className="w-full sm:w-auto">
+                <Button 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-[#1F6F78] text-white hover:bg-[#185c63] px-8 h-16 text-lg font-bold shadow-2xl shadow-[#1F6F78]/30 group transition-all duration-300 hover:scale-105 hover:shadow-[#1F6F78]/50"
+                >
+                  <Sparkles className={`${direction === 'rtl' ? 'ml-3' : 'mr-3'} h-5 w-5`} />
+                  {t("hero.ctaProducts")}
+                </Button>
+              </Link>
               <Link href="/quiz" className="w-full sm:w-auto">
                 <Button 
                   size="lg" 
-                  className="w-full sm:w-auto bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-12 h-16 text-xl font-bold shadow-2xl shadow-[#3DD4B0]/30 group transition-all duration-300 hover:scale-105 hover:shadow-[#3DD4B0]/50"
+                  className="w-full sm:w-auto bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-16 text-lg font-bold shadow-2xl shadow-[#3DD4B0]/30 group transition-all duration-300 hover:scale-105 hover:shadow-[#3DD4B0]/50"
                 >
-                  <Play className={`${direction === 'rtl' ? 'ml-3' : 'mr-3'} h-6 w-6 group-hover:animate-pulse`} />
-                  {t("hero.cta")}
-                  <ArrowRight className={`${direction === 'rtl' ? 'mr-3 rotate-180' : 'ml-3'} h-6 w-6 group-hover:translate-x-2 transition-transform`} />
+                  <Play className={`${direction === 'rtl' ? 'ml-3' : 'mr-3'} h-5 w-6 group-hover:animate-pulse`} />
+                  {t("hero.ctaAssessment")}
+                  <ArrowRight className={`${direction === 'rtl' ? 'mr-3 rotate-180' : 'ml-3'} h-5 w-5 group-hover:translate-x-2 transition-transform`} />
                 </Button>
               </Link>
             </div>
@@ -598,16 +607,27 @@ function CTASection() {
             </div>
           </div>
           
-          <Link href="/quiz">
-            <Button 
-              size="lg" 
-              className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-12 h-16 text-xl font-semibold shadow-2xl shadow-[#3DD4B0]/30 transition-all duration-300 hover:scale-105 group"
-            >
-              <Play className={`${direction === 'rtl' ? 'ml-3' : 'mr-3'} h-6 w-6 group-hover:animate-pulse`} />
-              {t("cta.button")}
-              <ArrowRight className={`${direction === 'rtl' ? 'mr-3 rotate-180' : 'ml-3'} h-6 w-6 group-hover:translate-x-2 transition-transform`} />
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/products">
+              <Button 
+                size="lg" 
+                className="bg-[#1F6F78] text-white hover:bg-[#185c63] px-10 h-14 text-lg font-semibold shadow-xl shadow-[#1F6F78]/30 transition-all duration-300 hover:scale-105 group"
+              >
+                <Sparkles className={`${direction === 'rtl' ? 'ml-3' : 'mr-3'} h-5 w-5`} />
+                {t("cta.ctaProducts")}
+              </Button>
+            </Link>
+            <Link href="/quiz">
+              <Button 
+                size="lg" 
+                className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-10 h-14 text-lg font-semibold shadow-2xl shadow-[#3DD4B0]/30 transition-all duration-300 hover:scale-105 group"
+              >
+                <Play className={`${direction === 'rtl' ? 'ml-3' : 'mr-3'} h-5 w-5 group-hover:animate-pulse`} />
+                {t("cta.ctaAssessment")}
+                <ArrowRight className={`${direction === 'rtl' ? 'mr-3 rotate-180' : 'ml-3'} h-5 w-5 group-hover:translate-x-2 transition-transform`} />
+              </Button>
+            </Link>
+          </div>
           
           {/* Final Trust */}
           <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-sm text-slate-400">

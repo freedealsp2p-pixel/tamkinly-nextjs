@@ -83,7 +83,9 @@
     "trustPrivate": "خاص 100%",
     "trustNoEmail": "لا يتطلب بريد إلكتروني",
     "trustInstant": "نتائج فورية",
-    "satisfaction": "رضا المستخدمين"
+    "satisfaction": "رضا المستخدمين",
+    "ctaProducts": "استكشف المنتجات",
+    "ctaAssessment": "ابدأ التقييم المجاني"
   },
   "discover": {
     "badge": "ما ستكتشفه",
@@ -205,7 +207,9 @@
     "peopleAssessed": "شخص تم تقييمهم",
     "accuracyRate": "معدل الدقة",
     "averageTime": "الوقت المتوسط",
-    "button": "ابدأ تقييمك المجاني"
+    "button": "ابدأ تقييمك المجاني",
+    "ctaProducts": "استكشف المنتجات",
+    "ctaAssessment": "ابدأ التقييم المجاني"
   },
   "quiz": {
     "title": "جرب ",

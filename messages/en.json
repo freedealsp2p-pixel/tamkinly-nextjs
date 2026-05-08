@@ -83,7 +83,9 @@
     "trustPrivate": "100% Private",
     "trustNoEmail": "No Email Required",
     "trustInstant": "Instant Results",
-    "satisfaction": "User Satisfaction"
+    "satisfaction": "User Satisfaction",
+    "ctaProducts": "Explore Products",
+    "ctaAssessment": "Start Free Assessment"
   },
   "discover": {
     "badge": "What You'll Discover",
@@ -205,7 +207,9 @@
     "peopleAssessed": "People Assessed",
     "accuracyRate": "Accuracy Rate",
     "averageTime": "Average Time",
-    "button": "Start Your Free Assessment"
+    "button": "Start Your Free Assessment",
+    "ctaProducts": "Explore Products",
+    "ctaAssessment": "Start Free Assessment"
   },
   "quiz": {
     "title": "Try a ",
