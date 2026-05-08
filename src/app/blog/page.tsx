@@ -308,7 +308,18 @@ const philosophyArticles = [
     categoryAr: "علوم الدماغ",
     readTime: "12 min read",
     featured: true
-  }
+  },
+  {
+    slug: "and-the-bamboo-kept-growing",
+    title: "And the Bamboo Kept Growing: Why Your Invisible Work Matters",
+    titleAr: "والخيزران استمر بالنمو: لماذا يهم عملك غير المرئي",
+    excerpt: "The Chinese bamboo tree grows nothing for five years then explodes 90 feet in six weeks. Your identity transformation follows the same law.",
+    excerptAr: "شجرة الخيزران الصينية لا تنمو شيئا لخمس سنوات ثم تنفجر 90 قدما في ستة أسابيع. تحول هويتك يتبع نفس القانون.",
+    category: "Identity Shift",
+    categoryAr: "تحول الهوية",
+    readTime: "9 min read",
+    featured: true
+  },
 ];
 
 const allFeatured = [...appArticles, ...worksheetArticles, ...philosophyArticles].filter(a => a.featured);
