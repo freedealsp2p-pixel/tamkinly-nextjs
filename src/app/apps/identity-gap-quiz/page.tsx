@@ -426,7 +426,7 @@ export default function IdentityGapQuiz() {
           <Button
             onClick={handleNext}
             disabled={!answers[question.id]}
-            className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-50"
+            className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 transition-all duration-300"
           >
             {currentQuestion === questions.length - 1 ? getText('See Results', 'عرض النتائج') : getText('Next →', 'التالي →')}
           </Button>
