@@ -277,6 +277,41 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
       'أدوات التحول',
     ],
   },
+  checkout: {
+    title: 'Secure Checkout | Complete Your Purchase',
+    titleAr: 'الدفع الآمن | أكمل عملية الشراء - تمكينلي',
+    description: 'Complete your purchase securely. SSL-encrypted checkout for Tamkinly identity transformation products. Instant access after payment.',
+    descriptionAr: 'أكمل عملية الشراء بأمان. دفع مشفر بتقنية SSL لمنتجات تحويل الهوية من تمكينلي. وصول فوري بعد الدفع.',
+    path: '/checkout',
+    keywords: ['checkout', 'secure payment', 'buy', 'purchase', 'الشراء', 'الدفع'],
+    noIndex: true,
+  },
+  search: {
+    title: 'Search | Find Tools & Resources',
+    titleAr: 'البحث | اعثر على الأدوات والموارد - تمكينلي',
+    description: 'Search Tamkinly for identity transformation tools, blog articles, apps, and resources. Find what you need to start your journey.',
+    descriptionAr: 'ابحث في تمكينلي عن أدوات تحويل الهوية ومقالات المدونة والتطبيقات والموارد. اعثر على ما تحتاجه لبدء رحلتك.',
+    path: '/search',
+    keywords: ['search', 'find', 'tools', 'resources', 'البحث', 'أدوات'],
+  },
+  dashboard: {
+    title: 'Dashboard | Your Progress',
+    titleAr: 'لوحة التحكم | تقدمك - تمكينلي',
+    description: 'Track your identity transformation progress, manage your apps, and view your personalized insights.',
+    descriptionAr: 'تتبع تقدم تحويل هويتك، وأدر تطبيقاتك، واعرض رؤاك المخصصة.',
+    path: '/dashboard',
+    keywords: ['dashboard', 'progress', 'tracking', 'لوحة التحكم', 'التقدم'],
+    noIndex: true,
+  },
+  downloads: {
+    title: 'Downloads | Your Purchased Resources',
+    titleAr: 'التنزيلات | مواردك المشتراة - تمكينلي',
+    description: 'Access and download your purchased Tamkinly resources including worksheets, guides, and tools for identity transformation.',
+    descriptionAr: 'الوصول وتنزيل موارد تمكينلي المشتراة بما في ذلك أوراق العمل والأدلة وأدوات تحويل الهوية.',
+    path: '/downloads',
+    keywords: ['downloads', 'resources', 'worksheets', 'PDF', 'التنزيلات', 'الموارد'],
+    noIndex: true,
+  },
 };
 
 // ============================================
@@ -379,6 +414,10 @@ export const REFUND_METADATA = generatePageMetadataFromConfig('refund');
 export const CART_METADATA = generatePageMetadataFromConfig('cart');
 export const ACCOUNT_METADATA = generatePageMetadataFromConfig('account');
 export const RESOURCES_METADATA = generatePageMetadataFromConfig('resources');
+export const CHECKOUT_METADATA = generatePageMetadataFromConfig('checkout');
+export const SEARCH_METADATA = generatePageMetadataFromConfig('search');
+export const DASHBOARD_METADATA = generatePageMetadataFromConfig('dashboard');
+export const DOWNLOADS_METADATA = generatePageMetadataFromConfig('downloads');
 
 // ============================================
 // DYNAMIC METADATA GENERATORS

@@ -15,9 +15,11 @@ const nextConfig: NextConfig = {
   // Enable strict mode for better error detection
   reactStrictMode: false,
 
-  // Image optimization - disabled for memory savings
+  // Image optimization - using lightweight configuration
+  // Keeps unoptimized: true for memory savings on VPS but adds format hints
   images: {
     unoptimized: true,
+    formats: ['image/webp'],
   },
 
   // Allowed dev origins for preview
@@ -31,7 +33,7 @@ const nextConfig: NextConfig = {
   // Experimental features for memory optimization
   experimental: {
     // Enable package import optimization
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
 
   // Security & caching headers
@@ -46,8 +48,33 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: '/:all*(js|css)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:all*(woff|woff2|ttf|otf)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+        ],
+      },
     ];
   },
+
+  // Compression
+  compress: true,
 };
 
 export default nextConfig;
