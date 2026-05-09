@@ -21,19 +21,19 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
             
             # Pull latest changes
-            git pull origin main
+            git pull origin master
             
             # Install dependencies
-            bun install
+            npm install
             
             # Generate Prisma client
-            bunx prisma generate
+            npx prisma generate
             
             # Apply database migrations
-            bunx prisma db push --accept-data-loss
+            npx prisma db push --accept-data-loss
             
             # Build with increased memory
-            NODE_OPTIONS='--max-old-space-size=1536' bun next build
+            NODE_OPTIONS="--max-old-space-size=1024" npm run build
             
             # Copy static files
             mkdir -p .next/standalone/.next
@@ -41,9 +41,9 @@ jobs:
             cp -r public .next/standalone/
             
             # Restart PM2
-            pm2 restart tamkinly-nextjs
+            pm2 restart tamkinly
             
             # Save PM2 state
             pm2 save
             
-            echo "✅ Deployment completed successfully!"
+            echo "Deployment completed successfully!"
