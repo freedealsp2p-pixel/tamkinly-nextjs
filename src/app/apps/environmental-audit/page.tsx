@@ -1,5 +1,7 @@
 'use client';
 
+import { AccessGate } from '@/components/AccessGate';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -173,6 +175,7 @@ export default function EnvironmentalAuditPage() {
     const score = calculateEnvironmentScore();
 
     return (
+      <AccessGate appSlug="environmental-audit">
       <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         {/* Header */}
         <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
@@ -352,6 +355,7 @@ export default function EnvironmentalAuditPage() {
           </div>
         </div>
       </div>
+    </AccessGate>
     );
   }
 

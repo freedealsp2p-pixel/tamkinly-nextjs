@@ -54,7 +54,11 @@ function SignInForm() {
       }
     } catch (err) {
       console.error('Sign in error:', err);
-      setError(t('errorOccurred') || 'An error occurred. Please try again.');
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        setError('Network error. Please check your connection and try again.');
+      } else {
+        setError(t('errorOccurred') || 'An error occurred. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -157,12 +161,14 @@ function SignInForm() {
           </div>
         </div>
 
-        {/* Continue without account - Fixed link */}
-        <Link href="/apps/values-clarification">
-          <Button variant="outline" className="w-full h-12">
-            {t('continueFree') || 'Continue with Free Assessment'}
-          </Button>
-        </Link>
+        {/* Continue without account */}
+        <Button 
+          variant="outline" 
+          className="w-full h-12"
+          onClick={() => router.push('/apps/values-clarification')}
+        >
+          {t('continueFree') || 'Continue with Free Assessment'}
+        </Button>
 
         {/* Sign Up Link */}
         <p className="text-center text-slate-600 mt-6">

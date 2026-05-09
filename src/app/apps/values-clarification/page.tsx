@@ -372,7 +372,7 @@ export default function ValuesClarificationPage() {
               <Button
                 onClick={moveToRanking}
                 disabled={selectedValues.length < 5}
-                className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold px-8 disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 transition-all duration-300"
+                className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold px-8 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
               >
                 {getText('Continue to Ranking', 'الاستمرار للترتيب')}
                 <ArrowRight className="w-4 h-4 ml-2" />

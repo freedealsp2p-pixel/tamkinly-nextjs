@@ -60,7 +60,11 @@ export default function SignUpPage() {
       router.push('/auth/signin?registered=true');
     } catch (err) {
       console.error('Registration error:', err);
-      setError(t('errorOccurred') || 'An error occurred. Please try again.');
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        setError('Network error. Please check your connection and try again.');
+      } else {
+        setError(t('errorOccurred') || 'An error occurred. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }

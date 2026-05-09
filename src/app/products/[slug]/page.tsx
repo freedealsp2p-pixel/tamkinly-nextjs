@@ -369,9 +369,12 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
       comparePrice: config.comparePrice,
     });
     
+    const cartDesc = t('productDetail.addedToCartDesc');
+    const displayName = name || config.id;
+    
     toast({
       title: t('productDetail.addedToCart'),
-      description: t('productDetail.addedToCartDesc', { name }),
+      description: cartDesc.includes('{name}') ? cartDesc.replace('{name}', displayName) : cartDesc,
     });
   };
 

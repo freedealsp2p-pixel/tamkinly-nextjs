@@ -43,8 +43,27 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/apps/ai-coach',
+        destination: '/apps/ai-identity-coach',
+        permanent: true,
+      },
+      {
+        source: '/apps/identity-planner',
+        destination: '/apps/daily-planner',
+        permanent: true,
+      },
+      {
+        source: '/apps/community',
+        destination: '/apps/community-access',
+        permanent: true,
+      },
+    ];
+  },
+
   compress: true,
 };
 
 export default nextConfig;
-

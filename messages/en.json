@@ -1872,7 +1872,19 @@
     "guide1Title": "Identity vs Behavior Change: Why Willpower Fails",
     "guide1Excerpt": "The hidden reason most self-improvement efforts don't last — and the identity-first approach that creates permanent transformation. Includes practical exercises.",
     "guide1Category": "Identity Shift",
-    "guide1ReadTime": "12 min read"
+    "guide1ReadTime": "12 min read",
+    "guide2Title": "How to Recode Your Identity in 30 Days",
+    "guide2Excerpt": "A practical step-by-step guide to transforming your identity from the inside out. Discover how to build sustainable habits by changing who you are, not just what you do.",
+    "guide2Category": "Identity Transformation",
+    "guide2ReadTime": "8 min read",
+    "guide3Title": "The Behavior Trap: Why Habits Fail and How They Succeed",
+    "guide3Excerpt": "Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails and how to build a new identity that supports your goals.",
+    "guide3Category": "Habits & Behavior",
+    "guide3ReadTime": "6 min read",
+    "guide4Title": "Your Environment Shapes You: A Personal Environment Audit Guide",
+    "guide4Excerpt": "Your physical, digital, and social environment shapes your identity more than you think. Learn how to design an environment that automatically supports your new identity.",
+    "guide4Category": "Environment Design",
+    "guide4ReadTime": "5 min read"
   },
   "privacyPage": {
     "badge": "Privacy Policy",

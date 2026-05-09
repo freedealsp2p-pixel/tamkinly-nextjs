@@ -386,25 +386,27 @@ export default function IdentityQuizPage() {
     setSelectedAnswer(value);
     const newAnswers = [...answers, value];
     setAnswers(newAnswers);
+  };
 
-    setTimeout(() => {
-      if (currentQuestion < quizQuestions.length - 1) {
-        setCurrentQuestion(currentQuestion + 1);
-        setSelectedAnswer(null);
-      } else {
-        // Start analyzing phase
-        setPhase('analyzing');
-        let progress = 0;
-        const interval = setInterval(() => {
-          progress += 5;
-          setAnalyzingProgress(progress);
-          if (progress >= 100) {
-            clearInterval(interval);
-            calculateAndNavigate();
-          }
-        }, 100);
-      }
-    }, 500);
+  const handleNext = () => {
+    if (selectedAnswer === null) return;
+    
+    if (currentQuestion < quizQuestions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
+    } else {
+      // Start analyzing phase
+      setPhase('analyzing');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 5;
+        setAnalyzingProgress(progress);
+        if (progress >= 100) {
+          clearInterval(interval);
+          calculateAndNavigate();
+        }
+      }, 100);
+    }
   };
 
   // Get text based on language
@@ -591,6 +593,18 @@ export default function IdentityQuizPage() {
                     </button>
                   ))}
                 </div>
+
+                {/* Next Question Button */}
+                {selectedAnswer !== null && (
+                  <div className="mt-6 text-center">
+                    <Button
+                      onClick={handleNext}
+                      className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold px-8 h-12"
+                    >
+                      {currentQuestion < quizQuestions.length - 1 ? getText('Next Question', 'السؤال التالي') : getText('See Results', 'عرض النتائج')} <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>

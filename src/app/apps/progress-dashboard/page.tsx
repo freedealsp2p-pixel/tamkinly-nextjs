@@ -1,5 +1,7 @@
 'use client';
 
+import { AccessGate } from '@/components/AccessGate';
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -207,6 +209,7 @@ export default function UnifiedProgressDashboard() {
 
   if (loading) {
     return (
+      <AccessGate appSlug="progress-dashboard">
       <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] flex items-center justify-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-[#3DD4B0]/20 flex items-center justify-center">
@@ -215,6 +218,7 @@ export default function UnifiedProgressDashboard() {
           <p className="text-white">{getText('Loading your progress...', 'جارٍ تحميل تقدمك...')}</p>
         </div>
       </div>
+    </AccessGate>
     );
   }
 

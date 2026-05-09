@@ -1,5 +1,7 @@
 'use client';
 
+import { AccessGate } from '@/components/AccessGate';
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -171,6 +173,7 @@ export default function JournalSystemPage() {
   };
 
   return (
+      <AccessGate appSlug="journal-system">
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-rose-50/30" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
@@ -408,5 +411,6 @@ export default function JournalSystemPage() {
         </Card>
       </div>
     </div>
-  );
+  </AccessGate>
+    );
 }

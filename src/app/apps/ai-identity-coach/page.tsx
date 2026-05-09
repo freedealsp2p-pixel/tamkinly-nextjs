@@ -1,5 +1,7 @@
 'use client';
 
+import { AccessGate } from '@/components/AccessGate';
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -328,9 +330,11 @@ export default function AIIdentityCoachPage() {
 
   if (!isInitialized) {
     return (
+      <AccessGate appSlug="ai-identity-coach">
       <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-[#3DD4B0] animate-spin" />
       </div>
+    </AccessGate>
     );
   }
 

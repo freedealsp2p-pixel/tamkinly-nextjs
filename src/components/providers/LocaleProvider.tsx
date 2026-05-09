@@ -164,9 +164,16 @@ export function useLocale() {
 export function useTranslations(namespace?: string) {
   const { t } = useLocale();
   
-  const translate = useCallback((key: string): string => {
+  const translate = useCallback((key: string, params?: Record<string, string | number>): string => {
     const fullKey = namespace ? `${namespace}.${key}` : key;
-    return t(fullKey);
+    let result = t(fullKey);
+    // Replace {param} placeholders with actual values
+    if (params) {
+      Object.entries(params).forEach(([paramKey, paramValue]) => {
+        result = result.replace(new RegExp(`\\{${paramKey}\\}`, 'g'), String(paramValue));
+      });
+    }
+    return result;
   }, [t, namespace]);
   
   return translate;

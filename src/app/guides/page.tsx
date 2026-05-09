@@ -26,6 +26,30 @@ const guides = [
     readTimeKey: "guide1ReadTime",
     featured: true,
   },
+  {
+    slug: "identity-vs-behavior-change",
+    titleKey: "guide2Title",
+    excerptKey: "guide2Excerpt",
+    categoryKey: "guide2Category",
+    readTimeKey: "guide2ReadTime",
+    featured: false,
+  },
+  {
+    slug: "identity-vs-behavior-change",
+    titleKey: "guide3Title",
+    excerptKey: "guide3Excerpt",
+    categoryKey: "guide3Category",
+    readTimeKey: "guide3ReadTime",
+    featured: false,
+  },
+  {
+    slug: "identity-vs-behavior-change",
+    titleKey: "guide4Title",
+    excerptKey: "guide4Excerpt",
+    categoryKey: "guide4Category",
+    readTimeKey: "guide4ReadTime",
+    featured: false,
+  },
 ];
 
 export default function GuidesPage() {

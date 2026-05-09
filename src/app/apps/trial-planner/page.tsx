@@ -1,5 +1,7 @@
 'use client';
 
+import { AccessGate } from '@/components/AccessGate';
+
 import React from 'react';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -31,6 +33,7 @@ export default function TrialPlannerPage() {
   ];
 
   return (
+      <AccessGate appSlug="trial-planner">
     <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
@@ -127,5 +130,6 @@ export default function TrialPlannerPage() {
         </div>
       </div>
     </div>
-  );
+  </AccessGate>
+    );
 }
