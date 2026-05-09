@@ -881,7 +881,9 @@
         ]
       }
     },
-    "addToCart": "Add to Cart"
+    "addToCart": "Add to Cart",
+    "addedToCart": "Added to Cart!",
+    "addedToCartDesc": "{name} has been added to your cart."
   },
   "cookieConsent": {
     "close": "Close cookie consent",
@@ -2035,7 +2037,9 @@
       "or": "Or",
       "continueFree": "Continue with Free Assessment",
       "noAccount": "Don't have an account?",
-      "signUp": "Sign up"
+      "signUp": "Sign up",
+      "loginSuccess": "Login successful! Redirecting...",
+      "registrationSuccess": "Account created successfully! Please sign in."
     },
     "signup": {
       "createAccount": "Create Account",
@@ -2043,7 +2047,7 @@
       "subtitle": "Start your transformation journey",
       "passwordTooShort": "Password must be at least 6 characters",
       "passwordsNoMatch": "Passwords do not match",
-      "registrationFailed": "Registration failed",
+      "registrationFailed": "Registration failed. Please try again.",
       "errorOccurred": "An error occurred. Please try again.",
       "name": "Name (optional)",
       "namePlaceholder": "Your name",
@@ -2060,7 +2064,8 @@
       "benefit3": "Earn achievements",
       "benefit4": "Access free apps",
       "hasAccount": "Already have an account?",
-      "signIn": "Sign in"
+      "signIn": "Sign in",
+      "nameRequired": "Name is required"
     }
   },
   "payment": {

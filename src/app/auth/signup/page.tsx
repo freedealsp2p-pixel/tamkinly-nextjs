@@ -25,13 +25,18 @@ export default function SignUpPage() {
     setError('');
 
     // Validation
+    if (!name.trim()) {
+      setError(t('nameRequired') || 'Name is required');
+      return;
+    }
+
     if (password.length < 6) {
-      setError(t('passwordTooShort'));
+      setError(t('passwordTooShort') || 'Password must be at least 6 characters');
       return;
     }
 
     if (password !== confirmPassword) {
-      setError(t('passwordsNoMatch'));
+      setError(t('passwordsNoMatch') || 'Passwords do not match');
       return;
     }
 
@@ -47,13 +52,15 @@ export default function SignUpPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || t('registrationFailed'));
-      } else {
-        // Redirect to sign in with success message
-        router.push('/auth/signin?registered=true');
+        setError(data.error || t('registrationFailed') || 'Registration failed. Please try again.');
+        return;
       }
+
+      // Success - redirect to sign in with success message
+      router.push('/auth/signin?registered=true');
     } catch (err) {
-      setError(t('errorOccurred'));
+      console.error('Registration error:', err);
+      setError(t('errorOccurred') || 'An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -75,7 +82,7 @@ export default function SignUpPage() {
           {/* Error Message */}
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
-              <AlertCircle className="h-4 w-4" />
+              <AlertCircle className="h-4 w-4 flex-shrink-0" />
               {error}
             </div>
           )}
@@ -94,6 +101,7 @@ export default function SignUpPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={t('namePlaceholder')}
+                  required
                   disabled={isLoading}
                   className="pl-10"
                 />
@@ -132,6 +140,7 @@ export default function SignUpPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={t('passwordPlaceholder')}
                   required
+                  minLength={6}
                   disabled={isLoading}
                   className="pl-10"
                 />
@@ -151,6 +160,7 @@ export default function SignUpPage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder={t('confirmPasswordPlaceholder')}
                   required
+                  minLength={6}
                   disabled={isLoading}
                   className="pl-10"
                 />
@@ -159,7 +169,7 @@ export default function SignUpPage() {
 
             <Button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !email || !password || !name || !confirmPassword}
               className="w-full h-12 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold"
             >
               {isLoading ? (
@@ -201,3 +211,4 @@ export default function SignUpPage() {
     </div>
   );
 }
+

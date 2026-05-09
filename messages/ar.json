@@ -881,7 +881,9 @@
         ]
       }
     },
-    "addToCart": "أضف إلى السلة"
+    "addToCart": "أضف إلى السلة",
+    "addedToCart": "تمت الإضافة إلى السلة!",
+    "addedToCartDesc": "تمت إضافة {name} إلى سلتك."
   },
   "cookieConsent": {
     "close": "إغلاق موافقة ملفات تعريف الارتباط",
@@ -2035,7 +2037,9 @@
       "or": "أو",
       "continueFree": "متابعة مع التقييم المجاني",
       "noAccount": "ليس لديك حساب؟",
-      "signUp": "إنشاء حساب"
+      "signUp": "إنشاء حساب",
+      "loginSuccess": "تم تسجيل الدخول بنجاح! جاري التحويل...",
+      "registrationSuccess": "تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول."
     },
     "signup": {
       "createAccount": "إنشاء حساب",
@@ -2043,7 +2047,7 @@
       "subtitle": "ابدأ رحلة تحولك",
       "passwordTooShort": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
       "passwordsNoMatch": "كلمات المرور غير متطابقة",
-      "registrationFailed": "فشل التسجيل",
+      "registrationFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى.",
       "errorOccurred": "حدث خطأ. يرجى المحاولة مرة أخرى.",
       "name": "الاسم (اختياري)",
       "namePlaceholder": "اسمك",
@@ -2060,7 +2064,8 @@
       "benefit3": "كسب الإنجازات",
       "benefit4": "الوصول للتطبيقات المجانية",
       "hasAccount": "لديك حساب بالفعل؟",
-      "signIn": "تسجيل الدخول"
+      "signIn": "تسجيل الدخول",
+      "nameRequired": "الاسم مطلوب"
     }
   },
   "payment": {

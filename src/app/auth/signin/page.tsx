@@ -7,23 +7,26 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { AlertCircle, Mail, Lock, Loader2, ArrowRight } from 'lucide-react';
+import { AlertCircle, Mail, Lock, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useTranslations } from "@/components/providers/LocaleProvider";
 
 function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const justRegistered = searchParams.get('registered') === 'true';
   const t = useTranslations("auth.signin");
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(justRegistered ? (t('registrationSuccess') || 'Account created successfully! Please sign in.') : '');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setIsLoading(true);
 
     try {
@@ -31,16 +34,27 @@ function SignInForm() {
         email,
         password,
         redirect: false,
+        callbackUrl,
       });
 
       if (result?.error) {
-        setError(t('invalidCredentials'));
+        // NextAuth returns error for invalid credentials
+        setError(t('invalidCredentials') || 'Invalid email or password');
+      } else if (result?.ok) {
+        // Successful login - redirect
+        setSuccess(t('loginSuccess') || 'Login successful! Redirecting...');
+        // Small delay to show success message
+        setTimeout(() => {
+          router.push(callbackUrl);
+          router.refresh();
+        }, 500);
       } else {
-        router.push(callbackUrl);
-        router.refresh();
+        // Unexpected result - try redirect approach as fallback
+        setError(t('errorOccurred') || 'An error occurred. Please try again.');
       }
     } catch (err) {
-      setError(t('errorOccurred'));
+      console.error('Sign in error:', err);
+      setError(t('errorOccurred') || 'An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -57,6 +71,14 @@ function SignInForm() {
           <h1 className="text-2xl font-bold text-[#0F1C2E] mt-4">{t('welcomeBack')}</h1>
           <p className="text-slate-600 mt-2">{t('subtitle')}</p>
         </div>
+
+        {/* Success Message */}
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4" />
+            {success}
+          </div>
+        )}
 
         {/* Error Message */}
         {error && (
@@ -108,7 +130,7 @@ function SignInForm() {
 
           <Button
             type="submit"
-            disabled={isLoading}
+            disabled={isLoading || !email || !password}
             className="w-full h-12 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold"
           >
             {isLoading ? (
@@ -135,10 +157,10 @@ function SignInForm() {
           </div>
         </div>
 
-        {/* Continue without account */}
-        <Link href="/quiz">
+        {/* Continue without account - Fixed link */}
+        <Link href="/apps/values-clarification">
           <Button variant="outline" className="w-full h-12">
-            {t('continueFree')}
+            {t('continueFree') || 'Continue with Free Assessment'}
           </Button>
         </Link>
 
@@ -182,3 +204,4 @@ export default function SignInPage() {
     </div>
   );
 }
+

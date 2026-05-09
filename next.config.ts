@@ -1,8 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Enable standalone for efficient deployment on memory-constrained server
-  output: 'standalone',
+  // Removed output: 'standalone' - incompatible with 'next start' command
+  // Using standard mode for full compatibility with API routes and auth
 
   // Remove X-Powered-By header for security
   poweredByHeader: false,
@@ -12,11 +12,10 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // Enable strict mode for better error detection
+  // Disable strict mode to prevent double rendering issues
   reactStrictMode: false,
 
-  // Image optimization - using lightweight configuration
-  // Keeps unoptimized: true for memory savings on VPS but adds format hints
+  // Image optimization - lightweight for VPS
   images: {
     unoptimized: true,
     formats: ['image/webp'],
@@ -32,7 +31,6 @@ const nextConfig: NextConfig = {
 
   // Experimental features for memory optimization
   experimental: {
-    // Enable package import optimization
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
 
@@ -78,3 +76,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

@@ -9,13 +9,29 @@ import { hashPassword } from '@/lib/auth-config';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch (jsonError) {
+      return NextResponse.json(
+        { error: 'Invalid request format' },
+        { status: 400 }
+      );
+    }
+    
     const { email, password, name } = body;
 
     // Validation
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
+        { status: 400 }
+      );
+    }
+
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      return NextResponse.json(
+        { error: 'Invalid input format' },
         { status: 400 }
       );
     }
@@ -54,30 +70,38 @@ export async function POST(request: NextRequest) {
     const user = await db.user.create({
       data: {
         email: email.toLowerCase(),
-        name: name || email.split('@')[0],
+        name: (typeof name === 'string' ? name : '') || email.split('@')[0],
         password: hashedPassword,
         role: 'CUSTOMER',
       },
     });
 
     // Create initial progress record
-    await db.userProgress.create({
-      data: {
-        userId: user.id,
-        currentDay: 1,
-        currentPhase: 'AWARENESS',
-      },
-    });
+    try {
+      await db.userProgress.create({
+        data: {
+          userId: user.id,
+          currentDay: 1,
+          currentPhase: 'AWARENESS',
+        },
+      });
+    } catch (progressErr) {
+      console.error('Failed to create user progress:', progressErr);
+    }
 
     // Create transformation journey
-    await db.transformationJourney.create({
-      data: {
-        userId: user.id,
-        currentDay: 1,
-        currentPhase: 'AWARENESS',
-        accessTier: 'FREE',
-      },
-    });
+    try {
+      await db.transformationJourney.create({
+        data: {
+          userId: user.id,
+          currentDay: 1,
+          currentPhase: 'AWARENESS',
+          accessTier: 'FREE',
+        },
+      });
+    } catch (journeyErr) {
+      console.error('Failed to create transformation journey:', journeyErr);
+    }
 
     return NextResponse.json({
       success: true,
@@ -96,3 +120,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
