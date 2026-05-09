@@ -1,148 +1,484 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Sparkles, 
-  Clock,
-  Wrench,
-  ArrowRight,
-  CheckCircle2,
-  Mail
+import {
+  Sparkles,
+  Send,
+  Trash2,
+  Plus,
+  ArrowLeft,
+  Loader2,
+  Bot,
+  User,
+  AlertCircle,
+  RefreshCw,
 } from 'lucide-react';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
-export default function AIIdentityCoachPage() {
-  const { locale } = useLocale();
-  const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
+// ============================================
+// Types
+// ============================================
+interface Message {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: string;
+}
+
+// ============================================
+// Generate a unique session ID
+// ============================================
+function generateSessionId(): string {
+  return `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+}
+
+// ============================================
+// Chat Message Bubble Component
+// ============================================
+function ChatMessage({ message, locale }: { message: Message; locale: string }) {
+  const isUser = message.role === 'user';
+  const isRTL = locale === 'ar';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+    <div className={`flex gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'} mb-4`}>
+      {/* Avatar */}
+      <div
+        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+          isUser
+            ? 'bg-[#0F1C2E] text-white'
+            : 'bg-[#3DD4B0]/20 text-[#1F6F78]'
+        }`}
+      >
+        {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+      </div>
+
+      {/* Message Bubble */}
+      <div
+        className={`max-w-[80%] sm:max-w-[70%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
+          isUser
+            ? 'bg-[#0F1C2E] text-white rounded-tr-sm'
+            : 'bg-white text-[#0F1C2E] border border-slate-200 rounded-tl-sm shadow-sm'
+        }`}
+        dir={isRTL && !isUser ? 'rtl' : 'ltr'}
+      >
+        {message.content}
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// Typing Indicator Component
+// ============================================
+function TypingIndicator({ locale }: { locale: string }) {
+  const isRTL = locale === 'ar';
+  return (
+    <div className={`flex gap-3 flex-row mb-4`} dir={isRTL ? 'rtl' : 'ltr'}>
+      <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-[#3DD4B0]/20 text-[#1F6F78]">
+        <Bot className="w-4 h-4" />
+      </div>
+      <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
+        <div className="flex gap-1.5 items-center">
+          <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:0ms]" />
+          <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:150ms]" />
+          <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:300ms]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// Welcome Screen Component
+// ============================================
+function WelcomeScreen({ locale, onStart }: { locale: string; onStart: () => void }) {
+  const isRTL = locale === 'ar';
+  const getText = (en: string, ar: string) => (isRTL ? ar : en);
+
+  const starters = [
+    {
+      en: "I feel stuck and don't know how to move forward",
+      ar: 'أشعر بالتعثر ولا أعرف كيف أتحرك للأمام',
+    },
+    {
+      en: 'Help me understand my identity gap',
+      ar: 'ساعدني في فهم فجوة هويتي',
+    },
+    {
+      en: "I want to build better habits but keep failing",
+      ar: 'أريد بناء عادات أفضل لكنني أفشل دائماً',
+    },
+    {
+      en: "How does the Tamkinly system work?",
+      ar: 'كيف يعمل نظام تمكينلي؟',
+    },
+  ];
+
+  return (
+    <div className="flex-1 flex flex-col items-center justify-center px-4 py-8" dir={isRTL ? 'rtl' : 'ltr'}>
+      <div className="max-w-lg w-full text-center">
+        {/* Logo Icon */}
+        <div className="w-16 h-16 rounded-2xl bg-[#3DD4B0]/20 flex items-center justify-center mx-auto mb-6">
+          <Sparkles className="w-8 h-8 text-[#3DD4B0]" />
+        </div>
+
+        <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-3">
+          {getText('AI Identity Coach', 'مدرب الهوية الذكي')}
+        </h2>
+
+        <p className="text-slate-600 mb-8">
+          {getText(
+            'Your personal transformation companion. Ask anything about identity change, habits, or the Tamkinly system.',
+            'رفيق تحوّلك الشخصي. اسأل أي شيء عن تغيير الهوية أو العادات أو نظام تمكينلي.'
+          )}
+        </p>
+
+        {/* Conversation Starters */}
+        <div className="space-y-3">
+          {starters.map((starter, index) => (
+            <button
+              key={index}
+              onClick={() => onStart(isRTL ? starter.ar : starter.en)}
+              className="w-full text-left rtl:text-right px-4 py-3 bg-white border border-slate-200 rounded-xl hover:border-[#3DD4B0] hover:bg-[#3DD4B0]/5 transition-all text-sm text-slate-700 hover:text-[#0F1C2E]"
+            >
+              <span className="text-[#3DD4B0] font-medium">{getText('Try:', 'جرّب:')}</span>{' '}
+              {getText(starter.en, starter.ar)}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// Main AI Coach Chat Page
+// ============================================
+export default function AIIdentityCoachPage() {
+  const { locale } = useLocale();
+  const isRTL = locale === 'ar';
+  const getText = (en: string, ar: string) => (isRTL ? ar : en);
+
+  // State
+  const [sessionId, setSessionId] = useState<string>('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Refs
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Initialize session
+  useEffect(() => {
+    const existingSessionId = localStorage.getItem('tamkinly_coach_session');
+    if (existingSessionId) {
+      setSessionId(existingSessionId);
+      // Load existing conversation
+      loadConversation(existingSessionId);
+    } else {
+      const newId = generateSessionId();
+      setSessionId(newId);
+      localStorage.setItem('tamkinly_coach_session', newId);
+    }
+    setIsInitialized(true);
+  }, []);
+
+  // Auto-scroll to bottom
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isLoading]);
+
+  // Load conversation from API
+  const loadConversation = useCallback(async (sid: string) => {
+    try {
+      const res = await fetch(`/api/ai-coach?sessionId=${sid}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.messages && data.messages.length > 0) {
+          setMessages(data.messages);
+        }
+      }
+    } catch {
+      // Silently fail - start fresh
+    }
+  }, []);
+
+  // Send message
+  const sendMessage = useCallback(
+    async (content: string) => {
+      if (!content.trim() || isLoading || !sessionId) return;
+
+      const trimmedContent = content.trim();
+      setInputValue('');
+      setError(null);
+
+      // Add user message immediately
+      const userMessage: Message = {
+        role: 'user',
+        content: trimmedContent,
+        timestamp: new Date().toISOString(),
+      };
+      setMessages((prev) => [...prev, userMessage]);
+      setIsLoading(true);
+
+      try {
+        const res = await fetch('/api/ai-coach', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId, message: trimmedContent }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          if (data.unavailable) {
+            setError(
+              getText(
+                'AI Coach is temporarily unavailable. Please try again in a moment.',
+                'مدرب الهوية غير متاح مؤقتاً. يرجى المحاولة مرة أخرى.'
+              )
+            );
+          } else {
+            setError(
+              getText(
+                'Something went wrong. Please try again.',
+                'حدث خطأ ما. يرجى المحاولة مرة أخرى.'
+              )
+            );
+          }
+          // Remove the user message if the request failed
+          setMessages((prev) => prev.slice(0, -1));
+          return;
+        }
+
+        // Add AI response
+        const assistantMessage: Message = {
+          role: 'assistant',
+          content: data.response,
+          timestamp: new Date().toISOString(),
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+      } catch {
+        setError(
+          getText(
+            'Network error. Please check your connection and try again.',
+            'خطأ في الاتصال. يرجى التحقق من اتصالك والمحاولة مرة أخرى.'
+          )
+        );
+        setMessages((prev) => prev.slice(0, -1));
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [sessionId, isLoading, getText]
+  );
+
+  // Handle form submit
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage(inputValue);
+  };
+
+  // Handle textarea key press (Enter to send, Shift+Enter for newline)
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(inputValue);
+    }
+  };
+
+  // Start new conversation
+  const startNewConversation = () => {
+    const newId = generateSessionId();
+    setSessionId(newId);
+    setMessages([]);
+    setError(null);
+    localStorage.setItem('tamkinly_coach_session', newId);
+  };
+
+  // Clear conversation
+  const clearConversation = async () => {
+    if (!sessionId) return;
+    try {
+      await fetch(`/api/ai-coach?sessionId=${sessionId}`, { method: 'DELETE' });
+    } catch {
+      // Ignore errors
+    }
+    startNewConversation();
+  };
+
+  // Handle starter click
+  const handleStarterClick = (text: string) => {
+    sendMessage(text);
+  };
+
+  // Auto-resize textarea
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 120) + 'px';
+    }
+  }, [inputValue]);
+
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-[#3DD4B0] animate-spin" />
+      </div>
+    );
+  }
+
+  const hasMessages = messages.length > 0;
+
+  return (
+    <div className="min-h-screen bg-[#F6F8FA] flex flex-col" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Header */}
-      <div className="bg-[#0F1C2E] text-white py-6 px-4 border-b border-[#1F6F78]/30">
+      <div className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/apps" className="text-[#3DD4B0] hover:underline text-sm mb-4 inline-block">
-            {getText('← Back to Apps', '← العودة للتطبيقات')}
-          </Link>
-          <div className="flex items-center gap-3 mt-2">
-            <div className="w-10 h-10 rounded-xl bg-[#3DD4B0]/20 flex items-center justify-center relative">
-              <Sparkles className="w-5 h-5 text-[#3DD4B0]" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-500 rounded-full animate-pulse" />
-            </div>
-            <div>
+          <div className="flex items-center justify-between h-14">
+            {/* Left: Back + Title */}
+            <div className="flex items-center gap-3">
+              <Link
+                href="/apps"
+                className="text-slate-500 hover:text-[#0F1C2E] transition-colors"
+              >
+                <ArrowLeft className={`w-5 h-5 ${isRTL ? 'rotate-180' : ''}`} />
+              </Link>
               <div className="flex items-center gap-2">
-                <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]/50">{getText('BUNDLE', 'الباقة الشاملة')}</Badge>
-                <Badge className="bg-amber-500/20 text-amber-400 border border-amber-500/50">
-                  <Wrench className="w-3 h-3 mr-1" />
-                  {getText('Under Development', 'قيد التطوير')}
-                </Badge>
+                <div className="w-8 h-8 rounded-lg bg-[#3DD4B0]/20 flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-[#3DD4B0]" />
+                </div>
+                <div>
+                  <h1 className="text-sm font-bold text-[#0F1C2E] leading-tight">
+                    {getText('AI Identity Coach', 'مدرب الهوية الذكي')}
+                  </h1>
+                  <p className="text-[10px] text-slate-500 leading-tight">
+                    {getText('Powered by Tamkinly', 'مدعوم من تمكينلي')}
+                  </p>
+                </div>
               </div>
-              <h1 className="text-xl font-bold">{getText('AI Identity Coach', 'مدرب الهوية الذكي')}</h1>
-              <p className="text-slate-400 text-sm">{getText('Your 24/7 transformation companion', 'رفيق تحوّلك على مدار الساعة')}</p>
+            </div>
+
+            {/* Right: Actions */}
+            <div className="flex items-center gap-2">
+              <Badge
+                variant="outline"
+                className="text-[10px] border-[#3DD4B0]/50 text-[#1F6F78] bg-[#3DD4B0]/10"
+              >
+                {getText('BUNDLE', 'الباقة الشاملة')}
+              </Badge>
+              {hasMessages && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-slate-400 hover:text-red-500"
+                    onClick={clearConversation}
+                    title={getText('Clear conversation', 'مسح المحادثة')}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-slate-400 hover:text-[#3DD4B0]"
+                    onClick={startNewConversation}
+                    title={getText('New conversation', 'محادثة جديدة')}
+                  >
+                    <Plus className="w-4 h-4" />
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Coming Soon Content */}
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
-        {/* Main Coming Soon Card */}
-        <Card className="bg-white mb-8 overflow-hidden">
-          <div className="h-2 bg-gradient-to-r from-amber-500 via-[#3DD4B0] to-[#1F6F78]" />
-          <CardContent className="p-8 lg:p-12 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-amber-500/10 text-amber-500 mb-6">
-              <Wrench className="w-10 h-10" />
-            </div>
-            
-            <Badge className="bg-amber-500/20 text-amber-600 border border-amber-500/30 mb-4">
-              {getText('Coming Soon', 'قريباً')}
-            </Badge>
-            
-            <h2 className="font-serif text-3xl font-bold text-[#0F1C2E] mb-4">
-              {getText('AI Identity Coach is Under Development', 'مدرب الهوية الذكي قيد التطوير')}
-            </h2>
-            
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-              {getText(
-                "We're working hard to bring you an intelligent coaching experience powered by evidence-based psychology frameworks. This feature will be available soon for BUNDLE package subscribers.",
-                'نعمل بجد لتقديم تجربة تدريب ذكية مدعومة بأطر نفسية مبنية على الأدلة. ستكون هذه الميزة متاحة قريباً لمشتركي الباقة الشاملة.'
-              )}
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/apps">
-                <Button size="lg" variant="outline" className="px-8">
-                  {getText('Explore Other Apps', 'استكشف تطبيقات أخرى')}
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-              <Link href="/products">
-                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8">
-                  {getText('View BUNDLE Package', 'عرض الباقة الشاملة')}
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* What to Expect */}
-        <Card className="bg-white mb-8">
-          <CardContent className="p-6 lg:p-8">
-            <h3 className="font-serif text-xl font-bold text-[#0F1C2E] mb-6 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#3DD4B0]" />
-              {getText('What to Expect', 'ما يمكنك توقعه')}
-            </h3>
-            
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                { title: getText('Identity Discovery', 'اكتشاف الهوية'), desc: getText('Guided conversations to explore who you are and who you want to become', 'محادثات موجّهة لاستكشاف هويتك ومن تريد أن تصبح') },
-                { title: getText('Habit Formation', 'بناء العادات'), desc: getText('Identity-based habit strategies backed by behavioral science', 'استراتيجيات عادات مبنية على الهوية مدعومة بالعلم السلوكي') },
-                { title: getText('Self-Authorship', 'تأليف الذات'), desc: getText('Develop your internal voice and move beyond external formulas', 'طوّر صوتك الداخلي وتجاوز الصيغ الخارجية') },
-                { title: getText('Emotion Regulation', 'تنظيم المشاعر'), desc: getText('Learn cognitive reappraisal and emotional intelligence techniques', 'تعلّم إعادة التقييم المعرفي وتقنيات الذكاء العاطفي') },
-              ].map((feature, index) => (
-                <div key={index} className="flex items-start gap-3 p-4 bg-slate-50 rounded-lg">
-                  <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-[#0F1C2E] text-sm">{feature.title}</h4>
-                    <p className="text-xs text-slate-600 mt-1">{feature.desc}</p>
-                  </div>
-                </div>
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl py-4">
+          {!hasMessages ? (
+            <WelcomeScreen locale={locale} onStart={handleStarterClick} />
+          ) : (
+            <>
+              {messages.map((msg, index) => (
+                <ChatMessage key={index} message={msg} locale={locale} />
               ))}
-            </div>
-          </CardContent>
-        </Card>
+              {isLoading && <TypingIndicator locale={locale} />}
+            </>
+          )}
 
-        {/* Get Notified */}
-        <Card className="bg-gradient-to-r from-[#1F6F78] to-[#0F1C2E] border-0">
-          <CardContent className="p-6 lg:p-8 text-center">
-            <Mail className="w-8 h-8 text-[#3DD4B0] mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">
-              {getText("Get Notified When It's Ready", 'احصل على إشعار عندما يكون جاهزاً')}
-            </h3>
-            <p className="text-slate-300 mb-4 max-w-md mx-auto">
-              {getText(
-                "Subscribe to our newsletter to be the first to know when AI Identity Coach launches.",
-                'اشترك في نشرتنا الإخبارية لتكون أول من يعلم عند إطلاق مدرب الهوية الذكي.'
-              )}
-            </p>
-            <Link href="/contact">
-              <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
-                {getText('Contact Us for Updates', 'تواصل معنا للتحديثات')}
-                <ArrowRight className="w-4 h-4 ml-2" />
+          {/* Error Message */}
+          {error && (
+            <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4">
+              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+              <p className="text-sm text-red-700 flex-1">{error}</p>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-red-600 hover:text-red-700 hover:bg-red-100"
+                onClick={() => {
+                  setError(null);
+                  // Retry last user message
+                  const lastUserMsg = [...messages].reverse().find((m) => m.role === 'user');
+                  if (lastUserMsg) {
+                    setMessages((prev) => prev.slice(0, -1)); // Remove failed message
+                    sendMessage(lastUserMsg.content);
+                  }
+                }}
+              >
+                <RefreshCw className="w-4 h-4" />
               </Button>
-            </Link>
-          </CardContent>
-        </Card>
+            </div>
+          )}
 
-        {/* Estimated Timeline */}
-        <div className="text-center mt-8">
-          <div className="inline-flex items-center gap-2 text-slate-400 text-sm">
-            <Clock className="w-4 h-4" />
-            <span>{getText('Expected launch: Q1 2025', 'الإطلاق المتوقع: الربع الأول 2025')}</span>
-          </div>
+          <div ref={messagesEndRef} />
+        </div>
+      </div>
+
+      {/* Input Area */}
+      <div className="sticky bottom-0 bg-white border-t border-slate-200 shadow-lg">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl py-3">
+          <form onSubmit={handleSubmit} className="flex items-end gap-2">
+            <div className="flex-1 relative">
+              <Textarea
+                ref={textareaRef}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={getText(
+                  'Ask your coach anything...',
+                  'اسأل مدربك أي شيء...'
+                )}
+                className="w-full min-h-[44px] max-h-[120px] resize-none bg-slate-50 border-slate-200 focus:border-[#3DD4B0] focus:ring-[#3DD4B0]/20 rounded-xl text-sm pr-4 pl-4 py-3"
+                rows={1}
+                disabled={isLoading}
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={!inputValue.trim() || isLoading}
+              className="bg-[#0F1C2E] hover:bg-[#1a2d42] text-white rounded-xl h-11 w-11 p-0 flex items-center justify-center flex-shrink-0 disabled:opacity-40"
+            >
+              {isLoading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Send className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
+              )}
+            </Button>
+          </form>
+          <p className="text-[10px] text-slate-400 mt-1.5 text-center">
+            {getText(
+              'AI Coach provides guidance, not therapy. Press Enter to send, Shift+Enter for new line.',
+              'يوفر المدرب إرشادات وليس علاجاً. اضغط Enter للإرسال، Shift+Enter لسطر جديد.'
+            )}
+          </p>
         </div>
       </div>
     </div>
