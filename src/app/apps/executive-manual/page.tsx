@@ -1,7 +1,5 @@
 'use client';
 
-import { AccessGate } from '@/components/AccessGate';
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -245,8 +243,7 @@ export default function ExecutiveManualPage() {
   ];
 
   return (
-      <AccessGate appSlug="executive-manual">
-    <div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+<div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Header */}
       <div className="bg-[#0F1C2E] text-white py-8 px-4">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -452,8 +449,7 @@ export default function ExecutiveManualPage() {
         </div>
       </div>
     </div>
-  </AccessGate>
-    );
+);
 }
 
 function FileTextIcon({ className }: { className?: string }) {

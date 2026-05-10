@@ -1,7 +1,5 @@
 'use client';
 
-import { AccessGate } from '@/components/AccessGate';
-
 import React from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -24,8 +22,7 @@ export default function CommunityAccessPage() {
   ];
 
   return (
-      <AccessGate appSlug="community-access">
-    <div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+<div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] text-white py-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
@@ -116,7 +113,6 @@ export default function CommunityAccessPage() {
         </div>
       </div>
     </div>
-  </AccessGate>
-    );
+);
 }
 

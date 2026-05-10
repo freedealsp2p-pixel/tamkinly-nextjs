@@ -1,13 +1,15 @@
-import type { Metadata } from 'next';
-import { APPS_METADATA } from '@/lib/seo-pages';
+'use client';
 
-export const metadata: Metadata = APPS_METADATA;
+import { AppAccessGuard } from '@/components/AppAccessGuard';
 
 export default function AppsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <AppAccessGuard>
+      {children}
+    </AppAccessGuard>
+  );
 }
-

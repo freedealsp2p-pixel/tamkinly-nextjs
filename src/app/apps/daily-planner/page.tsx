@@ -1,7 +1,5 @@
 'use client';
 
-import { AccessGate } from '@/components/AccessGate';
-
 import React from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -15,8 +13,7 @@ export default function DailyPlannerPage() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   return (
-      <AccessGate appSlug="daily-planner">
-    <div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+<div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] text-white py-12 px-4">
         <div className="container mx-auto max-w-4xl">
           <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#3DD4B0]/30 mb-4">{getText('BASIC - $17', 'الأساسية - $17')}</Badge>
@@ -56,6 +53,5 @@ export default function DailyPlannerPage() {
         </Card>
       </div>
     </div>
-  </AccessGate>
-    );
+);
 }
