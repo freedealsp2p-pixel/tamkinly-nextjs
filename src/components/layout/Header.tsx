@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { DarkModeToggle } from '@/components/DarkModeToggle';
 import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "@/components/providers/LocaleProvider";
@@ -185,6 +186,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
               </Link>
             ))}
           </nav>
+        <DarkModeToggle />
 
           <div className="mt-auto pt-8 space-y-3 pb-4">
             {/* Language Switcher for Mobile */}
@@ -387,6 +389,7 @@ export function Header() {
               </Link>
             ))}
           </nav>
+        <DarkModeToggle />
 
           {/* Search Input with Results */}
           <div className="hidden lg:flex items-center relative">

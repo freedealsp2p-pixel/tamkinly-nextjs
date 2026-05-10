@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.8 },
     { url: `${baseUrl}/resources`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.7 },
     { url: `${baseUrl}/search`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.3 },
+  
+      { url: 'https://tamkinly.com/guides/recode-identity-30-days', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+      { url: 'https://tamkinly.com/guides/behavior-trap-why-habits-fail', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+      { url: 'https://tamkinly.com/guides/environment-shapes-you', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+      { url: 'https://tamkinly.com/referral', lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+    
   ];
 
   // App pages
@@ -45,5 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...appPages];
+  return [
+    ...staticPages,
+    ...appPages,
+    { url: 'https://tamkinly.com/guides/recode-identity-30-days', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: 'https://tamkinly.com/guides/behavior-trap-why-habits-fail', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: 'https://tamkinly.com/guides/environment-shapes-you', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: 'https://tamkinly.com/referral', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.5 },
+  ];
 }

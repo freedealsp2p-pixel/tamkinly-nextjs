@@ -1,0 +1,42 @@
+{
+  "name": "Tamkinly - تحول الهوية",
+  "short_name": "Tamkinly",
+  "description": "Identity Transformation Platform - منصة تحول الهوية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F6F8FA",
+  "theme_color": "#1F6F78",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["lifestyle", "health", "education"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Take Quiz",
+      "short_name": "Quiz",
+      "url": "/quiz",
+      "icons": [{"src": "/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "My Apps",
+      "short_name": "Apps",
+      "url": "/apps",
+      "icons": [{"src": "/icon-192.png", "sizes": "192x192"}]
+    }
+  ]
+}

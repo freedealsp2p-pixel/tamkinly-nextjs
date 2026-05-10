@@ -293,3 +293,29 @@ html {
   margin-left: 0;
   margin-right: 0.75rem;
 }
+
+/* Dark Mode Support */
+.dark {
+  --bg-primary: #0F1C2E;
+  --bg-secondary: #1a2d42;
+  --bg-tertiary: #243b53;
+  --text-primary: #F6F8FA;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+  --border-color: #2d3748;
+  --card-bg: #1a2d42;
+  --accent: #3DD4B0;
+  --accent-hover: #2BC49E;
+}
+
+/* Dark mode overrides */
+.dark body, ..dark .bg-white { background-color: var(--bg-primary); color: var(--text-primary); }
+.dark .bg-\[\#F6F8FA\] { background-color: var(--bg-primary); }
+.dark .bg-\[\#F6F8FA\] { background-color: var(--bg-secondary); }
+.dark .text-\[\#0F1C2E\] { color: var(--text-primary); }
+.dark .text-slate-600, .dark .text-slate-700 { color: var(--text-secondary); }
+.dark .text-slate-500 { color: var(--text-muted); }
+.dark .border-slate-200 { border-color: var(--border-color); }
+.dark .bg-slate-50 { background-color: var(--bg-tertiary); }
+.dark .bg-white { background-color: var(--card-bg); }
+

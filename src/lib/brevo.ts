@@ -23,6 +23,7 @@ export interface BrevoContact {
     DOWNLOAD_LINK?: string;
     APPS_LINK?: string;
     QUIZ_SCORE?: number;
+    QUIZ_TYPE?: string;
     STREAK_DAYS?: number;
     LAST_ACTIVITY?: string;
     DAYS_SINCE_PURCHASE?: number;
@@ -31,6 +32,9 @@ export interface BrevoContact {
     RESET_LINK?: string;
     VERIFY_LINK?: string;
     LOGIN_LINK?: string;
+    INACTIVE_DAYS?: number;
+    CART_ITEMS?: string;
+    UPGRADE_TIER?: string;
   };
   listIds?: number[];
   updateEnabled?: boolean;
@@ -128,6 +132,31 @@ export const BREVO_TEMPLATES = {
   BUNDLE_FOLLOWUP_DAY_3: 28,     // "Bundle Follow-up Day 3" #28
   BUNDLE_FOLLOWUP_DAY_7: 29,     // "Bundle Follow-up Day 7" #29
   BUNDLE_FOLLOWUP_DAY_14: 30,    // "Bundle Follow-up Day 14" #30
+
+  // ============================================
+  // NEW TEMPLATE IDs (Drip Sequence Templates)
+  // ============================================
+
+  // Quiz Results
+  QUIZ_RESULTS: 31,              // "Quiz Results" #31
+
+  // Identity Milestones
+  MILESTONE_DAY_7: 32,           // "Milestone Day 7" #32
+  MILESTONE_DAY_14: 33,          // "Milestone Day 14" #33
+  MILESTONE_DAY_21: 34,          // "Milestone Day 21" #34
+  MILESTONE_DAY_30: 35,          // "Milestone Day 30" #35
+
+  // Re-engagement
+  RE_ENGAGEMENT: 36,             // "Re-Engagement" #36
+  RE_ENGAGEMENT_FOLLOWUP: 37,    // "Re-Engagement Follow-up" #37
+  RE_ENGAGEMENT_OFFER: 38,       // "Re-Engagement Final Offer" #38
+
+  // Purchase Confirmation (unified)
+  PURCHASE_CONFIRMATION: 39,     // "Purchase Confirmation" #39
+
+  // Abandoned Cart (branded versions)
+  ABANDONED_CART_1H_BRANDED: 40, // "Abandoned Cart 1H Branded" #40
+  ABANDONED_CART_24H_BRANDED: 41,// "Abandoned Cart 24H Branded" #41
 } as const;
 
 // List IDs
@@ -137,6 +166,9 @@ export const BREVO_LISTS = {
   TRIAL_USERS: parseInt(process.env.BREVO_LIST_TRIAL || '3'),
   QUIZ_TAKERS: parseInt(process.env.BREVO_LIST_QUIZ || '4'),
   NEWSLETTER: parseInt(process.env.BREVO_LIST_NEWSLETTER || '5'),
+  PREMIUM_CUSTOMERS: parseInt(process.env.BREVO_LIST_PREMIUM || '6'),
+  BUNDLE_VIP: parseInt(process.env.BREVO_LIST_BUNDLE || '7'),
+  INACTIVE_USERS: parseInt(process.env.BREVO_LIST_INACTIVE || '8'),
 };
 
 // ============================================
@@ -292,7 +324,6 @@ export const BrevoEmails = {
 
   // ============================================
   // TRIAL PURCHASE EMAIL (Template #2)
-  // 7-Day Identity System Trial
   // ============================================
   async sendTrialPurchase(
     email: string,
@@ -310,7 +341,6 @@ export const BrevoEmails = {
 
   // ============================================
   // PLANNER PURCHASE EMAIL (Template #3)
-  // Identity Recode Planner
   // ============================================
   async sendPlannerPurchase(
     email: string,
@@ -345,7 +375,6 @@ export const BrevoEmails = {
 
   // ============================================
   // BUNDLE PURCHASE EMAIL (Template #5)
-  // Complete Bundle (VIP)
   // ============================================
   async sendBundlePurchase(
     email: string,
@@ -422,6 +451,64 @@ export const BrevoEmails = {
 
     return this.sendTemplate(templateId, email, {
       NAME: name,
+    }, { name });
+  },
+
+  // ============================================
+  // QUIZ RESULTS (Template #31)
+  // ============================================
+  async sendQuizResults(
+    email: string,
+    name: string,
+    quizType: string,
+    score: number,
+    insights?: string[]
+  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
+    return this.sendTemplate(BREVO_TEMPLATES.QUIZ_RESULTS, email, {
+      NAME: name,
+      QUIZ_TYPE: quizType,
+      QUIZ_SCORE: score,
+      INSIGHTS: insights ? insights.join('; ') : '',
+      APPS_LINK: `${BASE_URL}/apps/`,
+    }, { name });
+  },
+
+  // ============================================
+  // IDENTITY MILESTONE (Templates #32-35)
+  // ============================================
+  async sendIdentityMilestone(
+    email: string,
+    name: string,
+    day: 7 | 14 | 21 | 30
+  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
+    const milestoneTemplates: Record<number, number> = {
+      7: BREVO_TEMPLATES.MILESTONE_DAY_7,
+      14: BREVO_TEMPLATES.MILESTONE_DAY_14,
+      21: BREVO_TEMPLATES.MILESTONE_DAY_21,
+      30: BREVO_TEMPLATES.MILESTONE_DAY_30,
+    };
+
+    const templateId = milestoneTemplates[day] || BREVO_TEMPLATES.MILESTONE_DAY_7;
+
+    return this.sendTemplate(templateId, email, {
+      NAME: name,
+      MILESTONE_DAY: day,
+      APPS_LINK: `${BASE_URL}/apps/`,
+    }, { name });
+  },
+
+  // ============================================
+  // RE-ENGAGEMENT (Template #36)
+  // ============================================
+  async sendReEngagement(
+    email: string,
+    name: string,
+    inactiveDays: number = 7
+  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
+    return this.sendTemplate(BREVO_TEMPLATES.RE_ENGAGEMENT, email, {
+      NAME: name,
+      INACTIVE_DAYS: inactiveDays,
+      APPS_LINK: `${BASE_URL}/apps/`,
     }, { name });
   },
 

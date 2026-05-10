@@ -2,6 +2,8 @@
 // Handles email queueing, sending, and tracking
 
 import { db } from '@/lib/db';
+import { getSequenceByTrigger, type DripSequence } from './drip-sequences';
+import EmailTemplates from '../email-templates';
 
 // Email template variables
 export interface EmailVariables {
@@ -32,6 +34,16 @@ export interface EmailVariables {
   expiry_date?: string;
   applicable_products?: string;
   birthday_link?: string;
+  // New variables for drip sequences
+  quiz_type?: string;
+  quiz_score?: string;
+  quiz_insights?: string;
+  milestone_day?: string;
+  inactive_days?: string;
+  current_tier?: string;
+  product_name?: string;
+  product_tier?: string;
+  locale?: string;
   [key: string]: string | undefined;
 }
 
@@ -58,8 +70,116 @@ export function replaceVariables(content: string, variables: EmailVariables): st
   return result;
 }
 
+// ============================================
+// GENERATE HTML FROM DRIP STEP
+// ============================================
+
+function generateHtmlFromTemplate(
+  templateName: string,
+  variables: EmailVariables
+): string {
+  const locale = (variables.locale as 'en' | 'ar') || 'en';
+  const name = variables.name || 'Friend';
+  const accessKey = variables.access_code || '';
+  const productName = variables.product_name || '';
+
+  switch (templateName) {
+    case 'welcome':
+      return EmailTemplates.welcome(name, locale);
+
+    case 'purchaseConfirmation':
+      return EmailTemplates.purchaseConfirmation(
+        name,
+        accessKey,
+        productName,
+        (variables.product_tier as 'trial' | 'basic' | 'premium' | 'bundle') || 'basic',
+        locale
+      );
+
+    case 'trialPurchase':
+      return EmailTemplates.trialPurchase(name, accessKey, locale);
+
+    case 'plannerPurchase':
+      return EmailTemplates.plannerPurchase(name, accessKey, locale);
+
+    case 'premiumPurchase':
+      return EmailTemplates.premiumPurchase(name, accessKey, locale);
+
+    case 'bundlePurchase':
+      return EmailTemplates.bundlePurchase(name, accessKey, locale);
+
+    case 'day3FollowUp':
+      return EmailTemplates.day3FollowUp(name, locale);
+
+    case 'day7FollowUp':
+      return EmailTemplates.day7FollowUp(name, locale);
+
+    case 'day14FollowUp':
+      return EmailTemplates.day14FollowUp(name, variables.current_tier || 'basic', locale);
+
+    case 'abandonedCart1h':
+      return EmailTemplates.abandonedCart1h(name, variables.cart_items || '', locale);
+
+    case 'abandonedCart24h':
+      return EmailTemplates.abandonedCart24h(name, variables.cart_items || '', locale);
+
+    case 'quizResults':
+      return EmailTemplates.quizResults(
+        name,
+        variables.quiz_type || 'identity_gap',
+        parseInt(variables.quiz_score || '50'),
+        variables.quiz_insights ? variables.quiz_insights.split(';') : [],
+        locale
+      );
+
+    case 'identityMilestone':
+      return EmailTemplates.identityMilestone(
+        name,
+        parseInt(variables.milestone_day || '7') as 7 | 14 | 21 | 30,
+        locale
+      );
+
+    case 'reEngagement':
+      return EmailTemplates.reEngagement(
+        name,
+        parseInt(variables.inactive_days || '7'),
+        locale
+      );
+
+    default:
+      return EmailTemplates.welcome(name, locale);
+  }
+}
+
 // Get email sequence by trigger
 export async function getEmailSequence(trigger: string) {
+  // First, try the drip sequences registry
+  const dripSequence = getSequenceByTrigger(trigger);
+  if (dripSequence) {
+    // Convert DripSequence to the format expected by the database
+    return {
+      id: dripSequence.id,
+      name: dripSequence.name,
+      trigger: dripSequence.trigger,
+      isActive: dripSequence.isActive,
+      steps: dripSequence.steps.map(step => ({
+        id: `${dripSequence.id}-step-${step.stepNumber}`,
+        sequenceId: dripSequence.id,
+        stepNumber: step.stepNumber,
+        delayHours: step.delayHours,
+        subject: step.subject,
+        preheader: step.preheader,
+        content: step.subjectAr, // Store Arabic subject as content hint
+        templateName: step.templateName,
+        primaryCta: step.primaryCta,
+        primaryUrl: step.primaryUrl,
+        openRate: 0,
+        clickRate: 0,
+      })),
+    };
+  }
+
+  // Fall back to database lookup
   return db.emailSequence.findFirst({
     where: {
       trigger,
@@ -118,7 +238,7 @@ export async function triggerEmailSequence(
       scheduledAt.setHours(scheduledAt.getHours() + step.delayHours);
       
       const personalizedSubject = replaceVariables(step.subject, variables);
-      const personalizedContent = replaceVariables(step.content, variables);
+      const personalizedContent = replaceVariables(step.content || '', variables);
       
       await queueEmail({
         email: variables.email,
@@ -127,6 +247,7 @@ export async function triggerEmailSequence(
         content: personalizedContent,
         sequenceId: sequence.id,
         stepNumber: step.stepNumber,
+        templateName: step.templateName || undefined,
         scheduledAt
       });
       
@@ -184,11 +305,16 @@ export async function sendQueuedEmails(): Promise<{ sent: number; failed: number
         data: { status: 'SENDING' }
       });
       
-      // Here you would integrate with your email provider (Brevo, SendGrid, etc.)
-      // For now, we'll simulate success
+      // Generate HTML from template name if available
+      let htmlContent = email.content;
+      if (email.templateName) {
+        htmlContent = generateHtmlFromTemplate(email.templateName, {
+          name: email.name || undefined,
+          email: email.email,
+        });
+      }
       
-      // Simulate email sending
-      const success = await sendEmailViaProvider(email.email, email.subject, email.content);
+      const success = await sendEmailViaProvider(email.email, email.subject, htmlContent);
       
       if (success) {
         await db.emailQueue.update({
@@ -233,19 +359,23 @@ export async function sendQueuedEmails(): Promise<{ sent: number; failed: number
 
 // Get email type from sequence ID (simplified)
 function getEmailType(sequenceId: string): string {
-  // This would be mapped from the actual sequence
+  if (sequenceId.includes('trial')) return 'TRIAL';
+  if (sequenceId.includes('basic') || sequenceId.includes('planner')) return 'BASIC';
+  if (sequenceId.includes('premium')) return 'PREMIUM';
+  if (sequenceId.includes('bundle')) return 'BUNDLE';
+  if (sequenceId.includes('quiz')) return 'QUIZ';
+  if (sequenceId.includes('milestone')) return 'MILESTONE';
+  if (sequenceId.includes('re_engagement')) return 'RE_ENGAGEMENT';
+  if (sequenceId.includes('abandoned')) return 'ABANDONED_CART';
   return 'WELCOME';
 }
 
-// Email provider integration (placeholder)
+// Email provider integration
 async function sendEmailViaProvider(
   to: string, 
   subject: string, 
   content: string
 ): Promise<boolean> {
-  // Integration with Brevo, SendGrid, or other providers
-  // For development, this returns true to simulate success
-  
   if (process.env.NODE_ENV === 'development') {
     console.log('📧 Email would be sent:');
     console.log(`   To: ${to}`);
@@ -253,8 +383,6 @@ async function sendEmailViaProvider(
     return true;
   }
   
-  // In production, integrate with actual provider
-  // Example: Brevo API
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
   
   if (!BREVO_API_KEY) {
@@ -277,7 +405,7 @@ async function sendEmailViaProvider(
         },
         to: [{ email: to }],
         subject,
-        htmlContent: content.replace(/\n/g, '<br>').replace(/# (.*)/g, '<h1>$1</h1>')
+        htmlContent: content.includes('<!DOCTYPE') ? content : content.replace(/\n/g, '<br>').replace(/# (.*)/g, '<h1>$1</h1>')
       })
     });
     

@@ -44,6 +44,9 @@ model User {
   updatedAt    DateTime   @updatedAt
   
   @@map("users")
+
+  referrals    Referral[]  @relation("ReferrerUser")
+  referredBy   Referral[]  @relation("ReferredUser")
 }
 
 enum UserRole {
@@ -1248,3 +1251,19 @@ model TransformationJourney {
 }
 
 
+
+
+// Referral System
+model Referral {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  referrerId  String
+  referrer    User     @relation("ReferrerUser", fields: [referrerId], references: [id])
+  referredEmail String?
+  referredId  String?
+  referred    User?    @relation("ReferredUser", fields: [referredId], references: [id])
+  reward      String?  // TRIAL, BASIC_DISCOUNT, etc
+  rewardClaimed Boolean @default(false)
+  createdAt   DateTime @default(now())
+  usedAt      DateTime?
+}

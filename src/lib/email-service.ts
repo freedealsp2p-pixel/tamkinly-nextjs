@@ -16,12 +16,14 @@ export interface PurchaseEmailOptions {
   productName: string;
   productType: ProductType;
   accessKey: string;
+  locale?: 'en' | 'ar';
 }
 
 export interface WelcomeEmailOptions {
   to: string;
   name: string;
   accessKey?: string;
+  locale?: 'en' | 'ar';
 }
 
 export interface FollowUpEmailOptions {
@@ -29,6 +31,8 @@ export interface FollowUpEmailOptions {
   name: string;
   day: 3 | 7 | 14;
   productType: ProductType | 'general';
+  currentTier?: string;
+  locale?: 'en' | 'ar';
 }
 
 export interface ResetEmailOptions {
@@ -48,6 +52,37 @@ export interface SupportEmailOptions {
   name: string;
   ticketId: string;
   subject: string;
+}
+
+export interface QuizResultsEmailOptions {
+  to: string;
+  name: string;
+  quizType: string;
+  score: number;
+  insights?: string[];
+  locale?: 'en' | 'ar';
+}
+
+export interface IdentityMilestoneEmailOptions {
+  to: string;
+  name: string;
+  day: 7 | 14 | 21 | 30;
+  locale?: 'en' | 'ar';
+}
+
+export interface ReEngagementEmailOptions {
+  to: string;
+  name: string;
+  inactiveDays?: number;
+  locale?: 'en' | 'ar';
+}
+
+export interface AbandonedCartEmailOptions {
+  to: string;
+  name: string;
+  hoursAgo: 1 | 24;
+  cartItems?: string;
+  locale?: 'en' | 'ar';
 }
 
 // ============================================
@@ -77,35 +112,42 @@ export async function sendPurchaseConfirmationEmail(
   options: PurchaseEmailOptions
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
   const provider = getActiveProvider();
+  const locale = options.locale || 'en';
   
-  // Generate HTML based on product type
+  // Generate HTML based on product type using new templates
+  const tierMap: Record<ProductType, 'trial' | 'basic' | 'premium' | 'bundle'> = {
+    trial: 'trial',
+    planner: 'basic',
+    premium: 'premium',
+    bundle: 'bundle',
+  };
+
   let htmlContent: string;
   let subject: string;
   
   switch (options.productType) {
     case 'trial':
-      htmlContent = EmailTemplates.trialPurchase(options.name, options.accessKey);
-      subject = 'Your 7-Day Identity System is Ready! 🎯';
+      htmlContent = EmailTemplates.trialPurchase(options.name, options.accessKey, locale);
+      subject = locale === 'ar' ? 'نظام الهوية لمدة 7 أيام جاهز! 🎯' : 'Your 7-Day Identity System is Ready! 🎯';
       break;
     case 'planner':
-      htmlContent = EmailTemplates.plannerPurchase(options.name, options.accessKey);
-      subject = 'Your Identity Recode Planner is Ready! 📋';
+      htmlContent = EmailTemplates.plannerPurchase(options.name, options.accessKey, locale);
+      subject = locale === 'ar' ? 'مخطط إعادة صياغة الهوية جاهز! 📋' : 'Your Identity Recode Planner is Ready! 📋';
       break;
     case 'premium':
-      htmlContent = EmailTemplates.premiumPurchase(options.name, options.accessKey);
-      subject = 'Your Premium Transformation Package is Ready! 🌟';
+      htmlContent = EmailTemplates.premiumPurchase(options.name, options.accessKey, locale);
+      subject = locale === 'ar' ? 'باقة التحول المتقدمة جاهزة! 🌟' : 'Your Premium Transformation Package is Ready! 🌟';
       break;
     case 'bundle':
-      htmlContent = EmailTemplates.bundlePurchase(options.name, options.accessKey);
-      subject = 'Welcome to VIP! Your Complete Bundle is Ready! 👑';
+      htmlContent = EmailTemplates.bundlePurchase(options.name, options.accessKey, locale);
+      subject = locale === 'ar' ? 'مرحباً بك في VIP! باقتك الشاملة جاهزة! 👑' : 'Welcome to VIP! Your Complete Bundle is Ready! 👑';
       break;
     default:
-      htmlContent = EmailTemplates.plannerPurchase(options.name, options.accessKey);
+      htmlContent = EmailTemplates.purchaseConfirmation(options.name, options.accessKey, options.productName, tierMap[options.productType] || 'basic', locale);
       subject = `Your ${options.productName} is Ready!`;
   }
   
   if (provider === 'brevo') {
-    // Send directly with HTML content (not using stored templates)
     return BrevoClient.emails.send({
       to: [{ email: options.to, name: options.name }],
       sender: {
@@ -118,7 +160,6 @@ export async function sendPurchaseConfirmationEmail(
     });
   }
   
-  // Fallback - log
   console.log(`[EMAIL FALLBACK] Would send purchase email to ${options.to}`);
   console.log(`[EMAIL FALLBACK] Access Key: ${options.accessKey}`);
   console.log(`[EMAIL FALLBACK] Product: ${options.productName}`);
@@ -132,9 +173,10 @@ export async function sendWelcomeEmail(
   options: WelcomeEmailOptions
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
   const provider = getActiveProvider();
+  const locale = options.locale || 'en';
   
-  const htmlContent = EmailTemplates.welcome(options.name);
-  const subject = 'Welcome to Tamkinly! 🎯';
+  const htmlContent = EmailTemplates.welcome(options.name, locale);
+  const subject = locale === 'ar' ? 'مرحباً بك في تمكنلي! 🎯' : 'Welcome to Tamkinly! 🎯';
   
   if (provider === 'brevo') {
     return BrevoClient.emails.send({
@@ -155,19 +197,57 @@ export async function sendWelcomeEmail(
 
 /**
  * Send follow-up email based on days since purchase
+ * Uses the new branded templates
  */
 export async function sendFollowUpEmail(
   options: FollowUpEmailOptions
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
   const provider = getActiveProvider();
+  const locale = options.locale || 'en';
+  
+  let htmlContent: string;
+  let subject: string;
+  
+  switch (options.day) {
+    case 3:
+      htmlContent = EmailTemplates.day3FollowUp(options.name, locale);
+      subject = locale === 'ar' ? 'كيف رحلتك؟ 🌱' : "How's Your Identity Journey? 🌱";
+      break;
+    case 7:
+      htmlContent = EmailTemplates.day7FollowUp(options.name, locale);
+      subject = locale === 'ar' ? 'أنت تبني الزخم! 🚀' : "You're Building Momentum! 🚀";
+      break;
+    case 14:
+      htmlContent = EmailTemplates.day14FollowUp(options.name, options.currentTier || 'basic', locale);
+      subject = locale === 'ar' ? 'مستعد للمستوى التالي? ⬆️' : 'Ready for the Next Level? ⬆️';
+      break;
+    default:
+      htmlContent = EmailTemplates.day3FollowUp(options.name, locale);
+      subject = `Day ${options.day} Update from Tamkinly`;
+  }
   
   if (provider === 'brevo') {
-    return BrevoClient.emails.sendFollowUp(
-      options.to,
-      options.name,
-      options.day,
-      options.productType
-    );
+    // Try using Brevo template first, fall back to custom HTML
+    try {
+      return await BrevoClient.emails.sendFollowUp(
+        options.to,
+        options.name,
+        options.day,
+        options.productType
+      );
+    } catch {
+      // Fall back to custom HTML
+      return BrevoClient.emails.send({
+        to: [{ email: options.to, name: options.name }],
+        sender: {
+          name: 'Tamkinly',
+          email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com',
+        },
+        subject,
+        htmlContent,
+        tags: ['followup', `day${options.day}`, options.productType],
+      });
+    }
   }
   
   console.log(`[EMAIL FALLBACK] Would send ${options.day}-day follow-up to ${options.to}`);
@@ -175,20 +255,150 @@ export async function sendFollowUpEmail(
 }
 
 /**
- * Send abandoned cart email
+ * Send abandoned cart email using new branded templates
  */
 export async function sendAbandonedCartEmail(
+  options: AbandonedCartEmailOptions
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  const provider = getActiveProvider();
+  const locale = options.locale || 'en';
+  
+  let htmlContent: string;
+  let subject: string;
+  
+  if (options.hoursAgo === 1) {
+    htmlContent = EmailTemplates.abandonedCart1h(options.name, options.cartItems || '', locale);
+    subject = locale === 'ar' ? 'منتظرك! 🛒' : "You're Almost There! 🛒";
+  } else {
+    htmlContent = EmailTemplates.abandonedCart24h(options.name, options.cartItems || '', locale);
+    subject = locale === 'ar' ? 'لا تؤجل تحولك 💫' : "Don't Put Your Transformation on Hold 💫";
+  }
+  
+  if (provider === 'brevo') {
+    return BrevoClient.emails.send({
+      to: [{ email: options.to, name: options.name }],
+      sender: {
+        name: 'Tamkinly',
+        email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com',
+      },
+      subject,
+      htmlContent,
+      tags: ['abandoned_cart', `${options.hoursAgo}h`],
+    });
+  }
+  
+  console.log(`[EMAIL FALLBACK] Would send abandoned cart email to ${options.to}`);
+  return { success: true };
+}
+
+// Legacy function signature for backward compatibility
+export async function sendAbandonedCartEmailLegacy(
   to: string,
   name: string,
   hoursAgo: 1 | 24 = 1
 ): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  return sendAbandonedCartEmail({ to, name, hoursAgo });
+}
+
+/**
+ * Send quiz results email with personalized insights
+ */
+export async function sendQuizResultsEmail(
+  options: QuizResultsEmailOptions
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
   const provider = getActiveProvider();
+  const locale = options.locale || 'en';
+  
+  const htmlContent = EmailTemplates.quizResults(
+    options.name,
+    options.quizType,
+    options.score,
+    options.insights,
+    locale
+  );
+  const subject = locale === 'ar' ? 'نتائج تقييمك جاهزة! 📊' : 'Your Assessment Results Are In! 📊';
   
   if (provider === 'brevo') {
-    return BrevoClient.emails.sendAbandonedCart(to, name, hoursAgo);
+    return BrevoClient.emails.send({
+      to: [{ email: options.to, name: options.name }],
+      sender: {
+        name: 'Tamkinly',
+        email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com',
+      },
+      subject,
+      htmlContent,
+      tags: ['quiz', 'results', options.quizType],
+    });
   }
   
-  console.log(`[EMAIL FALLBACK] Would send abandoned cart email to ${to}`);
+  console.log(`[EMAIL FALLBACK] Would send quiz results email to ${options.to}`);
+  return { success: true };
+}
+
+/**
+ * Send identity milestone email (day 7, 14, 21, 30)
+ */
+export async function sendIdentityMilestoneEmail(
+  options: IdentityMilestoneEmailOptions
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  const provider = getActiveProvider();
+  const locale = options.locale || 'en';
+  
+  const htmlContent = EmailTemplates.identityMilestone(options.name, options.day, locale);
+  
+  const subjects: Record<number, { en: string; ar: string }> = {
+    7: { en: 'Week 1 Complete! 🌟', ar: 'الأسبوع الأول مكتمل! 🌟' },
+    14: { en: 'Two Weeks Strong! 💪', ar: 'أسبوعان بقوة! 💪' },
+    21: { en: 'Three Weeks In! 🔥', ar: 'ثلاثة أسابيع! 🔥' },
+    30: { en: '30 Days! You Did It! 🏆', ar: '30 يوماً! لقد فعلتها! 🏆' },
+  };
+  
+  const subjectData = subjects[options.day] || subjects[7];
+  const subject = locale === 'ar' ? subjectData.ar : subjectData.en;
+  
+  if (provider === 'brevo') {
+    return BrevoClient.emails.send({
+      to: [{ email: options.to, name: options.name }],
+      sender: {
+        name: 'Tamkinly',
+        email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com',
+      },
+      subject,
+      htmlContent,
+      tags: ['milestone', `day${options.day}`],
+    });
+  }
+  
+  console.log(`[EMAIL FALLBACK] Would send day ${options.day} milestone email to ${options.to}`);
+  return { success: true };
+}
+
+/**
+ * Send re-engagement email for inactive users
+ */
+export async function sendReEngagementEmail(
+  options: ReEngagementEmailOptions
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  const provider = getActiveProvider();
+  const locale = options.locale || 'en';
+  
+  const htmlContent = EmailTemplates.reEngagement(options.name, options.inactiveDays || 7, locale);
+  const subject = locale === 'ar' ? 'نفتقدك! 💙' : 'We Miss You! 💙';
+  
+  if (provider === 'brevo') {
+    return BrevoClient.emails.send({
+      to: [{ email: options.to, name: options.name }],
+      sender: {
+        name: 'Tamkinly',
+        email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com',
+      },
+      subject,
+      htmlContent,
+      tags: ['re_engagement', 'winback'],
+    });
+  }
+  
+  console.log(`[EMAIL FALLBACK] Would send re-engagement email to ${options.to}`);
   return { success: true };
 }
 
@@ -336,6 +546,8 @@ export async function storeContact(
     type?: ProductType;
     accessKey?: string;
     quizScore?: number;
+    quizType?: string;
+    locale?: 'en' | 'ar';
   }
 ): Promise<{ success: boolean; error?: string }> {
   if (!BrevoClient.account.isConfigured()) {
@@ -401,6 +613,10 @@ const EmailService = {
   sendWelcomeEmail,
   sendFollowUpEmail,
   sendAbandonedCartEmail,
+  sendAbandonedCartEmailLegacy,
+  sendQuizResultsEmail,
+  sendIdentityMilestoneEmail,
+  sendReEngagementEmail,
   sendPasswordResetEmail,
   sendEmailVerificationEmail,
   sendAccountCreatedEmail,
