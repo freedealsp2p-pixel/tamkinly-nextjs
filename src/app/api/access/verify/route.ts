@@ -6,9 +6,9 @@ export async function POST(request: NextRequest) {
   try {
     const { code, email } = await request.json();
 
-    if (!code || !email) {
+    if (!code) {
       return NextResponse.json(
-        { error: 'Code and email are required' },
+        { error: 'Access code is required' },
         { status: 400 }
       );
     }
@@ -25,8 +25,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if email matches
-    if (access.email.toLowerCase() !== email.toLowerCase()) {
+    // If email is provided, verify it matches
+    if (email && access.email && access.email.toLowerCase() !== email.toLowerCase()) {
       return NextResponse.json(
         { error: 'Email does not match the purchase record' },
         { status: 403 }
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json({
-      success: true,
+      valid: true,
       message: 'Access granted',
       productId: access.productId,
       tier: access.tier,
@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
       }
 
       // Verify email matches
-      if (access.email.toLowerCase() !== email.toLowerCase()) {
+      if (access.email && access.email.toLowerCase() !== email.toLowerCase()) {
         return NextResponse.json({ hasAccess: false });
       }
 
@@ -100,6 +100,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         hasAccess: true,
         productId: access.productId,
+        tier: access.tier,
       });
     }
 
@@ -124,6 +125,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       hasAccess: true,
       productId: access.productId,
+      tier: access.tier,
     });
   } catch (error) {
     console.error('Access check error:', error);
