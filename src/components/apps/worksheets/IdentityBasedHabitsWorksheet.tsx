@@ -473,7 +473,7 @@ export default function IdentityBasedHabitsWorksheet() {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleRemoveHabit(habit.id)}
-                        className="text-red-500 hover:text-red-600"
+                        className="text-[#FC6D26] hover:text-[#E55A10]"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>

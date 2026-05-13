@@ -479,7 +479,7 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
                       </div>
                     </div>
                     {error && (
-                      <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 p-4 rounded-lg">
+                      <div className="flex items-center gap-2 text-[#FC6D26] text-sm bg-[#FFF3E8] p-4 rounded-lg">
                         <AlertCircle className="w-4 h-4 flex-shrink-0" />{error}
                       </div>
                     )}

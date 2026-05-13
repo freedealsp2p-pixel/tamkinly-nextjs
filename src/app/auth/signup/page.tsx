@@ -85,7 +85,7 @@ export default function SignUpPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
+            <div className="bg-[#FFF3E8] border border-[#FFB088] text-[#E55A10] px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
               <AlertCircle className="h-4 w-4 flex-shrink-0" />
               {error}
             </div>

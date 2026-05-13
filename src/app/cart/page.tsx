@@ -125,7 +125,7 @@ export default function CartPage() {
             </div>
             <Button 
               variant="ghost" 
-              className="text-red-500 hover:text-red-600 hover:bg-red-50"
+              className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
               onClick={handleClearCart}
             >
               <Trash2 className="w-4 h-4 mr-2" />
@@ -174,7 +174,7 @@ export default function CartPage() {
                     {/* Remove Button */}
                     <button
                       onClick={() => handleRemoveItem(item.productId, item.name)}
-                      className="text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded-lg transition-colors self-start"
+                      className="text-[#FF8C42] hover:text-[#E55A10] hover:bg-[#FFF3E8] p-2 rounded-lg transition-colors self-start"
                     >
                       <Trash2 className="w-5 h-5" />
                     </button>

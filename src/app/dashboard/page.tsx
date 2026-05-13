@@ -202,7 +202,7 @@ export default function DashboardPage() {
                     {codeLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : t('activateCode')}
                   </Button>
                 </div>
-                {codeError && <p className="text-red-400 text-xs mb-2">{codeError}</p>}
+                {codeError && <p className="text-[#FF8C42] text-xs mb-2">{codeError}</p>}
                 {codeSuccess && <p className="text-green-400 text-xs mb-2">{codeSuccess}</p>}
 
                 <Link href="/auth/signup?callbackUrl=/dashboard">

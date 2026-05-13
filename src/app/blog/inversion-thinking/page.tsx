@@ -124,7 +124,7 @@ export default function InversionThinkingArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <XCircle className="h-5 w-5 text-red-500" />
+                    <XCircle className="h-5 w-5 text-[#FC6D26]" />
                     <h3 className="font-semibold text-primary">{getText("Financial Failure", "الفشل المالي")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">
@@ -155,7 +155,7 @@ export default function InversionThinkingArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <XCircle className="h-5 w-5 text-red-500" />
+                    <XCircle className="h-5 w-5 text-[#FC6D26]" />
                     <h3 className="font-semibold text-primary">{getText("Identity Failure", "فشل الهوية")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">

@@ -178,7 +178,7 @@ const TransformationMap = ({
         {/* Current State */}
         <div className="bg-white/10 rounded-xl p-5">
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-3 h-3 rounded-full bg-red-400" />
+            <div className="w-3 h-3 rounded-full bg-[#FF8C42]" />
             <h4 className="font-semibold">{currentStateLabel}</h4>
           </div>
           <div className="space-y-3">

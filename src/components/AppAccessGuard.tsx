@@ -218,7 +218,7 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
                   {verifying ? '...' : getText('Verify', 'تحقق')}
                 </Button>
               </div>
-              {codeError && <p className="text-sm text-red-500 mt-1">{codeError}</p>}
+              {codeError && <p className="text-sm text-[#FC6D26] mt-1">{codeError}</p>}
             </div>
             
             <div className="text-center">

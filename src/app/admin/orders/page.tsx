@@ -142,7 +142,7 @@ export default function OrdersAdminPage() {
       case 'COMPLETED':
         return <Badge className="bg-green-100 text-green-700"><CheckCircle2 className="w-3 h-3 mr-1" />Completed</Badge>;
       case 'CANCELLED':
-        return <Badge className="bg-red-100 text-red-700"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
+        return <Badge className="bg-[#FFE4CC] text-[#E55A10]"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
       case 'PROCESSING':
         return <Badge className="bg-blue-100 text-blue-700"><RefreshCw className="w-3 h-3 mr-1" />Processing</Badge>;
       default:
@@ -175,7 +175,7 @@ export default function OrdersAdminPage() {
                 className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
               />
               {authError && (
-                <p className="text-sm text-red-500">{authError}</p>
+                <p className="text-sm text-[#FC6D26]">{authError}</p>
               )}
             </div>
             <Button onClick={handleLogin} className="w-full bg-[#1F6F78] hover:bg-[#1F6F78]/90 text-white">
@@ -415,7 +415,7 @@ export default function OrdersAdminPage() {
                         <Button
                           onClick={() => updateOrderStatus(selectedOrder.id, 'CANCELLED')}
                           variant="outline"
-                          className="w-full border-red-200 text-red-600 hover:bg-red-50"
+                          className="w-full border-[#FFB088] text-[#FC6D26] hover:bg-[#FFF3E8]"
                         >
                           <XCircle className="w-4 h-4 mr-1" />
                           Cancel Order

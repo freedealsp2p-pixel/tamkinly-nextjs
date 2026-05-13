@@ -118,7 +118,7 @@ export default function DopamineResetArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <Smartphone className="h-5 w-5 text-red-500" />
+                    <Smartphone className="h-5 w-5 text-[#FC6D26]" />
                     <h3 className="font-semibold text-primary">{getText("High Dopamine Triggers", "محفزات الدوبامين العالية")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">

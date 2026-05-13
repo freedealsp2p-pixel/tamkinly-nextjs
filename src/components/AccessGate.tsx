@@ -172,7 +172,7 @@ export function AccessGate({ appSlug, children }: AccessGateProps) {
                   {verifying ? '...' : getText('Verify', 'تحقق')}
                 </Button>
               </div>
-              {codeError && <p className="text-sm text-red-500 mt-1">{codeError}</p>}
+              {codeError && <p className="text-sm text-[#FC6D26] mt-1">{codeError}</p>}
             </div>
             
             {/* Or Purchase */}

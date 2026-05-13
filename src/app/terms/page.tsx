@@ -59,7 +59,7 @@ export default function TermsOfServicePage() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
-                  <XCircle className="w-10 h-10 text-red-500 mx-auto mb-3" />
+                  <XCircle className="w-10 h-10 text-[#FC6D26] mx-auto mb-3" />
                   <h3 className="font-semibold text-[#0F1C2E] mb-2">{t('youMayNot')}</h3>
                   <ul className="text-sm text-[#8A94A6] space-y-1 text-left">
                     <li>• {t('youMayNot1')}</li>
@@ -128,19 +128,19 @@ export default function TermsOfServicePage() {
                   </p>
                   <ul className="space-y-3 text-[#2B2E34]">
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction3')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction4')}</span>
                     </li>
                   </ul>

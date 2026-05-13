@@ -156,12 +156,12 @@ export default function AndTheBambooKeptGrowingArticle() {
                   <p className="text-sm text-slate-500">{getText("Doubt creeps in. Nothing visible. But roots are forming.", "يتسلل الشك. لا شيء مرئي. لكن الجذور تتشكل.")}</p>
                 </CardContent>
               </Card>
-              <Card className="border-0 shadow-sm ring-2 ring-red-100">
+              <Card className="border-0 shadow-sm ring-2 ring-[#FFE4CC]">
                 <CardContent className="p-5 text-center">
-                  <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-3">
-                    <Eye className="h-6 w-6 text-red-400" />
+                  <div className="w-12 h-12 rounded-full bg-[#FFF3E8] flex items-center justify-center mx-auto mb-3">
+                    <Eye className="h-6 w-6 text-[#FF8C42]" />
                   </div>
-                  <h3 className="font-semibold text-red-600 mb-1">{getText("Year 3", "العام ٣")}</h3>
+                  <h3 className="font-semibold text-[#FC6D26] mb-1">{getText("Year 3", "العام ٣")}</h3>
                   <p className="text-sm text-slate-500">{getText("The danger zone. Most people quit here.", "منطقة الخطر. معظم الناس يستسلمون هنا.")}</p>
                 </CardContent>
               </Card>

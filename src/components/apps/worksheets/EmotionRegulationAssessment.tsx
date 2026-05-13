@@ -196,9 +196,9 @@ export default function EmotionRegulationAssessment() {
     if (type === 'reappraisal') {
       if (score >= 5) return { level: 'High', color: 'text-green-600', description: 'You effectively use cognitive strategies to manage emotions.' };
       if (score >= 3) return { level: 'Moderate', color: 'text-yellow-600', description: 'You have some ability to reframe situations emotionally.' };
-      return { level: 'Developing', color: 'text-red-600', description: 'There\'s room to develop healthier cognitive regulation strategies.' };
+      return { level: 'Developing', color: 'text-[#FC6D26]', description: 'There\'s room to develop healthier cognitive regulation strategies.' };
     } else {
-      if (score >= 5) return { level: 'High', color: 'text-red-600', description: 'You tend to suppress emotions, which may have negative long-term effects.' };
+      if (score >= 5) return { level: 'High', color: 'text-[#FC6D26]', description: 'You tend to suppress emotions, which may have negative long-term effects.' };
       if (score >= 3) return { level: 'Moderate', color: 'text-yellow-600', description: 'You sometimes suppress emotions. Consider more expressive alternatives.' };
       return { level: 'Low', color: 'text-green-600', description: 'You express emotions freely, which is generally healthy.' };
     }

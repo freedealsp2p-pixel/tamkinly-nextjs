@@ -101,7 +101,7 @@ const coreMetrics = [
 const trendOptions = [
   { value: 'improving', label: 'Improving', icon: <TrendingUp className="w-4 h-4" />, color: 'text-green-600', bg: 'bg-green-100' },
   { value: 'stable', label: 'Stable', icon: <Minus className="w-4 h-4" />, color: 'text-yellow-600', bg: 'bg-yellow-100' },
-  { value: 'declining', label: 'Declining', icon: <TrendingDown className="w-4 h-4" />, color: 'text-red-600', bg: 'bg-red-100' }
+  { value: 'declining', label: 'Declining', icon: <TrendingDown className="w-4 h-4" />, color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]' }
 ];
 
 // Trend Tracking Categories
@@ -154,7 +154,7 @@ const reflectionPrompts = [
 const getDirection = (baseline: number, current: number) => {
   const diff = current - baseline;
   if (diff > 0) return { direction: 'up', icon: <ArrowUp className="w-4 h-4" />, color: 'text-green-600', bg: 'bg-green-100', label: 'Up' };
-  if (diff < 0) return { direction: 'down', icon: <ArrowDown className="w-4 h-4" />, color: 'text-red-600', bg: 'bg-red-100', label: 'Down' };
+  if (diff < 0) return { direction: 'down', icon: <ArrowDown className="w-4 h-4" />, color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]', label: 'Down' };
   return { direction: 'stable', icon: <Minus className="w-4 h-4" />, color: 'text-yellow-600', bg: 'bg-yellow-100', label: 'Stable' };
 };
 
@@ -358,10 +358,10 @@ export default function ProgressDashboardGuide() {
             </div>
             <div className="text-center">
               <p className="text-[#8A94A6] text-sm uppercase tracking-wide mb-2">Overall Change</p>
-              <div className={`text-4xl font-bold ${overallProgress.diff >= 0 ? 'text-green-400' : 'text-red-400'} mb-1`}>
+              <div className={`text-4xl font-bold ${overallProgress.diff >= 0 ? 'text-green-400' : 'text-[#FF8C42]'} mb-1`}>
                 {overallProgress.diff >= 0 ? '+' : ''}{overallProgress.diff}
               </div>
-              <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm ${overallProgress.diff >= 0 ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
+              <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm ${overallProgress.diff >= 0 ? 'bg-green-500/20 text-green-300' : 'bg-[#FC6D26]/20 text-[#FFB088]'}`}>
                 {overallProgress.diff >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                 {overallProgress.diff >= 0 ? 'Progress Made' : 'Needs Attention'}
               </div>
@@ -403,7 +403,7 @@ export default function ProgressDashboardGuide() {
                       <p className="text-2xl font-bold text-[#0F1C2E]">{score.current}</p>
                       <p className="text-xs text-[#8A94A6]">Current</p>
                     </div>
-                    <Badge className={`${diff >= 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                    <Badge className={`${diff >= 0 ? 'bg-green-100 text-green-700' : 'bg-[#FFE4CC] text-[#E55A10]'}`}>
                       {diff >= 0 ? '+' : ''}{diff}
                     </Badge>
                   </div>
@@ -478,7 +478,7 @@ export default function ProgressDashboardGuide() {
                   {/* Difference */}
                   <div className="text-center">
                     <label className="text-xs font-medium text-[#8A94A6] uppercase tracking-wide block mb-2">Difference</label>
-                    <div className={`text-2xl font-bold ${metric.diff >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    <div className={`text-2xl font-bold ${metric.diff >= 0 ? 'text-green-600' : 'text-[#FC6D26]'}`}>
                       {metric.diff >= 0 ? '+' : ''}{metric.diff}
                     </div>
                   </div>
@@ -688,7 +688,7 @@ export default function ProgressDashboardGuide() {
                 value={summary.weakestArea}
                 onChange={(e) => handleSummaryChange('weakestArea', e.target.value)}
                 placeholder="Which area needs the most work?"
-                className="border-red-200 focus:border-red-400"
+                className="border-[#FFB088] focus:border-[#FF8C42]"
               />
             </div>
             <div className="space-y-2">

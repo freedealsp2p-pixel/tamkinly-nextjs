@@ -202,10 +202,10 @@ export default function DecisionPatternAnalysis() {
               <div className="text-green-700 text-sm">High Quality (≥70%)</div>
             </CardContent>
           </Card>
-          <Card className="bg-red-50 border border-red-200">
+          <Card className="bg-[#FFF3E8] border border-[#FFB088]">
             <CardContent className="p-4 text-center">
-              <div className="text-3xl font-bold text-red-600">{stats.low}</div>
-              <div className="text-red-700 text-sm">Needs Work (&lt;40%)</div>
+              <div className="text-3xl font-bold text-[#FC6D26]">{stats.low}</div>
+              <div className="text-[#E55A10] text-sm">Needs Work (&lt;40%)</div>
             </CardContent>
           </Card>
         </div>
@@ -637,7 +637,7 @@ export default function DecisionPatternAnalysis() {
                     <Badge className={
                       entry.overallQuality >= 70 ? 'bg-green-100 text-green-700' :
                       entry.overallQuality >= 40 ? 'bg-yellow-100 text-yellow-700' :
-                      'bg-red-100 text-red-700'
+                      'bg-[#FFE4CC] text-[#E55A10]'
                     }>
                       {entry.overallQuality}% quality
                     </Badge>
@@ -646,7 +646,7 @@ export default function DecisionPatternAnalysis() {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleDeleteEntry(entry.id)}
-                    className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                    className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>

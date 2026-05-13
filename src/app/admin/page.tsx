@@ -363,7 +363,7 @@ export default function AdminPage() {
           <CardContent className="p-6">
             <form onSubmit={handleLogin} className="space-y-4">
               {error && (
-                <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 p-3 rounded-lg">
+                <div className="flex items-center gap-2 text-[#FC6D26] text-sm bg-[#FFF3E8] p-3 rounded-lg">
                   <AlertCircle className="w-4 h-4" />
                   {error}
                 </div>
@@ -779,7 +779,7 @@ export default function AdminPage() {
                             </div>
                             <div className="flex items-center gap-2">
                               <Button variant="ghost" size="sm" onClick={() => copyToClipboard(code.code)} className="text-[#1F6F78] hover:text-[#0F1C2E]"><Copy className="w-4 h-4" /></Button>
-                              <Button variant="ghost" size="sm" onClick={() => handleDelete(code.id)} className="text-red-500 hover:text-red-600 hover:bg-red-50"><Trash2 className="w-4 h-4" /></Button>
+                              <Button variant="ghost" size="sm" onClick={() => handleDelete(code.id)} className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"><Trash2 className="w-4 h-4" /></Button>
                             </div>
                           </div>
                         );

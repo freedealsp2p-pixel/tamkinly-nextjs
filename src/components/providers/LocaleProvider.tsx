@@ -111,26 +111,22 @@ export function LocaleProvider({ children, initialLocale = 'en', urlBased = fals
     localStorage.setItem('locale', newLocale);
     document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=${365 * 24 * 60 * 60};samesite=lax`;
 
+    // Update document attributes immediately
+    document.documentElement.lang = newLocale;
+    document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
+
     if (urlBased) {
-      // For URL-based mode, navigate to the new locale path
-      // Get current path without locale prefix
-      const pathWithoutLocale = pathname.replace(/^\/(en|ar)/, '') || '/';
-      const newPath = newLocale === 'en' 
-        ? pathWithoutLocale === '/' ? '/' : pathWithoutLocale
-        : `/ar${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
-      
-      // Use full page reload to ensure server-side locale is updated
-      window.location.href = newPath;
+      // For URL-based mode, use simple page reload instead of path navigation
+      // This avoids the 'Something Went Wrong' error from invalid /ar routes
+      setLocaleState(newLocale);
+      // Small delay to ensure cookie is set before reload
+      setTimeout(() => window.location.reload(), 50);
     } else {
       // For non-URL based mode, update state immediately
       setLocaleState(newLocale);
-      document.documentElement.lang = newLocale;
-      document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
-
-      // Dispatch custom event for same-tab updates
       window.dispatchEvent(new CustomEvent('localechange', { detail: { locale: newLocale } }));
     }
-  }, [urlBased, pathname]);
+  }, [urlBased]);
 
   const t = useCallback((key: string): string => {
     return getNestedValue(messages[locale] as unknown as Record<string, unknown>, key);

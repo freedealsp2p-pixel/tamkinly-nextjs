@@ -416,7 +416,7 @@ export default function WhoAmIWorksheet() {
                     className="py-2 px-3 bg-[#0F1C2E] text-white"
                   >
                     {part.role} ({part.strength}/10)
-                    <button onClick={() => handleRemoveIdentityPart(part.id)} className="ml-2 hover:text-red-300">
+                    <button onClick={() => handleRemoveIdentityPart(part.id)} className="ml-2 hover:text-[#FFB088]">
                       <Trash2 className="w-3 h-3" />
                     </button>
                   </Badge>

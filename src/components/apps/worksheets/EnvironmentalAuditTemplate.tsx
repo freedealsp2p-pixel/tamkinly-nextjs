@@ -186,7 +186,7 @@ export default function EnvironmentalAuditTemplate() {
     if (score >= 80) return { label: 'Supportive', color: 'text-green-600', bg: 'bg-green-100' };
     if (score >= 60) return { label: 'Neutral', color: 'text-blue-600', bg: 'bg-blue-100' };
     if (score >= 40) return { label: 'Mixed', color: 'text-yellow-600', bg: 'bg-yellow-100' };
-    return { label: 'Blocking', color: 'text-red-600', bg: 'bg-red-100' };
+    return { label: 'Blocking', color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]' };
   };
 
   if (showResults) {
@@ -261,7 +261,7 @@ export default function EnvironmentalAuditTemplate() {
                 <div 
                   key={index} 
                   className={`p-2 rounded-lg text-sm text-center ${
-                    frictionLevels[item.name] === 'high' ? 'bg-red-100 text-red-800' :
+                    frictionLevels[item.name] === 'high' ? 'bg-[#FFE4CC] text-[#C44D0A]' :
                     frictionLevels[item.name] === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
                     frictionLevels[item.name] === 'low' ? 'bg-green-100 text-green-800' :
                     'bg-gray-100 text-gray-600'
@@ -272,8 +272,8 @@ export default function EnvironmentalAuditTemplate() {
               ))}
             </div>
             {highFrictionItems.length > 0 && (
-              <div className="mt-4 p-3 bg-red-50 rounded-lg">
-                <p className="text-sm text-red-800">
+              <div className="mt-4 p-3 bg-[#FFF3E8] rounded-lg">
+                <p className="text-sm text-[#C44D0A]">
                   <strong>High Friction Areas:</strong> {highFrictionItems.join(', ')}
                 </p>
               </div>
@@ -291,9 +291,9 @@ export default function EnvironmentalAuditTemplate() {
               <span className="text-[#0F1C2E]">Strongest Supportive Factor</span>
               <Badge className="bg-green-100 text-green-800">{strongestArea.name}</Badge>
             </div>
-            <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-[#FFF3E8] rounded-lg">
               <span className="text-[#0F1C2E]">Strongest Blocking Factor</span>
-              <Badge className="bg-red-100 text-red-800">{weakestArea.name}</Badge>
+              <Badge className="bg-[#FFE4CC] text-[#C44D0A]">{weakestArea.name}</Badge>
             </div>
             <div className="p-3 bg-[#3DD4B0]/10 rounded-lg">
               <p className="text-sm text-[#0F1C2E] font-medium mb-2">
@@ -378,7 +378,7 @@ export default function EnvironmentalAuditTemplate() {
                       onClick={() => handleFrictionChange(item.name, level)}
                       className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
                         frictionLevels[item.name] === level
-                          ? level === 'high' ? 'bg-red-500 text-white' :
+                          ? level === 'high' ? 'bg-[#FC6D26] text-white' :
                             level === 'moderate' ? 'bg-yellow-500 text-white' :
                             'bg-green-500 text-white'
                           : 'bg-white border border-gray-200 text-gray-600 hover:border-gray-400'

@@ -378,7 +378,7 @@ export default function AIIdentityCoachPage() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-slate-400 hover:text-red-500"
+                    className="h-8 w-8 text-slate-400 hover:text-[#FC6D26]"
                     onClick={clearConversation}
                     title={getText('Clear conversation', 'مسح المحادثة')}
                   >
@@ -416,13 +416,13 @@ export default function AIIdentityCoachPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4">
-              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-              <p className="text-sm text-red-700 flex-1">{error}</p>
+            <div className="flex items-center gap-3 bg-[#FFF3E8] border border-[#FFB088] rounded-xl px-4 py-3 mb-4">
+              <AlertCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0" />
+              <p className="text-sm text-[#E55A10] flex-1">{error}</p>
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-red-600 hover:text-red-700 hover:bg-red-100"
+                className="text-[#FC6D26] hover:text-[#C44D0A] hover:bg-[#FFE4CC]"
                 onClick={() => {
                   setError(null);
                   // Retry last user message

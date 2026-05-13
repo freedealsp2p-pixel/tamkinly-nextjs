@@ -160,15 +160,15 @@ function ContactSection() {
                   </div>
                   
                   {status.type === 'error' && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div className="mb-6 p-4 bg-[#FFF3E8] border border-[#FFB088] rounded-lg">
                       <div className="flex items-start gap-3">
-                        <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+                        <AlertCircle className="h-5 w-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
                         <div>
-                          <p className="font-medium text-red-800">
+                          <p className="font-medium text-[#C44D0A]">
                             {status.message || t("errorTitle")}
                           </p>
                           {status.errors && status.errors.length > 0 && (
-                            <ul className="mt-2 text-sm text-red-600 list-disc list-inside">
+                            <ul className="mt-2 text-sm text-[#FC6D26] list-disc list-inside">
                               {status.errors.map((error, index) => (
                                 <li key={index}>{error}</li>
                               ))}

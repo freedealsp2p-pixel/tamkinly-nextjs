@@ -73,7 +73,7 @@ export function AccessCodeInput() {
             </Button>
           </div>
         </div>
-        {accessCodeError && <p className="text-red-400 text-xs mt-2 text-center">{accessCodeError}</p>}
+        {accessCodeError && <p className="text-[#FF8C42] text-xs mt-2 text-center">{accessCodeError}</p>}
         {accessCodeSuccess && <p className="text-green-400 text-xs mt-2 text-center">{accessCodeSuccess}</p>}
       </div>
     </div>

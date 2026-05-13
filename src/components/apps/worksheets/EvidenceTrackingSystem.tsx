@@ -526,7 +526,7 @@ export default function EvidenceTrackingSystem() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDeleteDailyLog(log.id)}
-                          className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                          className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -711,7 +711,7 @@ export default function EvidenceTrackingSystem() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDeleteEvidence(evidence.id)}
-                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                            className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>

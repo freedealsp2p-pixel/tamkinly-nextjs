@@ -243,7 +243,7 @@ export default function IdentityBaselineWorksheet() {
     if (score >= 80) return { label: 'Strong', color: 'text-green-600', bg: 'bg-green-100' };
     if (score >= 60) return { label: 'Developing', color: 'text-blue-600', bg: 'bg-blue-100' };
     if (score >= 40) return { label: 'Emerging', color: 'text-yellow-600', bg: 'bg-yellow-100' };
-    return { label: 'Needs Focus', color: 'text-red-600', bg: 'bg-red-100' };
+    return { label: 'Needs Focus', color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]' };
   };
 
   const dimension = dimensions[currentDimension];
@@ -323,9 +323,9 @@ export default function IdentityBaselineWorksheet() {
               <span className="text-[#0F1C2E]">Strongest Area</span>
               <Badge className="bg-green-100 text-green-800">{strongestArea.name} ({strongestArea.score}%)</Badge>
             </div>
-            <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-[#FFF3E8] rounded-lg">
               <span className="text-[#0F1C2E]">Area for Growth</span>
-              <Badge className="bg-red-100 text-red-800">{weakestArea.name} ({weakestArea.score}%)</Badge>
+              <Badge className="bg-[#FFE4CC] text-[#C44D0A]">{weakestArea.name} ({weakestArea.score}%)</Badge>
             </div>
             <div className="p-3 bg-[#3DD4B0]/10 rounded-lg">
               <p className="text-sm text-[#0F1C2E]">
