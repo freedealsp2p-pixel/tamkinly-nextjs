@@ -28,7 +28,6 @@ import {
   Lightbulb
 } from "lucide-react";
 import { DefaultJsonLd } from "@/components/seo/JsonLd";
-import { PromoBanner } from "@/components/layout/PromoBanner";
 import { useLocale, useTranslations } from "@/components/providers/LocaleProvider";
 
 // Dynamic imports for heavy interactive components (code-split for performance)
@@ -713,7 +712,6 @@ export default function Home() {
       <CTASectionLazy />
 
       {/* Promo Banner with Lazy Loading */}
-      <PromoBanner />
     </>
   );
 }

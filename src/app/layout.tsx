@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Suspense } from "react";
 import { cookies, headers } from "next/headers";
+import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/Header";
@@ -49,10 +50,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0F1C2E" },
-  ],
+  themeColor: "#ffffff",
 };
 
 // Comprehensive metadata for SEO - Bilingual support
@@ -186,6 +184,8 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -194,7 +194,7 @@ export default async function RootLayout({
   const locale = await getLocaleFromCookies();
 
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <head>
         {/* Preconnect to external resources for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -205,7 +205,7 @@ export default async function RootLayout({
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}
-        suppressHydrationWarning
+       
       >
         {/* Skip Navigation Link for Accessibility */}
         <a
@@ -214,27 +214,26 @@ export default async function RootLayout({
         >
           {locale === 'ar' ? 'تخطي إلى المحتوى الرئيسي' : 'Skip to main content'}
         </a>
-        <LocaleProvider initialLocale={locale} urlBased>
-          <AuthProvider>
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              <main id="main-content" className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <Toaster />
-            <Suspense fallback={null}>
-              <Analytics />
-            </Suspense>
-            <Suspense fallback={null}>
-              <CookieConsent />
-            </Suspense>
-            <ServiceWorkerRegistration />
-          </AuthProvider>
-        </LocaleProvider>
+          <LocaleProvider initialLocale={locale} urlBased>
+            <AuthProvider>
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <Toaster />
+              <Suspense fallback={null}>
+                <Analytics />
+              </Suspense>
+              <Suspense fallback={null}>
+                <CookieConsent />
+              </Suspense>
+              <ServiceWorkerRegistration />
+            </AuthProvider>
+          </LocaleProvider>
       </body>
     </html>
   );
 }
-
