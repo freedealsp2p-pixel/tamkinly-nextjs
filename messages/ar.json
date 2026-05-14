@@ -1019,6 +1019,12 @@
     "noQuestionsAsked": "بدون أسئلة",
     "fullRefund": "استرداد كامل",
     "keepProduct": "احتفظ بالمنتج",
+    "guaranteeBadge": "ضمان 30 يوم",
+    "guaranteeModalTitle": "ضمان رضا غير مشروط لمدة 30 يوم",
+    "guaranteeModalBody": "إذا لم تكن راضياً خلال 30 يوماً، أرسل لنا بريداً إلكترونياً لاسترداد كامل المبلغ. بدون أسئلة. نحن نثق بك — إذا طلبت الاسترداد، نفترض أنك جربت بصدق.",
+    "guaranteeBullet1": "لا يطلب إثبات العمل",
+    "guaranteeBullet2": "استرداد كامل، لا جزئي",
+    "guaranteeBullet3": "احتفظ بالمنتج",
     "faqBadge": "الأسئلة الشائعة",
     "faqTitle": "الأسئلة المتكررة",
     "ctaTitle": "ابدأ تحولك ",
@@ -1554,7 +1560,77 @@
     "ctaTitle": "مستعد للبدء؟",
     "ctaSubtitle": "مخطط إعادة صياغة الهوية يرشدك خلال جميع المراحل الأربع في 30 يوماً. مبني على العلم. مصمم بعناية.",
     "ctaButton1": "ابدأ تحولك",
-    "ctaButton2": "جرب الأدوات التفاعلية"
+    "ctaButton2": "جرب الأدوات التفاعلية",
+    "comparisonBadge": "كيف نقارن",
+    "comparisonTitle": "تمكينلي مقابل البدائل",
+    "comparisonSubtitle": "نظرة صادقة على كيف يختلف التحول المبني على الهوية عن المقاربات الأخرى.",
+    "comparisonFeature": "الميزة",
+    "comparisonColTamkinly": "تمكينلي",
+    "comparisonColHabitApps": "تطبيقات العادات",
+    "comparisonColBooks": "كتب تطوير الذات",
+    "comparisonColCoaching": "التدريب الفردي",
+    "comparison": {
+      "rows": {
+        "0": {
+          "feature": "يعالج السبب الجذري",
+          "tamkinly": "مستوى الهوية",
+          "habitApps": "مستوى السلوك",
+          "books": "مستوى المفاهيم",
+          "coaching": "يختلف حسب المدرب"
+        },
+        "1": {
+          "feature": "تقييم شخصي",
+          "tamkinly": "خط أساس بـ 6 أبعاد",
+          "habitApps": "تتبع أساسي",
+          "books": "لا يوجد",
+          "coaching": "ذاتي"
+        },
+        "2": {
+          "feature": "نظام منظم لـ 30 يوم",
+          "tamkinly": "نعم — بروتوكول يومي",
+          "habitApps": "تذكيرات فقط",
+          "books": "اقرأ وتأمل",
+          "coaching": "قائم على الجلسات"
+        },
+        "3": {
+          "feature": "يجعل التغيير تلقائياً",
+          "tamkinly": "إعادة صياغة الهوية",
+          "habitApps": "يعتمد على قوة الإرادة",
+          "books": "يعتمد على التحفيز",
+          "coaching": "يعتمد على المساءلة"
+        },
+        "4": {
+          "feature": "نطاق السعر",
+          "tamkinly": "$0 – $47",
+          "habitApps": "$5 – $30/شهر",
+          "books": "$10 – $30",
+          "coaching": "$100 – $500/جلسة"
+        },
+        "5": {
+          "feature": "تتبع الأدلة",
+          "tamkinly": "نظام مدمج",
+          "habitApps": "عداد السلسلة",
+          "books": "لا يوجد",
+          "coaching": "ملاحظات الجلسات"
+        }
+      }
+    },
+    "honestResultsTitle": "ماذا يحدث فعلاً",
+    "honestResults": {
+      "0": {
+        "text": "تتوقف عن البدء من جديد كل اثنين. عندما تتغير هويتك، يصبح الاتساق طبيعياً — لا معركة ضد نفسك."
+      },
+      "1": {
+        "text": "قراراتك تصبح أوضح. ليس لأن أحداً أخبرك ماذا تقرر، بل لأنك تعرف أخيراً من يقرر."
+      },
+      "2": {
+        "text": "الفجوة بين أفضل أيامك وأسوأها تضيق. تتوقف عن كونك شخصين مختلفين حسب الظروف."
+      },
+      "3": {
+        "text": "تتوقف عن أداء نسخة من نفسك لم تعد تناسبك. الشخص الذي تظهر به يبدأ بمطابقة من أنت فعلاً."
+      }
+    },
+    "honestResultsNote": "لا شيء من هذا فوري. تحول الهوية يتطلب عملاً صادقاً وتكراراً حقيقياً. لكنه النهج الوحيد الذي يدوم — لأنك لا تغير ما تفعله، أنت تغير من أنت."
   },
   "cartPage": {
     "emptyTitle": "سلتك فارغة",
@@ -1729,7 +1805,16 @@
     "categoryMentalClarity": "الوضوح الذهني",
     "tierFree": "مجاني",
     "tierBasic": "أساسي",
-    "tierBundle": "حزمة"
+    "tierBundle": "حزمة",
+    "startHereTitle": "ابدأ من هنا",
+    "startHereSubtitle": "جديد في تمكينلي؟ هذه المقالات الثلاث ستعطيك الأساس.",
+    "startHereArticle1Title": "فجوة الهوية: لماذا تعرف ما يجب فعله لكنك لا تفعله",
+    "startHereArticle1Desc": "المسافة بين من أنت وكيف تظهر ليست مشكلة انضباط. إنها فجوة هوية. فهم هذا يغير كل شيء.",
+    "startHereArticle2Title": "التغيير المبني على الهوية: الطريقة التي تجعل السلوك تلقائياً",
+    "startHereArticle2Desc": "عندما تتغير هويتك، يتبع السلوك بشكل طبيعي. لا حاجة لقوة إرادة. لهذا تستمر تطبيقات العادات في إخفاقك.",
+    "startHereArticle3Title": "المراحل الأربع لتحول الهوية",
+    "startHereArticle3Desc": "من الوعي إلى التكامل. كل تحول يتبع نفس النمط. معرفة أين أنت تخبرك بالضبط ماذا تفعل بعد ذلك.",
+    "startHereRead": "اقرأ"
   },
   "resourcesPage": {
     "heroBadge": "موارد مجانية",
@@ -1849,8 +1934,56 @@
     "phaseRange2": "30-59%",
     "phaseRange3": "60%+",
     "phaseRecoding": "إعادة البرمجة",
-    "there": "هناك",
-    "activateCode": "تفعيل"
+    "there": "هنا",
+    "activateCode": "تفعيل",
+    "assessmentResults": "نتائج التقييم",
+    "overallScore": "الدرجة الكلية",
+    "identityClarity": "وضوح الهوية",
+    "environmentalAlignment": "التوافق البيئي",
+    "emotionalRegulation": "التنظيم العاطفي",
+    "decisionQuality": "جودة القرارات",
+    "progressMomentum": "زخم التقدم",
+    "dominantChallenge": "التحدي الرئيسي",
+    "scoreCategory": "نطاق النتيجة",
+    "gapWide": "فجوة واسعة",
+    "gapModerate": "فجوة معتدلة",
+    "gapNarrow": "فجوة ضيقة",
+    "takeQuiz": "أجرِ التقييم",
+    "takeQuizDesc": "أجرِ تقييم فجوة الهوية المجاني لاكتشاف أبعاد هويتك والحصول على إرشاد شخصي.",
+    "viewFullResults": "عرض النتائج الكاملة",
+    "guidanceTitle": "خطوتك التالية",
+    "guidanceWide": "فجوة هويتك كبيرة. أفضل خطوة تالية هي مخطط إعادة صياغة الهوية — 30 يوماً منظماً لغلق الفجوة.",
+    "guidanceModerate": "عندك نقاط قوة حقيقية تعمل لصالحك. ركّز على أضعف بُعد لديك لفتح المستوى التالي.",
+    "guidanceNarrow": "أساسك متين. العمل الآن هو التعمق، لا إعادة البناء. الأدوات المتميزة تساعدك على التحسين.",
+    "guidanceNoQuiz": "ابدأ بتقييم فجوة الهوية المجاني لتعرف أين تقف.",
+    "journeyProgress": "تقدم رحلة الـ 30 يوم",
+    "dayOf": "اليوم {day} من 30",
+    "currentPhase": "المرحلة الحالية",
+    "phaseAwareness": "الوعي",
+    "phaseRecodingJourney": "إعادة الصياغة",
+    "phaseIntegration": "التكامل",
+    "journeyNotStarted": "لم يبدأ بعد",
+    "startJourney": "ابدأ رحلتك",
+    "startJourneyDesc": "ابدأ تحول هويتك لمدة 30 يوماً مع مخطط إعادة صياغة الهوية.",
+    "bestStreak": "أفضل سلسلة",
+    "wordsWritten": "كلمات مكتوبة",
+    "decisionsLogged": "قرارات مسجلة",
+    "evidenceRecords": "سجلات الأدلة",
+    "habitsToday": "عادات اليوم",
+    "goalsInProgress": "أهداف قيد التنفيذ",
+    "goalsCompleted": "أهداف مكتملة",
+    "journalStreak": "سلسلة التأمل",
+    "noAssessmentYet": "ابدأ بتقييم فجوة الهوية المجاني لتعرف أين تقف.",
+    "takeAssessmentNow": "ابدأ التقييم المجاني",
+    "yourDominantChallenge": "تحديك الرئيسي",
+    "scoreRange": "نطاق النتيجة",
+    "wide": "فجوة واسعة",
+    "moderate": "فجوة معتدلة",
+    "narrow": "فجوة ضيقة",
+    "dayRange1": "الأيام 1-10",
+    "dayRange2": "الأيام 11-22",
+    "dayRange3": "الأيام 23-30",
+    "currentDay": "اليوم الحالي"
   },
   "guidesPage": {
     "heroBadge": "دراسات معمقة",

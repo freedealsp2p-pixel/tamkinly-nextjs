@@ -1019,6 +1019,12 @@
     "noQuestionsAsked": "No questions asked",
     "fullRefund": "Full refund",
     "keepProduct": "Keep the product",
+    "guaranteeBadge": "30-Day Guarantee",
+    "guaranteeModalTitle": "30-Day Unconditional Satisfaction Guarantee",
+    "guaranteeModalBody": "If you're not satisfied within 30 days, email us for a full refund. No questions asked. We trust you — if you ask for a refund, we assume you gave it an honest try.",
+    "guaranteeBullet1": "No proof of work required",
+    "guaranteeBullet2": "Full refund, no partial",
+    "guaranteeBullet3": "Keep the product",
     "faqBadge": "FAQ",
     "faqTitle": "Frequently Asked Questions",
     "ctaTitle": "Start Your Transformation ",
@@ -1554,7 +1560,77 @@
     "ctaTitle": "Ready to begin?",
     "ctaSubtitle": "The Identity Recode Planner guides you through all four phases in 30 days. Science-backed. Intentionally designed.",
     "ctaButton1": "Start Your Transformation",
-    "ctaButton2": "Try Interactive Tools"
+    "ctaButton2": "Try Interactive Tools",
+    "comparisonBadge": "How We Compare",
+    "comparisonTitle": "Tamkinly vs. The Alternatives",
+    "comparisonSubtitle": "An honest look at how identity-based transformation differs from other approaches.",
+    "comparisonFeature": "Feature",
+    "comparisonColTamkinly": "Tamkinly",
+    "comparisonColHabitApps": "Habit Apps",
+    "comparisonColBooks": "Self-Help Books",
+    "comparisonColCoaching": "1-on-1 Coaching",
+    "comparison": {
+      "rows": {
+        "0": {
+          "feature": "Addresses root cause",
+          "tamkinly": "Identity level",
+          "habitApps": "Behavior level",
+          "books": "Conceptual level",
+          "coaching": "Varies by coach"
+        },
+        "1": {
+          "feature": "Personalized assessment",
+          "tamkinly": "6-dimension baseline",
+          "habitApps": "Basic tracking",
+          "books": "None",
+          "coaching": "Subjective"
+        },
+        "2": {
+          "feature": "Structured 30-day system",
+          "tamkinly": "Yes — daily protocol",
+          "habitApps": "Reminders only",
+          "books": "Read and hope",
+          "coaching": "Session-based"
+        },
+        "3": {
+          "feature": "Makes change automatic",
+          "tamkinly": "Identity recoding",
+          "habitApps": "Willpower-dependent",
+          "books": "Motivation-dependent",
+          "coaching": "Accountability-dependent"
+        },
+        "4": {
+          "feature": "Price range",
+          "tamkinly": "$0 – $47",
+          "habitApps": "$5 – $30/mo",
+          "books": "$10 – $30",
+          "coaching": "$100 – $500/session"
+        },
+        "5": {
+          "feature": "Evidence tracking",
+          "tamkinly": "Built-in system",
+          "habitApps": "Streak counter",
+          "books": "None",
+          "coaching": "Session notes"
+        }
+      }
+    },
+    "honestResultsTitle": "What Actually Happens",
+    "honestResults": {
+      "0": {
+        "text": "You stop starting over every Monday. When your identity shifts, consistency becomes natural — not a battle against yourself."
+      },
+      "1": {
+        "text": "Your decisions get clearer. Not because someone told you what to decide, but because you finally know who's deciding."
+      },
+      "2": {
+        "text": "The gap between your best days and worst days narrows. You stop being two different people depending on the circumstances."
+      },
+      "3": {
+        "text": "You stop performing a version of yourself that no longer fits. The person you show up as starts matching who you actually are."
+      }
+    },
+    "honestResultsNote": "None of this is instant. Identity transformation takes honest work and real repetition. But it's the only approach that lasts — because you're not changing what you do, you're changing who you are."
   },
   "cartPage": {
     "emptyTitle": "Your Cart is Empty",
@@ -1729,7 +1805,16 @@
     "categoryMentalClarity": "Mental Clarity",
     "tierFree": "FREE",
     "tierBasic": "BASIC",
-    "tierBundle": "BUNDLE"
+    "tierBundle": "BUNDLE",
+    "startHereTitle": "Start Here",
+    "startHereSubtitle": "New to Tamkinly? These three articles will give you the foundation.",
+    "startHereArticle1Title": "The Identity Gap: Why You Know What to Do But Don't Do It",
+    "startHereArticle1Desc": "The distance between who you are and who you show up as isn't a discipline problem. It's an identity gap. Understanding this changes everything.",
+    "startHereArticle2Title": "Identity-Based Change: The Method That Makes Behavior Automatic",
+    "startHereArticle2Desc": "When your identity shifts, behavior follows naturally. No willpower required. This is why habit apps keep failing you.",
+    "startHereArticle3Title": "The 4 Phases of Identity Transformation",
+    "startHereArticle3Desc": "From awareness to integration. Every transformation follows the same pattern. Knowing where you are tells you exactly what to do next.",
+    "startHereRead": "Read"
   },
   "resourcesPage": {
     "heroBadge": "Free Resources",
@@ -1834,7 +1919,7 @@
     "dailyReflectionApp": "Daily Reflection",
     "valuesClarificationApp": "Values Clarification",
     "progressDashboardApp": "Progress Dashboard",
-    "freeTier": "FREE",
+    "freeTier": "Free",
     "firstStep": "First Step",
     "firstStepDesc": "Complete your first habit",
     "weekWarrior": "Week Warrior",
@@ -1850,7 +1935,55 @@
     "phaseRange3": "60%+",
     "phaseRecoding": "Recoding",
     "there": "there",
-    "activateCode": "Activate"
+    "activateCode": "Activate",
+    "assessmentResults": "Assessment Results",
+    "overallScore": "Overall Score",
+    "identityClarity": "Identity Clarity",
+    "environmentalAlignment": "Environmental Alignment",
+    "emotionalRegulation": "Emotional Regulation",
+    "decisionQuality": "Decision Quality",
+    "progressMomentum": "Progress Momentum",
+    "dominantChallenge": "Dominant Challenge",
+    "scoreCategory": "Score Range",
+    "gapWide": "Wide Gap",
+    "gapModerate": "Moderate Gap",
+    "gapNarrow": "Narrow Gap",
+    "takeQuiz": "Take Assessment",
+    "takeQuizDesc": "Take the free Identity Gap Assessment to discover your identity dimensions and get personalized guidance.",
+    "viewFullResults": "View Full Results",
+    "guidanceTitle": "Your Next Step",
+    "guidanceWide": "Your identity gap is significant. The best next step is the Identity Recode Planner — 30 structured days to close the gap.",
+    "guidanceModerate": "You have real strengths working for you. Focus on your weakest dimension to unlock the next level.",
+    "guidanceNarrow": "Your foundation is solid. The work now is deepening, not rebuilding. Premium tools help you optimize.",
+    "guidanceNoQuiz": "Start with the free Identity Gap Assessment to discover where you stand.",
+    "journeyProgress": "30-Day Journey Progress",
+    "dayOf": "Day {day} of 30",
+    "currentPhase": "Current Phase",
+    "phaseAwareness": "Awareness",
+    "phaseRecodingJourney": "Recoding",
+    "phaseIntegration": "Integration",
+    "journeyNotStarted": "Not started yet",
+    "startJourney": "Start Your Journey",
+    "startJourneyDesc": "Begin your 30-day identity transformation with the Identity Recode Planner.",
+    "bestStreak": "Best Streak",
+    "wordsWritten": "Words Written",
+    "decisionsLogged": "Decisions Logged",
+    "evidenceRecords": "Evidence Records",
+    "habitsToday": "Habits Today",
+    "goalsInProgress": "Goals In Progress",
+    "goalsCompleted": "Goals Completed",
+    "journalStreak": "Journal Streak",
+    "noAssessmentYet": "Take the free Identity Gap Assessment to discover where you stand.",
+    "takeAssessmentNow": "Take Free Assessment",
+    "yourDominantChallenge": "Your Dominant Challenge",
+    "scoreRange": "Score Range",
+    "wide": "Wide Gap",
+    "moderate": "Moderate Gap",
+    "narrow": "Narrow Gap",
+    "dayRange1": "Days 1-10",
+    "dayRange2": "Days 11-22",
+    "dayRange3": "Days 23-30",
+    "currentDay": "Current Day"
   },
   "guidesPage": {
     "heroBadge": "Deep Dives",

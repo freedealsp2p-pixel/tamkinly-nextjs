@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -28,29 +28,112 @@ import {
   Settings,
   LogOut,
   Loader2,
-  Shield
+  Shield,
+  Compass,
+  AlertCircle,
+  Footprints,
+  PenLine,
+  Scale,
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
 
-// Demo data keys - translated at render time
-const getDemoData = (t: (key: string) => string) => ({
+// Types for /api/progress response
+interface QuizResults {
+  overallScore: number;
+  identityClarity: number;
+  environmentalAlignment: number;
+  emotionalRegulation: number;
+  decisionQuality: number;
+  progressMomentum: number;
+  dominantChallenge: string;
+  dominantChallengeAr: string;
+  recommendedProduct: string;
+  personalizedMessage: string;
+  personalizedMessageAr: string;
+  timestamp: string;
+}
+
+interface ProgressData {
+  identityScore: number;
+  phase: string;
+  journey: {
+    currentDay: number;
+    currentPhase: string;
+    totalVotes: number;
+    maxStreak: number;
+    goalsCompleted: number;
+    journalStreak: number;
+    totalWords: number;
+    decisionsLogged: number;
+    evidenceRecords: number;
+  };
+  apps: {
+    habits: { total: number; completedToday: number; streak: number };
+    goals: { total: number; inProgress: number; completed: number };
+    journal: { entries: number; streak: number };
+    decisions: { entries: number; avgQuality: number };
+    evidence: { records: number; byType: Record<string, unknown> };
+  };
+  assessments: {
+    identityBaseline: {
+      overallScore: number;
+      dimensions: Record<string, number>;
+      completedAt: string;
+    } | null;
+    environmentalAudit: {
+      overallScore: number;
+      dimensions: Record<string, number>;
+      completedAt: string;
+    } | null;
+    erq: {
+      reappraisalScore: number;
+      suppressionScore: number;
+      completedAt: string;
+    } | null;
+  };
+  achievements: Array<{
+    id: string;
+    category: string;
+    progress: number;
+    completed: boolean;
+    completedAt: string | null;
+  }>;
+  appProgress: Record<string, unknown>;
+}
+
+// Demo data for unauthenticated users
+const getDemoData = (t: (key: string) => string): ProgressData => ({
   identityScore: 58,
-  phase: t('phaseRecoding'),
-  currentStreak: 3,
-  bestStreak: 7,
-  totalVotes: 24,
-  habitsCompleted: 12,
-  wordsWritten: 1450,
+  phase: 'RECODING',
+  journey: {
+    currentDay: 0,
+    currentPhase: 'AWARENESS',
+    totalVotes: 24,
+    maxStreak: 7,
+    goalsCompleted: 0,
+    journalStreak: 3,
+    totalWords: 1450,
+    decisionsLogged: 0,
+    evidenceRecords: 0,
+  },
+  apps: {
+    habits: { total: 3, completedToday: 2, streak: 3 },
+    goals: { total: 2, inProgress: 2, completed: 0 },
+    journal: { entries: 5, streak: 3 },
+    decisions: { entries: 3, avgQuality: 65 },
+    evidence: { records: 5, byType: {} },
+  },
+  assessments: {
+    identityBaseline: null,
+    environmentalAudit: null,
+    erq: null,
+  },
   achievements: [
-    { id: 'first-habit', name: t('firstStep'), description: t('firstStepDesc'), unlocked: true },
-    { id: 'week-streak', name: t('weekWarrior'), description: t('weekWarriorDesc'), unlocked: false, progress: 43 },
+    { id: 'first-habit', category: 'habits', progress: 100, completed: true, completedAt: new Date().toISOString() },
+    { id: 'week-streak', category: 'streaks', progress: 43, completed: false, completedAt: null },
   ],
-  recentActivity: [
-    { type: 'quiz', name: t('identityGapAssessment'), date: t('today'), score: 58 },
-    { type: 'habit', name: t('morningRoutine'), date: t('yesterday'), completed: true },
-    { type: 'journal', name: t('day15Reflection'), date: t('twoDaysAgo'), words: 150 },
-  ],
+  appProgress: {},
 });
 
 export default function DashboardPage() {
@@ -58,7 +141,8 @@ export default function DashboardPage() {
   const router = useRouter();
   const t = useTranslations('dashboardPage');
   const { locale } = useLocale();
-  const [data, setData] = useState(getDemoData(t));
+  const [data, setData] = useState<ProgressData>(getDemoData(t));
+  const [quizResults, setQuizResults] = useState<QuizResults | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [accessCode, setAccessCode] = useState('');
   const [codeLoading, setCodeLoading] = useState(false);
@@ -66,14 +150,61 @@ export default function DashboardPage() {
   const [codeSuccess, setCodeSuccess] = useState<string | null>(null);
 
   useEffect(() => {
+    // Load quiz results from localStorage (works for both auth and anon users)
+    try {
+      const stored = localStorage.getItem('quizResults');
+      if (stored) {
+        setQuizResults(JSON.parse(stored));
+      }
+    } catch {
+      // ignore parse errors
+    }
+
     if (status === 'unauthenticated') {
-      // Still show dashboard with demo data
       setIsLoading(false);
     } else if (status === 'authenticated') {
-      // Fetch real user data
       fetchUserData();
     }
   }, [status]);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch('/api/progress');
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success && result.progress) {
+          setData(result.progress);
+          // If API returned assessment data, try to extract quiz results from appProgress
+          if (result.progress.assessments?.identityBaseline) {
+            // We have a baseline from the DB, but the quiz results in localStorage
+            // are richer (5 dimensions). Prioritize localStorage if available.
+            if (!quizResults) {
+              // Build quiz-like results from identityBaseline assessment
+              const baseline = result.progress.assessments.identityBaseline;
+              setQuizResults({
+                overallScore: baseline.overallScore,
+                identityClarity: baseline.dimensions.selfConcept || 50,
+                environmentalAlignment: baseline.dimensions.environmentalAlignment || 50,
+                emotionalRegulation: baseline.dimensions.emotionalRegulation || 50,
+                decisionQuality: baseline.dimensions.decisionQuality || 50,
+                progressMomentum: baseline.dimensions.commitmentConsistency || 50,
+                dominantChallenge: '',
+                dominantChallengeAr: '',
+                recommendedProduct: '',
+                personalizedMessage: '',
+                personalizedMessageAr: '',
+                timestamp: baseline.completedAt,
+              });
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleActivateCode = async () => {
     if (!accessCode.trim()) return;
@@ -105,23 +236,70 @@ export default function DashboardPage() {
     }
   };
 
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch('/api/user/progress');
-      if (response.ok) {
-        const userData = await response.json();
-        setData({ ...data, ...userData });
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleSignOut = async () => {
     await signOut({ callbackUrl: '/' });
   };
+
+  // Derive phase display name
+  const phaseLabel = useMemo(() => {
+    switch (data.phase) {
+      case 'AWARENESS': return t('awareness');
+      case 'RECODING': return t('recoding');
+      case 'INTEGRATION': return t('integration');
+      default: return t('recoding');
+    }
+  }, [data.phase, t]);
+
+  // Derive journey phase label
+  const journeyPhaseLabel = useMemo(() => {
+    const phase = data.journey?.currentPhase || data.phase;
+    switch (phase) {
+      case 'AWARENESS': return t('phaseAwareness');
+      case 'RECODING': return t('phaseRecodingJourney');
+      case 'INTEGRATION': return t('phaseIntegration');
+      default: return t('phaseAwareness');
+    }
+  }, [data.journey?.currentPhase, data.phase, t]);
+
+  // Get guidance message based on quiz score
+  const guidanceMessage = useMemo(() => {
+    if (!quizResults) return t('guidanceNoQuiz');
+    if (quizResults.overallScore <= 40) return t('guidanceWide');
+    if (quizResults.overallScore <= 70) return t('guidanceModerate');
+    return t('guidanceNarrow');
+  }, [quizResults, t]);
+
+  // Get guidance icon color based on score
+  const guidanceColor = useMemo(() => {
+    if (!quizResults) return '#8A94A6';
+    if (quizResults.overallScore <= 40) return '#FC6D26';
+    if (quizResults.overallScore <= 70) return '#FFB74D';
+    return '#3DD4B0';
+  }, [quizResults]);
+
+  // Quiz dimension data for bars
+  const quizDimensions = useMemo(() => {
+    if (!quizResults) return [];
+    return [
+      { key: 'identityClarity', label: t('identityClarity'), value: quizResults.identityClarity, color: '#3DD4B0', icon: User },
+      { key: 'environmentalAlignment', label: t('environmentalAlignment'), value: quizResults.environmentalAlignment, color: '#1F6F78', icon: Compass },
+      { key: 'emotionalRegulation', label: t('emotionalRegulation'), value: quizResults.emotionalRegulation, color: '#E57373', icon: Heart },
+      { key: 'decisionQuality', label: t('decisionQuality'), value: quizResults.decisionQuality, color: '#64B5F6', icon: Brain },
+      { key: 'progressMomentum', label: t('progressMomentum'), value: quizResults.progressMomentum, color: '#FFB74D', icon: TrendingUp },
+    ];
+  }, [quizResults, t]);
+
+  // Get score category
+  const scoreCategory = useMemo(() => {
+    if (!quizResults) return null;
+    if (quizResults.overallScore <= 40) return t('gapWide');
+    if (quizResults.overallScore <= 70) return t('gapModerate');
+    return t('gapNarrow');
+  }, [quizResults, t]);
+
+  // Journey progress calculation
+  const journeyDay = data.journey?.currentDay || 0;
+  const journeyProgressPercent = Math.round((journeyDay / 30) * 100);
 
   if (isLoading) {
     return (
@@ -219,7 +397,7 @@ export default function DashboardPage() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-[#0F1C2E] mb-2">
-            {status === 'authenticated' 
+            {status === 'authenticated'
               ? t('welcomeBack').replace('{name}', session?.user?.name || t('there'))
               : t('yourDashboard')
             }
@@ -229,13 +407,36 @@ export default function DashboardPage() {
           </p>
         </div>
 
+        {/* Guidance/Alerts Section */}
+        <Card className="mb-8 border-l-4" style={{ borderLeftColor: guidanceColor }}>
+          <CardContent className="p-5">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${guidanceColor}15` }}>
+                <AlertCircle className="h-5 w-5" style={{ color: guidanceColor }} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-[#0F1C2E] mb-1">{t('guidanceTitle')}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{guidanceMessage}</p>
+                {!quizResults && (
+                  <Link href="/quiz" className="inline-block mt-3">
+                    <Button size="sm" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
+                      {t('takeQuiz')}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
             { label: t('identityScore'), value: `${data.identityScore}%`, icon: Brain, color: '#3DD4B0' },
-            { label: t('currentStreak'), value: `${data.currentStreak} ${t('days')}`, icon: Flame, color: '#FFB74D' },
-            { label: t('totalVotes'), value: data.totalVotes, icon: CheckCircle2, color: '#1F6F78' },
-            { label: t('habitsDone'), value: data.habitsCompleted, icon: Target, color: '#64B5F6' },
+            { label: t('currentStreak'), value: `${data.journey?.journalStreak || 0} ${t('days')}`, icon: Flame, color: '#FFB74D' },
+            { label: t('totalVotes'), value: data.journey?.totalVotes || 0, icon: CheckCircle2, color: '#1F6F78' },
+            { label: t('habitsDone'), value: data.apps?.habits?.completedToday || 0, icon: Target, color: '#64B5F6' },
           ].map((stat, idx) => (
             <Card key={idx} className="border-0 shadow-sm">
               <CardContent className="p-4">
@@ -257,12 +458,175 @@ export default function DashboardPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Column - Progress */}
           <div className="lg:col-span-2 space-y-6">
+            {/* Assessment Results Card */}
+            {quizResults ? (
+              <Card className="border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-5">
+                    <h2 className="text-xl font-bold text-[#0F1C2E]">{t('assessmentResults')}</h2>
+                    <div className="flex items-center gap-2">
+                      <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0]">{scoreCategory}</Badge>
+                      <Link href="/quiz/results">
+                        <Button variant="ghost" size="sm" className="text-[#1F6F78]">
+                          {t('viewFullResults')}
+                          <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Overall Score */}
+                  <div className="flex items-center gap-4 mb-6 p-4 rounded-xl bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78]">
+                    <div className="text-center">
+                      <div className="text-4xl font-bold text-[#3DD4B0]">{quizResults.overallScore}%</div>
+                      <div className="text-sm text-slate-300">{t('overallScore')}</div>
+                    </div>
+                    <div className="flex-1">
+                      <Progress value={quizResults.overallScore} className="h-3 bg-white/20" />
+                    </div>
+                  </div>
+
+                  {/* 5 Dimension Scores */}
+                  <div className="space-y-3">
+                    {quizDimensions.map((dim) => (
+                      <div key={dim.key} className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${dim.color}15` }}>
+                          <dim.icon className="h-4 w-4" style={{ color: dim.color }} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-sm font-medium text-[#0F1C2E] truncate">{dim.label}</span>
+                            <span className="text-sm font-semibold" style={{ color: dim.color }}>{dim.value}%</span>
+                          </div>
+                          <div className="relative h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div
+                              className="absolute top-0 left-0 h-full rounded-full transition-all duration-700"
+                              style={{ width: `${dim.value}%`, backgroundColor: dim.color }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Dominant Challenge */}
+                  {quizResults.dominantChallenge && (
+                    <div className="mt-4 pt-4 border-t border-slate-100">
+                      <div className="flex items-center gap-2">
+                        <Target className="h-4 w-4 text-[#1F6F78]" />
+                        <span className="text-sm text-slate-500">{t('dominantChallenge')}:</span>
+                        <span className="text-sm font-semibold text-[#0F1C2E]">
+                          {locale === 'ar' ? quizResults.dominantChallengeAr : quizResults.dominantChallenge}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="border-0 shadow-sm border-dashed border-2 border-slate-200">
+                <CardContent className="p-6 text-center">
+                  <div className="w-14 h-14 rounded-full bg-[#3DD4B0]/10 flex items-center justify-center mx-auto mb-4">
+                    <Brain className="h-7 w-7 text-[#3DD4B0]" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#0F1C2E] mb-2">{t('assessmentResults')}</h3>
+                  <p className="text-slate-500 text-sm mb-4">{t('takeQuizDesc')}</p>
+                  <Link href="/quiz">
+                    <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
+                      {t('takeQuiz')}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* 30-Day Journey Progress */}
+            <Card className="border-0 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-5">
+                  <h2 className="text-xl font-bold text-[#0F1C2E]">{t('journeyProgress')}</h2>
+                  <Badge className="bg-[#1F6F78]/15 text-[#1F6F78]">
+                    {journeyDay > 0 ? t('dayOf', { day: String(journeyDay) }) : t('journeyNotStarted')}
+                  </Badge>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="mb-5">
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-slate-600">{t('overallProgress')}</span>
+                    <span className="font-semibold text-[#0F1C2E]">{journeyProgressPercent}%</span>
+                  </div>
+                  <div className="relative h-4 bg-slate-100 rounded-full overflow-hidden">
+                    {/* Three-phase colored bar */}
+                    <div className="absolute top-0 left-0 h-full flex" style={{ width: '100%' }}>
+                      <div className="h-full bg-[#3DD4B0]/20" style={{ width: '33.33%' }} />
+                      <div className="h-full bg-[#1F6F78]/20" style={{ width: '33.33%' }} />
+                      <div className="h-full bg-[#0F1C2E]/20" style={{ width: '33.34%' }} />
+                    </div>
+                    <div
+                      className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-[#3DD4B0] via-[#1F6F78] to-[#0F1C2E] transition-all duration-700"
+                      style={{ width: `${journeyProgressPercent}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Phase Indicator */}
+                <div className="grid grid-cols-3 gap-3 mb-5">
+                  {[
+                    { label: t('phaseAwareness'), range: '1-10', active: journeyDay > 0 && journeyDay <= 10 },
+                    { label: t('phaseRecodingJourney'), range: '11-22', active: journeyDay > 10 && journeyDay <= 22 },
+                    { label: t('phaseIntegration'), range: '23-30', active: journeyDay > 22 },
+                  ].map((phase, idx) => (
+                    <div
+                      key={idx}
+                      className={`text-center p-3 rounded-lg transition-all ${
+                        phase.active
+                          ? 'bg-[#3DD4B0]/10 border-2 border-[#3DD4B0]'
+                          : 'bg-slate-50'
+                      }`}
+                    >
+                      <div className="text-sm font-semibold text-[#0F1C2E]">{phase.label}</div>
+                      <div className="text-xs text-slate-500">{t('days')} {phase.range}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {journeyDay === 0 && (
+                  <Link href="/apps/identity-planner" className="block">
+                    <Button className="w-full bg-[#1F6F78] text-white hover:bg-[#185c63]">
+                      {t('startJourney')}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                )}
+
+                {/* Journey Stats */}
+                {journeyDay > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-100">
+                    {[
+                      { label: t('bestStreak'), value: data.journey?.maxStreak || 0, icon: Flame, color: '#FFB74D' },
+                      { label: t('wordsWritten'), value: data.journey?.totalWords || 0, icon: PenLine, color: '#3DD4B0' },
+                      { label: t('decisionsLogged'), value: data.journey?.decisionsLogged || 0, icon: Scale, color: '#1F6F78' },
+                      { label: t('evidenceRecords'), value: data.journey?.evidenceRecords || 0, icon: Shield, color: '#64B5F6' },
+                    ].map((stat, idx) => (
+                      <div key={idx} className="text-center p-2 rounded-lg bg-slate-50">
+                        <stat.icon className="h-4 w-4 mx-auto mb-1" style={{ color: stat.color }} />
+                        <div className="text-lg font-bold text-[#0F1C2E]">{stat.value}</div>
+                        <div className="text-xs text-slate-500">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
             {/* Transformation Phase */}
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold text-[#0F1C2E]">{t('yourTransformationPhase')}</h2>
-                  <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0]">{data.phase}</Badge>
+                  <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0]">{phaseLabel}</Badge>
                 </div>
                 <div className="space-y-4">
                   <div>
@@ -275,7 +639,7 @@ export default function DashboardPage() {
                   <div className="grid grid-cols-3 gap-4 pt-4">
                     {[t('awareness'), t('recoding'), t('integration')].map((phase, idx) => (
                       <div key={phase} className={`text-center p-3 rounded-lg ${
-                        phase === data.phase ? 'bg-[#3DD4B0]/10 border-2 border-[#3DD4B0]' : 'bg-slate-50'
+                        phase === phaseLabel ? 'bg-[#3DD4B0]/10 border-2 border-[#3DD4B0]' : 'bg-slate-50'
                       }`}>
                         <div className="text-sm font-semibold text-[#0F1C2E]">{phase}</div>
                         <div className="text-xs text-slate-500">
@@ -288,16 +652,16 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Quick Actions */}
+            {/* App Stats */}
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
                 <h2 className="text-xl font-bold text-[#0F1C2E] mb-4">{t('continueJourney')}</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {[
-                    { name: t('identityGapQuiz'), icon: Brain, url: '/quiz', tier: t('freeTier') },
-                    { name: t('dailyReflectionApp'), icon: BookOpen, url: '/apps/daily-reflection', tier: t('freeTier') },
-                    { name: t('valuesClarificationApp'), icon: Heart, url: '/apps/values-clarification', tier: t('freeTier') },
-                    { name: t('progressDashboardApp'), icon: BarChart3, url: '/apps/progress-dashboard', tier: t('freeTier') },
+                    { name: t('identityGapQuiz'), icon: Brain, url: '/quiz', tier: t('freeTier'), stat: quizResults ? `${quizResults.overallScore}%` : null },
+                    { name: t('dailyReflectionApp'), icon: BookOpen, url: '/apps/daily-reflection', tier: t('freeTier'), stat: data.apps?.journal?.streak ? `${data.apps.journal.streak} ${t('days')}` : null },
+                    { name: t('valuesClarificationApp'), icon: Heart, url: '/apps/values-clarification', tier: t('freeTier'), stat: null },
+                    { name: t('progressDashboardApp'), icon: BarChart3, url: '/apps/progress-dashboard', tier: t('freeTier'), stat: null },
                   ].map((app, idx) => (
                     <Link key={idx} href={app.url}>
                       <div className="flex items-center gap-3 p-4 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer">
@@ -308,35 +672,12 @@ export default function DashboardPage() {
                           <div className="font-semibold text-[#0F1C2E]">{app.name}</div>
                           <div className="text-xs text-slate-500">{app.tier}</div>
                         </div>
+                        {app.stat && (
+                          <Badge variant="outline" className="text-xs">{app.stat}</Badge>
+                        )}
                         <ArrowRight className="h-4 w-4 text-slate-400" />
                       </div>
                     </Link>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Recent Activity */}
-            <Card className="border-0 shadow-sm">
-              <CardContent className="p-6">
-                <h2 className="text-xl font-bold text-[#0F1C2E] mb-4">{t('recentActivity')}</h2>
-                <div className="space-y-3">
-                  {data.recentActivity.map((activity, idx) => (
-                    <div key={idx} className="flex items-center gap-4 p-3 rounded-lg bg-slate-50">
-                      <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center">
-                        {activity.type === 'quiz' && <Brain className="h-5 w-5 text-[#3DD4B0]" />}
-                        {activity.type === 'habit' && <CheckCircle2 className="h-5 w-5 text-[#3DD4B0]" />}
-                        {activity.type === 'journal' && <BookOpen className="h-5 w-5 text-[#3DD4B0]" />}
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-[#0F1C2E]">{activity.name}</div>
-                        <div className="text-sm text-slate-500">
-                          {activity.date}
-                          {activity.score && ` • ${t('score')}: ${activity.score}%`}
-                          {activity.words && ` • ${activity.words} ${t('words')}`}
-                        </div>
-                      </div>
-                    </div>
                   ))}
                 </div>
               </CardContent>
@@ -350,34 +691,60 @@ export default function DashboardPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-xl font-bold text-[#0F1C2E]">{t('achievements')}</h2>
-                  <Badge variant="outline">{data.achievements.filter(a => a.unlocked).length} / 20</Badge>
+                  <Badge variant="outline">{data.achievements?.filter(a => a.completed).length || 0} / 20</Badge>
                 </div>
-                <div className="space-y-3">
-                  {data.achievements.map((achievement) => (
-                    <div 
-                      key={achievement.id} 
-                      className={`p-3 rounded-lg ${achievement.unlocked ? 'bg-[#3DD4B0]/10' : 'bg-slate-50 opacity-60'}`}
+                <div className="space-y-3 max-h-96 overflow-y-auto">
+                  {(data.achievements || []).map((achievement) => (
+                    <div
+                      key={achievement.id}
+                      className={`p-3 rounded-lg ${achievement.completed ? 'bg-[#3DD4B0]/10' : 'bg-slate-50 opacity-60'}`}
                     >
                       <div className="flex items-center gap-2">
-                        {achievement.unlocked ? (
+                        {achievement.completed ? (
                           <Star className="h-5 w-5 text-[#FFB74D] fill-current" />
                         ) : (
                           <Star className="h-5 w-5 text-slate-300" />
                         )}
-                        <div className="font-semibold text-[#0F1C2E]">{achievement.name}</div>
+                        <div className="font-semibold text-[#0F1C2E]">{achievement.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</div>
                       </div>
-                      <p className="text-sm text-slate-600 mt-1">{achievement.description}</p>
-                      {!achievement.unlocked && achievement.progress && (
+                      <p className="text-sm text-slate-600 mt-1">{t('score')}: {achievement.progress}%</p>
+                      {!achievement.completed && achievement.progress > 0 && (
                         <Progress value={achievement.progress} className="h-1.5 mt-2" />
                       )}
                     </div>
                   ))}
+                  {(!data.achievements || data.achievements.length === 0) && (
+                    <p className="text-sm text-slate-400 text-center py-4">{t('loading')}</p>
+                  )}
                 </div>
                 <Link href="/apps/progress-dashboard">
                   <Button variant="link" className="w-full mt-4">
                     {t('viewAllAchievements')}
                   </Button>
                 </Link>
+              </CardContent>
+            </Card>
+
+            {/* App Stats Summary */}
+            <Card className="border-0 shadow-sm">
+              <CardContent className="p-6">
+                <h3 className="font-bold text-[#0F1C2E] mb-4">{t('continueJourney')}</h3>
+                <div className="space-y-3">
+                  {[
+                    { label: t('habitsToday'), value: `${data.apps?.habits?.completedToday || 0}/${data.apps?.habits?.total || 0}`, icon: CheckCircle2, color: '#3DD4B0' },
+                    { label: t('goalsInProgress'), value: data.apps?.goals?.inProgress || 0, icon: Target, color: '#1F6F78' },
+                    { label: t('goalsCompleted'), value: data.apps?.goals?.completed || 0, icon: Award, color: '#FFB74D' },
+                    { label: t('journalStreak'), value: `${data.apps?.journal?.streak || 0} ${t('days')}`, icon: BookOpen, color: '#64B5F6' },
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-2 rounded hover:bg-slate-50 transition-colors">
+                      <div className="flex items-center gap-2">
+                        <item.icon className="h-4 w-4" style={{ color: item.color }} />
+                        <span className="text-slate-600 text-sm">{item.label}</span>
+                      </div>
+                      <span className="font-semibold text-[#0F1C2E] text-sm">{item.value}</span>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
 

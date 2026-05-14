@@ -5,6 +5,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -34,7 +41,8 @@ import {
   GitBranch,
   BarChart3,
   ShoppingCart,
-  Check
+  Check,
+  Info
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { addToCart } from "@/lib/cart-client";
@@ -287,6 +295,7 @@ function ProductCard({ product, t }: {
   const Icon = product.icon;
   const isFree = product.price === 0;
   const { toast } = useToast();
+  const [guaranteeOpen, setGuaranteeOpen] = useState(false);
   
   const productName = t(`products.${product.nameKey}.name`);
   
@@ -388,11 +397,60 @@ function ProductCard({ product, t }: {
         </div>
         
         {/* Savings Badge */}
-        {!isFree && product.comparePrice && product.comparePrice > product.price && (
-          <Badge className="bg-green-100 text-green-700 mb-4">
-            {t('save')} ${product.comparePrice - product.price}
-          </Badge>
-        )}
+        <div className="flex items-center gap-2 mb-4">
+          {!isFree && product.comparePrice && product.comparePrice > product.price && (
+            <Badge className="bg-green-100 text-green-700">
+              {t('save')} ${product.comparePrice - product.price}
+            </Badge>
+          )}
+          {!isFree && (
+            <button
+              type="button"
+              onClick={() => setGuaranteeOpen(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-[#3DD4B0]/15 text-[#3DD4B0] hover:bg-[#3DD4B0]/25 transition-colors cursor-pointer"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              {t('guaranteeBadge')}
+              <Info className="w-3 h-3 opacity-60" />
+            </button>
+          )}
+        </div>
+
+        {/* Guarantee Modal */}
+        <Dialog open={guaranteeOpen} onOpenChange={setGuaranteeOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2 text-[#0F1C2E]">
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#3DD4B0]/15 text-[#3DD4B0]">
+                  <Shield className="w-4 h-4" />
+                </div>
+                {t('guaranteeModalTitle')}
+              </DialogTitle>
+              <DialogDescription className="sr-only">
+                {t('guaranteeModalTitle')}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              <p className="text-slate-600 leading-relaxed text-sm">
+                {t('guaranteeModalBody')}
+              </p>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#3DD4B0] flex-shrink-0" />
+                  <span className="text-slate-700 text-sm">{t('guaranteeBullet1')}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#3DD4B0] flex-shrink-0" />
+                  <span className="text-slate-700 text-sm">{t('guaranteeBullet2')}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#3DD4B0] flex-shrink-0" />
+                  <span className="text-slate-700 text-sm">{t('guaranteeBullet3')}</span>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
         
         {/* Highlights */}
         <div className="flex flex-wrap gap-2 mb-4">

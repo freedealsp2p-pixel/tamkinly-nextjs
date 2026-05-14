@@ -401,6 +401,163 @@ function WhatIfSection() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// Q8 — COMPARISON TABLE
+// ═══════════════════════════════════════════════════════════════
+
+function ComparisonSection() {
+  const t = useTranslations("methodologyPage");
+
+  const rows = [0, 1, 2, 3, 4, 5].map((idx) => ({
+    feature: t(`comparison.rows.${idx}.feature`),
+    tamkinly: t(`comparison.rows.${idx}.tamkinly`),
+    habitApps: t(`comparison.rows.${idx}.habitApps`),
+    books: t(`comparison.rows.${idx}.books`),
+    coaching: t(`comparison.rows.${idx}.coaching`),
+  }));
+
+  return (
+    <section className="py-20 lg:py-28 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-[#3DD4B0]/10 text-[#3DD4B0] border-0">
+              {t("comparisonBadge")}
+            </Badge>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F1C2E] mb-4">
+              {t("comparisonTitle")}
+            </h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              {t("comparisonSubtitle")}
+            </p>
+          </div>
+
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th className="text-left p-4 bg-slate-50 text-sm font-semibold text-[#0F1C2E] rounded-tl-lg">
+                    {t("comparisonFeature")}
+                  </th>
+                  <th className="p-4 bg-[#3DD4B0]/10 text-center rounded-t-lg border-b-2 border-[#3DD4B0]">
+                    <div className="text-[#3DD4B0] font-bold text-sm">{t("comparisonColTamkinly")}</div>
+                  </th>
+                  <th className="p-4 bg-slate-50 text-center text-sm font-semibold text-slate-600">
+                    {t("comparisonColHabitApps")}
+                  </th>
+                  <th className="p-4 bg-slate-50 text-center text-sm font-semibold text-slate-600">
+                    {t("comparisonColBooks")}
+                  </th>
+                  <th className="p-4 bg-slate-50 text-center text-sm font-semibold text-slate-600 rounded-tr-lg">
+                    {t("comparisonColCoaching")}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, idx) => (
+                  <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}>
+                    <td className="p-4 text-sm font-medium text-[#0F1C2E] border-b border-slate-100">
+                      {row.feature}
+                    </td>
+                    <td className="p-4 text-center text-sm text-[#0F1C2E] font-medium border-b border-slate-100 bg-[#3DD4B0]/5">
+                      {row.tamkinly}
+                    </td>
+                    <td className="p-4 text-center text-sm text-slate-500 border-b border-slate-100">
+                      {row.habitApps}
+                    </td>
+                    <td className="p-4 text-center text-sm text-slate-500 border-b border-slate-100">
+                      {row.books}
+                    </td>
+                    <td className="p-4 text-center text-sm text-slate-500 border-b border-slate-100">
+                      {row.coaching}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile View — Rows instead of columns */}
+          <div className="md:hidden space-y-4">
+            {rows.map((row, idx) => (
+              <Card key={idx} className="border-0 shadow-sm">
+                <CardContent className="p-5">
+                  <h4 className="font-semibold text-[#0F1C2E] mb-3">{row.feature}</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-[#3DD4B0]/10">
+                      <span className="text-xs font-semibold text-[#3DD4B0]">{t("comparisonColTamkinly")}</span>
+                      <span className="text-sm text-[#0F1C2E] font-medium">{row.tamkinly}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                      <span className="text-xs text-slate-500">{t("comparisonColHabitApps")}</span>
+                      <span className="text-sm text-slate-600">{row.habitApps}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                      <span className="text-xs text-slate-500">{t("comparisonColBooks")}</span>
+                      <span className="text-sm text-slate-600">{row.books}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50">
+                      <span className="text-xs text-slate-500">{t("comparisonColCoaching")}</span>
+                      <span className="text-sm text-slate-600">{row.coaching}</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Q9 — HONEST RESULTS SECTION
+// ═══════════════════════════════════════════════════════════════
+
+function HonestResultsSection() {
+  const t = useTranslations("methodologyPage");
+
+  const results = [0, 1, 2, 3].map((idx) => ({
+    text: t(`honestResults.${idx}.text`),
+  }));
+
+  return (
+    <section className="py-20 lg:py-28 bg-[#F6F8FA]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F1C2E] mb-4">
+              {t("honestResultsTitle")}
+            </h2>
+          </div>
+
+          {/* Results — generous whitespace, no icons/numbers/checkmarks */}
+          <div className="space-y-16">
+            {results.map((result, idx) => (
+              <div key={idx} className="text-center">
+                <p className="text-lg sm:text-xl text-[#0F1C2E] leading-relaxed max-w-2xl mx-auto">
+                  {result.text}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Honest Note */}
+          <div className="mt-16 pt-8 border-t border-slate-200 text-center">
+            <p className="text-slate-500 text-sm leading-relaxed max-w-xl mx-auto italic">
+              {t("honestResultsNote")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
 // CTA SECTION
 // ═══════════════════════════════════════════════════════════════
 
@@ -448,6 +605,8 @@ export default function MethodologyPage() {
       <WhatSection />
       <HowSection />
       <WhatIfSection />
+      <ComparisonSection />
+      <HonestResultsSection />
       <CTASection />
     </>
   );

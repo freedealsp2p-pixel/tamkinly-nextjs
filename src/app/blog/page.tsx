@@ -402,6 +402,71 @@ export default function BlogPage() {
         </div>
       </section>
 
+      {/* Start Here Section */}
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-primary/[0.03] to-slate-50 border-b border-accent/10" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto text-center mb-10">
+            <Badge variant="outline" className="mb-4 px-4 py-2 border-[#3DD4B0]/30 text-[#3DD4B0] bg-[#3DD4B0]/10">
+              <Sparkles className="w-3.5 h-3.5 mr-2" />
+              {t('startHereTitle')}
+            </Badge>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-3">
+              {t('startHereTitle')}
+            </h2>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+              {t('startHereSubtitle')}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              {
+                num: 1,
+                titleKey: 'startHereArticle1Title',
+                descKey: 'startHereArticle1Desc',
+                href: '/blog/identity-gap-assessment',
+              },
+              {
+                num: 2,
+                titleKey: 'startHereArticle2Title',
+                descKey: 'startHereArticle2Desc',
+                href: '/blog/identity-based-habits-worksheet',
+              },
+              {
+                num: 3,
+                titleKey: 'startHereArticle3Title',
+                descKey: 'startHereArticle3Desc',
+                href: '/blog/identity-recode-system-guide',
+              },
+            ].map((article) => (
+              <Link key={article.num} href={article.href}>
+                <Card className="h-full border border-accent/15 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group bg-white relative overflow-hidden">
+                  {/* Subtle top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#3DD4B0] to-[#1F6F78]" />
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4 mb-4">
+                      <span className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-[#3DD4B0]/15 text-[#3DD4B0] font-bold text-lg font-serif">
+                        {article.num}
+                      </span>
+                      <h3 className="font-semibold text-base text-primary group-hover:text-accent transition-colors leading-snug pt-0.5">
+                        {t(article.titleKey)}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-slate-600 mb-5 line-clamp-3 leading-relaxed">
+                      {t(article.descKey)}
+                    </p>
+                    <span className="text-[#3DD4B0] text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                      {t('startHereRead')}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Browse by Category */}
       <section className="py-12 lg:py-16 bg-slate-50 border-b border-slate-200" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
