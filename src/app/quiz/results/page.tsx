@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { 
   ArrowRight, 
   Sparkles, 
@@ -22,7 +23,11 @@ import {
   Clock,
   Zap,
   RefreshCw,
-  Share2
+  Share2,
+  Save,
+  LogIn,
+  ArrowUpRight,
+  BarChart3
 } from 'lucide-react';
 
 // Types
@@ -241,7 +246,10 @@ export default function QuizResultsPage() {
   const router = useRouter();
   const [results, setResults] = useState<QuizResults | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
   const { locale, direction } = useLocale();
+  const { data: session } = useSession();
 
   useEffect(() => {
     // Load results from localStorage
@@ -254,6 +262,10 @@ export default function QuizResultsPage() {
           Promise.resolve().then(() => {
             setResults(parsed);
             setIsLoading(false);
+            // Auto-save for logged-in users
+            if (session?.user?.id) {
+              saveResultsToDB(parsed);
+            }
           });
         } catch (e) {
           console.error('Error parsing quiz results:', e);
@@ -264,7 +276,40 @@ export default function QuizResultsPage() {
       }
     };
     loadResults();
-  }, []);
+  }, [session]);
+
+  // Save results to database for logged-in users
+  const saveResultsToDB = async (quizResults: QuizResults) => {
+    if (!session?.user?.id || saveSuccess) return;
+    setIsSaving(true);
+    try {
+      const response = await fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'quiz-results',
+          data: {
+            overallScore: quizResults.overallScore,
+            identityClarity: quizResults.identityClarity,
+            environmentalAlignment: quizResults.environmentalAlignment,
+            emotionalRegulation: quizResults.emotionalRegulation,
+            decisionQuality: quizResults.decisionQuality,
+            progressMomentum: quizResults.progressMomentum,
+            dominantChallenge: quizResults.dominantChallenge,
+            recommendedProduct: quizResults.recommendedProduct,
+            personalizedMessage: quizResults.personalizedMessage,
+          },
+        }),
+      });
+      if (response.ok) {
+        setSaveSuccess(true);
+      }
+    } catch (error) {
+      console.error('Failed to save results:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   // Get text based on language
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -447,126 +492,219 @@ export default function QuizResultsPage() {
           </CardContent>
         </Card>
 
-        {/* Product Recommendation */}
-        <div className="text-center mb-8">
-          <Badge className="mb-4 px-4 py-2 bg-[#3DD4B0]/10 text-[#3DD4B0]">
-            <Sparkles className="w-3.5 h-3.5 mr-2" />
-            {getText('Recommended For You', 'موصى به لك')}
-          </Badge>
-          <h2 className="text-3xl font-bold text-[#0F1C2E] mb-4">
-            {getText('Your Perfect Transformation Match', 'منتجك المثالي للتحول')}
-          </h2>
-        </div>
+        {/* Q25 — Score-Based Next Step Recommendation */}
+        <Card className="border-2 border-[#3DD4B0]/30 bg-white mb-8 overflow-hidden">
+          <CardContent className="p-6 md:p-8">
+            <div className="text-center mb-6">
+              <Badge className="mb-4 px-4 py-2 bg-[#3DD4B0]/10 text-[#3DD4B0]">
+                <ArrowUpRight className="w-3.5 h-3.5 mr-2" />
+                {getText('Your score is clear. Here\'s what it means for your next step.', 'نتيجتك واضحة. هذا ما تعنيه لخطوتك التالية.')}
+              </Badge>
+            </div>
 
-        {/* Recommended Product */}
-        {recommendedProduct && (
-          <Card className="border-2 shadow-xl bg-white mb-6 overflow-hidden" style={{ borderColor: recommendedProduct.color }}>
-            {recommendedProduct.popular && (
-              <div className="bg-[#3DD4B0] text-[#0F1C2E] text-center py-2 text-sm font-semibold">
-                {getText('Most Popular Choice', 'الخيار الأكثر شعبية')}
+            {/* Wide Gap (1-40) */}
+            {results.overallScore <= 40 && (
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-[#FC6D26]/10 flex items-center justify-center">
+                    <Target className="w-5 h-5 text-[#FC6D26]" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#0F1C2E]">{getText('Identity Gap: Wide', 'فجوة واسعة')}</h3>
+                    <p className="text-xs text-[#8A94A6]">{getText('Score 1–40', 'النتيجة 1–40')}</p>
+                  </div>
+                </div>
+                <p className="text-[#0F1C2E] font-medium">
+                  {getText(
+                    "Your gap is significant — and that's useful information, not a verdict.",
+                    'فجوتك كبيرة — وهذه معلومة مفيدة، ليست حكماً.'
+                  )}
+                </p>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {getText(
+                    "The best next step is the Identity Recode Planner. It was built specifically for this gap: 30 structured days that close the distance between who you are and who you show up as.",
+                    'أفضل خطوة تالية هي مخطط إعادة صياغة الهوية. بُني تحديداً لهذه الفجوة: 30 يوماً منظماً يُغلق المسافة بين من أنت وكيف تظهر.'
+                  )}
+                </p>
+                <Link href="/products">
+                  <Button className="bg-[#1F6F78] text-white hover:bg-[#185c63] h-12 font-semibold mt-2">
+                    {getText('Begin the 30-day protocol — $17', 'ابدأ بروتوكول الـ 30 يوماً — 17$')}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             )}
-            <CardContent className="p-0">
-              <div className="grid md:grid-cols-2">
-                {/* Left - Product Info */}
-                <div className="p-8" style={{ backgroundColor: `${recommendedProduct.color}10` }}>
-                  <div 
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-white mb-6"
-                    style={{ backgroundColor: recommendedProduct.color }}
-                  >
-                    <Zap className="w-8 h-8" />
+
+            {/* Moderate Gap (41-70) */}
+            {results.overallScore > 40 && results.overallScore <= 70 && (
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-[#FFB74D]/10 flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 text-[#FFB74D]" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0F1C2E] mb-2">
-                    {getText(recommendedProduct.name, recommendedProduct.nameAr)}
-                  </h3>
-                  <p className="text-[#8A94A6] mb-4">
-                    {getText(recommendedProduct.description, recommendedProduct.descriptionAr)}
-                  </p>
-                  <p className="text-sm text-[#0F1C2E] font-medium mb-6">
-                    {getText(recommendedProduct.bestFor, recommendedProduct.bestForAr)}
-                  </p>
-                  
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-4xl font-bold" style={{ color: recommendedProduct.color }}>
-                      {recommendedProduct.price}
-                    </span>
-                    <span className="text-[#8A94A6] line-through">{recommendedProduct.originalPrice}</span>
-                    <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0]">
-                      {getText('Save', 'وفر')} {Math.round((1 - parseInt(recommendedProduct.price.slice(1)) / parseInt(recommendedProduct.originalPrice.slice(1))) * 100)}%
-                    </Badge>
+                  <div>
+                    <h3 className="font-bold text-[#0F1C2E]">{getText('Identity Gap: Moderate', 'فجوة معتدلة')}</h3>
+                    <p className="text-xs text-[#8A94A6]">{getText('Score 41–70', 'النتيجة 41–70')}</p>
                   </div>
                 </div>
-                
-                {/* Right - Features & CTA */}
-                <div className="p-8">
-                  <h4 className="font-semibold text-[#0F1C2E] mb-4">
-                    {getText("What's Included:", 'ماذا يتضمن:')}
-                  </h4>
-                  <ul className="space-y-3 mb-8">
-                    {(locale === 'ar' ? recommendedProduct.featuresAr : recommendedProduct.features).map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] flex-shrink-0" />
-                        <span className="text-[#2B2E34]">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <Link href={recommendedProduct.productUrl}>
-                    <Button 
-                      className="w-full h-14 text-lg font-semibold shadow-lg"
-                      style={{ 
-                        backgroundColor: recommendedProduct.color, 
-                        color: recommendedProduct.id === 'premium' || recommendedProduct.id === 'bundle' ? 'white' : '#0F1C2E' 
-                      }}
-                    >
-                      {getText('Start Your Transformation', 'ابدأ تحولك')}
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                <p className="text-[#0F1C2E] font-medium">
+                  {getText(
+                    "You have real strengths already working for you. The gap exists in specific dimensions — your results show exactly where.",
+                    'عندك نقاط قوة حقيقية تعمل بالفعل لصالحك. الفجوة موجودة في أبعاد محددة — نتائجك تُظهر بالضبط أين.'
+                  )}
+                </p>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {getText(
+                    "The 7-Day Trial lets you experience the full system before committing.",
+                    'تجربة 7 أيام تتيح لك تجربة النظام الكامل قبل الالتزام.'
+                  )}
+                </p>
+                <Link href="/products">
+                  <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 font-semibold mt-2">
+                    {getText('Try the complete system for 7 days — $7', 'جرّب النظام الكامل لـ 7 أيام — 7$')}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            )}
+
+            {/* Narrow Gap (71-100) */}
+            {results.overallScore > 70 && (
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-10 h-10 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-5 h-5 text-[#3DD4B0]" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#0F1C2E]">{getText('Identity Gap: Narrow', 'فجوة ضيقة')}</h3>
+                    <p className="text-xs text-[#8A94A6]">{getText('Score 71–100', 'النتيجة 71–100')}</p>
+                  </div>
+                </div>
+                <p className="text-[#0F1C2E] font-medium">
+                  {getText(
+                    "Your foundation is solid. The work now is deepening — not rebuilding.",
+                    'أساسك متين. العمل الآن هو التعمق — لا إعادة البناء.'
+                  )}
+                </p>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {getText(
+                    "Premium Transformation gives you the analytics layer to measure and refine what's already working.",
+                    'التحول المتميز يعطيك طبقة التحليل لقياس وتحسين ما يعمل بالفعل.'
+                  )}
+                </p>
+                <Link href="/products">
+                  <Button className="bg-[#0F1C2E] text-white hover:bg-[#1a2d42] h-12 font-semibold mt-2">
+                    {getText('Go deeper with Premium — $27', 'اذهب أعمق مع المتميز — 27$')}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            )}
+
+            {/* Universal Closing — always shown */}
+            <div className="mt-6 pt-6 border-t border-slate-100 text-center">
+              <p className="text-slate-500 text-sm leading-relaxed">
+                {getText(
+                  "Not ready to invest yet? Start with the free Values Clarification Tool — the natural next step after any identity assessment.",
+                  'لست مستعداً للاستثمار بعد؟ ابدأ بأداة تحديد القيم المجانية — الخطوة الطبيعية التالية بعد أي تقييم هوية.'
+                )}
+              </p>
+              <Link href="/apps" className="inline-block mt-3">
+                <Button variant="outline" className="border-[#1F6F78] text-[#1F6F78] hover:bg-[#1F6F78] hover:text-white text-sm">
+                  {getText('Explore free tools', 'استكشف الأدوات المجانية')}
+                  <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Save Results Section */}
+        <Card className="border-0 shadow-sm bg-[#F6F8FA] mb-8">
+          <CardContent className="p-6 md:p-8">
+            {session?.user?.id ? (
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#3DD4B0]/10 flex items-center justify-center flex-shrink-0">
+                  {saveSuccess ? (
+                    <CheckCircle2 className="w-6 h-6 text-[#3DD4B0]" />
+                  ) : isSaving ? (
+                    <div className="w-5 h-5 border-2 border-[#3DD4B0] border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Save className="w-6 h-6 text-[#3DD4B0]" />
+                  )}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[#0F1C2E]">
+                    {saveSuccess 
+                      ? getText('Results saved successfully.', 'تم حفظ النتائج بنجاح.')
+                      : isSaving
+                        ? getText('Saving your results...', 'جاري حفظ نتائجك...')
+                        : getText('Saving your results...', 'جاري حفظ نتائجك...')
+                    }
+                  </h3>
+                  <p className="text-slate-500 text-sm">
+                    {saveSuccess 
+                      ? getText('You can track your progress anytime from your dashboard.', 'يمكنك تتبع تقدمك في أي وقت من لوحة التحكم.')
+                      : getText('Your results are being saved to your account.', 'يتم حفظ نتائجك في حسابك.')
+                    }
+                  </p>
+                </div>
+                {saveSuccess && (
+                  <Link href="/dashboard" className="ml-auto">
+                    <Button variant="outline" className="border-[#3DD4B0] text-[#3DD4B0] text-sm">
+                      <BarChart3 className="mr-2 h-4 w-4" />
+                      {getText('View Dashboard', 'عرض لوحة التحكم')}
                     </Button>
                   </Link>
-                  
-                  <div className="flex items-center justify-center gap-4 mt-4 text-sm text-[#8A94A6]">
-                    <div className="flex items-center gap-1">
-                      <Shield className="w-4 h-4" />
-                      <span>{getText('30-Day Guarantee', 'ضمان 30 يوم')}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{getText('Instant Access', 'وصول فوري')}</span>
-                    </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#3DD4B0]/10 flex items-center justify-center flex-shrink-0">
+                    <Save className="w-6 h-6 text-[#3DD4B0]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[#0F1C2E]">
+                      {getText('Save your results', 'احفظ نتائجك')}
+                    </h3>
+                    <p className="text-slate-500 text-sm">
+                      {getText(
+                        'Create a free account to track your progress over time.',
+                        'أنشئ حساباً مجانياً لتتبع تقدمك عبر الوقت.'
+                      )}
+                    </p>
                   </div>
                 </div>
+                <Link href="/auth/signup" className="whitespace-nowrap">
+                  <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-11 font-semibold">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    {getText('Sign in to save', 'سجّل لحفظ النتائج')}
+                  </Button>
+                </Link>
               </div>
-            </CardContent>
-          </Card>
-        )}
+            )}
+          </CardContent>
+        </Card>
 
-        {/* All Products */}
-        <div className="mt-12">
-          <h3 className="text-xl font-bold text-[#0F1C2E] text-center mb-6">
+        {/* All Products — Quick Comparison */}
+        <div className="mt-8">
+          <h3 className="text-lg font-bold text-[#0F1C2E] text-center mb-4">
             {getText('All Transformation Options', 'جميع خيارات التحول')}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {products.map((product) => (
               <Link key={product.id} href={product.productUrl} className="block">
                 <Card 
-                  className={`border-2 hover:shadow-lg transition-all cursor-pointer h-full ${results.recommendedProduct === product.id ? 'border-[#3DD4B0]' : 'border-transparent hover:border-slate-200'}`}
+                  className={`border hover:shadow-lg transition-all cursor-pointer h-full ${results.recommendedProduct === product.id ? 'border-[#3DD4B0]' : 'border-slate-100 hover:border-slate-200'}`}
                 >
-                  <CardContent className="p-6">
-                    <div 
-                      className="w-10 h-10 rounded-lg flex items-center justify-center text-white mb-3"
-                      style={{ backgroundColor: product.color }}
-                    >
-                      <Zap className="w-5 h-5" />
-                    </div>
-                    <h4 className="font-bold text-[#0F1C2E] mb-1">
+                  <CardContent className="p-4 text-center">
+                    <h4 className="font-bold text-[#0F1C2E] text-sm mb-1">
                       {getText(product.name, product.nameAr)}
                     </h4>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold" style={{ color: product.color }}>{product.price}</span>
-                      <span className="text-xs text-[#8A94A6] line-through">{product.originalPrice}</span>
-                    </div>
+                    <span className="text-lg font-bold" style={{ color: product.color }}>{product.price}</span>
                     {results.recommendedProduct === product.id && (
-                      <Badge className="mt-3 bg-[#3DD4B0]/20 text-[#3DD4B0]">
+                      <Badge className="mt-2 bg-[#3DD4B0]/20 text-[#3DD4B0] text-xs">
                         {getText('Recommended', 'موصى به')}
                       </Badge>
                     )}
@@ -604,36 +742,6 @@ export default function QuizResultsPage() {
             {getText('Share Results', 'شارك نتائجك')}
           </Button>
         </div>
-
-        {/* Final CTA */}
-        <Card className="mt-12 bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] border-0">
-          <CardContent className="p-8 md:p-12 text-center">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              {getText('Ready to Transform Your Identity?', 'مستعد لتحويل هويتك؟')}
-            </h3>
-            <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
-              {getText(
-                'Join thousands who have already begun their journey back to themselves. Your transformation starts with a single decision.',
-                'انضم إلى الآلاف الذين بدأوا رحلة العودة إلى ذواتهم. تحولك يبدأ بقرار واحد.'
-              )}
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              {recommendedProduct && (
-                <Link href={recommendedProduct.productUrl}>
-                  <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-10 h-14 text-lg font-semibold shadow-xl">
-                    {getText('Begin Your Transformation', 'ابدأ تحولك')}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-              )}
-              <Link href="/products">
-                <Button variant="outline" size="lg" className="px-8 h-14 font-semibold border-white text-white hover:bg-white/10">
-                  {getText('View All Products', 'عرض جميع المنتجات')}
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

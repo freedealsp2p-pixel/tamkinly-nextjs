@@ -383,6 +383,77 @@ export async function POST(request: NextRequest) {
         });
         return NextResponse.json({ success: true, id: achievement.id });
 
+      case 'quiz-results':
+        // Save Identity Gap Quiz results to AssessmentResult table
+        const assessmentResult = await db.assessmentResult.create({
+          data: {
+            userId,
+            type: 'IDENTITY_GAP',
+            identityClarity: data.identityClarity,
+            selfAwareness: data.selfAwareness || null,
+            valuesAlignment: data.valuesAlignment || null,
+            purposeClarity: null,
+            emotionalReg: data.emotionalRegulation,
+            overallScore: data.overallScore,
+            detailedResults: JSON.stringify({
+              identityClarity: data.identityClarity,
+              environmentalAlignment: data.environmentalAlignment,
+              emotionalRegulation: data.emotionalRegulation,
+              decisionQuality: data.decisionQuality,
+              progressMomentum: data.progressMomentum,
+              dominantChallenge: data.dominantChallenge,
+              recommendedProduct: data.recommendedProduct,
+            }),
+            recommendations: JSON.stringify({
+              personalizedMessage: data.personalizedMessage,
+              gapCategory: data.overallScore <= 40 ? 'wide' : data.overallScore <= 70 ? 'moderate' : 'narrow',
+            }),
+          },
+        });
+
+        // Update user progress identity score
+        await db.userProgress.upsert({
+          where: { userId },
+          create: {
+            userId,
+            identityScore: data.overallScore,
+            clarityScore: data.identityClarity,
+            alignmentScore: data.environmentalAlignment,
+          },
+          update: {
+            identityScore: data.overallScore,
+            clarityScore: data.identityClarity,
+            alignmentScore: data.environmentalAlignment,
+            lastActivityDate: new Date(),
+          },
+        });
+
+        // Award achievement for completing quiz
+        await db.userAchievement.upsert({
+          where: {
+            userId_achievementId: {
+              userId,
+              achievementId: 'first-quiz',
+            },
+          },
+          create: {
+            userId,
+            achievementId: 'first-quiz',
+            category: 'assessment',
+            tier: 'FREE',
+            progress: 100,
+            completed: true,
+            completedAt: new Date(),
+          },
+          update: {
+            progress: 100,
+            completed: true,
+            completedAt: new Date(),
+          },
+        });
+
+        return NextResponse.json({ success: true, id: assessmentResult.id });
+
       case 'app-progress':
         const appProgress = await db.appProgress.upsert({
           where: {

@@ -25,7 +25,11 @@ import {
   User,
   Compass,
   Eye,
-  Lightbulb
+  Lightbulb,
+  CircleDot,
+  Layers,
+  AlignCenter,
+  ArrowUpRight
 } from "lucide-react";
 import { DefaultJsonLd } from "@/components/seo/JsonLd";
 import { useLocale, useTranslations } from "@/components/providers/LocaleProvider";
@@ -650,6 +654,114 @@ function CTASection() {
 }
 
 // ============================================
+// Q7 — "THIS MIGHT BE FOR YOU" SECTION
+// ============================================
+function SelfIdentificationSection() {
+  const t = useTranslations();
+  const { direction } = useLocale();
+
+  const scenarios = [
+    {
+      titleKey: "selfIdentification.scenario1Title",
+      textKey: "selfIdentification.scenario1Text",
+      bottomKey: "selfIdentification.scenario1Bottom",
+      icon: CircleDot,
+      color: "#3DD4B0"
+    },
+    {
+      titleKey: "selfIdentification.scenario2Title",
+      textKey: "selfIdentification.scenario2Text",
+      bottomKey: null,
+      icon: Brain,
+      color: "#1F6F78"
+    },
+    {
+      titleKey: "selfIdentification.scenario3Title",
+      textKey: "selfIdentification.scenario3Text",
+      bottomKey: "selfIdentification.scenario3Bottom",
+      icon: Layers,
+      color: "#64B5F6"
+    },
+    {
+      titleKey: "selfIdentification.scenario4Title",
+      textKey: "selfIdentification.scenario4Text",
+      bottomKey: "selfIdentification.scenario4Bottom",
+      icon: AlignCenter,
+      color: "#FFB74D"
+    }
+  ];
+
+  return (
+    <section className="py-20 lg:py-28 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-4">
+            {t("selfIdentification.headline")}
+          </h2>
+          <p className="text-slate-600 leading-relaxed">
+            {t("selfIdentification.intro")}
+          </p>
+          <p className="text-[#0F1C2E] font-medium mt-2">
+            {t("selfIdentification.introLine2")}
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {scenarios.map((scenario, index) => (
+            <Card 
+              key={index} 
+              className="border-0 shadow-sm hover:shadow-lg transition-all duration-300 bg-[#F6F8FA] group"
+            >
+              <CardContent className="p-6 md:p-8">
+                <div 
+                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-5"
+                  style={{ backgroundColor: `${scenario.color}15` }}
+                >
+                  <scenario.icon className="w-5 h-5" style={{ color: scenario.color }} />
+                </div>
+                
+                <h3 className="font-semibold text-lg text-[#0F1C2E] mb-3">
+                  {t(scenario.titleKey)}
+                </h3>
+                
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  {t(scenario.textKey)}
+                </p>
+                
+                {scenario.bottomKey && (
+                  <p className="text-[#0F1C2E] font-medium text-sm">
+                    {t(scenario.bottomKey)}
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Closing Lines */}
+        <div className="text-center mt-12 max-w-2xl mx-auto">
+          <p className="text-slate-500 text-sm leading-relaxed">
+            {t("selfIdentification.closingLine")}
+          </p>
+          <p className="text-[#0F1C2E] font-medium mt-2">
+            {t("selfIdentification.closingLine2")}
+          </p>
+          <Link href="/quiz" className="inline-block mt-6">
+            <Button 
+              variant="outline"
+              className="border-[#3DD4B0] text-[#3DD4B0] hover:bg-[#3DD4B0] hover:text-[#0F1C2E] transition-all group"
+            >
+              {t("selfIdentification.ctaText")}
+              <ArrowRight className={`${direction === 'rtl' ? 'mr-2 rotate-180' : 'ml-2'} h-4 w-4 group-hover:translate-x-1 transition-transform`} />
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================
 // LAZY-LOADED SECTIONS (Below the Fold)
 // ============================================
 
@@ -703,6 +815,7 @@ export default function Home() {
       <DefaultJsonLd />
 
       <HeroSection />
+      <SelfIdentificationSection />
       <QuizPreviewWidget />
       <DiscoverSectionLazy />
       <HowItWorksSectionLazy />

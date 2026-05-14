@@ -452,6 +452,75 @@ export default function IdentityQuizPage() {
           </div>
         </div>
 
+        {/* Q15 — Quiz Results Preview */}
+        <div className="max-w-2xl mx-auto mb-12">
+          <h2 className="text-xl md:text-2xl font-semibold text-white mb-8">
+            {getText("Here's what you'll receive in 5 minutes.", 'هذا ما ستحصل عليه في 5 دقائق.')}
+          </h2>
+          
+          <div className="space-y-6">
+            {/* Identity Gap Score */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-[#3DD4B0]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <Target className="w-5 h-5 text-[#3DD4B0]" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-white mb-1">
+                  {getText('Your Identity Gap Score', 'نقاط فجوة هويتك')}
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  {getText(
+                    "A number from 1–100 that measures the distance between your current identity and your performed identity — who you actually are vs. who you show up as.",
+                    'رقم من 1 إلى 100 يقيس المسافة بين هويتك الحالية وهويتك التي تؤديها — من أنت فعلاً مقابل كيف تظهر.'
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Visual Map */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-[#1F6F78]/30 flex items-center justify-center flex-shrink-0 mt-1">
+                <Compass className="w-5 h-5 text-[#1F6F78]" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-white mb-1">
+                  {getText('A visual map across 6 life dimensions', 'خريطة مرئية عبر 6 أبعاد في حياتك')}
+                </h3>
+                <p className="text-[#3DD4B0] text-xs mb-1.5 tracking-wide">
+                  {getText(
+                    'Self-Trust · Decision Quality · Values Alignment · Consistency · Environmental Support · Emotional Regulation',
+                    'الثقة بالذات · جودة القرارات · توافق القيم · الاتساق · الدعم البيئي · التنظيم العاطفي'
+                  )}
+                </p>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  {getText(
+                    "You'll see exactly where the gap is largest — and where you're already stronger than you think.",
+                    'ستعرف بالضبط أين الفجوة الأكبر — وأين أنت أقوى مما تعتقد.'
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* One Next Step */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-[#FFB74D]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <ArrowRight className="w-5 h-5 text-[#FFB74D]" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-white mb-1">
+                  {getText('One personalized next step', 'خطوة تالية مخصصة واحدة')}
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  {getText(
+                    "Not a list of recommendations. One specific action matched to your highest-impact gap. Clear. Actionable. Immediate.",
+                    'ليست قائمة توصيات. فعل واحد محدد يتطابق مع الفجوة الأعلى تأثيراً لديك. واضح. قابل للتطبيق. فوري.'
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* CTA Button */}
         <Button 
           onClick={() => setPhase('questions')}
@@ -462,8 +531,16 @@ export default function IdentityQuizPage() {
           <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
         </Button>
 
+        {/* Privacy Note */}
+        <p className="text-slate-500 text-xs mt-6 max-w-md mx-auto">
+          {getText(
+            'No email required at any point. Your answers are private and not stored.',
+            'لا بريد إلكتروني مطلوب في أي مرحلة. إجاباتك خاصة ولا تُحفظ.'
+          )}
+        </p>
+
         {/* Trust Indicators */}
-        <div className="flex flex-wrap justify-center gap-6 mt-8 text-sm text-slate-400">
+        <div className="flex flex-wrap justify-center gap-6 mt-6 text-sm text-slate-400">
           <div className="flex items-center gap-2">
             <Lock className="h-4 w-4 text-[#3DD4B0]" />
             <span>{getText('100% Private', 'خاص 100%')}</span>
