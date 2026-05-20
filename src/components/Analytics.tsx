@@ -3,11 +3,23 @@
 import Script from 'next/script';
 import { useEffect, useCallback, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { GA_MEASUREMENT_ID, grantConsent, hasConsent, trackPageView, initScrollDepthTracking } from '@/lib/analytics';
+import {
+  GA_MEASUREMENT_ID,
+  GOOGLE_TAG_ID,
+  CONTENTSQUARE_ID,
+  HOTJAR_ID,
+  grantConsent,
+  hasConsent,
+  trackPageView,
+  initScrollDepthTracking,
+} from '@/lib/analytics';
 
 /**
- * Inner component that uses useSearchParams
+ * Google Analytics 4 + GT + Contentsquare + Hotjar Component
+ * Only loads analytics scripts after user consent (GDPR compliant)
+ * Privacy-first approach
  */
+
 function AnalyticsInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -22,7 +34,6 @@ function AnalyticsInner() {
 
   useEffect(() => {
     handleRouteChange();
-    // Initialize scroll depth tracking on route change
     initScrollDepthTracking();
   }, [handleRouteChange]);
 
@@ -33,24 +44,21 @@ function AnalyticsInner() {
         grantConsent();
       }
     };
-
     window.addEventListener('consent-change', handleConsentChange as EventListener);
     return () => {
       window.removeEventListener('consent-change', handleConsentChange as EventListener);
     };
   }, []);
 
-  // Don't render if no GA ID configured
+  // If no GA ID configured, don't render anything
   if (!GA_MEASUREMENT_ID) {
     return null;
   }
 
-  // Don't render scripts until consent is given
-  // This is a privacy-first approach
   const consentGiven = hasConsent();
 
+  // Before consent: only set default consent mode (GDPR requirement)
   if (!consentGiven) {
-    // Render consent initialization script only
     return (
       <Script
         id="ga-consent-init"
@@ -70,12 +78,14 @@ function AnalyticsInner() {
     );
   }
 
-  // User has consented - load full GA
+  // After consent: load GA4 + GT + Contentsquare + Hotjar
+  const gtagLoaderId = GOOGLE_TAG_ID || GA_MEASUREMENT_ID;
+
   return (
     <>
-      {/* Google tag (gtag.js) */}
+      {/* ===== Google Analytics 4 + Google Tag ===== */}
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtagLoaderId}`}
         strategy="afterInteractive"
       />
       <Script
@@ -86,28 +96,59 @@ function AnalyticsInner() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            
+
             // Grant consent since user has accepted
             gtag('consent', 'update', {
               'analytics_storage': 'granted',
               'ad_storage': 'denied'
             });
-            
+
+            // Configure GA4 measurement
             gtag('config', '${GA_MEASUREMENT_ID}', {
               page_path: window.location.pathname,
               send_page_view: true
             });
+
+            // Configure Google Tag (GT-xxxxx) if available
+            ${GOOGLE_TAG_ID ? `gtag('config', '${GOOGLE_TAG_ID}');` : ''}
           `,
         }}
       />
+
+      {/* ===== Contentsquare UX Analytics ===== */}
+      ${CONTENTSQUARE_ID ? `
+      <Script
+        id="contentsquare-init"
+        strategy="afterInteractive"
+        src={\`https://t.contentsquare.net/uxa/${CONTENTSQUARE_ID}.js\`}
+      />
+      ` : ''}
+
+      {/* ===== Hotjar Heatmaps & Recordings ===== */}
+      ${HOTJAR_ID ? `
+      <Script
+        id="hotjar-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: \`
+            (function(h,o,t,j,a,r){
+              h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+              h._hjSettings={hjid:'${HOTJAR_ID}',hjsv:6};
+              a=o.getElementsByTagName('head')[0];
+              r=o.createElement('script');r.async=1;
+              r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+              a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+          \`,
+        }}
+      />
+      ` : ''}
     </>
   );
 }
 
 /**
- * Google Analytics 4 Component
- * Only loads analytics scripts after user consent
- * GDPR compliant with privacy-first approach
+ * Main Analytics Component with Suspense boundary
  */
 export function Analytics() {
   return (
@@ -119,7 +160,6 @@ export function Analytics() {
 
 /**
  * Hook to track page views manually
- * Use this for SPAs or custom page tracking
  */
 function usePageTrackingInner() {
   const pathname = usePathname();
@@ -134,7 +174,6 @@ function usePageTrackingInner() {
 }
 
 export function usePageTracking() {
-  // This hook should be used inside a Suspense boundary
   return usePageTrackingInner();
 }
 

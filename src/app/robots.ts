@@ -7,9 +7,23 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/auth/', '/admin/', '/cart/', '/checkout/'],
+        disallow: ['/api/', '/auth/', '/admin/', '/cart/', '/checkout/', '/account/', '/search/'],
+        crawlDelay: 1,
+      },
+      {
+        userAgent: 'GPTBot',
+        disallow: ['/api/', '/admin/'],
+      },
+      {
+        userAgent: 'Google-Extended',
+        disallow: ['/api/', '/admin/'],
+      },
+      {
+        userAgent: 'CCBot',
+        disallow: ['/api/', '/admin/'],
       },
     ],
     sitemap: `${SEO_SITE_CONFIG.url}/sitemap.xml`,
+    host: SEO_SITE_CONFIG.url,
   };
 }

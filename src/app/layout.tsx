@@ -165,7 +165,7 @@ export const metadata: Metadata = {
     address: false,
   },
   
-  // Other SEO
+  // Other SEO - Modern best practices
   other: {
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",
@@ -181,6 +181,17 @@ export const metadata: Metadata = {
     "DC.language": "en, ar",
     "msapplication-TileColor": "#0F1C2E",
     "msapplication-config": "/browserconfig.xml",
+    "theme-color": "#0F1C2E",
+    "color-scheme": "light",
+    "referrer": "origin-when-cross-origin",
+  },
+  
+  // App Links for deep linking
+  appLinks: {
+    web: {
+      url: SEO_SITE_CONFIG.url,
+      should_fallback: true,
+    },
   },
 };
 
@@ -202,6 +213,9 @@ export default async function RootLayout({
         {/* DNS prefetch for external APIs */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://t.contentsquare.net" />
+        <link rel="dns-prefetch" href="https://static.hotjar.com" />
+        <link rel="preconnect" href="https://t.contentsquare.net" />
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}

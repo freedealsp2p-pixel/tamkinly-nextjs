@@ -6,13 +6,24 @@
 // GA Measurement ID from environment
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+// Google Tag ID (GT-xxxxx) for enhanced measurement
+export const GOOGLE_TAG_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
+
+// Contentsquare Tag ID for UX analytics
+export const CONTENTSQUARE_ID = process.env.NEXT_PUBLIC_CONTENTSQUARE_ID;
+
+// Hotjar Site ID for heatmaps & recordings
+export const HOTJAR_ID = process.env.NEXT_PUBLIC_HOTJAR_ID;
+
 // Window interface extension for gtag
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
+    _csq?: unknown[];
   }
 }
+
 
 // Check if GA is available and consent given
 const isGAAvailable = (): boolean => {
