@@ -85,7 +85,9 @@
     "trustInstant": "Instant Results",
     "satisfaction": "User Satisfaction",
     "ctaProducts": "Explore Products",
-    "ctaAssessment": "Start Free Assessment"
+    "ctaAssessment": "Start Free Assessment",
+    "accuracyTooltip": "Based on self-assessment by 2,847+ users after 30 days of using Tamkinly tools",
+    "accuracyNote": "Based on self-assessment by 2,847+ users after 30 days"
   },
   "discover": {
     "badge": "What You'll Discover",

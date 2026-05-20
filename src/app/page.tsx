@@ -109,9 +109,12 @@ function HeroSection() {
                   <Star key={i} className="h-5 w-5 fill-[#3DD4B0] text-[#3DD4B0]" />
                 ))}
                 <span className="text-white text-sm ml-2">
-                  <span className="font-bold">94%</span> {t("hero.accuracy")}
+                  <span className="font-bold" title={t("hero.accuracyTooltip")}>94%</span> {t("hero.accuracy")}
                 </span>
               </div>
+              <p className="text-slate-400/80 text-[11px] text-center lg:text-left max-w-md mt-2">
+                {t("hero.accuracyNote")}
+              </p>
             </div>
             
             {/* Primary CTA - Two side-by-side buttons */}
