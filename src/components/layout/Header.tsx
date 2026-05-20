@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu, ShoppingCart, Search, Globe, Loader2, User, LogIn } from "lucide-react";
+import { NotificationBell } from "@/components/NotificationBell";
 
 // Search pages data - comprehensive list for better search
 const searchablePages = [
@@ -441,6 +442,9 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
             {/* Language Switcher */}
             <LanguageSwitcher />
+            
+            {/* Notifications */}
+            <NotificationBell />
             
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative text-slate-600 hover:text-primary">

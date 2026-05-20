@@ -34,6 +34,9 @@ import {
   Footprints,
   PenLine,
   Scale,
+  Gift,
+  Copy,
+  Check,
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
@@ -148,6 +151,8 @@ export default function DashboardPage() {
   const [codeLoading, setCodeLoading] = useState(false);
   const [codeError, setCodeError] = useState<string | null>(null);
   const [codeSuccess, setCodeSuccess] = useState<string | null>(null);
+  const [referralCopied, setReferralCopied] = useState(false);
+  const [referralInfo, setReferralInfo] = useState<{ code: string; totalReferrals: number; currentTier: string; nextTierAt: number | null } | null>(null);
 
   useEffect(() => {
     // Load quiz results from localStorage (works for both auth and anon users)
@@ -204,7 +209,42 @@ export default function DashboardPage() {
     } finally {
       setIsLoading(false);
     }
+
+    // Fetch referral data
+    try {
+      const refRes = await fetch('/api/referral');
+      if (refRes.ok) {
+        const refData = await refRes.json();
+        if (refData.code) {
+          setReferralInfo({
+            code: refData.code,
+            totalReferrals: refData.totalReferrals || 0,
+            currentTier: refData.currentTier === 3 ? 'PREMIUM_BUNDLE' : refData.currentTier === 2 ? 'BASIC_ACCESS' : 'TRIAL_EXTENSION',
+            nextTierAt: refData.nextTierAt,
+          });
+        }
+      }
+    } catch {}
   };
+
+  // Fetch referral data
+  useEffect(() => {
+    if (status === 'authenticated') {
+      fetch('/api/referral')
+        .then(res => res.json())
+        .then(data => {
+          if (data.code) {
+            setReferralInfo({
+              code: data.code,
+              totalReferrals: data.totalReferrals || 0,
+              currentTier: data.currentTier || 'TRIAL_EXTENSION',
+              nextTierAt: data.nextTierAt || 4,
+            });
+          }
+        })
+        .catch(() => {});
+    }
+  }, [status]);
 
   const handleActivateCode = async () => {
     if (!accessCode.trim()) return;
@@ -725,6 +765,7 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
+
             {/* App Stats Summary */}
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
@@ -766,6 +807,71 @@ export default function DashboardPage() {
                     </Button>
                   </Link>
                 </div>
+              </CardContent>
+            </Card>
+
+            {/* Referral Program Widget */}
+            <Card className="border-0 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-[#0F1C2E]">{t('referralTitle')}</h3>
+                  <Gift className="h-5 w-5 text-[#3DD4B0]" />
+                </div>
+                {status === 'authenticated' && referralInfo ? (
+                  <>
+                    <div className="bg-[#0F1C2E] rounded-lg p-3 mb-3 text-center">
+                      <span className="font-mono text-lg text-[#3DD4B0] tracking-widest">{referralInfo.code}</span>
+                    </div>
+                    <div className="flex gap-2 mb-3">
+                      <Button
+                        onClick={() => {
+                          navigator.clipboard.writeText('https://tamkinly.com/ref/' + referralInfo.code);
+                          setReferralCopied(true);
+                          setTimeout(() => setReferralCopied(false), 2000);
+                        }}
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-[#1F6F78] text-[#1F6F78] text-xs"
+                      >
+                        {referralCopied ? <Check className="w-3 h-3 mr-1" /> : <Copy className="w-3 h-3 mr-1" />}
+                        {referralCopied ? 'Copied!' : t('yourCode')}
+                      </Button>
+                    </div>
+                    <div className="flex items-center justify-between text-sm mb-2">
+                      <span className="text-slate-500">{t('referralCount')}</span>
+                      <span className="font-semibold text-[#0F1C2E]">{referralInfo.totalReferrals}</span>
+                    </div>
+                    {referralInfo.nextTierAt && (
+                      <div className="mb-3">
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-slate-500">{t('currentTier')}</span>
+                          <span className="text-[#1F6F78]">
+                            {referralInfo.currentTier === 'PREMIUM_BUNDLE' ? 'Premium' :
+                             referralInfo.currentTier === 'BASIC_ACCESS' ? 'Basic' : 'Trial+'}
+                          </span>
+                        </div>
+                        <Progress value={Math.min(100, (referralInfo.totalReferrals / referralInfo.nextTierAt) * 100)} className="h-1.5" />
+                      </div>
+                    )}
+                    <Link href="/referral">
+                      <Button variant="link" className="w-full text-[#1F6F78] text-sm">
+                        {t('viewReferralPage')}
+                        <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                      </Button>
+                    </Link>
+                  </>
+                ) : (
+                  <div className="text-center py-4">
+                    <p className="text-sm text-slate-500 mb-3">
+                      {locale === 'ar' ? 'سجل الدخول للوصول إلى برنامج الإحالة' : 'Sign in to access the referral program'}
+                    </p>
+                    <Link href="/auth/signin?callbackUrl=/dashboard">
+                      <Button size="sm" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
+                        {locale === 'ar' ? 'تسجيل الدخول' : 'Sign In'}
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </CardContent>
             </Card>
 

@@ -47,6 +47,7 @@ model User {
 
   referrals    Referral[]  @relation("ReferrerUser")
   referredBy   Referral[]  @relation("ReferredUser")
+  notifications Notification[]
 }
 
 enum UserRole {
@@ -1255,15 +1256,36 @@ model TransformationJourney {
 
 // Referral System
 model Referral {
-  id          String   @id @default(cuid())
-  code        String   @unique
-  referrerId  String
-  referrer    User     @relation("ReferrerUser", fields: [referrerId], references: [id])
-  referredEmail String?
-  referredId  String?
-  referred    User?    @relation("ReferredUser", fields: [referredId], references: [id])
-  reward      String?  // TRIAL, BASIC_DISCOUNT, etc
-  rewardClaimed Boolean @default(false)
-  createdAt   DateTime @default(now())
-  usedAt      DateTime?
+  id              String   @id @default(cuid())
+  code            String   @unique
+  referrerId      String
+  referrer        User     @relation("ReferrerUser", fields: [referrerId], references: [id])
+  referredEmail   String?
+  referredId      String?
+  referred        User?    @relation("ReferredUser", fields: [referredId], references: [id])
+  reward          String?  // TRIAL_EXTENSION, BASIC_ACCESS, PREMIUM_BUNDLE
+  rewardClaimed   Boolean  @default(false)
+  status          String   @default("PENDING") // PENDING, REGISTERED, COMPLETED
+  createdAt       DateTime @default(now())
+  usedAt          DateTime?
+
+  @@map("referrals")
 }
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String   // REFERRAL_SUCCESS, REWARD_EARNED, REWARD_TIER_UP, etc.
+  title     String
+  titleAr   String?
+  message   String
+  messageAr String?
+  read      Boolean  @default(false)
+  actionUrl String?
+  createdAt DateTime @default(now())
+  readAt    DateTime?
+
+  @@map("notifications")
+}
+

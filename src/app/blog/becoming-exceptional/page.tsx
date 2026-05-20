@@ -49,11 +49,11 @@ export default function BecomingExceptionalArticle() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
-              {getText("You cannot make yourself exceptional and live an ordinary life. To become exceptional, you must live an exceptional life. And an exceptional life doesn't always mean better—it means different enough that most people would reject it.", "لا يمكنك أن تصبح استثنائياً وتعيش حياة عادية. لتصبح استثنائياً، يجب أن تعيش حياة استثنائية. والحياة الاستثنائية لا تعني دائماً الأفضل — بل تعني مختلفة بما يكفي ليرفضها معظم الناس.")}
+              {getText("You cannot make yourself exceptional and live an ordinary life. To become exceptional, you must live an exceptional life. And an exceptional life doesn't always mean better—it means different enough that most people would reject it.", "لا يمكنك أن تصبح استثنائياً وتعيش حياة عادية. لتصبح استثنائياً، يجب أن تعيش حياة استثنائية. والحياة الاستثنائية لا تعني دائماً الأفضل — بل تعني مختلفة بما يكفي ليرفضها معظم الناس. وهذا ما عاشه ابن خلدون حين اختار العزلة لكتابة مقدمته الشهيرة، وما عاشه المتنبي حين رفض أن يكون شاعراً عادياً في بلاط خليفة، بل أراد أن يكون صوتاً استثنائياً يتجاوز عصره.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("And when that happens, you must reject them too. Oil and water don't mix. This is what it truly means to be exceptional: you must become the exception.", "وعندما يحدث ذلك، يجب أن ترفضهم أنت أيضاً. الزيت والماء لا يمتزجان. هذا هو المعنى الحقيقي للاستثنائية: يجب أن تصبح الاستثناء.")}
+              {getText("And when that happens, you must reject them too. Oil and water don't mix. This is what it truly means to be exceptional: you must become the exception.", "وعندما يحدث ذلك، يجب أن ترفضهم أنت أيضاً. الزيت والماء لا يمتزجان. هذا هو المعنى الحقيقي للاستثنائية: يجب أن تصبح الاستثناء. وكما قال أبو الطيب المتنبي: «ومن لا يطيق صعود الجبال يعش أبد الدهر بين الحفر» — فمن يرفض الصعود يبقى في القاع، ومن يختار الاستثنائية يدفع ثمنها غالياً لكنه يصل إلى القمة.")}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
@@ -61,7 +61,7 @@ export default function BecomingExceptionalArticle() {
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("Most people want the rewards of being exceptional without the costs. They want to stand out without standing apart. They want to be extraordinary while living ordinary.", "معظم الناس يريدون مكافآت الاستثنائية دون تكلفتها. يريدون البروز دون الانفصال. يريدون أن يكونوا استثنائيين بينما يعيشون حياة عادية.")}
+              {getText("Most people want the rewards of being exceptional without the costs. They want to stand out without standing apart. They want to be extraordinary while living ordinary.", "معظم الناس يريدون مكافآت الاستثنائية دون تكلفتها. يريدون البروز دون الانفصال. يريدون أن يكونوا استثنائيين بينما يعيشون حياة عادية. وهذا ما حذّر منه الفارابي حين ميّز بين «الإنسان الكامل» وبين العامة — فالإنسان الكامل لا يصل إلى كماله بالتمني، بل بالتفرد في الاختيار والصبر على مشقّة المخالفة.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -79,7 +79,7 @@ export default function BecomingExceptionalArticle() {
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("Excellence is confidence. And confidence is knowing who you are because you've put in the hours, the discipline, the sacrifice. It's not arrogance—it's earned certainty.", "التميّز هو الثقة. والثقة هي معرفة من أنت لأنك بذلت الساعات والانضباط والتضحية. ليس غطرسة — بل يقين مكتسب.")}
+              {getText("Excellence is confidence. And confidence is knowing who you are because you've put in the hours, the discipline, the sacrifice. It's not arrogance—it's earned certainty.", "التميّز هو الثقة. والثقة هي معرفة من أنت لأنك بذلت الساعات والانضباط والتضحية. ليس غطرسة — بل يقين مكتسب. والعرب قديماً كانوا يسمّون هذا «الحميّة» — ليس الحميّة الجاهلية العمياء، بل حميّة صاحب المروءة الذي يعرف قدر نفسه لأنه صقلها بالتجربة.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -128,7 +128,7 @@ export default function BecomingExceptionalArticle() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("This isn't about being better than others. It's about being fully yourself—so fully that you naturally stand out. The exceptional person isn't trying to be different. They're just being completely themselves.", "الأمر ليس حول أن تكون أفضل من الآخرين. بل حول أن تكون نفسك بالكامل — بشكل كامل لدرجة أنك تبرز بشكل طبيعي. الشخص الاستثنائي لا يحاول أن يكون مختلفاً. إنه ببساطة يكون نفسه بالكامل.")}
+              {getText("This isn't about being better than others. It's about being fully yourself—so fully that you naturally stand out. The exceptional person isn't trying to be different. They're just being completely themselves.", "الأمر ليس حول أن تكون أفضل من الآخرين. بل حول أن تكون نفسك بالكامل — بشكل كامل لدرجة أنك تبرز بشكل طبيعي. الشخص الاستثنائي لا يحاول أن يكون مختلفاً. إنه ببساطة يكون نفسه بالكامل. وكما جاء في الحكمة: «من عرف نفسه عرف ربّه» — فمن عرف ذاته الحقيقية وعاش بها بصدق، أصبح استثنائياً بدون أن يحاول.")}
             </p>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
@@ -147,7 +147,7 @@ export default function BecomingExceptionalArticle() {
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("Here's what no one tells you: becoming exceptional can be lonely. The path narrows as you climb. The people who understood you before may not understand you now.", "إليك ما لا يخبرك به أحد: أن تصبح استثنائياً قد يكون وحيداً. يضيق المسار كلما صعدت. الأشخاص الذين فهموك سابقاً قد لا يفهمونك الآن.")}
+              {getText("Here's what no one tells you: becoming exceptional can be lonely. The path narrows as you climb. The people who understood you before may not understand you now.", "إليك ما لا يخبرك به أحد: أن تصبح استثنائياً قد يكون وحيداً. يضيق المسار كلما صعدت. الأشخاص الذين فهموك سابقاً قد لا يفهمونك الآن. وقد عاش هذه الوحدة أعظم عقول الأمة — من ابن سينا الذي كتب الشفاء في عزلة، إلى ابن خلدون الذي نُفي مراراً قبل أن يُعترف بعبقريته.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -163,7 +163,7 @@ export default function BecomingExceptionalArticle() {
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("Ordinary will never build a legacy. Ever. The monuments, the movements, the transformations—they all come from people who refused to settle, who chose the exceptional path.", "العادي لن يبني إرثاً أبداً. النصب التذكارية والحركات والتحولات — كلها أتت من أشخاص رفضوا القبول بالأقل، اختاروا المسار الاستثنائي.")}
+              {getText("Ordinary will never build a legacy. Ever. The monuments, the movements, the transformations—they all come from people who refused to settle, who chose the exceptional path.", "العادي لن يبني إرثاً أبداً. النصب التذكارية والحركات والتحولات — كلها أتت من أشخاص رفضوا القبول بالأقل، اختاروا المسار الاستثنائي. والحضارة الإسلامية نفسها بُنيت على أيدي استثنائيين رفضوا العادي — من الخوارزمي الذي اخترع الجبر، إلى ابن النفيس الذي اكتشف الدورة الدموية الصغرى، لم يكن أحد منهم راضياً بأن يكون عادياً.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">

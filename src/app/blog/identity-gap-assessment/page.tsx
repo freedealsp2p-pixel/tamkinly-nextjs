@@ -45,7 +45,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText(
                 "The distance between your current self and your ideal self isn't just a philosophical concept—it's a measurable gap that research shows directly impacts your mental health, motivation, and life satisfaction.",
-                "المسافة بين ذاتك الحالية وذاتك المثالية ليست مجرد مفهوم فلسفي—إنها فجوة قابلة للقياس تُظهر الأبحاث أنها تؤثر مباشرة على صحتك النفسية ودافعك ورضاك عن الحياة."
+                "المسافة بين ذاتك الحالية وذاتك المثالية ليست مجرد مفهوم فلسفي—إنها فجوة قابلة للقياس تُظهر الأبحاث أنها تؤثر مباشرة على صحتك النفسية ودافعك ورضاك عن الحياة. وهذا المفهوم يتجلى بوضوح في الفكر العربي الإسلامي، حيث تحدّث ابن خلدون عن «العصبية» كقوة تجذب الإنسان نحو هويته الأصلية، وتحدّث الغزالي عن «المقامات» كمراحل للارتقاء الروحي — ففكرة الفجوة بين الحالي والمثالي ليست غريبة على تراثنا، بل هي جوهر الطريق إلى التحقق."
               )}
             </p>
 
@@ -63,7 +63,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Your identity gap represents the space between your actual self (who you currently are) and your ideal self (who you aspire to become). This isn't about self-criticism—it's about honest self-assessment. The research shows that acknowledging this gap is the first step toward closing it.",
-                "تمثل فجوة الهوية المسافة بين ذاتك الفعلية (من أنت حالياً) وذاتك المثالية (من تتطلع لأن تصبح). هذا ليس عن انتقاد الذات—بل عن التقييم الذاتي الصادق. تُظهر الأبحاث أن الاعتراف بهذه الفجوة هو الخطوة الأولى نحو إغلاقها."
+                "تمثل فجوة الهوية المسافة بين ذاتك الفعلية (من أنت حالياً) وذاتك المثالية (من تتطلع لأن تصبح). هذا ليس عن انتقاد الذات—بل عن التقييم الذاتي الصادق، تماماً كما قال الحسن البصري: «لا يُصلح آخر هذه الأمة إلا ما أصلح أولها» — أي أن معرفة أين تقف هي شرط التقدم. تُظهر الأبحاث أن الاعتراف بهذه الفجوة هو الخطوة الأولى نحو إغلاقها."
               )}
             </p>
 
@@ -104,7 +104,7 @@ export default function IdentityGapAssessmentArticle() {
                   <p className="text-sm text-slate-600">
                     {getText(
                       "Your ability to trust your own judgment and keep the promises you make to yourself. Research shows self-trust is foundational to identity coherence.",
-                      "قدرتك على الثقة بحكمك الخاص والوفاء بالوعود التي تقطعها لنفسك. تُظهر الأبحاث أن الثقة بالنفس هي أساس تماسك الهوية."
+                      "قدرتك على الثقة بحكمك الخاص والوفاء بالوعود التي تقطعها لنفسك. تُظهر الأبحاث أن الثقة بالنفس هي أساس تماسك الهوية. وفي التراث الإسلامي، يرتبط هذا المفهوم بـ«الأمانة مع النفس» — فمن لا يفي بما يعد به لنفسه يفقد الثقة بذاته، والثقة بالذات هي أول درجات التمكين."
                     )}
                   </p>
                 </CardContent>
@@ -146,7 +146,7 @@ export default function IdentityGapAssessmentArticle() {
                   <p className="text-sm text-slate-600">
                     {getText(
                       "Your ability to follow through on commitments regardless of motivation. Consistency builds identity evidence and reinforces neural pathways.",
-                      "قدرتك على الالتزام بالعهود بغض النظر عن الدافع. الاتساق يبني أدلة الهوية ويعزز المسارات العصبية."
+                      "قدرتك على الالتزام بالعهود بغض النظر عن الدافع. الاتساق يبني أدلة الهوية ويعزز المسارات العصبية. وكما قال علي بن أبي طالب رضي الله عنه: «لا تكن ممن يرجو الآخرة بغير عمل» — فالاتساق في العمل هو الجسر بين النية والتحقق، وبين الهوية المأمولة والهوية المتحققة."
                     )}
                   </p>
                 </CardContent>
@@ -167,7 +167,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "But here's the empowering insight: the research also found that awareness of the gap—consciously acknowledging it—was the first step toward reducing it. Those who understood their identity gaps were better positioned to take action.",
-                "لكن إليك البصيرة التمكينية: وجدت الأبحاث أيضاً أن الوعي بالفجوة—الاعتراف بها بوعي—كان الخطوة الأولى نحو تقليلها. كان الأشخاص الذين فهموا فجوات هويتهم في وضع أفضل لاتخاذ الإجراءات."
+                "لكن إليك البصيرة التمكينية: وجدت الأبحاث أيضاً أن الوعي بالفجوة—الاعتراف بها بوعي—كان الخطوة الأولى نحو تقليلها. كان الأشخاص الذين فهموا فجوات هويتهم في وضع أفضل لاتخاذ الإجراءات. وهذا يتوافق مع مبدأ «المحاسبة» في التراث الإسلامي — محاسبة النفس قبل أن تُحاسب، ومعرفة مواطن الضعف قبل أن تصبح هوة سحيقة. فالعلاج يبدأ بالتشخيص."
               )}
             </p>
 
