@@ -33,8 +33,8 @@ export function Footer() {
   const appsLinks = [
     { href: "/apps", label: t("allApps") },
     { href: "/apps/identity-gap-quiz", label: t("identityQuiz") },
-    { href: "/apps/habit-tracker", label: t("habitTracker") },
-    { href: "/apps/goal-system", label: t("goalSystem") },
+    { href: "/apps/identity-baseline", label: t("identityBaseline") },
+    { href: "/apps/values-clarification", label: t("valuesClarification") },
     { href: "/apps/ai-identity-coach", label: t("aiCoach") },
   ];
 

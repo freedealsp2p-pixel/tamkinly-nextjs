@@ -227,23 +227,23 @@ export function BlogArticleContentClient({ article }: { article: BlogArticle }) 
         {/* Article Navigation */}
         <ArticleNavigation currentSlug={article.slug} />
 
-        {/* CTA Section */}
+        {/* CTA Section with Quiz Link */}
         <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-                {getText('Start Your Transformation Journey', 'ابدأ رحلة تحولك')}
+                {getText('Does This Sound Like You?', 'هل هذا يصفك؟')}
               </h2>
               <p className="text-slate-300 mb-6">
                 {getText(
-                  'Get the tools and structure to apply these insights to your life.',
-                  'احصل على الأدوات والهيكل لتطبيق هذه الرؤى في حياتك.'
+                  'Take our free 3-minute Identity Gap Assessment and discover what is holding you back.',
+                  'خذ تقييم فجوة الهوية المجاني لـ 3 دقائق واكتشف ما يعيقك.'
                 )}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/apps">
+                <Link href="/quiz">
                   <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                    {getText('Try Free Apps', 'جرّب التطبيقات المجانية')}
+                    {getText('Start Free Assessment', 'ابدأ التقييم المجاني')}
                     <ArrowRight className={`${isAr ? 'mr-2 rotate-180' : 'ml-2'} h-5 w-5`} />
                   </Button>
                 </Link>

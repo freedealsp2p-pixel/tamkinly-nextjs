@@ -89,9 +89,9 @@
   },
   "discover": {
     "badge": "ما ستكتشفه",
-    "title": "5 أبعاد رئيسية لهويتك",
+    "title": "6 أبعاد رئيسية لهويتك",
     "titleHighlight": "الهوية",
-    "subtitle": "يقيس تقييمنا خمسة مجالات حاسمة تحدد قدرتك على إحداث تغيير دائم في حياتك.",
+    "subtitle": "يقيس تقييمنا ستة مجالات حاسمة تحدد قدرتك على إحداث تغيير دائم في حياتك.",
     "identityClarity": {
       "title": "درجة وضوح الهوية",
       "description": "ما مدى وضوحك حول من أنت ومن تريد أن تصبح؟"
@@ -111,6 +111,10 @@
     "progressMomentum": {
       "title": "زخم التقدم",
       "description": "ما مدى ثباتك في الالتزام بأهدافك؟"
+    },
+    "lifeAlignment": {
+      "title": "التوافق الحياتي",
+      "description": "ما مدى توافق أفعالك اليومية مع الشخص الذي تريد أن تصبحه؟"
     }
   },
   "howItWorks": {
@@ -341,7 +345,9 @@
     "socialInstagram": "إنستغرام",
     "socialLinkedin": "لينكدإن",
     "socialYoutube": "يوتيوب",
-    "socialEmail": "البريد الإلكتروني"
+    "socialEmail": "البريد الإلكتروني",
+    "identityBaseline": "خط الأساس للهوية",
+    "valuesClarification": "توضيح القيم"
   },
   "search": {
     "identityQuiz": "اختبار فجوة الهوية",

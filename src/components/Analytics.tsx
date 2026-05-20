@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import { useEffect, useCallback, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { GA_MEASUREMENT_ID, grantConsent, hasConsent, trackPageView } from '@/lib/analytics';
+import { GA_MEASUREMENT_ID, grantConsent, hasConsent, trackPageView, initScrollDepthTracking } from '@/lib/analytics';
 
 /**
  * Inner component that uses useSearchParams
@@ -22,6 +22,8 @@ function AnalyticsInner() {
 
   useEffect(() => {
     handleRouteChange();
+    // Initialize scroll depth tracking on route change
+    initScrollDepthTracking();
   }, [handleRouteChange]);
 
   // Listen for consent changes

@@ -89,9 +89,9 @@
   },
   "discover": {
     "badge": "What You'll Discover",
-    "title": "5 Key Dimensions of Your ",
+    "title": "6 Key Dimensions of Your ",
     "titleHighlight": "Identity",
-    "subtitle": "Our assessment measures five critical areas that determine your ability to create lasting change in your life.",
+    "subtitle": "Our assessment measures six critical areas that determine your ability to create lasting change in your life.",
     "identityClarity": {
       "title": "Identity Clarity Score",
       "description": "How clear are you about who you are and who you want to become?"
@@ -111,6 +111,10 @@
     "progressMomentum": {
       "title": "Progress Momentum",
       "description": "How consistently do you follow through on your goals?"
+    },
+    "lifeAlignment": {
+      "title": "Life Alignment",
+      "description": "How consistently do your daily actions match the person you want to become?"
     }
   },
   "howItWorks": {
@@ -341,7 +345,9 @@
     "socialInstagram": "Instagram",
     "socialLinkedin": "LinkedIn",
     "socialYoutube": "YouTube",
-    "socialEmail": "Email"
+    "socialEmail": "Email",
+    "identityBaseline": "Identity Baseline",
+    "valuesClarification": "Values Clarification"
   },
   "search": {
     "identityQuiz": "Identity Gap Quiz",

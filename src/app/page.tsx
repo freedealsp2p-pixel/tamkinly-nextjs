@@ -227,6 +227,12 @@ function DiscoverSection() {
       titleKey: "discover.progressMomentum.title",
       descKey: "discover.progressMomentum.description",
       color: "#FFB74D"
+    },
+    {
+      icon: Target,
+      titleKey: "discover.lifeAlignment.title",
+      descKey: "discover.lifeAlignment.description",
+      color: "#9333EA"
     }
   ];
 
@@ -246,7 +252,7 @@ function DiscoverSection() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {discoveries.map((item, index) => (
             <Card 
               key={index} 
@@ -767,7 +773,7 @@ function SelfIdentificationSection() {
 
 function DiscoverSectionLazy() {
   return (
-    <Suspense fallback={<div className="py-20 lg:py-28 bg-[#F6F8FA]"><div className="container mx-auto px-4"><div className="animate-pulse space-y-6 max-w-3xl mx-auto"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" /><div className="h-12 bg-slate-200 rounded w-2/3 mx-auto" /><div className="h-4 bg-slate-200 rounded w-full mx-auto" /></div><div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mt-12">{[...Array(5)].map((_, i) => <div key={i} className="h-48 bg-white rounded-xl shadow-sm" />)}</div></div></div>}>
+    <Suspense fallback={<div className="py-20 lg:py-28 bg-[#F6F8FA]"><div className="container mx-auto px-4"><div className="animate-pulse space-y-6 max-w-3xl mx-auto"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" /><div className="h-12 bg-slate-200 rounded w-2/3 mx-auto" /><div className="h-4 bg-slate-200 rounded w-full mx-auto" /></div><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">{[...Array(6)].map((_, i) => <div key={i} className="h-48 bg-white rounded-xl shadow-sm" />)}</div></div></div>}>
       <DiscoverSection />
     </Suspense>
   );

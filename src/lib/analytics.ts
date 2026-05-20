@@ -446,6 +446,31 @@ export const trackDownload = (
   });
 };
 
+// Scroll depth tracking
+export const initScrollDepthTracking = (): void => {
+  if (typeof window === 'undefined') return;
+  
+  const thresholds = [25, 50, 75, 90];
+  const tracked = new Set<number>();
+  
+  const handleScroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.round((window.scrollY / scrollHeight) * 100);
+    
+    thresholds.forEach(threshold => {
+      if (scrollPercent >= threshold && !tracked.has(threshold)) {
+        tracked.add(threshold);
+        trackEvent('scroll', {
+          percent_scrolled: threshold,
+          page_path: window.location.pathname,
+        });
+      }
+    });
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+};
+
 // Export all tracking functions as a single object for convenience
 export const analytics = {
   initialize: initializeGA,

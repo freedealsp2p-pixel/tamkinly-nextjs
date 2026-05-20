@@ -76,7 +76,7 @@ const appsData = [
   { slug: 'evidence-tracking', icon: BarChart3, color: '#FFB74D', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Daily', comingSoon: false, appKey: 'evidenceTracking' },
   { slug: 'progress-dashboard', icon: BarChart3, color: '#8A94A6', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Always', comingSoon: false, appKey: 'progressDashboard' },
   { slug: 'emotion-regulation', icon: Heart, color: '#E57373', tier: 'BUNDLE', featured: false, freeApp: false, duration: '10 min', comingSoon: false, appKey: 'emotionRegulation' },
-  { slug: 'ai-identity-coach', icon: Sparkles, color: '#3DD4B0', tier: 'BUNDLE', featured: true, freeApp: false, duration: 'Unlimited', comingSoon: true, appKey: 'aiIdentityCoach' },
+  { slug: 'ai-identity-coach', icon: Sparkles, color: '#3DD4B0', tier: 'BUNDLE', featured: true, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'aiIdentityCoach' },
   { slug: 'community-access', icon: Users, color: '#1F6F78', tier: 'BUNDLE', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'communityAccess' },
   { slug: 'priority-support', icon: Headphones, color: '#0F1C2E', tier: 'BUNDLE', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'prioritySupport' },
 ];
