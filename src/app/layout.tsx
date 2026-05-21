@@ -106,11 +106,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.webp",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `${SEO_SITE_CONFIG.name} - Identity Transformation Tools`,
-        type: "image/webp",
+        alt: `${SEO_SITE_CONFIG.name} - Transform Your Identity`,
       },
       {
         url: "/og-image-square.webp",
@@ -122,14 +121,19 @@ export const metadata: Metadata = {
     ],
   },
   
-  // Twitter Card
+  // Twitter Card - using same dynamic OG image
   twitter: {
     card: "summary_large_image",
     site: SEO_SITE_CONFIG.twitterHandle,
     creator: SEO_SITE_CONFIG.twitterHandle,
     title: PAGE_METADATA.home.title,
     description: PAGE_METADATA.home.description,
-    images: ["/og-image.webp"],
+    images: [
+      {
+        url: "/opengraph-image",
+        alt: `${SEO_SITE_CONFIG.name} - Transform Your Identity`,
+      },
+    ],
   },
   
   // Robots configuration
