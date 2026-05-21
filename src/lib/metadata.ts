@@ -47,6 +47,7 @@ export const siteMetadata = {
 
 export function buildMetadata(page: keyof typeof siteMetadata): Metadata {
   const m = siteMetadata[page]
+  const imageUrl = 'https://tamkinly.com/opengraph-image'
   return {
     title: m.title,
     description: m.description,
@@ -54,11 +55,13 @@ export function buildMetadata(page: keyof typeof siteMetadata): Metadata {
     openGraph: {
       title: m.title,
       description: m.description,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: m.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: m.title,
       description: m.description,
+      images: [imageUrl],
     },
   }
 }

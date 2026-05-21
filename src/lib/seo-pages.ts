@@ -30,7 +30,7 @@ export const SEO_SITE_CONFIG = {
   name: 'Tamkinly',
   nameAr: 'تمكينلي',
   url: 'https://tamkinly.com',
-  defaultImage: '/og-image.webp',
+  defaultImage: '/opengraph-image',
   twitterHandle: '@tamkinly',
   author: 'Tamkinly',
 } as const;
