@@ -43,17 +43,17 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   home: {
     title: 'Tamkinly | Return to Your Center - Identity Transformation Tools',
     titleAr: 'تمكينلي | عد إلى مركزك - أدوات تحويل الهوية',
-    description: 'Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, habit formation, and personal development. Start your journey today.',
+    description: 'Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, identity recode, and personal development. Start your journey today.',
     descriptionAr: 'اكتشف فجوة هويتك مع تقييمنا المجاني في 3 دقائق. أدوات مبنية على الأدلة لتحويل الهوية وتكوين العادات والتطوير الشخصي. ابدأ رحلتك اليوم.',
     path: '/',
     keywords: [
       'identity transformation',
-      'self-development',
-      'habit tracker',
-      'personal growth',
-      'identity assessment',
+      'identity gap',
+      'identity recode',
+      'self-authorship',
+      'values clarification',
       'تحويل الهوية',
-      'التطوير الذاتي',
+      'فجوة الهوية',
       'تقييم الهوية',
     ],
   },
@@ -66,7 +66,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
     keywords: [
       'identity transformation pricing',
       'personal development products',
-      'habit tracker pricing',
+      'identity planner pricing',
       'digital planner',
       'أسعار تحويل الهوية',
       'أدوات التطوير الشخصي',
@@ -82,7 +82,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
     keywords: [
       'identity apps',
       'self-development tools',
-      'habit tracker app',
+      'identity baseline app',
       'AI coaching',
       'transformation tools',
       'تطبيقات الهوية',
@@ -139,7 +139,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   blog: {
     title: 'Blog | Research-Backed Insights',
     titleAr: 'المدونة | رؤى مبنية على الأبحاث - تمكينلي',
-    description: 'Research-backed insights, practical frameworks, and transformation tools. Articles on identity transformation, habit formation, and personal development.',
+    description: 'Research-backed insights, practical frameworks, and transformation tools. Articles on identity transformation, identity recode, and personal development.',
     descriptionAr: 'رؤى مبنية على الأبحاث، أطر عملية، وأدوات تحويل. مقالات عن تحويل الهوية، تكوين العادات، والتطوير الشخصي.',
     path: '/blog',
     keywords: [

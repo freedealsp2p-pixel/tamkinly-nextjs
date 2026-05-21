@@ -70,7 +70,7 @@ export const APP_PAGES: AppPage[] = [
     tier: 'FREE',
     category: 'Productivity',
     categoryAr: 'الإنتاجية',
-    keywords: ['habit tracker', 'habit tracking', 'daily habits', 'streak tracking', 'habit builder'],
+    keywords: ['identity-aligned habits', 'daily consistency', 'habit architecture', 'streak tracking', 'identity-based habits'],
   },
   {
     slug: 'goal-system',
@@ -184,9 +184,9 @@ export const APP_PAGES: AppPage[] = [
   },
   {
     slug: 'ai-identity-coach',
-    title: 'AI Identity Coach | 24/7 Personal Transformation Guide',
+    title: 'AI Identity Coach | Coming Soon',
     titleAr: 'مدرب الهوية بالذكاء الاصطناعي | دليل تحول شخصي على مدار الساعة',
-    description: 'AI-powered coaching for identity transformation. Personalized guidance for discovery, habits, and emotional regulation.',
+    description: 'The Tamkinly AI Identity Coach is coming Q3 2026. Built on neuroplasticity and self-authorship. Join the waitlist for early access.',
     descriptionAr: 'تدريب مدعوم بالذكاء الاصطناعي لتحويل الهوية. إرشاد شخصي للاكتشاف والعادات والتنظيم العاطفي.',
     tier: 'BUNDLE',
     category: 'AI Coaching',
@@ -292,7 +292,7 @@ export function generateAppPageMetadata(slug: string): Metadata {
     : `Available in ${app.tier} package.`;
   
   return {
-    title: `${app.title} | Tamkinly`,
+    title: app.title,
     description: `${app.description} ${tierDescription}`,
     keywords: app.keywords,
     

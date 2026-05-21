@@ -30,10 +30,9 @@ const searchablePages = [
   { titleKey: "navigation.blog", path: "/blog", keywords: ["blog", "articles", "posts", "news", "المدونة"] },
   // Popular Apps
   { titleKey: "search.identityQuiz", path: "/apps/identity-gap-quiz", keywords: ["identity", "quiz", "gap", "assessment", "هوية", "اختبار"] },
-  { titleKey: "search.habitTracker", path: "/apps/habit-tracker", keywords: ["habit", "tracker", "habits", "عادات", "متتبع"] },
-  { titleKey: "search.goalSystem", path: "/apps/goal-system", keywords: ["goal", "goals", "system", "أهداف", "نظام"] },
+  { titleKey: "search.dailyReflection", path: "/apps/daily-reflection", keywords: ["reflection", "daily", "journal", "تأمل", "يومي"] },
+  { titleKey: "search.identityRecode", path: "/apps/identity-recode-system", keywords: ["identity", "recode", "transformation", "هوية", "إعادة"] },
   { titleKey: "search.aiCoach", path: "/apps/ai-identity-coach", keywords: ["ai", "coach", "artificial", "intelligence", "ذكاء", "مدرب"] },
-  { titleKey: "search.dailyReflection", path: "/apps/daily-reflection", keywords: ["daily", "reflection", "journal", "يومي", "تأمل"] },
 ];
 
 // Custom hook to safely detect client-side mounting
