@@ -216,70 +216,7 @@ const quizQuestions: QuestionType[] = [
   }
 ];
 
-// Products data
-const products = [
-  {
-    id: 'trial',
-    name: '7-Day Identity Reset',
-    nameAr: 'إعادة ضبط الهوية لمدة 7 أيام',
-    price: '$7',
-    originalPrice: '$15',
-    description: 'A quick-start mini-guide to experience the Tamkinly methodology',
-    descriptionAr: 'دليل مصغر للبدء السريع لتجربة منهجية تمكينلي',
-    features: ['7-Day Guided Introduction', 'Daily Prompts Sample', 'Quick Assessment', 'PDF Download'],
-    featuresAr: ['مقدمة موجهة لـ 7 أيام', 'عينة من التوجيهات اليومية', 'تقييم سريع', 'تحميل PDF'],
-    bestFor: 'Curious explorers ready to test the waters',
-    bestForAr: 'المستكشفون الفضوليون الجاهزون للتجربة',
-    color: '#3DD4B0',
-    productUrl: '/products/trial'
-  },
-  {
-    id: 'planner',
-    name: 'Identity Recode Planner',
-    nameAr: 'مخطط إعادة صياغة الهوية',
-    price: '$17',
-    originalPrice: '$29',
-    description: 'The complete 30-day identity transformation system',
-    descriptionAr: 'نظام تحول الهوية الكامل لمدة 30 يوم',
-    features: ['Full 30-Day Program', 'Digital + Print Version', 'Daily Prompts', 'Evidence Tracking', 'Lifetime Updates'],
-    featuresAr: ['برنامج 30 يوم كامل', 'نسخة رقمية + مطبوعة', 'توجيهات يومية', 'تتبع الأدلة', 'تحديثات مدى الحياة'],
-    bestFor: 'Those ready for deep transformation',
-    bestForAr: 'الجاهزون لتحول عميق',
-    color: '#1F6F78',
-    popular: true,
-    productUrl: '/products/planner'
-  },
-  {
-    id: 'premium',
-    name: 'Premium Transformation',
-    nameAr: 'التحول المتميز',
-    price: '$27',
-    originalPrice: '$44',
-    description: 'Comprehensive transformation with advanced tools',
-    descriptionAr: 'تحول شامل مع أدوات متقدمة',
-    features: ['Everything in Planner', 'Identity Reset Checklist', 'Advanced Worksheets', 'Priority Support', 'Quick-start Guide'],
-    featuresAr: ['كل ما في المخطط', 'قائمة إعادة ضبط الهوية', 'أوراق عمل متقدمة', 'دعم ذو أولوية', 'دليل البدء السريع'],
-    bestFor: 'Committed individuals seeking complete transformation',
-    bestForAr: 'الأفراد الملتزمون بالتحول الكامل',
-    color: '#0F1C2E',
-    productUrl: '/products/premium'
-  },
-  {
-    id: 'bundle',
-    name: 'Complete Bundle',
-    nameAr: 'الباقة الكاملة',
-    price: '$47',
-    originalPrice: '$91',
-    description: 'The ultimate identity transformation experience',
-    descriptionAr: 'تجربة تحول الهوية المثالية',
-    features: ['All PDF Products', 'Interactive Apps Access', 'Executive Manual', 'Daily Planner App', 'Progress Dashboard', '1-on-1 Support'],
-    featuresAr: ['جميع منتجات PDF', 'وصول للتطبيقات التفاعلية', 'دليل تنفيذي', 'تطبيق المخطط اليومي', 'لوحة التقدم', 'دعم فردي'],
-    bestFor: 'Those who want the complete transformation experience',
-    bestForAr: 'من يريدون تجربة التحول الكاملة',
-    color: '#8A94A6',
-    productUrl: '/products/bundle'
-  }
-];
+// Products are defined in quiz-recommendations.ts (3-tier: BASIC $7, PREMIUM $17, MASTERY $27)
 
 // Main Quiz Component
 export default function IdentityQuizPage() {
@@ -337,24 +274,24 @@ export default function IdentityQuizPage() {
     const lowestScore = scores.sort((a, b) => a.score - b.score)[0];
 
     // Determine recommended product based on score
-    let recommendedProduct = 'planner';
+    let recommendedProduct = 'mastery';
     let personalizedMessage = '';
     let personalizedMessageAr = '';
 
     if (overallScore >= 70) {
-      recommendedProduct = 'premium';
+      recommendedProduct = 'mastery';
       personalizedMessage = "You have a strong foundation. The Premium Bundle will help you optimize and master your identity transformation with advanced tools and frameworks.";
       personalizedMessageAr = "لديك أساس قوي. ستساعدك الباقة المتميزة على تحسين وإتقان تحول هويتك مع أدوات وأطر متقدمة.";
     } else if (overallScore >= 50) {
-      recommendedProduct = 'planner';
+      recommendedProduct = 'mastery';
       personalizedMessage = "You're ready for transformation. The Identity Recode Planner is perfectly suited for your journey - it will guide you through a complete 30-day identity reconstruction.";
       personalizedMessageAr = "أنت جاهز للتحول. مخطط إعادة صياغة الهوية مناسب تماماً لرحلتك - سيوجهك خلال إعادة بناء هوية كاملة لمدة 30 يوم.";
     } else if (overallScore >= 35) {
-      recommendedProduct = 'planner';
+      recommendedProduct = 'mastery';
       personalizedMessage = "There's significant potential waiting to be unlocked. The Planner will help you rebuild your identity foundation from the ground up.";
       personalizedMessageAr = "هناك إمكانات كبيرة تنتظر الإطلاق. المخطط سيساعدك على إعادة بناء أساس هويتك من الصفر.";
     } else {
-      recommendedProduct = 'trial';
+      recommendedProduct = 'basic';
       personalizedMessage = "Your transformation journey starts with a single step. The 7-Day Reset is the perfect introduction to discover what's possible.";
       personalizedMessageAr = "رحلة تحولك تبدأ بخطوة واحدة. إعادة الضبط لمدة 7 أيام هي المقدمة المثالية لاكتشاف ما هو ممكن.";
     }

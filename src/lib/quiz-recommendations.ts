@@ -1,6 +1,7 @@
 /**
  * Quiz Dynamic Recommendation Engine
  * Provides personalized recommendations based on quiz score tiers
+ * 3-tier model: BASIC $7/mo, PREMIUM $17/mo, MASTERY $27/mo
  */
 
 export type RecommendationTier = 'beginner' | 'explorer' | 'builder' | 'master';
@@ -36,15 +37,15 @@ const recommendations: QuizRecommendation[] = [
       "Your assessment reveals that your identity foundation is still taking shape. This isn't a weakness — it's the most powerful place to start. People who begin here and follow a structured path see the most dramatic transformations. The gap between who you are and who you want to be is your greatest opportunity.",
     descriptionAr:
       'يكشف تقييمك أن أساس هويتك لا يزال يتشكل. هذا ليس ضعفاً — بل هو أقوى مكان للبدء. الأشخاص الذين يبدأون من هنا ويتبعون مساراً منظماً يشهدون أعمق التحولات. الفجوة بين من أنت ومن تريد أن تكون هي أعظم فرصتك.',
-    recommendedProduct: 'trial',
-    productNameEn: '7-Day Identity Reset',
-    productNameAr: 'إعادة ضبط الهوية لمدة 7 أيام',
+    recommendedProduct: 'basic',
+    productNameEn: 'Basic (Monthly)',
+    productNameAr: 'أساسي (شهري)',
     productReasonEn:
-      "The 7-Day Identity Reset is designed specifically for this stage — it gives you a structured, low-risk introduction to the Tamkinly methodology. You'll experience daily identity prompts, quick assessments, and a clear taste of what transformation feels like before committing to a deeper program.",
+      "The Basic plan is the perfect starting point for your identity journey. At just $7/month, you get a guided 7-day discipline introduction, daily identity prompts, evidence tracking basics, and a progress dashboard. It gives you a structured, low-risk entry into the Tamkinly methodology.",
     productReasonAr:
-      'إعادة ضبط الهوية لمدة 7 أيام مصممة خصيصاً لهذه المرحلة — تمنحك مقدمة منظمة ومنخفضة المخاطر لمنهجية تمكينلي. ستختبر توجيهات هوية يومية وتقييمات سريعة وذوقاً واضحاً لما يشبه التحول قبل الالتزام ببرنامج أعمق.',
-    ctaEn: 'Start Your 7-Day Reset — $7',
-    ctaAr: 'ابدأ إعادة الضبط لمدة 7 أيام — 7$',
+      'الخطة الأساسية هي نقطة البداية المثالية لرحلة هويتك. مقابل 7$ شهرياً فقط، تحصل على مقدمة انضباط موجهة لمدة 7 أيام ومطالبات هوية يومية وأساسيات تتبع الأدلة ولوحة تقدم. تمنحك دخولاً منظماً ومنخفض المخاطر لمنهجية تمكينلي.',
+    ctaEn: 'Start with Basic — $7/mo',
+    ctaAr: 'ابدأ بالخطة الأساسية — 7$/شهر',
     nextSteps: [
       {
         stepEn: 'Complete the Values Clarification Tool to discover what truly matters to you',
@@ -55,8 +56,8 @@ const recommendations: QuizRecommendation[] = [
         stepAr: 'اكتب 3 لحظات شعرت فيها بأنك أكثر نفسك — هذا يكشف مراسي هويتك',
       },
       {
-        stepEn: 'Start the 7-Day Identity Reset to build your first identity foundation',
-        stepAr: 'ابدأ إعادة ضبط الهوية لمدة 7 أيام لبناء أساس هويتك الأول',
+        stepEn: 'Start with the Basic plan to build your first identity foundation',
+        stepAr: 'ابدأ بالخطة الأساسية لبناء أساس هويتك الأول',
       },
     ],
     color: '#C97B7B',
@@ -69,15 +70,15 @@ const recommendations: QuizRecommendation[] = [
       "You have some awareness of who you are and what you want, but the picture isn't complete yet. You're in the exploration phase — you've started asking the right questions, and now you need a structured system to turn those questions into clarity. This is where real transformation begins.",
     descriptionAr:
       'لديك بعض الوعي بمن أنت وما تريد، لكن الصورة ليست مكتملة بعد. أنت في مرحلة الاستكشاف — بدأت طرح الأسئلة الصحيحة، والآن تحتاج نظاماً منظماً لتحويل تلك الأسئلة إلى وضوح. هنا يبدأ التحول الحقيقي.',
-    recommendedProduct: 'planner',
-    productNameEn: 'Identity Recode Planner',
-    productNameAr: 'مخطط إعادة صياغة الهوية',
+    recommendedProduct: 'premium',
+    productNameEn: 'Premium (Monthly)',
+    productNameAr: 'مميز (شهري)',
     productReasonEn:
-      "The Identity Recode Planner was built for explorers like you. Its 30-day structured program takes your emerging self-awareness and gives it a concrete framework. Each day builds on the last, guiding you from scattered insights to a coherent, actionable identity architecture.",
+      "The Premium plan was built for explorers like you. At $17/month, it includes everything in Basic plus advanced decision analysis, evidence tracking, and a progress dashboard. Its structured 30-day program takes your emerging self-awareness and gives it a concrete framework.",
     productReasonAr:
-      'مخطط إعادة صياغة الهوية بُني للمستكشفين مثلك. برنامجه المنظم لمدة 30 يوماً يأخذ وعيك الذاتي الناشئ ويمنحه إطاراً ملموساً. كل يوم يبني على السابق، موجداً إياك من رؤى متفرقة إلى بنية هوية متماسكة وقابلة للتنفيذ.',
-    ctaEn: 'Begin the 30-Day Protocol — $17',
-    ctaAr: 'ابدأ بروتوكول الـ 30 يوماً — 17$',
+      'الخطة المميزة بُنيت للمستكشفين مثلك. مقابل 17$ شهرياً، تتضمن كل ما في الأساسي بالإضافة إلى تحليل القرارات المتقدم وتتبع الأدلة ولوحة التقدم. برنامجها المنظم لمدة 30 يوماً يأخذ وعيك الذاتي الناشئ ويمنحه إطاراً ملموساً.',
+    ctaEn: 'Upgrade to Premium — $17/mo',
+    ctaAr: 'ارتقِ إلى المميز — 17$/شهر',
     nextSteps: [
       {
         stepEn: 'Use the Identity Baseline Worksheet to map where you are today',
@@ -88,8 +89,8 @@ const recommendations: QuizRecommendation[] = [
         stepAr: 'حدد أهم 3 فجوات هويتك من تفصيل أبعاد الاختبار أعلاه',
       },
       {
-        stepEn: 'Start the Identity Recode Planner for a guided 30-day transformation journey',
-        stepAr: 'ابدأ مخطط إعادة صياغة الهوية لرحلة تحول موجّهة لمدة 30 يوماً',
+        stepEn: 'Start the Premium plan for a guided 30-day transformation journey',
+        stepAr: 'ابدأ الخطة المميزة لرحلة تحول موجّهة لمدة 30 يوماً',
       },
     ],
     color: '#2A8A94',
@@ -103,14 +104,14 @@ const recommendations: QuizRecommendation[] = [
     descriptionAr:
       'مؤثر — لقد تجاوزت الوعي إلى البناء النشط. لديك أساس متين وأنت تحرز تقدماً حقيقياً. التحدي الآن هو الحفاظ على الزخم وتعميق العمل. البناؤون الذين يضيفون الأدوات المناسبة في هذه المرحلة يسرّعون نموهم بشكل كبير.',
     recommendedProduct: 'premium',
-    productNameEn: 'Premium Transformation',
-    productNameAr: 'التحول المتميز',
+    productNameEn: 'Premium (Monthly)',
+    productNameAr: 'مميز (شهري)',
     productReasonEn:
-      "As a builder, you need more than daily prompts — you need analytics and advanced frameworks. Premium Transformation adds decision pattern analysis, evidence tracking, and a progress dashboard so you can measure what's working and refine your approach with precision.",
+      "As a builder, you need more than daily prompts — you need analytics and advanced frameworks. The Premium plan at $17/month adds decision pattern analysis, evidence tracking, and a progress dashboard so you can measure what's working and refine your approach with precision.",
     productReasonAr:
-      'كباني، تحتاج أكثر من التوجيهات اليومية — تحتاج تحليلات وأطر متقدمة. التحول المتميز يضيف تحليل أنماط القرار وتتبع الأدلة ولوحة تقدم حتى تتمكن من قياس ما يعمل وتحسين نهجك بدقة.',
-    ctaEn: 'Go Deeper with Premium — $27',
-    ctaAr: 'اذهب أعمق مع المتميز — 27$',
+      'كباني، تحتاج أكثر من التوجيهات اليومية — تحتاج تحليلات وأطر متقدمة. الخطة المميزة مقابل 17$ شهرياً تضيف تحليل أنماط القرار وتتبع الأدلة ولوحة تقدم حتى تتمكن من قياس ما يعمل وتحسين نهجك بدقة.',
+    ctaEn: 'Go Deeper with Premium — $17/mo',
+    ctaAr: 'اذهب أعمق مع المميز — 17$/شهر',
     nextSteps: [
       {
         stepEn: 'Set up the Progress Dashboard to track your transformation metrics weekly',
@@ -121,8 +122,8 @@ const recommendations: QuizRecommendation[] = [
         stepAr: 'استخدم تحليل أنماط القرار لتحديد وتحسين عاداتك في اتخاذ القرارات',
       },
       {
-        stepEn: 'Upgrade to Premium Transformation for advanced tracking and optimization tools',
-        stepAr: 'ارتقِ إلى التحول المتميز لأدوات التتبع والتحسين المتقدمة',
+        stepEn: 'Upgrade to Premium for advanced tracking and optimization tools',
+        stepAr: 'ارتقِ إلى المميز لأدوات التتبع والتحسين المتقدمة',
       },
     ],
     color: '#1F6F78',
@@ -135,15 +136,15 @@ const recommendations: QuizRecommendation[] = [
       "Your identity alignment is exceptional. You've done the work — your values, environment, emotions, decisions, and momentum are all in sync. But mastery isn't a destination; it's a practice. The question now is: how do you sustain this and continue evolving? Masters who invest in refinement stay ahead.",
     descriptionAr:
       'توافق هويتك استثنائي. لقد قمت بالعمل — قيمك وبيئتك ومشاعرك وقراراتك وزخمك جميعها متزامنة. لكن الإتقان ليس وجهة؛ إنه ممارسة. السؤال الآن هو: كيف تحافظ على هذا وتستمر في التطور؟ الأساتذة الذين يستثمرون في التحسين يبقون في المقدمة.',
-    recommendedProduct: 'bundle',
+    recommendedProduct: 'mastery',
     productNameEn: 'Mastery (Monthly)',
-    productNameAr: 'الباقة الكاملة',
+    productNameAr: 'إتقان (شهري)',
     productReasonEn:
-      "As a master, you're ready for the full ecosystem. The Mastery subscription gives you all products, interactive apps, AI Identity Coach, and priority support — everything you need to sustain mastery and continue evolving. It's not about filling gaps anymore; it's about reaching your highest potential.",
+      "As a master, you're ready for the full ecosystem. The Mastery subscription at $27/month gives you all apps including AI Identity Coach, community access, priority support, and every tool in the platform. It's not about filling gaps anymore; it's about reaching your highest potential.",
     productReasonAr:
-      'كأستاذ، أنت جاهز للنظام البيئي الكامل. الباقة الكاملة تمنحك جميع المنتجات والتطبيقات التفاعلية ومدرب الهوية الذكي والدعم ذو الأولوية — كل ما تحتاجه للحفاظ على الإتقان ومواصلة التطور. لم يعد الأمر عن سد الفجوات؛ بل عن الوصول إلى أعلى إمكاناتك.',
-    ctaEn: 'Unlock the Full Ecosystem — $27/mo',
-    ctaAr: 'افتح النظام البيئي الكامل — 47$',
+      'كأستاذ، أنت جاهز للنظام البيئي الكامل. اشتراك الإتقان مقابل 27$ شهرياً يمنحك جميع التطبيقات بما في ذلك مدرب الهوية الذكي والوصول للمجتمع والدعم ذو الأولوية وكل أداة في المنصة. لم يعد الأمر عن سد الفجوات؛ بل عن الوصول إلى أعلى إمكاناتك.',
+    ctaEn: 'Unlock Mastery — $27/mo',
+    ctaAr: 'افتح الإتقان — 27$/شهر',
     nextSteps: [
       {
         stepEn: 'Schedule a monthly identity audit using the Executive Manual framework',
@@ -155,7 +156,7 @@ const recommendations: QuizRecommendation[] = [
       },
       {
         stepEn: 'Get the Mastery subscription for access to every tool and continuous evolution',
-        stepAr: 'احصل على الباقة الكاملة للإلغاء في أي وقت لكل أداة والتطور المستمر',
+        stepAr: 'احصل على اشتراك الإتقان للوصول لكل أداة والتطور المستمر',
       },
     ],
     color: '#3DD4B0',
@@ -169,15 +170,15 @@ const recommendations: QuizRecommendation[] = [
  */
 export function getRecommendation(score: number): QuizRecommendation {
   if (score <= 30) {
-    return recommendations[0]; // beginner
+    return recommendations[0]; // beginner → basic
   }
   if (score <= 60) {
-    return recommendations[1]; // explorer
+    return recommendations[1]; // explorer → premium
   }
   if (score <= 80) {
-    return recommendations[2]; // builder
+    return recommendations[2]; // builder → premium
   }
-  return recommendations[3]; // master
+  return recommendations[3]; // master → mastery
 }
 
 /**

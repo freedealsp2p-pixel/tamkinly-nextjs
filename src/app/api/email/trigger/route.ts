@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { triggerEmailSequence, EmailVariables } from '@/lib/email/service';
 
+// ============================================
+// AUTHORIZATION: Requires CRON_API_KEY for all requests
+// ============================================
+function isAuthorized(request: NextRequest): boolean {
+  const authHeader = request.headers.get('authorization');
+  const cronKey = process.env.CRON_API_KEY;
+  if (!cronKey || !authHeader) return false;
+  const providedKey = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
+  return providedKey === cronKey;
+}
+
 // Trigger an email sequence
 // This endpoint is used by the system to trigger email sequences
-// It should be protected in production
+// Protected with CRON_API_KEY
 
 // ============================================
 // VALID TRIGGERS
@@ -105,6 +116,11 @@ const TRIGGER_SEQUENCE_MAP: Record<string, string> = {
 
 export async function POST(request: NextRequest) {
   try {
+    // Require server authorization (cron jobs / internal services)
+    if (!isAuthorized(request)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { trigger, variables } = await request.json() as {
       trigger: string;
       variables: EmailVariables;
@@ -213,7 +229,12 @@ function validateTriggerVariables(
 // GET HANDLER - List valid triggers
 // ============================================
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // Require server authorization
+  if (!isAuthorized(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   return NextResponse.json({
     triggers: VALID_TRIGGERS,
     newTriggers: [
