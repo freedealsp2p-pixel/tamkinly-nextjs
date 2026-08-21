@@ -68,13 +68,13 @@ export default function GuidesPage() {
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0] border border-[#3DD4B0]/30 mb-6">
               <BookOpen className="w-4 h-4 mr-2" />
-              {t('badge')}
+              {t('heroBadge')}
             </Badge>
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              {t('title')}
+              {t('heroTitle')}
             </h1>
             <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-              {t('subtitle')}
+              {t('heroSubtitle')}
             </p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function GuidesPage() {
                         {formatReadTime(t(guide.readTimeKey), t)}
                       </div>
                       <span className="text-[#1F6F78] font-medium flex items-center gap-1 text-sm">
-                        {t('readMore')}
+                        {t('readGuide')}
                         <ArrowRight className="w-4 h-4" />
                       </span>
                     </div>
@@ -124,11 +124,13 @@ export default function GuidesPage() {
 
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-[#0F1C2E] mb-4">{t('ctaTitle')}</h2>
+          <h2 className="text-2xl font-bold text-[#0F1C2E] mb-4">
+              {t('ctaTitle')}{t('ctaTitleHighlight')}{t('ctaTitleEnd')}
+            </h2>
           <p className="text-slate-600 mb-8 max-w-xl mx-auto">{t('ctaSubtitle')}</p>
-          <Link href="/products/bundle">
+          <Link href="/products/mastery">
             <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold h-12 px-8">
-              {t('ctaButton')}
+              {t('viewProducts')}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>

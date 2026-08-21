@@ -50,10 +50,10 @@ interface DailyVote {
 const categories = [
   { id: 'health', name: 'Health & Fitness', color: '#3DD4B0' },
   { id: 'career', name: 'Career & Work', color: '#1F6F78' },
-  { id: 'relationships', name: 'Relationships', color: '#E57373' },
-  { id: 'growth', name: 'Personal Growth', color: '#64B5F6' },
-  { id: 'creativity', name: 'Creativity', color: '#BA68C8' },
-  { id: 'mindfulness', name: 'Mindfulness', color: '#FFB74D' }
+  { id: 'relationships', name: 'Relationships', color: '#C97B7B' },
+  { id: 'growth', name: 'Personal Growth', color: '#2A8A94' },
+  { id: 'creativity', name: 'Creativity', color: '#2A8A94' },
+  { id: 'mindfulness', name: 'Mindfulness', color: '#2A8A94' }
 ];
 
 const habitSizes = [
@@ -188,7 +188,7 @@ export default function IdentityBasedHabitsWorksheet() {
           </Card>
           <Card className="bg-white border border-gray-200">
             <CardContent className="p-4 text-center">
-              <Star className="w-6 h-6 text-[#FFB74D] mx-auto mb-2" />
+              <Star className="w-6 h-6 text-[#2A8A94] mx-auto mb-2" />
               <div className="text-2xl font-bold text-[#0F1C2E]">{identityStatements.length}</div>
               <div className="text-[#8A94A6] text-xs">Identity Statements</div>
             </CardContent>
@@ -473,7 +473,7 @@ export default function IdentityBasedHabitsWorksheet() {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleRemoveHabit(habit.id)}
-                        className="text-[#FC6D26] hover:text-[#E55A10]"
+                        className="text-[#1F6F78] hover:text-[#A86565]"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -550,7 +550,7 @@ export default function IdentityBasedHabitsWorksheet() {
         <Card className="border-0 shadow-lg">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-[#FFB74D] flex items-center justify-center text-[#0F1C2E]">
+              <div className="w-12 h-12 rounded-xl bg-[#2A8A94] flex items-center justify-center text-[#0F1C2E]">
                 <Vote className="w-6 h-6" />
               </div>
               <div>

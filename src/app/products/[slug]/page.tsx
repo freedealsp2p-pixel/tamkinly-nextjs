@@ -28,6 +28,17 @@ import { useTranslations, useLocale } from "@/components/providers/LocaleProvide
 import { addToCart } from "@/lib/cart-client";
 
 // Product configuration with prices and icons only (translatable content comes from translations)
+// Slug alias mapping: new slugs -> old translation keys
+const slugToTranslationKey: Record<string, string> = {
+  'basic': 'basic',
+  'premium': 'premium',
+  'mastery': 'mastery',
+  // Legacy slugs redirect to new translation keys
+  'trial': 'basic',
+  'planner': 'premium',
+  'bundle': 'mastery',
+};
+
 const productsConfig: Record<string, {
   id: string;
   slug: string;
@@ -37,40 +48,59 @@ const productsConfig: Record<string, {
   icon: React.ElementType;
   color: string;
 }> = {
-  'trial': {
-    id: "trial",
-    slug: "trial",
+  'basic': {
+    id: "basic",
+    slug: "basic",
     price: 7,
     comparePrice: 15,
     popular: false,
     icon: Clock,
-    color: "#64B5F6"
+    color: "#1F6F78"
   },
-  'planner': {
-    id: "planner",
-    slug: "planner",
+  'premium': {
+    id: "premium",
+    slug: "premium",
     price: 17,
     comparePrice: 29,
     popular: true,
     icon: Calendar,
     color: "#3DD4B0"
   },
-  'premium': {
-    id: "premium",
-    slug: "premium",
+  'mastery': {
+    id: "mastery",
+    slug: "mastery",
     price: 27,
-    comparePrice: 44,
-    popular: false,
-    icon: Award,
-    color: "#1F6F78"
-  },
-  'bundle': {
-    id: "bundle",
-    slug: "bundle",
-    price: 47,
     comparePrice: 91,
     popular: false,
-    icon: Monitor,
+    icon: Award,
+    color: "#0F1C2E"
+  },
+  // Legacy slugs - redirect to new ones
+  'trial': {
+    id: "basic",
+    slug: "basic",
+    price: 7,
+    comparePrice: 15,
+    popular: false,
+    icon: Clock,
+    color: "#1F6F78"
+  },
+  'planner': {
+    id: "premium",
+    slug: "premium",
+    price: 17,
+    comparePrice: 29,
+    popular: true,
+    icon: Calendar,
+    color: "#3DD4B0"
+  },
+  'bundle': {
+    id: "mastery",
+    slug: "mastery",
+    price: 27,
+    comparePrice: 91,
+    popular: false,
+    icon: Award,
     color: "#0F1C2E"
   }
 };
@@ -102,7 +132,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   }
   
   const Icon = config.icon;
-  const productKey = `productDetail.products.${slug}` as const;
+  const translationSlug = slugToTranslationKey[slug] || slug; const productKey = `productDetail.products.${translationSlug}` as const;
   
   // Get translated product data
   const name = t(`${productKey}.name`);
@@ -113,19 +143,19 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   
   // Get highlights based on product
   const getHighlights = () => {
-    if (slug === 'trial') {
+    if ((slug === 'trial' || slug === 'basic')) {
       return [
         t(`${productKey}.highlights.fullAccess`),
         t(`${productKey}.highlights.sevenDays`),
         t(`${productKey}.highlights.lowRisk`)
       ];
-    } else if (slug === 'planner') {
+    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
       return [
         t(`${productKey}.highlights.mostPopular`),
         t(`${productKey}.highlights.printIncluded`),
         t(`${productKey}.highlights.thirtyDays`)
       ];
-    } else if (slug === 'premium') {
+    } else if ((slug === 'premium' || slug === 'mastery')) {
       return [
         t(`${productKey}.highlights.bestValue`),
         t(`${productKey}.highlights.save`),
@@ -143,19 +173,19 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
   // Get benefits based on product
   const getBenefits = () => {
-    if (slug === 'trial') {
+    if ((slug === 'trial' || slug === 'basic')) {
       return [
         { title: t(`${productKey}.benefits.testBeforeCommit.title`), description: t(`${productKey}.benefits.testBeforeCommit.description`) },
         { title: t(`${productKey}.benefits.seeResults.title`), description: t(`${productKey}.benefits.seeResults.description`) },
         { title: t(`${productKey}.benefits.fullSystem.title`), description: t(`${productKey}.benefits.fullSystem.description`) }
       ];
-    } else if (slug === 'planner') {
+    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
       return [
         { title: t(`${productKey}.benefits.structured.title`), description: t(`${productKey}.benefits.structured.description`) },
         { title: t(`${productKey}.benefits.evidence.title`), description: t(`${productKey}.benefits.evidence.description`) },
         { title: t(`${productKey}.benefits.printDigital.title`), description: t(`${productKey}.benefits.printDigital.description`) }
       ];
-    } else if (slug === 'premium') {
+    } else if ((slug === 'premium' || slug === 'mastery')) {
       return [
         { title: t(`${productKey}.benefits.dataDriven.title`), description: t(`${productKey}.benefits.dataDriven.description`) },
         { title: t(`${productKey}.benefits.patterns.title`), description: t(`${productKey}.benefits.patterns.description`) },
@@ -191,21 +221,21 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
   // Get apps based on product
   const getApps = () => {
-    if (slug === 'trial') {
+    if ((slug === 'trial' || slug === 'basic')) {
       return [
         { name: t(`${productKey}.apps.trialPlanner.name`), description: t(`${productKey}.apps.trialPlanner.description`) },
         { name: t(`${productKey}.apps.identityGap.name`), description: t(`${productKey}.apps.identityGap.description`) },
         { name: t(`${productKey}.apps.values.name`), description: t(`${productKey}.apps.values.description`) },
         { name: t(`${productKey}.apps.reflection.name`), description: t(`${productKey}.apps.reflection.description`) }
       ];
-    } else if (slug === 'planner') {
+    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
       return [
         { name: t(`${productKey}.apps.manual.name`), description: t(`${productKey}.apps.manual.description`) },
         { name: t(`${productKey}.apps.dailyPlanner.name`), description: t(`${productKey}.apps.dailyPlanner.description`) },
         { name: t(`${productKey}.apps.baseline.name`), description: t(`${productKey}.apps.baseline.description`) },
         { name: t(`${productKey}.apps.audit.name`), description: t(`${productKey}.apps.audit.description`) }
       ];
-    } else if (slug === 'premium') {
+    } else if ((slug === 'premium' || slug === 'mastery')) {
       return [
         { name: t(`${productKey}.apps.allPlanner.name`), description: t(`${productKey}.apps.allPlanner.description`) },
         { name: t(`${productKey}.apps.decision.name`), description: t(`${productKey}.apps.decision.description`) },
@@ -225,7 +255,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
   // Get includes based on product
   const getIncludes = () => {
-    if (slug === 'trial') {
+    if ((slug === 'trial' || slug === 'basic')) {
       return [
         { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
         { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
@@ -233,7 +263,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.email`) },
         { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.durationValue`) }
       ];
-    } else if (slug === 'planner') {
+    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
       return [
         { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
         { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
@@ -241,7 +271,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.email`) },
         { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.freeForever`) }
       ];
-    } else if (slug === 'premium') {
+    } else if ((slug === 'premium' || slug === 'mastery')) {
       return [
         { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
         { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
@@ -257,7 +287,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.includes.pdfDownloads`), value: t(`${productKey}.includes.all`) },
         { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.priority`) },
         { name: t(`${productKey}.includes.aiCoach`), value: t(`${productKey}.includes.unlimited`) },
-        { name: t(`${productKey}.includes.community`), value: t(`${productKey}.includes.lifetimeAccess`) },
+        { name: t(`${productKey}.includes.community`), value: t(`${productKey}.includes.monthlyAccess`) },
         { name: t(`${productKey}.includes.liveQA`), value: t(`${productKey}.includes.monthly`) }
       ];
     }
@@ -266,21 +296,21 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
   // Get specifications based on product
   const getSpecifications = () => {
-    if (slug === 'trial') {
+    if ((slug === 'trial' || slug === 'basic')) {
       return [
         { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
         { name: t(`${productKey}.specs.device`), value: t(`${productKey}.specs.deviceValue`) },
         { name: t(`${productKey}.specs.languages`), value: t(`${productKey}.specs.languagesValue`) },
         { name: t(`${productKey}.specs.access`), value: t(`${productKey}.specs.accessValue`) }
       ];
-    } else if (slug === 'planner') {
+    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
       return [
         { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
         { name: t(`${productKey}.specs.pages`), value: t(`${productKey}.specs.pagesValue`) },
         { name: t(`${productKey}.specs.device`), value: t(`${productKey}.specs.deviceValue`) },
         { name: t(`${productKey}.specs.languages`), value: t(`${productKey}.specs.languagesValue`) }
       ];
-    } else if (slug === 'premium') {
+    } else if ((slug === 'premium' || slug === 'mastery')) {
       return [
         { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
         { name: t(`${productKey}.specs.analytics`), value: t(`${productKey}.specs.analyticsValue`) },
@@ -514,7 +544,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                   </div>
                   <div className="flex items-center gap-2">
                     <Zap className="w-4 h-4 text-[#3DD4B0]" />
-                    <span>{t('productDetail.lifetimeUpdates')}</span>
+                    <span>{t('productDetail.cancelAnytime')}</span>
                   </div>
                 </div>
               </div>
@@ -658,7 +688,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                             <span className="text-lg text-slate-400 line-through">${config.comparePrice}</span>
                           )}
                         </div>
-                        <p className="text-sm text-slate-500">{t('productDetail.oneTimePayment')} • {t('productDetail.lifetimeAccess')}</p>
+                        <p className="text-sm text-slate-500">{t('productDetail.monthlySubscription')} • {t('productDetail.cancelAnytime')}</p>
                       </div>
                       
                       <Button 

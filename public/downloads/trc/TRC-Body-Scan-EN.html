@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Scan Worksheet - TRC-BODY_SCAN</title>
+    <style>
+        :root {
+            --primary-teal: #1F6F78;
+            --dark-navy: #0F1C2E;
+            --soft-bg: #F8FAFC;
+            --border-gray: #CBD5E1;
+            --pale-teal-bg: #E6F4F5;
+            --pale-teal-border: #99D1D5;
+            --pale-amber-bg: #FFFBEB;
+            --pale-amber-border: #FCD34D;
+            --amber-text: #92400E;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #E2E8F0;
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Screen Preview Layout */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: #FFFFFF;
+            padding: 16mm 18mm 14mm 18mm;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+        }
+
+        /* Header & Footer Styling */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-teal);
+            margin-bottom: 14px;
+        }
+
+        .header-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark-navy);
+            letter-spacing: 0.3px;
+        }
+
+        .header-tool-id {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary-teal);
+            background-color: var(--pale-teal-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--pale-teal-border);
+        }
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-footer {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-gray);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .footer-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .footer-disclaimer {
+            font-size: 8.5px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.3;
+            font-style: italic;
+        }
+
+        /* Headings & Text Elements */
+        h1.doc-title {
+            font-size: 24px;
+            color: var(--dark-navy);
+            font-weight: 800;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        p.doc-subtitle {
+            font-size: 12.5px;
+            color: var(--primary-teal);
+            font-weight: 500;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+
+        h2.section-heading {
+            font-size: 15px;
+            color: var(--dark-navy);
+            font-weight: 700;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--primary-teal);
+            padding-left: 8px;
+        }
+
+        /* Alert & Callout Boxes */
+        .safety-alert-box {
+            background-color: var(--pale-teal-bg);
+            border: 1px solid var(--pale-teal-border);
+            border-left: 5px solid var(--primary-teal);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 11.5px;
+            color: var(--dark-navy);
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .amber-warning-box {
+            background-color: var(--pale-amber-bg);
+            border: 1px solid var(--pale-amber-border);
+            border-left: 5px solid #D97706;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 11.5px;
+            color: var(--amber-text);
+            line-height: 1.5;
+        }
+
+        /* Page 1 Specific Layout */
+        .info-card {
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .info-card p + p {
+            margin-top: 8px;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 2px;
+        }
+
+        .step-card {
+            display: flex;
+            align-items: center;
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 11px 14px;
+            gap: 14px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary-teal);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 12px;
+            color: var(--dark-navy);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* Page 2 Specific Layout: 9 Regions */
+        .writing-grid-9 {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .region-block {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .region-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .writing-box {
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            width: 100%;
+        }
+
+        .writing-box.region {
+            height: 42px;
+            background-image: repeating-linear-gradient(transparent, transparent 19px, #E2E8F0 20px);
+            background-position: 0 19px;
+        }
+
+        .writing-box.summary {
+            height: 48px;
+            background-image: repeating-linear-gradient(transparent, transparent 22px, #E2E8F0 23px);
+            background-position: 0 22px;
+        }
+
+        /* Page 3 Elements */
+        .bullet-list {
+            list-style-type: disc;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .bullet-list li {
+            font-size: 11.5px;
+            line-height: 1.4;
+        }
+
+        .contacts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 12px 14px;
+        }
+
+        .contact-line-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .contact-line {
+            height: 20px;
+            border-bottom: 1px solid var(--border-gray);
+            width: 100%;
+        }
+
+        .platform-ref {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .platform-ref strong {
+            color: var(--dark-navy);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .platform-ref a {
+            color: var(--primary-teal);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Print Media Query */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html, body {
+                background-color: #FFFFFF;
+                margin: 0;
+                padding: 0;
+                width: 210mm;
+            }
+
+            .page-container {
+                gap: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                max-height: 297mm;
+                padding: 16mm 18mm 14mm 18mm;
+                page-break-after: always;
+                break-after: page;
+                page-break-inside: avoid;
+            }
+
+            #page-3 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+
+    <!-- PAGE 1 -->
+    <div class="page" id="page-1">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-BODY_SCAN</span>
+        </header>
+
+        <main class="page-content">
+            <h1 class="doc-title">Body Scan</h1>
+            <p class="doc-subtitle">A gradual body check-in to notice tension and sensation in each region, increasing somatic awareness as a grounding tool.</p>
+
+            <div class="safety-alert-box">
+                Body awareness can be triggering for trauma survivors. If body memories arise or dissociation increases, stop and use 5-4-3-2-1 Grounding with external senses only.
+            </div>
+
+            <h2 class="section-heading">Starting Position</h2>
+            <div class="info-card">
+                <p>Choose a position that feels physically supported enough for you to notice your body without forcing yourself to relax.</p>
+                <p>You may sit with your feet supported or lie down if that feels comfortable and appropriate.</p>
+            </div>
+
+            <h2 class="section-heading">How to Practice</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Begin in your chosen position and orient yourself to the room.</div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Move your attention gradually from one body region to the next.</div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Notice sensations without needing to change them.</div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Record only what you notice in each region.</div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-text">If internal body awareness becomes distressing, stop and return to external sensory grounding.</div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-BODY_SCAN</span>
+                <span>Page 1 of 3</span>
+            </div>
+            <div class="footer-disclaimer">
+                This tool is supportive and educational. It does not replace individualized assessment, diagnosis, psychotherapy, medical care, or professional support.
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page" id="page-2">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-BODY_SCAN</span>
+        </header>
+
+        <main class="page-content">
+            <h2 class="section-heading">Body Region Scan</h2>
+            <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px;">
+                Use the spaces below to record what you notice in each region. There are no right or wrong sensations to report.
+            </p>
+
+            <div class="writing-grid-9">
+                <div class="region-block">
+                    <label class="region-label">1. Head and face — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">2. Neck and throat — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">3. Shoulders and upper back — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">4. Chest and ribcage — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">5. Arms and hands — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">6. Belly and lower back — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">7. Hips and pelvis — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">8. Legs and knees — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">9. Feet — what do I notice?</label>
+                    <div class="writing-box region"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-BODY_SCAN</span>
+                <span>Page 2 of 3</span>
+            </div>
+            <div class="footer-disclaimer">
+                This tool is supportive and educational. It does not replace individualized assessment, diagnosis, psychotherapy, medical care, or professional support.
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page" id="page-3">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-BODY_SCAN</span>
+        </header>
+
+        <main class="page-content">
+            <h2 class="section-heading">Sensation Summary</h2>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+                <div class="region-block">
+                    <label class="region-label">Overall sensation</label>
+                    <div class="writing-box summary"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">Most tense area</label>
+                    <div class="writing-box summary"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">Most relaxed area</label>
+                    <div class="writing-box summary"></div>
+                </div>
+
+                <div class="region-block">
+                    <label class="region-label">What gentle action might support me now?</label>
+                    <div class="writing-box summary"></div>
+                </div>
+            </div>
+
+            <h2 class="section-heading">When to Stop</h2>
+            <div class="amber-warning-box">
+                <ul class="bullet-list">
+                    <li>Dissociation increases</li>
+                    <li>Flashbacks are triggered</li>
+                    <li>Overwhelming body memories arise</li>
+                    <li>Panic escalates</li>
+                </ul>
+                <p style="margin-top: 8px; font-weight: 500;">
+                    If any of these occur, stop the body scan and return to external sensory grounding.
+                </p>
+            </div>
+
+            <h2 class="section-heading">Emergency Contacts</h2>
+            <div class="contacts-container">
+                <div class="contact-line-item">
+                    <span class="contact-label">My therapist / counselor:</span>
+                    <div class="contact-line"></div>
+                </div>
+                <div class="contact-line-item">
+                    <span class="contact-label">Mental-health support line:</span>
+                    <div class="contact-line"></div>
+                </div>
+                <div class="contact-line-item">
+                    <span class="contact-label">Other emergency/support number:</span>
+                    <div class="contact-line"></div>
+                </div>
+            </div>
+
+            <div class="platform-ref">
+                <strong>Tamkinly TRC Recovery Journey</strong>
+                <a href="https://tamkinly.com/recovery/trc">
+                    https://tamkinly.com/recovery/trc</a>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-BODY_SCAN</span>
+                <span>Page 3 of 3</span>
+            </div>
+            <div class="footer-disclaimer">
+                This tool is supportive and educational. It does not replace individualized assessment, diagnosis, psychotherapy, medical care, or professional support.
+            </div>
+        </footer>
+    </div>
+
+</div>
+
+</body>
+</html>

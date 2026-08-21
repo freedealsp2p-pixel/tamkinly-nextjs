@@ -25,7 +25,7 @@ const categoryNameMap: Record<string, string> = {
 const articleCategoryMap: Record<string, string> = {
   'FREE App': 'categoryFreeApp',
   'BASIC App': 'categoryBasicApp',
-  'BUNDLE App': 'categoryBundleApp',
+  'MASTERY App': 'categoryBundleApp',
   'Worksheet': 'categoryWorksheet',
   'Identity Shift': 'categoryIdentityShift',
   'Transformation': 'categoryTransformation',
@@ -110,7 +110,7 @@ const appArticles = [
     titleAr: "مدرب الهوية بالذكاء الاصطناعي: دليلك الشخصي للتحول",
     excerpt: "24/7 AI coaching powered by identity science. Personalized guidance for discovery, habits, self-authorship, and emotional regulation.",
     excerptAr: "تدريب على مدار الساعة مدعوم بالذكاء الاصطناعي وعلم الهوية. إرشاد شخصي للاكتشاف والعادات وتأليف الذات والتنظيم العاطفي.",
-    category: "BUNDLE App",
+    category: "MASTERY App",
     categoryAr: "تطبيق حزمة",
     readTime: "8 min read",
     featured: true,

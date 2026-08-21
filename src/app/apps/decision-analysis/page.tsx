@@ -58,11 +58,11 @@ export default function DecisionAnalysisPage() {
 
   const emotions = [
     { value: 'calm', labelEn: 'Calm', labelAr: 'هادئ', color: '#3DD4B0' },
-    { value: 'stressed', labelEn: 'Stressed', labelAr: 'متوتر', color: '#FFB74D' },
+    { value: 'stressed', labelEn: 'Stressed', labelAr: 'متوتر', color: '#2A8A94' },
     { value: 'tired', labelEn: 'Tired', labelAr: 'متعب', color: '#8A94A6' },
-    { value: 'anxious', labelEn: 'Anxious', labelAr: 'قلق', color: '#E57373' },
+    { value: 'anxious', labelEn: 'Anxious', labelAr: 'قلق', color: '#C97B7B' },
     { value: 'confident', labelEn: 'Confident', labelAr: 'واثق', color: '#1F6F78' },
-    { value: 'frustrated', labelEn: 'Frustrated', labelAr: 'محبط', color: '#BA68C8' },
+    { value: 'frustrated', labelEn: 'Frustrated', labelAr: 'محبط', color: '#2A8A94' },
   ];
 
   const patternOptions = [
@@ -229,7 +229,7 @@ export default function DecisionAnalysisPage() {
           </Card>
           <Card className="bg-white">
             <CardContent className="pt-6 text-center">
-              <div className="text-3xl font-bold text-[#FFB74D]">
+              <div className="text-3xl font-bold text-[#2A8A94]">
                 {Object.keys(stats.patterns).length}
               </div>
               <p className="text-xs text-[#8A94A6]">{getText('Patterns Identified', 'أنماط محددة')}</p>
@@ -309,8 +309,8 @@ export default function DecisionAnalysisPage() {
                   </Badge>
                   <Badge
                     variant={!formData.aligned ? 'default' : 'outline'}
-                    className={`cursor-pointer py-2 px-4 ${!formData.aligned ? 'bg-[#E57373]' : 'hover:bg-[#E57373]/10'}`}
-                    style={!formData.aligned ? { backgroundColor: '#E57373', color: 'white' } : { borderColor: '#E57373', color: '#E57373' }}
+                    className={`cursor-pointer py-2 px-4 ${!formData.aligned ? 'bg-[#C97B7B]' : 'hover:bg-[#C97B7B]/10'}`}
+                    style={!formData.aligned ? { backgroundColor: '#C97B7B', color: 'white' } : { borderColor: '#C97B7B', color: '#C97B7B' }}
                     onClick={() => setFormData(prev => ({ ...prev, aligned: false }))}
                   >
                     <XCircle className="w-4 h-4 mr-1" /> {getText('No', 'لا')}
@@ -457,7 +457,7 @@ export default function DecisionAnalysisPage() {
                               <CheckCircle2 className="w-3 h-3 mr-1" /> {getText('Aligned', 'متوافق')}
                             </Badge>
                           ) : (
-                            <Badge className="bg-[#E57373]/10 text-[#E57373]">
+                            <Badge className="bg-[#C97B7B]/10 text-[#C97B7B]">
                               <XCircle className="w-3 h-3 mr-1" /> {getText('Not Aligned', 'غير متوافق')}
                             </Badge>
                           )}
@@ -468,7 +468,7 @@ export default function DecisionAnalysisPage() {
                             variant="ghost"
                             size="sm"
                             onClick={() => deleteDecision(decision.id)}
-                            className="text-[#E57373] hover:bg-[#E57373]/10"
+                            className="text-[#C97B7B] hover:bg-[#C97B7B]/10"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
@@ -500,7 +500,7 @@ export default function DecisionAnalysisPage() {
         <Card className="bg-[#1F6F78]/10 border-[#1F6F78]/30 mt-8">
           <CardContent className="p-6">
             <h4 className="font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
-              <Lightbulb className="w-4 h-4 text-[#FFB74D]" />
+              <Lightbulb className="w-4 h-4 text-[#2A8A94]" />
               {getText('Decision Quality Framework', 'إطار جودة القرار')}
             </h4>
             <p className="text-sm text-[#2B2E34] mb-3">

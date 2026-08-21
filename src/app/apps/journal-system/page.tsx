@@ -15,7 +15,7 @@ import { toast } from 'sonner';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 const moods = [
-  { value: 'GREAT', labelEn: 'Amazing', labelAr: 'مذهل', icon: <Star className="h-5 w-5" />, color: 'text-amber-500', bg: 'bg-amber-100' },
+  { value: 'GREAT', labelEn: 'Amazing', labelAr: 'مذهل', icon: <Star className="h-5 w-5" />, color: 'text-[#3DD4B0]', bg: 'bg-[#edfbf6]' },
   { value: 'GOOD', labelEn: 'Good', labelAr: 'جيد', icon: <Sun className="h-5 w-5" />, color: 'text-emerald-500', bg: 'bg-emerald-100' },
   { value: 'NEUTRAL', labelEn: 'Okay', labelAr: 'عادي', icon: <CloudSun className="h-5 w-5" />, color: 'text-slate-500', bg: 'bg-slate-100' },
   { value: 'LOW', labelEn: 'Low', labelAr: 'منخفض', icon: <Cloud className="h-5 w-5" />, color: 'text-blue-500', bg: 'bg-blue-100' },
@@ -41,13 +41,13 @@ const promptsEn = [
 ];
 
 const promptsAr = [
-  "ما الهوية التي تجسّدتها اليوم؟",
+  "ما الهوية التي جسّدتها اليوم؟",
   "ما هو الانتصار الصغير الذي حققته اليوم؟",
-  "ما الذي تحدّاك اليوم، وماذا تعلّمت؟",
-  "على ما أنت ممتن الآن؟",
+  "ما التحدي الذي واجهته اليوم، وماذا تعلّمت؟",
+  "ما الذي تشعر بالامتنان له الآن؟",
   "ما الذي سيجعل يوم غد يومًا رائعًا؟",
-  "كما اعتنيت بنفسك اليوم؟",
-  "ما العادة التي مارستها وتتوافق مع أهدافك؟",
+  "كيف اعتنيت بنفسك اليوم؟",
+  "ما العادة التي مارستها وتتوافق مع الهوية التي تريد ترسيخها؟",
   "ماذا سيفعل ذاتك المثالية في موقف الغد؟",
   "ما المعتقد عن نفسك الذي عزّزته اليوم؟",
   "ما الشيء الذي تتطلع إليه؟",
@@ -198,13 +198,13 @@ export default function JournalSystemPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-amber-50 to-orange-50">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-[#e8f4f3] to-[#e6f3f4]">
             <CardContent className="pt-6 text-center">
-              <div className="p-3 rounded-full bg-amber-500 text-white w-fit mx-auto mb-3">
+              <div className="p-3 rounded-full bg-[#1F6F78] text-white w-fit mx-auto mb-3">
                 <BookOpen className="h-6 w-6" />
               </div>
-              <p className="text-3xl font-bold text-amber-700">{totalEntries}</p>
-              <p className="text-sm text-amber-600">{getText('Entries', 'المدوّنات')}</p>
+              <p className="text-3xl font-bold text-[#1F6F78]">{totalEntries}</p>
+              <p className="text-sm text-[#4da8a2]">{getText('Entries', 'المدوّنات')}</p>
             </CardContent>
           </Card>
 

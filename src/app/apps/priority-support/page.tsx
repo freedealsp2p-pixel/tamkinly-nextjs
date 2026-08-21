@@ -44,13 +44,13 @@ const categoryOptionsEn = [
 const priorityColors: Record<string, string> = {
   LOW: '#8A94A6',
   NORMAL: '#3DD4B0',
-  HIGH: '#FFB74D',
-  URGENT: '#E57373',
+  HIGH: '#2A8A94',
+  URGENT: '#C97B7B',
 };
 
 const statusColors: Record<string, { bg: string; text: string }> = {
   OPEN: { bg: '#3DD4B0/10', text: '#3DD4B0' },
-  IN_PROGRESS: { bg: '#FFB74D/10', text: '#FFB74D' },
+  IN_PROGRESS: { bg: '#2A8A94/10', text: '#2A8A94' },
   WAITING: { bg: '#8A94A6/10', text: '#8A94A6' },
   RESOLVED: { bg: '#1F6F78/10', text: '#1F6F78' },
   CLOSED: { bg: '#0F1C2E/10', text: '#0F1C2E' },
@@ -158,7 +158,7 @@ export default function PrioritySupportPage() {
                 <Headphones className="w-5 h-5 text-[#3DD4B0]" />
               </div>
               <div>
-                <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('BUNDLE', 'حزمة')}</Badge>
+                <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('MASTERY', 'حزمة')}</Badge>
                 <h1 className="text-xl font-bold">{getText('Priority Support', 'الدعم ذو الأولوية')}</h1>
               </div>
             </div>
@@ -196,8 +196,8 @@ export default function PrioritySupportPage() {
           </Card>
           <Card className="bg-white">
             <CardContent className="pt-6 text-center">
-              <div className="w-10 h-10 rounded-full bg-[#FFB74D]/10 flex items-center justify-center mx-auto mb-3">
-                <MessageSquare className="w-5 h-5 text-[#FFB74D]" />
+              <div className="w-10 h-10 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mx-auto mb-3">
+                <MessageSquare className="w-5 h-5 text-[#2A8A94]" />
               </div>
               <h3 className="font-semibold text-[#0F1C2E] mb-1">{getText('Direct Support', 'دعم مباشر')}</h3>
               <p className="text-xs text-[#8A94A6]">{getText('Direct email support channel', 'قناة دعم مباشرة عبر البريد الإلكتروني')}</p>

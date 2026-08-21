@@ -242,7 +242,7 @@ export default function EnvironmentalAuditPage() {
             <Card className="bg-white">
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <Users className="w-5 h-5 text-[#FFB74D]" />
+                  <Users className="w-5 h-5 text-[#2A8A94]" />
                   <h4 className="font-semibold text-[#0F1C2E]">{getText('Social Circle', 'الدائرة الاجتماعية')}</h4>
                 </div>
                 <p className="text-sm text-[#2B2E34]">{data.socialCircle || getText('Not provided', 'لم يُقدَّم')}</p>
@@ -262,10 +262,10 @@ export default function EnvironmentalAuditPage() {
 
           {/* Key Insights */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <Card className="bg-[#FFB74D]/10 border border-[#FFB74D]/30">
+            <Card className="bg-[#2A8A94]/10 border border-[#2A8A94]/30">
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <AlertTriangle className="w-5 h-5 text-[#FFB74D]" />
+                  <AlertTriangle className="w-5 h-5 text-[#2A8A94]" />
                   <h4 className="font-semibold text-[#0F1C2E]">{getText('Main Friction Point', 'نقطة الاحتكاك الرئيسية')}</h4>
                 </div>
                 <p className="text-sm text-[#2B2E34]">{data.mainFriction || getText('Not identified', 'لم تُحدَّد')}</p>
@@ -321,7 +321,7 @@ export default function EnvironmentalAuditPage() {
           <Card className="bg-[#0F1C2E] mb-8">
             <CardContent className="p-6">
               <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                <Lightbulb className="w-4 h-4 text-[#FFB74D]" />
+                <Lightbulb className="w-4 h-4 text-[#2A8A94]" />
                 {getText('Why Environment Matters', 'لماذا البيئة مهمة')}
               </h4>
               <p className="text-slate-400 text-sm mb-3">
@@ -443,7 +443,7 @@ export default function EnvironmentalAuditPage() {
           <Card className="bg-white">
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-                <Users className="w-5 h-5 text-[#FFB74D]" />
+                <Users className="w-5 h-5 text-[#2A8A94]" />
                 {getText('Social & Resources', 'الاجتماعي والموارد')}
               </CardTitle>
               <CardDescription>
@@ -453,7 +453,7 @@ export default function EnvironmentalAuditPage() {
             <CardContent className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
-                  <Users className="w-4 h-4 text-[#FFB74D]" />
+                  <Users className="w-4 h-4 text-[#2A8A94]" />
                   {getText('Social circle', 'الدائرة الاجتماعية')}
                 </label>
                 <Textarea
@@ -500,7 +500,7 @@ export default function EnvironmentalAuditPage() {
           <Card className="bg-white">
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-                <Zap className="w-5 h-5 text-[#FFB74D]" />
+                <Zap className="w-5 h-5 text-[#2A8A94]" />
                 {getText('Friction & Cues', 'الاحتكاك والإشارات')}
               </CardTitle>
               <CardDescription>
@@ -510,7 +510,7 @@ export default function EnvironmentalAuditPage() {
             <CardContent className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-[#FFB74D]" />
+                  <AlertTriangle className="w-4 h-4 text-[#2A8A94]" />
                   {getText('Main friction point', 'نقطة الاحتكاك الرئيسية')}
                 </label>
                 <Textarea
@@ -524,7 +524,7 @@ export default function EnvironmentalAuditPage() {
                     <Badge
                       key={i}
                       variant="outline"
-                      className="cursor-pointer hover:bg-[#FFB74D]/10"
+                      className="cursor-pointer hover:bg-[#2A8A94]/10"
                       onClick={() => setData(prev => ({ ...prev, mainFriction: point }))}
                     >
                       {point}

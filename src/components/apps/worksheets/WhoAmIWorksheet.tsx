@@ -53,7 +53,7 @@ const identityDimensions = [
     title: 'My Traits',
     description: 'What character traits define you? (e.g., creative, determined, compassionate)',
     icon: <Star className="w-5 h-5" />,
-    color: '#FFB74D',
+    color: '#2A8A94',
     questions: [
       'What are your top 5 character strengths?',
       'What traits do others consistently recognize in you?',
@@ -65,7 +65,7 @@ const identityDimensions = [
     title: 'My Values',
     description: 'What principles guide your decisions? (e.g., honesty, growth, freedom)',
     icon: <Heart className="w-5 h-5" />,
-    color: '#E57373',
+    color: '#C97B7B',
     questions: [
       'What values are non-negotiable for you?',
       'When have you acted against your values? Why?',
@@ -77,7 +77,7 @@ const identityDimensions = [
     title: 'My Goals',
     description: 'What are you working toward? What legacy do you want to build?',
     icon: <Target className="w-5 h-5" />,
-    color: '#64B5F6',
+    color: '#2A8A94',
     questions: [
       'What are you working toward in the next year?',
       'What would make you feel proud at the end of your life?',
@@ -89,7 +89,7 @@ const identityDimensions = [
     title: 'My Energy Sources',
     description: 'What energizes you? What drains you?',
     icon: <Zap className="w-5 h-5" />,
-    color: '#BA68C8',
+    color: '#2A8A94',
     questions: [
       'What activities make you lose track of time?',
       'What situations consistently drain your energy?',
@@ -416,7 +416,7 @@ export default function WhoAmIWorksheet() {
                     className="py-2 px-3 bg-[#0F1C2E] text-white"
                   >
                     {part.role} ({part.strength}/10)
-                    <button onClick={() => handleRemoveIdentityPart(part.id)} className="ml-2 hover:text-[#FFB088]">
+                    <button onClick={() => handleRemoveIdentityPart(part.id)} className="ml-2 hover:text-[#D4A8AE]">
                       <Trash2 className="w-3 h-3" />
                     </button>
                   </Badge>

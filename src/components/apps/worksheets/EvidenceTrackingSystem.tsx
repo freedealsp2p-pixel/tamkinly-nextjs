@@ -335,14 +335,14 @@ export default function EvidenceTrackingSystem() {
         </Card>
         <Card className="bg-white border border-gray-200">
           <CardContent className="p-4 text-center">
-            <Star className="w-6 h-6 text-[#FFB74D] mx-auto mb-2" />
+            <Star className="w-6 h-6 text-[#2A8A94] mx-auto mb-2" />
             <div className="text-2xl font-bold text-[#0F1C2E]">{getAverageQuality()}/10</div>
             <div className="text-[#8A94A6] text-xs">Avg Quality</div>
           </CardContent>
         </Card>
         <Card className="bg-white border border-gray-200">
           <CardContent className="p-4 text-center">
-            <Award className="w-6 h-6 text-[#BA68C8] mx-auto mb-2" />
+            <Award className="w-6 h-6 text-[#2A8A94] mx-auto mb-2" />
             <div className="text-2xl font-bold text-[#0F1C2E]">{getMilestoneProgress()}/8</div>
             <div className="text-[#8A94A6] text-xs">Milestones</div>
           </CardContent>
@@ -510,12 +510,12 @@ export default function EvidenceTrackingSystem() {
             {dailyLogs.length > 0 && (
               <div className="space-y-3 max-h-[400px] overflow-y-auto">
                 {dailyLogs.map((log) => (
-                  <Card key={log.id} className={`border-l-4 ${log.actionCompleted === 'yes' ? 'border-l-[#3DD4B0]' : 'border-l-[#FFB74D]'}`}>
+                  <Card key={log.id} className={`border-l-4 ${log.actionCompleted === 'yes' ? 'border-l-[#3DD4B0]' : 'border-l-[#2A8A94]'}`}>
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-2">
                           <span className="text-sm font-medium text-[#0F1C2E]">{log.date}</span>
-                          <Badge className={log.actionCompleted === 'yes' ? 'bg-[#3DD4B0]/10 text-[#1F6F78]' : 'bg-[#FFB74D]/10 text-[#B8860B]'}>
+                          <Badge className={log.actionCompleted === 'yes' ? 'bg-[#3DD4B0]/10 text-[#1F6F78]' : 'bg-[#2A8A94]/10 text-[#B8860B]'}>
                             {log.actionCompleted === 'yes' ? 'Completed' : 'Not Completed'}
                           </Badge>
                           {log.actionCompleted === 'yes' && (
@@ -526,7 +526,7 @@ export default function EvidenceTrackingSystem() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDeleteDailyLog(log.id)}
-                          className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
+                          className="text-[#C97B7B] hover:text-[#A86565] hover:bg-[#F8EEEF]"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -536,7 +536,7 @@ export default function EvidenceTrackingSystem() {
                         <p className="text-sm text-[#1F6F78]"><strong>Done:</strong> {log.whatWasDone}</p>
                       )}
                       {log.actionCompleted === 'no' && log.whatPreventedIt && (
-                        <p className="text-sm text-[#FFB74D]"><strong>Barrier:</strong> {log.whatPreventedIt}</p>
+                        <p className="text-sm text-[#2A8A94]"><strong>Barrier:</strong> {log.whatPreventedIt}</p>
                       )}
                       {(log.timeStarted || log.timeFinished) && (
                         <p className="text-xs text-[#8A94A6] mt-2">
@@ -711,7 +711,7 @@ export default function EvidenceTrackingSystem() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDeleteEvidence(evidence.id)}
-                            className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
+                            className="text-[#C97B7B] hover:text-[#A86565] hover:bg-[#F8EEEF]"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
@@ -816,7 +816,7 @@ export default function EvidenceTrackingSystem() {
         <CardHeader className="cursor-pointer" onClick={() => toggleSection('milestones')}>
           <div className="flex items-center justify-between">
             <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-              <Award className="w-5 h-5 text-[#FFB74D]" />
+              <Award className="w-5 h-5 text-[#2A8A94]" />
               Transformation Milestones
             </CardTitle>
             {expandedSections.milestones ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}

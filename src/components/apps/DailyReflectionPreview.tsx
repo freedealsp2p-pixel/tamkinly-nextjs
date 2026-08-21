@@ -38,28 +38,28 @@ export default function DailyReflectionPreview() {
     {
       theme: t("reflection.promptsList.growthMindset.theme"),
       prompt: t("reflection.promptsList.growthMindset.prompt"),
-      color: '#64B5F6'
+      color: '#2A8A94'
     },
     {
       theme: t("reflection.promptsList.valuesAlignment.theme"),
       prompt: t("reflection.promptsList.valuesAlignment.prompt"),
-      color: '#E57373'
+      color: '#C97B7B'
     },
     {
       theme: t("reflection.promptsList.futureSelf.theme"),
       prompt: t("reflection.promptsList.futureSelf.prompt"),
-      color: '#81C784'
+      color: '#3DD4B0'
     }
   ];
 
   const themePills = [
     { name: t("reflection.themePills.selfAwareness"), color: '#3DD4B0' },
     { name: t("reflection.themePills.identityShift"), color: '#1F6F78' },
-    { name: t("reflection.themePills.growthMindset"), color: '#64B5F6' },
-    { name: t("reflection.themePills.valuesAlignment"), color: '#E57373' },
-    { name: t("reflection.themePills.emotionalIntelligence"), color: '#BA68C8' },
-    { name: t("reflection.themePills.environmentalDesign"), color: '#FFB74D' },
-    { name: t("reflection.themePills.futureSelf"), color: '#81C784' }
+    { name: t("reflection.themePills.growthMindset"), color: '#2A8A94' },
+    { name: t("reflection.themePills.valuesAlignment"), color: '#C97B7B' },
+    { name: t("reflection.themePills.emotionalIntelligence"), color: '#2A8A94' },
+    { name: t("reflection.themePills.environmentalDesign"), color: '#2A8A94' },
+    { name: t("reflection.themePills.futureSelf"), color: '#3DD4B0' }
   ];
 
   const currentPrompt = previewPrompts[currentPromptIndex];

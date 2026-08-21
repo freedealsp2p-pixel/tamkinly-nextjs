@@ -196,9 +196,9 @@ export default function EmotionRegulationAssessment() {
     if (type === 'reappraisal') {
       if (score >= 5) return { level: 'High', color: 'text-green-600', description: 'You effectively use cognitive strategies to manage emotions.' };
       if (score >= 3) return { level: 'Moderate', color: 'text-yellow-600', description: 'You have some ability to reframe situations emotionally.' };
-      return { level: 'Developing', color: 'text-[#FC6D26]', description: 'There\'s room to develop healthier cognitive regulation strategies.' };
+      return { level: 'Developing', color: 'text-[#C97B7B]', description: 'There\'s room to develop healthier cognitive regulation strategies.' };
     } else {
-      if (score >= 5) return { level: 'High', color: 'text-[#FC6D26]', description: 'You tend to suppress emotions, which may have negative long-term effects.' };
+      if (score >= 5) return { level: 'High', color: 'text-[#C97B7B]', description: 'You tend to suppress emotions, which may have negative long-term effects.' };
       if (score >= 3) return { level: 'Moderate', color: 'text-yellow-600', description: 'You sometimes suppress emotions. Consider more expressive alternatives.' };
       return { level: 'Low', color: 'text-green-600', description: 'You express emotions freely, which is generally healthy.' };
     }
@@ -253,11 +253,11 @@ export default function EmotionRegulationAssessment() {
           </Card>
 
           {/* Expressive Suppression */}
-          <Card className="border-2 border-[#E57373]">
+          <Card className="border-2 border-[#C97B7B]">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-[#E57373]" />
+                  <Heart className="w-5 h-5 text-[#C97B7B]" />
                   Expressive Suppression
                 </CardTitle>
                 <Badge className={getInterpretation(suppressionScore, 'suppression').color}>
@@ -274,7 +274,7 @@ export default function EmotionRegulationAssessment() {
               <p className="text-sm text-[#8A94A6]">
                 {getInterpretation(suppressionScore, 'suppression').description}
               </p>
-              <div className="mt-4 p-3 bg-[#E57373]/10 rounded-lg">
+              <div className="mt-4 p-3 bg-[#C97B7B]/10 rounded-lg">
                 <p className="text-sm text-[#0F1C2E]">
                   <strong>What this means:</strong> Expressive suppression involves hiding emotions. Lower scores are generally healthier as suppression can lead to long-term negative effects.
                 </p>
@@ -310,7 +310,7 @@ export default function EmotionRegulationAssessment() {
               
               {suppressionScore >= 4 && (
                 <div>
-                  <h4 className="text-[#E57373] font-semibold mb-3">Reduce Expressive Suppression</h4>
+                  <h4 className="text-[#C97B7B] font-semibold mb-3">Reduce Expressive Suppression</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {strategies.suppression.map((strategy, idx) => (
                       <div key={idx} className="p-4 bg-[#1A2A42] rounded-lg">
@@ -408,7 +408,7 @@ export default function EmotionRegulationAssessment() {
           />
         </div>
         <Badge variant="outline" className={
-          question.subscale === 'reappraisal' ? 'border-[#3DD4B0] text-[#3DD4B0]' : 'border-[#E57373] text-[#E57373]'
+          question.subscale === 'reappraisal' ? 'border-[#3DD4B0] text-[#3DD4B0]' : 'border-[#C97B7B] text-[#C97B7B]'
         }>
           {question.subscale === 'reappraisal' ? 'Cognitive Reappraisal' : 'Expressive Suppression'}
         </Badge>
@@ -420,7 +420,7 @@ export default function EmotionRegulationAssessment() {
           <div className="flex items-center gap-3">
             <div 
               className="w-12 h-12 rounded-xl flex items-center justify-center text-white"
-              style={{ backgroundColor: question.subscale === 'reappraisal' ? '#3DD4B0' : '#E57373' }}
+              style={{ backgroundColor: question.subscale === 'reappraisal' ? '#3DD4B0' : '#C97B7B' }}
             >
               {question.subscale === 'reappraisal' ? <Brain className="w-6 h-6" /> : <Heart className="w-6 h-6" />}
             </div>
@@ -451,7 +451,7 @@ export default function EmotionRegulationAssessment() {
                     answers[currentQuestion] === label.value
                       ? question.subscale === 'reappraisal'
                         ? 'bg-[#3DD4B0] text-[#0F1C2E]'
-                        : 'bg-[#E57373] text-white'
+                        : 'bg-[#C97B7B] text-white'
                       : 'bg-[#F6F8FA] text-[#8A94A6] hover:bg-gray-200'
                   }`}
                 >
@@ -485,7 +485,7 @@ export default function EmotionRegulationAssessment() {
               onClick={() => setCurrentQuestion(index)}
               className={`w-2 h-2 rounded-full transition-all ${
                 currentQuestion === index 
-                  ? erqQuestions[index].subscale === 'reappraisal' ? 'bg-[#3DD4B0] w-4' : 'bg-[#E57373] w-4'
+                  ? erqQuestions[index].subscale === 'reappraisal' ? 'bg-[#3DD4B0] w-4' : 'bg-[#C97B7B] w-4'
                   : answers[index] > 0 ? 'bg-[#1F6F78]' : 'bg-[#8A94A6]/30'
               }`}
             />

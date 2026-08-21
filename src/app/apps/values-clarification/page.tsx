@@ -67,16 +67,16 @@ const valuesList: Value[] = [
 const categoryColors: Record<string, string> = {
   'Personal Growth': '#3DD4B0',
   'النمو الشخصي': '#3DD4B0',
-  'Achievement': '#FFB74D',
-  'الإنجاز': '#FFB74D',
-  'Relationships': '#E57373',
-  'العلاقات': '#E57373',
-  'Integrity': '#64B5F6',
-  'النزاهة': '#64B5F6',
-  'Well-being': '#BA68C8',
-  'الرفاهية': '#BA68C8',
-  'Contribution': '#81C784',
-  'المساهمة': '#81C784'
+  'Achievement': '#2A8A94',
+  'الإنجاز': '#2A8A94',
+  'Relationships': '#C97B7B',
+  'العلاقات': '#C97B7B',
+  'Integrity': '#2A8A94',
+  'النزاهة': '#2A8A94',
+  'Well-being': '#2A8A94',
+  'الرفاهية': '#2A8A94',
+  'Contribution': '#3DD4B0',
+  'المساهمة': '#3DD4B0'
 };
 
 export default function ValuesClarificationPage() {
@@ -152,8 +152,8 @@ export default function ValuesClarificationPage() {
               {getText('← Back to Apps', '→ العودة للتطبيقات')}
             </Link>
             <div className="flex items-center gap-3 mt-2">
-              <div className="w-10 h-10 rounded-xl bg-[#E57373]/20 flex items-center justify-center">
-                <Heart className="w-5 h-5 text-[#E57373]" />
+              <div className="w-10 h-10 rounded-xl bg-[#C97B7B]/20 flex items-center justify-center">
+                <Heart className="w-5 h-5 text-[#C97B7B]" />
               </div>
               <div>
                 <h1 className="text-xl font-bold">{getText('Values Clarification Tool', 'أداة توضيح القيم')}</h1>
@@ -205,7 +205,7 @@ export default function ValuesClarificationPage() {
                       </div>
                       {index === 0 && (
                         <div className="text-right">
-                          <Star className="w-6 h-6 text-[#FFB74D] fill-[#FFB74D]" />
+                          <Star className="w-6 h-6 text-[#2A8A94] fill-[#2A8A94]" />
                           <p className="text-xs text-[#8A94A6]">{getText('Core Value', 'القيمة الأساسية')}</p>
                         </div>
                       )}
@@ -302,8 +302,8 @@ export default function ValuesClarificationPage() {
             {getText('← Back to Apps', '→ العودة للتطبيقات')}
           </Link>
           <div className="flex items-center gap-3 mt-2">
-            <div className="w-10 h-10 rounded-xl bg-[#E57373]/20 flex items-center justify-center">
-              <Heart className="w-5 h-5 text-[#E57373]" />
+            <div className="w-10 h-10 rounded-xl bg-[#C97B7B]/20 flex items-center justify-center">
+              <Heart className="w-5 h-5 text-[#C97B7B]" />
             </div>
             <div>
               <h1 className="text-xl font-bold">{getText('Values Clarification Tool', 'أداة توضيح القيم')}</h1>

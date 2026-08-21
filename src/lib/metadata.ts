@@ -1,16 +1,26 @@
 import type { Metadata } from 'next'
 
+const pagePaths: Record<string, string> = {
+  home: '/',
+  apps: '/apps',
+  quiz: '/quiz',
+  methodology: '/methodology',
+  products: '/products',
+  about: '/about',
+  aiCoach: '/apps/ai-identity-coach',
+}
+
 export const siteMetadata = {
   home: {
     title: 'Tamkinly | Return to Your Center',
     description:
-      "You don't have a discipline problem. You have an identity gap. Discover it free in 3 minutes — no email required.",
+      "You don't have a discipline problem. You have an identity gap. Discover it free in 3 minutes \u2014 no email required.",
     keywords: 'identity transformation, identity gap, identity recode, self-authorship, values clarification, \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0647\u0648\u064a\u0629, \u0641\u062c\u0648\u0629 \u0627\u0644\u0647\u0648\u064a\u0629',
   },
   apps: {
     title: 'Tamkinly Apps | Identity Transformation Tools',
     description:
-      'Free and premium tools for identity transformation — identity assessment, values clarification, daily reflection, and more. Start free, no email required.',
+      'Free and premium tools for identity transformation \u2014 identity assessment, values clarification, daily reflection, and more. Start free, no email required.',
     keywords: 'identity tools, values clarification, daily reflection, identity baseline, \u0623\u062f\u0648\u0627\u062a \u0627\u0644\u0647\u0648\u064a\u0629',
   },
   quiz: {
@@ -22,7 +32,7 @@ export const siteMetadata = {
   methodology: {
     title: 'Methodology | Evidence-Based Identity Transformation',
     description:
-      'Our methodology combines neuroplasticity, self-authorship theory, and the Maintain IT Model for lasting identity transformation — not habit change.',
+      'Our methodology combines neuroplasticity, self-authorship theory, and the Maintain IT Model for lasting identity transformation \u2014 not habit change.',
     keywords: 'identity methodology, self-authorship, neuroplasticity, Maintain IT model',
   },
   products: {
@@ -38,23 +48,31 @@ export const siteMetadata = {
     keywords: 'about tamkinly, identity transformation team',
   },
   aiCoach: {
-    title: 'AI Identity Coach | Coming Soon',
+    title: 'AI Identity Coach | Personal Transformation Companion',
     description:
-      'The Tamkinly AI Identity Coach is coming Q3 2026. Built on neuroplasticity and self-authorship. Join the waitlist for early access.',
+      'Talk to your AI identity coach \u2014 grounded in psychology and self-authorship. Ask about identity change, habits, and the Tamkinly system. Available now.',
     keywords: 'AI identity coach, AI coaching, \u0645\u062f\u0631\u0628 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0630\u0643\u064a',
   },
 } satisfies Record<string, { title: string; description: string; keywords: string }>
 
 export function buildMetadata(page: keyof typeof siteMetadata): Metadata {
   const m = siteMetadata[page]
+  const path = pagePaths[page] || '/'
+  const fullUrl = 'https://tamkinly.com' + path
   const imageUrl = 'https://tamkinly.com/opengraph-image'
   return {
     title: m.title,
     description: m.description,
     keywords: m.keywords,
+    alternates: {
+      canonical: fullUrl,
+    },
     openGraph: {
       title: m.title,
       description: m.description,
+      url: fullUrl,
+      siteName: 'Tamkinly',
+      type: 'website',
       images: [{ url: imageUrl, width: 1200, height: 630, alt: m.title }],
     },
     twitter: {

@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { tamkinlyGuide, quickGuideChat, getStepGuidance } from '@/lib/tamkinly-guide';
 
 /**
@@ -13,6 +15,10 @@ import { tamkinlyGuide, quickGuideChat, getStepGuidance } from '@/lib/tamkinly-g
 // Chat with the guide
 export async function POST(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
     const body = await request.json();
     const { action, sessionId, message, step, context } = body;
 
@@ -77,6 +83,10 @@ export async function POST(request: NextRequest) {
 // Get conversation history
 export async function GET(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get('sessionId');
 
@@ -88,15 +98,15 @@ export async function GET(request: NextRequest) {
     }
 
     const history = tamkinlyGuide.getHistory(sessionId);
-    const session = tamkinlyGuide.getSession(sessionId);
+    const guideSession = tamkinlyGuide.getSession(sessionId);
 
     return NextResponse.json({
       success: true,
       history,
-      sessionInfo: session ? {
-        createdAt: session.createdAt,
-        lastActivity: session.lastActivity,
-        messageCount: session.messages.length,
+      sessionInfo: guideSession ? {
+        createdAt: guideSession.createdAt,
+        lastActivity: guideSession.lastActivity,
+        messageCount: guideSession.messages.length,
       } : null,
     });
   } catch (error) {
@@ -111,6 +121,10 @@ export async function GET(request: NextRequest) {
 // Delete/clear session
 export async function DELETE(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get('sessionId');
     const clear = searchParams.get('clear') === 'true';

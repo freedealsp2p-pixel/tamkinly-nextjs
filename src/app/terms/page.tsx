@@ -59,7 +59,7 @@ export default function TermsOfServicePage() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
-                  <XCircle className="w-10 h-10 text-[#FC6D26] mx-auto mb-3" />
+                  <XCircle className="w-10 h-10 text-[#C97B7B] mx-auto mb-3" />
                   <h3 className="font-semibold text-[#0F1C2E] mb-2">{t('youMayNot')}</h3>
                   <ul className="text-sm text-[#8A94A6] space-y-1 text-left">
                     <li>• {t('youMayNot1')}</li>
@@ -70,7 +70,7 @@ export default function TermsOfServicePage() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
-                  <AlertTriangle className="w-10 h-10 text-amber-500 mx-auto mb-3" />
+                  <AlertTriangle className="w-10 h-10 text-[#C97B7B] mx-auto mb-3" />
                   <h3 className="font-semibold text-[#0F1C2E] mb-2">{t('important')}</h3>
                   <ul className="text-sm text-[#8A94A6] space-y-1 text-left">
                     <li>• {t('important1')}</li>
@@ -128,19 +128,19 @@ export default function TermsOfServicePage() {
                   </p>
                   <ul className="space-y-3 text-[#2B2E34]">
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction3')}</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <XCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
                       <span>{t('restriction4')}</span>
                     </li>
                   </ul>
@@ -161,10 +161,10 @@ export default function TermsOfServicePage() {
                 {/* Disclaimer */}
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('disclaimer')}</h2>
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <div className="bg-[#f8eded] border border-[#e4c0c0] rounded-lg p-4 mb-4">
                     <div className="flex items-start gap-3">
-                      <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-amber-800">
+                      <AlertTriangle className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-[#a86060]">
                         <strong>{t('disclaimerImportant')}</strong>
                       </p>
                     </div>

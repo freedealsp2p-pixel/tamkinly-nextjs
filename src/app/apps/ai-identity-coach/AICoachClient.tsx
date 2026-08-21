@@ -25,6 +25,8 @@ import {
   Target,
   CheckCircle2,
   Lock,
+  Gift,
+  Zap,
 } from 'lucide-react';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
@@ -41,7 +43,7 @@ interface Message {
 // Tier hierarchy for access check
 // ============================================
 const TIER_HIERARCHY: Record<string, number> = {
-  FREE: 0, TRIAL: 1, BASIC: 2, PREMIUM: 3, BUNDLE: 4,
+  FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4,
 };
 
 // ============================================
@@ -104,9 +106,107 @@ function TypingIndicator({ locale }: { locale: string }) {
 }
 
 // ============================================
+// Free Limit Reached Component
+// ============================================
+function FreeLimitReached({ locale, onAccessGranted }: { locale: string; onAccessGranted: () => void }) {
+  const isRTL = locale === 'ar';
+  const getText = (en: string, ar: string) => (isRTL ? ar : en);
+  const [accessCode, setAccessCode] = useState('');
+  const [verifying, setVerifying] = useState(false);
+  const [codeError, setCodeError] = useState('');
+
+  const handleVerify = async () => {
+    if (!accessCode.trim()) return;
+    setVerifying(true);
+    setCodeError('');
+    try {
+      const response = await fetch('/api/access/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: accessCode.trim() }),
+      });
+      const data = await response.json();
+      if (response.ok && data.valid) {
+        const TIER_HIERARCHY_LOCAL: Record<string, number> = { FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4 };
+        const tierLevel = TIER_HIERARCHY_LOCAL[data.tier] || 0;
+        if (tierLevel >= TIER_HIERARCHY_LOCAL['PREMIUM']) {
+          localStorage.setItem('tamkinly_access', JSON.stringify({
+            tier: data.tier || 'MASTERY',
+            code: accessCode.trim(),
+            verifiedAt: new Date().toISOString(),
+          }));
+          onAccessGranted();
+        } else {
+          setCodeError(getText('This code does not include AI Coach access. You need Premium ($17/mo) or Mastery ($27/mo).', 'هذا الرمز لا يشمل وصول المدرب الذكي. تحتاج باقة المميز ($17/شهر) أو الإتقان ($27/شهر).'));
+        }
+      } else {
+        setCodeError(data.error || getText('Invalid access code', 'رمز الوصول غير صالح'));
+      }
+    } catch {
+      setCodeError(getText('Verification failed', 'فشل التحقق'));
+    } finally {
+      setVerifying(false);
+    }
+  };
+
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center px-4 py-8" dir={isRTL ? 'rtl' : 'ltr'}>
+      <Card className="max-w-lg w-full border-2 border-[#3DD4B0]/30 shadow-xl">
+        <CardContent className="p-8 text-center">
+          <div className="w-16 h-16 rounded-2xl bg-[#3DD4B0]/10 flex items-center justify-center mx-auto mb-6">
+            <Gift className="w-8 h-8 text-[#3DD4B0]" />
+          </div>
+          <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-3">
+            {getText('You\'ve Used Your 2 Free Questions!', 'لقد استخدمت سؤاليك المجانيين!')}
+          </h2>
+          <p className="text-slate-600 mb-6 leading-relaxed">
+            {getText(
+              'Every visitor gets 2 free questions with the AI Identity Coach. To continue, get Premium ($17/mo) or Mastery ($27/mo) — your personal code will be sent to you.',
+              'يحصل كل زائر على سؤالين مجانيين مع مدرب الهوية الذكي. لمواصلة رحلة التحوّل مع وصول غير محدود، احصل على الباقة الشاملة — سيتم إرسال رمزك الشخصي إليك.'
+            )}
+          </p>
+
+          {/* Access Code Input */}
+          <div className="bg-[#F6F8FA] rounded-xl p-4 mb-6">
+            <p className="text-sm font-medium text-[#0F1C2E] mb-3">
+              {getText('Already have an access code?', 'لديك رمز وصول بالفعل؟')}
+            </p>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={accessCode}
+                onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
+                placeholder="TMLY-XXXX-XXXX"
+                className="flex-1 px-4 py-2.5 border border-slate-200 rounded-lg focus:border-[#3DD4B0] focus:outline-none font-mono text-sm"
+                onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
+              />
+              <Button onClick={handleVerify} disabled={verifying || !accessCode.trim()} className="bg-[#0F1C2E] hover:bg-[#1a2d42] text-white">
+                {verifying ? <Loader2 className="w-4 h-4 animate-spin" /> : getText('Verify', 'تحقق')}
+              </Button>
+            </div>
+            {codeError && <p className="text-sm text-[#C97B7B] mt-2">{codeError}</p>}
+          </div>
+
+          {/* CTA Button */}
+          <Link href="/products/mastery">
+            <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-bold h-12 text-base">
+              <Zap className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
+              {getText('Premium — $17/mo', 'احصل على الإتقان — $27/شهر')}
+            </Button>
+          </Link>
+          <p className="text-xs text-slate-500 mt-3">
+            {getText('Premium: AI Coach + 6 tools. Bundle: AI Coach + all 15 tools + personal token.', 'يشمل المدرب الذكي + جميع الأدوات الـ 15 + رمز الوصول الشخصي')}
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+// ============================================
 // Landing Page Component (visible to all visitors)
 // ============================================
-function AICoachLanding({ locale, onAccessCheck }: { locale: string; onAccessCheck: () => void }) {
+function AICoachLanding({ locale, onStartChat }: { locale: string; onStartChat: () => void }) {
   const isRTL = locale === 'ar';
   const getText = (en: string, ar: string) => (isRTL ? ar : en);
 
@@ -138,20 +238,27 @@ function AICoachLanding({ locale, onAccessCheck }: { locale: string; onAccessChe
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">
               {getText('AI Identity Coach', 'مدرب الهوية الذكي')}
             </h1>
-            <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-slate-300 mb-4 max-w-2xl mx-auto">
               {getText(
-                'Your personal transformation companion powered by AI. Ask anything about identity change, habits, or the Tamkinly system. Available 24/7 with personalized guidance.',
-                'رفيق تحوّلك الشخصي المدعوم بالذكاء الاصطناعي. اسأل أي شيء عن تغيير الهوية أو العادات أو نظام تمكينلي. متاح على مدار الساعة مع إرشادات مخصصة.'
+                'Your personal transformation companion powered by AI. Ask anything about identity change, habits, or the Tamkinly system.',
+                'رفيق تحوّلك الشخصي المدعوم بالذكاء الاصطناعي. اسأل أي شيء عن تغيير الهوية أو العادات أو نظام تمكينلي.'
               )}
             </p>
+            {/* Free questions badge */}
+            <div className="inline-flex items-center gap-2 bg-[#3DD4B0]/10 border border-[#3DD4B0]/30 rounded-full px-4 py-2 mb-8">
+              <Gift className="w-4 h-4 text-[#3DD4B0]" />
+              <span className="text-[#3DD4B0] text-sm font-medium">
+                {getText('2 free questions for every visitor', 'سؤالان مجانيان لكل زائر')}
+              </span>
+            </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
                 size="lg"
                 className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-14 text-lg font-bold"
-                onClick={onAccessCheck}
+                onClick={onStartChat}
               >
                 <MessageCircle className={`${isRTL ? 'ml-2' : 'mr-2'} h-5 w-5`} />
-                {getText('Start Chatting', 'ابدأ المحادثة')}
+                {getText('Start Chatting — 2 Free Questions', 'ابدأ المحادثة — سؤالان مجانيان')}
               </Button>
               <Link href="/quiz">
                 <Button
@@ -226,25 +333,25 @@ function AICoachLanding({ locale, onAccessCheck }: { locale: string; onAccessChe
                 <span className="text-sm text-slate-600">{getText('Private & Secure', 'خاص وآمن')}</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-[#3DD4B0]" />
-                <span className="text-sm text-slate-600">{getText('No Email Required', 'بدون بريد إلكتروني')}</span>
+                <Gift className="w-5 h-5 text-[#3DD4B0]" />
+                <span className="text-sm text-slate-600">{getText('2 Free Questions', 'سؤالان مجانيان')}</span>
               </div>
             </div>
             <div className="bg-gradient-to-br from-[#0F1C2E] to-slate-900 rounded-2xl p-8 text-white">
               <Lock className="w-8 h-8 text-[#3DD4B0] mx-auto mb-4" />
               <h3 className="font-serif text-2xl font-bold mb-3">
-                {getText('Available with Complete Bundle', 'متاح مع الباقة الشاملة')}
+                {getText('Unlimited Access from $27', 'وصول غير محدود مع الباقة الشاملة')}
               </h3>
               <p className="text-slate-300 mb-6">
                 {getText(
-                  'The AI Identity Coach is part of the Complete Bundle, our most popular package. Get unlimited access to the coach plus all 15+ transformation tools.',
-                  'مدرب الهوية الذكي جزء من الباقة الشاملة، أكثر باقاتنا شعبية. احصل على وصول غير محدود للمدرب بالإضافة إلى جميع أدوات التحول الـ 15+.'
+                  'After your 2 free questions, continue with unlimited access. The Mastery subscription ($27/month) includes AI Coach + all 20 transformation tools. Your personal access token is sent after purchase confirmation.',
+                  'بعد سؤاليك المجانيين، واصل مع وصول غير محدود. الباقة الشاملة تتضمن المدرب الذكي بالإضافة إلى جميع أدوات التحول الـ 15+. يتم إرسال رمز الوصول الشخصي بعد الشراء.'
                 )}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/products/bundle">
+                <Link href="/products/mastery">
                   <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-bold">
-                    {getText('Get Bundle - $47', 'احصل على الباقة - $47')}
+                    {getText('Get Access - from $17/mo', 'احصل على الباقة - $17/شهر')}
                     <ArrowRight className={`${isRTL ? 'mr-2 rotate-180' : 'ml-2'} h-5 w-5`} />
                   </Button>
                 </Link>
@@ -252,89 +359,15 @@ function AICoachLanding({ locale, onAccessCheck }: { locale: string; onAccessChe
                   variant="outline"
                   size="lg"
                   className="border-white/30 text-white hover:bg-white/10 px-8"
-                  onClick={onAccessCheck}
+                  onClick={onStartChat}
                 >
-                  {getText('I Have Access', 'لدي وصول')}
+                  {getText('Try 2 Free Questions', 'جرّب سؤالين مجاناً')}
                 </Button>
               </div>
             </div>
           </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-// ============================================
-// Access Gate Component (shown when user doesn't have BUNDLE access)
-// ============================================
-function AccessGate({ locale, onAccessGranted }: { locale: string; onAccessGranted: () => void }) {
-  const isRTL = locale === 'ar';
-  const getText = (en: string, ar: string) => (isRTL ? ar : en);
-  const [accessCode, setAccessCode] = useState('');
-  const [verifying, setVerifying] = useState(false);
-  const [codeError, setCodeError] = useState('');
-
-  const handleVerify = async () => {
-    if (!accessCode.trim()) return;
-    setVerifying(true);
-    setCodeError('');
-    try {
-      const response = await fetch('/api/access/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: accessCode.trim() }),
-      });
-      const data = await response.json();
-      if (response.ok && data.valid) {
-        localStorage.setItem('tamkinly_access', JSON.stringify({
-          tier: data.tier || 'BUNDLE',
-          code: accessCode.trim(),
-          verifiedAt: new Date().toISOString(),
-        }));
-        onAccessGranted();
-      } else {
-        setCodeError(data.error || getText('Invalid access code', 'رمز الوصول غير صالح'));
-      }
-    } catch {
-      setCodeError(getText('Verification failed', 'فشل التحقق'));
-    } finally {
-      setVerifying(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center px-4" dir={isRTL ? 'rtl' : 'ltr'}>
-      <Card className="max-w-md w-full border-2 border-[#3DD4B0]/30 shadow-lg">
-        <CardContent className="p-8 text-center">
-          <Lock className="w-12 h-12 text-[#3DD4B0] mx-auto mb-4" />
-          <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-2">
-            {getText('Unlock AI Coach', 'فتح المدرب الذكي')}
-          </h2>
-          <p className="text-slate-600 mb-6">
-            {getText('Enter your access code or get the Complete Bundle', 'أدخل رمز الوصول أو احصل على الباقة الشاملة')}
-          </p>
-          <div className="flex gap-2 mb-4">
-            <input
-              type="text"
-              value={accessCode}
-              onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
-              placeholder="TMLY-XXXX-XXXX"
-              className="flex-1 px-4 py-2 border border-slate-200 rounded-lg focus:border-[#3DD4B0] focus:outline-none font-mono text-sm"
-              onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
-            />
-            <Button onClick={handleVerify} disabled={verifying || !accessCode.trim()} className="bg-[#0F1C2E] hover:bg-[#1a2d42] text-white">
-              {verifying ? '...' : getText('Verify', 'تحقق')}
-            </Button>
-          </div>
-          {codeError && <p className="text-sm text-[#FC6D26] mb-4">{codeError}</p>}
-          <Link href="/products/bundle">
-            <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold">
-              {getText('Get Complete Bundle - $47', 'احصل على الباقة الشاملة - $47')}
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
     </div>
   );
 }
@@ -347,9 +380,8 @@ export default function AIIdentityCoachPage() {
   const isRTL = locale === 'ar';
   const getText = (en: string, ar: string) => (isRTL ? ar : en);
 
-  // View state: 'landing' | 'gate' | 'chat'
-  const [view, setView] = useState<'landing' | 'gate' | 'chat'>('landing');
-  const [isCheckingAccess, setIsCheckingAccess] = useState(false);
+  // View state: 'landing' | 'chat' | 'limitReached'
+  const [view, setView] = useState<'landing' | 'chat' | 'limitReached'>('landing');
 
   // Chat state
   const [sessionId, setSessionId] = useState<string>('');
@@ -357,6 +389,8 @@ export default function AIIdentityCoachPage() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [freeMessagesRemaining, setFreeMessagesRemaining] = useState(2);
+  const [hasFullAccess, setHasFullAccess] = useState(false);
 
   // Refs
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -375,19 +409,17 @@ export default function AIIdentityCoachPage() {
     }
   }, [inputValue]);
 
-  // Check if user has BUNDLE access
-  const checkAccess = useCallback(async () => {
-    setIsCheckingAccess(true);
+  // Check if user has full access (MASTERY tier)
+  const checkFullAccess = useCallback(async (): Promise<boolean> => {
     try {
       // Check localStorage
       const storedAccess = localStorage.getItem('tamkinly_access');
       if (storedAccess) {
         const access = JSON.parse(storedAccess);
         const tierLevel = TIER_HIERARCHY[access.tier] || 0;
-        if (tierLevel >= TIER_HIERARCHY['BUNDLE']) {
-          setView('chat');
-          initChat();
-          return;
+        if (tierLevel >= TIER_HIERARCHY['PREMIUM']) {
+          setHasFullAccess(true);
+          return true;
         }
       }
       // Check session
@@ -396,21 +428,25 @@ export default function AIIdentityCoachPage() {
         const data = await res.json();
         if (data?.user?.accessTier) {
           const userTierLevel = TIER_HIERARCHY[data.user.accessTier] || 0;
-          if (userTierLevel >= TIER_HIERARCHY['BUNDLE']) {
-            setView('chat');
-            initChat();
-            return;
+          if (userTierLevel >= TIER_HIERARCHY['PREMIUM']) {
+            setHasFullAccess(true);
+            return true;
           }
         }
       }
-      // No access - show gate
-      setView('gate');
     } catch {
-      setView('gate');
-    } finally {
-      setIsCheckingAccess(false);
+      // No access
     }
+    return false;
   }, []);
+
+  // Start chat (from landing page)
+  const startChat = useCallback(async () => {
+    const hasAccess = await checkFullAccess();
+    setHasFullAccess(hasAccess);
+    initChat();
+    setView('chat');
+  }, [checkFullAccess]);
 
   // Initialize chat session
   const initChat = useCallback(() => {
@@ -434,10 +470,31 @@ export default function AIIdentityCoachPage() {
         if (data.messages && data.messages.length > 0) {
           setMessages(data.messages);
         }
+        if (data.freeMessagesRemaining !== undefined) {
+          setFreeMessagesRemaining(data.freeMessagesRemaining);
+        }
+        if (data.freeLimitReached && !hasFullAccess) {
+          const hasAccess = await checkFullAccess();
+          if (!hasAccess) {
+            setView('limitReached');
+          }
+        }
       }
     } catch {
       // Start fresh
     }
+  }, [hasFullAccess, checkFullAccess]);
+
+  // Get access code from localStorage
+  const getAccessCode = useCallback((): string | undefined => {
+    try {
+      const storedAccess = localStorage.getItem('tamkinly_access');
+      if (storedAccess) {
+        const access = JSON.parse(storedAccess);
+        return access.code;
+      }
+    } catch {}
+    return undefined;
   }, []);
 
   // Send message
@@ -454,9 +511,24 @@ export default function AIIdentityCoachPage() {
         const res = await fetch('/api/ai-coach', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sessionId, message: trimmedContent }),
+          body: JSON.stringify({
+            sessionId,
+            message: trimmedContent,
+            accessCode: hasFullAccess ? getAccessCode() : undefined,
+          }),
         });
         const data = await res.json();
+
+        // Handle free limit reached
+        if (res.status === 403 && data.freeLimitReached) {
+          setMessages((prev) => prev.slice(0, -1));
+          setFreeMessagesRemaining(0);
+          if (!hasFullAccess) {
+            setView('limitReached');
+            return;
+          }
+        }
+
         if (!res.ok) {
           if (data.unavailable) {
             setError(getText('AI Coach is temporarily unavailable. Please try again.', 'مدرب الهوية غير متاح مؤقتاً. يرجى المحاولة مرة أخرى.'));
@@ -466,8 +538,14 @@ export default function AIIdentityCoachPage() {
           setMessages((prev) => prev.slice(0, -1));
           return;
         }
+
         const assistantMessage: Message = { role: 'assistant', content: data.response, timestamp: new Date().toISOString() };
         setMessages((prev) => [...prev, assistantMessage]);
+
+        // Update free message count
+        if (data.freeMessagesRemaining !== undefined) {
+          setFreeMessagesRemaining(data.freeMessagesRemaining);
+        }
       } catch {
         setError(getText('Network error. Please check your connection.', 'خطأ في الاتصال. يرجى التحقق من اتصالك.'));
         setMessages((prev) => prev.slice(0, -1));
@@ -475,7 +553,7 @@ export default function AIIdentityCoachPage() {
         setIsLoading(false);
       }
     },
-    [sessionId, isLoading, getText]
+    [sessionId, isLoading, getText, hasFullAccess, getAccessCode]
   );
 
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); sendMessage(inputValue); };
@@ -488,6 +566,7 @@ export default function AIIdentityCoachPage() {
     setSessionId(newId);
     setMessages([]);
     setError(null);
+    setFreeMessagesRemaining(2);
     localStorage.setItem('tamkinly_coach_session', newId);
   };
 
@@ -497,31 +576,25 @@ export default function AIIdentityCoachPage() {
     startNewConversation();
   };
 
-  // Loading state while checking access
-  if (isCheckingAccess) {
-    return (
-      <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-[#3DD4B0] animate-spin" />
-      </div>
-    );
-  }
+  // Handle access granted from limit reached screen
+  const handleAccessGranted = useCallback(async () => {
+    setHasFullAccess(true);
+    setView('chat');
+  }, []);
 
-  // Landing page - SSR handles the visual landing, auto-check access here
+  // Landing page
   if (view === 'landing') {
-    // Auto-trigger access check since the SSR component handles the visual landing
-    if (!isCheckingAccess) {
-      checkAccess();
-    }
-    return null;
+    return <AICoachLanding locale={locale} onStartChat={startChat} />;
   }
 
-  // Access gate
-  if (view === 'gate') {
-    return <AccessGate locale={locale} onAccessGranted={() => { setView('chat'); initChat(); }} />;
+  // Free limit reached
+  if (view === 'limitReached') {
+    return <FreeLimitReached locale={locale} onAccessGranted={handleAccessGranted} />;
   }
 
   // Chat interface
   const hasMessages = messages.length > 0;
+  const userMsgCount = messages.filter(m => m.role === 'user').length;
   const starters = [
     { en: "I feel stuck and don't know how to move forward", ar: 'أشعر بالتعثر ولا أعرف كيف أتحرك للأمام' },
     { en: 'Help me understand my identity gap', ar: 'ساعدني في فهم فجوة هويتي' },
@@ -550,12 +623,21 @@ export default function AIIdentityCoachPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-[10px] border-[#3DD4B0]/50 text-[#1F6F78] bg-[#3DD4B0]/10">
-                {getText('BUNDLE', 'الباقة الشاملة')}
-              </Badge>
+              {hasFullAccess ? (
+                <Badge variant="outline" className="text-[10px] border-[#3DD4B0]/50 text-[#1F6F78] bg-[#3DD4B0]/10">
+                  {getText('FULL ACCESS', 'الباقة الشاملة')}
+                </Badge>
+              ) : (
+                <Badge variant="outline" className="text-[10px] border-[#cde7e9] text-[#2A8A94] bg-[#e6f3f4]">
+                  {freeMessagesRemaining > 0
+                    ? getText(`${freeMessagesRemaining} free left`, `\u0645\u062a\u0628\u0642\u064a ${freeMessagesRemaining} \u0645\u062c\u0627\u0646\u0627\u064b`)
+                    : getText('Free limit reached', '\u0627\u0646\u062a\u0647\u062a \u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0645\u062c\u0627\u0646\u064a\u0629')
+                  }
+                </Badge>
+              )}
               {hasMessages && (
                 <>
-                  <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-[#FC6D26]" onClick={clearConversation} title={getText('Clear', 'مسح')}>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-[#C97B7B]" onClick={clearConversation} title={getText('Clear', 'مسح')}>
                     <Trash2 className="w-4 h-4" />
                   </Button>
                   <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-[#3DD4B0]" onClick={startNewConversation} title={getText('New', 'جديد')}>
@@ -568,6 +650,19 @@ export default function AIIdentityCoachPage() {
         </div>
       </div>
 
+      {/* Free trial notice */}
+      {!hasFullAccess && freeMessagesRemaining > 0 && userMsgCount > 0 && (
+        <div className="bg-[#3DD4B0]/5 border-b border-[#3DD4B0]/20 px-4 py-2 text-center">
+          <p className="text-xs text-[#1F6F78]">
+            <Gift className="w-3 h-3 inline mr-1" />
+            {getText(
+              `You have ${freeMessagesRemaining} free question${freeMessagesRemaining > 1 ? 's' : ''} remaining. Get Premium ($17/mo) or Mastery ($27/mo) for unlimited access.`,
+              `\u0645\u062a\u0628\u0642\u064a ${freeMessagesRemaining} \u0633\u0624\u0627\u0644${freeMessagesRemaining > 1 ? '\u0627\u0646' : ''} \u0645\u062c\u0627\u0646\u0627\u064b. \u0627\u062d\u0635\u0644 \u0639\u0644\u0649 \u0627\u0644\u0628\u0627\u0642\u0629 \u0627\u0644\u0634\u0627\u0645\u0644\u0629 \u0644\u0648\u0635\u0648\u0644 \u063a\u064a\u0631 \u0645\u062d\u062f\u0648\u062f.`
+            )}
+          </p>
+        </div>
+      )}
+
       {/* Messages */}
       <div className="flex-1 overflow-y-auto">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl py-4">
@@ -578,6 +673,12 @@ export default function AIIdentityCoachPage() {
                   <Sparkles className="w-8 h-8 text-[#3DD4B0]" />
                 </div>
                 <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-3">{getText('AI Identity Coach', 'مدرب الهوية الذكي')}</h2>
+                {!hasFullAccess && (
+                  <p className="text-[#1F6F78] text-sm mb-2 font-medium">
+                    <Gift className="w-4 h-4 inline mr-1" />
+                    {getText('You have 2 free questions', 'لديك سؤالان مجانيان')}
+                  </p>
+                )}
                 <p className="text-slate-600 mb-8">{getText('Your personal transformation companion. Ask anything about identity change, habits, or the Tamkinly system.', 'رفيق تحوّلك الشخصي. اسأل أي شيء عن تغيير الهوية أو العادات أو نظام تمكينلي.')}</p>
                 <div className="space-y-3">
                   {starters.map((s, i) => (
@@ -595,10 +696,10 @@ export default function AIIdentityCoachPage() {
             </>
           )}
           {error && (
-            <div className="flex items-center gap-3 bg-[#FFF3E8] border border-[#FFB088] rounded-xl px-4 py-3 mb-4">
-              <AlertCircle className="w-5 h-5 text-[#FC6D26] flex-shrink-0" />
-              <p className="text-sm text-[#E55A10] flex-1">{error}</p>
-              <Button variant="ghost" size="sm" className="text-[#FC6D26] hover:text-[#C44D0A] hover:bg-[#FFE4CC]" onClick={() => { setError(null); const lastUserMsg = [...messages].reverse().find((m) => m.role === 'user'); if (lastUserMsg) { setMessages((prev) => prev.slice(0, -1)); sendMessage(lastUserMsg.content); } }}>
+            <div className="flex items-center gap-3 bg-[#F8EEEF] border border-[#D4A8AE] rounded-xl px-4 py-3 mb-4">
+              <AlertCircle className="w-5 h-5 text-[#C97B7B] flex-shrink-0" />
+              <p className="text-sm text-[#A86565] flex-1">{error}</p>
+              <Button variant="ghost" size="sm" className="text-[#C97B7B] hover:text-[#A86565] hover:bg-[#F0E0E2]" onClick={() => { setError(null); const lastUserMsg = [...messages].reverse().find((m) => m.role === 'user'); if (lastUserMsg) { setMessages((prev) => prev.slice(0, -1)); sendMessage(lastUserMsg.content); } }}>
                 <RefreshCw className="w-4 h-4" />
               </Button>
             </div>
@@ -619,7 +720,13 @@ export default function AIIdentityCoachPage() {
             </Button>
           </form>
           <p className="text-[10px] text-slate-400 mt-1.5 text-center">
-            {getText('AI Coach provides guidance, not therapy. Press Enter to send, Shift+Enter for new line.', 'يوفر المدرب إرشادات وليس علاجاً. اضغط Enter للإرسال، Shift+Enter لسطر جديد.')}
+            {hasFullAccess
+              ? getText('AI Coach provides guidance, not therapy. Press Enter to send, Shift+Enter for new line.', 'يوفر المدرب إرشادات وليس علاجاً. اضغط Enter للإرسال، Shift+Enter لسطر جديد.')
+              : getText(
+                  `${freeMessagesRemaining} free question${freeMessagesRemaining !== 1 ? 's' : ''} remaining`,
+                  `\u0645\u062a\u0628\u0642\u064a ${freeMessagesRemaining} \u0633\u0624\u0627\u0644${freeMessagesRemaining !== 1 ? '\u0627\u0646' : ''} \u0645\u062c\u0627\u0646\u0627\u064b`
+                )
+            }
           </p>
         </div>
       </div>

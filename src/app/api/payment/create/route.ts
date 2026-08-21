@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { tahweelPayment } from '@/lib/tahweel-payment';
+import { applySecurity, CHECKOUT_RATE_LIMIT } from '@/lib/security';
 
 // Sanitize string to ASCII-safe characters only (for URL construction and headers)
 function sanitizeToAscii(str: string): string {
@@ -9,6 +10,11 @@ function sanitizeToAscii(str: string): string {
 // POST - Create a payment session with Tahweel
 export async function POST(request: NextRequest) {
   try {
+  // Security: CSRF + rate limit
+  const securityBlocked = await applySecurity(request, CHECKOUT_RATE_LIMIT);
+  if (securityBlocked) return securityBlocked;
+
+
     const body = await request.json();
     const { 
       amount, 

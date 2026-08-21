@@ -85,7 +85,11 @@ function HeroSection() {
               <span className="text-[#3DD4B0]">{t("hero.titleHighlight")}</span>
             </h1>
             
-            {/* Subheadline */}
+            {/* Subheadline - What happens next */}
+            <p className="text-base text-slate-400 font-medium mb-3 tracking-wide">
+              {t("hero.subheadline")}
+            </p>
+            {/* Supporting detail */}
             <p className="text-lg sm:text-xl text-slate-300 leading-relaxed mb-8">
               {t("hero.subtitle")}&nbsp;<span className="text-white font-semibold">{t("hero.subtitleHighlight")}</span>
             </p>
@@ -217,25 +221,25 @@ function DiscoverSection() {
       icon: Heart,
       titleKey: "discover.emotionalRegulation.title",
       descKey: "discover.emotionalRegulation.description",
-      color: "#E57373"
+      color: "#C97B7B"
     },
     {
       icon: Brain,
       titleKey: "discover.decisionQuality.title",
       descKey: "discover.decisionQuality.description",
-      color: "#64B5F6"
+      color: "#2A8A94"
     },
     {
       icon: TrendingUp,
       titleKey: "discover.progressMomentum.title",
       descKey: "discover.progressMomentum.description",
-      color: "#FFB74D"
+      color: "#2A8A94"
     },
     {
       icon: Target,
       titleKey: "discover.lifeAlignment.title",
       descKey: "discover.lifeAlignment.description",
-      color: "#9333EA"
+      color: "#1F6F78"
     }
   ];
 
@@ -689,14 +693,14 @@ function SelfIdentificationSection() {
       textKey: "selfIdentification.scenario3Text",
       bottomKey: "selfIdentification.scenario3Bottom",
       icon: Layers,
-      color: "#64B5F6"
+      color: "#2A8A94"
     },
     {
       titleKey: "selfIdentification.scenario4Title",
       textKey: "selfIdentification.scenario4Text",
       bottomKey: "selfIdentification.scenario4Bottom",
       icon: AlignCenter,
-      color: "#FFB74D"
+      color: "#2A8A94"
     }
   ];
 
@@ -817,6 +821,79 @@ function CTASectionLazy() {
 // ============================================
 // MAIN PAGE COMPONENT
 // ============================================
+
+// ============================================
+// RECOVERY SECTION — Integration into Homepage
+// ============================================
+function RecoverySection() {
+  const t = useTranslations("homePage");
+  const { direction } = useLocale();
+
+  return (
+    <section className="py-20 lg:py-28 bg-white" dir={direction}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <Badge className="mb-4 bg-[#1F6F78]/10 text-[#1F6F78] border-[#1F6F78]/20">
+            <Heart className="w-3.5 h-3.5 mr-1.5" />
+            {t("recoveryBadge")}
+          </Badge>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-6">
+            {t("recoveryTitle")}
+          </h2>
+          <p className="text-lg text-slate-600 leading-relaxed">
+            {t("recoverySubtitle")}
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+          {/* Trauma Recovery Card */}
+          <Link href="/recovery/trc" className="group">
+            <Card className="h-full border-0 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 bg-gradient-to-br from-[#F6F8FA] to-white">
+              <CardContent className="p-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 bg-[#1F6F78]/10 group-hover:scale-110 transition-transform duration-300">
+                  <Shield className="h-7 w-7 text-[#1F6F78]" />
+                </div>
+                <h3 className="font-semibold text-xl text-[#0F1C2E] mb-3">
+                  {t("recoveryTrauma")}
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {t("recoveryTraumaDesc")}
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+
+          {/* Porn Recovery Card */}
+          <Link href="/recovery/porn-recovery" className="group">
+            <Card className="h-full border-0 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 bg-gradient-to-br from-[#F0FDF9] to-white">
+              <CardContent className="p-8">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 bg-[#3DD4B0]/10 group-hover:scale-110 transition-transform duration-300">
+                  <Brain className="h-7 w-7 text-[#3DD4B0]" />
+                </div>
+                <h3 className="font-semibold text-xl text-[#0F1C2E] mb-3">
+                  {t("recoveryPorn")}
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {t("recoveryPornDesc")}
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+
+        <div className="text-center">
+          <Link href="/recovery">
+            <Button className="bg-[#1F6F78] text-white hover:bg-[#1F6F78]/90 font-semibold px-8 py-3 text-base shadow-sm hover:shadow-md transition-all">
+              {t("recoveryCTA")}
+              <ArrowRight className="w-4 h-4 ml-2 rtl:ml-0 rtl:mr-2" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -825,6 +902,7 @@ export default function Home() {
 
       <HeroSection />
       <SelfIdentificationSection />
+      <RecoverySection />
       <QuizPreviewWidget />
       <DiscoverSectionLazy />
       <HowItWorksSectionLazy />

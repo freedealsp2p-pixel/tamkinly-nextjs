@@ -142,11 +142,11 @@ export default function OrdersAdminPage() {
       case 'COMPLETED':
         return <Badge className="bg-green-100 text-green-700"><CheckCircle2 className="w-3 h-3 mr-1" />Completed</Badge>;
       case 'CANCELLED':
-        return <Badge className="bg-[#FFE4CC] text-[#E55A10]"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
+        return <Badge className="bg-[#F0E0E2] text-[#A86565]"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
       case 'PROCESSING':
         return <Badge className="bg-blue-100 text-blue-700"><RefreshCw className="w-3 h-3 mr-1" />Processing</Badge>;
       default:
-        return <Badge className="bg-amber-100 text-amber-700"><Clock className="w-3 h-3 mr-1" />Pending</Badge>;
+        return <Badge className="bg-[#f8eded] text-[#a86060]"><Clock className="w-3 h-3 mr-1" />Pending</Badge>;
     }
   };
 
@@ -175,7 +175,7 @@ export default function OrdersAdminPage() {
                 className="border-[#1F6F78]/20 focus:border-[#3DD4B0]"
               />
               {authError && (
-                <p className="text-sm text-[#FC6D26]">{authError}</p>
+                <p className="text-sm text-[#C97B7B]">{authError}</p>
               )}
             </div>
             <Button onClick={handleLogin} className="w-full bg-[#1F6F78] hover:bg-[#1F6F78]/90 text-white">
@@ -235,8 +235,8 @@ export default function OrdersAdminPage() {
           <Card className="border-0 shadow-sm">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-amber-600" />
+                <div className="w-10 h-10 rounded-lg bg-[#f8eded] flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-[#C97B7B]" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-[#0F1C2E]">{pendingOrders}</p>
@@ -415,7 +415,7 @@ export default function OrdersAdminPage() {
                         <Button
                           onClick={() => updateOrderStatus(selectedOrder.id, 'CANCELLED')}
                           variant="outline"
-                          className="w-full border-[#FFB088] text-[#FC6D26] hover:bg-[#FFF3E8]"
+                          className="w-full border-[#D4A8AE] text-[#C97B7B] hover:bg-[#F8EEEF]"
                         >
                           <XCircle className="w-4 h-4 mr-1" />
                           Cancel Order

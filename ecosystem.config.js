@@ -1,44 +1,55 @@
 module.exports = {
   apps: [
     {
-      name: 'tamkinly-nextjs',
+      name: 'tamkinly-prod',
       script: 'node',
       args: '.next/standalone/server.js',
       cwd: '/var/www/tamkinly',
       instances: 1,
       exec_mode: 'fork',
-      
-      // Memory management - increased for better stability
-      max_memory_restart: '512M',
-      node_args: '--max-old-space-size=512',
-      
-      // Auto restart
+      max_memory_restart: '450M',
+      node_args: '--max-old-space-size=384 --optimize-for-size --gc-interval=100',
       watch: false,
       ignore_watch: ['node_modules', '.next', 'logs'],
-      
-      // Environment variables
       env: {
         NODE_ENV: 'production',
         PORT: 3001,
         HOSTNAME: '0.0.0.0',
+        NODE_OPTIONS: '--max-old-space-size=384',
+        DATABASE_URL: process.env.DATABASE_URL,
+        NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+        NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+        ENCRYPTION_KEY: process.env.ENCRYPTION_KEY,
+        NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+        NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+        BREVO_API_KEY: process.env.BREVO_API_KEY,
+        BREVO_SENDER_EMAIL: process.env.BREVO_SENDER_EMAIL,
+        BREVO_SENDER_NAME: process.env.BREVO_SENDER_NAME,
+        BREVO_LIST_ALL: process.env.BREVO_LIST_ALL,
+        BREVO_LIST_CUSTOMERS: process.env.BREVO_LIST_CUSTOMERS,
+        BREVO_LIST_TRIAL: process.env.BREVO_LIST_TRIAL,
+        BREVO_LIST_QUIZ: process.env.BREVO_LIST_QUIZ,
+        BREVO_LIST_NEWSLETTER: process.env.BREVO_LIST_NEWSLETTER,
+        BREVO_LIST_PREMIUM: process.env.BREVO_LIST_PREMIUM,
+        BREVO_LIST_BUNDLE: process.env.BREVO_LIST_BUNDLE,
+        BREVO_LIST_INACTIVE: process.env.BREVO_LIST_INACTIVE,
+        TRIBUTE_API_KEY: process.env.TRIBUTE_API_KEY,
+        TRIBUTE_SUBSCRIPTION_BASIC: process.env.TRIBUTE_SUBSCRIPTION_BASIC,
+        TRIBUTE_SUBSCRIPTION_PREMIUM: process.env.TRIBUTE_SUBSCRIPTION_PREMIUM,
+        TRIBUTE_SUBSCRIPTION_MASTERY: process.env.TRIBUTE_SUBSCRIPTION_MASTERY,
+        GROQ_API_KEY: process.env.GROQ_API_KEY,
+        CRON_API_KEY: process.env.CRON_API_KEY,
       },
-      
-      // Logging
       error_file: './logs/pm2-error.log',
       out_file: './logs/pm2-out.log',
       log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
       merge_logs: true,
-      
-      // Restart on crash
       exp_backoff_restart_delay: 100,
       max_restarts: 10,
       restart_delay: 3000,
-      
-      // Graceful shutdown
       kill_timeout: 5000,
       listen_timeout: 10000,
       wait_ready: true,
     },
   ],
 };
-

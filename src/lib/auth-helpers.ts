@@ -24,7 +24,7 @@ export async function requireAdmin() {
 
 export async function requireTier(minTier: string) {
   const user = await requireAuth();
-  const tiers = ['FREE', 'TRIAL', 'BASIC', 'PREMIUM', 'BUNDLE'];
+  const tiers = ['FREE', 'BASIC', 'BASIC', 'PREMIUM', 'MASTERY'];
   const userTierIndex = tiers.indexOf(user.accessTier);
   const requiredTierIndex = tiers.indexOf(minTier);
   

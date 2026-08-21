@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 import { readdir } from 'fs/promises';
 import path from 'path';
 
 // Get content stats
 export async function GET(request: NextRequest) {
   try {
-    const password = request.nextUrl.searchParams.get('password');
-    
-    if (!password || !verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    const session = await getAdminSession();
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     // Count blog articles (static pages in /blog directory)
     const blogDir = path.join(process.cwd(), 'src/app/blog');

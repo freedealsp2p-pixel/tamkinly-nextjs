@@ -9,6 +9,10 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function AndTheBambooKeptGrowingArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -156,21 +160,21 @@ export default function AndTheBambooKeptGrowingArticle() {
                   <p className="text-sm text-slate-500">{getText("Doubt creeps in. Nothing visible. But roots are forming.", "يتسلل الشك. لا شيء مرئي. لكن الجذور تتشكل.")}</p>
                 </CardContent>
               </Card>
-              <Card className="border-0 shadow-sm ring-2 ring-[#FFE4CC]">
+              <Card className="border-0 shadow-sm ring-2 ring-[#F0E0E2]">
                 <CardContent className="p-5 text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#FFF3E8] flex items-center justify-center mx-auto mb-3">
-                    <Eye className="h-6 w-6 text-[#FF8C42]" />
+                  <div className="w-12 h-12 rounded-full bg-[#F0F8F8] flex items-center justify-center mx-auto mb-3">
+                    <Eye className="h-6 w-6 text-[#B88A8E]" />
                   </div>
-                  <h3 className="font-semibold text-[#FC6D26] mb-1">{getText("Year 3", "العام ٣")}</h3>
+                  <h3 className="font-semibold text-[#1F6F78] mb-1">{getText("Year 3", "العام ٣")}</h3>
                   <p className="text-sm text-slate-500">{getText("The danger zone. Most people quit here.", "منطقة الخطر. معظم الناس يستسلمون هنا.")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-5 text-center">
-                  <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-3">
-                    <Shield className="h-6 w-6 text-amber-500" />
+                  <div className="w-12 h-12 rounded-full bg-[#e6f3f4] flex items-center justify-center mx-auto mb-3">
+                    <Shield className="h-6 w-6 text-[#2A8A94]" />
                   </div>
-                  <h3 className="font-semibold text-amber-600 mb-1">{getText("Year 4", "العام ٤")}</h3>
+                  <h3 className="font-semibold text-[#2A8A94] mb-1">{getText("Year 4", "العام ٤")}</h3>
                   <p className="text-sm text-slate-500">{getText("Deepest roots. Maximum resilience. Almost there.", "أعمق الجذور. أقصى مرونة. على وشك.")}</p>
                 </CardContent>
               </Card>
@@ -364,35 +368,13 @@ export default function AndTheBambooKeptGrowingArticle() {
       </section>
 
       {/* Article Navigation */}
-      <ArticleNavigation currentSlug="and-the-bamboo-kept-growing" />
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="quiz" />
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Start Building Your Roots Today", "ابدأ ببناء جذورك اليوم")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("The Daily Reflection Practice helps you track your invisible progress and build evidence that your transformation is working — even when the surface looks unchanged.", "ممارسة التأمل اليومي تساعدك على تتبع تقدمك غير المرئي وبناء أدلة على أن تحولك يعمل — حتى عندما يبدو السطح بدون تغيير.")}
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/apps/daily-reflection-practice">
-                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  {getText("Start Daily Reflection", "ابدأ التأمل اليومي")}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/apps/identity-gap-assessment">
-                <Button variant="white" size="lg" className="px-8 font-semibold">
-                  {getText("Measure Your Gap", "قِس فجوتك")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
+      <ArticleNavigation currentSlug="and-the-bamboo-kept-growing" />
+        <BlogConversionSection />
+      </article>
     </>
   );
 }
+

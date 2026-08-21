@@ -275,7 +275,7 @@ export default function ReferralPage() {
                       <div key={ref.id} className="flex items-center justify-between p-3 rounded-lg bg-slate-50">
                         <div className="flex items-center gap-3">
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            ref.status === 'COMPLETED' ? 'bg-[#3DD4B0]/20' : ref.status === 'REGISTERED' ? 'bg-amber-100' : 'bg-slate-200'
+                            ref.status === 'COMPLETED' ? 'bg-[#3DD4B0]/20' : ref.status === 'REGISTERED' ? 'bg-[#e6f3f4]' : 'bg-slate-200'
                           }`}>
                             {ref.status === 'COMPLETED' ? <Check className="w-4 h-4 text-[#3DD4B0]" /> : <Clock className="w-4 h-4 text-slate-400" />}
                           </div>

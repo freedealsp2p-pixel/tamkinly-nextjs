@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { nanoid } from 'nanoid';
+import { applySecurity, API_RATE_LIMIT } from '@/lib/security';
 
 // Generate a unique ticket number
 function generateTicketNumber(): string {
@@ -10,6 +11,11 @@ function generateTicketNumber(): string {
 // POST - Create a new support ticket
 export async function POST(request: NextRequest) {
   try {
+  // Security: CSRF + rate limit
+  const securityBlocked = await applySecurity(request, API_RATE_LIMIT);
+  if (securityBlocked) return securityBlocked;
+
+
     const body = await request.json();
     const { name, email, subject, category, message } = body;
 

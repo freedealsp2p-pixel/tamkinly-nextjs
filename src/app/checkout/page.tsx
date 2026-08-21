@@ -27,7 +27,8 @@ import {
   Copy,
   Check,
   ExternalLink,
-  CreditCard
+  CreditCard,
+  Smartphone
 } from 'lucide-react';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
 import { getCart, type CartData } from '@/lib/cart-client';
@@ -53,7 +54,8 @@ const BANK_CONFIG = {
   bankAddress: '89-16 Jamaica Ave, Woodhaven, NY, 11421, United States'
 };
 
-// Product data with bilingual support
+// Product data with bilingual support — NEW MODEL: 3 monthly subscription tiers
+// (FREE is shown separately as "Get started free" lead magnet, not here)
 const productsData: Record<string, {
   id: string;
   name: string;
@@ -65,54 +67,86 @@ const productsData: Record<string, {
   tierAr: string;
   features: string[];
   featuresAr: string[];
+  billingPeriod: 'monthly';
 }> = {
-  'trial': {
-    id: "trial",
-    name: "7-Day Trial",
-    nameAr: "تجربة 7 أيام",
+  'basic': {
+    id: "basic",
+    name: "Basic (Monthly)",
+    nameAr: "أساسي (شهري)",
     price: 7,
     comparePrice: 15,
     icon: Clock,
-    tier: "TRIAL",
-    tierAr: "تجربة",
-    features: ["7-Day Guided Journey", "Daily identity prompts", "Evidence tracking", "Progress dashboard"],
-    featuresAr: ["رحلة موجهة لمدة 7 أيام", "مطالبات الهوية اليومية", "تتبع الأدلة", "لوحة تتبع التقدم"]
-  },
-  'planner': {
-    id: "planner",
-    name: "Identity Recode Planner",
-    nameAr: "مخطط إعادة صياغة الهوية",
-    price: 17,
-    comparePrice: 29,
-    icon: Calendar,
     tier: "BASIC",
     tierAr: "أساسي",
-    features: ["30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs"],
-    featuresAr: ["مخطط الهوية لمدة 30 يوم", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "PDF رقمي + للطباعة"]
+    features: ["7-Day Guided Discipline Journey", "Daily identity prompts", "Evidence tracking basics", "Progress dashboard", "7 Days System PDF (downloadable)", "Cancel anytime"],
+    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مطالبات الهوية اليومية", "أساسيات تتبع الأدلة", "لوحة تتبع التقدم", "PDF نظام 7 أيام (قابل للتحميل)", "إلغاء في أي وقت"],
+    billingPeriod: "monthly"
   },
   'premium': {
     id: "premium",
-    name: "Premium Transformation",
-    nameAr: "التحول المتميز",
-    price: 27,
-    comparePrice: 44,
-    icon: Award,
+    name: "Premium (Monthly)",
+    nameAr: "مميز (شهري)",
+    price: 17,
+    comparePrice: 29,
+    icon: Calendar,
     tier: "PREMIUM",
-    tierAr: "متميز",
-    features: ["Everything in Planner", "Decision Pattern Analysis", "Evidence Tracking System", "Progress Dashboard"],
-    featuresAr: ["كل ما في المخطط", "تحليل أنماط القرارات", "نظام تتبع الأدلة", "لوحة تتبع التقدم"]
+    tierAr: "مميز",
+    features: ["Everything in Basic", "30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs", "Decision Pattern Analysis", "Cancel anytime"],
+    featuresAr: ["كل ما في الباقة الأساسية", "مخطط الهوية لمدة 30 يوم", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "PDF رقمي + للطباعة", "تحليل أنماط القرارات", "إلغاء في أي وقت"],
+    billingPeriod: "monthly"
+  },
+  'mastery': {
+    id: "mastery",
+    name: "Mastery (Monthly)",
+    nameAr: "إتقان (شهري)",
+    price: 27,
+    comparePrice: 91,
+    icon: Award,
+    tier: "MASTERY",
+    tierAr: "إتقان",
+    features: ["Everything in Premium", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support", "Emotion Regulation Toolkit", "Cancel anytime"],
+    featuresAr: ["كل ما في الباقة المميزة", "جميع التطبيقات التفاعلية", "مدرب الهوية بالذكاء الاصطناعي", "مجتمع التحول", "دعم ذو أولوية", "أدوات تنظيم المشاعر", "إلغاء في أي وقت"],
+    billingPeriod: "monthly"
+  },
+  // Legacy aliases — for backward compatibility with old links/bookmarks
+  'trial': {
+    id: "basic",
+    name: "Basic (Monthly)",
+    nameAr: "أساسي (شهري)",
+    price: 7,
+    comparePrice: 15,
+    icon: Clock,
+    tier: "BASIC",
+    tierAr: "أساسي",
+    features: ["7-Day Guided Discipline Journey", "Daily identity prompts", "Evidence tracking basics", "Progress dashboard", "Cancel anytime"],
+    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مطالبات الهوية اليومية", "أساسيات تتبع الأدلة", "لوحة تتبع التقدم", "إلغاء في أي وقت"],
+    billingPeriod: "monthly"
+  },
+  'planner': {
+    id: "premium",
+    name: "Premium (Monthly)",
+    nameAr: "مميز (شهري)",
+    price: 17,
+    comparePrice: 29,
+    icon: Calendar,
+    tier: "PREMIUM",
+    tierAr: "مميز",
+    features: ["Everything in Basic", "30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs", "Decision Pattern Analysis", "Cancel anytime"],
+    featuresAr: ["كل ما في الباقة الأساسية", "مخطط الهوية لمدة 30 يوم", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "PDF رقمي + للطباعة", "تحليل أنماط القرارات", "إلغاء في أي وقت"],
+    billingPeriod: "monthly"
   },
   'bundle': {
-    id: "bundle",
-    name: "Complete Bundle",
-    nameAr: "الحزمة الكاملة",
-    price: 47,
+    id: "mastery",
+    name: "Mastery (Monthly)",
+    nameAr: "إتقان (شهري)",
+    price: 27,
     comparePrice: 91,
-    icon: Monitor,
-    tier: "BUNDLE",
-    tierAr: "حزمة",
-    features: ["All PDF products", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support"],
-    featuresAr: ["جميع منتجات PDF", "جميع التطبيقات التفاعلية", "مدرب الهوية AI", "مجتمع التحول", "دعم ذو أولوية"]
+    icon: Award,
+    tier: "MASTERY",
+    tierAr: "إتقان",
+    features: ["Everything in Premium", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support", "Emotion Regulation Toolkit", "Cancel anytime"],
+    featuresAr: ["كل ما في الباقة المميزة", "جميع التطبيقات التفاعلية", "مدرب الهوية بالذكاء الاصطناعي", "مجتمع التحول", "دعم ذو أولوية", "أدوات تنظيم المشاعر", "إلغاء في أي وقت"],
+    billingPeriod: "monthly"
   }
 };
 
@@ -261,9 +295,7 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
       }
 
       setOrderNumber(data.orderNumber);
-      if (data.accessCode) {
-        setAccessCode(data.accessCode);
-      }
+      // Access code no longer exposed - sent via email after payment confirmation
       setSuccess(true);
     } catch (err) {
       console.error('Confirmation error:', err);
@@ -316,26 +348,34 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
       <div className="min-h-screen bg-[#F6F8FA]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-lg mx-auto text-center">
-            <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="w-12 h-12 text-green-600" />
+            {/* Awaiting confirmation - amber icon instead of green check */}
+            <div className="w-24 h-24 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-6">
+              <Clock className="w-12 h-12 text-amber-600" />
             </div>
-            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">{t('orderCompleted')}</h1>
-            <p className="text-[#8A94A6] mb-8">{t('thankYouPurchase')}</p>
+            <h1 className="text-3xl font-bold text-[#0F1C2E] mb-4">{getText('Order Submitted', 'تم إرسال الطلب')}</h1>
+            <p className="text-[#8A94A6] mb-8">{getText('Your order has been received and is awaiting payment confirmation.', 'تم استلام طلبك وهو بانتظار تأكيد الدفع.')}</p>
 
-            {accessCode && (
-              <Card className="border-2 border-[#3DD4B0] shadow-sm mb-6">
-                <CardContent className="p-6">
-                  <p className="text-sm font-medium text-[#1F6F78] mb-2">{t('yourAccessCode')}</p>
-                  <div className="flex items-center justify-center gap-2">
-                    <p className="text-2xl font-mono font-bold text-[#0F1C2E]">{accessCode}</p>
-                    <Button variant="ghost" size="sm" onClick={() => copyToClipboard(accessCode)} className="h-8 w-8 p-0">
-                      {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
-                    </Button>
-                  </div>
-                  <p className="text-xs text-[#8A94A6] mt-2">{t('saveCode')}</p>
-                </CardContent>
-              </Card>
-            )}
+            <Card className="border-2 border-amber-300 shadow-sm mb-6 bg-gradient-to-br from-white to-amber-50">
+              <CardContent className="p-6 text-center">
+                <div className="w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-7 h-7 text-amber-700" />
+                </div>
+                <p className="text-sm font-medium text-amber-800 mb-2">{getText('Access Token Will Be Sent After Payment Verification', 'سيتم إرسال رمز الوصول بعد التحقق من الدفع')}</p>
+                <div className="bg-[#0F1C2E] rounded-lg px-4 py-3 mb-3">
+                  <p className="text-white font-medium">{formData.email}</p>
+                </div>
+                <p className="text-xs text-[#8A94A6] mb-3">
+                  {getText(
+                    'IMPORTANT: Your access token will ONLY be sent after your payment is verified. This typically takes a few minutes for card payments, or up to 24 hours for bank transfers. Do NOT share your order reference with anyone.',
+                    'مهم: سيتم إرسال رمز الوصول فقط بعد التحقق من دفعك. يستغرق ذلك عادةً بضع دقائق للبطاقات، أو حتى 24 ساعة للتحويل البنكي. لا تشارك مرجع طلبك مع أحد.'
+                  )}
+                </p>
+                <div className="flex items-center justify-center gap-2 text-amber-700">
+                  <Shield className="w-4 h-4" />
+                  <span className="text-xs">{getText('Payment Verification Required', 'يتطلب التحقق من الدفع')}</span>
+                </div>
+              </CardContent>
+            </Card>
 
             <Card className="border-0 shadow-sm mb-8">
               <CardContent className="p-6">
@@ -347,12 +387,12 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/apps">
-                <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-8">
-                  {t('accessYourApps')}
+                <Button className="bg-[#1F6F78] text-white hover:bg-[#154d54] h-12 px-8">
+                  {getText('Browse Free Apps', 'تصفح التطبيقات المجانية')}
                 </Button>
               </Link>
-              <Link href="/products">
-                <Button variant="outline" className="h-12 px-8">{t('continueShopping')}</Button>
+              <Link href="/contact">
+                <Button variant="outline" className="h-12 px-8">{getText('Contact Support', 'اتصل بالدعم')}</Button>
               </Link>
             </div>
           </div>
@@ -465,6 +505,117 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
                       </div>
                     </div>
                     <p className="text-center text-sm text-[#8A94A6] mt-2">{t('bankTransferTime')}</p>
+                    
+                    {/* Coming Soon Payment Methods - Tahweel + Coda */}
+                    <div className="relative my-6"><Separator /><span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm font-medium text-[#0F1C2E]">{t('comingSoonPayments')}</span></div>
+                    <div className="space-y-4">
+                      <p className="text-center text-sm text-[#8A94A6]">{t('comingSoonPaymentsDesc')}</p>
+
+                      {/* Tahweel Card Payment - Coming Soon */}
+                      <div className="relative bg-gradient-to-br from-slate-100 to-slate-50 rounded-xl p-6 border-2 border-dashed border-slate-300">
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-amber-100 text-amber-800 border-amber-300 hover:bg-amber-200 px-3 py-1 text-xs font-semibold">
+                            <Clock className="w-3 h-3 mr-1 inline" />
+                            {t('comingSoonBadge')}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center gap-3 mb-4 pr-24">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1F6F78] to-[#0F4F56] flex items-center justify-center">
+                            <CreditCard className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-lg text-[#0F1C2E]">{t('tahweelComingSoon')}</p>
+                            <p className="text-slate-500 text-sm">{t('tahweelComingSoonDesc')}</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">Visa</span>
+                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">Mastercard</span>
+                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">mada</span>
+                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">Apple Pay</span>
+                        </div>
+                      </div>
+
+                      {/* Coda Digital Wallets - Coming Soon */}
+                      <div className="relative bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 border-2 border-dashed border-purple-200">
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-amber-100 text-amber-800 border-amber-300 hover:bg-amber-200 px-3 py-1 text-xs font-semibold">
+                            <Clock className="w-3 h-3 mr-1 inline" />
+                            {t('comingSoonBadge')}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center gap-3 mb-4 pr-24">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#6366F1] flex items-center justify-center">
+                            <Smartphone className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-lg text-[#0F1C2E]">{t('codaComingSoon')}</p>
+                            <p className="text-slate-500 text-sm">{t('codaComingSoonDesc')}</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">STC Pay</span>
+                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">Apple Pay</span>
+                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">Google Pay</span>
+                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">Samsung Pay</span>
+                        </div>
+                      </div>
+
+                      <p className="text-center text-xs text-[#8A94A6] italic">{t('stayTuned')}</p>
+                    </div>
+
+                    
+                    {/* ============================================ */}
+                    {/* TRIBUTE PAYMENT (Telegram) */}
+                    {/* ============================================ */}
+                    <div className="relative my-6"><Separator /><span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm font-medium text-[#0F1C2E]">{getText('Pay via Telegram (Tribute)', 'ادفع عبر تيليجرام (Tribute)')}</span></div>
+                    
+                    <div className="bg-gradient-to-br from-[#0088cc] to-[#005580] rounded-xl p-6 text-white">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                          <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.022c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.643.135-.953l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                        </div>
+                        <div>
+                          <p className="font-bold text-lg">{getText('Pay with Tribute', 'ادفع عبر Tribute')}</p>
+                          <p className="text-white/70 text-sm">{getText('Secure payment via Telegram — Card, Telegram Stars, or Wallet', 'دفع آمن عبر تيليجرام — بطاقة أو Stars أو المحفظة')}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        {/* Generate Tribute payment links dynamically */}
+                        {product ? (
+                          <a 
+                            href={`/api/tribute/redirect?tier=${product.id}&amount=${checkoutTotal}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="block"
+                          >
+                            <button
+                              type="button"
+                              className="w-full bg-white text-[#0088cc] hover:bg-white/90 h-14 text-lg font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+                            >
+                              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.022c.242-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.643.135-.953l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                              {getText(`Pay $${checkoutTotal} with Tribute`, `ادفع $${checkoutTotal} عبر Tribute`)}
+                            </button>
+                          </a>
+                        ) : (
+                          // Cart checkout — show all 3 options
+                          <div className="space-y-2">
+                            {cartItems.length > 0 && (
+                              <p className="text-white/70 text-sm text-center mb-2">
+                                {getText('Select a tier to pay via Tribute:', 'اختر طبقة للدفع عبر Tribute:')}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                        
+                        <p className="text-center text-xs text-white/60 mt-2">
+                          {getText('After payment, you\'ll receive your access code via Telegram. Then return here to unlock your apps.', 'بعد الدفع، ستستلم رمز الوصول عبر تيليجرام. ثم ارجع هنا لفتح تطبيقاتك.')}
+                        </p>
+                      </div>
+                    </div>
+
+
                     <div className="relative"><Separator /><span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-sm text-[#8A94A6]">{t('alreadyPaid')}</span></div>
                     <div className="space-y-4">
                       <p className="font-medium text-[#0F1C2E]">{t('confirmPayment')}</p>
@@ -479,7 +630,7 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
                       </div>
                     </div>
                     {error && (
-                      <div className="flex items-center gap-2 text-[#FC6D26] text-sm bg-[#FFF3E8] p-4 rounded-lg">
+                      <div className="flex items-center gap-2 text-[#C97B7B] text-sm bg-[#F8EEEF] p-4 rounded-lg">
                         <AlertCircle className="w-4 h-4 flex-shrink-0" />{error}
                       </div>
                     )}
@@ -550,7 +701,7 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
                 <div className="pt-4 space-y-3 border-t">
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><CheckCircle2 className="w-4 w-4 text-[#3DD4B0]" /><span>{t('instantAccessAfter')}</span></div>
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><Shield className="w-4 w-4 text-[#3DD4B0]" /><span>{t('accessCodeSent')}</span></div>
-                  <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><Sparkles className="w-4 w-4 text-[#3DD4B0]" /><span>{t('lifetimeAccess')}</span></div>
+                  <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><Sparkles className="w-4 w-4 text-[#3DD4B0]" /><span>{t('monthlyAccess')}</span></div>
                 </div>
               </CardContent>
             </Card>
@@ -583,4 +734,5 @@ export default function CheckoutPage() {
     </Suspense>
   );
 }
+
 

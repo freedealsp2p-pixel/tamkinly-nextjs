@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-4-3-2-1 Grounding Printable Companion - TRC</title>
+    <style>
+        :root {
+            --primary-teal: #1F6F78;
+            --dark-navy: #0F1C2E;
+            --accent-teal: #3DD4B0;
+            --light-bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text-main: #0F1C2E;
+            --text-muted: #475569;
+            --border-color: #CBD5E1;
+            --warning-border: #D97706;
+            --warning-bg: #FFFBEB;
+            --warning-text: #92400E;
+            --alert-border: #B45309;
+            --alert-bg: #FEF3C7;
+            --alert-text: #78350F;
+            --line-color: #9CA3AF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            background-color: #E2E8F0;
+            direction: ltr;
+            line-height: 1.45;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .preview-toolbar {
+            max-width: 210mm;
+            margin: 16px auto 0;
+            padding: 12px 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toolbar-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toolbar-badge {
+            background-color: var(--primary-teal);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .toolbar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .print-btn {
+            background-color: var(--primary-teal);
+            color: var(--white);
+            border: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .print-btn:hover {
+            background-color: #165259;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 14mm 15mm;
+            margin: 16px auto;
+            background: var(--white);
+            position: relative;
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        @media print {
+            body {
+                background: none !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page {
+                margin: 0 !important;
+                box-shadow: none !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+                height: 297mm !important;
+                width: 210mm !important;
+                border-radius: 0 !important;
+                padding: 12mm 15mm !important;
+            }
+            .page:last-child,
+            .page:last-of-type {
+                page-break-after: auto !important;
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--primary-teal);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: right;
+        }
+
+        .brand-badge {
+            background-color: var(--primary-teal);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 13px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-title-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+            line-height: 1.25;
+        }
+
+        .title-area h1 {
+            font-size: 20px;
+            color: var(--primary-teal);
+            font-weight: 800;
+            margin-bottom: 2px;
+            letter-spacing: -0.2px;
+        }
+
+        .title-area p {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .purpose-box {
+            background-color: var(--light-bg);
+            border-left: 3px solid var(--primary-teal);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--dark-navy);
+            margin-bottom: 10px;
+        }
+
+        .safety-alert {
+            background-color: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            border-left: 4px solid var(--warning-border);
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+        }
+
+        .safety-alert-title {
+            color: var(--warning-text);
+            font-weight: 700;
+            font-size: 11.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+
+        .safety-alert-text {
+            color: var(--warning-text);
+            font-size: 10.5px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .step-card {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .step-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary-teal);
+            background-color: #E6F4F5;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .step-icon {
+            font-size: 15px;
+        }
+
+        .writing-lines-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 2px;
+        }
+
+        .flex-lines {
+            display: flex;
+            gap: 8px;
+        }
+
+        .flex-lines .step-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .field-num {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .writing-line {
+            display: inline-block;
+            border-bottom: 1.5px dotted var(--line-color);
+            height: 16px;
+            width: 100%;
+            vertical-align: bottom;
+        }
+
+        .anchoring-box {
+            background-color: #E6F4F5;
+            border: 1px dashed var(--primary-teal);
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+
+        .anchoring-label {
+            font-size: 11px;
+            color: var(--primary-teal);
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .anchoring-subtext {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .anchoring-custom-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--dark-navy);
+            margin-top: 4px;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .section-box {
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+
+        .section-box.alert-box {
+            background-color: var(--alert-bg);
+            border-color: var(--alert-border);
+        }
+
+        .section-title {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--primary-teal);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        .alert-box .section-title {
+            color: var(--alert-text);
+            border-bottom-color: #FCD34D;
+        }
+
+        .bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .bullet-list li {
+            font-size: 10.5px;
+            color: var(--text-main);
+            position: relative;
+            padding-left: 14px;
+            line-height: 1.4;
+        }
+
+        .bullet-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-teal);
+            font-weight: bold;
+        }
+
+        .alert-box .bullet-list li::before {
+            color: var(--alert-text);
+        }
+
+        .contacts-box {
+            border: 1.5px solid var(--primary-teal);
+            background-color: var(--white);
+            border-radius: 6px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+        }
+
+        .contacts-field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 10.5px;
+        }
+
+        .contacts-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .contacts-label {
+            width: 210px;
+            font-weight: 600;
+            color: var(--dark-navy);
+            flex-shrink: 0;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-code {
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            background-color: #F1F5F9;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .action-link {
+            color: var(--primary-teal);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .action-link:hover {
+            color: #165259;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print preview-toolbar">
+        <div class="toolbar-info">
+            <span class="toolbar-badge">Tamkinly TRC</span>
+            <h2 class="toolbar-title">5-4-3-2-1 Grounding Printable Companion</h2>
+        </div>
+        <button onclick="window.print()" class="print-btn">
+            🖨️ Print / Save as PDF
+        </button>
+    </div>
+
+    <div class="page" id="page-1">
+        <div>
+            <!-- Header -->
+            <div class="header">
+                <div class="title-area">
+                    <h1>5-4-3-2-1 Grounding Printable Companion</h1>
+                    <p>TRC Grounding Printable Companion — Sensory Grounding Tool</p>
+                </div>
+                <div class="brand-container">
+                    <div class="brand-badge">TRC</div>
+                    <div class="brand-title-sub">Trauma Recovery<br>Resources</div>
+                </div>
+            </div>
+
+            <!-- Purpose Box -->
+            <div class="purpose-box">
+                <strong>Purpose of this companion:</strong> A practical support tool for gently directing attention toward the five senses and the immediate environment when you feel disconnected from the present moment or mentally distracted.
+            </div>
+
+            <!-- Safety Alert Notice -->
+            <div class="safety-alert">
+                <div class="safety-alert-title">
+                    ⚠️ IMPORTANT SAFETY NOTICE
+                </div>
+                <div class="safety-alert-text">
+                    If you are in immediate danger or under direct threat right now, contact emergency services immediately. This printable companion is a supportive self-regulation tool and is not a substitute for professional mental-health care.
+                </div>
+            </div>
+
+            <!-- Grounding Steps Section -->
+            <div class="steps-container">
+
+                <!-- STEP 5 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-title-group">
+                            <div class="step-number">5</div>
+                            <div class="step-title">Look — 5 things you can see around you</div>
+                        </div>
+                        <div class="step-icon">👁️</div>
+                    </div>
+                    <div class="writing-lines-container flex-lines">
+                        <div class="step-field"><span class="field-num">1.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">2.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">3.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">4.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">5.</span><span class="writing-line"></span></div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-title-group">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Touch — 4 things you can safely touch and feel</div>
+                        </div>
+                        <div class="step-icon">✋</div>
+                    </div>
+                    <div class="writing-lines-container flex-lines">
+                        <div class="step-field"><span class="field-num">1.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">2.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">3.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">4.</span><span class="writing-line"></span></div>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-title-group">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Listen — 3 sounds you can hear around you</div>
+                        </div>
+                        <div class="step-icon">👂</div>
+                    </div>
+                    <div class="writing-lines-container flex-lines">
+                        <div class="step-field"><span class="field-num">1.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">2.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">3.</span><span class="writing-line"></span></div>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-title-group">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Smell — Notice up to 2 things you can smell, if comfortable</div>
+                        </div>
+                        <div class="step-icon">👃</div>
+                    </div>
+                    <div class="writing-lines-container flex-lines">
+                        <div class="step-field"><span class="field-num">1.</span><span class="writing-line"></span></div>
+                        <div class="step-field"><span class="field-num">2.</span><span class="writing-line"></span></div>
+                    </div>
+                </div>
+
+                <!-- STEP 1 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-title-group">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Taste — Notice 1 taste in your mouth, if present and comfortable to notice</div>
+                        </div>
+                        <div class="step-icon">👅</div>
+                    </div>
+                    <div class="writing-lines-container">
+                        <div class="step-field"><span class="field-num">1.</span><span class="writing-line"></span></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Optional Grounding Statement -->
+            <div class="anchoring-box">
+                <div class="anchoring-label">Optional grounding statement</div>
+                <div class="anchoring-subtext">You may use the following suggested statement in a calm voice: “I am here, in this moment.”</div>
+                <div class="anchoring-custom-line">
+                    <span style="white-space: nowrap;">My own statement:</span>
+                    <span class="writing-line"></span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <!-- Footer Page 1 -->
+            <div class="footer">
+                <div class="footer-left">
+                    <span>Tamkinly TRC — Trauma Recovery Resources</span>
+                    <span class="footer-code">Tool ID: grounding-54321</span>
+                </div>
+                <div>Page 1 of 2</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="page-2">
+        <div>
+            <!-- Header Page 2 -->
+            <div class="header">
+                <div class="title-area">
+                    <h1>Support & Safety Guide</h1>
+                    <p>Guidance for increased distress and when to pause or stop</p>
+                </div>
+                <div class="brand-container">
+                    <div class="brand-badge">TRC</div>
+                    <div class="brand-title-sub">Support Guide<br>Companion Back</div>
+                </div>
+            </div>
+
+            <!-- Grid: Additional Grounding & General Guidance -->
+            <div class="grid-2col">
+                <!-- Section 1 -->
+                <div class="section-box">
+                    <div class="section-title">💡 When you need additional grounding</div>
+                    <ul class="bullet-list">
+                        <li>If this exercise does not help right away, that does not mean you are doing anything wrong. Returning attention to the present moment can take time, and another form of support may be more helpful.</li>
+                        <li>You can try placing your feet firmly on the floor or using another simple sensory action that feels safe and comfortable for you.</li>
+                        <li>If disconnection from the present moment or mental distraction continues, try noticing several things around you that share a particular color.</li>
+                        <li>If intense distress continues, contact a trusted person or an appropriate support service.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="section-box">
+                    <div class="section-title">📌 General guidance</div>
+                    <ul class="bullet-list">
+                        <li>Directing attention toward your senses and immediate surroundings may help reduce distraction and support a return to the present moment.</li>
+                        <li>Do not rush through the exercise. Take the time you need with each sense, without forcing yourself to achieve a particular result.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 3: Pause or Stop Warning Box -->
+            <div class="section-box alert-box" style="margin-bottom: 10px;">
+                <div class="section-title">⛔ When to pause or stop</div>
+                <div class="grid-2col" style="margin-bottom: 0;">
+                    <div>
+                        <strong style="font-size: 10.5px; color: var(--alert-text);">Guidance for use and stopping</strong>
+                        <ul class="bullet-list" style="margin-top: 4px;">
+                            <li>Stop the exercise or choose another support tool if your distress is so intense that you cannot comfortably focus on your senses or surroundings.</li>
+                            <li>Stop immediately if focusing on your senses or surroundings increases your distress or does not feel appropriate for you at that moment.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="font-size: 10.5px; color: var(--alert-text);">When additional support is needed</strong>
+                        <ul class="bullet-list" style="margin-top: 4px;">
+                            <li>If the discomfort or sense of disconnection does not ease, take a break and move to another support tool.</li>
+                            <li>If thoughts of self-harm arise, seek immediate emergency help or contact an appropriate support service.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Next Step -->
+            <div class="section-box" style="margin-bottom: 10px; background-color: #F0FDFA; border-color: #99F6E4;">
+                <div class="section-title" style="color: #0D9488;">➡️ Next step</div>
+                <div style="font-size: 10.5px; color: var(--dark-navy);">
+                    After completing the exercise, you can <a href="https://tamkinly.com/recovery/trc" class="action-link">return to the Tamkinly TRC recovery journey</a> and choose another support tool that fits your current needs through the platform.
+                </div>
+            </div>
+
+            <!-- Section 5: Emergency Contacts -->
+            <div class="contacts-box">
+                <div class="section-title" style="border: none; padding: 0; margin-bottom: 6px;">
+                    📞 Personal support and emergency contacts (Write down by hand)
+                </div>
+                <div class="contacts-field">
+                    <span class="contacts-label">Therapist / trauma support center:</span>
+                    <span class="writing-line"></span>
+                </div>
+                <div class="contacts-field">
+                    <span class="contacts-label">Mental-health support line:</span>
+                    <span class="writing-line"></span>
+                </div>
+                <div class="contacts-field">
+                    <span class="contacts-label">Other emergency/support number:</span>
+                    <span class="writing-line"></span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <!-- Footer Page 2 -->
+            <div class="footer">
+                <div class="footer-left">
+                    <span>TRC Printable Companion — Non-Clinical Self-Help Tool</span>
+                    <span class="footer-code">Tool ID: TRC-Grounding-Companion-EN</span>
+                </div>
+                <div>Page 2 of 2</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

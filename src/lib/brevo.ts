@@ -194,11 +194,22 @@ async function brevoFetch<T>(
       },
     });
 
-    const data = await response.json();
+    // Handle empty responses (204 No Content, etc.)
+    const text = await response.text();
+    let data: T | undefined;
+    if (text && text.trim()) {
+      try {
+        data = JSON.parse(text);
+      } catch {
+        // Non-JSON response, treat as success if status is ok
+        data = undefined;
+      }
+    }
 
     if (!response.ok) {
-      console.error('Brevo API Error:', data);
-      return { error: data.message || `HTTP ${response.status}` };
+      console.error('Brevo API Error:', data || text);
+      const errorMsg = (data as Record<string, string>)?.message || `HTTP ${response.status}`;
+      return { error: errorMsg };
     }
 
     return { data };
@@ -271,14 +282,14 @@ export const BrevoEmails = {
       body: JSON.stringify({
         sender: email.sender || { name: DEFAULT_SENDER_NAME, email: DEFAULT_SENDER_EMAIL },
         to: email.to,
-        subject: email.subject,
-        htmlContent: email.htmlContent,
-        textContent: email.textContent,
+        ...(email.subject ? { subject: email.subject } : {}),
+        ...(email.templateId ? {} : { htmlContent: email.htmlContent }),
+        textContent: email.textContent || undefined,
         replyTo: email.replyTo,
         tags: email.tags,
         headers: email.headers,
-        templateId: email.templateId,
-        params: email.params,
+        ...(email.templateId ? { templateId: email.templateId } : {}),
+        ...(email.params ? { params: email.params } : {}),
       }),
     });
 
@@ -323,7 +334,7 @@ export const BrevoEmails = {
   },
 
   // ============================================
-  // TRIAL PURCHASE EMAIL (Template #2)
+  // BASIC PURCHASE EMAIL (Template #2)
   // ============================================
   async sendTrialPurchase(
     email: string,
@@ -374,7 +385,7 @@ export const BrevoEmails = {
   },
 
   // ============================================
-  // BUNDLE PURCHASE EMAIL (Template #5)
+  // MASTERY PURCHASE EMAIL (Template #5)
   // ============================================
   async sendBundlePurchase(
     email: string,
@@ -384,7 +395,7 @@ export const BrevoEmails = {
     return this.sendTemplate(BREVO_TEMPLATES.BUNDLE_PURCHASE, email, {
       NAME: name,
       ACCESS_KEY: accessKey,
-      PRODUCT_NAME: 'Complete Bundle (VIP)',
+      PRODUCT_NAME: 'Mastery (Monthly)',
       DOWNLOAD_LINK: `${BASE_URL}/my-account/downloads/`,
       APPS_LINK: `${BASE_URL}/apps/?code=${accessKey}`,
     }, { name });

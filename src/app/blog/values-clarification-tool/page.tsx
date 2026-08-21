@@ -8,6 +8,10 @@ import { ArrowRight, Clock, User, Heart, Star, Target, Compass, Sparkles, CheckC
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function ValuesClarificationToolArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -128,8 +132,8 @@ export default function ValuesClarificationToolArticle() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#BA68C8]/10 flex items-center justify-center mx-auto mb-4">
-                    <Sparkles className="h-6 w-6 text-[#BA68C8]" />
+                  <div className="w-12 h-12 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mx-auto mb-4">
+                    <Sparkles className="h-6 w-6 text-[#2A8A94]" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">{getText("Alignment", "التوافق")}</h3>
                   <p className="text-sm text-slate-600">{getText("Living your values reduces cognitive dissonance", "العيش وفق قيمك يقلل التنافر المعرفي")}</p>
@@ -208,28 +212,28 @@ export default function ValuesClarificationToolArticle() {
                 <h4 className="font-semibold text-primary text-sm">{getText("Personal Growth", "النمو الشخصي")}</h4>
                 <p className="text-xs text-slate-500">{getText("Growth, Wisdom, Creativity, Curiosity", "النمو، الحكمة، الإبداع، الفضول")}</p>
               </div>
-              <div className="p-4 rounded-lg bg-[#FFB74D]/10">
-                <div className="w-3 h-3 rounded-full bg-[#FFB74D] mb-2"></div>
+              <div className="p-4 rounded-lg bg-[#2A8A94]/10">
+                <div className="w-3 h-3 rounded-full bg-[#2A8A94] mb-2"></div>
                 <h4 className="font-semibold text-primary text-sm">{getText("Achievement", "الإنجاز")}</h4>
                 <p className="text-xs text-slate-500">{getText("Achievement, Ambition, Competence", "الإنجاز، الطموح، الكفاءة")}</p>
               </div>
-              <div className="p-4 rounded-lg bg-[#E57373]/10">
-                <div className="w-3 h-3 rounded-full bg-[#E57373] mb-2"></div>
+              <div className="p-4 rounded-lg bg-[#C97B7B]/10">
+                <div className="w-3 h-3 rounded-full bg-[#C97B7B] mb-2"></div>
                 <h4 className="font-semibold text-primary text-sm">{getText("Relationships", "العلاقات")}</h4>
                 <p className="text-xs text-slate-500">{getText("Family, Friendship, Love, Compassion", "العائلة، الصداقة، الحب، التعاطف")}</p>
               </div>
-              <div className="p-4 rounded-lg bg-[#64B5F6]/10">
-                <div className="w-3 h-3 rounded-full bg-[#64B5F6] mb-2"></div>
+              <div className="p-4 rounded-lg bg-[#2A8A94]/10">
+                <div className="w-3 h-3 rounded-full bg-[#2A8A94] mb-2"></div>
                 <h4 className="font-semibold text-primary text-sm">{getText("Integrity", "النزاهة")}</h4>
                 <p className="text-xs text-slate-500">{getText("Honesty, Integrity, Justice, Responsibility", "الصدق، النزاهة، العدالة، المسؤولية")}</p>
               </div>
-              <div className="p-4 rounded-lg bg-[#BA68C8]/10">
-                <div className="w-3 h-3 rounded-full bg-[#BA68C8] mb-2"></div>
+              <div className="p-4 rounded-lg bg-[#2A8A94]/10">
+                <div className="w-3 h-3 rounded-full bg-[#2A8A94] mb-2"></div>
                 <h4 className="font-semibold text-primary text-sm">{getText("Well-being", "الرفاهية")}</h4>
                 <p className="text-xs text-slate-500">{getText("Health, Balance, Peace, Freedom", "الصحة، التوازن، السلام، الحرية")}</p>
               </div>
-              <div className="p-4 rounded-lg bg-[#81C784]/10">
-                <div className="w-3 h-3 rounded-full bg-[#81C784] mb-2"></div>
+              <div className="p-4 rounded-lg bg-[#3DD4B0]/10">
+                <div className="w-3 h-3 rounded-full bg-[#3DD4B0] mb-2"></div>
                 <h4 className="font-semibold text-primary text-sm">{getText("Contribution", "المساهمة")}</h4>
                 <p className="text-xs text-slate-500">{getText("Service, Legacy, Community, Mentoring", "الخدمة، الإرث، المجتمع، الإرشاد")}</p>
               </div>
@@ -337,6 +341,9 @@ export default function ValuesClarificationToolArticle() {
       </section>
 
       {/* Article Navigation */}
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="values" />
+
       <ArticleNavigation currentSlug="values-clarification-tool" />
 
       {/* Related Articles */}
@@ -361,34 +368,8 @@ export default function ValuesClarificationToolArticle() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge className="mb-4 bg-accent/20 text-accent border-0">{getText("FREE Tool", "أداة مجانية")}</Badge>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Ready to Discover What Matters Most?", "هل أنت مستعد لاكتشاف ما يهمك أكثر؟")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Clarify your core values in just 5 minutes. No signup required.", "وضح قيمك الجوهرية في 5 دقائق فقط. لا يلزم التسجيل.")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/apps/values-clarification">
-                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  {getText("Clarify Your Values", "وضح قيمك")}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/products">
-                <Button variant="white" size="lg" className="px-8">
-                  {getText("View All Products", "عرض جميع المنتجات")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
+        <BlogConversionSection />
+      </article>
   );
 }
+

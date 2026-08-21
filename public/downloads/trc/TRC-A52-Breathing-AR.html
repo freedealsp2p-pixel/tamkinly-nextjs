@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تنفس A52 (5-2) — Tamkinly</title>
+
+  <style>
+    :root {
+      --navy: #0F1C2E;
+      --teal: #1F6F78;
+      --teal-soft: #E8F4F5;
+      --teal-border: #B2D8DC;
+
+      --slate: #334155;
+      --muted: #64748B;
+      --border: #D9E2E7;
+      --line: #CBD5E1;
+      --paper: #FFFFFF;
+      --page-bg: #F1F5F9;
+
+      --warning-bg: #FFF7ED;
+      --warning-border: #C2410C;
+      --warning-text: #7C2D12;
+
+      --soft-bg: #F8FAFC;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--page-bg);
+      color: var(--slate);
+      font-family:
+        "Noto Sans Arabic",
+        "Noto Kufi Arabic",
+        Tahoma,
+        Arial,
+        sans-serif;
+      direction: rtl;
+      line-height: 1.42;
+    }
+
+    /* =========================
+       A4 PAGE
+       ========================= */
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 13mm 15mm 11mm;
+      margin: 18px auto;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+
+      page-break-after: always;
+      break-after: page;
+
+      box-shadow: 0 3px 12px rgba(15, 28, 46, 0.07);
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    .page-content {
+      flex: 1;
+      min-height: 0;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF;
+      }
+
+      .page {
+        margin: 0;
+        width: 210mm;
+        height: 297mm;
+        box-shadow: none;
+      }
+
+      .print-controls {
+        display: none !important;
+      }
+    }
+
+    /* =========================
+       HEADER
+       ========================= */
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10mm;
+
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+
+      margin-bottom: 5mm;
+    }
+
+    .brand {
+      color: var(--navy);
+      font-size: 9pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--teal);
+    }
+
+    .tool-code {
+      color: var(--muted);
+      font-size: 7.5pt;
+      direction: ltr;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    /* =========================
+       TYPOGRAPHY
+       ========================= */
+
+    h1 {
+      margin: 0 0 1.5mm;
+      color: var(--navy);
+      font-size: 18pt;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 3.5mm 0 1.5mm;
+      color: var(--navy);
+      font-size: 10.5pt;
+      font-weight: 700;
+    }
+
+    h3 {
+      margin: 0 0 1mm;
+      color: var(--navy);
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 0 0 3mm;
+      color: var(--teal);
+      font-size: 9pt;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .purpose-text {
+      margin: 0;
+      color: var(--slate);
+      font-size: 8pt;
+      line-height: 1.45;
+    }
+
+    .instruction {
+      margin: 0 0 2mm;
+      color: var(--muted);
+      font-size: 7.5pt;
+      line-height: 1.4;
+    }
+
+    /* =========================
+       BOXES
+       ========================= */
+
+    .box {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5mm 3mm;
+      margin-top: 3mm;
+    }
+
+    .box-title {
+      margin-bottom: 1mm;
+      font-size: 8.5pt;
+      font-weight: 700;
+    }
+
+    .box-body {
+      margin: 0;
+      color: var(--slate);
+      font-size: 7.5pt;
+      line-height: 1.42;
+    }
+
+    .safety-box {
+      background: var(--teal-soft);
+      border-color: var(--teal-border);
+    }
+
+    .safety-box .box-title {
+      color: var(--teal);
+    }
+
+    .warning-box {
+      background: var(--warning-bg);
+      border-color: #FDBA74;
+      border-right: 4px solid var(--warning-border);
+    }
+
+    .warning-box .box-title {
+      color: var(--warning-text);
+    }
+
+    .neutral-box {
+      background: var(--soft-bg);
+    }
+
+    .neutral-box .box-title {
+      color: var(--navy);
+    }
+
+    /* =========================
+       BREATHING SEQUENCE
+       ========================= */
+
+    .sequence {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2mm;
+      margin-top: 2.5mm;
+    }
+
+    .sequence-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #FFFFFF;
+      padding: 2.5mm;
+      min-height: 24mm;
+    }
+
+    .sequence-number {
+      width: 6mm;
+      height: 6mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #FFFFFF;
+      font-size: 8pt;
+      font-weight: 700;
+      margin-bottom: 1.5mm;
+    }
+
+    .sequence-title {
+      color: var(--navy);
+      font-size: 8pt;
+      font-weight: 700;
+      margin-bottom: 1mm;
+    }
+
+    .sequence-text {
+      color: var(--slate);
+      font-size: 7pt;
+      line-height: 1.35;
+    }
+
+    /* =========================
+       RHYTHM VISUAL
+       ========================= */
+
+    .rhythm-box {
+      margin-top: 3mm;
+      padding: 3mm;
+      background: var(--soft-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .rhythm-title {
+      color: var(--navy);
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      text-align: center;
+    }
+
+    .rhythm-track {
+      display: grid;
+      grid-template-columns: 5fr 2fr;
+      height: 9mm;
+      max-width: 145mm;
+      margin: 0 auto;
+      border: 1px solid var(--teal);
+      border-radius: 5mm;
+      overflow: hidden;
+    }
+
+    .rhythm-inhale {
+      background: var(--teal);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7.5pt;
+      font-weight: 700;
+    }
+
+    .rhythm-exhale {
+      background: var(--navy);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7.5pt;
+      font-weight: 700;
+    }
+
+    .rhythm-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 7pt;
+      margin-top: 1.5mm;
+    }
+
+    /* =========================
+       PRACTICE TRACKING
+       ========================= */
+
+    .practice-section {
+      margin-top: 3mm;
+    }
+
+    .rounds {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2mm;
+      margin-top: 2mm;
+    }
+
+    .round {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      min-height: 13mm;
+      padding: 2mm;
+      background: #FFFFFF;
+    }
+
+    .round-label {
+      color: var(--muted);
+      font-size: 7pt;
+      margin-bottom: 1mm;
+    }
+
+    .round-line {
+      border-bottom: 1px dotted var(--line);
+      height: 5mm;
+    }
+
+    .writing-box {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5mm 3mm;
+      margin-top: 2mm;
+      background: #FFFFFF;
+    }
+
+    .writing-line {
+      height: 7mm;
+      border-bottom: 1px dotted var(--line);
+    }
+
+    /* =========================
+       PAGE 2
+       ========================= */
+
+    .section {
+      margin-top: 3mm;
+    }
+
+    .choice-list {
+      margin: 1mm 0 0;
+      padding-right: 5mm;
+    }
+
+    .choice-list li {
+      margin-bottom: 1.5mm;
+      color: var(--slate);
+      font-size: 7.8pt;
+      line-height: 1.4;
+    }
+
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3mm;
+      margin-top: 2mm;
+    }
+
+    .contact-field {
+      display: flex;
+      align-items: baseline;
+      gap: 3mm;
+    }
+
+    .contact-label {
+      min-width: 48mm;
+      color: var(--navy);
+      font-size: 7.8pt;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .contact-line {
+      flex: 1;
+      height: 5mm;
+      border-bottom: 1px dotted var(--line);
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .footer {
+      flex-shrink: 0;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding-top: 5px;
+      border-top: 1px solid var(--border);
+
+      color: var(--muted);
+      font-size: 7.5pt;
+
+      direction: rtl;
+    }
+
+    .footer-code {
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* =========================
+       SCREEN CONTROL
+       ========================= */
+
+    .print-controls {
+      text-align: center;
+      margin: 12px 0 4px;
+    }
+
+    .print-button {
+      border: 0;
+      border-radius: 14px;
+      padding: 6px 14px;
+
+      background: var(--navy);
+      color: #FFFFFF;
+
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="print-controls">
+    <button class="print-button" onclick="window.print()">طباعة / PDF</button>
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 1
+       ========================================================= -->
+
+  <section class="page">
+
+    <div class="page-content">
+
+      <header class="header">
+        <div class="brand">
+          Tamkinly <span>| مركز تعافي الصدمات</span>
+        </div>
+
+        <div class="tool-code">
+          TRC-A52_BREATHING
+        </div>
+      </header>
+
+
+      <h1>تنفس A52 (5-2)</h1>
+
+      <p class="subtitle">
+        تمرين تنفس قصير يركز على إبطاء الإيقاع وملاحظة التنفس دون إجبار الجسم على نمط غير مريح.
+      </p>
+
+      <p class="purpose-text">
+        استخدم هذا التمرين عندما ترغب في أخذ لحظة للتوقف والانتباه إلى تنفسك.
+        لا تحتاج إلى أخذ نفس عميق أو ملء الرئتين بالقوة.
+        الهدف هو التنفس بطريقة هادئة ومريحة قدر الإمكان.
+      </p>
+
+
+      <div class="box safety-box">
+        <div class="box-title">قبل أن تبدأ</div>
+
+        <p class="box-body">
+          اجلس أو قف في وضع مريح، واترك تنفسك طبيعيًا في البداية.
+          إذا كان التركيز على التنفس غير مريح لك، يمكنك ترك التمرين والانتقال إلى وسيلة أخرى للتثبيت.
+          لا تحبس أنفاسك إذا كان ذلك يسبب لك عدم ارتياح.
+        </p>
+      </div>
+
+
+      <h2>تسلسل التمرين</h2>
+
+      <p class="instruction">
+        جرّب الدورة بهدوء، ويمكنك تعديل الإيقاع بما يناسب تنفسك الطبيعي.
+        لا تحتاج إلى الوصول إلى عدد محدد من الجولات.
+      </p>
+
+
+      <div class="sequence">
+
+        <div class="sequence-card">
+          <div class="sequence-number">1</div>
+          <div class="sequence-title">استعد</div>
+          <div class="sequence-text">
+            اترك كتفيك في وضع مريح ولاحظ تنفسك الطبيعي.
+          </div>
+        </div>
+
+        <div class="sequence-card">
+          <div class="sequence-number">2</div>
+          <div class="sequence-title">شهيق</div>
+          <div class="sequence-text">
+            خذ شهيقًا هادئًا وبطيئًا لمدة تقارب 5 ثوانٍ إذا كان ذلك مريحًا.
+          </div>
+        </div>
+
+        <div class="sequence-card">
+          <div class="sequence-number">3</div>
+          <div class="sequence-title">زفير</div>
+          <div class="sequence-text">
+            اسمح للزفير أن يخرج بهدوء لمدة تقارب ثانيتين أو أكثر دون إجبار.
+          </div>
+        </div>
+
+        <div class="sequence-card">
+          <div class="sequence-number">4</div>
+          <div class="sequence-title">استمر أو توقف</div>
+          <div class="sequence-text">
+            عد إلى تنفسك الطبيعي أو كرر الدورة إذا بقيت مرتاحًا.
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="rhythm-box">
+
+        <div class="rhythm-title">
+          الإيقاع الإرشادي 5 — 2
+        </div>
+
+        <div class="rhythm-track">
+          <div class="rhythm-inhale">
+            شهيق هادئ — نحو 5 ثوانٍ
+          </div>
+
+          <div class="rhythm-exhale">
+            زفير هادئ — نحو 2 ثانية أو أكثر
+          </div>
+        </div>
+
+        <div class="rhythm-note">
+          الأرقام إرشادية وليست هدفًا إلزاميًا. إذا كان الإيقاع غير مريح، عد إلى تنفسك الطبيعي.
+        </div>
+
+      </div>
+
+
+      <div class="practice-section">
+
+        <h2>متابعة الجولات</h2>
+
+        <p class="instruction">
+          استخدم هذه المساحات فقط إذا كان تسجيل الجولات مفيدًا لك.
+        </p>
+
+        <div class="rounds">
+
+          <div class="round">
+            <div class="round-label">الجولة 1</div>
+            <div class="round-line"></div>
+          </div>
+
+          <div class="round">
+            <div class="round-label">الجولة 2</div>
+            <div class="round-line"></div>
+          </div>
+
+          <div class="round">
+            <div class="round-label">الجولة 3</div>
+            <div class="round-line"></div>
+          </div>
+
+          <div class="round">
+            <div class="round-label">الجولة 4</div>
+            <div class="round-line"></div>
+          </div>
+
+          <div class="round">
+            <div class="round-label">الجولة 5</div>
+            <div class="round-line"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="practice-section">
+
+        <h2>ملاحظات خلال التمرين</h2>
+
+        <p class="instruction">
+          يمكنك كتابة أي ملاحظة عن التجربة، أو ترك المساحة فارغة.
+        </p>
+
+        <div class="writing-box">
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+
+      </div>
+
+
+      <div class="box warning-box">
+
+        <div class="box-title">توقف إذا أصبح التمرين غير مريح</div>
+
+        <p class="box-body">
+          إذا ظهر دوار، شعور بالإغماء، ضيق أو ألم في الصدر، أو ازداد القلق بوضوح،
+          توقف عن محاولة تنظيم التنفس وعد إلى تنفسك الطبيعي.
+          إذا كانت الأعراض شديدة أو مرتبطة بخطر طبي أو حالة طارئة، اطلب الرعاية المناسبة.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <footer class="footer">
+      <span class="footer-code">Tool ID: TRC-A52_BREATHING</span>
+      <span>صفحة 1 من 2</span>
+    </footer>
+
+  </section>
+
+
+  <!-- =========================================================
+       PAGE 2
+       ========================================================= -->
+
+  <section class="page">
+
+    <div class="page-content">
+
+      <header class="header">
+        <div class="brand">
+          Tamkinly <span>| مركز تعافي الصدمات</span>
+        </div>
+
+        <div class="tool-code">
+          TRC-A52_BREATHING
+        </div>
+      </header>
+
+
+      <h1>إرشادات الاستخدام والدعم</h1>
+
+      <p class="subtitle">
+        الهدف هو إيجاد إيقاع قابل للتحمل، وليس إجبار التنفس على نمط محدد.
+      </p>
+
+
+      <div class="section">
+
+        <h2>متى يمكن تجربة التمرين؟</h2>
+
+        <p class="purpose-text">
+          يمكن تجربة التمرين في لحظة هادئة أو عندما ترغب في أخذ استراحة قصيرة والانتباه إلى تنفسك.
+          ليس من الضروري استخدامه أثناء الضيق الشديد إذا كان التركيز على التنفس يزيد عدم الارتياح.
+        </p>
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>كيف أعرف أن الإيقاع مناسب لي؟</h2>
+
+        <ul class="choice-list">
+          <li>التنفس يبدو مريحًا ولا يتطلب جهدًا واضحًا.</li>
+          <li>لا تشعر بالحاجة إلى إجبار الشهيق أو الزفير.</li>
+          <li>يمكنك التوقف والعودة إلى تنفسك الطبيعي في أي وقت.</li>
+          <li>لا تظهر أعراض جسدية مزعجة أثناء المحاولة.</li>
+        </ul>
+
+      </div>
+
+
+      <div class="box neutral-box">
+
+        <div class="box-title">مرونة التمرين</div>
+
+        <p class="box-body">
+          لا توجد نتيجة يجب الوصول إليها ولا عدد جولات إلزامي.
+          إذا كان العد أو التركيز على الثواني يسبب ضغطًا، اترك العد واستخدم تنفسًا طبيعيًا وهادئًا.
+          ويمكنك ببساطة إنهاء التمرين.
+        </p>
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>متى أتوقف؟</h2>
+
+        <div class="box warning-box">
+
+          <p class="box-body">
+            توقف إذا ظهر أو ازداد الدوار، الشعور بالإغماء، ضيق أو ألم في الصدر،
+            صعوبة واضحة في التنفس، تنميل مزعج، أو شعور متزايد بالذعر أو عدم الارتياح.
+          </p>
+
+          <p class="box-body" style="margin-top:2mm;">
+            عد إلى تنفسك الطبيعي. إذا استمرت الأعراض أو كانت شديدة،
+            اطلب تقييمًا أو دعمًا طبيًا مناسبًا، وخاصة عند وجود أعراض قد تشير إلى حالة طارئة.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>إذا لم يناسبك التركيز على التنفس</h2>
+
+        <p class="instruction">
+          بعض الأشخاص يجدون الانتباه إلى التنفس غير مريح، خصوصًا أثناء الضيق.
+          في هذه الحالة لا تحتاج إلى إجبار نفسك على استخدام هذا التمرين.
+        </p>
+
+        <ul class="choice-list">
+          <li>يمكنك العودة إلى التنفس الطبيعي دون محاولة تغييره.</li>
+          <li>يمكنك توجيه انتباهك إلى البيئة الحالية بدلًا من التنفس.</li>
+          <li>يمكنك إيقاف الورقة والعودة إليها في وقت آخر إذا رغبت.</li>
+          <li>يمكنك طلب دعم من شخص موثوق أو مختص بالصحة النفسية عند الحاجة.</li>
+        </ul>
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>جهات الدعم التي أستطيع الرجوع إليها</h2>
+
+        <p class="instruction">
+          اكتب المعلومات التي تريد الاحتفاظ بها للرجوع إليها عند الحاجة.
+        </p>
+
+        <div class="contact-grid">
+
+          <div class="contact-field">
+            <div class="contact-label">
+              شخص داعم موثوق:
+            </div>
+            <div class="contact-line"></div>
+          </div>
+
+          <div class="contact-field">
+            <div class="contact-label">
+              مختص بالصحة النفسية:
+            </div>
+            <div class="contact-line"></div>
+          </div>
+
+          <div class="contact-field">
+            <div class="contact-label">
+              خدمة دعم / خط مساعدة:
+            </div>
+            <div class="contact-line"></div>
+          </div>
+
+          <div class="contact-field">
+            <div class="contact-label">
+              خدمة الطوارئ المحلية:
+            </div>
+            <div class="contact-line"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="section">
+
+        <h2>ملاحظة بعد الاستخدام</h2>
+
+        <p class="instruction">
+          لا تحتاج إلى تقييم نفسك. اكتب فقط ما تريد الاحتفاظ به من تجربة استخدام الأداة.
+        </p>
+
+        <div class="writing-box">
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+          <div class="writing-line"></div>
+        </div>
+
+      </div>
+
+
+      <div class="box neutral-box">
+
+        <div class="box-title">
+          إخلاء المسؤولية
+        </div>
+
+        <p class="box-body">
+          هذه الورقة أداة تعليمية وداعمة وليست تشخيصًا أو علاجًا طبيًا أو نفسيًا.
+          لا تحل محل التقييم المهني أو العلاج أو الرعاية الطبية أو التدخل في حالات الأزمات.
+          لا تهدف الأداة إلى معالجة الصدمات أو استرجاع الذكريات أو تحليل التجارب المؤلمة.
+          إذا كنت في خطر فوري أو تمر بحالة طارئة، فالأولوية للسلامة وطلب المساعدة المناسبة.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <footer class="footer">
+      <span class="footer-code">Tool ID: TRC-A52_BREATHING</span>
+      <span>صفحة 2 من 2</span>
+    </footer>
+
+  </section>
+
+</body>
+</html>

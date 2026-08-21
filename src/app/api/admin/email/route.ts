@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // Get email queue and logs
 export async function GET(request: NextRequest) {
   try {
-    const password = request.nextUrl.searchParams.get('password');
+    const session = await getAdminSession();
     
-    if (!verifyAdminPassword(password || '')) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     const type = request.nextUrl.searchParams.get('type') || 'all'; // all, queue, logs, subscriptions
 

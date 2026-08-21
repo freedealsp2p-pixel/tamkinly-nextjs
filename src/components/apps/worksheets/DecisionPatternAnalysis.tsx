@@ -202,10 +202,10 @@ export default function DecisionPatternAnalysis() {
               <div className="text-green-700 text-sm">High Quality (≥70%)</div>
             </CardContent>
           </Card>
-          <Card className="bg-[#FFF3E8] border border-[#FFB088]">
+          <Card className="bg-[#F8EEEF] border border-[#D4A8AE]">
             <CardContent className="p-4 text-center">
-              <div className="text-3xl font-bold text-[#FC6D26]">{stats.low}</div>
-              <div className="text-[#E55A10] text-sm">Needs Work (&lt;40%)</div>
+              <div className="text-3xl font-bold text-[#C97B7B]">{stats.low}</div>
+              <div className="text-[#A86565] text-sm">Needs Work (&lt;40%)</div>
             </CardContent>
           </Card>
         </div>
@@ -518,8 +518,8 @@ export default function DecisionPatternAnalysis() {
                 />
               </div>
 
-              <div className="p-3 bg-amber-50 rounded-lg border border-amber-200">
-                <p className="text-sm text-amber-800">
+              <div className="p-3 bg-[#f8eded] rounded-lg border border-[#e4c0c0]">
+                <p className="text-sm text-[#a86060]">
                   <strong>Pattern Label:</strong> Give this pattern a name (e.g., "Procrastination Loop", "Identity Aligned")
                 </p>
                 <Input 
@@ -637,7 +637,7 @@ export default function DecisionPatternAnalysis() {
                     <Badge className={
                       entry.overallQuality >= 70 ? 'bg-green-100 text-green-700' :
                       entry.overallQuality >= 40 ? 'bg-yellow-100 text-yellow-700' :
-                      'bg-[#FFE4CC] text-[#E55A10]'
+                      'bg-[#F0E0E2] text-[#A86565]'
                     }>
                       {entry.overallQuality}% quality
                     </Badge>
@@ -646,7 +646,7 @@ export default function DecisionPatternAnalysis() {
                     variant="ghost"
                     size="sm"
                     onClick={() => handleDeleteEntry(entry.id)}
-                    className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
+                    className="text-[#C97B7B] hover:text-[#A86565] hover:bg-[#F8EEEF]"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>

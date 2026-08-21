@@ -58,7 +58,7 @@ const coreMetrics = [
     name: 'Commitment Consistency Score',
     description: 'Your ability to follow through on commitments to yourself',
     icon: <CheckCircle2 className="w-5 h-5" />,
-    color: '#64B5F6'
+    color: '#2A8A94'
   },
   {
     id: 'decisionQuality',
@@ -72,28 +72,28 @@ const coreMetrics = [
     name: 'Emotional Regulation Score',
     description: 'Your ability to manage and respond to emotional experiences',
     icon: <Heart className="w-5 h-5" />,
-    color: '#E57373'
+    color: '#C97B7B'
   },
   {
     id: 'environmentalAlignment',
     name: 'Environmental Alignment Score',
     description: 'How well your environment supports your identity',
     icon: <Home className="w-5 h-5" />,
-    color: '#FFB74D'
+    color: '#2A8A94'
   },
   {
     id: 'evidenceStrength',
     name: 'Evidence Strength Score',
     description: 'The strength of evidence supporting your new identity',
     icon: <BarChart3 className="w-5 h-5" />,
-    color: '#81C784'
+    color: '#3DD4B0'
   },
   {
     id: 'agency',
     name: 'Agency Score',
     description: 'Your sense of control and ownership over your life direction',
     icon: <Zap className="w-5 h-5" />,
-    color: '#BA68C8'
+    color: '#2A8A94'
   }
 ];
 
@@ -101,7 +101,7 @@ const coreMetrics = [
 const trendOptions = [
   { value: 'improving', label: 'Improving', icon: <TrendingUp className="w-4 h-4" />, color: 'text-green-600', bg: 'bg-green-100' },
   { value: 'stable', label: 'Stable', icon: <Minus className="w-4 h-4" />, color: 'text-yellow-600', bg: 'bg-yellow-100' },
-  { value: 'declining', label: 'Declining', icon: <TrendingDown className="w-4 h-4" />, color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]' }
+  { value: 'declining', label: 'Declining', icon: <TrendingDown className="w-4 h-4" />, color: 'text-[#C97B7B]', bg: 'bg-[#F0E0E2]' }
 ];
 
 // Trend Tracking Categories
@@ -154,7 +154,7 @@ const reflectionPrompts = [
 const getDirection = (baseline: number, current: number) => {
   const diff = current - baseline;
   if (diff > 0) return { direction: 'up', icon: <ArrowUp className="w-4 h-4" />, color: 'text-green-600', bg: 'bg-green-100', label: 'Up' };
-  if (diff < 0) return { direction: 'down', icon: <ArrowDown className="w-4 h-4" />, color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]', label: 'Down' };
+  if (diff < 0) return { direction: 'down', icon: <ArrowDown className="w-4 h-4" />, color: 'text-[#C97B7B]', bg: 'bg-[#F0E0E2]', label: 'Down' };
   return { direction: 'stable', icon: <Minus className="w-4 h-4" />, color: 'text-yellow-600', bg: 'bg-yellow-100', label: 'Stable' };
 };
 
@@ -358,10 +358,10 @@ export default function ProgressDashboardGuide() {
             </div>
             <div className="text-center">
               <p className="text-[#8A94A6] text-sm uppercase tracking-wide mb-2">Overall Change</p>
-              <div className={`text-4xl font-bold ${overallProgress.diff >= 0 ? 'text-green-400' : 'text-[#FF8C42]'} mb-1`}>
+              <div className={`text-4xl font-bold ${overallProgress.diff >= 0 ? 'text-green-400' : 'text-[#B88A8E]'} mb-1`}>
                 {overallProgress.diff >= 0 ? '+' : ''}{overallProgress.diff}
               </div>
-              <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm ${overallProgress.diff >= 0 ? 'bg-green-500/20 text-green-300' : 'bg-[#FC6D26]/20 text-[#FFB088]'}`}>
+              <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm ${overallProgress.diff >= 0 ? 'bg-green-500/20 text-green-300' : 'bg-[#C97B7B]/20 text-[#7AEEE0]'}`}>
                 {overallProgress.diff >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                 {overallProgress.diff >= 0 ? 'Progress Made' : 'Needs Attention'}
               </div>
@@ -403,7 +403,7 @@ export default function ProgressDashboardGuide() {
                       <p className="text-2xl font-bold text-[#0F1C2E]">{score.current}</p>
                       <p className="text-xs text-[#8A94A6]">Current</p>
                     </div>
-                    <Badge className={`${diff >= 0 ? 'bg-green-100 text-green-700' : 'bg-[#FFE4CC] text-[#E55A10]'}`}>
+                    <Badge className={`${diff >= 0 ? 'bg-green-100 text-green-700' : 'bg-[#F0E0E2] text-[#A86565]'}`}>
                       {diff >= 0 ? '+' : ''}{diff}
                     </Badge>
                   </div>
@@ -478,7 +478,7 @@ export default function ProgressDashboardGuide() {
                   {/* Difference */}
                   <div className="text-center">
                     <label className="text-xs font-medium text-[#8A94A6] uppercase tracking-wide block mb-2">Difference</label>
-                    <div className={`text-2xl font-bold ${metric.diff >= 0 ? 'text-green-600' : 'text-[#FC6D26]'}`}>
+                    <div className={`text-2xl font-bold ${metric.diff >= 0 ? 'text-green-600' : 'text-[#C97B7B]'}`}>
                       {metric.diff >= 0 ? '+' : ''}{metric.diff}
                     </div>
                   </div>
@@ -688,7 +688,7 @@ export default function ProgressDashboardGuide() {
                 value={summary.weakestArea}
                 onChange={(e) => handleSummaryChange('weakestArea', e.target.value)}
                 placeholder="Which area needs the most work?"
-                className="border-[#FFB088] focus:border-[#FF8C42]"
+                className="border-[#7AEEE0] focus:border-[#B88A8E]"
               />
             </div>
             <div className="space-y-2">
@@ -792,11 +792,11 @@ export default function ProgressDashboardGuide() {
       </div>
 
       {/* Footer Note */}
-      <Card className="bg-amber-50 border-amber-200">
+      <Card className="bg-[#f8eded] border-[#e4c0c0]">
         <CardContent className="p-4">
           <div className="flex items-start gap-3">
-            <Clock className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-amber-800">
+            <Clock className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
+            <p className="text-sm text-[#a86060]">
               <strong>Update Frequency:</strong> For best results, update this dashboard once per day or at minimum once per week. 
               Consistent tracking reveals patterns that sporadic updates cannot show.
             </p>

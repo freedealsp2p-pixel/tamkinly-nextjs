@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أنماط الاستجابة للصدمة - Tamkinly TRC</title>
+<style>
+@page{size:A4 portrait;margin:0}
+:root{--primary:#1F6F78;--dark:#0F1C2E;--bg:#F8FAFC;--white:#fff;--line:#CBD5E1;--safety-bg:#FEF3C7;--safety-border:#B45309;--safety-text:#78350F;--teal-bg:#E6F4F5;--teal-text:#1F6F78;--writing:#9CA3AF;--footer:#475569}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:"Noto Sans Arabic","Arial",sans-serif;background:#E2E8F0;color:var(--dark);font-size:13px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.page{width:210mm;height:297mm;padding:15mm;margin:10px auto;background:var(--bg);position:relative;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 3px 12px rgba(15,28,46,.10)}
+.page-content{flex:1;min-height:0}
+.header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px solid var(--primary);padding-bottom:7px;margin-bottom:12px}
+.brand{font-size:11px;font-weight:800;color:var(--primary)}
+.status{font-size:10px;font-weight:700;color:var(--safety-text);background:var(--safety-bg);border:1px solid var(--safety-border);border-radius:5px;padding:3px 9px;white-space:nowrap}
+h1,h2,h3,p{margin:0}.title{font-size:23px;line-height:1.35;font-weight:800;color:var(--dark);margin-bottom:8px}
+.subtitle{font-size:13px;line-height:1.7}
+.purpose{background:var(--white);border:1px solid var(--line);border-right:5px solid var(--primary);border-radius:6px;padding:10px 13px;margin-bottom:12px}
+.safety{background:var(--safety-bg);border:1px solid var(--safety-border);color:var(--safety-text);border-radius:7px;padding:10px 13px;font-size:12.5px;line-height:1.65;margin-bottom:13px}
+.teal{background:var(--teal-bg);border:1px solid var(--primary);color:var(--teal-text);border-radius:7px;padding:10px 13px;font-size:12.5px;line-height:1.65}
+.responses{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--primary);border-radius:7px;padding:12px 13px}
+.card-header{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-bottom:1px solid #E2E8F0;padding-bottom:6px;margin-bottom:8px}
+.card-title{color:var(--primary);font-size:16px;line-height:1.4;font-weight:800}
+.en{direction:ltr;unicode-bidi:isolate;color:var(--primary);font-family:Inter,Arial,sans-serif;font-size:12px;font-weight:700;white-space:nowrap}
+.label{font-size:12px;font-weight:800;margin-top:6px;margin-bottom:2px}
+ul{margin:3px 0 0;padding:0 19px 0 0}
+li{font-size:12.5px;line-height:1.6;margin:1px 0}
+.strategy{margin-top:8px;padding-top:7px;border-top:1px solid #E2E8F0}
+.key{margin-top:12px}
+.section-title{color:var(--primary);font-size:18px;line-height:1.4;font-weight:800;border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:9px}
+.intro{font-size:13px;line-height:1.7;margin-bottom:12px}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px}
+.check{min-height:58px;display:flex;align-items:center;gap:11px;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:10px 13px}
+.box{width:20px;height:20px;flex:0 0 20px;border:2px solid var(--primary);border-radius:3px;background:#fff}
+.check-label{font-size:13.5px;font-weight:800}
+.decision{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:10px}
+.decision-card{background:#fff;border:1px solid var(--line);border-radius:7px;padding:12px 13px}
+.decision-title{color:var(--primary);font-size:13.5px;font-weight:800;margin-bottom:5px}
+.decision-body{font-size:12.5px;line-height:1.65}
+.escalation{margin-top:13px;background:#fff;border:1px solid var(--line);border-right:5px solid #D97706;border-radius:7px;padding:12px 13px}
+.escalation h3{color:#92400E;font-size:14px;margin-bottom:5px}.escalation p{font-size:12.5px;line-height:1.7}
+.support-box{background:#fff;border:1px solid var(--line);border-radius:7px;padding:13px 15px;margin-bottom:13px}
+.support-box li{font-size:13px;line-height:1.75;margin-bottom:3px}
+.contacts-title{color:var(--primary);font-size:18px;font-weight:800;border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:7px}
+.contacts-intro{font-size:12.5px;line-height:1.7;margin-bottom:10px;color:#475569}
+.contact{background:#fff;border:1px solid var(--line);border-radius:7px;padding:10px 13px;margin-bottom:9px}
+.row{display:flex;align-items:center;gap:10px;min-height:27px}.row+.row{margin-top:5px}
+.row-label{min-width:125px;font-size:12px;font-weight:700}.write-line{flex:1;height:22px;border-bottom:2px dotted var(--writing)}
+.footer{flex:0 0 auto;display:grid;grid-template-columns:1.6fr 1.5fr 1.1fr .6fr;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:7px;margin-top:9px;color:var(--footer);font-size:9.5px;line-height:1.3}
+.footer span:last-child{text-align:left}.page-break{page-break-after:always}
+@media print{body{background:transparent}.page{margin:0;box-shadow:none;page-break-after:always;page-break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}.page:last-child{page-break-after:auto}.no-print{display:none!important}}
+@media screen and (max-width:900px){body{background:var(--bg)}.page{width:100%;height:auto;min-height:297mm;margin:0 0 14px;box-shadow:none}}
+</style>
+</head>
+<body>
+
+<section class="page page-break">
+<div class="page-content">
+<header class="header"><div class="brand">Tamkinly | مركز التعافي من الصدمات (TRC)</div><div class="status">مسودة للمراجعة السريرية</div></header>
+<h1 class="title">أنماط الاستجابة للصدمة</h1>
+<div class="purpose"><p class="subtitle"><strong>الغرض:</strong> مرجع سريع لتحديد أنماط الاستجابة الأربع (<span class="en">Fight</span> / <span class="en">Flight</span> / <span class="en">Freeze</span> / <span class="en">Fawn</span>) واستراتيجيات خفض الاستثارة المناسبة لكل نمط.</p></div>
+<div class="safety"><strong>تنبيه السلامة:</strong> استجاباتك أبقتك آمنًا. هي ليست عيوبًا. إذا كان التعرف على أنماطك يزيد العار أو لوم الذات، توقف واطلب الدعم.</div>
+
+<div class="responses">
+<article class="card">
+<div class="card-header"><h2 class="card-title">استجابة القتال</h2><span class="en">Fight</span></div>
+<div class="label">إشارات جسدية:</div><ul><li>فك مشدود</li><li>قبضات</li><li>حرارة</li><li>هياج</li></ul>
+<div class="label">بصمة عاطفية:</div><ul><li>غضب</li><li>ثورة</li><li>دفاعية</li></ul>
+<div class="label">نمط سلوكي:</div><ul><li>مواجهة</li><li>سيطرة</li><li>نقد</li></ul>
+<div class="strategy"><div class="label">استراتيجيات إلغاء التفعيل:</div><ul><li>تأريض</li><li>تفريغ بالحركة</li><li>تنفس</li></ul></div>
+</article>
+
+<article class="card">
+<div class="card-header"><h2 class="card-title">استجابة الفر</h2><span class="en">Flight</span></div>
+<div class="label">إشارات جسدية:</div><ul><li>أرجل قلقة</li><li>رغبة بالمغادرة</li><li>نبض سريع</li></ul>
+<div class="label">بصمة عاطفية:</div><ul><li>قلق</li><li>خوف</li><li>إلحاح</li></ul>
+<div class="label">نمط سلوكي:</div><ul><li>تجنب</li><li>انشغال مفرط</li><li>كمالية</li></ul>
+<div class="strategy"><div class="label">استراتيجيات إلغاء التفعيل:</div><ul><li>إبطاء</li><li>تأريض بالحاضر</li></ul></div>
+</article>
+
+<article class="card">
+<div class="card-header"><h2 class="card-title">استجابة التجميد</h2><span class="en">Freeze</span></div>
+<div class="label">إشارات جسدية:</div><ul><li>خدر</li><li>سكون</li><li>تنفس سطحي</li><li>تفارق</li></ul>
+<div class="label">بصمة عاطفية:</div><ul><li>انطفاء</li><li>فراغ</li><li>انفصال</li></ul>
+<div class="label">نمط سلوكي:</div><ul><li>عزلة</li><li>عجز عن الفعل</li><li>امتثال</li></ul>
+<div class="strategy"><div class="label">استراتيجيات إلغاء التفعيل:</div><ul><li>حركة لطيفة</li><li>تحفيز حسي</li><li>توجيه</li></ul></div>
+</article>
+
+<article class="card">
+<div class="card-header"><h2 class="card-title">استجابة التملق</h2><span class="en">Fawn</span></div>
+<div class="label">إشارات جسدية:</div><ul><li>توتر في إرضاء الآخرين</li><li>تجاهل الاحتياجات</li></ul>
+<div class="label">بصمة عاطفية:</div><ul><li>ذنب</li><li>عار</li><li>خوف من الرفض</li></ul>
+<div class="label">نمط سلوكي:</div><ul><li>إرضاء الناس</li><li>تساهل مفرط</li><li>فقدان حدود</li></ul>
+<div class="strategy"><div class="label">استراتيجيات إلغاء التفعيل:</div><ul><li>ممارسة الحدود</li><li>الدفاع عن الذات</li><li>توسّط</li></ul></div>
+</article>
+</div>
+
+<div class="teal key"><strong>رسالة أساسية:</strong> يمكن أن تتعايش استجابات متعددة، وقد تختلف الاستجابة من موقف إلى آخر. الهدف هو الملاحظة ودعم التنظيم والأمان، وليس لوم الذات.</div>
+</div>
+<footer class="footer"><span>Tamkinly | مركز التعافي من الصدمات (TRC)</span><span>Tool ID: TRC-TRAUMA_RESPONSES</span><span>مسودة للمراجعة السريرية</span><span>صفحة 1 من 3</span></footer>
+</section>
+
+<section class="page page-break">
+<div class="page-content">
+<header class="header"><div class="brand">Tamkinly | مركز التعافي من الصدمات (TRC)</div><div class="status">مسودة للمراجعة السريرية</div></header>
+<h2 class="title">تحديد سريع</h2>
+<p class="intro"><strong>أي استجابة هي الغالبة الآن؟</strong><br>استخدم القائمة للملاحظة فقط. يمكن اختيار أكثر من استجابة، ولا توجد إجابة صحيحة أو خاطئة.</p>
+
+<div class="checklist">
+<div class="check"><div class="box"></div><div class="check-label">القتال <span class="en">Fight</span></div></div>
+<div class="check"><div class="box"></div><div class="check-label">الفر <span class="en">Flight</span></div></div>
+<div class="check"><div class="box"></div><div class="check-label">التجميد <span class="en">Freeze</span></div></div>
+<div class="check"><div class="box"></div><div class="check-label">التملق <span class="en">Fawn</span></div></div>
+</div>
+
+<div class="teal"><strong>ملاحظة الاستجابات المختلطة:</strong> يمكن أن تتعايش استجابات متعددة. قد تظهر أكثر من استجابة في الوقت نفسه أو تتغير الاستجابة مع تغير الموقف.</div>
+
+<div style="margin-top:15px">
+<h3 class="section-title">دليل القرار</h3>
+<p class="intro">إذا لاحظت أن أحد الأنماط هو الأقرب لما يحدث الآن، استخدم الاستراتيجية المقابلة.</p>
+<div class="decision">
+<article class="decision-card"><div class="decision-title">إذا كان: القتال <span class="en">Fight</span></div><div class="decision-body">تأريض ← تفريغ بالحركة ← تنفس.</div></article>
+<article class="decision-card"><div class="decision-title">إذا كان: الفر <span class="en">Flight</span></div><div class="decision-body">إبطاء ← تأريض بالحاضر.</div></article>
+<article class="decision-card"><div class="decision-title">إذا كان: التجميد <span class="en">Freeze</span></div><div class="decision-body">حركة لطيفة ← تحفيز حسي ← توجيه.</div></article>
+<article class="decision-card"><div class="decision-title">إذا كان: التملق <span class="en">Fawn</span></div><div class="decision-body">ممارسة الحدود ← الدفاع عن الذات ← توسّط.</div></article>
+</div>
+</div>
+
+<div class="escalation"><h3>مسار التصعيد: عندما لا يكفي التنظيم الذاتي</h3><p>إذا كانت الاستجابة شديدة أو استمرت، أو أصبحت تعيق قدرتك على أداء وظائفك اليومية، أو صاحبها انفصال شديد أو فقدان السيطرة، اطلب دعمًا من مختص مناسب. هذا المرجع أداة تثقيفية ومساندة، وليس بديلًا عن التقييم أو العلاج المتخصص.</p></div>
+</div>
+<footer class="footer"><span>Tamkinly | مركز التعافي من الصدمات (TRC)</span><span>Tool ID: TRC-TRAUMA_RESPONSES</span><span>مسودة للمراجعة السريرية</span><span>صفحة 2 من 3</span></footer>
+</section>
+
+<section class="page">
+<div class="page-content">
+<header class="header"><div class="brand">Tamkinly | مركز التعافي من الصدمات (TRC)</div><div class="status">مسودة للمراجعة السريرية</div></header>
+<h2 class="title">مسار التصعيد والدعم</h2>
+
+<div class="support-box"><h3 class="section-title">مؤشرات الحاجة إلى دعم إضافي</h3><ul>
+<li>عندما تكون الاستجابة شديدة جدًا أو مستمرة.</li>
+<li>عندما تؤثر الاستجابة بوضوح في حياتك اليومية.</li>
+<li>عندما تشعر بانفصال شديد أو فقدان السيطرة.</li>
+<li>عندما تحتاج إلى دعم متخصص ولا تستطيع التعامل مع الأمر بمفردك.</li>
+</ul></div>
+
+<h3 class="contacts-title">جهات اتصال الطوارئ والدعم المحلي</h3>
+<p class="contacts-intro">اكتب هنا أرقام أو أسماء الجهات الموثوقة التي يمكنك الرجوع إليها عند الحاجة.</p>
+
+<div class="contact"><div class="row"><span class="row-label">جهة اتصال / اسم:</span><span class="write-line"></span></div><div class="row"><span class="row-label">رقم / وسيلة اتصال:</span><span class="write-line"></span></div><div class="row"><span class="row-label">ملاحظة:</span><span class="write-line"></span></div></div>
+<div class="contact"><div class="row"><span class="row-label">جهة اتصال / اسم:</span><span class="write-line"></span></div><div class="row"><span class="row-label">رقم / وسيلة اتصال:</span><span class="write-line"></span></div><div class="row"><span class="row-label">ملاحظة:</span><span class="write-line"></span></div></div>
+<div class="contact"><div class="row"><span class="row-label">جهة اتصال / اسم:</span><span class="write-line"></span></div><div class="row"><span class="row-label">رقم / وسيلة اتصال:</span><span class="write-line"></span></div><div class="row"><span class="row-label">ملاحظة:</span><span class="write-line"></span></div></div>
+
+<div class="safety" style="margin-top:14px"><strong>تنبيه سلامة:</strong> إذا كنت في خطر فوري أو غير قادر على الحفاظ على سلامتك، لا تعتمد على هذا المرجع وحده. اطلب مساعدة مباشرة من خدمات الطوارئ المحلية أو من شخص موثوق أو مختص مناسب.</div>
+<div class="teal" style="margin-top:12px"><strong>ختامًا:</strong> فهم استجابتك يمكن أن يكون خطوة نحو التنظيم، وليس سببًا للوم الذات. الهدف هو زيادة الأمان والاختيار خطوة بخطوة.</div>
+</div>
+<footer class="footer"><span>Tamkinly | مركز التعافي من الصدمات (TRC)</span><span>Tool ID: TRC-TRAUMA_RESPONSES</span><span>مسودة للمراجعة السريرية</span><span>صفحة 3 من 3</span></footer>
+</section>
+
+</body>
+</html>

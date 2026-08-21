@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>يوميات التعافي | مركز التعافي من الصدمات (TRC)</title>
+
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            background-color: #F8FAFC;
+            color: #0F1C2E;
+            line-height: 1.5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 12mm 15mm;
+            margin: 0 auto 10px auto;
+            background-color: #FFFFFF;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                background-color: #FFFFFF;
+            }
+
+            .page {
+                margin: 0;
+                min-height: 297mm;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #1F6F78;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .brand-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1F6F78;
+        }
+
+        .draft-badge {
+            background-color: #FEF3C7;
+            color: #78350F;
+            border: 1px solid #B45309;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .page-footer {
+            border-top: 1px solid #CBD5E1;
+            padding-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 9px;
+            color: #475569;
+            margin-top: 12px;
+        }
+
+        /* Typography */
+
+        h1 {
+            font-size: 22px;
+            color: #0F1C2E;
+            margin-bottom: 4px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 15px;
+            color: #1F6F78;
+            border-right: 4px solid #3DD4B0;
+            padding-right: 8px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        p,
+        li {
+            font-size: 12px;
+            color: #0F1C2E;
+        }
+
+        ul {
+            padding-right: 18px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        /* Core Components */
+
+        .purpose-box {
+            background-color: #E6F4F5;
+            color: #1F6F78;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            border-right: 3px solid #1F6F78;
+        }
+
+        .safety-box {
+            background-color: #FEF3C7;
+            border: 1px solid #B45309;
+            color: #78350F;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .alert-box {
+            background-color: #FFFBEB;
+            border: 1px solid #D97706;
+            color: #92400E;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .section-card {
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            padding: 10px 12px;
+            background-color: #FFFFFF;
+        }
+
+        .writing-area {
+            border: 1px dotted #9CA3AF;
+            background-color: #FAFAFA;
+            border-radius: 6px;
+            min-height: 170px;
+            padding: 10px;
+        }
+
+        .writing-area-lg {
+            border: 1px dotted #9CA3AF;
+            background-color: #FAFAFA;
+            border-radius: 6px;
+            min-height: 220px;
+            padding: 10px;
+        }
+
+        .writing-area-sm {
+            border: 1px dotted #9CA3AF;
+            background-color: #FAFAFA;
+            border-radius: 6px;
+            min-height: 48px;
+            padding: 6px;
+        }
+
+        .input-line {
+            border: 1px dotted #9CA3AF;
+            background-color: #FAFAFA;
+            border-radius: 4px;
+            height: 28px;
+            width: 100%;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .field-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #0F1C2E;
+        }
+
+        .optional-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #64748B;
+        }
+
+        /* Prompt List */
+
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .prompt-item {
+            font-size: 11px;
+            background-color: #F8FAFC;
+            padding: 6px 8px;
+            border: 1px solid #CBD5E1;
+            border-radius: 4px;
+        }
+
+        /* SUDS */
+
+        .suds-container {
+            margin: 6px 0;
+        }
+
+        .suds-title {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #0F1C2E;
+        }
+
+        .suds-optional {
+            font-size: 9px;
+            font-weight: 500;
+            color: #64748B;
+        }
+
+        .suds-scale {
+            display: flex;
+            justify-content: space-between;
+            gap: 4px;
+            direction: ltr;
+        }
+
+        .suds-node {
+            flex: 1;
+            border: 1px solid #CBD5E1;
+            background-color: #FFFFFF;
+            border-radius: 4px;
+            text-align: center;
+            padding: 4px 0;
+            font-size: 10px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        /* Layout */
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .grid-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        .muted {
+            color: #64748B;
+            font-size: 10px;
+        }
+
+        .closing-note {
+            text-align: center;
+            font-weight: 700;
+            padding: 7px;
+        }
+
+        @media screen and (max-width: 800px) {
+            .page {
+                width: 100%;
+                min-height: auto;
+                margin-bottom: 20px;
+            }
+
+            .grid-2col,
+            .grid-3col,
+            .prompts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         PAGE 1 — INTRODUCTION + SAFETY
+         ========================================================= -->
+
+    <div class="page">
+
+        <header class="page-header">
+            <span class="brand-title">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </span>
+
+            <span class="draft-badge">
+                مسودة للمراجعة السريرية
+            </span>
+        </header>
+
+        <main class="page-content">
+
+            <div>
+                <h1>يوميات التعافي</h1>
+
+                <div class="purpose-box">
+                    يوميات منظمة للكتابة التعبيرية عن التجربة الصدمية مع دعم التنظيم والسلامة في كل جلسة كتابة.
+                </div>
+            </div>
+
+            <div class="safety-box">
+                <strong>تنبيه سلامة:</strong>
+                الكتابة يمكن أن تكون محفّزة. توقف إذا زاد الضيق أو أصبح طاغيًا.
+                استخدم التأريض قبل وبعد الكتابة.
+            </div>
+
+            <section class="section-card">
+
+                <h2>قبل أن تبدأ</h2>
+
+                <ul>
+                    <li>اكتب لمدة 15–20 دقيقة في المرة.</li>
+                    <li>توقف إذا أصبح الضيق طاغيًا.</li>
+                    <li>استخدم التأريض قبل وبعد الكتابة.</li>
+                    <li>اختر فقط ما يبدو مناسبًا لك الآن.</li>
+                </ul>
+
+            </section>
+
+            <section class="section-card">
+
+                <h2>يمكنك ترك أي جزء فارغًا</h2>
+
+                <p>
+                    هذه يومياتك. لا تحتاج إلى كتابة كل شيء، ولا توجد إجابة يجب أن تصل إليها.
+                    يمكنك ترك أي سؤال أو موجه فارغًا إذا لم يكن مناسبًا لك الآن.
+                </p>
+
+            </section>
+
+            <div class="grid-2col">
+
+                <section class="section-card">
+
+                    <h2>متى تكتب؟</h2>
+
+                    <p>
+                        عندما تكون مستقرًا بما يكفي للانخراط في الكتابة دون أن يصبح الضيق طاغيًا.
+                    </p>
+
+                </section>
+
+                <section class="section-card">
+
+                    <h2>متى لا تكتب؟</h2>
+
+                    <p>
+                        أثناء أزمة حادة أو عندما يكون الضيق شديدًا لدرجة تجعل الاستمرار غير مناسب.
+                    </p>
+
+                </section>
+
+            </div>
+
+            <section class="section-card">
+
+                <h2>حدود الكتابة</h2>
+
+                <p>
+                    لا تحتاج إلى إعادة سرد التجربة الصدمية بالتفصيل.
+                    اكتب فقط بالقدر الذي يبدو آمنًا ومناسبًا لك الآن.
+                </p>
+
+            </section>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+            <span>Tool ID: TRC-TRAUMA_JOURNAL</span>
+            <span>مسودة للمراجعة السريرية</span>
+            <span>صفحة 1 من 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         PAGE 2 — SAFE WRITING PROTOCOL
+         ========================================================= -->
+
+    <div class="page">
+
+        <header class="page-header">
+            <span class="brand-title">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </span>
+
+            <span class="draft-badge">
+                مسودة للمراجعة السريرية
+            </span>
+        </header>
+
+        <main class="page-content">
+
+            <div>
+                <h1>جلسة كتابة آمنة</h1>
+
+                <p class="muted">
+                    استخدم هذه الصفحة كمرجع قبل كل جلسة كتابة.
+                </p>
+            </div>
+
+            <section class="section-card">
+
+                <h2>1. قبل الكتابة</h2>
+
+                <ul>
+                    <li>تأكد أنك مستقر بما يكفي للانخراط.</li>
+                    <li>يمكنك تسجيل مستوى الضيق قبل الكتابة إذا كان ذلك مفيدًا لك.</li>
+                    <li>اختر موجهًا واحدًا، أو اكتب دون موجه.</li>
+                    <li>اكتب لمدة 15–20 دقيقة في المرة.</li>
+                </ul>
+
+            </section>
+
+            <section class="section-card">
+
+                <h2>2. أثناء الكتابة</h2>
+
+                <p>
+                    اكتب بالقدر الذي تختاره.
+                    لا تحتاج إلى إجبار نفسك على تذكر أو وصف تفاصيل لا تريد الكتابة عنها.
+                </p>
+
+                <div class="safety-box" style="margin-top: 10px;">
+                    إذا زاد الضيق أو أصبح طاغيًا، توقف عن الكتابة واستخدم التأريض.
+                    لا تحتاج إلى إكمال الإدخال.
+                </div>
+
+            </section>
+
+            <section class="section-card">
+
+                <h2>3. بعد الكتابة</h2>
+
+                <ul>
+                    <li>يمكنك تسجيل مستوى الضيق بعد الكتابة إذا كان ذلك مفيدًا لك.</li>
+                    <li>لاحظ شيئًا واحدًا فقط، إن رغبت.</li>
+                    <li>استخدم التأريض.</li>
+                    <li>أغلق الجلسة قبل الانتقال إلى نشاط آخر.</li>
+                </ul>
+
+            </section>
+
+            <section class="section-card">
+
+                <h2>تذكير مهم</h2>
+
+                <p>
+                    لا توجد حاجة إلى إنهاء قصة أو الوصول إلى استنتاج.
+                    الهدف من هذه الصفحة هو توفير مساحة منظمة وآمنة نسبيًا للكتابة،
+                    وليس إجبار نفسك على مواجهة أكثر مما تستطيع تحمّله الآن.
+                </p>
+
+            </section>
+
+            <div class="alert-box closing-note">
+                إذا لم تكن الكتابة مناسبة الآن، يمكنك تخطيها والعودة إليها في وقت آخر.
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+            <span>Tool ID: TRC-TRAUMA_JOURNAL</span>
+            <span>مسودة للمراجعة السريرية</span>
+            <span>صفحة 2 من 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         PAGE 3 — JOURNAL ENTRY 1
+         ========================================================= -->
+
+    <div class="page">
+
+        <header class="page-header">
+            <span class="brand-title">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </span>
+
+            <span class="draft-badge">
+                مسودة للمراجعة السريرية
+            </span>
+        </header>
+
+        <main class="page-content">
+
+            <h1>إدخال يوميات — 1</h1>
+
+            <div class="grid-3col">
+
+                <div class="field-group">
+                    <span class="field-label">التاريخ</span>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">الوقت</span>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">الموجه المستخدم — اختياري</span>
+                    <div class="input-line"></div>
+                </div>
+
+            </div>
+
+            <section class="section-card">
+
+                <h2>موجهات الكتابة — اختر ما يناسبك فقط</h2>
+
+                <div class="prompts-grid">
+
+                    <div class="prompt-item">
+                        ماذا حدث لي؟
+                    </div>
+
+                    <div class="prompt-item">
+                        كيف شعرت حينها؟
+                    </div>
+
+                    <div class="prompt-item">
+                        كيف أشعر الآن؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أتمنى لو أن أحدًا عرف؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا كنت أحتاج حينها؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أتعلم عن نفسي؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أقدّر في نفسي أو في الطريقة التي أتعامل بها الآن؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أريد أن أتركه جانبًا الآن؟
+                    </div>
+
+                </div>
+
+                <p class="muted" style="margin-top: 7px;">
+                    لا تحتاج إلى استخدام أي موجه، ولا تحتاج إلى الإجابة عن أكثر من موجه واحد.
+                </p>
+
+            </section>
+
+            <div class="suds-container">
+
+                <div class="suds-title">
+                    مستوى الضيق قبل الكتابة
+                    <span class="suds-optional">(اختياري، 0–10)</span>
+                </div>
+
+                <div class="suds-scale">
+                    <div class="suds-node">0</div>
+                    <div class="suds-node">1</div>
+                    <div class="suds-node">2</div>
+                    <div class="suds-node">3</div>
+                    <div class="suds-node">4</div>
+                    <div class="suds-node">5</div>
+                    <div class="suds-node">6</div>
+                    <div class="suds-node">7</div>
+                    <div class="suds-node">8</div>
+                    <div class="suds-node">9</div>
+                    <div class="suds-node">10</div>
+                </div>
+
+                <div class="field-group" style="margin-top: 4px;">
+                    <span class="field-label">
+                        إن رغبت، اكتب الرقم هنا:
+                    </span>
+                    <div class="input-line" style="height: 24px;"></div>
+                </div>
+
+            </div>
+
+            <div class="field-group">
+
+                <span class="field-label">
+                    مساحة الكتابة
+                </span>
+
+                <span class="optional-label">
+                    اكتب فقط بالقدر الذي يبدو مناسبًا لك. لا تحتاج إلى وصف التفاصيل.
+                </span>
+
+                <div class="writing-area-lg"></div>
+
+            </div>
+
+            <div class="suds-container">
+
+                <div class="suds-title">
+                    مستوى الضيق بعد الكتابة
+                    <span class="suds-optional">(اختياري، 0–10)</span>
+                </div>
+
+                <div class="suds-scale">
+                    <div class="suds-node">0</div>
+                    <div class="suds-node">1</div>
+                    <div class="suds-node">2</div>
+                    <div class="suds-node">3</div>
+                    <div class="suds-node">4</div>
+                    <div class="suds-node">5</div>
+                    <div class="suds-node">6</div>
+                    <div class="suds-node">7</div>
+                    <div class="suds-node">8</div>
+                    <div class="suds-node">9</div>
+                    <div class="suds-node">10</div>
+                </div>
+
+                <div class="field-group" style="margin-top: 4px;">
+                    <span class="field-label">
+                        إن رغبت، اكتب الرقم هنا:
+                    </span>
+                    <div class="input-line" style="height: 24px;"></div>
+                </div>
+
+            </div>
+
+            <div class="field-group">
+
+                <span class="field-label">
+                    شيء واحد لاحظته — اختياري
+                </span>
+
+                <div class="writing-area-sm"></div>
+
+            </div>
+
+            <div class="alert-box closing-note">
+                بعد الكتابة: استخدم التأريض وأغلق الجلسة قبل الانتقال إلى نشاط آخر.
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+            <span>Tool ID: TRC-TRAUMA_JOURNAL</span>
+            <span>مسودة للمراجعة السريرية</span>
+            <span>صفحة 3 من 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         PAGE 4 — JOURNAL ENTRY 2
+         ========================================================= -->
+
+    <div class="page">
+
+        <header class="page-header">
+            <span class="brand-title">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </span>
+
+            <span class="draft-badge">
+                مسودة للمراجعة السريرية
+            </span>
+        </header>
+
+        <main class="page-content">
+
+            <h1>إدخال يوميات — 2</h1>
+
+            <div class="grid-3col">
+
+                <div class="field-group">
+                    <span class="field-label">التاريخ</span>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">الوقت</span>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">الموجه المستخدم — اختياري</span>
+                    <div class="input-line"></div>
+                </div>
+
+            </div>
+
+            <section class="section-card">
+
+                <h2>موجهات الكتابة — اختر ما يناسبك فقط</h2>
+
+                <div class="prompts-grid">
+
+                    <div class="prompt-item">
+                        ماذا حدث لي؟
+                    </div>
+
+                    <div class="prompt-item">
+                        كيف شعرت حينها؟
+                    </div>
+
+                    <div class="prompt-item">
+                        كيف أشعر الآن؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أتمنى لو أن أحدًا عرف؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا كنت أحتاج حينها؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أتعلم عن نفسي؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أقدّر في نفسي أو في الطريقة التي أتعامل بها الآن؟
+                    </div>
+
+                    <div class="prompt-item">
+                        ماذا أريد أن أتركه جانبًا الآن؟
+                    </div>
+
+                </div>
+
+                <p class="muted" style="margin-top: 7px;">
+                    لا تحتاج إلى استخدام أي موجه، ولا تحتاج إلى الإجابة عن أكثر من موجه واحد.
+                </p>
+
+            </section>
+
+            <div class="suds-container">
+
+                <div class="suds-title">
+                    مستوى الضيق قبل الكتابة
+                    <span class="suds-optional">(اختياري، 0–10)</span>
+                </div>
+
+                <div class="suds-scale">
+                    <div class="suds-node">0</div>
+                    <div class="suds-node">1</div>
+                    <div class="suds-node">2</div>
+                    <div class="suds-node">3</div>
+                    <div class="suds-node">4</div>
+                    <div class="suds-node">5</div>
+                    <div class="suds-node">6</div>
+                    <div class="suds-node">7</div>
+                    <div class="suds-node">8</div>
+                    <div class="suds-node">9</div>
+                    <div class="suds-node">10</div>
+                </div>
+
+                <div class="field-group" style="margin-top: 4px;">
+                    <span class="field-label">
+                        إن رغبت، اكتب الرقم هنا:
+                    </span>
+                    <div class="input-line" style="height: 24px;"></div>
+                </div>
+
+            </div>
+
+            <div class="field-group">
+
+                <span class="field-label">
+                    مساحة الكتابة
+                </span>
+
+                <span class="optional-label">
+                    اكتب فقط بالقدر الذي يبدو مناسبًا لك. لا تحتاج إلى وصف التفاصيل.
+                </span>
+
+                <div class="writing-area-lg"></div>
+
+            </div>
+
+            <div class="suds-container">
+
+                <div class="suds-title">
+                    مستوى الضيق بعد الكتابة
+                    <span class="suds-optional">(اختياري، 0–10)</span>
+                </div>
+
+                <div class="suds-scale">
+                    <div class="suds-node">0</div>
+                    <div class="suds-node">1</div>
+                    <div class="suds-node">2</div>
+                    <div class="suds-node">3</div>
+                    <div class="suds-node">4</div>
+                    <div class="suds-node">5</div>
+                    <div class="suds-node">6</div>
+                    <div class="suds-node">7</div>
+                    <div class="suds-node">8</div>
+                    <div class="suds-node">9</div>
+                    <div class="suds-node">10</div>
+                </div>
+
+                <div class="field-group" style="margin-top: 4px;">
+                    <span class="field-label">
+                        إن رغبت، اكتب الرقم هنا:
+                    </span>
+                    <div class="input-line" style="height: 24px;"></div>
+                </div>
+
+            </div>
+
+            <div class="field-group">
+
+                <span class="field-label">
+                    شيء واحد لاحظته — اختياري
+                </span>
+
+                <div class="writing-area-sm"></div>
+
+            </div>
+
+            <div class="alert-box closing-note">
+                بعد الكتابة: استخدم التأريض وأغلق الجلسة قبل الانتقال إلى نشاط آخر.
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+            <span>Tool ID: TRC-TRAUMA_JOURNAL</span>
+            <span>مسودة للمراجعة السريرية</span>
+            <span>صفحة 4 من 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         PAGE 5 — SESSION CLOSING / CONTAINMENT
+         ========================================================= -->
+
+    <div class="page">
+
+        <header class="page-header">
+            <span class="brand-title">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </span>
+
+            <span class="draft-badge">
+                مسودة للمراجعة السريرية
+            </span>
+        </header>
+
+        <main class="page-content">
+
+            <h1>إغلاق الجلسة</h1>
+
+            <div class="alert-box">
+                تذكير: بعد كل إدخال، خذ وقتًا للإغلاق قبل الانتقال إلى نشاط آخر.
+            </div>
+
+            <section class="section-card">
+
+                <h2>التأريض</h2>
+
+                <p>
+                    استخدم تمرين التأريض بعد الكتابة للعودة إلى الحاضر
+                    والاستقرار قبل الانتقال إلى نشاط آخر.
+                </p>
+
+            </section>
+
+            <section class="section-card">
+
+                <h2>الاحتواء — اختياري</h2>
+
+                <p>
+                    إذا كان تصور الاحتواء مناسبًا لك، يمكنك تخيل وضع ما كتبته جانبًا
+                    في مكان آمن ومؤقت، ثم العودة إلى الحاضر.
+                </p>
+
+                <div style="text-align: center; margin-top: 8px;">
+
+                    <svg
+                        width="60"
+                        height="40"
+                        viewBox="0 0 60 40"
+                        fill="none"
+                        stroke="#1F6F78"
+                        stroke-width="1.5"
+                        aria-hidden="true"
+                    >
+                        <rect x="10" y="10" width="40" height="25" rx="3"></rect>
+                        <path d="M 10 15 L 30 25 L 50 15"></path>
+                        <line x1="20" y1="10" x2="20" y2="5"></line>
+                        <line x1="40" y1="10" x2="40" y2="5"></line>
+                        <line x1="18" y1="5" x2="42" y2="5"></line>
+                    </svg>
+
+                </div>
+
+            </section>
+
+            <div class="field-group">
+
+                <span class="field-label">
+                    ماذا سأفعل الآن للعناية بنفسي؟
+                </span>
+
+                <span class="optional-label">
+                    اختياري
+                </span>
+
+                <div class="writing-area-sm" style="min-height: 60px;"></div>
+
+            </div>
+
+            <div class="safety-box">
+                إذا بقي الضيق مرتفعًا أو ازداد، لا تجبر نفسك على الاستمرار في الكتابة.
+                أوقف الجلسة واستخدم التأريض.
+            </div>
+
+            <section class="section-card">
+
+                <h2>جهات اتصال الطوارئ والدعم</h2>
+
+                <div class="field-group">
+                    <span class="field-label">جهة اتصال 1:</span>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">جهة اتصال 2:</span>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">جهة اتصال 3:</span>
+                    <div class="input-line"></div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+            <span>Tool ID: TRC-TRAUMA_JOURNAL</span>
+            <span>مسودة للمراجعة السريرية</span>
+            <span>صفحة 5 من 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         PAGE 6 — WEEKLY REVIEW + SUPPORT
+         ========================================================= -->
+
+    <div class="page">
+
+        <header class="page-header">
+            <span class="brand-title">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </span>
+
+            <span class="draft-badge">
+                مسودة للمراجعة السريرية
+            </span>
+        </header>
+
+        <main class="page-content">
+
+            <h1>المراجعة الأسبوعية</h1>
+
+            <div class="purpose-box"
+                 style="background-color: #F8FAFC; border-right-color: #475569; color: #475569;">
+
+                هذه المراجعة ليست اختبارًا للنجاح أو التقدم.
+                استخدم فقط ما تريد مراجعته، ويمكنك ترك أي حقل فارغًا.
+
+            </div>
+
+            <div class="grid-2col">
+
+                <div class="field-group">
+                    <span class="field-label">
+                        هذا الأسبوع كتبت عن...
+                    </span>
+                    <div class="writing-area-sm" style="min-height: 50px;"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">
+                        لاحظت...
+                    </span>
+                    <div class="writing-area-sm" style="min-height: 50px;"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">
+                        هل لاحظت أي تغير؟ إن كان نعم، ما هو؟
+                    </span>
+                    <div class="writing-area-sm" style="min-height: 50px;"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">
+                        شيء أريد استكشافه أكثر...
+                    </span>
+                    <div class="writing-area-sm" style="min-height: 50px;"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">
+                        ما الذي لاحظته في طريقة استجابتي للكتابة؟
+                    </span>
+                    <div class="writing-area-sm" style="min-height: 50px;"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">
+                        ماذا أقدّر في تعافي...
+                    </span>
+                    <div class="writing-area-sm" style="min-height: 50px;"></div>
+                </div>
+
+            </div>
+
+            <section class="section-card">
+
+                <h2>متى أتوقف؟</h2>
+
+                <ul>
+                    <li>أزمة حادة.</li>
+                    <li>ضيق شديد.</li>
+                    <li>إذا أصبح الضيق طاغيًا.</li>
+                    <li>إذا لم تعد الكتابة تبدو مناسبة أو آمنة لك الآن.</li>
+                </ul>
+
+            </section>
+
+            <section class="section-card">
+
+                <h2>جهات اتصال الطوارئ والدعم</h2>
+
+                <div class="field-group">
+                    <span class="field-label">جهة اتصال 1:</span>
+                    <div class="input-line" style="height: 22px;"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">جهة اتصال 2:</span>
+                    <div class="input-line" style="height: 22px;"></div>
+                </div>
+
+                <div class="field-group">
+                    <span class="field-label">جهة اتصال 3:</span>
+                    <div class="input-line" style="height: 22px;"></div>
+                </div>
+
+            </section>
+
+            <div class="safety-box">
+                تذكير: هذه الأداة لا تتطلب منك كشف تفاصيل التجربة الصدمية.
+                يمكنك التوقف أو ترك أي سؤال فارغًا في أي وقت.
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+            <span>Tool ID: TRC-TRAUMA_JOURNAL</span>
+            <span>مسودة للمراجعة السريرية</span>
+            <span>صفحة 6 من 6</span>
+        </footer>
+
+    </div>
+
+</body>
+</html>

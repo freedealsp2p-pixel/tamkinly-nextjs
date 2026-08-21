@@ -52,7 +52,7 @@ const phases = [
     id: 'crossroads',
     name: 'Crossroads',
     description: 'Questioning and exploring internal voice',
-    color: '#FFB74D',
+    color: '#2A8A94',
     icon: <Compass className="w-5 h-5" />,
     characteristics: [
       'Beginning to question external expectations',
@@ -95,7 +95,7 @@ const dimensions = [
     name: 'Cognitive Dimension',
     description: 'How you form beliefs and make knowledge claims',
     icon: <BookOpen className="w-5 h-5" />,
-    color: '#64B5F6',
+    color: '#2A8A94',
     questions: [
       'When faced with conflicting information, how do you determine what to believe?',
       'Do you rely more on expert opinions or your own analysis?',
@@ -108,7 +108,7 @@ const dimensions = [
     name: 'Intrapersonal Dimension',
     description: 'How you understand and define yourself',
     icon: <Heart className="w-5 h-5" />,
-    color: '#E57373',
+    color: '#C97B7B',
     questions: [
       'How would you describe your core identity?',
       'What values guide your decisions?',
@@ -121,7 +121,7 @@ const dimensions = [
     name: 'Interpersonal Dimension',
     description: 'How you relate to and interact with others',
     icon: <Users className="w-5 h-5" />,
-    color: '#BA68C8',
+    color: '#2A8A94',
     questions: [
       'How do you balance your needs with others\' expectations?',
       'What role does others\' approval play in your decisions?',
@@ -293,7 +293,7 @@ export default function SelfAuthorshipWorksheet() {
         <Card className="bg-[#F6F8FA]">
           <CardHeader>
             <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-              <Lightbulb className="w-5 h-5 text-[#FFB74D]" />
+              <Lightbulb className="w-5 h-5 text-[#2A8A94]" />
               Growth Recommendations
             </CardTitle>
           </CardHeader>

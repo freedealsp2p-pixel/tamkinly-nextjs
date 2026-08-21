@@ -10,9 +10,9 @@ export const contentType = 'image/png';
 function getTierColor(tier: string): string {
   switch (tier) {
     case 'FREE': return '#3DD4B0';
-    case 'BASIC': return '#f59e0b';
-    case 'PREMIUM': return '#8b5cf6';
-    case 'BUNDLE': return '#ec4899';
+    case 'BASIC': return '#2A8A94';
+    case 'PREMIUM': return '#1F6F78';
+    case 'MASTERY': return '#7AEEE0';
     default: return '#3DD4B0';
   }
 }
@@ -113,7 +113,7 @@ export default async function AppOgImage({ params }: { params: Promise<{ app: st
             marginBottom: '24px',
           }}>
             <span style={{
-              display: 'inline-flex',
+              display: 'flex',
               alignItems: 'center',
               padding: '6px 14px',
               borderRadius: '16px',

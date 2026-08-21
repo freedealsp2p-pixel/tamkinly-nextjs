@@ -86,7 +86,7 @@ function SignInForm() {
 
         {/* Error Message */}
         {error && (
-          <div className="bg-[#FFF3E8] border border-[#FFB088] text-[#E55A10] px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
+          <div className="bg-[#F8EEEF] border border-[#D4A8AE] text-[#A86565] px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
             <AlertCircle className="h-4 w-4" />
             {error}
           </div>
@@ -170,8 +170,15 @@ function SignInForm() {
           {t('continueFree') || 'Continue with Free Assessment'}
         </Button>
 
+        {/* Forgot Password Link */}
+        <div className="text-center mt-4">
+          <Link href="/auth/forgot-password" className="text-sm text-[#1F6F78] hover:text-[#0F1C2E] hover:underline">
+            {t('forgotPassword')}
+          </Link>
+        </div>
+
         {/* Sign Up Link */}
-        <p className="text-center text-slate-600 mt-6">
+        <p className="text-center text-slate-600 mt-4">
           {t('noAccount')}{' '}
           <Link href="/auth/signup" className="text-[#3DD4B0] hover:underline font-medium">
             {t('signUp')}
@@ -210,4 +217,5 @@ export default function SignInPage() {
     </div>
   );
 }
+
 

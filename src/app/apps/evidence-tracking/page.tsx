@@ -193,8 +193,8 @@ export default function EvidenceTrackingPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <Card className="bg-white">
             <CardContent className="pt-6 text-center">
-              <div className="w-10 h-10 rounded-full bg-[#FFB74D]/10 flex items-center justify-center mx-auto mb-2">
-                <Flame className="w-5 h-5 text-[#FFB74D]" />
+              <div className="w-10 h-10 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mx-auto mb-2">
+                <Flame className="w-5 h-5 text-[#2A8A94]" />
               </div>
               <div className="text-3xl font-bold text-[#0F1C2E]">{stats.streak}</div>
               <p className="text-xs text-[#8A94A6]">{getText('Day Streak', 'سلسلة الأيام')}</p>
@@ -220,8 +220,8 @@ export default function EvidenceTrackingPage() {
           </Card>
           <Card className="bg-white">
             <CardContent className="pt-6 text-center">
-              <div className="w-10 h-10 rounded-full bg-[#FFB74D]/10 flex items-center justify-center mx-auto mb-2">
-                <Award className="w-5 h-5 text-[#FFB74D]" />
+              <div className="w-10 h-10 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mx-auto mb-2">
+                <Award className="w-5 h-5 text-[#2A8A94]" />
               </div>
               <div className="text-3xl font-bold text-[#0F1C2E]">
                 {evidence.filter(e => e.followedThrough).length}
@@ -301,7 +301,7 @@ export default function EvidenceTrackingPage() {
                   </Badge>
                   <Badge
                     variant={!formData.followedThrough ? 'default' : 'outline'}
-                    className={`cursor-pointer py-2 px-4 ${!formData.followedThrough ? 'bg-[#E57373] text-white' : 'hover:bg-[#E57373]/10 border-[#E57373] text-[#E57373]'}`}
+                    className={`cursor-pointer py-2 px-4 ${!formData.followedThrough ? 'bg-[#C97B7B] text-white' : 'hover:bg-[#C97B7B]/10 border-[#C97B7B] text-[#C97B7B]'}`}
                     onClick={() => setFormData(prev => ({ ...prev, followedThrough: false }))}
                   >
                     {getText('Not fully', 'ليس بالكامل')}
@@ -427,7 +427,7 @@ export default function EvidenceTrackingPage() {
                               {e.followedThrough ? (
                                 <CheckCircle2 className="w-4 h-4 text-[#3DD4B0]" />
                               ) : (
-                                <CheckCircle2 className="w-4 h-4 text-[#FFB74D]" />
+                                <CheckCircle2 className="w-4 h-4 text-[#2A8A94]" />
                               )}
                               <span className="text-sm font-medium text-[#0F1C2E]">{e.action}</span>
                             </div>
@@ -437,7 +437,7 @@ export default function EvidenceTrackingPage() {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => deleteEvidence(e.id)}
-                                className="text-[#E57373] hover:bg-[#E57373]/10 h-6 w-6 p-0"
+                                className="text-[#C97B7B] hover:bg-[#C97B7B]/10 h-6 w-6 p-0"
                               >
                                 ×
                               </Button>

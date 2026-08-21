@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مسح الجسد — Tamkinly | مركز تعافي الصدمات</title>
+
+  <style>
+    :root {
+      --primary: #1F6F78;
+      --accent: #3DD4B0;
+      --dark: #0F1C2E;
+      --bg-light: #F8FAFC;
+      --line-border: #CBD5E1;
+
+      --alert-bg: #FFFBEB;
+      --alert-border: #D97706;
+      --alert-text: #92400E;
+
+      --safety-bg: #FEF3C7;
+      --safety-border: #B45309;
+      --safety-text: #78350F;
+
+      --teal-bg: #E6F4F5;
+      --teal-text: #1F6F78;
+
+      --writing-border: #9CA3AF;
+      --footer-text: #475569;
+
+      --font-family: 'Noto Sans Arabic', Tahoma, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background: #E2E8F0;
+    }
+
+    body {
+      background: #E2E8F0;
+      color: var(--dark);
+      font-family: var(--font-family);
+      direction: rtl;
+      text-align: right;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =========================
+       PRINT / A4
+       ========================= */
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 15mm;
+      background: #FFFFFF;
+      margin-bottom: 20px;
+
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+      overflow: hidden;
+
+      page-break-after: always;
+      break-after: page;
+
+      box-shadow: 0 4px 15px rgba(15, 28, 46, 0.08);
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+      margin-bottom: 0;
+    }
+
+    .page-content {
+      flex: 1;
+      min-height: 0;
+    }
+
+    @media print {
+      html,
+      body {
+        background: #FFFFFF !important;
+      }
+
+      .page-wrapper {
+        padding: 0;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      * {
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+      }
+    }
+
+    /* =========================
+       SCREEN CONTROLS
+       ========================= */
+
+    .action-bar {
+      width: 210mm;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .print-btn {
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 5px;
+      font-family: var(--font-family);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .print-btn:hover {
+      background: #165259;
+    }
+
+    /* =========================
+       HEADER
+       ========================= */
+
+    .header-bar {
+      display: flex;
+      align-items: center;
+
+      border-bottom: 1px solid var(--line-border);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    .brand-name {
+      color: var(--dark);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand-name span {
+      color: var(--primary);
+    }
+
+    /* =========================
+       TYPOGRAPHY
+       ========================= */
+
+    .main-title {
+      color: var(--dark);
+      font-size: 22px;
+      line-height: 1.25;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .purpose-box {
+      background: var(--teal-bg);
+      color: var(--teal-text);
+      border-right: 4px solid var(--primary);
+      border-radius: 5px;
+      padding: 11px 14px;
+      margin-bottom: 14px;
+
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+
+    .section-title {
+      color: var(--dark);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    /* =========================
+       SAFETY
+       ========================= */
+
+    .safety-box {
+      background: var(--safety-bg);
+      border: 1px solid var(--safety-border);
+      border-right: 4px solid var(--safety-border);
+      color: var(--safety-text);
+      border-radius: 5px;
+
+      padding: 11px 14px;
+      margin-bottom: 15px;
+
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .safety-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .alert-box {
+      background: var(--alert-bg);
+      border: 1px solid var(--alert-border);
+      border-right: 4px solid var(--alert-border);
+      color: var(--alert-text);
+      border-radius: 5px;
+
+      padding: 11px 14px;
+      margin-bottom: 14px;
+
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .alert-box-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stop-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 8px;
+    }
+
+    .stop-list li {
+      position: relative;
+      padding-right: 16px;
+      margin-bottom: 5px;
+    }
+
+    .stop-list li::before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      font-weight: 700;
+    }
+
+    .stop-direction {
+      background: rgba(217, 119, 6, 0.08);
+      border-radius: 4px;
+      padding: 7px 9px;
+      font-weight: 600;
+    }
+
+    /* =========================
+       GUIDANCE
+       ========================= */
+
+    .instructions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px;
+    }
+
+    .instructions-list li {
+      position: relative;
+      padding-right: 17px;
+      margin-bottom: 6px;
+
+      font-size: 12.5px;
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    .instructions-list li::before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .start-position-box {
+      background: var(--bg-light);
+      border: 1px solid var(--line-border);
+      border-radius: 5px;
+
+      padding: 11px 14px;
+      margin-bottom: 13px;
+    }
+
+    .start-position-text {
+      font-size: 12.5px;
+      color: var(--dark);
+      line-height: 1.55;
+    }
+
+    .reminder-box {
+      background: #F1F5F9;
+      border: 1px dashed var(--line-border);
+      border-right: 4px solid var(--primary);
+      border-radius: 5px;
+
+      padding: 10px 14px;
+    }
+
+    .reminder-title {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .reminder-text {
+      font-size: 12px;
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    /* =========================
+       BODY AREAS
+       ========================= */
+
+    .page-intro {
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .grid-container-9 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .body-card {
+      background: #FFFFFF;
+      border: 1px solid var(--line-border);
+      border-radius: 5px;
+
+      padding: 9px;
+
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .body-card-title {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 2px;
+    }
+
+    .body-card-label {
+      color: #64748B;
+      font-size: 10.5px;
+      margin-bottom: 5px;
+    }
+
+    .body-card-input {
+      flex: 1;
+      min-height: 91px;
+
+      background: #FFFFFF;
+      border: 1.5px dotted var(--writing-border);
+      border-radius: 4px;
+    }
+
+    /* =========================
+       PAGE 3
+       ========================= */
+
+    .reflection-group {
+      margin-bottom: 12px;
+    }
+
+    .reflection-label {
+      color: var(--dark);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .reflection-sublabel {
+      color: #64748B;
+      font-size: 11.5px;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .writing-area {
+      width: 100%;
+      min-height: 55px;
+
+      background: #FFFFFF;
+      border: 1.5px dotted var(--writing-border);
+      border-radius: 5px;
+    }
+
+    .writing-area.large {
+      min-height: 76px;
+    }
+
+    .contacts-title {
+      color: var(--dark);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .contact-field {
+      background: var(--bg-light);
+      border: 1px solid var(--line-border);
+      border-radius: 5px;
+      padding: 8px 10px;
+    }
+
+    .contact-label {
+      color: var(--primary);
+      font-size: 11.5px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .contact-line {
+      height: 27px;
+      border-bottom: 1.5px dotted var(--writing-border);
+    }
+
+    .disclaimer {
+      background: var(--bg-light);
+      border: 1px solid var(--line-border);
+      border-radius: 5px;
+
+      padding: 9px 11px;
+
+      color: #64748B;
+      font-size: 10.5px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .footer {
+      flex-shrink: 0;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      border-top: 1px solid var(--line-border);
+      padding-top: 7px;
+      margin-top: 10px;
+
+      color: var(--footer-text);
+      font-size: 9px;
+
+      direction: ltr;
+    }
+
+    .footer-code {
+      direction: ltr;
+      text-align: left;
+    }
+
+    .footer-page {
+      direction: rtl;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Screen-only print control -->
+  <div class="action-bar no-print">
+    <button class="print-btn" onclick="window.print()">
+      طباعة الأداة / حفظ كـ PDF
+    </button>
+  </div>
+
+
+  <!-- =====================================================
+       PAGE 1
+       ===================================================== -->
+
+  <section class="page">
+
+    <div class="page-content">
+
+      <header class="header-bar">
+        <div class="brand-name">
+          Tamkinly <span>| مركز تعافي الصدمات</span>
+        </div>
+      </header>
+
+      <main>
+
+        <h1 class="main-title">
+          مسح الجسد
+        </h1>
+
+        <div class="purpose-box">
+          <strong>الغرض:</strong>
+          فحص تدريجي للجسد لرصد التوتر والإحساس في كل منطقة وزيادة الوعي الجسدي كأداة تأريض.
+        </div>
+
+        <div class="safety-box">
+          <div class="safety-title">تنبيه السلامة</div>
+
+          <div>
+            الوعي الجسدي يمكن أن يكون محفّزًا للناجين من الصدمة.
+            إذا ظهرت ذكريات جسدية مؤلمة، أو زاد التفارق، أو أصبح التركيز على الجسد غير محتمل،
+            توقف وارجع إلى التأريض 5-4-3-2-1 بالحواس الخارجية فقط.
+          </div>
+        </div>
+
+
+        <section>
+          <h2 class="section-title">
+            كيف تنجز مسح الجسد؟
+          </h2>
+
+          <ul class="instructions-list">
+
+            <li>
+              انتقل ببطء وبشكل تدريجي بين مناطق الجسد.
+            </li>
+
+            <li>
+              لاحظ ما هو موجود الآن بفضول ودون إصدار أحكام.
+            </li>
+
+            <li>
+              لا تحاول تفسير الإحساس أو البحث عن سببه أو مصدره.
+            </li>
+
+            <li>
+              يمكنك ملاحظة التوتر، الحرارة، البرودة، الضغط، الثقل، الخفة،
+              التنميل أو أي إحساس آخر يظهر لك.
+            </li>
+
+            <li>
+              لا تحتاج إلى تغيير الإحساس أو إجباره على الاختفاء.
+            </li>
+
+            <li>
+              يمكنك تجاوز أي منطقة أو ترك أي ملاحظة فارغة إذا لم يكن التركيز عليها مناسبًا لك.
+            </li>
+
+            <li>
+              إذا أصبح التركيز على الجسد غير مريح، افتح عينيك ووجّه انتباهك إلى البيئة الخارجية.
+            </li>
+
+          </ul>
+        </section>
+
+
+        <section class="start-position-box">
+
+          <h2 class="section-title">
+            وضع البداية
+          </h2>
+
+          <p class="start-position-text">
+            اجلس أو استلقِ بالطريقة التي تناسبك.
+            أبقِ عينيك مفتوحتين أو أغمضهما إذا كان ذلك مريحًا وآمنًا لك.
+            لا توجد وضعية صحيحة أو مطلوبة.
+          </p>
+
+        </section>
+
+
+        <div class="reminder-box">
+
+          <div class="reminder-title">
+            تذكير مهم
+          </div>
+
+          <p class="reminder-text">
+            ليس مطلوبًا أن تشعر بالاسترخاء.
+            الهدف هو ملاحظة ما هو موجود الآن، بالقدر الذي تستطيع تحمّله.
+            يمكنك التوقف في أي وقت.
+          </p>
+
+        </div>
+
+      </main>
+
+    </div>
+
+
+    <footer class="footer">
+
+      <span class="footer-code">
+        TRC Tool ID: TRC-BODY_SCAN
+      </span>
+
+      <span class="footer-page">
+        صفحة 1 من 3
+      </span>
+
+    </footer>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       PAGE 2
+       ===================================================== -->
+
+  <section class="page">
+
+    <div class="page-content">
+
+      <header class="header-bar">
+        <div class="brand-name">
+          Tamkinly <span>| مركز تعافي الصدمات</span>
+        </div>
+      </header>
+
+      <main>
+
+        <h1 class="main-title" style="font-size: 20px;">
+          ملاحظة مناطق الجسد
+        </h1>
+
+        <p class="page-intro">
+          انتقل بين المناطق بهدوء.
+          اكتب فقط ما تلاحظه الآن، دون محاولة تغييره أو تفسيره.
+          يمكنك تجاوز أي منطقة أو ترك أي حقل فارغًا إذا لم يكن التركيز عليه مناسبًا لك.
+        </p>
+
+
+        <div class="grid-container-9">
+
+          <div class="body-card">
+            <div class="body-card-title">1. الرأس والوجه</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">2. الرقبة والحنجرة</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">3. الكتفان وأعلى الظهر</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">4. الصدر والقفص الصدري</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">5. الذراعان واليدان</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">6. البطن وأسفل الظهر</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">7. الوركان والحوض</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">8. الساقان والركبتان</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+          <div class="body-card">
+            <div class="body-card-title">9. القدمان</div>
+            <div class="body-card-label">ماذا ألاحظ؟</div>
+            <div class="body-card-input"></div>
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+
+
+    <footer class="footer">
+
+      <span class="footer-code">
+        TRC Tool ID: TRC-BODY_SCAN
+      </span>
+
+      <span class="footer-page">
+        صفحة 2 من 3
+      </span>
+
+    </footer>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       PAGE 3
+       ===================================================== -->
+
+  <section class="page">
+
+    <div class="page-content">
+
+      <header class="header-bar">
+        <div class="brand-name">
+          Tamkinly <span>| مركز تعافي الصدمات</span>
+        </div>
+      </header>
+
+      <main>
+
+        <h1 class="main-title" style="font-size: 20px;">
+          بعد مسح الجسد
+        </h1>
+
+
+        <div class="reflection-group">
+
+          <div class="reflection-label">
+            الإحساس العام
+          </div>
+
+          <div class="reflection-sublabel">
+            ما الإحساس العام في جسدي الآن؟
+          </div>
+
+          <div class="writing-area large"></div>
+
+        </div>
+
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+          "
+          class="reflection-group"
+        >
+
+          <div>
+
+            <div class="reflection-label">
+              منطقة التوتر
+            </div>
+
+            <div class="reflection-sublabel">
+              أين يتركز التوتر أكثر؟
+            </div>
+
+            <div class="writing-area"></div>
+
+          </div>
+
+
+          <div>
+
+            <div class="reflection-label">
+              منطقة الاسترخاء
+            </div>
+
+            <div class="reflection-sublabel">
+              أين أشعر بأكثر استرخاء؟
+            </div>
+
+            <div class="writing-area"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="reflection-group">
+
+          <div class="reflection-label">
+            خطوة عملية
+          </div>
+
+          <div class="reflection-sublabel">
+            شيء واحد يمكنني فعله الآن ليساعدني على العودة إلى الحاضر أو الشعور بقدر أكبر من الدعم.
+          </div>
+
+          <div class="writing-area"></div>
+
+        </div>
+
+
+        <div class="alert-box">
+
+          <div class="alert-box-title">
+            متى أتوقف؟
+          </div>
+
+          <ul class="stop-list">
+
+            <li>
+              إذا زاد التفارق أو ظهرت ذكريات جسدية اقتحامية.
+            </li>
+
+            <li>
+              إذا زاد الهلع أو أصبح التركيز على الجسد غير محتمل.
+            </li>
+
+            <li>
+              إذا ظهرت رغبة في إيذاء النفس.
+            </li>
+
+            <li>
+              إذا شعرت أن الاستمرار أصبح غير آمن بالنسبة لك.
+            </li>
+
+          </ul>
+
+          <div class="stop-direction">
+            لا تحتاج إلى إكمال الورقة.
+            توقف، وافتح عينيك ووجّه انتباهك إلى البيئة الخارجية.
+            يمكنك استخدام التأريض 5-4-3-2-1 بالحواس الخارجية فقط،
+            أو طلب دعم مناسب إذا احتجت إليه.
+          </div>
+
+        </div>
+
+
+        <section>
+
+          <h2 class="contacts-title">
+            جهات اتصال الطوارئ
+          </h2>
+
+          <div class="contacts-grid">
+
+            <div class="contact-field">
+              <div class="contact-label">جهة اتصال 1:</div>
+              <div class="contact-line"></div>
+            </div>
+
+            <div class="contact-field">
+              <div class="contact-label">جهة اتصال 2:</div>
+              <div class="contact-line"></div>
+            </div>
+
+            <div class="contact-field">
+              <div class="contact-label">جهة اتصال 3:</div>
+              <div class="contact-line"></div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <div class="disclaimer">
+          هذا المحتوى تعليمي وداعم للتأريض والوعي الجسدي،
+          ولا يغني عن التقييم أو العلاج الطبي أو النفسي المتخصص لحالة الشخص الفردية.
+          إذا كنت في خطر فوري أو تمر بحالة طارئة، اطلب الدعم المناسب أو خدمات الطوارئ المحلية.
+        </div>
+
+      </main>
+
+    </div>
+
+
+    <footer class="footer">
+
+      <span class="footer-code">
+        TRC Tool ID: TRC-BODY_SCAN
+      </span>
+
+      <span class="footer-page">
+        صفحة 3 من 3
+      </span>
+
+    </footer>
+
+  </section>
+
+</div>
+
+</body>
+</html>

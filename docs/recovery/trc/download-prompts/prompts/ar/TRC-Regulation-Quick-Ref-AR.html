@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرجع التنظيم السريع — TRC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+:root{--primary:#1F6F78;--accent:#3DD4B0;--dark:#0F1C2E;--bg:#F8FAFC;--border:#CBD5E1;--alert-bg:#FFFBEB;--alert-border:#D97706;--alert-text:#92400E;--safety-bg:#FEF3C7;--safety-border:#B45309;--safety-text:#78350F;--teal-bg:#E6F4F5;--teal-text:#1F6F78;--writing-border:#9CA3AF;--footer:#475569}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Arabic',sans-serif;background:var(--bg);color:var(--dark);font-size:13px;line-height:1.8;direction:rtl}
+.page{width:210mm;min-height:297mm;padding:15mm;margin:0 auto 20px auto;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);page-break-after:always}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none;page-break-after:always}}
+.header-bar{background:var(--primary);color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.header-bar .title{font-size:18px;font-weight:700}
+.header-bar .meta{font-size:10px;opacity:.85;text-align:left}
+.section-title{font-size:16px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent);padding-bottom:6px;margin:20px 0 14px 0}
+.sub-title{font-size:14px;font-weight:600;color:var(--primary);margin:14px 0 8px 0}
+.purpose-box{background:var(--teal-bg);border-right:4px solid var(--primary);padding:12px 16px;border-radius:0 6px 6px 0;margin-bottom:16px}
+.purpose-box .label{font-size:11px;font-weight:600;color:var(--teal-text);margin-bottom:4px}
+.safety-alert{background:var(--safety-bg);border:2px solid var(--safety-border);border-radius:6px;padding:14px 16px;margin-bottom:16px}
+.safety-alert .alert-title{font-weight:700;color:var(--safety-text);font-size:14px;margin-bottom:6px}
+.safety-alert .alert-text{color:var(--safety-text);font-size:12px;line-height:1.7}
+.content-text{font-size:13px;line-height:1.9;margin-bottom:12px}
+.bullet-list{list-style:none;padding:0;margin:0 0 14px 0}
+.bullet-list li{padding:4px 0;position:relative;padding-right:20px}
+.bullet-list li::before{content:"●";position:absolute;right:0;color:var(--accent);font-size:10px;top:6px}
+.ref-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:11px}
+.ref-table th{background:var(--primary);color:#fff;padding:8px 10px;text-align:right;font-weight:600;font-size:10px}
+.ref-table td{padding:7px 8px;border-bottom:1px solid var(--border);text-align:right;vertical-align:top;font-size:10px}
+.ref-table tr:nth-child(even) td{background:#F8FAFC}
+.decision-box{background:var(--teal-bg);border:2px solid var(--primary);border-radius:8px;padding:16px;margin-bottom:12px;text-align:center}
+.decision-box .q{font-weight:700;font-size:14px;color:var(--primary);margin-bottom:12px}
+.decision-flow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.decision-branch{flex:1;min-width:120px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center}
+.decision-branch .branch-cond{font-weight:600;font-size:11px;color:var(--primary);margin-bottom:4px}
+.decision-branch .branch-tool{font-size:10px;color:#64748B}
+.stage-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:9px;font-weight:600}
+.stage-badge.safety{background:#DCFCE7;color:#166534}
+.stage-badge.regulation{background:#DBEAFE;color:#1E40AF}
+.stage-badge.recovery{background:#F3E8FF;color:#6B21A8}
+.contact-box{background:var(--dark);color:#fff;border-radius:6px;padding:14px 16px;margin-top:16px}
+.contact-box .contact-title{font-weight:600;font-size:13px;margin-bottom:8px;color:var(--accent)}
+.contact-box .contact-item{font-size:11px;margin-bottom:4px;opacity:.9}
+.clinical-gate{background:#F1F5F9;border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-top:14px;font-size:10px;color:#64748B}
+.clinical-gate .gate-label{font-weight:600;color:var(--primary);margin-bottom:4px}
+.page-footer{text-align:center;font-size:9px;color:var(--footer);margin-top:20px;padding-top:8px;border-top:1px solid var(--border)}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:600}
+.badge.stage{background:var(--teal-bg);color:var(--teal-text)}
+.badge.type{background:#E0F2FE;color:#0369A1}
+.badge.gate{background:#FEE2E2;color:#991B1B}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+<div class="header-bar">
+  <div class="title">مرجع التنظيم السريع</div>
+  <div class="meta">المرحلة: تنظيم<br>النوع: مرجع<br>TRC-Regulation-Quick-Ref-AR</div>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:14px">
+  <span class="badge stage">المرحلة: تنظيم</span>
+  <span class="badge type">النوع: مرجع</span>
+  <span class="badge gate">بوابة مراجعة سريرية: مطلوبة</span>
+</div>
+<div class="purpose-box">
+  <div class="label">الغرض</div>
+  جدول مرجعي سريع لجميع أدوات TRC — يساعدك على اختيار الأداة المناسبة بناءً على حالتك والمرحلة التي أنت فيها. اطبع هذه الصفحة وضِعها في مكان تراه دائمًا.
+</div>
+<div class="safety-alert">
+  <div class="alert-title">⚠ تنبيه</div>
+  <div class="alert-text">هذه الأدوات تكميلية وليست بديلًا عن العلاج المهني. إذا كانت الأعراض شديدة أو مستمرة، اطلب مساعدة معالج مختص.</div>
+</div>
+
+<div class="section-title">جدول مرجعي — جميع أدوات TRC</div>
+
+<table class="ref-table">
+  <tr>
+    <th>الأداة</th>
+    <th>متى أستخدمها</th>
+    <th>المدة</th>
+    <th>التعليمة الرئيسية</th>
+    <th>المرحلة</th>
+  </tr>
+  <tr>
+    <td><strong>تأريض 5-4-3-2-1</strong></td>
+    <td>فرط تنبيغ / انفصال / ذكريات نشطة</td>
+    <td>2–5 د</td>
+    <td>سمِّ 5 أشياء أراها، 4 ألمسها، 3 أسمعها، 2 أشمّها، 1 أتذوقها</td>
+    <td><span class="stage-badge safety">سلامة</span></td>
+  </tr>
+  <tr>
+    <td><strong>تنفس A52</strong></td>
+    <td>توتر / قلق / غضب / حاجة للهدوء</td>
+    <td>3–5 د</td>
+    <td>شهيق 5 ثوانٍ → احبس → زفير 2 (أطول من الشهيق)</td>
+    <td><span class="stage-badge safety">سلامة</span></td>
+  </tr>
+  <tr>
+    <td><strong>المكان الآمن</strong></td>
+    <td>حاجة للأمان / خوف / توتر عام</td>
+    <td>5–10 د</td>
+    <td>اصنع مكانًا آمنًا في خيالك — تفاصيل حسية كاملة</td>
+    <td><span class="stage-badge safety">سلامة</span></td>
+  </tr>
+  <tr>
+    <td><strong>مسح الجسد</strong></td>
+    <td>توتر جسدي غير محدد / نقص تنبيغ / خدر</td>
+    <td>10–15 د</td>
+    <td>لاحظ كل منطقة في جسدك بترتيب من القدم إلى الرأس</td>
+    <td><span class="stage-badge safety">سلامة</span></td>
+  </tr>
+  <tr>
+    <td><strong>رسم المحفزات</strong></td>
+    <td>بعد محفز / لفهم أنماط الاستجابة</td>
+    <td>15–20 د</td>
+    <td>سجّل المحفز → الاستجابة → الأعراض → ماذا ساعد</td>
+    <td><span class="stage-badge regulation">تنظيم</span></td>
+  </tr>
+  <tr>
+    <td><strong>خطة السلامة</strong></td>
+    <td>ضيق شديد / أفكار إيذاء / أزمة</td>
+    <td>حسب الحاجة</td>
+    <td>اتبع خطوات الخطة المكتوبة مسبقًا</td>
+    <td><span class="stage-badge safety">سلامة</span></td>
+  </tr>
+  <tr>
+    <td><strong>EFT (التنقر الحر)</strong></td>
+    <td>عاطفة محددة / خوف / قلق محدد</td>
+    <td>5–10 د</td>
+    <td>انقر نقاط الجسد مع عبارة الإعداد والتنبيه</td>
+    <td><span class="stage-badge regulation">تنظيم</span></td>
+  </tr>
+  <tr>
+    <td><strong>إعادة الصياغة</strong></td>
+    <td>فكرة تلقائية سلبية / اعتقاد محدود</td>
+    <td>10–15 د</td>
+    <td>افحص الأدلة لصالح الفكرة وضدها — هل هناك تفسير بديل؟</td>
+    <td><span class="stage-badge regulation">تنظيم</span></td>
+  </tr>
+  <tr>
+    <td><strong>التعافي من العار</strong></td>
+    <td>عار / خجل / شعور بأنك سيء من الداخل</td>
+    <td>15–20 د</td>
+    <td>ميز العار عن الذنب — العار يقول "أنا سيء"، الذنب يقول "فعلت شيئًا سيئًا"</td>
+    <td><span class="stage-badge regulation">تنظيم</span></td>
+  </tr>
+  <tr>
+    <td><strong>يوميات التعافي</strong></td>
+    <td>معالجة تجربة / كتابة تعبيرية</td>
+    <td>15–20 د</td>
+    <td>اكتب مع التعرض التدريجي — توقف عند SUDS ≥ 7</td>
+    <td><span class="stage-badge recovery">تعافي</span></td>
+  </tr>
+</table>
+
+<div class="page-footer">مرجع التنظيم السريع — TRC © 2025 | الصفحة 1 من 2 | الأداة الأم: regulation-toolkit</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<div class="section-title">مخطط القرار — أي أداة أستخدم؟</div>
+<p class="content-text">ابدأ من السؤال المركزي واتبع المسار المناسب لحالتك:</p>
+
+<div class="decision-box">
+  <div class="q">ماذا تشعر الآن؟</div>
+</div>
+
+<div class="decision-flow">
+  <div class="decision-branch" style="border-color:#DC2626">
+    <div class="branch-cond">🔴 فرط تنبيغ</div>
+    <div class="branch-tool">قلق، غضب، ذكريات نشطة، ارتعاد، توتر جسدي شديد</div>
+    <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);font-size:10px;font-weight:600;color:var(--primary)">→ تأريض 5-4-3-2-1<br>→ تنفس A52</div>
+  </div>
+  <div class="decision-branch" style="border-color:#1E40AF">
+    <div class="branch-cond">🔵 نقص تنبيغ</div>
+    <div class="branch-tool">خدر، شلل، انفصال، فراغ عاطفي، إرهاق شديد</div>
+    <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);font-size:10px;font-weight:600;color:var(--primary)">→ مسح الجسد<br>→ مكان آمن + حركة</div>
+  </div>
+  <div class="decision-branch" style="border-color:#F59E0B">
+    <div class="branch-cond">🟡 عاطفة محددة</div>
+    <div class="branch-tool">خوف محدد، قلق محدد، غضب على موقف معين</div>
+    <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);font-size:10px;font-weight:600;color:var(--primary)">→ EFT (تنقر حر)<br>→ إعادة صياغة</div>
+  </div>
+  <div class="decision-branch" style="border-color:#8B5CF6">
+    <div class="branch-cond">🟣 عار / خجل</div>
+    <div class="branch-tool">شعور أنك سيء، رغبة في الاختباء، لوم الذات</div>
+    <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);font-size:10px;font-weight:600;color:var(--primary)">→ ورقة العار<br>→ إعادة صياغة</div>
+  </div>
+</div>
+
+<div class="decision-flow">
+  <div class="decision-branch" style="border-color:#059669">
+    <div class="branch-cond">🟢 حاجة للأمان</div>
+    <div class="branch-tool">خوف عام، شعور بعدم الأمان، توتر بدون سبب واضح</div>
+    <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);font-size:10px;font-weight:600;color:var(--primary)">→ المكان الآمن<br>→ تنفس A52</div>
+  </div>
+  <div class="decision-branch" style="border-color:#EA580C">
+    <div class="branch-cond">🟠 محفز / استجابة</div>
+    <div class="branch-tool">حدث فجائي أطلق رد فعل قوي</div>
+    <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);font-size:10px;font-weight:600;color:var(--primary)">→ تأريض فوري<br>→ رسم المحفزات (لاحقًا)</div>
+  </div>
+  <div class="decision-branch" style="border-color:#DC2626;background:#FEF2F2">
+    <div class="branch-cond">🚨 أزمة</div>
+    <div class="branch-tool">ضيق شديد جدًا، أفكار إيذاء، فقدان سيطرة</div>
+    <div style="margin-top:6px;padding-top:6px;border-top:1px dashed var(--border);font-size:10px;font-weight:600;color:#DC2626">→ خطة السلامة<br>→ اتصل 937 أو 997</div>
+  </div>
+</div>
+
+<div class="section-title">متى تطلب مساعدة مهنية</div>
+<ul class="bullet-list">
+  <li>الأدوات لا تقلل الضيق بشكل كافٍ بعد أسبوعين من الممارسة المنتظمة</li>
+  <li>أعراض تتفاقم بدلًا من أن تتحسن</li>
+  <li>أفكار بإيذاء النفس — اتصل بالطوارئ فورًا</li>
+  <li>استخدام مواد لتنظيم الأعراض</li>
+  <li>صعوبة الأداء في الحياة اليومية بشكل مستمر</li>
+</ul>
+
+<div class="section-title">جهات الاتصال</div>
+<div class="contact-box">
+  <div class="contact-title">خطوط الطوارئ والدعم</div>
+  <div class="contact-item">📞 خط الدعم النفسي: 937 (مجاني في المملكة العربية السعودية)</div>
+  <div class="contact-item">📞 خط أزمة الصحة النفسية: 920-033-360</div>
+  <div class="contact-item">🌐 الدعم عبر الإنترنت: ncmh.org.sa</div>
+  <div class="contact-item">💬 في حالة الطوارئ: اتصل بالرقم 997 أو توجه لأقرب غرفة طوارئ</div>
+</div>
+
+<div class="clinical-gate">
+  <div class="gate-label">بوابة المراجعة السريرية: مطلوبة</div>
+  يجب مراجعة هذا المحتوى من قبل معالج أو مختص صحة نفسية مرخص قبل استخدامه مع العملاء. جميع الأدوات مبنية على أبحاث محكّمة لكنها تكميلية وليست بديلًا عن العلاج.
+</div>
+<div class="page-footer">مرجع التنظيم السريع — TRC © 2025 | الصفحة 2 من 2 | المرحلة: تنظيم | الأداة الأم: regulation-toolkit</div>
+</div>
+
+</body>
+</html>

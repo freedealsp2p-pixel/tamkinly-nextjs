@@ -12,10 +12,9 @@ import { useLocale } from '@/components/providers/LocaleProvider';
 // Access tier hierarchy
 const TIER_HIERARCHY = {
   FREE: 0,
-  TRIAL: 1,
-  BASIC: 2,
-  PREMIUM: 3,
-  BUNDLE: 4,
+  BASIC: 1,
+  PREMIUM: 2,
+  MASTERY: 3,
 };
 
 // Map app slugs to required tiers
@@ -23,7 +22,7 @@ const APP_TIERS: Record<string, string> = {
   'identity-gap-quiz': 'FREE',
   'values-clarification': 'FREE',
   'daily-reflection': 'FREE',
-  'trial-planner': 'TRIAL',
+  'trial-planner': 'FREE',
   'executive-manual': 'BASIC',
   'daily-planner': 'BASIC',
   'identity-baseline': 'BASIC',
@@ -31,10 +30,10 @@ const APP_TIERS: Record<string, string> = {
   'decision-analysis': 'PREMIUM',
   'evidence-tracking': 'PREMIUM',
   'progress-dashboard': 'PREMIUM',
-  'emotion-regulation': 'BUNDLE',
-  'ai-identity-coach': 'BUNDLE',
-  'community-access': 'BUNDLE',
-  'priority-support': 'BUNDLE',
+  'emotion-regulation': 'MASTERY',
+  'ai-identity-coach': 'MASTERY',
+  'community-access': 'MASTERY',
+  'priority-support': 'MASTERY',
   'goal-system': 'BASIC',
   'habit-tracker': 'BASIC',
   'journal-system': 'BASIC',
@@ -44,10 +43,9 @@ const APP_TIERS: Record<string, string> = {
 
 // Products that grant each tier
 const TIER_PRODUCTS: Record<string, { slug: string; price: number }> = {
-  TRIAL: { slug: 'trial', price: 7 },
-  BASIC: { slug: 'planner', price: 17 },
-  PREMIUM: { slug: 'premium', price: 27 },
-  BUNDLE: { slug: 'bundle', price: 47 },
+  BASIC: { slug: 'basic', price: 7 },
+  PREMIUM: { slug: 'premium', price: 17 },
+  MASTERY: { slug: 'mastery', price: 27 },
 };
 
 interface AccessGateProps {

@@ -8,6 +8,10 @@ import { ArrowRight, Clock, User, Sun, BookOpen, Brain, Sparkles, Calendar, Chec
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function DailyReflectionPracticeArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -137,8 +141,8 @@ export default function DailyReflectionPracticeArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-5">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#64B5F6]/10 flex items-center justify-center">
-                      <Sun className="h-4 w-4 text-[#64B5F6]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#2A8A94]/10 flex items-center justify-center">
+                      <Sun className="h-4 w-4 text-[#2A8A94]" />
                     </div>
                     <h3 className="font-semibold text-primary">{getText("Growth Mindset", "عقلية النمو")}</h3>
                   </div>
@@ -148,8 +152,8 @@ export default function DailyReflectionPracticeArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-5">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#E57373]/10 flex items-center justify-center">
-                      <BookOpen className="h-4 w-4 text-[#E57373]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#C97B7B]/10 flex items-center justify-center">
+                      <BookOpen className="h-4 w-4 text-[#C97B7B]" />
                     </div>
                     <h3 className="font-semibold text-primary">{getText("Values Alignment", "توافق القيم")}</h3>
                   </div>
@@ -159,8 +163,8 @@ export default function DailyReflectionPracticeArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-5">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#BA68C8]/10 flex items-center justify-center">
-                      <Calendar className="h-4 w-4 text-[#BA68C8]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#2A8A94]/10 flex items-center justify-center">
+                      <Calendar className="h-4 w-4 text-[#2A8A94]" />
                     </div>
                     <h3 className="font-semibold text-primary">{getText("Emotional Intelligence", "الذكاء العاطفي")}</h3>
                   </div>
@@ -170,8 +174,8 @@ export default function DailyReflectionPracticeArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-5">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#FFB74D]/10 flex items-center justify-center">
-                      <PenLine className="h-4 w-4 text-[#FFB74D]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#2A8A94]/10 flex items-center justify-center">
+                      <PenLine className="h-4 w-4 text-[#2A8A94]" />
                     </div>
                     <h3 className="font-semibold text-primary">{getText("Environmental Design", "تصميم البيئة")}</h3>
                   </div>
@@ -374,6 +378,9 @@ export default function DailyReflectionPracticeArticle() {
       </section>
 
       {/* Article Navigation */}
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="daily" />
+
       <ArticleNavigation currentSlug="daily-reflection-practice" />
 
       {/* Related Articles */}
@@ -398,34 +405,8 @@ export default function DailyReflectionPracticeArticle() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge className="mb-4 bg-accent/20 text-accent border-0">{getText("FREE Tool", "أداة مجانية")}</Badge>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Begin Your Daily Reflection Journey", "ابدأ رحلة التأمل اليومي")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Start today. Your future self will thank you.", "ابدأ اليوم. ذاتك المستقبلية ستشكرك.")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/apps/daily-reflection">
-                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  {getText("Start Daily Reflection", "ابدأ التأمل اليومي")}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/products">
-                <Button variant="white" size="lg" className="px-8">
-                  {getText("View All Products", "عرض جميع المنتجات")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
+        <BlogConversionSection />
+      </article>
   );
 }
+

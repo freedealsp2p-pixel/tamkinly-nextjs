@@ -124,11 +124,11 @@ export function AICoachLandingSSR({ locale }: { locale: string }) {
             <div className="bg-gradient-to-br from-[#0F1C2E] to-slate-900 rounded-2xl p-8 text-white">
               <Lock className="w-8 h-8 text-[#3DD4B0] mx-auto mb-4" />
               <h3 className="font-serif text-2xl font-bold mb-3">
-                {getText('Available with Complete Bundle', 'متاح مع الباقة الشاملة')}
+                {getText('Available with Mastery subscription', 'متاح مع اشتراك الإتقان')}
               </h3>
               <p className="text-slate-300 mb-6">
                 {getText(
-                  'The AI Identity Coach is part of the Complete Bundle, our most popular package. Get unlimited access to the coach plus all 15+ transformation tools.',
+                  'The AI Identity Coach is part of the Mastery subscription, our premium package. Get unlimited access to the coach plus all 20 transformation tools.',
                   'مدرب الهوية الذكي جزء من الباقة الشاملة، أكثر باقاتنا شعبية. احصل على وصول غير محدود للمدرب بالإضافة إلى جميع أدوات التحول الـ 15+.'
                 )}
               </p>

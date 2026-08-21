@@ -6,6 +6,13 @@ export async function POST(request: NextRequest) {
   try {
     const { code, email } = await request.json();
 
+    if (!email) {
+      return NextResponse.json(
+        { error: 'Email is required to verify access code' },
+        { status: 400 }
+      );
+    }
+
     if (!code) {
       return NextResponse.json(
         { error: 'Access code is required' },
@@ -25,10 +32,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // If email is provided, verify it matches
-    if (email && access.email && access.email.toLowerCase() !== email.toLowerCase()) {
+    // SECURITY: Email MUST match the purchase record - token is personal
+    if (access.email && access.email.toLowerCase() !== email.toLowerCase()) {
       return NextResponse.json(
-        { error: 'Email does not match the purchase record' },
+        { error: 'This access code is linked to a different email address. Use the email you purchased with.' },
         { status: 403 }
       );
     }
@@ -37,6 +44,14 @@ export async function POST(request: NextRequest) {
     if (access.expiresAt && new Date() > access.expiresAt) {
       return NextResponse.json(
         { error: 'Access code has expired' },
+        { status: 403 }
+      );
+    }
+
+    // SECURITY: Check if token is active (payment confirmed)
+    if (!access.isActive) {
+      return NextResponse.json(
+        { error: 'Access code is not yet active. Payment confirmation is pending.' },
         { status: 403 }
       );
     }
@@ -119,7 +134,17 @@ export async function GET(request: NextRequest) {
 
     // Check expiration
     if (access.expiresAt && new Date() > access.expiresAt) {
-      return NextResponse.json({ hasAccess: false });
+      return NextResponse.json({ hasAccess: false, error: 'expired' });
+    }
+
+    // Check if active (payment confirmed)
+    if (!access.isActive) {
+      return NextResponse.json({ hasAccess: false, error: 'not_active' });
+    }
+
+    // Verify email match for code+email lookups
+    if (email && access.email && access.email.toLowerCase() !== email.toLowerCase()) {
+      return NextResponse.json({ hasAccess: false, error: 'email_mismatch' });
     }
 
     return NextResponse.json({

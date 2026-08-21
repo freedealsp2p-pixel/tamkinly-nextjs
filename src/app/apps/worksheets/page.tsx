@@ -46,7 +46,7 @@ export default function WorksheetsPage() {
       name: getText('Identity-Based Habits', 'عادات مبنية على الهوية'),
       description: getText('Create habits that vote for your new identity (Atomic Habits method)', 'أنشئ عادات تصوّت لهويتك الجديدة (طريقة العادات الذرية)'),
       icon: <Target className="w-5 h-5" />,
-      color: '#FFB74D',
+      color: '#2A8A94',
       tier: 'FREE'
     },
     {
@@ -54,7 +54,7 @@ export default function WorksheetsPage() {
       name: getText('Self-Authorship Journey', 'رحلة تأليف الذات'),
       description: getText('Map your journey from external formulas to internal identity', 'ارسم رحلتك من الصيغ الخارجية إلى الهوية الداخلية'),
       icon: <Brain className="w-5 h-5" />,
-      color: '#64B5F6',
+      color: '#2A8A94',
       tier: 'FREE'
     },
     {
@@ -70,7 +70,7 @@ export default function WorksheetsPage() {
       name: getText('Environmental Audit', 'تدقيق بيئي'),
       description: getText('Analyze how your environment supports or hinders your growth', 'حلّل كيف تدعم بيئتك نموك أو تعيقه'),
       icon: <Home className="w-5 h-5" />,
-      color: '#81C784',
+      color: '#3DD4B0',
       tier: 'BASIC'
     },
     {
@@ -78,8 +78,8 @@ export default function WorksheetsPage() {
       name: getText('Emotion Regulation (ERQ)', 'تنظيم المشاعر (ERQ)'),
       description: getText('Assess your cognitive reappraisal and expressive suppression', 'قيّم إعادة التقييم المعرفي والكبت التعبيري لديك'),
       icon: <Heart className="w-5 h-5" />,
-      color: '#E57373',
-      tier: 'BUNDLE'
+      color: '#C97B7B',
+      tier: 'MASTERY'
     }
   ];
 

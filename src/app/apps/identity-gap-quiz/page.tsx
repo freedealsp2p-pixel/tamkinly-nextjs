@@ -158,7 +158,7 @@ export default function IdentityGapQuiz() {
       nameAr: 'المحاذاة',
       descriptionEn: 'The match between your daily actions and your stated values',
       descriptionAr: 'مدى التوافق بين أفعالك اليومية وقيمك المعلنة',
-      color: '#FFB74D', // Amber - warm accent
+      color: '#2A8A94', // Amber - warm accent
       icon: <Sparkles className="w-5 h-5" />
     },
     consistency: {

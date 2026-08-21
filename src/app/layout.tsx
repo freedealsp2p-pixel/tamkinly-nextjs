@@ -10,6 +10,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import { SEO_SITE_CONFIG, HOME_METADATA, PAGE_METADATA } from "@/lib/seo-pages";
 import { Analytics } from "@/components/Analytics";
+import { DefaultJsonLd } from "@/components/seo/JsonLd";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { LocaleProvider } from '@/components/providers/LocaleProvider';
@@ -225,6 +226,8 @@ export default async function RootLayout({
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}
        
       >
+        {/* JSON-LD Structured Data — Organization, WebSite, SearchAction, Speakable for AI crawlers */}
+        <DefaultJsonLd />
         {/* Skip Navigation Link for Accessibility */}
         <a
           href="#main-content"

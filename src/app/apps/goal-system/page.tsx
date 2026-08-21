@@ -34,7 +34,7 @@ const categoryColors: Record<string, { bg: string; text: string; light: string }
   HEALTH: { bg: 'bg-rose-500', text: 'text-rose-700', light: 'bg-rose-100' },
   RELATIONSHIPS: { bg: 'bg-pink-500', text: 'text-pink-700', light: 'bg-pink-100' },
   PERSONAL_GROWTH: { bg: 'bg-emerald-500', text: 'text-emerald-700', light: 'bg-emerald-100' },
-  FINANCIAL: { bg: 'bg-amber-500', text: 'text-amber-700', light: 'bg-amber-100' },
+  FINANCIAL: { bg: 'bg-[#1F6F78]', text: 'text-[#1F6F78]', light: 'bg-[#e8f4f3]' },
   SPIRITUAL: { bg: 'bg-cyan-500', text: 'text-cyan-700', light: 'bg-cyan-100' },
 };
 
@@ -243,13 +243,13 @@ export default function GoalSystemPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-amber-50 to-orange-50">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-[#e8f4f3] to-[#e6f3f4]">
             <CardContent className="pt-6 text-center">
-              <div className="p-3 rounded-full bg-amber-500 text-white w-fit mx-auto mb-3">
+              <div className="p-3 rounded-full bg-[#1F6F78] text-white w-fit mx-auto mb-3">
                 <Flag className="h-6 w-6" />
               </div>
-              <p className="text-3xl font-bold text-amber-700">{goals.length}</p>
-              <p className="text-sm text-amber-600">{getText('Total Goals', 'إجمالي الأهداف')}</p>
+              <p className="text-3xl font-bold text-[#1F6F78]">{goals.length}</p>
+              <p className="text-sm text-[#4da8a2]">{getText('Total Goals', 'إجمالي الأهداف')}</p>
             </CardContent>
           </Card>
         </div>

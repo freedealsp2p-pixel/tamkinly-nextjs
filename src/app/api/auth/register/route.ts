@@ -5,10 +5,16 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { hashPassword } from '@/lib/auth-config';
+import { hashPassword } from '@/lib/auth';
+import { applySecurity, AUTH_RATE_LIMIT } from '@/lib/security';
 
 export async function POST(request: NextRequest) {
   try {
+  // Security: CSRF + rate limit
+  const securityBlocked = await applySecurity(request, AUTH_RATE_LIMIT);
+  if (securityBlocked) return securityBlocked;
+
+
     let body;
     try {
       body = await request.json();

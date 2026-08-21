@@ -2,6 +2,8 @@
  * Dynamic App Page
  * Uses generateMetadata for SEO-optimized metadata per app
  * Enables Google to index all 20+ apps with unique metadata
+ * 
+ * Server-side access verification: checks user tier before rendering
  */
 
 import { Metadata } from 'next';
@@ -14,6 +16,7 @@ import {
 import { JsonLd } from '@/components/seo/JsonLd';
 import { generateSoftwareAppSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { AppContentClient } from './AppContentClient';
+import { checkAppAccess } from '@/lib/access-guard';
 
 // ============================================
 // DYNAMIC METADATA GENERATION
@@ -106,6 +109,13 @@ export default async function AppPageDynamic({ params }: PageParams) {
     notFound();
   }
 
+  // ============================================
+  // SERVER-SIDE ACCESS VERIFICATION
+  // ============================================
+  // This runs on the server, so users cannot bypass it by modifying client-side code.
+  // The page still renders for SEO, but with serverAccessResult passed to the client.
+  const serverAccessResult = await checkAppAccess(appData.slug);
+
   // Generate structured data schemas (server-side for SEO)
   const isFree = appData.tier === 'FREE';
   const appSchema = generateSoftwareAppSchema({
@@ -114,9 +124,9 @@ export default async function AppPageDynamic({ params }: PageParams) {
     url: `/apps/${appData.slug}`,
     category: appData.category,
     offers: {
-      price: appData.tier === 'FREE' ? 0 : appData.tier === 'TRIAL' ? 7 : appData.tier === 'BASIC' ? 17 : appData.tier === 'PREMIUM' ? 27 : 47,
+      price: appData.tier === 'FREE' ? 0 : undefined,
+      category: appData.tier,
     },
-    aggregateRating: isFree ? { ratingValue: 4.9, reviewCount: 127 } : undefined,
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -127,11 +137,12 @@ export default async function AppPageDynamic({ params }: PageParams) {
 
   return (
     <>
-      {/* JSON-LD Structured Data for SEO (rendered server-side) */}
       <JsonLd data={[appSchema, breadcrumbSchema]} />
-
-      {/* Client component handles bilingual rendering */}
-      <AppContentClient appData={appData} />
+      <AppContentClient 
+        appData={appData} 
+        serverAccessResult={serverAccessResult}
+      />
     </>
   );
 }
+

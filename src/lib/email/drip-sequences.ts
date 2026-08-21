@@ -1,16 +1,24 @@
 // ============================================
-// DRIP SEQUENCES - Email Automation Definitions
+// DRIP SEQUENCES - Email Automation Definitions (NEW MODEL 2025)
 // Tamkinly Identity Transformation Platform
 // ============================================
-// Defines all drip sequences with timing, templates, and content
-// Used by the email trigger system to queue the right emails
+// 9 sequences for the new 3-tier monthly subscription model:
+//   1. LEAD_NURTURE — Quiz completers → BASIC conversion
+//   2. BASIC_ONBOARDING — BASIC purchase → activation + upsell to PREMIUM
+//   3. PREMIUM_ONBOARDING — PREMIUM purchase → 30-day journey + upsell to MASTERY
+//   4. MASTERY_ONBOARDING — MASTERY purchase → VIP activation + retention
+//   5. ABANDONED_CART_1H — Cart abandoned (1 hour)
+//   6. ABANDONED_CART_24H — Cart abandoned (24 hours)
+//   7. RE_ENGAGEMENT — Inactive users (14 days)
+//   8. UPSELL_BASIC_TO_PREMIUM — Day 5 of BASIC journey
+//   9. UPSELL_PREMIUM_TO_MASTERY — Day 21 of PREMIUM journey
 // ============================================
 
 // ============================================
 // TYPES
 // ============================================
 
-export type SequenceTier = 'free' | 'trial' | 'basic' | 'premium' | 'bundle';
+export type SequenceTier = 'free' | 'basic' | 'premium' | 'mastery';
 
 export interface DripStep {
   /** Step number within the sequence (1-based) */
@@ -59,407 +67,407 @@ export interface DripSequence {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://tamkinly.com';
 
 // ============================================
-// FREE SUBSCRIBER SEQUENCE
-// Welcome → Day 3 tips → Day 7 quiz → Day 14 trial offer → Day 21 basic offer
+// SEQUENCE 1: LEAD_NURTURE (Quiz completers → BASIC)
+// ============================================
+// Trigger: User completes quiz and provides email
+// Goal: Convert lead → BASIC subscriber
 // ============================================
 
-const FREE_SUBSCRIBER_SEQUENCE: DripSequence = {
-  id: 'free_subscriber_sequence',
-  name: 'Free Subscriber Onboarding',
-  description: 'Nurture free subscribers from welcome to first purchase',
+const LEAD_NURTURE_SEQUENCE: DripSequence = {
+  id: 'lead_nurture_sequence',
+  name: 'Lead Nurture — Quiz to BASIC',
+  description: 'Nurture quiz completers from results to first BASIC subscription',
   tier: 'free',
-  trigger: 'FREE_SUBSCRIBER_SEQUENCE',
+  trigger: 'LEAD_NURTURE',
   isActive: true,
   steps: [
     {
       stepNumber: 1,
-      delayHours: 0,
-      subject: 'Welcome to Tamkinly! 🎯',
-      subjectAr: 'مرحباً بك في تمكنلي! 🎯',
-      preheader: 'Your transformation journey starts now',
-      preheaderAr: 'رحلة التحول تبدأ الآن',
-      templateName: 'welcome',
-      primaryCta: 'Explore Our Products',
-      primaryUrl: `${BASE_URL}/shop/`,
-      tags: ['welcome', 'free', 'onboarding'],
+      delayHours: 0, // Immediate
+      subject: 'Your Identity Gap Score is ready 🎯',
+      subjectAr: 'درجة فجوة هويتك جاهزة 🎯',
+      preheader: 'See your results and personalized roadmap',
+      preheaderAr: 'شاهد نتائجك وخارطة الطريق الشخصية',
+      templateName: 'quizResults',
+      primaryCta: 'See My Full Results',
+      primaryUrl: `${BASE_URL}/quiz/results`,
+      tags: ['lead', 'quiz', 'results', 'free'],
+    },
+    {
+      stepNumber: 2,
+      delayHours: 48, // Day 2
+      subject: 'What your Identity Gap Score really means 📊',
+      subjectAr: 'ماذا تعني درجة فجوة هويتك حقاً 📊',
+      preheader: '3 key insights + a 5-minute exercise',
+      preheaderAr: '3 رؤى رئيسية + تمرين 5 دقائق',
+      templateName: 'day3FollowUp',
+      primaryCta: 'Start the Free Exercise',
+      primaryUrl: `${BASE_URL}/apps/values-clarification`,
+      tags: ['lead', 'day2', 'insights', 'free'],
+    },
+    {
+      stepNumber: 3,
+      delayHours: 72, // Day 4 (2 days after step 2)
+      subject: 'The #1 reason people stay stuck (and how to fix it)',
+      subjectAr: 'السبب الأول لبقاء الناس عالقين (وكيف تصلحه)',
+      preheader: 'It is not about discipline. It is about identity.',
+      preheaderAr: 'الأمر لا يتعلق بالانضباط. بل بالهوية.',
+      templateName: 'day7FollowUp',
+      primaryCta: 'Read the Full Guide',
+      primaryUrl: `${BASE_URL}/blog/identity-gap-assessment`,
+      tags: ['lead', 'day4', 'education', 'free'],
+    },
+    {
+      stepNumber: 4,
+      delayHours: 72, // Day 7 (3 days after step 3)
+      subject: 'Ready to start your 7-day transformation? ($7/mo) ⬆️',
+      subjectAr: 'مستعد لبدء تحولك لـ 7 أيام؟ ($7/شهر) ⬆️',
+      preheader: 'Your Basic subscription unlocks the 7-Day System',
+      preheaderAr: 'اشتراكك الأساسي يفتح نظام 7 أيام',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Start Basic — $7/mo',
+      primaryUrl: `${BASE_URL}/products/basic`,
+      tags: ['lead', 'day7', 'offer', 'basic', 'upsell'],
+    },
+    {
+      stepNumber: 5,
+      delayHours: 168, // Day 14 (7 days after step 4)
+      subject: 'How Sarah closed her Identity Gap in 30 days ✨',
+      subjectAr: 'كيف سدّت سارة فجوة هويتها في 30 يوماً ✨',
+      preheader: 'Real story + why Basic is the perfect start',
+      preheaderAr: 'قصة حقيقية + لماذا الأساسي بداية مثالية',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Start Your Journey — $7/mo',
+      primaryUrl: `${BASE_URL}/products/basic`,
+      tags: ['lead', 'day14', 'testimonial', 'basic', 'upsell'],
+    },
+    {
+      stepNumber: 6,
+      delayHours: 168, // Day 21 (7 days after step 5)
+      subject: 'Last chance: 7-Day System at $7/mo 🕐',
+      subjectAr: 'فرصة أخيرة: نظام 7 أيام بـ $7/شهر 🕐',
+      preheader: 'Your quiz results expire soon. Take action.',
+      preheaderAr: 'نتائج اختبارك تنتهي قريباً. اتخذ إجراءً.',
+      templateName: 'reEngagement',
+      primaryCta: 'Unlock Basic Now',
+      primaryUrl: `${BASE_URL}/products/basic`,
+      tags: ['lead', 'day21', 'urgency', 'basic', 'upsell'],
+    },
+  ],
+};
+
+// ============================================
+// SEQUENCE 2: BASIC_ONBOARDING (BASIC purchase → activation + upsell)
+// ============================================
+// Trigger: Webhook confirms $7 payment
+// Goal: Activate user in 7 days + upsell to PREMIUM
+// ============================================
+
+const BASIC_ONBOARDING_SEQUENCE: DripSequence = {
+  id: 'basic_onboarding_sequence',
+  name: 'BASIC Onboarding — 7-Day Journey + Upsell',
+  description: 'Guide BASIC subscribers through 7-day journey and convert to PREMIUM',
+  tier: 'basic',
+  trigger: 'BASIC_ONBOARDING',
+  isActive: true,
+  steps: [
+    {
+      stepNumber: 1,
+      delayHours: 0, // Immediate after purchase
+      subject: 'Welcome to Basic! Your 7-Day System is ready 🎯',
+      subjectAr: 'مرحباً بك في الأساسي! نظام 7 أيام جاهز 🎯',
+      preheader: 'Your access code + 7-Day System PDF inside',
+      preheaderAr: 'رمز وصولك + PDF نظام 7 أيام بالداخل',
+      templateName: 'purchaseConfirmation',
+      primaryCta: 'Access Your Apps',
+      primaryUrl: `${BASE_URL}/apps`,
+      tags: ['basic', 'welcome', 'onboarding', 'access'],
+    },
+    {
+      stepNumber: 2,
+      delayHours: 48, // Day 2
+      subject: 'Day 1: Set your Identity Baseline 📝',
+      subjectAr: 'اليوم 1: حدد خط أساس هويتك 📝',
+      preheader: 'Start with awareness. This is where transformation begins.',
+      preheaderAr: 'ابدأ بالوعي. هنا يبدأ التحول.',
+      templateName: 'day3FollowUp',
+      primaryCta: 'Open Trial Planner',
+      primaryUrl: `${BASE_URL}/apps/trial-planner`,
+      tags: ['basic', 'day1', 'activation', 'baseline'],
+    },
+    {
+      stepNumber: 3,
+      delayHours: 48, // Day 3 (2 days after step 2)
+      subject: 'Day 3: The science of identity shift 🧠',
+      subjectAr: 'اليوم 3: علم تحول الهوية 🧠',
+      preheader: 'Why identity-based change is 3x more effective',
+      preheaderAr: 'لماذا التحول القائم على الهوية أكثر فعالية بـ 3 مرات',
+      templateName: 'day7FollowUp',
+      primaryCta: 'Read the Research',
+      primaryUrl: `${BASE_URL}/methodology`,
+      tags: ['basic', 'day3', 'education', 'science'],
+    },
+    {
+      stepNumber: 4,
+      delayHours: 72, // Day 6 (3 days after step 3)
+      subject: 'Day 5: Common pitfalls to avoid ⚠️',
+      subjectAr: 'اليوم 5: أخطاء شائعة يجب تجنبها ⚠️',
+      preheader: '3 mistakes that derail identity transformation',
+      preheaderAr: '3 أخطاء تُفشل تحول الهوية',
+      templateName: 'day3FollowUp',
+      primaryCta: 'Avoid These Mistakes',
+      primaryUrl: `${BASE_URL}/blog/stop-procrastinating-identity-shift`,
+      tags: ['basic', 'day5', 'education', 'pitfalls'],
+    },
+    {
+      stepNumber: 5,
+      delayHours: 24, // Day 7 (1 day after step 4)
+      subject: 'Day 7: Your progress + what\'s next ⬆️',
+      subjectAr: 'اليوم 7: تقدمك + ما التالي ⬆️',
+      preheader: 'You completed 7 days! Ready for the 30-day journey?',
+      preheaderAr: 'أكملت 7 أيام! مستعد لرحلة 30 يوماً؟',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Upgrade to Premium — $17/mo',
+      primaryUrl: `${BASE_URL}/products/premium`,
+      tags: ['basic', 'day7', 'milestone', 'upsell', 'premium'],
+    },
+    {
+      stepNumber: 6,
+      delayHours: 72, // Day 10 (3 days after step 5)
+      subject: 'Why Premium is the natural next step 🚀',
+      subjectAr: 'لماذا المميز هو الخطوة الطبيعية التالية 🚀',
+      preheader: 'Unlock 10 more apps + 30-day structured journey',
+      preheaderAr: 'افتح 10 تطبيقات إضافية + رحلة 30 يوماً منظمة',
+      templateName: 'day14FollowUp',
+      primaryCta: 'See What Premium Includes',
+      primaryUrl: `${BASE_URL}/products/premium`,
+      tags: ['basic', 'day10', 'upsell', 'premium'],
+    },
+    {
+      stepNumber: 7,
+      delayHours: 96, // Day 14 (4 days after step 6)
+      subject: 'Special: First month Premium at $12 (save $5) 🎁',
+      subjectAr: 'عرض خاص: أول شهر مميز بـ $12 (وفر $5) 🎁',
+      preheader: 'Exclusive upgrade offer for Basic subscribers',
+      preheaderAr: 'عرض ترقية حصري لمشتركي الأساسي',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Claim Your Discount',
+      primaryUrl: `${BASE_URL}/products/premium?offer=basic_upgrade`,
+      tags: ['basic', 'day14', 'offer', 'upsell', 'premium', 'discount'],
+    },
+  ],
+};
+
+// ============================================
+// SEQUENCE 3: PREMIUM_ONBOARDING (PREMIUM purchase → 30-day journey + upsell)
+// ============================================
+// Trigger: Webhook confirms $17 payment
+// Goal: Complete 30-day journey + upsell to MASTERY
+// ============================================
+
+const PREMIUM_ONBOARDING_SEQUENCE: DripSequence = {
+  id: 'premium_onboarding_sequence',
+  name: 'PREMIUM Onboarding — 30-Day Journey + Upsell',
+  description: 'Guide PREMIUM subscribers through 30-day journey and convert to MASTERY',
+  tier: 'premium',
+  trigger: 'PREMIUM_ONBOARDING',
+  isActive: true,
+  steps: [
+    {
+      stepNumber: 1,
+      delayHours: 0, // Immediate
+      subject: 'Welcome to Premium! Your 30-day journey begins 🌟',
+      subjectAr: 'مرحباً بك في المميز! رحلة 30 يوماً تبدأ 🌟',
+      preheader: '11 apps unlocked + 4-phase transformation roadmap',
+      preheaderAr: '11 تطبيقاً مفتوحة + خارطة تحول 4 مراحل',
+      templateName: 'purchaseConfirmation',
+      primaryCta: 'Access Your Apps',
+      primaryUrl: `${BASE_URL}/apps`,
+      tags: ['premium', 'welcome', 'onboarding', 'access'],
     },
     {
       stepNumber: 2,
       delayHours: 72, // Day 3
-      subject: "How's your identity journey? 🌱",
-      subjectAr: 'كيف رحلتك؟ 🌱',
-      preheader: 'Three days into transformation — key insights inside',
-      preheaderAr: 'ثلاثة أيام من التحول - رؤى مهمة بالداخل',
+      subject: 'Phase 1: Discover — Your baseline 📊',
+      subjectAr: 'المرحلة 1: اكتشاف — خط أساسك 📊',
+      preheader: 'Days 1-7: Identity audit + values excavation',
+      preheaderAr: 'أيام 1-7: تدقيق الهوية + تنقيب القيم',
       templateName: 'day3FollowUp',
-      primaryCta: 'Continue Your Journey',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['followup', 'day3', 'free'],
+      primaryCta: 'Start Phase 1',
+      primaryUrl: `${BASE_URL}/apps/identity-baseline`,
+      tags: ['premium', 'phase1', 'discover', 'day3'],
     },
     {
       stepNumber: 3,
       delayHours: 96, // Day 7 (4 days after step 2)
-      subject: "You're building momentum! 🚀",
-      subjectAr: 'أنت تبني الزخم! 🚀',
-      preheader: 'One full week of transformation — see your progress',
-      preheaderAr: 'أسبوع كامل من التحول - شاهد تقدمك',
+      subject: 'Phase 1 complete! What\'s next 🎉',
+      subjectAr: 'المرحلة 1 مكتملة! ما التالي 🎉',
+      preheader: 'You discovered your identity gaps. Now deconstruct.',
+      preheaderAr: 'اكتشفت فجوات هويتك. الآن فككها.',
       templateName: 'day7FollowUp',
-      primaryCta: 'Take the Free Quiz',
-      primaryUrl: `${BASE_URL}/apps/identity-gap`,
-      tags: ['followup', 'day7', 'quiz', 'free'],
+      primaryCta: 'Begin Phase 2',
+      primaryUrl: `${BASE_URL}/apps/identity-recode-system`,
+      tags: ['premium', 'milestone', 'phase2', 'day7'],
     },
     {
       stepNumber: 4,
       delayHours: 168, // Day 14 (7 days after step 3)
-      subject: 'Ready to go deeper? Try the 7-Day System ⬆️',
-      subjectAr: 'مستعد للعمق أكثر؟ جرّب نظام الـ 7 أيام ⬆️',
-      preheader: 'Special trial offer for active subscribers',
-      preheaderAr: 'عرض تجريبي خاص للمشتركين النشطين',
+      subject: 'Phase 2-3: Deconstruct & Reconstruct 🔄',
+      subjectAr: 'المرحلة 2-3: تفكيك وإعادة بناء 🔄',
+      preheader: 'Days 8-21: Release borrowed identities + build authentic self',
+      preheaderAr: 'أيام 8-21: تحرير الهويات المستعارة + بناء الذات الأصيلة',
       templateName: 'day14FollowUp',
-      primaryCta: 'Start Your Trial - $9',
-      primaryUrl: `${BASE_URL}/shop/trial`,
-      tags: ['offer', 'day14', 'trial', 'upsell'],
+      primaryCta: 'Continue Your Journey',
+      primaryUrl: `${BASE_URL}/apps/journal-system`,
+      tags: ['premium', 'phase2', 'phase3', 'day14'],
     },
     {
       stepNumber: 5,
       delayHours: 168, // Day 21 (7 days after step 4)
-      subject: 'Your identity deserves the full planner 📋',
-      subjectAr: 'هويتك تستحق المخطط الكامل 📋',
-      preheader: 'Unlock the complete Identity Recode Planner',
-      preheaderAr: 'افتح مخطط إعادة صياغة الهوية الكامل',
+      subject: 'Phase 4: Integrate + Meet your AI Coach 🤖',
+      subjectAr: 'المرحلة 4: دمج + تعرف على مدربك الذكي 🤖',
+      preheader: 'Days 22-30: Make it automatic + discover MASTERY tools',
+      preheaderAr: 'أيام 22-30: اجعله تلقائياً + اكتشف أدوات الإتقان',
       templateName: 'day14FollowUp',
-      primaryCta: 'Get the Planner - $27',
-      primaryUrl: `${BASE_URL}/shop/planner`,
-      tags: ['offer', 'day21', 'basic', 'upsell'],
+      primaryCta: 'Discover MASTERY',
+      primaryUrl: `${BASE_URL}/products/mastery`,
+      tags: ['premium', 'phase4', 'integrate', 'day21', 'upsell', 'mastery'],
+    },
+    {
+      stepNumber: 6,
+      delayHours: 168, // Day 28 (7 days after step 5)
+      subject: 'Almost done! Share your wins 🏆',
+      subjectAr: 'اقتربت من النهاية! شارك إنجازاتك 🏆',
+      preheader: '30-day journey almost complete. Celebrate + plan next.',
+      preheaderAr: 'رحلة 30 يوماً شبه مكتملة. احتفل + خطط للتالي.',
+      templateName: 'identityMilestone',
+      primaryCta: 'See Your Progress',
+      primaryUrl: `${BASE_URL}/apps/progress-dashboard`,
+      tags: ['premium', 'milestone', 'day28', 'celebration'],
+    },
+    {
+      stepNumber: 7,
+      delayHours: 48, // Day 30 (2 days after step 6)
+      subject: 'Day 30: What\'s next? Master-level tools await 🎓',
+      subjectAr: 'اليوم 30: ما التالي؟ أدوات مستوى الإتقان بانتظارك 🎓',
+      preheader: 'AI Coach + Community + Emotion Regulation + Priority Support',
+      preheaderAr: 'مدرب ذكي + مجتمع + تنظيم المشاعر + دعم أولوية',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Upgrade to MASTERY — $27/mo',
+      primaryUrl: `${BASE_URL}/products/mastery`,
+      tags: ['premium', 'day30', 'milestone', 'upsell', 'mastery'],
     },
   ],
 };
 
 // ============================================
-// TRIAL SEQUENCE
-// Purchase confirm → Day 2 welcome → Day 5 tips → Day 7 trial ending → Day 10 upgrade
+// SEQUENCE 4: MASTERY_ONBOARDING (MASTERY purchase → VIP activation + retention)
+// ============================================
+// Trigger: Webhook confirms $27 payment
+// Goal: Long-term retention + advocacy
 // ============================================
 
-const TRIAL_SEQUENCE: DripSequence = {
-  id: 'trial_sequence',
-  name: 'Trial Customer Journey',
-  description: 'Guide trial users through their 7-day experience and convert to paid',
-  tier: 'trial',
-  trigger: 'TRIAL_SEQUENCE',
+const MASTERY_ONBOARDING_SEQUENCE: DripSequence = {
+  id: 'mastery_onboarding_sequence',
+  name: 'MASTERY Onboarding — VIP Journey',
+  description: 'VIP onboarding with AI Coach, Community, and advanced tools',
+  tier: 'mastery',
+  trigger: 'MASTERY_ONBOARDING',
   isActive: true,
   steps: [
     {
       stepNumber: 1,
-      delayHours: 0,
-      subject: 'Your 7-Day Identity System is Ready! 🎯',
-      subjectAr: 'نظام الهوية لمدة 7 أيام جاهز! 🎯',
-      preheader: 'Access key and downloads inside',
-      preheaderAr: 'مفتاح الوصول والتنزيلات بالداخل',
+      delayHours: 0, // Immediate
+      subject: 'Welcome to MASTERY! You\'re VIP now 👑',
+      subjectAr: 'مرحباً بك في الإتقان! أنت VIP الآن 👑',
+      preheader: 'Everything unlocked + AI Coach + Community + Priority Support',
+      preheaderAr: 'كل شيء مفتوح + مدرب ذكي + مجتمع + دعم أولوية',
       templateName: 'purchaseConfirmation',
-      primaryCta: 'Access Your Apps Now',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['purchase', 'trial', 'confirmation'],
+      primaryCta: 'Access Everything',
+      primaryUrl: `${BASE_URL}/apps`,
+      tags: ['mastery', 'vip', 'welcome', 'onboarding'],
     },
     {
       stepNumber: 2,
       delayHours: 48, // Day 2
-      subject: 'Welcome to your transformation! Day 2 tips inside 🌟',
-      subjectAr: 'مرحباً بتحولك! نصائح اليوم الثاني بالداخل 🌟',
-      preheader: 'Getting the most from your 7-Day System',
-      preheaderAr: 'كيف تحصل على أقصى استفادة من نظام الـ 7 أيام',
+      subject: 'Meet your AI Identity Coach 🤖',
+      subjectAr: 'تعرف على مدرب هويتك الذكي 🤖',
+      preheader: '24/7 personalized coaching powered by AI + neuroscience',
+      preheaderAr: 'تدريب شخصي 24/7 مدعوم بالذكاء الاصطناعي والعلوم العصبية',
       templateName: 'day3FollowUp',
-      primaryCta: 'Open Your Apps',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['onboarding', 'day2', 'trial'],
+      primaryCta: 'Start Coaching Session',
+      primaryUrl: `${BASE_URL}/apps/ai-identity-coach`,
+      tags: ['mastery', 'day2', 'ai-coach', 'activation'],
     },
     {
       stepNumber: 3,
       delayHours: 72, // Day 5 (3 days after step 2)
-      subject: 'Day 5: Your identity is shifting! 💪',
-      subjectAr: 'اليوم 5: هويتك تتغير! 💪',
-      preheader: 'Keep the momentum going with these tips',
-      preheaderAr: 'حافظ على الزخم بهذه النصائح',
+      subject: 'Community spotlight: Your transformation family 👥',
+      subjectAr: 'ضوء على المجتمع: عائلة تحولك 👥',
+      preheader: 'Connect, share, and grow with people on the same journey',
+      preheaderAr: 'تواصل وشارك وانمُ مع أشخاص في نفس الرحلة',
       templateName: 'day7FollowUp',
-      primaryCta: 'Continue Your Journey',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['followup', 'day5', 'trial'],
+      primaryCta: 'Join the Community',
+      primaryUrl: `${BASE_URL}/apps/community-access`,
+      tags: ['mastery', 'day5', 'community', 'engagement'],
     },
     {
       stepNumber: 4,
-      delayHours: 48, // Day 7 (2 days after step 3)
-      subject: 'Your trial ends tomorrow — here\'s what\'s next ⏰',
-      subjectAr: 'تنتهي فترتك التجريبية غداً - إليك ما يلي ⏰',
-      preheader: 'Don\'t lose your progress — upgrade today',
-      preheaderAr: 'لا تفقد تقدمك - ارتقِ اليوم',
-      templateName: 'day14FollowUp',
-      primaryCta: 'Upgrade to Basic - $27',
-      primaryUrl: `${BASE_URL}/shop/planner`,
-      tags: ['trial_ending', 'day7', 'upgrade', 'trial'],
+      delayHours: 120, // Day 10 (5 days after step 3)
+      subject: 'Advanced: Emotion Regulation toolkit 💙',
+      subjectAr: 'متقدم: أدوات تنظيم المشاعر 💙',
+      preheader: 'ERQ-based techniques for emotional intelligence',
+      preheaderAr: 'تقنيات مبنية على ERQ للذكاء العاطفي',
+      templateName: 'day3FollowUp',
+      primaryCta: 'Open Emotion Regulation',
+      primaryUrl: `${BASE_URL}/apps/emotion-regulation`,
+      tags: ['mastery', 'day10', 'advanced', 'emotion'],
     },
     {
       stepNumber: 5,
-      delayHours: 72, // Day 10 (3 days after step 4)
-      subject: 'Don\'t let your transformation fade 🌱',
-      subjectAr: 'لا تدع تحولك يتلاشى 🌱',
-      preheader: 'Your trial has ended — continue with the full planner',
-      preheaderAr: 'انتهت فترتك التجريبية - تابع مع المخطط الكامل',
-      templateName: 'reEngagement',
-      primaryCta: 'Get the Full Planner',
-      primaryUrl: `${BASE_URL}/shop/planner`,
-      tags: ['post_trial', 'day10', 'upgrade', 'trial'],
-    },
-  ],
-};
-
-// ============================================
-// BASIC SEQUENCE
-// Purchase confirm → Day 2 welcome → Day 7 tips → Day 14 premium offer
-// ============================================
-
-const BASIC_SEQUENCE: DripSequence = {
-  id: 'basic_sequence',
-  name: 'Basic Customer Journey',
-  description: 'Onboard basic customers and upsell to premium',
-  tier: 'basic',
-  trigger: 'BASIC_SEQUENCE',
-  isActive: true,
-  steps: [
-    {
-      stepNumber: 1,
-      delayHours: 0,
-      subject: 'Your Identity Recode Planner is Ready! 📋',
-      subjectAr: 'مخطط إعادة صياغة الهوية جاهز! 📋',
-      preheader: 'Downloads and access key inside',
-      preheaderAr: 'التنزيلات ومفتاح الوصول بالداخل',
-      templateName: 'purchaseConfirmation',
-      primaryCta: 'Access Your Apps Now',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['purchase', 'basic', 'confirmation'],
-    },
-    {
-      stepNumber: 2,
-      delayHours: 48, // Day 2
-      subject: 'Day 2: Start with your Identity Gap Assessment 🎯',
-      subjectAr: 'اليوم 2: ابدأ بتقييم فجوة الهوية 🎯',
-      preheader: 'The best first step in your planner',
-      preheaderAr: 'أفضل خطوة أولى في مخططك',
-      templateName: 'day3FollowUp',
-      primaryCta: 'Take the Assessment',
-      primaryUrl: `${BASE_URL}/apps/identity-gap`,
-      tags: ['onboarding', 'day2', 'basic'],
-    },
-    {
-      stepNumber: 3,
-      delayHours: 120, // Day 7 (5 days after step 2)
-      subject: "You're building momentum! Week 1 insights 🚀",
-      subjectAr: 'أنت تبني الزخم! رؤى الأسبوع الأول 🚀',
-      preheader: 'See how far you\'ve come in just 7 days',
-      preheaderAr: 'شاهد كم تقدمت في 7 أيام فقط',
-      templateName: 'day7FollowUp',
-      primaryCta: 'View Your Progress',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['followup', 'day7', 'basic'],
-    },
-    {
-      stepNumber: 4,
-      delayHours: 168, // Day 14 (7 days after step 3)
-      subject: 'Ready for the next level? Premium awaits ⬆️',
-      subjectAr: 'مستعد للمستوى التالي؟ الباقة المتقدمة بانتظارك ⬆️',
-      preheader: 'Unlock advanced analytics and decision tracking',
-      preheaderAr: 'افتح التحليلات المتقدمة وتتبع القرارات',
+      delayHours: 96, // Day 14 (4 days after step 4)
+      subject: 'Priority Support — how to use it 🎧',
+      subjectAr: 'الدعم ذو الأولوية — كيف تستخدمه 🎧',
+      preheader: 'Personal guidance from transformation experts',
+      preheaderAr: 'إرشاد شخصي من خبراء التحول',
       templateName: 'day14FollowUp',
-      primaryCta: 'Upgrade to Premium - $47',
-      primaryUrl: `${BASE_URL}/shop/premium`,
-      tags: ['offer', 'day14', 'premium', 'upsell'],
-    },
-  ],
-};
-
-// ============================================
-// PREMIUM SEQUENCE
-// Purchase confirm → Day 2 welcome → Day 7 tips → Day 14 bundle offer
-// ============================================
-
-const PREMIUM_SEQUENCE: DripSequence = {
-  id: 'premium_sequence',
-  name: 'Premium Customer Journey',
-  description: 'Onboard premium customers and upsell to bundle',
-  tier: 'premium',
-  trigger: 'PREMIUM_SEQUENCE',
-  isActive: true,
-  steps: [
-    {
-      stepNumber: 1,
-      delayHours: 0,
-      subject: 'Your Premium Transformation Package is Ready! 🌟',
-      subjectAr: 'باقة التحول المتقدمة جاهزة! 🌟',
-      preheader: 'Full access to advanced tools and analytics',
-      preheaderAr: 'وصول كامل للأدوات والتحليلات المتقدمة',
-      templateName: 'purchaseConfirmation',
-      primaryCta: 'Access Your Apps Now',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['purchase', 'premium', 'confirmation'],
+      primaryCta: 'Contact Priority Support',
+      primaryUrl: `${BASE_URL}/apps/priority-support`,
+      tags: ['mastery', 'day14', 'support', 'vip'],
     },
     {
-      stepNumber: 2,
-      delayHours: 48, // Day 2
-      subject: 'Day 2: Dive into Decision Pattern Analysis 🔬',
-      subjectAr: 'اليوم 2: انغمس في تحليل أنماط القرارات 🔬',
-      preheader: 'Your premium tools are waiting',
-      preheaderAr: 'أدواتك المتقدمة بانتظارك',
-      templateName: 'day3FollowUp',
-      primaryCta: 'Start Decision Analysis',
-      primaryUrl: `${BASE_URL}/apps/decision-analysis`,
-      tags: ['onboarding', 'day2', 'premium'],
-    },
-    {
-      stepNumber: 3,
-      delayHours: 120, // Day 7
-      subject: "Week 1: You're uncovering powerful patterns! 🎯",
-      subjectAr: 'الأسبوع 1: أنت تكشف أنماطاً قوية! 🎯',
-      preheader: 'Your premium analytics show real progress',
-      preheaderAr: 'تحليلاتك المتقدمة تُظهر تقدماً حقيقياً',
-      templateName: 'day7FollowUp',
+      stepNumber: 6,
+      delayHours: 168, // Day 21 (7 days after step 5)
+      subject: 'MASTERY milestones: Track your evolution 📈',
+      subjectAr: 'إنجازات الإتقان: تتبع تطورك 📈',
+      preheader: 'See how far you\'ve come across all 15 tools',
+      preheaderAr: 'شاهد كم تقدمت عبر كل الأدوات الـ 15',
+      templateName: 'identityMilestone',
       primaryCta: 'View Your Dashboard',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['followup', 'day7', 'premium'],
+      primaryUrl: `${BASE_URL}/apps/progress-dashboard`,
+      tags: ['mastery', 'day21', 'milestones', 'retention'],
     },
     {
-      stepNumber: 4,
-      delayHours: 168, // Day 14
-      subject: 'Complete your transformation with the Bundle 👑',
-      subjectAr: 'أكمل تحولك مع الباقة الشاملة 👑',
-      preheader: 'Add AI coaching and community support',
-      preheaderAr: 'أضف التدريب بالذكاء الاصطناعي ودعم المجتمع',
-      templateName: 'day14FollowUp',
-      primaryCta: 'Upgrade to Bundle - $67',
-      primaryUrl: `${BASE_URL}/shop/bundle`,
-      tags: ['offer', 'day14', 'bundle', 'upsell'],
+      stepNumber: 7,
+      delayHours: 216, // Day 30 (9 days after step 6)
+      subject: 'You\'re a Master now — share your story ✨',
+      subjectAr: 'أنت الآن مُتقن — شارك قصتك ✨',
+      preheader: 'Inspire others + earn referral rewards',
+      preheaderAr: 'ألهم الآخرين + اكسب مكافآت الإحالة',
+      templateName: 'reEngagement',
+      primaryCta: 'Share Your Story',
+      primaryUrl: `${BASE_URL}/referral`,
+      tags: ['mastery', 'day30', 'advocacy', 'referral'],
     },
   ],
 };
 
 // ============================================
-// BUNDLE SEQUENCE
-// Purchase confirm → Day 2 VIP welcome → Day 7 coach tips → Day 14 community highlight
+// SEQUENCE 5: ABANDONED_CART_1H
 // ============================================
-
-const BUNDLE_SEQUENCE: DripSequence = {
-  id: 'bundle_sequence',
-  name: 'Bundle VIP Journey',
-  description: 'VIP onboarding with coaching and community engagement',
-  tier: 'bundle',
-  trigger: 'BUNDLE_SEQUENCE',
-  isActive: true,
-  steps: [
-    {
-      stepNumber: 1,
-      delayHours: 0,
-      subject: 'Welcome to VIP! Your Complete Bundle is Ready! 👑',
-      subjectAr: 'مرحباً بك في VIP! باقتك الشاملة جاهزة! 👑',
-      preheader: 'Full access to everything Tamkinly offers',
-      preheaderAr: 'وصول كامل لكل ما يقدمه تمكنلي',
-      templateName: 'purchaseConfirmation',
-      primaryCta: 'Access Your VIP Apps Now',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['purchase', 'bundle', 'vip', 'confirmation'],
-    },
-    {
-      stepNumber: 2,
-      delayHours: 48, // Day 2
-      subject: 'VIP Day 2: Meet your AI Identity Coach 🤖',
-      subjectAr: 'اليوم 2 VIP: تعرف على مدرب هويتك بالذكاء الاصطناعي 🤖',
-      preheader: 'Your personal transformation coach is ready',
-      preheaderAr: 'مدرب التحول الشخصي جاهز',
-      templateName: 'day3FollowUp',
-      primaryCta: 'Start Coaching Session',
-      primaryUrl: `${BASE_URL}/apps/ai-coach`,
-      tags: ['onboarding', 'day2', 'bundle', 'vip'],
-    },
-    {
-      stepNumber: 3,
-      delayHours: 120, // Day 7
-      subject: 'VIP Week 1: Coach tips for deeper transformation 💎',
-      subjectAr: 'الأسبوع 1 VIP: نصائح المدرب لتحول أعمق 💎',
-      preheader: 'Exclusive coaching insights for VIP members',
-      preheaderAr: 'رؤى تدريب حصرية لأعضاء VIP',
-      templateName: 'day7FollowUp',
-      primaryCta: 'Get Coach Recommendations',
-      primaryUrl: `${BASE_URL}/apps/ai-coach`,
-      tags: ['followup', 'day7', 'bundle', 'vip', 'coaching'],
-    },
-    {
-      stepNumber: 4,
-      delayHours: 168, // Day 14
-      subject: 'VIP Spotlight: Community highlights & your progress 🌟',
-      subjectAr: 'أضواء VIP: أبرز المجتمع وتقدمك 🌟',
-      preheader: 'See how fellow VIPs are transforming',
-      preheaderAr: 'شاهد كيف يتحول زملاؤك في VIP',
-      templateName: 'day7FollowUp',
-      primaryCta: 'Join the Community',
-      primaryUrl: `${BASE_URL}/community/`,
-      tags: ['followup', 'day14', 'bundle', 'vip', 'community'],
-    },
-  ],
-};
-
-// ============================================
-// QUIZ COMPLETED SEQUENCE
-// ============================================
-
-const QUIZ_COMPLETED_SEQUENCE: DripSequence = {
-  id: 'quiz_completed_sequence',
-  name: 'Quiz Results Follow-up',
-  description: 'Follow up after quiz completion with results and recommendations',
-  tier: 'free',
-  trigger: 'QUIZ_COMPLETED',
-  isActive: true,
-  steps: [
-    {
-      stepNumber: 1,
-      delayHours: 0,
-      subject: 'Your Assessment Results Are In! 📊',
-      subjectAr: 'نتائج تقييمك جاهزة! 📊',
-      preheader: 'See your identity score and personalized insights',
-      preheaderAr: 'شاهد درجة هويتك والرؤى المخصصة',
-      templateName: 'quizResults',
-      primaryCta: 'Start Working on Your Results',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['quiz', 'results', 'immediate'],
-    },
-    {
-      stepNumber: 2,
-      delayHours: 48, // 2 days later
-      subject: 'Based on your results, we recommend... 💡',
-      subjectAr: 'بناءً على نتائجك، نوصي بـ... 💡',
-      preheader: 'Personalized recommendations for your journey',
-      preheaderAr: 'توصيات مخصصة لرحلتك',
-      templateName: 'day3FollowUp',
-      primaryCta: 'See Recommendations',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['quiz', 'followup', 'recommendation'],
-    },
-    {
-      stepNumber: 3,
-      delayHours: 120, // 5 days later
-      subject: 'Ready to take the next step? 🚀',
-      subjectAr: 'مستعد للخطوة التالية؟ 🚀',
-      preheader: 'Your quiz results pointed to a clear path forward',
-      preheaderAr: 'نتائج تقييمك أشارت إلى مسار واضح',
-      templateName: 'day14FollowUp',
-      primaryCta: 'Explore Products',
-      primaryUrl: `${BASE_URL}/shop/`,
-      tags: ['quiz', 'upsell', 'offer'],
-    },
-  ],
-};
-
-// ============================================
-// ABANDONED CART SEQUENCES
-// ============================================
-
 const ABANDONED_CART_1H_SEQUENCE: DripSequence = {
   id: 'abandoned_cart_1h_sequence',
-  name: 'Abandoned Cart - 1 Hour',
+  name: 'Abandoned Cart — 1 Hour',
   description: 'Gentle reminder 1 hour after cart abandonment',
   tier: 'free',
   trigger: 'ABANDONED_CART_1H',
@@ -467,22 +475,25 @@ const ABANDONED_CART_1H_SEQUENCE: DripSequence = {
   steps: [
     {
       stepNumber: 1,
-      delayHours: 0,
-      subject: "You're Almost There! 🛒",
-      subjectAr: 'منتظرك! 🛒',
-      preheader: 'Your transformation is one step away',
-      preheaderAr: 'رحلتك على بعد خطوة واحدة',
+      delayHours: 1, // 1 hour after abandonment
+      subject: 'Forgot something? 🛒',
+      subjectAr: 'نسيت شيئاً؟ 🛒',
+      preheader: 'Your transformation journey is waiting',
+      preheaderAr: 'رحلة تحولك بانتظارك',
       templateName: 'abandonedCart1h',
       primaryCta: 'Complete Your Purchase',
-      primaryUrl: `${BASE_URL}/checkout/`,
-      tags: ['abandoned_cart', '1h', 'gentle'],
+      primaryUrl: `${BASE_URL}/checkout`,
+      tags: ['cart', 'abandoned', '1h', 'recovery'],
     },
   ],
 };
 
+// ============================================
+// SEQUENCE 6: ABANDONED_CART_24H
+// ============================================
 const ABANDONED_CART_24H_SEQUENCE: DripSequence = {
   id: 'abandoned_cart_24h_sequence',
-  name: 'Abandoned Cart - 24 Hours',
+  name: 'Abandoned Cart — 24 Hours',
   description: 'Incentivized reminder 24 hours after cart abandonment',
   tier: 'free',
   trigger: 'ABANDONED_CART_24H',
@@ -490,122 +501,26 @@ const ABANDONED_CART_24H_SEQUENCE: DripSequence = {
   steps: [
     {
       stepNumber: 1,
-      delayHours: 0,
-      subject: "Don't Put Your Transformation on Hold 💫",
-      subjectAr: 'لا تؤجل تحولك 💫',
-      preheader: 'Special bonus offer inside',
-      preheaderAr: 'عرض مكافأة خاص بالداخل',
+      delayHours: 24, // 24 hours after abandonment
+      subject: 'Still thinking? Here\'s $5 off your first month 🎁',
+      subjectAr: 'ما زلت تفكر؟ إليك $5 خصم على أول شهر 🎁',
+      preheader: 'FAQ + testimonial + special discount',
+      preheaderAr: 'أسئلة شائعة + شهادة + خصم خاص',
       templateName: 'abandonedCart24h',
-      primaryCta: 'Complete Purchase & Claim Bonus',
-      primaryUrl: `${BASE_URL}/checkout/`,
-      tags: ['abandoned_cart', '24h', 'incentive'],
+      primaryCta: 'Claim Discount + Checkout',
+      primaryUrl: `${BASE_URL}/checkout?discount=welcome5`,
+      tags: ['cart', 'abandoned', '24h', 'recovery', 'discount'],
     },
   ],
 };
 
 // ============================================
-// IDENTITY MILESTONE SEQUENCES
+// SEQUENCE 7: RE_ENGAGEMENT (Inactive 14 days)
 // ============================================
-
-const IDENTITY_MILESTONE_SEQUENCES: DripSequence[] = [
-  {
-    id: 'identity_milestone_7',
-    name: 'Identity Milestone - Day 7',
-    description: 'Celebrate week 1 completion and encourage continuation',
-    tier: 'trial',
-    trigger: 'IDENTITY_MILESTONE_7',
-    isActive: true,
-    steps: [
-      {
-        stepNumber: 1,
-        delayHours: 0,
-        subject: 'Week 1 Complete! 🌟',
-        subjectAr: 'الأسبوع الأول مكتمل! 🌟',
-        preheader: "You've built your foundation",
-        preheaderAr: 'لقد بنيت أساسك',
-        templateName: 'identityMilestone',
-        primaryCta: 'View Your Progress',
-        primaryUrl: `${BASE_URL}/apps/`,
-        tags: ['milestone', 'day7', 'celebration'],
-      },
-    ],
-  },
-  {
-    id: 'identity_milestone_14',
-    name: 'Identity Milestone - Day 14',
-    description: 'Mid-point celebration with upgrade nudge',
-    tier: 'basic',
-    trigger: 'IDENTITY_MILESTONE_14',
-    isActive: true,
-    steps: [
-      {
-        stepNumber: 1,
-        delayHours: 0,
-        subject: 'Two Weeks Strong! 💪',
-        subjectAr: 'أسبوعان بقوة! 💪',
-        preheader: "You're in the active recoding phase",
-        preheaderAr: 'أنت في مرحلة إعادة البرمجة الفعالة',
-        templateName: 'identityMilestone',
-        primaryCta: 'View Your Progress',
-        primaryUrl: `${BASE_URL}/apps/`,
-        tags: ['milestone', 'day14', 'celebration'],
-      },
-    ],
-  },
-  {
-    id: 'identity_milestone_21',
-    name: 'Identity Milestone - Day 21',
-    description: 'The turning point - habits becoming automatic',
-    tier: 'basic',
-    trigger: 'IDENTITY_MILESTONE_21',
-    isActive: true,
-    steps: [
-      {
-        stepNumber: 1,
-        delayHours: 0,
-        subject: 'Three Weeks In! 🔥',
-        subjectAr: 'ثلاثة أسابيع! 🔥',
-        preheader: 'The turning point',
-        preheaderAr: 'نقطة التحول',
-        templateName: 'identityMilestone',
-        primaryCta: 'View Your Progress',
-        primaryUrl: `${BASE_URL}/apps/`,
-        tags: ['milestone', 'day21', 'turning_point'],
-      },
-    ],
-  },
-  {
-    id: 'identity_milestone_30',
-    name: 'Identity Milestone - Day 30',
-    description: 'Journey completion celebration and next steps',
-    tier: 'basic',
-    trigger: 'IDENTITY_MILESTONE_30',
-    isActive: true,
-    steps: [
-      {
-        stepNumber: 1,
-        delayHours: 0,
-        subject: '30 Days! You Did It! 🏆',
-        subjectAr: '30 يوماً! لقد فعلتها! 🏆',
-        preheader: 'Transformation complete — what\'s next?',
-        preheaderAr: 'التحول مكتمل - ما التالي؟',
-        templateName: 'identityMilestone',
-        primaryCta: 'View Your Final Results',
-        primaryUrl: `${BASE_URL}/apps/`,
-        tags: ['milestone', 'day30', 'completion', 'celebration'],
-      },
-    ],
-  },
-];
-
-// ============================================
-// RE-ENGAGEMENT SEQUENCE
-// ============================================
-
 const RE_ENGAGEMENT_SEQUENCE: DripSequence = {
   id: 're_engagement_sequence',
-  name: 'Re-Engagement (Inactive 7+ Days)',
-  description: 'Win back inactive users with gentle reminders and offers',
+  name: 'Re-Engagement — Inactive Users',
+  description: 'Win back users inactive for 14+ days',
   tier: 'free',
   trigger: 'RE_ENGAGEMENT',
   isActive: true,
@@ -613,135 +528,225 @@ const RE_ENGAGEMENT_SEQUENCE: DripSequence = {
     {
       stepNumber: 1,
       delayHours: 0,
-      subject: 'We Miss You! 💙',
-      subjectAr: 'نفتقدك! 💙',
-      preheader: 'Your journey still matters',
-      preheaderAr: 'رحلتك لا تزال مهمة',
+      subject: 'We miss you! 💙',
+      subjectAr: 'نحن نفتقدك! 💙',
+      preheader: 'Pick up where you left off',
+      preheaderAr: 'أكمل من حيث توقفت',
       templateName: 'reEngagement',
       primaryCta: 'Return to Your Journey',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['re_engagement', 'winback', 'gentle'],
+      primaryUrl: `${BASE_URL}/apps`,
+      tags: ['reengagement', 'winback', 'inactive'],
     },
     {
       stepNumber: 2,
-      delayHours: 72, // 3 days later
-      subject: 'Your progress is still waiting for you 🌱',
-      subjectAr: 'تقدمك لا يزال بانتظارك 🌱',
-      preheader: '3 easy steps to get back on track',
-      preheaderAr: '3 خطوات سهلة للعودة للمسار',
-      templateName: 'reEngagement',
-      primaryCta: 'Quick Start',
-      primaryUrl: `${BASE_URL}/apps/`,
-      tags: ['re_engagement', 'winback', 'followup'],
+      delayHours: 72, // Day 3
+      subject: 'Quick win you can do in 5 minutes ⚡',
+      subjectAr: 'إنجاز سريع يمكنك فعله في 5 دقائق ⚡',
+      preheader: 'A small action that restarts momentum',
+      preheaderAr: 'فعل صغير يعيد الزخم',
+      templateName: 'day3FollowUp',
+      primaryCta: 'Do This 5-Minute Exercise',
+      primaryUrl: `${BASE_URL}/apps/daily-reflection`,
+      tags: ['reengagement', 'day3', 'quick-win'],
     },
     {
       stepNumber: 3,
-      delayHours: 168, // 7 days later
-      subject: 'Last chance: Special offer to continue your journey 🎁',
-      subjectAr: 'فرصة أخيرة: عرض خاص لمواصلة رحلتك 🎁',
-      preheader: 'Exclusive discount to come back',
-      preheaderAr: 'خصم حصري للعودة',
-      templateName: 'day14FollowUp',
-      primaryCta: 'Claim Your Offer',
-      primaryUrl: `${BASE_URL}/shop/`,
-      tags: ['re_engagement', 'winback', 'offer', 'final'],
+      delayHours: 96, // Day 7 (4 days after step 2)
+      subject: 'If you cancel, here\'s what you\'ll miss 📋',
+      subjectAr: 'إذا ألغيت، هذا ما ستفوته 📋',
+      preheader: 'Your progress + milestones + future tools',
+      preheaderAr: 'تقدمك + إنجازاتك + أدواتك المستقبلية',
+      templateName: 'reEngagement',
+      primaryCta: 'Keep My Subscription',
+      primaryUrl: `${BASE_URL}/apps`,
+      tags: ['reengagement', 'day7', 'retention', 'fomo'],
     },
   ],
 };
 
 // ============================================
-// SEQUENCE REGISTRY
+// SEQUENCE 8: UPSELL_BASIC_TO_PREMIUM
 // ============================================
-
-/**
- * All available drip sequences
- */
-export const ALL_SEQUENCES: DripSequence[] = [
-  FREE_SUBSCRIBER_SEQUENCE,
-  TRIAL_SEQUENCE,
-  BASIC_SEQUENCE,
-  PREMIUM_SEQUENCE,
-  BUNDLE_SEQUENCE,
-  QUIZ_COMPLETED_SEQUENCE,
-  ABANDONED_CART_1H_SEQUENCE,
-  ABANDONED_CART_24H_SEQUENCE,
-  ...IDENTITY_MILESTONE_SEQUENCES,
-  RE_ENGAGEMENT_SEQUENCE,
-];
-
-/**
- * Get a sequence by its trigger name
- */
-export function getSequenceByTrigger(trigger: string): DripSequence | undefined {
-  return ALL_SEQUENCES.find(s => s.trigger === trigger);
-}
-
-/**
- * Get a sequence by its ID
- */
-export function getSequenceById(id: string): DripSequence | undefined {
-  return ALL_SEQUENCES.find(s => s.id === id);
-}
-
-/**
- * Get all sequences for a specific tier
- */
-export function getSequencesByTier(tier: SequenceTier): DripSequence[] {
-  return ALL_SEQUENCES.filter(s => s.tier === tier);
-}
-
-/**
- * Get all active sequences
- */
-export function getActiveSequences(): DripSequence[] {
-  return ALL_SEQUENCES.filter(s => s.isActive);
-}
-
-/**
- * Get a summary of all sequences (for admin/debugging)
- */
-export function getSequencesSummary(): Array<{
-  id: string;
-  name: string;
-  tier: string;
-  trigger: string;
-  stepsCount: number;
-  totalDurationHours: number;
-  isActive: boolean;
-}> {
-  return ALL_SEQUENCES.map(s => ({
-    id: s.id,
-    name: s.name,
-    tier: s.tier,
-    trigger: s.trigger,
-    stepsCount: s.steps.length,
-    totalDurationHours: s.steps.reduce((sum, step) => sum + step.delayHours, 0),
-    isActive: s.isActive,
-  }));
-}
-
-// ============================================
-// EXPORT DEFAULT
-// ============================================
-
-const DripSequences = {
-  ALL_SEQUENCES,
-  getSequenceByTrigger,
-  getSequenceById,
-  getSequencesByTier,
-  getActiveSequences,
-  getSequencesSummary,
-  // Individual sequences for direct import
-  FREE_SUBSCRIBER_SEQUENCE,
-  TRIAL_SEQUENCE,
-  BASIC_SEQUENCE,
-  PREMIUM_SEQUENCE,
-  BUNDLE_SEQUENCE,
-  QUIZ_COMPLETED_SEQUENCE,
-  ABANDONED_CART_1H_SEQUENCE,
-  ABANDONED_CART_24H_SEQUENCE,
-  IDENTITY_MILESTONE_SEQUENCES,
-  RE_ENGAGEMENT_SEQUENCE,
+const UPSELL_BASIC_TO_PREMIUM_SEQUENCE: DripSequence = {
+  id: 'upsell_basic_to_premium_sequence',
+  name: 'Upsell — BASIC to PREMIUM',
+  description: 'Convert BASIC subscribers to PREMIUM after 5 days',
+  tier: 'basic',
+  trigger: 'UPSELL_BASIC_TO_PREMIUM',
+  isActive: true,
+  steps: [
+    {
+      stepNumber: 1,
+      delayHours: 0,
+      subject: 'You\'re ready for the 30-day journey 🚀',
+      subjectAr: 'أنت مستعد لرحلة 30 يوماً 🚀',
+      preheader: 'Basic gave you a taste. Premium transforms completely.',
+      preheaderAr: 'الأساسي أعطاك لمحة. المميز يحول بالكامل.',
+      templateName: 'day14FollowUp',
+      primaryCta: 'See Premium Details',
+      primaryUrl: `${BASE_URL}/products/premium`,
+      tags: ['upsell', 'basic-to-premium', 'day5'],
+    },
+    {
+      stepNumber: 2,
+      delayHours: 48, // Day 2
+      subject: 'BASIC vs PREMIUM: What\'s the difference? 📊',
+      subjectAr: 'الأساسي vs المميز: ما الفرق؟ 📊',
+      preheader: 'Side-by-side comparison of 1 app vs 11 apps',
+      preheaderAr: 'مقارنة جنباً إلى جنب لتطبيق vs 11 تطبيقاً',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Compare Plans',
+      primaryUrl: `${BASE_URL}/products`,
+      tags: ['upsell', 'basic-to-premium', 'comparison', 'day2'],
+    },
+    {
+      stepNumber: 3,
+      delayHours: 96, // Day 4 (2 days after step 2)
+      subject: 'Limited: First month Premium at $12 (save $5) 🎁',
+      subjectAr: 'محدود: أول شهر مميز بـ $12 (وفر $5) 🎁',
+      preheader: 'Exclusive offer for Basic subscribers',
+      preheaderAr: 'عرض حصري لمشتركي الأساسي',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Claim Discount',
+      primaryUrl: `${BASE_URL}/products/premium?offer=basic_upgrade`,
+      tags: ['upsell', 'basic-to-premium', 'discount', 'day4', 'urgency'],
+    },
+  ],
 };
 
-export default DripSequences;
+// ============================================
+// SEQUENCE 9: UPSELL_PREMIUM_TO_MASTERY
+// ============================================
+const UPSELL_PREMIUM_TO_MASTERY_SEQUENCE: DripSequence = {
+  id: 'upsell_premium_to_mastery_sequence',
+  name: 'Upsell — PREMIUM to MASTERY',
+  description: 'Convert PREMIUM subscribers to MASTERY after 21 days',
+  tier: 'premium',
+  trigger: 'UPSELL_PREMIUM_TO_MASTERY',
+  isActive: true,
+  steps: [
+    {
+      stepNumber: 1,
+      delayHours: 0,
+      subject: 'Meet your AI Identity Coach 🤖',
+      subjectAr: 'تعرف على مدرب هويتك الذكي 🤖',
+      preheader: '24/7 personalized guidance — only in MASTERY',
+      preheaderAr: 'إرشاد شخصي 24/7 — فقط في الإتقان',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Discover AI Coach',
+      primaryUrl: `${BASE_URL}/apps/ai-identity-coach`,
+      tags: ['upsell', 'premium-to-mastery', 'ai-coach', 'day21'],
+    },
+    {
+      stepNumber: 2,
+      delayHours: 48, // Day 2
+      subject: 'Community success story: From Premium to MASTERY ✨',
+      subjectAr: 'قصة نجاح من المجتمع: من المميز إلى الإتقان ✨',
+      preheader: 'How joining the community accelerated transformation',
+      preheaderAr: 'كيف سرّع الانضمام للمجتمع التحول',
+      templateName: 'day7FollowUp',
+      primaryCta: 'Read Success Story',
+      primaryUrl: `${BASE_URL}/apps/community-access`,
+      tags: ['upsell', 'premium-to-mastery', 'community', 'testimonial', 'day2'],
+    },
+    {
+      stepNumber: 3,
+      delayHours: 96, // Day 4 (2 days after step 2)
+      subject: 'Upgrade to MASTERY — lock in your price 🔒',
+      subjectAr: 'ترقية إلى الإتقان — احجز سعرك 🔒',
+      preheader: 'AI Coach + Community + Emotion Regulation + Priority Support',
+      preheaderAr: 'مدرب ذكي + مجتمع + تنظيم مشاعر + دعم أولوية',
+      templateName: 'day14FollowUp',
+      primaryCta: 'Upgrade to MASTERY — $27/mo',
+      primaryUrl: `${BASE_URL}/products/mastery`,
+      tags: ['upsell', 'premium-to-mastery', 'offer', 'day4', 'urgency'],
+    },
+  ],
+};
+
+// ============================================
+// LEGACY SEQUENCES (kept for backward compatibility with existing subscribers)
+// ============================================
+
+const FREE_SUBSCRIBER_SEQUENCE: DripSequence = LEAD_NURTURE_SEQUENCE;
+const TRIAL_SEQUENCE: DripSequence = BASIC_ONBOARDING_SEQUENCE;
+const BASIC_SEQUENCE: DripSequence = PREMIUM_ONBOARDING_SEQUENCE;
+const PREMIUM_SEQUENCE: DripSequence = MASTERY_ONBOARDING_SEQUENCE;
+const BUNDLE_SEQUENCE: DripSequence = MASTERY_ONBOARDING_SEQUENCE;
+
+const QUIZ_COMPLETED_SEQUENCE: DripSequence = {
+  id: 'quiz_completed_sequence',
+  name: 'Quiz Results Follow-up (Legacy)',
+  description: 'Legacy alias for LEAD_NURTURE sequence',
+  tier: 'free',
+  trigger: 'QUIZ_COMPLETED',
+  isActive: false, // Disabled — use LEAD_NURTURE instead
+  steps: LEAD_NURTURE_SEQUENCE.steps,
+};
+
+// ============================================
+// EXPORT ALL SEQUENCES
+// ============================================
+
+export const DRIP_SEQUENCES: DripSequence[] = [
+  LEAD_NURTURE_SEQUENCE,
+  BASIC_ONBOARDING_SEQUENCE,
+  PREMIUM_ONBOARDING_SEQUENCE,
+  MASTERY_ONBOARDING_SEQUENCE,
+  ABANDONED_CART_1H_SEQUENCE,
+  ABANDONED_CART_24H_SEQUENCE,
+  RE_ENGAGEMENT_SEQUENCE,
+  UPSELL_BASIC_TO_PREMIUM_SEQUENCE,
+  UPSELL_PREMIUM_TO_MASTERY_SEQUENCE,
+  // Legacy aliases (inactive)
+  QUIZ_COMPLETED_SEQUENCE,
+];
+
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+
+export function getSequenceByTrigger(trigger: string): DripSequence | undefined {
+  return DRIP_SEQUENCES.find((s) => s.trigger === trigger && s.isActive);
+}
+
+export function getSequenceById(id: string): DripSequence | undefined {
+  return DRIP_SEQUENCES.find((s) => s.id === id);
+}
+
+export function getActiveSequences(): DripSequence[] {
+  return DRIP_SEQUENCES.filter((s) => s.isActive);
+}
+
+export function getSequencesByTier(tier: SequenceTier): DripSequence[] {
+  return DRIP_SEQUENCES.filter((s) => s.tier === tier && s.isActive);
+}
+
+// ============================================
+// TRIGGER MAPPING (legacy → new)
+// ============================================
+
+export const TRIGGER_ALIASES: Record<string, string> = {
+  // Legacy triggers → new triggers
+  'FREE_SUBSCRIBER': 'LEAD_NURTURE',
+  'TRIAL_PURCHASE': 'BASIC_ONBOARDING',
+  'BASIC_PURCHASE': 'PREMIUM_ONBOARDING', // old BASIC = new PREMIUM
+  'PLANNER_PURCHASE': 'PREMIUM_ONBOARDING',
+  'PREMIUM_PURCHASE': 'MASTERY_ONBOARDING', // old PREMIUM merged into MASTERY
+  'BUNDLE_PURCHASE': 'MASTERY_ONBOARDING',
+  'QUIZ_COMPLETED': 'LEAD_NURTURE',
+  // New triggers (identity mapping)
+  'LEAD_NURTURE': 'LEAD_NURTURE',
+  'BASIC_ONBOARDING': 'BASIC_ONBOARDING',
+  'PREMIUM_ONBOARDING': 'PREMIUM_ONBOARDING',
+  'MASTERY_ONBOARDING': 'MASTERY_ONBOARDING',
+  'ABANDONED_CART_1H': 'ABANDONED_CART_1H',
+  'ABANDONED_CART_24H': 'ABANDONED_CART_24H',
+  'RE_ENGAGEMENT': 'RE_ENGAGEMENT',
+  'UPSELL_BASIC_TO_PREMIUM': 'UPSELL_BASIC_TO_PREMIUM',
+  'UPSELL_PREMIUM_TO_MASTERY': 'UPSELL_PREMIUM_TO_MASTERY',
+};
+
+export function resolveTrigger(trigger: string): string {
+  return TRIGGER_ALIASES[trigger] || trigger;
+}

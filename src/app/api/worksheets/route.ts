@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 
-// GET - Get all worksheet data for a user
+// GET - Get all worksheet data for the authenticated user only
 export async function GET(request: NextRequest) {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const userId = searchParams.get('userId');
-
-    if (!userId) {
-      return NextResponse.json(
-        { error: 'userId is required' },
-        { status: 400 }
-      );
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
+
+    const userId = session.user.id;
 
     const worksheets = await db.worksheetData.findMany({
       where: { userId },
@@ -43,22 +42,27 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Get worksheets error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get worksheets' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to get worksheets' }, { status: 500 });
   }
 }
 
-// POST - Save worksheet data
+// POST - Save worksheet data for the authenticated user only
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { userId, worksheetType, data, score } = body;
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
 
-    if (!userId || !worksheetType || !data) {
+    const body = await request.json();
+    const { worksheetType, data, score } = body;
+
+    // Note: userId is now taken from session, NOT from client
+    const userId = session.user.id;
+
+    if (!worksheetType || !data) {
       return NextResponse.json(
-        { error: 'userId, worksheetType, and data are required' },
+        { error: 'worksheetType and data are required' },
         { status: 400 }
       );
     }
@@ -95,9 +99,6 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Save worksheet error:', error);
-    return NextResponse.json(
-      { error: 'Failed to save worksheet' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to save worksheet' }, { status: 500 });
   }
 }

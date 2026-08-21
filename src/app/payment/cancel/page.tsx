@@ -18,8 +18,8 @@ function CancelContent() {
       <div className="max-w-lg mx-auto">
         {/* Cancel Icon */}
         <div className="text-center mb-8">
-          <div className="w-24 h-24 rounded-full bg-[#FFE4CC] flex items-center justify-center mx-auto mb-6">
-            <XCircle className="w-12 h-12 text-[#FC6D26]" />
+          <div className="w-24 h-24 rounded-full bg-[#F0E0E2] flex items-center justify-center mx-auto mb-6">
+            <XCircle className="w-12 h-12 text-[#C97B7B]" />
           </div>
           <h1 className="text-3xl font-bold text-[#0F1C2E] mb-2">{t('title')}</h1>
           <p className="text-slate-600">

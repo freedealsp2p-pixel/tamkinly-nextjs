@@ -80,7 +80,7 @@ while true; do
             ;;
         9)
             echo "🧹 Cleaning and rebuilding..."
-            run_ssh "cd /var/www/tamkinly && rm -rf .next && NODE_OPTIONS='--max-old-space-size=768' bun run build && pm2 restart tamkinly-nextjs"
+            run_ssh "cd /var/www/tamkinly && rm -rf .next && NODE_OPTIONS='--max-old-space-size=768' bun run build && cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/ 2>/dev/null && pm2 restart tamkinly-nextjs"
             ;;
         10)
             echo "📈 Server resources..."

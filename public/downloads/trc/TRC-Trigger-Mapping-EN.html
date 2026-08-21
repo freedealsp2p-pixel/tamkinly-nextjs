@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigger Mapping Worksheet - TRC-TRIGGER_MAPPING</title>
+    <style>
+        :root {
+            --primary-teal: #1F6F78;
+            --dark-navy: #0F1C2E;
+            --soft-bg: #F8FAFC;
+            --border-gray: #CBD5E1;
+            --pale-teal-bg: #E6F4F5;
+            --pale-teal-border: #99D1D5;
+            --pale-amber-bg: #FFFBEB;
+            --pale-amber-border: #FCD34D;
+            --amber-text: #92400E;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #E2E8F0;
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            max-height: 297mm;
+            background-color: #FFFFFF;
+            padding: 16mm 18mm 14mm 18mm;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-teal);
+            margin-bottom: 14px;
+        }
+
+        .header-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dark-navy);
+            letter-spacing: 0.3px;
+        }
+
+        .header-tool-id {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary-teal);
+            background-color: var(--pale-teal-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--pale-teal-border);
+        }
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-footer {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-gray);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .footer-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .footer-disclaimer {
+            font-size: 8.5px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.3;
+            font-style: italic;
+        }
+
+        h1.doc-title {
+            font-size: 24px;
+            color: var(--dark-navy);
+            font-weight: 800;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        p.doc-subtitle {
+            font-size: 12.5px;
+            color: var(--primary-teal);
+            font-weight: 500;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        h2.section-heading {
+            font-size: 15px;
+            color: var(--dark-navy);
+            font-weight: 700;
+            margin-bottom: 8px;
+            margin-top: 10px;
+            border-left: 4px solid var(--primary-teal);
+            padding-left: 8px;
+        }
+
+        .safety-alert-box {
+            background-color: var(--pale-teal-bg);
+            border: 1px solid var(--pale-teal-border);
+            border-left: 5px solid var(--primary-teal);
+            border-radius: 8px;
+            padding: 11px 15px;
+            margin-bottom: 12px;
+            font-size: 11.5px;
+            color: var(--dark-navy);
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .amber-warning-box {
+            background-color: var(--pale-amber-bg);
+            border: 1px solid var(--pale-amber-border);
+            border-left: 5px solid #D97706;
+            border-radius: 8px;
+            padding: 11px 15px;
+            margin-bottom: 12px;
+            font-size: 11.5px;
+            color: var(--amber-text);
+            line-height: 1.5;
+        }
+
+        .info-card {
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            font-size: 11.5px;
+            color: var(--text-main);
+            line-height: 1.45;
+        }
+
+        .writing-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .field-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .field-label {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .writing-box {
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            width: 100%;
+        }
+
+        .writing-box.p1-large {
+            height: 60px;
+            background-image: repeating-linear-gradient(transparent, transparent 28px, #E2E8F0 29px);
+            background-position: 0 28px;
+        }
+
+        .writing-box.p1-small {
+            height: 48px;
+            background-image: repeating-linear-gradient(transparent, transparent 23px, #E2E8F0 24px);
+            background-position: 0 23px;
+        }
+
+        .writing-box.p2-field {
+            height: 46px;
+            background-image: repeating-linear-gradient(transparent, transparent 22px, #E2E8F0 23px);
+            background-position: 0 22px;
+        }
+
+        .writing-box.p3-field {
+            height: 46px;
+            background-image: repeating-linear-gradient(transparent, transparent 22px, #E2E8F0 23px);
+            background-position: 0 22px;
+        }
+
+        .bottom-reminder {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+            margin-top: 8px;
+            padding-top: 4px;
+        }
+
+        .scale-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+
+        .scale-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .scale-sublabel {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .scale-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        .scale-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .scale-number {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .scale-box {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            background-color: #FFFFFF;
+        }
+
+        .bullet-list {
+            list-style-type: disc;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .bullet-list li {
+            font-size: 11.5px;
+            line-height: 1.4;
+        }
+
+        .contacts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        .contact-line-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .contact-line {
+            height: 18px;
+            border-bottom: 1px solid var(--border-gray);
+            width: 100%;
+        }
+
+        .platform-ref {
+            text-align: center;
+            padding: 8px;
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        .platform-ref strong {
+            color: var(--dark-navy);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .platform-ref a {
+            color: var(--primary-teal);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html, body {
+                background-color: #FFFFFF;
+                margin: 0;
+                padding: 0;
+                width: 210mm;
+            }
+
+            .page-container {
+                gap: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                max-height: 297mm;
+                padding: 16mm 18mm 14mm 18mm;
+                page-break-after: always;
+                break-after: page;
+                page-break-inside: avoid;
+            }
+
+            #page-3 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+
+    <!-- PAGE 1 -->
+    <div class="page" id="page-1">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-TRIGGER_MAPPING</span>
+        </header>
+
+        <main class="page-content">
+            <h1 class="doc-title">Trigger Mapping</h1>
+            <p class="doc-subtitle">Identifying triggers and understanding body, emotion, and behavioral responses to enable proactive regulation.</p>
+
+            <div class="safety-alert-box">
+                Trigger mapping is done after settling — not during crisis. If reflecting on the trigger increases distress, stop and use 5-4-3-2-1 Grounding first.
+            </div>
+
+            <h2 class="section-heading">Before You Map</h2>
+            <div class="info-card">
+                Use this worksheet only when you feel sufficiently settled to look back at what happened before a shift in your state. You do not need to describe the traumatic event itself. You may skip any field or stop at any point.
+            </div>
+
+            <h2 class="section-heading">Trigger Context</h2>
+            <div class="writing-grid">
+                <div class="field-block">
+                    <label class="field-label">1. What happened just before I noticed the shift?</label>
+                    <div class="writing-box p1-large"></div>
+                </div>
+
+                <div class="field-block">
+                    <label class="field-label">2. Where was I?</label>
+                    <div class="writing-box p1-small"></div>
+                </div>
+
+                <div class="field-block">
+                    <label class="field-label">3. What was I doing?</label>
+                    <div class="writing-box p1-small"></div>
+                </div>
+
+                <div class="field-block">
+                    <label class="field-label">4. What was I thinking about?</label>
+                    <div class="writing-box p1-small"></div>
+                </div>
+
+                <div class="field-block">
+                    <label class="field-label">5. What sensory input did I notice?</label>
+                    <div class="writing-box p1-small"></div>
+                </div>
+            </div>
+
+            <p class="bottom-reminder">Focus on the sequence you noticed, not on explaining why it happened.</p>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-TRIGGER_MAPPING</span>
+                <span>Page 1 of 3</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page" id="page-2">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-TRIGGER_MAPPING</span>
+        </header>
+
+        <main class="page-content">
+            <h2 class="section-heading" style="margin-top: 0;">Response Map</h2>
+            <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px;">
+                Notice the response without judging it. Record what you experienced as accurately and simply as you can. You do not need to explain the response.
+            </p>
+
+            <h3 style="font-size: 13px; font-weight: 700; color: var(--dark-navy); margin-bottom: 6px;">Body Response</h3>
+            <div class="field-block" style="margin-bottom: 8px;">
+                <label class="field-label">First sensation location</label>
+                <div class="writing-box p2-field"></div>
+            </div>
+            <div class="field-block" style="margin-bottom: 8px;">
+                <label class="field-label">Sensation description</label>
+                <div class="writing-box p2-field"></div>
+            </div>
+            <div class="field-block" style="margin-bottom: 12px;">
+                <div class="scale-wrapper">
+                    <div class="scale-header">
+                        <label class="field-label" style="margin-bottom: 0;">Intensity (optional, 1–10)</label>
+                        <span class="scale-sublabel">Optional — skip if not useful</span>
+                    </div>
+                    <div class="scale-container">
+                        <div class="scale-item"><span class="scale-number">1</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">2</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">3</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">4</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">5</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">6</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">7</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">8</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">9</span><div class="scale-box"></div></div>
+                        <div class="scale-item"><span class="scale-number">10</span><div class="scale-box"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 13px; font-weight: 700; color: var(--dark-navy); margin-bottom: 6px;">Emotional Response</h3>
+            <div class="field-block" style="margin-bottom: 8px;">
+                <label class="field-label">Primary emotion</label>
+                <div class="writing-box p2-field"></div>
+            </div>
+            <div class="field-block" style="margin-bottom: 12px;">
+                <label class="field-label">Secondary emotion underneath</label>
+                <div class="writing-box p2-field"></div>
+            </div>
+
+            <h3 style="font-size: 13px; font-weight: 700; color: var(--dark-navy); margin-bottom: 6px;">Impulse / Behavior</h3>
+            <div class="field-block" style="margin-bottom: 8px;">
+                <label class="field-label">What did I want to do?</label>
+                <div class="writing-box p2-field"></div>
+            </div>
+            <div class="field-block">
+                <label class="field-label">What did I actually do?</label>
+                <div class="writing-box p2-field"></div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-TRIGGER_MAPPING</span>
+                <span>Page 2 of 3</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page" id="page-3">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-TRIGGER_MAPPING</span>
+        </header>
+
+        <main class="page-content">
+            <h2 class="section-heading" style="margin-top: 0;">Regulation &amp; Pattern Review</h2>
+            <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px;">
+                Review the sequence after you have settled. Look for useful information rather than trying to find a single explanation.
+            </p>
+
+            <h3 style="font-size: 13px; font-weight: 700; color: var(--dark-navy); margin-bottom: 6px;">What Helped</h3>
+            <div class="field-block" style="margin-bottom: 6px;">
+                <label class="field-label">Regulation tools used</label>
+                <div class="writing-box p3-field"></div>
+            </div>
+            <div class="field-block" style="margin-bottom: 6px;">
+                <label class="field-label">What might I try next time?</label>
+                <div class="writing-box p3-field"></div>
+            </div>
+            <div class="field-block" style="margin-bottom: 10px;">
+                <label class="field-label">How long did it take me to feel more settled?</label>
+                <div class="writing-box p3-field"></div>
+            </div>
+
+            <h3 style="font-size: 13px; font-weight: 700; color: var(--dark-navy); margin-bottom: 6px;">Review the Pattern</h3>
+            <div class="field-block" style="margin-bottom: 6px;">
+                <label class="field-label">Have I noticed something similar before?</label>
+                <div class="writing-box p3-field"></div>
+            </div>
+            <div class="field-block" style="margin-bottom: 4px;">
+                <label class="field-label">Observed patterns</label>
+                <div class="writing-box p3-field"></div>
+            </div>
+            <p style="font-size: 10.5px; color: var(--text-muted); font-style: italic; margin-bottom: 10px;">
+                Patterns may be incomplete. You do not need to reach a conclusion.
+            </p>
+
+            <h2 class="section-heading">When to Stop</h2>
+            <div class="amber-warning-box">
+                <ul class="bullet-list">
+                    <li>Mapping re-traumatizes me</li>
+                    <li>I am unable to stay present</li>
+                </ul>
+                <p style="margin-top: 6px; font-weight: 500;">
+                    If this happens, stop the worksheet and return to external sensory grounding, such as 5-4-3-2-1 Grounding.
+                </p>
+            </div>
+
+            <h2 class="section-heading">Emergency &amp; Support Contacts</h2>
+            <div class="contacts-container">
+                <div class="contact-line-item">
+                    <span class="contact-label">My therapist / counselor:</span>
+                    <div class="contact-line"></div>
+                </div>
+                <div class="contact-line-item">
+                    <span class="contact-label">Mental-health support line:</span>
+                    <div class="contact-line"></div>
+                </div>
+                <div class="contact-line-item">
+                    <span class="contact-label">Other emergency / support number:</span>
+                    <div class="contact-line"></div>
+                </div>
+            </div>
+
+            <div class="platform-ref">
+                <strong>Tamkinly TRC Recovery Journey</strong>
+                <a href="https://tamkinly.com/recovery/trc">https://tamkinly.com/recovery/trc</a>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-TRIGGER_MAPPING</span>
+                <span>Page 3 of 3</span>
+            </div>
+            <div class="footer-disclaimer">
+                This tool is supportive and educational. It does not replace individualized assessment, diagnosis, psychotherapy, medical care, or professional support.
+            </div>
+        </footer>
+    </div>
+
+</div>
+
+</body>
+</html>

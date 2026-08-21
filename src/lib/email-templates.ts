@@ -152,8 +152,8 @@ export function getPurchaseConfirmationHtml(
 
   const appsByTier: Record<string, { en: string[]; ar: string[] }> = {
     trial: {
-      en: ['Identity Gap Assessment', 'Values Clarification Tool', '7-Day Guided Journey'],
-      ar: ['تقييم فجوة الهوية', 'أداة توضيح القيم', 'رحلة موجهة لمدة 7 أيام'],
+      en: ['7-Day Guided Discipline Journey', 'Daily identity prompts', 'Evidence tracking basics', 'Progress dashboard', '7 Days System PDF (downloadable)'],
+      ar: ['رحلة انضباط موجهة لمدة 7 أيام', 'مطالبات الهوية اليومية', 'أساسيات تتبع الأدلة', 'لوحة تتبع التقدم', 'PDF نظام 7 أيام (قابل للتحميل)', 'PDF عرض خاص (خصم الترقية)'],
     },
     basic: {
       en: ['Identity Gap Assessment', 'Values Clarification Tool', '30-Day Transformation Journey', 'Daily Planner & Tracker'],
@@ -177,7 +177,7 @@ export function getPurchaseConfirmationHtml(
   const body = `
     <div class="header">
       <h1>${isVip ? (isAr ? 'مرحباً بك في VIP! 👑' : 'Welcome to VIP! 👑') : (isAr ? 'شكراً لشرائك! 🙏' : 'Thank You for Your Purchase! 🙏')}</h1>
-      ${isVip ? `<p class="subtitle"><span class="vip-badge">${isAr ? 'عضو الباقة الشاملة' : 'BUNDLE MEMBER'}</span></p>` : ''}
+      ${isVip ? `<p class="subtitle"><span class="vip-badge">${isAr ? 'عضو الباقة الشاملة' : 'MASTERY MEMBER'}</span></p>` : ''}
     </div>
     <div class="content">
       <h2>${isAr ? `تم تأكيد طلبك: ${productName}` : `Your Order is Confirmed: ${productName}`}</h2>
@@ -197,6 +197,23 @@ export function getPurchaseConfirmationHtml(
         <h3>${isAr ? '📱 التطبيقات المتاحة لك:' : '📱 Apps You Can Access:'}</h3>
         <ul>${appList}</ul>
       </div>
+      ${(tier === 'mastery' || tier === 'bundle') ? `
+      <div style="background: linear-gradient(135deg, #0F1C2E 0%, #1F6F78 100%); border-radius: 12px; padding: 20px; margin: 24px 0; text-align: center; border: 2px solid #3DD4B0;">
+        <h3 style="color: #3DD4B0; margin: 0 0 8px 0; font-size: 16px;">${isAr ? '🎧 تواصل مباشر مع المؤسس' : '🎧 Direct Access to the Founder'}</h3>
+        <p style="color: #ffffff; font-size: 13px; margin: 0 0 12px 0; line-height: 1.5;">${isAr ? 'بصفتك مشترك MASTERY، لديك وصول مباشر للمراسلة مع عبدالله، مؤسس Tamkinly.' : 'As a MASTERY subscriber, you have direct messaging access to Abdallah, founder of Tamkinly.'}</p>
+        <a href="https://t.me/tribute/app?startapp=i42v" style="display: inline-block; background: #3DD4B0; color: #0F1C2E; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">${isAr ? '📨 مراسلة مباشرة' : '📨 Message Directly'}</a>
+      </div>
+      ` : ''}
+      ${tier === 'trial' || tier === 'basic' ? `
+      <div style="background: linear-gradient(135deg, ${BRAND.accent} 0%, #2BC49E 100%); border-radius: 12px; padding: 20px; margin: 24px 0; text-align: center;">
+        <h3 style="color: ${BRAND.dark}; margin: 0 0 12px 0; font-size: 16px;">${isAr ? '📥 ملفاتك القابلة للتحميل:' : '📥 Your Downloadable Files:'}</h3>
+        <div style="background: white; border-radius: 8px; padding: 12px; margin: 8px 0;">
+          <p style="margin: 0; color: ${BRAND.dark}; font-weight: 600;">${isAr ? '📘 نظام 7 أيام (PDF)' : '📘 7 Days System (PDF)'}</p>
+          <a href="${BASE_URL}/7-Days-System.pdf" download style="display: inline-block; background: ${BRAND.teal}; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; margin-top: 6px;">${isAr ? 'تحميل' : 'Download'}</a>
+        </div>
+
+      </div>
+      ` : ''}
 
       <div class="highlight-box">
         <h3>${isAr ? '📥 التنزيلات:' : '📥 Your Downloads:'}</h3>
@@ -218,7 +235,7 @@ export function getPurchaseConfirmationHtml(
 }
 
 // ============================================
-// TRIAL PURCHASE EMAIL (7-Day System) - kept for backward compat
+// BASIC PURCHASE EMAIL (7-Day System) - kept for backward compat
 // ============================================
 export function getTrialPurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
   return getPurchaseConfirmationHtml(name, accessKey, '7-Day Identity System', 'trial', locale);
@@ -239,10 +256,10 @@ export function getPremiumPurchaseEmailHtml(name: string, accessKey: string, loc
 }
 
 // ============================================
-// BUNDLE PURCHASE EMAIL (VIP) - kept for backward compat
+// MASTERY PURCHASE EMAIL (VIP) - kept for backward compat
 // ============================================
 export function getBundlePurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, 'Complete Bundle (VIP)', 'bundle', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Mastery (Monthly)', 'bundle', locale);
 }
 
 // ============================================
@@ -360,8 +377,8 @@ export function getDay14FollowUpHtml(name: string, currentTier: string = 'basic'
 
   const upgradeMap: Record<string, { en: string; ar: string; price: string }> = {
     trial: { en: 'Identity Recode Planner', ar: 'مخطط إعادة صياغة الهوية', price: '$27' },
-    basic: { en: 'Premium Package', ar: 'الباقة المتقدمة', price: '$47' },
-    premium: { en: 'Complete Bundle', ar: 'الباقة الشاملة', price: '$67' },
+    basic: { en: 'Premium (Monthly)', ar: 'مميز (شهري)', price: '$17/mo' },
+    premium: { en: 'Mastery (Monthly)', ar: 'إتقان (شهري)', price: '$27/mo' },
   };
 
   const upgrade = upgradeMap[currentTier] || upgradeMap.basic;

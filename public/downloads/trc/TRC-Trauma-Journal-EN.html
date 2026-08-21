@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamkinly — Trauma Recovery Journal</title>
+
+  <style>
+    /* =========================================================
+       TAMKINLY — TRAUMA RECOVERY JOURNAL
+       Asset ID: trauma-journal
+       Tool ID: TRC-TRAUMA_JOURNAL
+       Companion Type: WORKSHEET
+       Language: English
+       Direction: LTR
+       Format: A4 Portrait / 15mm page padding
+       ========================================================= */
+
+    /* ---------- Global Reset ---------- */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background: #F1F5F9;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: #F1F5F9;
+      color: #334155;
+      line-height: 1.45;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ---------- Print Setup ---------- */
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 15mm;
+      margin: 20px auto;
+      background: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    @media print {
+      html,
+      body {
+        background: #FFFFFF;
+        margin: 0;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 15mm;
+        box-shadow: none;
+        page-break-after: always;
+        break-after: page;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
+
+    /* ---------- Header ---------- */
+
+    .header {
+      height: 10mm;
+      flex: 0 0 10mm;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-bottom: 8px;
+      border-bottom: 1px solid #D9E2E7;
+
+      font-size: 8.5pt;
+      color: #64748B;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .header-brand {
+      color: #0F1C2E;
+      font-weight: 600;
+    }
+
+    /* ---------- Main Content ---------- */
+
+    .content {
+      flex: 1;
+      min-height: 0;
+
+      display: flex;
+      flex-direction: column;
+
+      padding-top: 6mm;
+      padding-bottom: 3mm;
+    }
+
+    /* ---------- Footer ---------- */
+
+    .footer {
+      height: 8mm;
+      flex: 0 0 8mm;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-top: 8px;
+      border-top: 1px solid #D9E2E7;
+
+      font-size: 8pt;
+      color: #64748B;
+    }
+
+    /* ---------- Typography ---------- */
+
+    h1 {
+      font-size: 19pt;
+      line-height: 1.2;
+      color: #0F1C2E;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 9.5pt;
+      line-height: 1.4;
+      color: #1F6F78;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .secondary-note {
+      font-size: 8.5pt;
+      line-height: 1.4;
+      color: #64748B;
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 11.5pt;
+      line-height: 1.3;
+      color: #0F1C2E;
+      font-weight: 600;
+      margin-bottom: 5px;
+      letter-spacing: -0.005em;
+    }
+
+    .instruction-text {
+      font-size: 8.5pt;
+      line-height: 1.4;
+      color: #64748B;
+      margin-bottom: 7px;
+    }
+
+    .small-note {
+      font-size: 8pt;
+      line-height: 1.4;
+      color: #64748B;
+      font-style: italic;
+    }
+
+    /* ---------- Safety Boxes ---------- */
+
+    .box {
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      border: 1px solid #D9E2E7;
+    }
+
+    .box-safety {
+      background: #E8F4F5;
+      border-color: #B2D8DC;
+    }
+
+    .box-safety .box-title {
+      color: #1F6F78;
+    }
+
+    .box-warning {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      border-left: 4px solid #64748B;
+    }
+
+    .box-warning .box-title {
+      color: #0F1C2E;
+    }
+
+    .box-disclaimer {
+      background: #F8FAFC;
+      border-color: #D9E2E7;
+    }
+
+    .box-title {
+      font-size: 9.5pt;
+      line-height: 1.3;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .box-body {
+      font-size: 8.5pt;
+      line-height: 1.45;
+      color: #334155;
+    }
+
+    .box-body-secondary {
+      font-size: 8pt;
+      line-height: 1.4;
+      color: #64748B;
+      margin-top: 5px;
+    }
+
+    /* ---------- Writing Lines ---------- */
+
+    .line-container {
+      width: 100%;
+      margin-top: 3px;
+      margin-bottom: 9px;
+    }
+
+    .dotted-line {
+      width: 100%;
+      height: 22px;
+      border-bottom: 1.5px dotted #CBD5E1;
+    }
+
+    /* ---------- Inline Fields ---------- */
+
+    .inline-field {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .inline-field-label {
+      flex: 0 0 auto;
+
+      font-size: 9pt;
+      font-weight: 600;
+      color: #0F1C2E;
+
+      white-space: nowrap;
+      margin-right: 8px;
+    }
+
+    .inline-field-line {
+      flex: 1;
+      min-width: 20px;
+      height: 16px;
+      border-bottom: 1.5px dotted #CBD5E1;
+    }
+
+    /* ---------- Optional State Check-In ----------
+       Deliberately kept as an empty writing field.
+       No pre-filled rating boxes or selectable values.
+    --------------------------------------------------- */
+
+    .state-check {
+      margin-top: 9px;
+      margin-bottom: 15px;
+    }
+
+    .state-label {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #0F1C2E;
+      margin-bottom: 4px;
+    }
+
+    .state-description {
+      font-size: 8pt;
+      color: #64748B;
+      line-height: 1.4;
+      margin-bottom: 5px;
+    }
+
+    /* ---------- Section Spacing ---------- */
+
+    .section-gap {
+      margin-bottom: 13px;
+    }
+
+    .section-gap:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ---------- Numbered Reflection Fields ---------- */
+
+    .numbered-item {
+      margin-bottom: 10px;
+    }
+
+    .numbered-label {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #0F1C2E;
+      margin-bottom: 2px;
+    }
+
+    /* ---------- Page 4 Contact Fields ---------- */
+
+    .contact-field {
+      margin-bottom: 14px;
+    }
+
+    /* ---------- Prevent Unwanted Splits ---------- */
+
+    .box,
+    .section-gap,
+    .contact-field {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       PAGE 1
+       ========================================================= -->
+
+  <div class="page page-1">
+
+    <header class="header">
+      <span class="header-brand">Tamkinly | Trauma Recovery Center</span>
+      <span>TRC-TRAUMA_JOURNAL</span>
+    </header>
+
+    <main class="content">
+
+      <h1>Trauma Recovery Journal</h1>
+
+      <p class="subtitle">
+        A safe space for reflective writing, present-focused emotional awareness,
+        and noticing recovery experiences.
+      </p>
+
+      <p class="secondary-note">
+        This journal is designed to support gentle reflection and stabilization.
+        It does not require you to revisit, reconstruct, or describe traumatic events.
+      </p>
+
+      <!-- Safety Notice -->
+
+      <div class="box box-safety">
+
+        <div class="box-title">
+          Safety Notice
+        </div>
+
+        <div class="box-body">
+          Journaling about trauma can stir up intense feelings. Write only at a
+          pace that feels manageable. If you notice increasing distress,
+          disorientation, or a loss of connection with the present moment,
+          pause or close the journal and return to a grounding or stabilization
+          practice that feels appropriate.
+        </div>
+
+        <div class="box-body-secondary">
+          You do not need to describe traumatic events, recover difficult memories,
+          search for hidden memories, or explain everything for this journal to be useful.
+        </div>
+
+      </div>
+
+      <!-- Session Setup -->
+
+      <div class="section-gap">
+
+        <h2 class="section-title">
+          Session Setup
+        </h2>
+
+        <div style="display:flex; gap:20px;">
+
+          <div class="inline-field" style="flex:1;">
+            <span class="inline-field-label">Date:</span>
+            <div class="inline-field-line"></div>
+          </div>
+
+          <div class="inline-field" style="flex:1;">
+            <span class="inline-field-label">Time:</span>
+            <div class="inline-field-line"></div>
+          </div>
+
+        </div>
+
+        <!-- Optional nervous-system check-in -->
+
+        <div class="state-check">
+
+          <div class="state-label">
+            Current Nervous System State
+          </div>
+
+          <div class="state-description">
+            Optional brief check-in. If you use a 1–10 scale, write the number
+            that best represents your current state. This is not a clinical assessment.
+          </div>
+
+          <div class="inline-field" style="margin-bottom:4px;">
+            <span class="inline-field-label">Optional 1–10:</span>
+            <div class="inline-field-line"></div>
+          </div>
+
+        </div>
+
+        <!-- Orientation / Support -->
+
+        <div style="margin-top:6px;">
+
+          <div class="state-label">
+            Before I begin, what would help me stay oriented and supported?
+          </div>
+
+          <p class="instruction-text">
+            You may note a present-focused support, boundary, environment,
+            or condition that would make this writing feel more manageable.
+          </p>
+
+          <div class="line-container">
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <span>Tamkinly | Tool ID: TRC-TRAUMA_JOURNAL</span>
+      <span>Page 1 of 4</span>
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 2
+       ========================================================= -->
+
+  <div class="page page-2">
+
+    <header class="header">
+      <span class="header-brand">Tamkinly | Trauma Recovery Center</span>
+      <span>TRC-TRAUMA_JOURNAL</span>
+    </header>
+
+    <main class="content">
+
+      <h1>Today's Reflection</h1>
+
+      <p class="subtitle" style="margin-bottom:14px;">
+        Stay close to the present moment. Notice what is happening without
+        forcing yourself to explain, interpret, or revisit painful memories.
+      </p>
+
+      <!-- Reflection 1 -->
+
+      <div class="section-gap">
+
+        <h2 class="section-title">
+          What sensations or emotions are present right now?
+        </h2>
+
+        <p class="instruction-text">
+          Notice what is here now. You may describe sensations, emotions,
+          thoughts, or changes in your level of tension or steadiness.
+          There is no need to find a perfect explanation.
+        </p>
+
+        <div class="line-container">
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+        </div>
+
+      </div>
+
+
+      <!-- Reflection 2 -->
+
+      <div class="section-gap">
+
+        <h2 class="section-title">
+          What supported or regulated me today?
+        </h2>
+
+        <p class="instruction-text">
+          You may reflect on people, routines, boundaries, rest, movement,
+          surroundings, or other experiences that helped you feel more steady,
+          supported, or connected to the present.
+        </p>
+
+        <div class="line-container">
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+        </div>
+
+      </div>
+
+
+      <!-- Reflection 3 -->
+
+      <div class="section-gap">
+
+        <h2 class="section-title">
+          What challenge did I face, and how did my body respond?
+        </h2>
+
+        <p class="instruction-text">
+          Focus on what you noticed in the present. You may describe bodily
+          sensations, changes in tension, urges, emotions, or other responses.
+          You do not need to reconstruct the event or describe traumatic details.
+        </p>
+
+        <div class="line-container">
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <span>Tamkinly | Tool ID: TRC-TRAUMA_JOURNAL</span>
+      <span>Page 2 of 4</span>
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 3
+       ========================================================= -->
+
+  <div class="page page-3">
+
+    <header class="header">
+      <span class="header-brand">Tamkinly | Trauma Recovery Center</span>
+      <span>TRC-TRAUMA_JOURNAL</span>
+    </header>
+
+    <main class="content">
+
+      <h1>Free Expression & Present-Moment Anchoring</h1>
+
+      <p class="subtitle" style="margin-bottom:14px;">
+        Use this page only to the level that feels manageable.
+        You are allowed to stop at any time.
+      </p>
+
+
+      <!-- Free Expression -->
+
+      <div class="section-gap">
+
+        <h2 class="section-title">
+          Free Expression Space
+        </h2>
+
+        <p class="instruction-text">
+          Write freely without judgment. You may write about what you are
+          experiencing now, what you need, what feels difficult, what has helped,
+          or anything you want to put into words.
+        </p>
+
+        <p class="instruction-text" style="font-style:italic; color:#475569;">
+          You do not need to describe traumatic events, identify every detail,
+          search for memories, or make sense of everything.
+        </p>
+
+        <div class="line-container">
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+          <div class="dotted-line"></div>
+        </div>
+
+      </div>
+
+
+      <!-- Present-Moment Anchoring -->
+
+      <div class="section-gap" style="margin-top:4px;">
+
+        <h2 class="section-title">
+          Three things that remind me I am here in the present moment.
+        </h2>
+
+        <p class="instruction-text">
+          Choose present-focused details such as a familiar person, place,
+          object, routine, sound, or other reminder that helps you orient
+          to the here and now.
+        </p>
+
+
+        <div class="numbered-item">
+
+          <div class="numbered-label">
+            1.
+          </div>
+
+          <div class="line-container" style="margin-top:0; margin-bottom:2px;">
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+          </div>
+
+        </div>
+
+
+        <div class="numbered-item">
+
+          <div class="numbered-label">
+            2.
+          </div>
+
+          <div class="line-container" style="margin-top:0; margin-bottom:2px;">
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+          </div>
+
+        </div>
+
+
+        <div class="numbered-item">
+
+          <div class="numbered-label">
+            3.
+          </div>
+
+          <div class="line-container" style="margin-top:0; margin-bottom:2px;">
+            <div class="dotted-line"></div>
+            <div class="dotted-line"></div>
+          </div>
+
+        </div>
+
+
+        <p class="small-note" style="margin-top:4px;">
+          If focusing on present-moment reminders increases distress rather
+          than helping you orient, stop and return to a grounding or
+          stabilization practice that feels appropriate.
+        </p>
+
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <span>Tamkinly | Tool ID: TRC-TRAUMA_JOURNAL</span>
+      <span>Page 3 of 4</span>
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 4
+       ========================================================= -->
+
+  <div class="page page-4">
+
+    <header class="header">
+      <span class="header-brand">Tamkinly | Trauma Recovery Center</span>
+      <span>TRC-TRAUMA_JOURNAL</span>
+    </header>
+
+    <main class="content">
+
+      <h1>Closure & Support</h1>
+
+      <p class="subtitle" style="margin-bottom:14px;">
+        The goal is not to finish every thought. The goal is to close the
+        entry in a way that supports present-moment orientation and stability.
+      </p>
+
+
+      <!-- Closure -->
+
+      <div class="box box-safety">
+
+        <div class="box-title">
+          Closure & De-escalation
+        </div>
+
+        <div class="box-body">
+          Take a moment to close this entry. Allow your breathing to settle
+          naturally rather than forcing a particular breathing pattern.
+          Then notice a few details of the environment around you and remind
+          yourself that you are here in the present moment.
+        </div>
+
+        <div class="box-body-secondary">
+          You may look around, notice the surface supporting your body,
+          identify a familiar sound, notice an object nearby, or connect
+          with another present-focused grounding cue.
+        </div>
+
+      </div>
+
+
+      <!-- When to Stop -->
+
+      <div class="box box-warning">
+
+        <div class="box-title">
+          When to Stop
+        </div>
+
+        <div class="box-body">
+          Stop writing if you experience uncontrollable flashbacks, severe
+          dissociation, rapidly increasing distress, panic that is becoming
+          difficult to manage, or a significant loss of connection with
+          the present moment.
+        </div>
+
+        <div class="box-body-secondary">
+          You do not need to complete the journal entry. Close the journal
+          and return to a grounding or stabilization practice that feels
+          appropriate. If symptoms remain severe or you cannot regain a
+          sufficient sense of orientation or safety, contact an appropriate
+          mental-health professional, trusted support person, crisis service,
+          or emergency service according to your situation.
+        </div>
+
+      </div>
+
+
+      <!-- Emergency / Support Contacts -->
+
+      <div class="section-gap" style="margin-top:4px;">
+
+        <h2 class="section-title" style="margin-bottom:10px;">
+          Emergency & Support Contacts
+        </h2>
+
+
+        <div class="contact-field">
+
+          <div class="inline-field" style="margin-bottom:0;">
+            <span class="inline-field-label">
+              Therapist / Mental Health Professional:
+            </span>
+
+            <div class="inline-field-line"></div>
+          </div>
+
+        </div>
+
+
+        <div class="contact-field">
+
+          <div class="inline-field" style="margin-bottom:0;">
+            <span class="inline-field-label">
+              Crisis Line / Support Service:
+            </span>
+
+            <div class="inline-field-line"></div>
+          </div>
+
+        </div>
+
+
+        <div class="contact-field">
+
+          <div class="inline-field" style="margin-bottom:0;">
+            <span class="inline-field-label">
+              Emergency Contact:
+            </span>
+
+            <div class="inline-field-line"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Mandatory Disclaimer -->
+
+      <div class="box box-disclaimer" style="margin-top:auto;">
+
+        <div class="box-title" style="color:#0F1C2E;">
+          Important Disclaimer
+        </div>
+
+        <div class="box-body" style="font-size:8pt; color:#64748B; line-height:1.4;">
+          This worksheet is an educational and supportive resource. It does
+          not provide a diagnosis and does not replace psychotherapy,
+          psychological assessment, medical care, crisis intervention,
+          or other professional support. It is not designed to guide trauma
+          exposure, forced memory retrieval, or detailed recollection of
+          traumatic events. If this activity increases distress or causes
+          significant disorientation, stop using the worksheet and seek
+          appropriate support. If you are in immediate danger or experiencing
+          a mental-health emergency, prioritize immediate safety and seek
+          appropriate local emergency or professional support.
+        </div>
+
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      <span>Tamkinly | Tool ID: TRC-TRAUMA_JOURNAL</span>
+      <span>Page 4 of 4</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>

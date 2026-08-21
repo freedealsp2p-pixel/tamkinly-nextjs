@@ -62,7 +62,7 @@ const dimensions: DimensionScore[] = [
     maxScore: 100,
     description: 'Alignment between your actions and your core values',
     icon: <Compass className="w-5 h-5" />,
-    color: '#81C784',
+    color: '#3DD4B0',
     questions: [
       'I can clearly name my top 5 values.',
       'My daily actions reflect my stated values.',
@@ -102,7 +102,7 @@ const dimensions: DimensionScore[] = [
     maxScore: 100,
     description: 'Your ability to follow through on commitments to yourself',
     icon: <Target className="w-5 h-5" />,
-    color: '#64B5F6',
+    color: '#2A8A94',
     questions: [
       'I usually complete what I start.',
       'I do not break my own commitments easily.',
@@ -142,7 +142,7 @@ const dimensions: DimensionScore[] = [
     maxScore: 100,
     description: 'Your ability to manage and respond to emotional experiences',
     icon: <Heart className="w-5 h-5" />,
-    color: '#E57373',
+    color: '#C97B7B',
     questions: [
       'I can stay grounded when I feel overwhelmed.',
       'I can notice my emotions without being controlled by them.',
@@ -162,7 +162,7 @@ const dimensions: DimensionScore[] = [
     maxScore: 100,
     description: 'How well your environment supports your identity and goals',
     icon: <Home className="w-5 h-5" />,
-    color: '#FFB74D',
+    color: '#2A8A94',
     questions: [
       'My environment makes good behavior easy.',
       'My space supports the identity I want to build.',
@@ -182,7 +182,7 @@ const dimensions: DimensionScore[] = [
     maxScore: 100,
     description: 'Your sense of control and ownership over your life direction',
     icon: <TrendingUp className="w-5 h-5" />,
-    color: '#BA68C8',
+    color: '#2A8A94',
     questions: [
       'I believe my actions matter.',
       'I see myself as responsible for my life direction.',
@@ -243,7 +243,7 @@ export default function IdentityBaselineWorksheet() {
     if (score >= 80) return { label: 'Strong', color: 'text-green-600', bg: 'bg-green-100' };
     if (score >= 60) return { label: 'Developing', color: 'text-blue-600', bg: 'bg-blue-100' };
     if (score >= 40) return { label: 'Emerging', color: 'text-yellow-600', bg: 'bg-yellow-100' };
-    return { label: 'Needs Focus', color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]' };
+    return { label: 'Needs Focus', color: 'text-[#C97B7B]', bg: 'bg-[#F0E0E2]' };
   };
 
   const dimension = dimensions[currentDimension];
@@ -323,9 +323,9 @@ export default function IdentityBaselineWorksheet() {
               <span className="text-[#0F1C2E]">Strongest Area</span>
               <Badge className="bg-green-100 text-green-800">{strongestArea.name} ({strongestArea.score}%)</Badge>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[#FFF3E8] rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-[#F8EEEF] rounded-lg">
               <span className="text-[#0F1C2E]">Area for Growth</span>
-              <Badge className="bg-[#FFE4CC] text-[#C44D0A]">{weakestArea.name} ({weakestArea.score}%)</Badge>
+              <Badge className="bg-[#F0E0E2] text-[#A86565]">{weakestArea.name} ({weakestArea.score}%)</Badge>
             </div>
             <div className="p-3 bg-[#3DD4B0]/10 rounded-lg">
               <p className="text-sm text-[#0F1C2E]">
@@ -520,9 +520,9 @@ export default function IdentityBaselineWorksheet() {
       </div>
 
       {/* Baseline Rule */}
-      <Card className="bg-amber-50 border-amber-200">
+      <Card className="bg-[#f8eded] border-[#e4c0c0]">
         <CardContent className="p-4">
-          <p className="text-sm text-amber-800">
+          <p className="text-sm text-[#a86060]">
             <strong>Baseline Rule:</strong> If a score feels uncertain, choose the lower score. 
             Your goal is clarity, not perfection.
           </p>

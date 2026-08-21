@@ -114,3 +114,11 @@ export const authOptions: NextAuthOptions = {
   // Skip secret validation in development or when no secret is provided
   debug: process.env.NODE_ENV === 'development',
 };
+
+export async function hashPassword(password: string): Promise<string> {
+  return bcrypt.hash(password, 12);
+}
+
+export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
+  return bcrypt.compare(password, hashedPassword);
+}

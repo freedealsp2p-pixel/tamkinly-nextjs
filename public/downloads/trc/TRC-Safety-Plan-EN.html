@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Plan Worksheet - TRC-SAFETY_PLAN</title>
+    <style>
+        :root {
+            --primary-teal: #1F6F78;
+            --dark-navy: #0F1C2E;
+            --soft-bg: #F8FAFC;
+            --border-gray: #CBD5E1;
+            --pale-teal-bg: #E6F4F5;
+            --pale-teal-border: #99D1D5;
+            --danger-red: #B42318;
+            --danger-red-bg: #FEF3F2;
+            --danger-red-border: #FDA29B;
+            --danger-dark: #7A271A;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #E2E8F0;
+            color: var(--text-main);
+            line-height: 1.4;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Screen Display Container */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            max-height: 297mm;
+            background-color: #FFFFFF;
+            padding: 14mm 16mm 12mm 16mm;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+        }
+
+        /* Page Headers & Footers */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-teal);
+            margin-bottom: 12px;
+        }
+
+        .header-title {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--dark-navy);
+            letter-spacing: 0.3px;
+        }
+
+        .header-tool-id {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--primary-teal);
+            background-color: var(--pale-teal-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--pale-teal-border);
+        }
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-footer {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-gray);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .footer-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9.5px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .footer-disclaimer {
+            font-size: 8.5px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.3;
+            font-style: italic;
+        }
+
+        /* Headings & Text */
+        h1.doc-title {
+            font-size: 22px;
+            color: var(--dark-navy);
+            font-weight: 800;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        p.doc-subtitle {
+            font-size: 12px;
+            color: var(--primary-teal);
+            font-weight: 500;
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        h2.section-heading {
+            font-size: 14.5px;
+            color: var(--dark-navy);
+            font-weight: 700;
+            margin-bottom: 8px;
+            margin-top: 8px;
+            border-left: 4px solid var(--primary-teal);
+            padding-left: 8px;
+        }
+
+        /* Alert Box - Red Emergency Palette */
+        .danger-alert-box {
+            background-color: var(--danger-red-bg);
+            border: 1px solid var(--danger-red-border);
+            border-left: 5px solid var(--danger-red);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            font-size: 11px;
+            color: var(--danger-dark);
+            line-height: 1.45;
+            font-weight: 600;
+        }
+
+        /* Form Controls & Writing Areas */
+        .field-block {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .field-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--dark-navy);
+        }
+
+        .writing-box {
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            background-color: #FFFFFF;
+            width: 100%;
+        }
+
+        /* Ruled lines for natural writing experience */
+        .writing-box.p1-field {
+            height: 44px;
+            background-image: repeating-linear-gradient(transparent, transparent 21px, #E2E8F0 22px);
+            background-position: 0 21px;
+        }
+
+        .writing-box.p2-field {
+            height: 42px;
+            background-image: repeating-linear-gradient(transparent, transparent 20px, #E2E8F0 21px);
+            background-position: 0 20px;
+        }
+
+        .writing-box.p3-field {
+            height: 42px;
+            background-image: repeating-linear-gradient(transparent, transparent 20px, #E2E8F0 21px);
+            background-position: 0 20px;
+        }
+
+        .writing-box.p3-large {
+            height: 96px;
+            background-image: repeating-linear-gradient(transparent, transparent 23px, #E2E8F0 24px);
+            background-position: 0 23px;
+        }
+
+        /* Contact Cards Layout */
+        .contact-card {
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .contact-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .contact-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .input-line-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .input-sublabel {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .line-field {
+            height: 22px;
+            border-bottom: 1px solid var(--border-gray);
+            width: 100%;
+        }
+
+        /* Emergency Block on Page 3 */
+        .emergency-summary-box {
+            background-color: var(--soft-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .emergency-line-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .emergency-label {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: var(--dark-navy);
+            width: 170px;
+            flex-shrink: 0;
+        }
+
+        /* Print Media Setup */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html, body {
+                background-color: #FFFFFF;
+                margin: 0;
+                padding: 0;
+                width: 210mm;
+            }
+
+            .page-container {
+                gap: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                max-height: 297mm;
+                padding: 14mm 16mm 12mm 16mm;
+                page-break-after: always;
+                break-after: page;
+                page-break-inside: avoid;
+            }
+
+            #page-3 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+
+    <!-- PAGE 1 -->
+    <div class="page" id="page-1">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-SAFETY_PLAN</span>
+        </header>
+
+        <main class="page-content">
+            <h1 class="doc-title">Safety Plan</h1>
+            <p class="doc-subtitle">A structured step-by-step plan for times when feeling unsafe or having urges to harm myself.</p>
+
+            <div class="danger-alert-box">
+                If you are in immediate danger or having thoughts of ending your life, contact your local emergency services now. Emergency numbers vary by country (for example: 911, 999, or 112 where applicable).
+            </div>
+
+            <h2 class="section-heading">Step 1: Warning Signs</h2>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
+                Thoughts, moods, behaviors, or physical sensations that indicate a crisis may be developing:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+                <div class="field-block">
+                    <label class="field-label">Warning sign 1</label>
+                    <div class="writing-box p1-field"></div>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">Warning sign 2</label>
+                    <div class="writing-box p1-field"></div>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">Warning sign 3</label>
+                    <div class="writing-box p1-field"></div>
+                </div>
+            </div>
+
+            <h2 class="section-heading">Step 2: Internal Coping Strategies</h2>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
+                Things I can do on my own to take my mind off problems and help myself calm down without contacting another person:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div class="field-block">
+                    <label class="field-label">Coping strategy 1</label>
+                    <div class="writing-box p1-field"></div>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">Coping strategy 2</label>
+                    <div class="writing-box p1-field"></div>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">Coping strategy 3</label>
+                    <div class="writing-box p1-field"></div>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">Coping strategy 4</label>
+                    <div class="writing-box p1-field"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-SAFETY_PLAN</span>
+                <span>Page 1 of 3</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page" id="page-2">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-SAFETY_PLAN</span>
+        </header>
+
+        <main class="page-content">
+            <h2 class="section-heading" style="margin-top: 0;">Step 3: People and Social Settings for Distraction</h2>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+                People and safe places that can provide a distraction from distress (without needing to talk about the crisis):
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                <div class="contact-card">
+                    <div class="contact-row-2">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Person / Contact Name (1)</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Phone / Contact Detail</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-row-2">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Person / Contact Name (2)</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Phone / Contact Detail</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-row-2">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Person / Contact Name (3)</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Phone / Contact Detail</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-block" style="margin-top: 2px;">
+                    <label class="field-label">Social setting I can go to</label>
+                    <div class="writing-box p2-field"></div>
+                </div>
+            </div>
+
+            <h2 class="section-heading">Step 4: People I Can Ask for Help</h2>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+                Trusted individuals I can contact for support and talk to directly during a crisis:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div class="contact-card">
+                    <div class="contact-row-3">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Name (1)</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Relationship</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Contact Information</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-row-3">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Name (2)</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Relationship</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Contact Information</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-row-3">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Name (3)</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Relationship</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Contact Information</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-SAFETY_PLAN</span>
+                <span>Page 2 of 3</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page" id="page-3">
+        <header class="page-header">
+            <span class="header-title">Tamkinly | Trauma Recovery Center (TRC)</span>
+            <span class="header-tool-id">Tool ID: TRC-SAFETY_PLAN</span>
+        </header>
+
+        <main class="page-content">
+            <h2 class="section-heading" style="margin-top: 0;">Step 5: Professionals or Agencies</h2>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px;">
+                <div class="contact-card">
+                    <div class="contact-row-2">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">1. Therapist / Counselor Name</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Phone / Contact Details</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-row-2">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">2. Crisis Line / Support Service</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Phone / Contact Details</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-row-2">
+                        <div class="input-line-group">
+                            <span class="input-sublabel">3. Emergency Services / Urgent Care</span>
+                            <div class="line-field"></div>
+                        </div>
+                        <div class="input-line-group">
+                            <span class="input-sublabel">Phone / Contact Details</span>
+                            <div class="line-field"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-heading">Step 6: Making My Environment Safe</h2>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px;">
+                <div class="field-block">
+                    <label class="field-label">Safety action 1</label>
+                    <div class="writing-box p3-field"></div>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">Safety action 2</label>
+                    <div class="writing-box p3-field"></div>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">Items or access I can make less accessible, secure, or ask someone else to hold</label>
+                    <div class="writing-box p3-field"></div>
+                </div>
+            </div>
+
+            <h2 class="section-heading">Reason for Living / What Matters Most</h2>
+            <div class="field-block" style="margin-bottom: 8px;">
+                <div class="writing-box p3-large"></div>
+            </div>
+
+            <h2 class="section-heading">Emergency &amp; Support Contacts</h2>
+            <div class="emergency-summary-box">
+                <div class="emergency-line-item">
+                    <span class="emergency-label">Local emergency services:</span>
+                    <div class="line-field"></div>
+                </div>
+                <div class="emergency-line-item">
+                    <span class="emergency-label">Crisis / mental-health support:</span>
+                    <div class="line-field"></div>
+                </div>
+                <div class="emergency-line-item">
+                    <span class="emergency-label">Trusted person:</span>
+                    <div class="line-field"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-meta">
+                <span>Tamkinly</span>
+                <span>Tool ID: TRC-SAFETY_PLAN</span>
+                <span>Page 3 of 3</span>
+            </div>
+            <div class="footer-disclaimer">
+                This tool is supportive and educational. It does not replace individualized assessment, diagnosis, psychotherapy, medical care, or emergency support. If you are in immediate danger or may act on thoughts of ending your life, contact local emergency services or seek immediate in-person help.
+            </div>
+        </footer>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -9,6 +9,10 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function RedefiningDisciplineArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -176,6 +180,10 @@ export default function RedefiningDisciplineArticle() {
         </div>
       </section>
 
+      <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
+      <BlogArticleCTA ctaType="recode" />
+
+
       <ArticleNavigation currentSlug="redefining-discipline" />
 
       <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
@@ -188,13 +196,13 @@ export default function RedefiningDisciplineArticle() {
               {getText("The Identity-Based Habits Worksheet helps you connect discipline to identity — so showing up becomes who you are, not what you force.", "ورقة عمل العادات المبنية على الهوية تساعدك على ربط الانضباط بالهوية — ليصبح الحضور من أنت، لا ما تجبر نفسك عليه.")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/apps/identity-based-habits-worksheet">
+              <Link href="/blog/identity-based-habits-worksheet">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
                   {getText("Start Building Identity-Based Habits", "ابدأ ببناء عادات مبنية على الهوية")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/apps/daily-reflection-practice">
+              <Link href="/blog/daily-reflection-practice">
                 <Button variant="white" size="lg" className="px-8 font-semibold">
                   {getText("Daily Reflection Practice", "ممارسة التأمل اليومي")}
                 </Button>
@@ -203,7 +211,9 @@ export default function RedefiningDisciplineArticle() {
           </div>
         </div>
       </section>
-    </article>
+            <BlogConversionSection />
+      </article>
     </>
   );
 }
+

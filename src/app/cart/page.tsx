@@ -125,7 +125,7 @@ export default function CartPage() {
             </div>
             <Button 
               variant="ghost" 
-              className="text-[#FC6D26] hover:text-[#E55A10] hover:bg-[#FFF3E8]"
+              className="text-[#1F6F78] hover:text-[#185C64] hover:bg-[#F0F8F8]"
               onClick={handleClearCart}
             >
               <Trash2 className="w-4 h-4 mr-2" />
@@ -168,13 +168,13 @@ export default function CartPage() {
                           </Badge>
                         )}
                       </div>
-                      <Badge variant="outline" className="mt-2 text-xs">{t('digitalProductLifetime')}</Badge>
+                      <Badge variant="outline" className="mt-2 text-xs">{t('digitalProductMonthly')}</Badge>
                     </div>
 
                     {/* Remove Button */}
                     <button
                       onClick={() => handleRemoveItem(item.productId, item.name)}
-                      className="text-[#FF8C42] hover:text-[#E55A10] hover:bg-[#FFF3E8] p-2 rounded-lg transition-colors self-start"
+                      className="text-[#B88A8E] hover:text-[#185C64] hover:bg-[#F0F8F8] p-2 rounded-lg transition-colors self-start"
                     >
                       <Trash2 className="w-5 h-5" />
                     </button>

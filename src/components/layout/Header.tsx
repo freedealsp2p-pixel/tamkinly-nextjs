@@ -28,6 +28,7 @@ const searchablePages = [
   { titleKey: "navigation.contact", path: "/contact", keywords: ["contact", "support", "help", "email", "تواصل"] },
   { titleKey: "navigation.resources", path: "/resources", keywords: ["resources", "blog", "articles", "guides", "الموارد"] },
   { titleKey: "navigation.blog", path: "/blog", keywords: ["blog", "articles", "posts", "news", "المدونة"] },
+  { titleKey: "navigation.recovery", path: "/recovery", keywords: ["recovery", "healing", "trauma", "porn", "تعافي", "صدمة"] },
   // Popular Apps
   { titleKey: "search.identityQuiz", path: "/apps/identity-gap-quiz", keywords: ["identity", "quiz", "gap", "assessment", "هوية", "اختبار"] },
   { titleKey: "search.dailyReflection", path: "/apps/daily-reflection", keywords: ["reflection", "daily", "journal", "تأمل", "يومي"] },
@@ -134,9 +135,10 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
 
   const navItems = [
     { href: "/", label: t("navigation.home") },
-    { href: "/products", label: t("navigation.products") },
-    { href: "/apps", label: t("navigation.apps") },
     { href: "/methodology", label: t("navigation.methodology") },
+    { href: "/apps", label: t("navigation.apps") },
+    { href: "/recovery", label: t("navigation.recovery") },
+    { href: "/products", label: t("navigation.products") },
     { href: "/about", label: t("navigation.about") },
     { href: "/contact", label: t("navigation.contact") },
   ];
@@ -232,9 +234,10 @@ export function Header() {
 
   const navItems = [
     { href: "/", label: t("navigation.home") },
-    { href: "/products", label: t("navigation.products") },
-    { href: "/apps", label: t("navigation.apps") },
     { href: "/methodology", label: t("navigation.methodology") },
+    { href: "/apps", label: t("navigation.apps") },
+    { href: "/recovery", label: t("navigation.recovery") },
+    { href: "/products", label: t("navigation.products") },
     { href: "/about", label: t("navigation.about") },
     { href: "/contact", label: t("navigation.contact") },
   ];

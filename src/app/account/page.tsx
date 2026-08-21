@@ -191,7 +191,7 @@ function AuthForm({ onLoginSuccess }: { onLoginSuccess: () => void }) {
               <button type="button" onClick={() => { setMode("register"); setError(null); }} className={"flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all " + (mode === "register" ? "bg-white text-[#0F1C2E] shadow-sm" : "text-[#8A94A6] hover:text-[#0F1C2E]")}>{t("register")}</button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
-              {error && <div className="flex items-center gap-2 text-[#FC6D26] text-sm bg-[#FFF3E8] p-3 rounded-lg"><AlertCircle className="w-4 h-4 flex-shrink-0" />{error}</div>}
+              {error && <div className="flex items-center gap-2 text-[#C97B7B] text-sm bg-[#F8EEEF] p-3 rounded-lg"><AlertCircle className="w-4 h-4 flex-shrink-0" />{error}</div>}
               {success && <div className="flex items-center gap-2 text-green-600 text-sm bg-green-50 p-3 rounded-lg"><CheckCircle2 className="w-4 h-4 flex-shrink-0" />{success}</div>}
               {mode === "register" && <div className="space-y-2"><label className="text-sm font-medium text-[#2B2E34]">{t("nameOptional")}</label><Input type="text" placeholder={t("yourName")} value={name} onChange={(e) => setName(e.target.value)} className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>}
               <div className="space-y-2"><label className="text-sm font-medium text-[#2B2E34] flex items-center gap-2"><Mail className="w-4 h-4" />{t("emailAddress")}</label><Input type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="border-[#1F6F78]/20 focus:border-[#3DD4B0]" /></div>
@@ -206,7 +206,7 @@ function AuthForm({ onLoginSuccess }: { onLoginSuccess: () => void }) {
                 <Input type="text" placeholder="TMLY-XXXX-XXXX" value={accessCodeInput} onChange={(e) => setAccessCodeInput(e.target.value.toUpperCase())} className="flex-1 h-12 border-[#1F6F78]/30 focus:border-[#3DD4B0] font-mono text-center tracking-wider" maxLength={18} />
                 <Button type="button" onClick={handleAccessCode} disabled={accessCodeLoading || !accessCodeInput.trim()} className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-12 px-6">{accessCodeLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Key className="w-4 h-4 mr-2" />}{t("activateCode")}</Button>
               </div>
-              {accessCodeError && <p className="text-[#FC6D26] text-xs text-center">{accessCodeError}</p>}
+              {accessCodeError && <p className="text-[#C97B7B] text-xs text-center">{accessCodeError}</p>}
               {accessCodeSuccess && <p className="text-green-600 text-xs text-center">{accessCodeSuccess}</p>}
               <p className="text-center text-xs text-[#8A94A6]">{t("enterCodeDesc")}</p>
             </div>

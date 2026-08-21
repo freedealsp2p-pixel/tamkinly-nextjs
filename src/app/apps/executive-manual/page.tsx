@@ -47,13 +47,13 @@ export default function ExecutiveManualPage() {
       name: getText('Phase 3: Evidence', 'المرحلة ٣: الأدلة'),
       days: getText('Days 15-21', 'الأيام ١٥-٢١'),
       description: getText('Track repeated actions and emerging identity proof.', 'تتبع الإجراءات المتكررة وأدلة الهوية الناشئة.'),
-      color: '#64B5F6'
+      color: '#2A8A94'
     },
     {
       name: getText('Phase 4: Stabilize', 'المرحلة ٤: الاستقرار'),
       days: getText('Days 22-30', 'الأيام ٢٢-٣٠'),
       description: getText('Review results, reinforce wins, and refine the next cycle.', 'مراجعة النتائج وتعزيز الإنجازات وتحسين الدورة التالية.'),
-      color: '#FFB74D'
+      color: '#2A8A94'
     }
   ];
 
@@ -69,10 +69,10 @@ export default function ExecutiveManualPage() {
   const systems = [
     { name: getText('Baseline', 'خط الأساس'), question: getText('Where am I now?', 'أين أنا الآن؟'), icon: Target, color: '#3DD4B0' },
     { name: getText('Environment', 'البيئة'), question: getText('What supports or blocks the new identity?', 'ما الذي يدعم أو يعيق الهوية الجديدة؟'), icon: Home, color: '#1F6F78' },
-    { name: getText('Decisions', 'القرارات'), question: getText('What patterns drive my choices?', 'ما الأنماط التي تحرك اختياراتي؟'), icon: Brain, color: '#64B5F6' },
-    { name: getText('Evidence', 'الأدلة'), question: getText('What proof shows that change is happening?', 'ما الدليل على أن التغيير يحدث؟'), icon: Eye, color: '#FFB74D' },
-    { name: getText('Progress', 'التقدم'), question: getText('How do I measure growth over time?', 'كيف أقيس النمو بمرور الوقت؟'), icon: TrendingUp, color: '#E57373' },
-    { name: getText('Integration', 'الدمج'), question: getText('What must become stable, repeatable, and automatic?', 'ما الذي يجب أن يصبح مستقرًا وقابلًا للتكرار وتلقائيًا؟'), icon: CheckCircle2, color: '#BA68C8' }
+    { name: getText('Decisions', 'القرارات'), question: getText('What patterns drive my choices?', 'ما الأنماط التي تحرك اختياراتي؟'), icon: Brain, color: '#2A8A94' },
+    { name: getText('Evidence', 'الأدلة'), question: getText('What proof shows that change is happening?', 'ما الدليل على أن التغيير يحدث؟'), icon: Eye, color: '#2A8A94' },
+    { name: getText('Progress', 'التقدم'), question: getText('How do I measure growth over time?', 'كيف أقيس النمو بمرور الوقت؟'), icon: TrendingUp, color: '#C97B7B' },
+    { name: getText('Integration', 'الدمج'), question: getText('What must become stable, repeatable, and automatic?', 'ما الذي يجب أن يصبح مستقرًا وقابلًا للتكرار وتلقائيًا؟'), icon: CheckCircle2, color: '#2A8A94' }
   ];
 
   const rules = [

@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // Get all users with search and filter
 export async function GET(request: NextRequest) {
   try {
-    const password = request.nextUrl.searchParams.get('password');
+    const session = await getAdminSession();
     
-    if (!verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     const search = request.nextUrl.searchParams.get('search') || '';
     const role = request.nextUrl.searchParams.get('role') || '';
@@ -101,9 +101,9 @@ export async function PATCH(request: NextRequest) {
   try {
     const { password, userId, role } = await request.json();
 
-    if (!verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     if (!userId || !role || !['CUSTOMER', 'ADMIN', 'EDITOR'].includes(role)) {
       return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
@@ -134,9 +134,9 @@ export async function DELETE(request: NextRequest) {
   try {
     const { password, userId } = await request.json();
 
-    if (!verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     if (!userId) {
       return NextResponse.json({ error: 'User ID required' }, { status: 400 });

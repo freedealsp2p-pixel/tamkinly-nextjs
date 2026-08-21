@@ -22,10 +22,10 @@ export async function POST(request: NextRequest) {
     // Map tier to product ID
     const tierToProductId: Record<string, string> = {
       'FREE': 'free',
-      'TRIAL': 'trial',
+      'BASIC': 'trial',
       'BASIC': 'planner',
       'PREMIUM': 'premium',
-      'BUNDLE': 'bundle',
+      'MASTERY': 'bundle',
     };
 
     const codes: string[] = [];
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       
       // Set expiration for trial
       let expiresAt: Date | undefined;
-      if (tier === 'TRIAL') {
+      if (tier === 'BASIC') {
         expiresAt = new Date();
         expiresAt.setDate(expiresAt.getDate() + 7);
       }
@@ -47,9 +47,9 @@ export async function POST(request: NextRequest) {
           customerName: prefix ? `${prefix} Customer ${i + 1}` : null,
           productId: tierToProductId[tier] || tier.toLowerCase(),
           productName: tier === 'FREE' ? 'Free Access' : 
-            tier === 'TRIAL' ? '7-Day Trial' : 
+            tier === 'BASIC' ? 'Basic (Monthly)' : 
             tier === 'BASIC' ? 'Identity Recode Planner' : 
-            tier === 'PREMIUM' ? 'Premium Transformation' : 'Complete Bundle',
+            tier === 'PREMIUM' ? 'Premium (Monthly)' : 'Mastery (Monthly)',
           tier: tier as AccessTier,
           isActive: true,
           isUsed: false,

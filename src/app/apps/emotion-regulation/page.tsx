@@ -190,7 +190,7 @@ export default function EmotionRegulationPage() {
                 <Heart className="w-5 h-5 text-[#3DD4B0]" />
               </div>
               <div>
-                <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('BUNDLE', 'حزمة')}</Badge>
+                <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('MASTERY', 'حزمة')}</Badge>
                 <h1 className="text-xl font-bold">{getText('ERQ Results', 'نتائج ERQ')}</h1>
               </div>
             </div>
@@ -234,8 +234,8 @@ export default function EmotionRegulationPage() {
             <Card className="bg-white">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#FFB74D]/10 flex items-center justify-center">
-                    <TrendingDown className="w-6 h-6 text-[#FFB74D]" />
+                  <div className="w-12 h-12 rounded-xl bg-[#2A8A94]/10 flex items-center justify-center">
+                    <TrendingDown className="w-6 h-6 text-[#2A8A94]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#0F1C2E]">{getText('Suppression', 'الكبت')}</h3>
@@ -258,7 +258,7 @@ export default function EmotionRegulationPage() {
           <Card className="bg-[#0F1C2E] mb-8">
             <CardContent className="p-6">
               <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-                <Lightbulb className="w-5 h-5 text-[#FFB74D]" />
+                <Lightbulb className="w-5 h-5 text-[#2A8A94]" />
                 {getText('Interpretation', 'التفسير')}
               </h3>
               <p className="text-slate-300 mb-4">{interpretation}</p>
@@ -273,8 +273,8 @@ export default function EmotionRegulationPage() {
                     )}
                   </p>
                 </div>
-                <div className="p-4 bg-[#FFB74D]/10 rounded-lg">
-                  <h4 className="text-[#FFB74D] font-medium mb-2">{getText('Suppression (Caution)', 'الكبت (تحذير)')}</h4>
+                <div className="p-4 bg-[#2A8A94]/10 rounded-lg">
+                  <h4 className="text-[#2A8A94] font-medium mb-2">{getText('Suppression (Caution)', 'الكبت (تحذير)')}</h4>
                   <p className="text-sm text-slate-400">
                     {getText(
                       'Inhibiting emotional expression. While sometimes useful, chronic suppression may increase stress and reduce authenticity.',
@@ -306,7 +306,7 @@ export default function EmotionRegulationPage() {
                         <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0]">
                           {getText('R', 'إ')}: {result.reappraisal}
                         </Badge>
-                        <Badge className="bg-[#FFB74D]/10 text-[#FFB74D]">
+                        <Badge className="bg-[#2A8A94]/10 text-[#2A8A94]">
                           {getText('S', 'ك')}: {result.suppression}
                         </Badge>
                       </div>
@@ -334,7 +334,7 @@ export default function EmotionRegulationPage() {
   }
 
   const question = erqQuestions[currentQuestion];
-  const dimensionColor = question.dimension === 'reappraisal' ? '#3DD4B0' : '#FFB74D';
+  const dimensionColor = question.dimension === 'reappraisal' ? '#3DD4B0' : '#2A8A94';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -349,7 +349,7 @@ export default function EmotionRegulationPage() {
               <Heart className="w-5 h-5 text-[#3DD4B0]" />
             </div>
             <div>
-              <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('BUNDLE', 'حزمة')}</Badge>
+              <Badge className="bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]">{getText('MASTERY', 'حزمة')}</Badge>
               <h1 className="text-xl font-bold">{getText('Emotion Regulation Questionnaire', 'استبيان تنظيم المشاعر')}</h1>
               <p className="text-slate-400 text-sm">{getText('ERQ - Gross & John (2003)', 'ERQ - غروس وجون (2003)')}</p>
             </div>
@@ -465,7 +465,7 @@ export default function EmotionRegulationPage() {
                 'يقيس استبيان تنظيم المشاعر استراتيجيتين:'
               )}
               <strong className="text-[#3DD4B0]"> {getText('Reappraisal', 'إعادة التقييم')}</strong> {getText('(changing how you think)', '(تغيير طريقة تفكيرك)')} {getText('and', 'و')}
-              <strong className="text-[#FFB74D]"> {getText('Suppression', 'الكبت')}</strong> {getText('(hiding emotions).', '(إخفاء المشاعر).')}
+              <strong className="text-[#2A8A94]"> {getText('Suppression', 'الكبت')}</strong> {getText('(hiding emotions).', '(إخفاء المشاعر).')}
             </p>
             <p className="text-xs text-[#8A94A6]">
               {getText('Reference: Gross, J.J., & John, O.P. (2003). Individual differences in two emotion regulation processes.', 'المرجع: غروس، ج.ج.، وجون، أ.ب. (2003). الاختلافات الفردية في عمليتي تنظيم المشاعر.')}

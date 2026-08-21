@@ -8,6 +8,10 @@ import { ArrowRight, Clock, User, Brain, Target, TrendingUp, Sparkles, CheckCirc
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function IdentityGapAssessmentArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -125,8 +129,8 @@ export default function IdentityGapAssessmentArticle() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-[#BA68C8]/10 flex items-center justify-center mb-4">
-                    <Sparkles className="h-6 w-6 text-[#BA68C8]" />
+                  <div className="w-12 h-12 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mb-4">
+                    <Sparkles className="h-6 w-6 text-[#2A8A94]" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">{getText("Alignment", "المحاذاة")}</h3>
                   <p className="text-sm text-slate-600">
@@ -139,8 +143,8 @@ export default function IdentityGapAssessmentArticle() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-[#64B5F6]/10 flex items-center justify-center mb-4">
-                    <TrendingUp className="h-6 w-6 text-[#64B5F6]" />
+                  <div className="w-12 h-12 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mb-4">
+                    <TrendingUp className="h-6 w-6 text-[#2A8A94]" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">{getText("Consistency", "الاتساق")}</h3>
                   <p className="text-sm text-slate-600">
@@ -318,35 +322,12 @@ export default function IdentityGapAssessmentArticle() {
       </section>
 
       {/* Article Navigation */}
-      <ArticleNavigation currentSlug="identity-gap-assessment" />
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="quiz" />
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge className="mb-4 bg-accent/20 text-accent border-0">{getText("FREE Assessment", "تقييم مجاني")}</Badge>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Ready to Discover Your Identity Gap?", "هل أنت مستعد لاكتشاف فجوة هويتك؟")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Take the free 3-minute assessment and get your personalized identity alignment report.", "خذ التقييم المجاني لمدة ٣ دقائق واحصل على تقرير محاذاة الهوية المخصص لك.")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/quiz">
-                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  {getText("Take the Assessment", "خذ التقييم")}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/products">
-                <Button variant="white" size="lg" className="px-8">
-                  {getText("View All Products", "عرض جميع المنتجات")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
+      <ArticleNavigation currentSlug="identity-gap-assessment" />
+        <BlogConversionSection />
+      </article>
   );
 }
+

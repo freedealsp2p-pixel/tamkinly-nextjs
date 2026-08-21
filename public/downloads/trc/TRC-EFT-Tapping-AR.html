@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TRC EFT Tapping Worksheet - Arabic Draft for Clinical Review">
+<title>TRC — النقر العصبي EFT</title>
+
+<style>
+/* =========================================================
+   TAMKINLY TRC — EFT TAPPING WORKSHEET
+   Asset ID: eft-tapping
+   Locale: ar
+   Status: clinical-review
+   Format: A4 Printable HTML
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #1F6F78;
+    --accent: #3DD4B0;
+    --dark: #0F1C2E;
+
+    --bg: #F8FAFC;
+    --white: #FFFFFF;
+
+    --line: #CBD5E1;
+    --line-light: #E2E8F0;
+
+    --alert-bg: #FFFBEB;
+    --alert-border: #D97706;
+    --alert-text: #92400E;
+
+    --safety-bg: #FEF3C7;
+    --safety-border: #B45309;
+    --safety-text: #78350F;
+
+    --teal-bg: #E6F4F5;
+    --teal-text: #1F6F78;
+
+    --writing-border: #9CA3AF;
+    --footer-text: #475569;
+}
+
+html {
+    direction: rtl;
+    background: #E2E8F0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #E2E8F0;
+    color: var(--dark);
+    font-family:
+        "Noto Sans Arabic",
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* ---------------------------------------------------------
+   PAGE
+   --------------------------------------------------------- */
+
+.page {
+    width: 210mm;
+    height: 297mm;
+    padding: 15mm;
+    margin: 12px auto;
+
+    background: var(--bg);
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 16px rgba(15, 28, 46, 0.12);
+}
+
+.page-content {
+    flex: 1;
+    min-height: 0;
+}
+
+.page:last-child {
+    page-break-after: auto;
+}
+
+/* ---------------------------------------------------------
+   PRINT
+   --------------------------------------------------------- */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        background: transparent;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        box-shadow: none;
+
+        page-break-after: always;
+        page-break-inside: avoid;
+
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .page:last-child {
+        page-break-after: auto;
+    }
+
+    .card,
+    .safety-box,
+    .alert-box,
+    .teal-box,
+    .visual-container,
+    .contact-block,
+    .decision-block {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ---------------------------------------------------------
+   HEADER
+   --------------------------------------------------------- */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 7px;
+    margin-bottom: 13px;
+
+    border-bottom: 2px solid var(--primary);
+}
+
+.header-brand {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.clinical-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 10px;
+
+    background: var(--safety-bg);
+    border: 1px solid var(--safety-border);
+    border-radius: 999px;
+
+    color: var(--safety-text);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   TYPOGRAPHY
+   --------------------------------------------------------- */
+
+.main-title {
+    margin: 0 0 8px;
+
+    color: var(--primary);
+
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 800;
+}
+
+.page-title {
+    margin: 0 0 10px;
+
+    color: var(--primary);
+
+    font-size: 21px;
+    line-height: 1.3;
+    font-weight: 800;
+}
+
+.section-title {
+    margin: 0 0 8px;
+
+    color: var(--primary);
+
+    font-size: 16px;
+    line-height: 1.35;
+    font-weight: 800;
+
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--line);
+}
+
+.instruction {
+    margin: 0 0 8px;
+
+    color: var(--dark);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.small-note {
+    margin: 5px 0 0;
+
+    color: var(--footer-text);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.en-text {
+    direction: ltr;
+    display: inline-block;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.92em;
+}
+
+/* ---------------------------------------------------------
+   INFORMATION BOXES
+   --------------------------------------------------------- */
+
+.purpose-box {
+    margin-bottom: 12px;
+    padding: 10px 13px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-right: 4px solid var(--primary);
+    border-radius: 6px;
+
+    color: var(--dark);
+
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.safety-box {
+    margin-bottom: 12px;
+    padding: 10px 13px;
+
+    background: var(--safety-bg);
+
+    border: 1px solid var(--safety-border);
+    border-right: 4px solid var(--safety-border);
+    border-radius: 7px;
+
+    color: var(--safety-text);
+
+    font-size: 12.5px;
+    line-height: 1.55;
+    font-weight: 600;
+}
+
+.alert-box {
+    margin-bottom: 12px;
+    padding: 10px 13px;
+
+    background: var(--alert-bg);
+
+    border: 1px solid var(--alert-border);
+    border-right: 4px solid var(--alert-border);
+    border-radius: 7px;
+
+    color: var(--alert-text);
+
+    font-size: 12.5px;
+    line-height: 1.55;
+}
+
+.teal-box {
+    margin-bottom: 12px;
+    padding: 10px 13px;
+
+    background: var(--teal-bg);
+
+    border: 1px solid var(--primary);
+    border-right: 4px solid var(--primary);
+    border-radius: 7px;
+
+    color: var(--teal-text);
+
+    font-size: 12.5px;
+    line-height: 1.55;
+}
+
+/* ---------------------------------------------------------
+   CARDS
+   --------------------------------------------------------- */
+
+.card {
+    margin-bottom: 12px;
+    padding: 12px 14px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.card:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   WRITING FIELDS
+   --------------------------------------------------------- */
+
+.field-group {
+    margin-top: 10px;
+}
+
+.field-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--dark);
+
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.writing-field {
+    width: 100%;
+
+    background: #FCFCFD;
+
+    border: 1.5px dotted var(--writing-border);
+    border-radius: 6px;
+
+    margin-bottom: 9px;
+}
+
+.writing-field.short {
+    height: 36px;
+}
+
+.writing-field.medium {
+    height: 62px;
+}
+
+.writing-field.long {
+    height: 92px;
+}
+
+/* ---------------------------------------------------------
+   SETUP STATEMENT
+   --------------------------------------------------------- */
+
+.setup-statement {
+    margin: 8px 0 13px;
+    padding: 11px 14px;
+
+    background: var(--teal-bg);
+
+    border: 1px solid var(--line);
+    border-right: 4px solid var(--primary);
+    border-radius: 6px;
+
+    color: var(--dark);
+
+    text-align: center;
+
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 700;
+}
+
+/* ---------------------------------------------------------
+   SUDS
+   --------------------------------------------------------- */
+
+.suds-wrapper {
+    margin-top: 8px;
+}
+
+.suds-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 6px;
+
+    color: var(--footer-text);
+
+    font-size: 10.5px;
+}
+
+.suds-scale {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 4px;
+
+    width: 100%;
+
+    padding: 8px;
+
+    background: #F8FAFC;
+
+    border: 1px solid var(--line);
+    border-radius: 7px;
+}
+
+.suds-node {
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.suds-writing {
+    margin-top: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.suds-writing-label {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.suds-writing-line {
+    flex: 1;
+
+    height: 23px;
+
+    border-bottom: 1.5px dotted var(--writing-border);
+}
+
+/* ---------------------------------------------------------
+   TAPPING DIAGRAM
+   --------------------------------------------------------- */
+
+.visual-container {
+    display: flex;
+    align-items: stretch;
+    gap: 15px;
+
+    margin: 11px 0 13px;
+    padding: 12px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+/*
+   The illustration is intentionally simple and CSS-only.
+   It is a printable orientation aid, not an anatomical diagram.
+*/
+
+.diagram-area {
+    width: 170px;
+    height: 285px;
+
+    position: relative;
+    flex-shrink: 0;
+
+    background: #F1F5F9;
+
+    border: 1px solid var(--line);
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.diagram-note {
+    position: absolute;
+
+    bottom: 7px;
+    right: 7px;
+    left: 7px;
+
+    color: var(--footer-text);
+
+    font-size: 8px;
+    text-align: center;
+}
+
+/* Head */
+.head-shape {
+    position: absolute;
+
+    top: 25px;
+    left: 50%;
+
+    width: 66px;
+    height: 78px;
+
+    transform: translateX(-50%);
+
+    background: #FFFFFF;
+
+    border: 2px solid var(--primary);
+    border-radius: 50% 50% 45% 45%;
+}
+
+/* Neck */
+.neck-shape {
+    position: absolute;
+
+    top: 99px;
+    left: 50%;
+
+    width: 22px;
+    height: 25px;
+
+    transform: translateX(-50%);
+
+    background: #FFFFFF;
+
+    border-left: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+}
+
+/* Torso */
+.torso-shape {
+    position: absolute;
+
+    top: 119px;
+    left: 50%;
+
+    width: 106px;
+    height: 105px;
+
+    transform: translateX(-50%);
+
+    background: #FFFFFF;
+
+    border: 2px solid var(--primary);
+    border-radius: 30px 30px 12px 12px;
+}
+
+/* Hand representation */
+.hand-shape {
+    position: absolute;
+
+    top: 176px;
+    left: 10px;
+
+    width: 34px;
+    height: 52px;
+
+    background: #FFFFFF;
+
+    border: 2px solid var(--primary);
+    border-radius: 8px 12px 10px 10px;
+
+    transform: rotate(-8deg);
+}
+
+/* Tapping markers */
+.tap-point {
+    position: absolute;
+    z-index: 10;
+
+    width: 21px;
+    height: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+
+    color: #FFFFFF;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    box-shadow: 0 1px 4px rgba(15, 28, 46, 0.25);
+}
+
+/* Head / face */
+.tp-2 { top: 13px; left: 50%; transform: translateX(-50%); }
+.tp-3 { top: 47px; left: 50%; transform: translateX(-50%); }
+.tp-4 { top: 61px; left: calc(50% - 29px); }
+.tp-5 { top: 76px; left: calc(50% - 7px); }
+.tp-6 { top: 94px; left: 50%; transform: translateX(-50%); }
+.tp-7 { top: 111px; left: 50%; transform: translateX(-50%); }
+
+/* Collarbone */
+.tp-8 { top: 128px; left: 50%; transform: translateX(-50%); }
+
+/* Karate chop / hand */
+.tp-1 { top: 183px; left: 16px; }
+
+/* ---------------------------------------------------------
+   POINTS LIST
+   --------------------------------------------------------- */
+
+.points-list {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+
+    gap: 7px;
+}
+
+.point-item {
+    min-height: 39px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 6px 8px;
+
+    background: #F8FAFC;
+
+    border: 1px solid var(--line);
+    border-radius: 6px;
+
+    font-size: 11.5px;
+}
+
+.point-number {
+    width: 23px;
+    height: 23px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 7px;
+
+    background: var(--primary);
+
+    border-radius: 50%;
+
+    color: #FFFFFF;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.point-name {
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.point-name-en {
+    display: block;
+
+    margin-top: 1px;
+
+    direction: ltr;
+
+    color: var(--footer-text);
+
+    font-family: Inter, Arial, sans-serif;
+
+    font-size: 9px;
+}
+
+/* ---------------------------------------------------------
+   REASSESSMENT
+   --------------------------------------------------------- */
+
+.reassessment-note {
+    margin-bottom: 12px;
+}
+
+/* ---------------------------------------------------------
+   STOP CONDITIONS
+   --------------------------------------------------------- */
+
+.stop-list {
+    margin: 5px 0 0;
+    padding-right: 20px;
+}
+
+.stop-list li {
+    margin-bottom: 4px;
+}
+
+/* ---------------------------------------------------------
+   CONTACTS
+   --------------------------------------------------------- */
+
+.contact-block {
+    margin-bottom: 8px;
+    padding: 9px 11px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-radius: 7px;
+}
+
+.contact-block:last-child {
+    margin-bottom: 0;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 7px;
+
+    font-size: 11.5px;
+}
+
+.contact-row:last-child {
+    margin-bottom: 0;
+}
+
+.contact-label {
+    min-width: 115px;
+
+    color: var(--dark);
+
+    font-weight: 700;
+}
+
+.contact-line {
+    flex: 1;
+
+    height: 20px;
+
+    border-bottom: 1.5px dotted var(--writing-border);
+}
+
+/* ---------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------- */
+
+.footer {
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 10px;
+    padding-top: 6px;
+
+    border-top: 1px solid var(--line);
+
+    color: var(--footer-text);
+
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+.footer span {
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   UTILITY
+   --------------------------------------------------------- */
+
+.no-print {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     PAGE 1 — SETUP + INITIAL SUDS
+     ======================================================= -->
+
+<section class="page">
+
+    <div class="page-content">
+
+        <header class="header">
+            <div class="header-brand">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </div>
+
+            <div class="clinical-badge">
+                مسودة للمراجعة السريرية
+            </div>
+        </header>
+
+        <h1 class="main-title">
+            النقر العصبي EFT
+        </h1>
+<div style="text-align: center; margin: 16px 0; padding: 8px; background: #F0F9FA; border-radius: 8px;">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gxYSUNDX1BST0ZJTEUAAQEAAAxITGlubwIQAABtbnRyUkdCIFhZWiAHzgACAAkABgAxAABhY3NwTVNGVAAAAABJRUMgc1JHQgAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLUhQICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFjcHJ0AAABUAAAADNkZXNjAAABhAAAAGx3dHB0AAAB8AAAABRia3B0AAACBAAAABRyWFlaAAACGAAAABRnWFlaAAACLAAAABRiWFlaAAACQAAAABRkbW5kAAACVAAAAHBkbWRkAAACxAAAAIh2dWVkAAADTAAAAIZ2aWV3AAAD1AAAACRsdW1pAAAD+AAAABRtZWFzAAAEDAAAACR0ZWNoAAAEMAAAAAxyVFJDAAAEPAAACAxnVFJDAAAEPAAACAxiVFJDAAAEPAAACAx0ZXh0AAAAAENvcHlyaWdodCAoYykgMTk5OCBIZXdsZXR0LVBhY2thcmQgQ29tcGFueQAAZGVzYwAAAAAAAAASc1JHQiBJRUM2MTk2Ni0yLjEAAAAAAAAAAAAAABJzUkdCIElFQzYxOTY2LTIuMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWFlaIAAAAAAAAPNRAAEAAAABFsxYWVogAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z2Rlc2MAAAAAAAAAFklFQyBodHRwOi8vd3d3LmllYy5jaAAAAAAAAAAAAAAAFklFQyBodHRwOi8vd3d3LmllYy5jaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkZXNjAAAAAAAAAC5JRUMgNjE5NjYtMi4xIERlZmF1bHQgUkdCIGNvbG91ciBzcGFjZSAtIHNSR0IAAAAAAAAAAAAAAC5JRUMgNjE5NjYtMi4xIERlZmF1bHQgUkdCIGNvbG91ciBzcGFjZSAtIHNSR0IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZGVzYwAAAAAAAAAsUmVmZXJlbmNlIFZpZXdpbmcgQ29uZGl0aW9uIGluIElFQzYxOTY2LTIuMQAAAAAAAAAAAAAALFJlZmVyZW5jZSBWaWV3aW5nIENvbmRpdGlvbiBpbiBJRUM2MTk2Ni0yLjEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHZpZXcAAAAAABOk/gAUXy4AEM8UAAPtzAAEEwsAA1yeAAAAAVhZWiAAAAAAAEwJVgBQAAAAVx/nbWVhcwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAo8AAAACc2lnIAAAAABDUlQgY3VydgAAAAAAAAQAAAAABQAKAA8AFAAZAB4AIwAoAC0AMgA3ADsAQABFAEoATwBUAFkAXgBjAGgAbQByAHcAfACBAIYAiwCQAJUAmgCfAKQAqQCuALIAtwC8AMEAxgDLANAA1QDbAOAA5QDrAPAA9gD7AQEBBwENARMBGQEfASUBKwEyATgBPgFFAUwBUgFZAWABZwFuAXUBfAGDAYsBkgGaAaEBqQGxAbkBwQHJAdEB2QHhAekB8gH6AgMCDAIUAh0CJgIvAjgCQQJLAlQCXQJnAnECegKEAo4CmAKiAqwCtgLBAssC1QLgAusC9QMAAwsDFgMhAy0DOANDA08DWgNmA3IDfgOKA5YDogOuA7oDxwPTA+AD7AP5BAYEEwQgBC0EOwRIBFUEYwRxBH4EjASaBKgEtgTEBNME4QTwBP4FDQUcBSsFOgVJBVgFZwV3BYYFlgWmBbUFxQXVBeUF9gYGBhYGJwY3BkgGWQZqBnsGjAadBq8GwAbRBuMG9QcHBxkHKwc9B08HYQd0B4YHmQesB78H0gflB/gICwgfCDIIRghaCG4IggiWCKoIvgjSCOcI+wkQCSUJOglPCWQJeQmPCaQJugnPCeUJ+woRCicKPQpUCmoKgQqYCq4KxQrcCvMLCwsiCzkLUQtpC4ALmAuwC8gL4Qv5DBIMKgxDDFwMdQyODKcMwAzZDPMNDQ0mDUANWg10DY4NqQ3DDd4N+A4TDi4OSQ5kDn8Omw62DtIO7g8JDyUPQQ9eD3oPlg+zD88P7BAJECYQQxBhEH4QmxC5ENcQ9RETETERTxFtEYwRqhHJEegSBxImEkUSZBKEEqMSwxLjEwMTIxNDE2MTgxOkE8UT5RQGFCcUSRRqFIsUrRTOFPAVEhU0FVYVeBWbFb0V4BYDFiYWSRZsFo8WshbWFvoXHRdBF2UXiReuF9IX9xgbGEAYZRiKGK8Y1Rj6GSAZRRlrGZEZtxndGgQaKhpRGncanhrFGuwbFBs7G2MbihuyG9ocAhwqHFIcexyjHMwc9R0eHUcdcB2ZHcMd7B4WHkAeah6UHr4e6R8THz4faR+UH78f6iAVIEEgbCCYIMQg8CEcIUghdSGhIc4h+yInIlUigiKvIt0jCiM4I2YjlCPCI/AkHyRNJHwkqyTaJQklOCVoJZclxyX3JicmVyaHJrcm6CcYJ0kneierJ9woDSg/KHEooijUKQYpOClrKZ0p0CoCKjUqaCqbKs8rAis2K2krnSvRLAUsOSxuLKIs1y0MLUEtdi2rLeEuFi5MLoIuty7uLyQvWi+RL8cv/jA1MGwwpDDbMRIxSjGCMbox8jIqMmMymzLUMw0zRjN/M7gz8TQrNGU0njTYNRM1TTWHNcI1/TY3NnI2rjbpNyQ3YDecN9c4FDhQOIw4yDkFOUI5fzm8Ofk6Njp0OrI67zstO2s7qjvoPCc8ZTykPOM9Ij1hPaE94D4gPmA+oD7gPyE/YT+iP+JAI0BkQKZA50EpQWpBrEHuQjBCckK1QvdDOkN9Q8BEA0RHRIpEzkUSRVVFmkXeRiJGZ0arRvBHNUd7R8BIBUhLSJFI10kdSWNJqUnwSjdKfUrESwxLU0uaS+JMKkxyTLpNAk1KTZNN3E4lTm5Ot08AT0lPk0/dUCdQcVC7UQZRUFGbUeZSMVJ8UsdTE1NfU6pT9lRCVI9U21UoVXVVwlYPVlxWqVb3V0RXklfgWC9YfVjLWRpZaVm4WgdaVlqmWvVbRVuVW+VcNVyGXNZdJ114XcleGl5sXr1fD19hX7NgBWBXYKpg/GFPYaJh9WJJYpxi8GNDY5dj62RAZJRk6WU9ZZJl52Y9ZpJm6Gc9Z5Nn6Wg/aJZo7GlDaZpp8WpIap9q92tPa6dr/2xXbK9tCG1gbbluEm5rbsRvHm94b9FwK3CGcOBxOnGVcfByS3KmcwFzXXO4dBR0cHTMdSh1hXXhdj52m3b4d1Z3s3gReG54zHkqeYl553pGeqV7BHtje8J8IXyBfOF9QX2hfgF+Yn7CfyN/hH/lgEeAqIEKgWuBzYIwgpKC9INXg7qEHYSAhOOFR4Wrhg6GcobXhzuHn4gEiGmIzokziZmJ/opkisqLMIuWi/yMY4zKjTGNmI3/jmaOzo82j56QBpBukNaRP5GokhGSepLjk02TtpQglIqU9JVflcmWNJaflwqXdZfgmEyYuJkkmZCZ/JpomtWbQpuvnByciZz3nWSd0p5Anq6fHZ+Ln/qgaaDYoUehtqImopajBqN2o+akVqTHpTilqaYapoum/adup+CoUqjEqTepqaocqo+rAqt1q+msXKzQrUStuK4trqGvFq+LsACwdbDqsWCx1rJLssKzOLOutCW0nLUTtYq2AbZ5tvC3aLfguFm40blKucK6O7q1uy67p7whvJu9Fb2Pvgq+hL7/v3q/9cBwwOzBZ8Hjwl/C28NYw9TEUcTOxUvFyMZGxsPHQce/yD3IvMk6ybnKOMq3yzbLtsw1zLXNNc21zjbOts83z7jQOdC60TzRvtI/0sHTRNPG1EnUy9VO1dHWVdbY11zX4Nhk2OjZbNnx2nba+9uA3AXcit0Q3ZbeHN6i3ynfr+A24L3hROHM4lPi2+Nj4+vkc+T85YTmDeaW5x/nqegy6LzpRunQ6lvq5etw6/vshu0R7ZzuKO6070DvzPBY8OXxcvH/8ozzGfOn9DT0wvVQ9d72bfb794r4Gfio+Tj5x/pX+uf7d/wH/Jj9Kf26/kv+3P9t////2wCEAAQEBAQFBAUGBgUHCAcIBwoKCQkKChALDAsMCxAYDxEPDxEPGBUZFRMVGRUmHhoaHiYsJSMlLDUvLzVDP0NXV3UBCwsLCwwLDQ4ODRITERMSGhgWFhgaJxweHB4cJzwlKyUlKyU8NUA0MDRANV9KQkJKX21cV1xthHZ2hKeep9ra///CABEIASwBzAMBEQACEQEDEQH/xAAzAAEBAAIDAQEAAAAAAAAAAAAABgUHAQMEAggBAQEBAQEBAAAAAAAAAAAAAAACAwEEBf/aAAwDAQACEAMQAAAA/fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwcgAAHyTFZfHQq415AAAAAB8n0Dg5AAB8nWdwAAAABpM3YaPMcfRljGmyDCGAIwzZ+hDkA+XIm8u88FeacTU5++JrOxnTJcoAAAADoJAsyRIEpDBGJNtHYahNqGGMAdZOH61OQAATZnSAMOeQ9pmDwHjOk9h3m0TkHDkFeN7G/JiqwxtZU2fr5dnKz9juXmwAAABLHgLg1QZIoCbBXmEPMUxjzFEucm5AAAAa8MwAADw956ed7QD1FCRF420bYvsdp8Hydh5u8GF7NpGwAAAAAAAAAAAAAAAAkitABiajLTcbePaZ+b93LEkVpHXjm+XlpsAAdfZxfefDmbnQAAADBEmW5CHtPYeMtCNMkY8hTY5jz2FOewAAAEkVoAJS8vTx4e8wvZp50yXO5HlyRWkFeFpOvp5QAHBr88vY8PeVk6AAAAeUhDaprgmDwHiP1KflgzZLmXL8kDk2MbIAAABJFaAYio7eI68r2NtT6ee3jWn5o52SK01np59mZ+jhw7yDg12bEPD2ML2amdQAAAAAAABjzIAAAAAAAkitAJisqWdNV6+fa2Xp1Dr5biNcxysT2fNOtaa208+xo2wvZwvZto1xNYaA3+XsTP33cerg8iaOdQAAABHlcauNpHhPcADkAAAAAAEkVoBM1lnuXrK8Nlxvq/Tz2E6j646p18V4TVRt/L1T1Z43s2MbcuSGnmz8b4ns6n18H1Ht2nnuAAABKEMbcNTH2R5Hm/CJMIeU/QRsUAAAAAEkVoBM1lSzrpTXybry9cbePQ5lOV8HXOsvr5s9N28bfHZnexSzqOO8lu503L13p5MMvcOXqAAAAHycnlOw+z4O4+CVK04PoAAAAAGqazrXKPl93KmKypuaAYXsavvDYkbUnLleV7qzmajYue44OQfJrvX50XWN9Ht6F7Dz3AAAA4OTg4Po4OQAAAAAAAAax7Fr3mH7NjG0xWVPOoAxFRjE1U6yRWmpdfNtrL0ibrLky3LjKy2BG+FNdVn7+douWAAABMmPLc/MBTGVKU6y7NNFSRZ+pQAAAAASR3VlScuc7Hk7ywjbq7PJ9u/XOzFZU86yRWk7WdBN/TojNPJrC/J+gcPq8uiLvG0jYAAAAYkjy4NaHuO09pIG5zXpMGfNlgAAAAAkjm8qyNZqsszy/Zyh5ez3Hlc17p5NoZe6SK0EreVVGuJqIassD3nXN7wjXjvMP2c1OgAAAAAAAAAAAAAAAAkitcn6ignThzl3gODyVlqvXxbgw+nJFaDVenm2pn6DsNfn8veeibTtrfTzbgz9IAAAAGGPYZc0wbGMQZMpTuJA7DvO4sDkAAAAEkVpI3jXRqDo83Z9PK4chdPNd5+qSK0EVePwW8bSmni1y5uGd8B3vjLKdfRzoAAAA1uTpsg/PR4SoKY1Ufps1OTR7DoN+GfAAAABJFacOR15WUbAcd5zzvHZwvZzc6SRWkxWXodz06SN49/O/Brh3ePLc7KXlQTfs5QAAAAAAAAAAAAAAAEkVoOO8j6ysY2HDnLsjeNdGw1TWdP2a2dfrnQAODXpsI5MPWeJ7yqm+zlAAAY0wpVEGXxizKA+SeKMAAAAAAEkVoB5uz5O8yk1x1hexju8rI1EiVwAAABGHcAYXs9TmEqa+NPW6AM8QxmzQBgjNlIRB+hTQR6j9XgAAAAAEUegA6zqc+iNrO5nXxd57edGbMh3kx3P56q40OgDhyUvPoc73aab7uUBO1n4ezXRt9A4Pg+ySO4zR4jsMsTpNGyAAAAAAAAAfLkVeVvGwAAAAAAAAAAHBFXjbRqdAAHByAAcHIODkAAAAAAEVeNrGwAAAAAA+ezpLf4+OL/D6uX5qAAAIysrKdYE8Rss/MZXntKY7ivJonCALwrzUBsc+DAG0C2AAAAOjs+DvMtNgAAAAAAcdlxyoAAADwdgYflzZcmsDvPQZIhzehrUwRlDCGxTWxmynIg20ZEAAAAlayqp1AAAAAAAAAAAAAEtWVTOoAAAAAAAAAAAAAl6yqJ1AAAAAAAAAAAAAExWXROvkKM1WbBMOZIpTtJg8h5zJngOC8AAAAAAJisqedQAAAAAAAAAANcGZABK1nmZ0gzaZ+aDyFUVRqg/VB+ZSiNnmjj2m3jagAAAAAPkmqyp51GO7GR5YAAAAAAAAAkSuOns93KEvWVROoAAAAA8J7gAAAAAATNZUs68gm6ypJ1AAAAAAAAAEiVxPVnQzoOO8wHYoJ0AAAAAAAAAAAAEreVVGoEtWVTOoAAAAAAAAAkSuJysqOdQJS8quNQAAAAAAAAAAABLVlUzqB1dnGd5mJsAAAAAAAACRMtWeW5f1zoExWVNOvIAAAAAAAAAAAPL2ehzI8sAR942EbCfrOgnQAAAAAAYeozE3JC8a2NgBw5gKignQAAAAAAAAAAATFZU86gARt45rl5ibAAAAAAAAEJ3norKzjYACXrKonUAAAAAAAAAAAS1ZVM6gARt45+byfLAAAAAAAA6O5fmX0fK35h9WlnUACXrKonUAAAAAAAAAAATFZU86gASN5d/FPOoAAAAAAAGEvzaE3+TurD7VZGoAExWVPOoAAAAAAAAAAAmaypp1AAk7y+ypjUAAAAAAAASd5dblhGwAEzWVNOoAAAAAAAAAAA8fZ9nKAHl7Ppdw/ZzM2AAAAAAAAMFWebm8LUZydABjexkuWAAAAAAAAAAAODkAHBycHIAAAAAAAAODk4OQAcA5AAAAAAAAAP//EADgQAAICAgEABgkCBgICAwAAAAQFAwYBAgcAEBEWIFYSExQVFzBAVFUxNiEiIyQ3VyVQCBgzQWD/2gAIAQEAAQkA/wDwuNsbY7cZ8e22uuO3bM3IVQh31jhY4vsHl3Xkir6FaDHSxyRyx6SR7/Mllihi3klkDOCOgxOIV0jaq5TZA4zvE3cqUy+Y5mfs+SaJ9Gu7LrYMV60KYw4vxo1jJTzlgaew9FqAC/XW87vdqrenCKCNJNvytyDbIFPJwCbFi5RcIy0CKacbmawOgqloiUcgW1tVKZhrGCuvFwDsxaF8kqPLzFhc1SFjtxpb7MupfGCFKu35a5Hjrlmcb1uCbSaCKXTwFFiiDykEzz2V8+z6isjacehGSZ3fntbFApL9iUAycjNwpI8z415ErZ4OnrlWxiJXNqTVxl3KaeeGPQlZ8Rkf434jI/xvxGR/jfiMj/G/EZH+N+IyP8b8Rkf434jI/wAb8Rkf434jI/xvxGR/jXqqt3lKFIwxxMsBlf2+xJwOVnB6XjS3sQdxuIqLipIPZYLTzO/0cW73YyzbuRbC7t0KZmpd22ycgcWN9G+nOr4rbLgU2lu7s+uFrzOyePbg3vZdar7C1u7Tb01EzKZztoRHw3Ytc7nXu302xMRrEdSOV7IdYqvAUxG5XtENir+ZXXJTy82ria9PNGOP0x496pLtyJDZvalkTmOZlk8tjSrUBZmzqquJ+Ii4quAOE734msLQXkTLt+146tBhiN7owDoDTDSlsDGfO4phXHkkImSOL7E/MdmWZ+i42uA1hp7Fo7qPFJKGSh7btCeLiZqhyMlwzDgyOIPDnbqPPDXhEFlTK151rPy0bRRx6R6a6aadHFVWNJcyybYoKXOJ8Sbxxxxx6aaadLTV9mGdGK4itWL3tGXCQP8AK5Cpe1yruyjLgGm24cE4aW/mLhTlpAJkcHEG+YFyw+3HcZl4cNjE1tCpIYji0sdSxOLYFvcTcF2BxgWrN3jV26t1UVCTYZ4iLJQp2L+N4pfjcVpBU9bXwl3SrC2qssEpE7uhKHVkiam7Vnj9slmBilugXCWRIq+H3vecI6MQXyqC1/IRm8ivRCTR3Pu/k3zL7v5N8y+7+TfMvu/k3zL7v5N8y+7+TfMp+97XRYlNuUIvI88WksNq938m+Zfd/JvmX3fyb5lpbdwxEZ6s5Ol2IgYs0NcxJJJHHHtvvvCxbMo87gQ5Ds3bjHvfK+yf/TzZAVnG+cP/AHMxi9HQd5vDdIYo8Rma2WWGTSI9Vc9Mpiw7RB/0fGv7Yl8JtzqgJ+wRTnohAEcPH7U2GtDQL7TZ1wsetprW7TK3Vz1UP9bT1VLO51kt7XbBGsjNzkXbHicLYGKwkSTOketjqUkJOlHaTs6ssnIx8m5SW3VbBHX8ceWZ8dYLWkYsbezKVVOwMRug3LCgRfWoD4pOYKTqsQHaTi8p0+atsHUhGeX6dEmdsS9q8/GeK9D4BVvLlOYsxhB9heSKqUnrjKAkXlumkuIAY5K5zOCFvZ438snJNb1t01b01U8vU1oyBFg3n5Spo6gVlOaBYlhzpwqH3+Rxr+2JfBNLpFFJJtmiroJaQvyVBx9LJJTU/p70Q0OGrjETknNJgccmtB871BHFUPdEg9ROKPqiAwnPSh/raeqkm6BUUxpvqjCKGFk3K28Oc4xjOc59aTe5+yCVfx7UNGZwJS+mUOpsU85BIHwxpH4z4Y0j8Z8MaR+M+GNI/GfDGkfjPhjSPxnwxpH4z4Y0j8Z8MaR+MsQJldrsMCCuUUBkhMubpbTbkEWfRrGKNBTqw+CutUMIAqVLtAb2izTq7Xx3a2OLnOOC0pB7at2skCvMw8mrTRcSUShMhsVBK3QU2pGa8w2IHO1P46ZABIa23RmA3eOq8j1WOlo6O30b8lCTdIFtyc1yi1CaoteKG7i820ImLh5NYg62YxsIvyONf2xL4LqZ7FUH5HQOTZWsEEyIsOlT8OhF6dEiuJYkWrtcHdkoNiF16XF3DFUrHtDlcJoEvEF16qH+tp6kWe2lTAZz02PB1lxHsTjOM47cZ6tttdcZznMku98lzprvHHpHppppo9xjSVQT2cd/zVnE/wBHXasgrgkwyoL53Gv7Yl8F8/rK14XQjGMwS4z0HzmfjfjsLPVVP+RuM0fTkLPbWd4elkd5ULfXRwBO3wrcJe6Dof62nqh7Rm9lH6NVcbIfA8s8lFqskGsWy3eizg677p24ftOAx/aOltZGLk0kw27sSRnDGKXOipekK7SZ6zCRZFkgmBbW6eOJR6eZOOocxUOsa51+VReSEF1kfYU6lljBizkkSjcxh7RgHlVn0sfx/jNZ0sNgCS7k+tj9Z6v0/Wx+njX05JY48Yzvv247ezt3mh00zvtJ83jX9sS+Cyf1bNTIM9CpmmY59cBVvOhUHFY2md0kUpehEpXE+I4Ybe0Jlt80RGavFHJn/l71jHQ3bLG9qx9OlD/W09OVHBi6twRC7r6wuWWdKL7F0FvtVlLnDnZM7nRAS498WOKXSWLSTTM0MU0edJNCFtQq/s5pskdtqskOJdHyG3VRm6JBUE3gWXdiaNguuYtiJ8uVh59TyZ976rkz7z1XJn3nquTPvPVcmfd+q5M+79VyZ936vkz7r1fJn3XIsPJBVRhWiLOIney208nYPQcqqz3PGNvBXa8g3KrWLhDcBSfI5UJrVzbGzZUdDU8WnhMwxbX1h7QOJiUw4prCGS18hvZAORxpmfLxQLWAkxjx7WaRccHtqmUleUOssY+GQZgaPCNs2+Zxr+2JfAyz6fINd06ZzjXGc5zx23VZcgw5P7cdnb28Vj4joqyTpaGAQVmVTT4qyEqFNDOVNQ9ckLz22+aH+tp6c4S5Fqy5h6C4vXDWpAbdTBKmZYxg5aJSVw5mJdOtqujYB7wbTCUSuaYzk1NqOmW43l0heLa9sv1a+vH1II51Iikx8qRSql0M0kAxjGMYxjEVerw7GVjEoOr6E8uAoxTIjSS6gayLNq8g2aastlMAoo+ZswwNUaVvFHEyWWamlvWCOLdgzTqGw3s7FeOPANBHDBF8ytuTwKyAMDFubfgMesnWpXa9yFgkSToX/kZN2dJlohGf6+m6tZuR7RsCcCMcHMLPomQzV8KEUQ3ciOzckbwYxZ3bkCuNZ/YEqyFUoXr4elD/AFtPS9qJG1VYwRRooIZe47XTfq2211x25z1Z31xtrjO1kdvYWeRYcC4JdMjRY5G1Z9FSpUbmVkSYzka2N5Plbba64znbOk0Unb6Emc4xjOc50lik7fQ36QmBzzERREfRV5JhxQSh9Zae7nbJ/TJgsMXd9pHYR8dAu0nkFxL4WVf02bQOQsXXbJASIPOvSh/raeoojFWbK1M+3Vci8hZRGS9F16SmkCx+g6fgJ9B9ZNWFnwzLUL4gelnrOG+gxIpJ18aDulEbKrVZ82UJ4h56b33YeSO+7DyR33YeSO+7DyR33YeSO+7DyR33YeSO+7DyR33YeSOTA31w4zYBA13jGBAntDlJihcqf4xu/RGAsAL4nJDojnn9jAS9PEPjt5NcdcrGAisrdyYgONSGyA8z4Kttfh0hqVtYEcaCWd3DVebnjRpWMyskfKr9lBTAtoEPPzJkWgY+3/M41/bEvRL/AG12tIvRuvjZLyAZdKsWYGWcgPnppOCyH7CLpnGc4zjtmKOEz6UsHbmSPUoCQRmIVvtHrv0s+O2x0nHVQ/1tPVyCPJNTHW0Wo88RA8U0e3VegwB67JDqKsYiJWcOYYxQgIdpJhxepIAGyu9icywfKttczYFHsmjFfx49gKdtSbdY0eHlYbp5SAOJ2u+K8O7uMfGrleex9y3FjxQrY62/E7CvUM8Wxe/nthzwHXsUJzWI2MisCRXsu2gq9CsVf2Wjd9eOa0KZf7vctFtc42d1/cIIC5/M41/bEvSx77J36x7nHS5VDNhHi9Qwri7C9MGPkfqIBnHn3LBxjVa2HxmSCcYoCGSaFkrfl2C6o8TDdKH+tp6t9NN9NtNtaNNuIKWgn26PXk6zOmkaeSYfbbJJ/HUw9ONCIBh48rDsqr7jr2KoMiQgaKXcZw0FUqjmBO1LWkgVwTUrH/Rca/tiXocEMcESITHSDSZUuQy5OgZGZ4t9+qaP1sMmnpLyslBxS7ayQa+uxNp0su++iFhtr0oEEslzKnzD0of62nrtsrNdyCC1C1ELGMFgJHm6FXR4AZKNOgj5Pzv6vHdQUUu6r5d2sINvzX5/dVtYcoXSsPgJVAdm+I3HvnD4jce+cPiNx75w+I3HvnD4jce+cPiNx75w+I3HvnD4jce+cPiNx75w+I3HvnD4jce+cLnyYmSVDd0uL45sOXiWaeS0XhwWlpdkaC9FV8u4RNDkNsDHlmmL284E06m/+xN+TpnzIflyoShuJpumt0re1kBQ4OTWpM4r+HYcqLmKlOzU8AkhnL9IEaECSkWPlWo19kWEXtYOTqokIhHlkWsgGa8Q4Ij5XGv7Yl6j5cILbqfJ0IlzDBJvjRcLkQKCHO3UN/bNyoOqSPSTTbTfWgKoBGNtnj36UP8AW09ZbCDHKykTXaXWSmFzT6aRyRyx6SR7vKZlgduTEW9SMkpEZDbauo9VYu+diXDQp6ZMlTb3JRorpXqVYSqZG1Xjmh6exB/bexB/bexB/bexB/bexB/bexB/bexB/bexB/bexB/bexB/bctVUptX1EgCpFu4xcLbcoqlyCEaz49tQgg6Wpzz5oUKPjffjxmPtZkDRQ8odqJm5AIFWxBMrrfBGxdcF495LBpZDrQECtxpaBAiD0Cqdi0ovCAey2dJcROO7Dx3pU7wisIbh1IqQuKpZ1t0YNzw6CjgRU1IthC+Vxr+2Jeo0IQ0ScUmFWeTXToUrSbrNjxmcCXqbtBVSsw8namryV9cD0Kx0of62nqZ27MhUy5FAjqQy6XUwifOMZxnGcd3XKGTeSuSYuRcX8ptVmuPtEW8UNWkEsVfCigPlWLly4CAUGDOMZ7O3DBIyTnztUMaSxKnIu8wkv8A0PGv7Yl62iwFovICMhUv5Ussad/P1TTjR+j62Xozz7/s8CvXrrdtWri7UFHH7isb7+Z2YAvBXiRChjeGSPSTTfTfTXaWgy403zjONsYzjPR1VAmJOhsM2LDYUv8AI9WLHahqLggA7x2OyDIRoZ5gKzyIjsTc1WMI4ahJ1DBkZum5cqTQ5YL6vomtK5u3sK4ePqIn0gHmm3xXLyqfioCBBfnca/tiXwP1gTJKcIVrTjCTakgKIzvBjf8AhtvuuG0029QJqg9OT+IXHY8OiQyeOLqoWMYzas4x8jfTSTTbTfWDj7IUfqFtq7ltvPfctt577ltvPe/FMGzHB/eptSr5p6O6u+ek2B/g8sYNaIPG0ID5F7ltvPfctt577ltvPfctt57g1jr6QqZg54pFJmTMLSx05U/xjd+k4doXq+Hjnj3fPIFjxbnQYj1uzXk8qZGNbVj3ZcZaigagcpuNyVl9KKpa1mu4rAhZT0s86FVxtBEUkD9zVjhqxgufmj0AwPE+gN07mvf9gdzXv+wO5r3/AGBNSHM0Uke9/DoTQMQcUe+k1ZqLBLPPyMAqvT0qKVZeO5r3/YC/j1iuEjFFvfc17/sDua9/2BWq7EiDJh1OM1Y5i/s95mfIAu2e2uw3eXTPYwrALAM6H1o8vgKKFEg3nInl5Fr+dvRCh7220rt9ho0c3Jk38dhFkb3TXOWJXWfR08pO5gO2bC8QZ9GwwRSxTRaSxSdTZStbrSV54zRKqbKiFhwZi0E1cQAQOi4s47QnxHLKwy41oTN373Nru9Xru+rjWRXWaNUav7RlKm3pdT3TmKdk0kekke+m+pNHQaLdYAF3H3EdUqq5BNlN9EQRANBLPNKEFPbp4mLGL6fOMZxnGehS4qpSyHKoRCxTBYCRpvFrLHvtvrrv4clDY9Ltn6o5Y5dMbx7/ADmkeLHYfc/zy5ZIRZ5Y4Z3bonO+khcpzCbPp67IrHdPdQuZan3kt/kjvJb/ACR3kt/kjvHb/JHeO3+SO8dw8kd47h5I7x3DyQvb2OtMJIO63eO4+SeX2LSWgCymBcM5D0tV5gWBco776caXXfTau7KQj+LJFKJ5/wCRWgRTsyEwW4ZrLvlk+AQ++8goyWKpqsE5kFKuSBfGNVLlOfx0LaWo1Zt3JR2lfanoY+V7l3cFukqix/8Ay3/pyLzC8qR7nfO8Fyt7PkY9GtC40t91q/FlNZkgHcg3szNrYIFGvI9vsNi1X1YOfnrMqam+hvxhe9LpXZzc4+S+bwp0p7CXWop51aOCMnPz5F4EudsyCRijRZxmOD5NoS++UZYeu9Zc4cIQDs6Xuny2UBbgZiroltgMsDsqyWhFu9qjpPkkLi62ExVkJ/bYeMrKsPZRJLIz4kiYd8s7tkFIf96I7DZXfwAC04+c1uF5IlXbpNlOYK1Qrmr2SgF3GLh53hSNWJLOy4lkN3sGffFj4dsp8F2XAWpDT5FNpeOdzlHDVnHQoq0fbWfGNmxNZBUlqr3HwiG0ysxCA+G2ShbWN1D6sK2q1ViFkx+TbcYNa1lR9bWMexWK1K/rRf7rkRjJ9abjI3ISiXHTkC2MEAaiFaJTLW/MfPq8/GuLmdFULA1gjB5BvoO1JJeBH8l0UB7hMS9R3rbLrkXVuUBylQT17U0d53jR++RlPt6d2qcrtD15Sbk+hOm2qxc+05d443wy21sWOZ+Ms+vxixzcn0GFOra7vzOSEZtXlbonSDlJC6vb6sQa/NqnbM7uRWfqDq+pe8lN4WUPwxpH4v4Y0j8X8MaR+L+GNI/F2Sg1ME2t7RL7ZR6prUdx8w8erWKMy6XNnByPASbxvboRh6+hT5n483q1SnqrGLS3Vl0wsNVsREnJMsSn1MHIHIUBwykRByKFVt7hsnQV2Stcfgpg4EW71k84r3mi3rrj/wBe3oGFBqsvbnRIfgGLciutqeSerfrm9gGv70BIjzOBzTcNSA/mb766a7bbZ4+133rUZ2+OqzsZgFkU0W30gH+ULD1ImPvJSIVnHVyF2xV3Uz5rSuK2bRIwJ0+dfZ5dkmiyDeGGKCGOKPTqvecYVLsZ+lA/yhYeqj5x7mLxjrZADMFxYRGlLYFzLpl5u/1WmMsuQJts+DkX+SrSkfSgf5QsPVx9/PUFs/gNx7svi0nH1dCx69axZZ8D1VE3SMl0maY2ka1lcRNj6MD/AChYel1YSL6k7Jj6KQY1yoAPTwcha7R1uRhp012xtrjOM/UPzcLULU3PSpL/AHdVkYfhGzlDdJxtus7S8+8t4hN/nLbAae2yNhL0A/yhYelmz7zsSBJr4TRIjAyRpcUQ6UmnJdps/Ucj/wAaU3i8XKY8klFcTw71Z9M0D2jNh+i2YgruRLQUXPx9mRmIZZZ4/DS/6E1nA+pvmvprVQ/i5TIn0o7UYfpWd4DUKJhnT6F4ylXrpZ4h3seZpmzkwnjiXWWg1fONfCt/t7+/h+pt/wDOyp0HiY+i0vawPPTjjPZR0kX0VyBJNS7RQxNIdTPZQJCKbn2A1+j38TH+hyCgl+pef1bpUYvFRf7zR06z0o2fUaWBf9HYddCrhUQ+y35yoZqrJp4rVjMbqnFY+p3D03sY5OceCw5I2Ukwj7ABDgAiiQaBA7iWxtPj6OEOWW8lmbYLFHLFnGnjqWCw12ysvfwWcXMy6KTXH1HZj0s58O2uudtM5x0zjHbjP0eNcYznPZ09HX0/S7PBnGM4zjPTH0n/xAA2EQACAAMEBA0EAwEBAAAAAAABAgADERIhMVEQIEFxBBMiMjNAUFJhgZGhsUJicsEjMNEUYP/aAAgBAwEBPwD/AMcZ0vY1d1/xHHDuP6Rx8utDVT4inapIAqTQQXd7pYu7xw8o4kHnkvvidwni3sS1uBAN2J2KsSp/CHJvQ0r4Anur4DaYBDKDcajeI4qzfLNnw2GAa447R2kSFBJwEKDMNpqhfpX9nTN4NLmmpqDSlQdkf8UnlVrfdlyR9O6AAAABQDRMl2uUpo4wMI9qoIowxHZRZVxIEAg600hmSXmancNFWbACmcUfvD0ij9/2iwe+0WTscxSaNqmLfeUiJvIImDZc27sgzZYNCwB0IAzuxFaGg8AIQBZkxRhcfWLaWrNoVyrqy73mt42R5QeU1Ng12W0pEdJLodooYlMWlqTjgfLseUKylqOcKnziT0SxKIEsEnEk+pgsRx7DEXD0ji04uxS6kSyWloTiVB1JRpKLeLH3hQQL8Tef6ATaIO8bolMWUk95vY9jTTSW5+0wOSoFMBCmzwYHbYhVsqq5ACDeHHemgfETWpLemNkwBQAZDUToiv3ke+ioz12+k5N83RJ5lc2Y+p7Gm3qozYCDhAvkSBnY/wB0S+VM/EsfMmkTuZTMqPUw7WVrSpwAgM4YK4F+BGkXNMH3qfWGW0KVMcVL7scURzGIgVoK4xwqY8uUWUgZscFGcCY6mt/J715Wu05ucokSnEus5qEmoFcBASmDGJhovmPmJN0mX+I7Gfnyh4k+0G1lCXjg4ySvtSLN9amOD4TWO1zEy/ixm49r4503wQe5g8qao7oqd5u0cIYqgpixAgIFdRShrswI0CdLqQWAI2G6GmygeetdBAYUIgSJEkqxrdhW+hOJ3xxkvvr6wkyWzFVNd2EGwOEurWxabzIzOSjAQlhHVQCLQqBu7Gbpk/Fv1okstoCouUj30cHH8S+NT6xMYB1JwVWYxLQhQTcxvO8xKvBbvMTo4VdLVsmBgHlS12hdDKrYqDvgSlByGQFNLC0KVIgSU2oh8bMGwgJuF3sIEuV0ysSHYHffAqeFkZLUdhOxWyBSrGl8VnLiqtuuMKwcVGg9Mv4N8iCAcYsrWtBWCAQQYVLAABJAwEV4yfT1H43/ACYmMyoxpshVCqqjYKaJq2pbAY4jyhB0TZimvwidOEyytQK3DAuf0o2mDImuA1RMt0JOxj45KMoEmwioWLFmqzHbCCs6Y2QC9hOltaYHEGJbllvFCDQiH5DcYMMG/wB0C+c3goGqU5Qcc75ETbwgzce1+oTxbKpwtAr53U0zDSwTgGvgTVJGIrgTgYZwtMzgBDPaKqAQ1oaWItreN0S1srQ44neew1umzBmAf1DC0CDgcYlkglGNSMDmIlGpdu83sLtBJGyojxEBgdD8+V+R+DqThWU3gK+kA1AOnhdVlckACotXVPkM4R517qoublUvI+wfswABeANKgNNd6YUUdiPyXV9mB0TZdsXMVOYhBZUCmkgg1HmIuYQeSCbVABU1iTwjj5ygrQBSy5kYVOrKuBQ4rd5bNDuV+ljuioxaQ530MIUXmSHHlSBRBaCsPtgGowpDMFUscAIlKVQVxN53nsQgEEHAxKJK0OKmh0A10GAaiKRPJEmYRZw+rDzjgQPGu327ecbW1tWZaWcGGxLxmKwCCARgdBn2WslQTWlzDHzgcKU05JvrS8X084lOZgt1Fk4Uv0Tw7goAaYnsY8iZa+lrjvgwBQAaRcxGd+ggEEGODSll8bSpq95OJ1SR/wBCj7DHRGv0HH7dE7gnGOWDUrcd2Qyrtg8DDIoNkGgDBcCB9O6JEnilNWtMcT/g2CGYsSiHe2UTAVlUWpoRvxhWDAEG49ikAggioMKShCMbvpP6OocRoZgqljgBEpSqCuJvO86jTLyqC03sN8JLC3k1badFhk6OlO6f1HGEYy3HvHG5S3PlT5gh3W+q7jCqFAAFBoKspLJ5rnCOrio7FZQwIIuMK5TkOdzZ6ajQ3LcLsW879g0tMVTS8tkIsO/PNB3R+zAAUUAoP6mlhjUGjZiLbpz1qO8sKysKqQexHUMpBiWSZaE4lRooMhFjwAiSBZJzZvnqNhLVqyK5w1v6abjHG056lfHEQCGFQQR2EAAABgIJAFTAd3NVFFzO3doACig1DXZSC04fQp3NAm96W48q/EAg4apIAqTHHJsDNuBMcZMOEk+ZAis87EHmTC2/qI8hqGUpNRVTmItunPFR3h++wSQBUwAZptNzdgz8T1kgyr15u1f2IBBAIwPX2/kex9K3t4nL+9iVViFqQMM4adOeoLk2mwU0qR9K+A2mJZ4xuVNxqa30az8IPeJNeKWrFjTEilf6QBLNK3Mbh49edgilshEtSqiuJvO89QKIcVBuphsgKowUD+p1toR6b4RraBuuzL2lrmancOupc8xfEMPProvnN4KB69dN05fFSPTrsu9pp+74HXXJBTxah67J5le8S3rpclV8wPU9XVrSg6Z3MrkwPoeuTTybIxY0gCmmbzR+a/PV5XNP5N86WAYEHAiJRJUqcVND1vnTvBB7nUndHXIqfQ9Xk9GpzqfW/UPJmqdjCnmOtyb1Zu8xOo62lZcwREprSKTjgd46rNNmW58IUWVAyGpO5lrukN6dac2UY5AmJYsy0GSjVHImkbHvG/SeNtXWaZ7R/erlmpYIGZ0vynRPG0fLVIqCIkkmWlcaUPl1md0TDO711p4/iYjEXjyiW5YXijDEdTZlUEk0ESeUDMP14btmtKuMxcnPvf1mbzVGbr8608nimAxa4ecJQojZqOpTnMuWWC2jsETJluQAWZ2LFqYK1Nv4CJHQy/xGst05xmoPWZnOlD7/AIB1jypqjYoqd5uESeiQZCnp1LhaM8kgAteOTWld/hAFt0U1Nth4WqHE5KNgiVcXTI1G46xunJ4qw6y/Sy/M60q+2/eb2F0Srra5Ofe/qb3zJY3t6RM5LLMyubcdaZzpR+75HWacsHIar1skDEwAFAAwEAUmMcwOp0/lJyUCCAQQcDEuoWycVu1XFRuIP/j/AP/EADQRAAEDAQYGAAUDAwUAAAAAAAEAAhEhECAxMlFxEkBBUGGBAyIwQpETQ2JgcuEjobHR8P/aAAgBAgEBPwD+juB2kbrg/k38rgd0r3bhAzfhcZGUQmskSSnNaNVgVxzmqj3ICSiQ0QMeptDyF+o61rooahOEbHtQBOAvtoC6yAMVTRS3RT4CkaL5dCo0KbWW/jftAa4iYsJgADSU6rWlcLomDF11GtHtYC+DBWVycIcezvPzHwn5in5tgEBP6YXEeKU4Q4jzccJeBsj9A4Apwg+h2ZtXDdYlET8QjyiZJK6t8NTR8zd0am4c0+J/2sg3x12T83odmZiToDZ97zpNjqN3ACZm9FASUQIJFvRv9pQMLjdquOcRYwAuqoBTnVhoROoTcU/O7fszcrlRO/c3hSvifaP4hN+7ZYM3Qow+bPhgF2wRcS02cDsYkINeftNvE90hcLtCi1wElCeEERQIyQSSDB7MMjtxY8GDTE2fEzlNEtPkgJxr4T8QNBZ8LMRqEcHHzYCRgUXG0GEXu6E/lVKBdl0BX7W57E0AzPRQw9SEQQbPsO4UqSgYRMlZWf8AuqaASETJJsYYcEfvF9rWxK4mimELikkxgKJ1GNHvsTTBThBQqOH8WHIPJug0g4JvU6A3MwJ8VtbWR1iiLCEASg2JM0i0YGicZPYzlb7CBgyndHBO6DQW7qLG5X7XGZhcZVyMGhO3/ak2kkNaNa9kFQW+xY13D0lEyTcqFj0Tm8LDXqBdfrrYBPULZ4CIccXhYmCRvYBJATjJ7IDBTsZ1rdNjcwXxMo3utgsIOtvACJlfp/yCcA2nWz4ZDTJ7MKtjqLDb0te4kN2ux/pncLP/AHf82NfAiF+pBTncSAAEn0E2rqoggweygwiOISPYvASQE4ybgb1NAi6adLJBzflcOjguH+QUgHVEkmTYCCId6KII7KCQZCImrfYuijZ6nC0NJrgFIGAk6lEk4/SDiKYhQDgfRRBGI7IDBBThDjvZKnyU/EbDkZMRNEOHrK4ZwIKII7Ea2EAY42EzcEKGakelw6OBREXuA9YG5XC3q8el8nlGOlwOOBqFAdlx07FloMep5meKhx6HsA+UT1OH1xig1o6I0FB/j/KdiaR9Ey4eRzwEkBOMnkJOqk/SaYMpwgkc62gceddUNPrncGDyedGQ+DzrsG7c60SHbc6/NGlLWiT6PLkQbWYxqDzjMZ0rcZidjy7sfQtBgynCsjA83gzc3GZvR5d+Y3BVh8c2/EDQXAYIKcIceVaJcETJJuMzRrTmgJICcZcT5u4t8i0cMdZ+uRAxFraAn0Loon5jzLMwvfDzjzROEYYcmASn0hul532nxzLMTsbzM48VTqEjzyTRJTRDtBQJ+d2945BueZbg7a8KMJ1on5jyTCA5YSdAU6oBvDIdxzIyu9Xn0gaBP6HUcmMrj6Tagt/F5uDtuZ6XRiiZKJlo8cn9sebHVM63W4/0f//EAFoQAAICAAQCBQQLDAMNBgcAAAECAwQABRESEzEGISJBURAUYXEgMDJAgZKTlJXS0xUjQkVGUmJyobXC1DSRpAckM1Njc4KDorGys7Q1Q1BUo8FER2BkdMPE/9oACAEBAAo/AP8A6FBHtAA9OBclPOOij3HUDXViIA2gGmOkOhICn7nv2tesYs5fMzAbbtd4ANRqCXYbADpoCThXR1DKynUEHrBBHtqoiAlmYgAAd5JxDPESQJInDqdPSvkrNaQavAsqmRR6VB1Hs69OpEBxJ55FijXU6DVm0GKq5e8Ucq22lUQmOXTYwcnTRtRofYQ1q0S6yTTOI40HLVmbQD2jNcxWx0Ss2XFuYGNH88jUcKJAqIAPJZnp5RmMWW0Ka2ZYYotsCTSTERMusjmTmcPfEH90B+jsdmxIWm81eA2Y2dubug7GK9aXIsqpWRbMjiXZbjlLFNAe2pQaY6OVs5s5a92zYv3mrUYolfYgQsA7u+MsmzDNb2aUpxLcJqwTZaNWdJY1JkjPNcV7V4WcvgMHEMcTSWp0gOj6EgDfiibj5PPmWXGhYJSwK5CPXY2Am2QFho3LHRyWTMa1mRFynMvPJKUlYBzDZ+sMUZ581o5vIZbczxJB5nNzOwMTrvxkwh6NXLFbNU88lLWWq6NIavY6hsYEb8dl0Vh6mGvsI4YY13PJIwRFHiSeoDASuXkR83sKDAAoI1rprrKd3Ins4s53oCsMdsIIY1OvXwowqGTQ+7I1xFHHC8cUxjiAaWXaNlaBRpufTm3JRiWyGNgkVaM9lHkjA+8RtXR9Ej17Ujczyxnk0ciAsBkOYSRn1EwYz/LHAAeoejmYvSnA/PjEIIb9JTjPYroiRp4EyXMJNhP+oBK46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y46R/QGY/Y4vR5bUvramrWq71Esebg6JYisopaEE7sLRyDM2qR0IEjEMdk1QwkurGNAqy7gF8QNcFLVbJ7UkLjmjhDo+IcuuVDTtRZvCqLb4ylWZ3mbrfi8n1xVrDI7Ulavlz5XZtvmUsCBpA08XZiDE7ExQy2rleWZbchWxRNiZ3uVzNwn7aBRiKrWzTotZvPSFcuqjSsZY9d41LFuwxHYxA9b7r+bpka5VZeZ6iz8Ay+djsCXTt6Yox5NlGdz0I6qVSZ5tIUcFpS+ihS+KeWpQyuC5cuT1Tbd3tO6xQxpvQAaRks2KVO5U6ffcu7GKpsQNcpmUCdNzg7OzrswjzLXqjdpsVnE8eKWZ1R0Vv5ynm1Q1Whegyh4Rq77kYPitmEOcBxZrQZTZq/cxzEZU0ml6pU6thxlt+tmOfLls1SlltnzWuspZEaLMX0SV0IG7FCvkgsWqkGXmqXmkgqWeAZWn3jSQsuoGntC7EyGXLuBs6yXnWbfu/wBHFeaN7RaoIojGYoNo0RyWbc2uvaxQrHNREb9S/VexCZoV4azxGJ4yr7QAw5HCnO63SEZ89+xBujs3jrv4kSEaRlW2gA9QxTe10nyutU1q1GiiqmukiDQO7lx28ZKc+q5c9C2s9F5qFmAvvXRC+9HQ8jripJPk8uYyziCmK0UpuxmMLGik7Qnp1JwwnbOMm2OqcQoReiO/biq9izkFrJ6Yy6s9dK0VvrlmPEeQmRiBjJ2gyGvarwVaVBqwkSeERb2JkftYjm+4FLNa76RFeOb7q4I8Nu3EYbpJfv2Ul4R0ri3GkYBGva0241McSJr47Rp5VighQvI55KoxYiyuKVWy/LpNFDmMkcedCgbXvRSdBgKqgBVA0AA7gPJNHKYuFxI30YRk6sq66hd/JiOvTE7LIFj2ghAsCcq67QNI/EDrPfhVRQAqgaAAcgB5PM85rRsK1ocmHPgzD8OInmMCrmFOXhWqu/fsPNXU6DVH5qfa7VCJ543maBEfjInXwnEgIKMeYxmEolqcGuwo0oTVbUaSII4gCQBpocCeCeu8M6OOqRHXawbTxGM1vZDRmgkr5ZMkIB82IaFJplQPIiEDQYzPJ4M1mE1+tXSF1ebaEMsTSoxidgBqRid5M6r1IZg2h4YqxGIEHvJDanFqCXo5RNFG4cbi3VcIHSQMOotwh2hjNaWTPfa4criWHaru/FdI5mQukTtzTEkhzXNZL8gfQBHeNI9q6d2iYt5Pmfmfmc00MUUyTwBi6rJHMGG5CSVbFrTKs7GbGZyHltWu2XeY+LmQk4khitCMNJGAWGxxJ1a+rDyKMlu5XJWIHDlguspfX4mM2u5bSiMdWjKkKDZt2KJpEQPLsHLGavleSZnBcy2i0cASMwPuCSOEDyAA6DGaU8kzSxLZmy6KOBkSeZuI5SR0LhGftFPachrQ/dHMK8cL5TPO6pUsyVxucW0BJCY6O/Qdj+ex0d+g7H89jo79B2P57HR36Dsfz2Ojv0HY/nsdHfoOx/PY6K1oydA82UTRgn1tex0akjcaq6ZLOykegi9jo79B2P57HR36Dsfz2Ojv0HY/nsVJLNPNLFQyVoWgjcRaaNsd5SOfj5N3nlsS3YkYhxUhVn7e3kjuoXCqiglmY6AAd5OK8dZndUsyuXLKjFd6RqACG07J3YqBB3+ZkufWeJp+zEIAJI/vManXmG7fWB3aaYzMStruk3RctNNAmzYvrA1xbSHr1WRUmdRzGx3Gvx92MssFVGpeB4mcr3HazDVvHuxarO08cW8aSw/fWCIRINOZIBGmow481aOHMlUnSWixIJIAPXCz8T1A/wDgf47zz94z+xqRWFKhkeQDYW5BjyUnyRzvDdejUEihxDDXAD7AeRd9SxwsdQJStJEg0SOWwHWQKO4Hhg4oG9rp5sJ0Muvhs1118v5R3f4fJ2DcjoQHuMdFSG09UjsMR+aUmhllBGpllYMVQ9wCdTezIEiaKw6ijjrV19KkAjAVrlKSCdSNQkhBjcekBsaWFjaGbr1PFrsYnJ9JK+1VEszWo0mtWe1HUr9Zkm2arvYaaBdcVM0TKjTMWZVoRCshsqzNDIqs68SPTC8eplluxFuGo3xRF11GL1nOMxyGvmIrUaclh5A6jeVEYOgBxcmTOHsR0ooaksk7y1uqSIxKNwcEaEYsV4KVs1LUM9eSOzFZ1AEBh03mRtw2gYvUhlXAN6vaqSQWYVssEicxMNSjeIxdrxOzBVt1nqyEKfdbJAGCnmMXilqaSGlcanKlO5LECTHBOQFc9k6eOJXgzu4tSiBE29pm3aqy8127Duxd4c91qUF81JRRmtKSDClgjYW1BGMweOl0pzGmbqUHNSnAk2yFZpo12jF6bMIeCZ+DUkkhgSZN6ySygbETF5YrszQ0bstOWKnclXXsQTsArE6HTxw8VefOjlC74yGFwSmEow7tCpw7Wct83867JCqbCl0UN3nQan2n8d55+8Z/YdlFLH1DCO2Y1vOrYYaiR7g4r7vjaYZzHCYgzHUlYWMakn1DEUZvW7toF3C7vObDyDTX0HH32tHDDCf8pFUWRf8AalxHwIqum/TRxIo14wbmJNe1u5641nsZZVllPi8kYZvJ+Ud3+Hybma1mlp/Fj5xJoOv0ADCGzYmaabYNFDMAoUDU+5UAey0AxLD0ZifrmjcxyZq6nlGy6FaoPNh1yerm2/eZqp85mG+A6DufmjdRwzv90swjGliZdqQ2XjRep+4Lh/nU/wBfD/Op/r4f51P9fD/Op/r4f51P9fD/ADqf6+H+dT/Xw/zqf6+H+dT/AF8JmVM2tMwoF98slSUFZTDxm0Z/0WOhGL+XZLLXqGjkSiGKaazFu400cIfZFvBAwzWbOT3I4ourcZJIWCriSOvW/uew0JpDpolpZY2MWJUjp9JOlliwTppHDdMpgf1Puxa1XpxQzetFDOK81uvXqxxPwJOSvz246VC9YgyutG+c3FmnnSG4s7oke99qx4MZnryRBxzXepXXHS5rOT2qzvK+ZqcojNP3E8I36kHuj24Q5NkMtq/QC847WfIrOno4ej/Hx0usS5dmMLGZMzUZPtrTcVLKAv8ADw9uuuMxlnz/ADvOvMbm6HzQQ35CBNMxfcmwHdiSKvmWVZZTq3D+GYqZgdx6ji5Qlya/lUl6+7ReZrFlRDbqzq5ZzLs0A0xs6Oz1rl+lN4ZlmUCVnI8DFsZ/W+OBnebZhNcvRahthAEEa6jwjjHtP47zz94z+w60y6wVHixQhRiYitTjQOACn3tAPHXGsydH45U9M0sQKj4WbAKVqkUA9IjULjqzDplVr6foIIBJ/sRHEgnTLbGxXjeMlihC6bwNes47MEEcY9SKF8n5R3f4fISUz+ei3VoWXz8glvSUOp8kQcgkKXAJ0Oh09Rxr5QB4nBj6LI5DvrtObsOar4VPE/8Ae+rmFRQAqgaAAcgBgfecwjHwTq0H8eP6RmGY2AfFZrUjqfhB95iCOadppTvaR5JG0Bd3kLMx0Hefb/x3nn7xn9h/Tc3oQn0oswlcfFQ4/AbH9MORow8UhVbDfsi8msWX383uv/np7D1Yj8Co+Ouxey+v8tZjTHHsSzRwVoN23izTHaq69eg72PcMVF88EgrWKsjMhkjUu0Tq4BB2gkHH5R3f4fINy9I8ssxn0WhEjDT1KcTxxE6yCJzGzj80svWB46YTaNNDvfd1cu1rrixAwYsI5HLx64HG4ScTTlv068RREsFexJ7mBDzk282Pcq95xZWnEwaeJ23y6Sckn5mSef8AxQ00HUeonEkUrkmKuZlWOCPksZDahiO/Fng66tHIwnjkU+BPWD6dcBTHbpv6gJ0OuCD9y6zMD4ugY+1zmLLL/mrTOoCTnaHEkWhOqEHqOFighiaSWRjoqIg1ZifADGdU8iuzRR1s3nSIQNxztieSMOZY43JG1mXA6ueP7+tVJrMKAEgxQMqud3Lm4wu/TXbr16eOmF3HXQa9Z0wqgkAEnTrOBrhFUc2JAHt347zz94z+w6lvWrBH+arOg/bJiPYY2Abjdrl+btxqsGSG6fXDWSsP+fid2U6rrsXT0BlUMB8OI40n6RXo42dgo4UczsOs/pO2FdZ8+qkFTqCIFef+DGtbJK+voNy2P98cX/HjWPKqstuY+EtoGCFfi7zj8o7v8OGWW9fhqBlYo2j6uwDDrXcF03DliKtbNjimWkZI692CGN21kjZn7ccm3mSfJBTuwNtlq2nEEqnxAfTcp7iuoxl0Vpjpw451fi+h0TX4DjVHUMp8QcBlJB0I16wdQfWDh44oS2yWYNJHHI/upXYAgO3e7Yy1oyNQ4tRkaevXEU7rE0srwdcGoIGm4dTP19emPNUsXleaSbezSwqdN0hjKGKuhIVNDqcZbUGZ0DNDXeGw8Mfm/PqaclJND2sdHvmtj7XHR75tY+1x0e+bWPtMdHvm1j7THR75vY+0x0e+b2PtMdHvm9j7THR75Cx9pjo98hY+0wt6e7bEOYPl8yVWjo85BEbUg7bjsa4+4eW17tRpJJ7VYQUhDThjSFijnuwZLNrJrSQKnOQtGdFH62Ks93N6NWlRoxyAz+cyFVEZj5gx82xWrPLl+XSR8eVYzKnmBj3Ju59oYy4WJ+gSus8sSb5LUCVRCQx5yIPcY6JUekadJyZ79q1Mmbx2Ut6ebFdvuGTsLH7nZiJ8zj6XX4IrLDV44uDFqqeAOuOjc9JMggfLoM9ldKxLu4sSQAAqZRoATzAxBm5TKr+TT2KjPPHYjkLzZfozdbbJEEeuMhsUoOjE0wjzuR0pWM0km3Wn6gQ8w11AOKF+GO7cFWSlM88EUHGO2BHfrYRe5Htv47zz94z+w6o8qzSX4S8CDAAA1JxX1p5PZrAGRf8AzhH7VRSMDTH9KaxbPp85laUfsbAWtlmW5hmU2niAsKfCQ7YmhzC1K9y0Y35SzncUIOoIQaINRyGN0uZ355t3+RjbgwD5NAcflHd/hwXFHOK07oO9Nrxn9jYaSeHKmeaTuBeMAfC20nyVLQHITwpLp8YHEUEKtqtanAlSI6cuIUG9/VrofLNET1rJE21lI7+vUEeIIIOMlsyDlP8Ac6KNz+tzBOKtbSLtMFWPSOPr+KMNJVvZlQkkLhu3rZQgvr17FA0VeQGCI6eVvZh9UyxxH2us6WjrZVolIm0G374CO11DTrxoMUY7smu+yldFmfXxcDU4pWLEI0immgSSSP8AVZgSMU3FJlaoGhQiuV6gYtR2CO7TFI31GgtGBDOBy0Emm7EcZlkMkmxQu9z1Fm05k6c8VLkaNuRLEKTKreIDg6HEMOSUrEFmWglbtzzVW3wgybtFiUgHaFxVtw7g3CsRLMmo79HBGEiiRQqIihVUDkAByHtsDWr/AEmz2CN52Iij23LMpZtvWepOoYy7MYh7tabvBOB+gk2qt8YYJXeyOjqUkikXqZJFPWrDvB8n4izHX5evgzLrqEc6p8XkcV2m0A4hiUvoPTprgtFIpVgGKn1groQfAjFmxTgiWOKtKI2aNEGiqjgIfjE4cQxSQrLFIpVtmWpx9HU8gZrCevbhY5VrMkTiUMDPJ2E0HPbuOPvdWtFCvpEahcflHd/hwHnRUsQIeTS12EqKfQxXQ4YmaF6wbX/Cw8F5IXf9IKvlAGoHX4nygE8h44mSMTfelAEbWnC67Q34ECDrkk+AY87tjhSzrMDGtjf1pKdf/g05Kq67m54kke9metuducn3p3k0HJQQm1fDHVBDDlyejYTIyj4Cres+1AAd5wraeBBxoBhW08Dr5IpJIHCTIrhmjYjcA4HIkHX3nwrCZ7nM1abnwp4sxnKNhobleaStbhJ1Mc0XMa94IIIPeDjbXkaOHNYxyaInYlj9eInrPenk7NLKqlcfrzu8r/sC+xiizGKNonYroLEDEExSEdfMAqe44KtczuipQ89IH85cf1ReT8o7v8PkAptnEM2VSHwsuYZa3rjMuq/oeVhQr5mr3WA1CRmJ1R3/AEFkKk4tQLabbVmmi0hnbntRwSNx7lOhOJZZ55OHBXhXfNM2mpCjq5DrJOgGLNbMxmdaUQyNE7JBG2s0hMLyALs1T1nyGpmtMs9K6q7jGW5o46t8L8nTF9L0MM68CGSu8c1mXREaEtKrGMhX0JAOOkMtp5JZ7Uqx1tHnncyORrPy1Ogx0k+Tq/b46SfJ1ft8dJPk6v2+OknydX7fHST5Or9vjpJ8nV+3x0k+Tq/b46SfJ1ft8dJPk6v2+LXnNi3TVqNt4YXeGOzG8upDuoBQHGXdHM3WjDaPmTrNDbqO5QMJAkZ1RxoQRj8n8x/5DYl6MM9yiLGdFYES6JICOARUdyfODyMuMnFTLMzlqrk71p3u3Yq0nDllWZWCIx0JjXacR2L1vpVk1KjFKSsZnu1IIkMhHJBrqcZPfzG1kF/MMoswVZYIzPR27680RkckHeNrA4gGQXMlgmnuHXdFdtQPcii+RiJOEid8tlzCSKJCuyDQyxjRie1w9NcZLYjzyYQnL6tacWMsM0ZeJnlZtswBAWTqGKcecWc0zGDO02MUrxZTuFlkG7Ubjs2YyeSlmmaQ1vuPFWn89rQWH4cc7T7tjMObrt9t/HeefvGfGgnhoXh6S6NXb/kjAaCzG0U4PfE40cesjqw001NElrTue1PTk1CMx73Qgq+A4v5pI8bd3ArotZG9TGMlcEY48He8IPET1p3j0r1+jCSKw12BuxIPQe5sbJlHbhfsyL618PSOo+T8aWD/AFU5vJ+Ud3+HybpYK5sxDv31iJl0+FcbkkRXU+IYag+WpHVmsIbIEKsxAOo4aaaGVm0AJ5c8RxXZpJAdC9h9ItpNKGWbcN3WDKdQAAdBiCN5jukeNFUufFiOflV5Kbw5dVkbrKCOPiS7PW0uhPtdqjPHPDYr2q5G+KaFt6nQ9TL3Mp6iMTT5/doR0oL4pxIlOCNi4EUB3KdWOrbsMgvZfPUeYKCVEyGMuBi1mOXZPPWnq0lqQ1UaWoNITKyaswTFzLsrvX3uT0krRSskszb5eBM+pjWQ9ZBBxZDZ1mNS+ksQCSU7FKONIniPXqQYgcSZvmMdJqlZjXSrDXhkYO+2NNdXcqNzYtRpezU3haUDiwaEBI09CRrw8KajVjXMX4PCK7Nvq0xdsZNlw21qTVYVkMaqUSOafm6oMXqlXMDDXpx3IXru2ka+cziGQBkErIvr24uJkFSxxIMu82hMix7twrmwdSYR7b+O88/eM+P70MZoXj/i0mcGKY+hH6j6G8k1G3Gk0a2YfdcKZdHjbxRiBrhIZEhRZFQ6ruUbTtP5vV2fAeUb2Os0BOizekeEnge/kcK+xutZF0eJ/wDerDBWGNWd1tayoqqNSQ+ocesk4hgjrVL1uJRIWkdTshSRlIBUMHJHk/KO7/D5AVYEEHkQcEz5RIIUJ5yVGGtd/i9k+kHyZlaDoSHqxJKFbwYM6kYzm47DrmsrTtSaeATjHaPQox0iAkHUFqGuYGB3BoHldVjIPWCmMyrWZSfNoYoFMV9BzIijYpDZXm6odp91iWBmXUxS7d6+g7CwxpBWgeVz6EGuNLc5ktWv8/ZYyuPgLaf+B/jvPP3jPgSQTxPHIh5MjjQjBe5ls8lGdjzcw+4kPpdCG8nKaVPk3Kf+3kK7lIBHMHxxtcgrIv5rodrr8BBGNJNND+kvgf8A2xXGkJ1Nj/BKvez+IA69O/B0jyokyy/0iU25VO+X80uItVTuXyflHd/h8ryCvkkjW6yDUz1kmAfaO9037lwksM0avHIp1VlYagjyLbInMSSU7kI3nTcF2WGjIfTmoJxnO6Tfw9r1GD7PdaET92IIMukUGpDBMJLCSqdVscdOpHQjsbMVq8qgmpmkzLBXvxjxJ0VJ1/DT4VxlPmqRpNZkW9D9+beBHAna7j23xkX0hB9bGRfSEH1sZF9IQfWxkX0hB9bGRfSEH1sZF9IQfWxkX0hB9bGRfSEH1sZF9IQfWxkX0hB9bGRfSEH1sUL5ltxU6pW0grtYmbaOJKCQqJzc9wxkudTCwQ8uVpsgg1A0i0MkpJHicJ5xSym5Zh3jVd8MRddRjJM3jz+evDLRrUzXtVhPCZTKpE0u5Ivw9Ri2RXtJVtXEqTPTrTyaBYprCrsRuvCRZXkmZ1Y4GKAcKOWrFIV7A1cs74zGpJltE3rNa3Rmr2PNRzmSORQXTCnMLeXNfgiAOj11IXdrh3olZ2WQoVLLAxVmAPdqp0xfCZoP7xszUZ4a1hwnEMaSuoUuBi3wq9wVLF9aczUYLJO3hSWQuxW1OhxekenFHLekrUprMVKOQaq1h41IQEYuW5nqC2Uo1JbpiqnlPJwQ22M4SerZhSWGVDqro41Vh7X+O88/eM/k25fmyRV7D/gw24+zC7eAkU7CfEDBYhTtUc2PcPhxuZUG9vznPWzfCfL2LKecR/rLokg/4T6yfICrAggjUEHEkm/M1g4sjbnlNeJd7sfHe7eT8o7v8PlBlPR+6XHgGmiKf17Thm6PzyF5kUanLpHOrSKP8Qx62H4Bwro6hlZTqCD1ggjBQyApID1FYiNWjiKjscRvdt1nFb7jzxxQzzQIUSkEGiwyd4psetn5g8+rkZ55yHll02qdBoqoo6lRR1KMKBE22/mG0OlXxji11DTn+pOZxJLJBPR2Ip3TyqlhGcb26yzDFeWCZNyMEHwgjuI5EYi+IMRfEGIviDEXxBiL4gxF8QYi+IMRfEGIviDEXxBiO8+VZ7SzM0NEHnSVyQ8a79F3aNqMZpVqNktOpHQMcUdy/PA7uZeHv0G0OEXccO9m1kl2KGH8NpJYWCpi3kOaZdboSZlm8letTBggXSxHrC5ebjY6Y3osxzm5PCcvvJHl1mC7KZdZi5HDZNdHw0rjpXkma0oJHCC/Hl0MG+MMfEoRi/lmU0shv0JBfVIprcmYFNyBEZ/vaBOeGk6VZVcr0ctTcA02X0oDQB1/T4rzY3CpkwqRgc3KRbP6ycTCxlOYZW9+PvrrDTkjcv6mOLti3ds5hDWzMcPzF4L87SizLIW1V0D9aY6RxZrLRrxUsxyueKWrmLxRbFGYwznYuw9RJHWmOks0WaZTlqMejthYxFaqRmOSGRCV7BJ1RsT1EgqqBWnmE8kO7tFGdepiCfa/x3nn7xn8iSwTIUkjcaqyt1EHDyVJXCZZfkOu7wrTN/jR+Cx92PYdcc5/qdCv+8jyaQ14XkfxIUch6TyGNLcxks2vRPaczSD4C2nk/KO7/D5BfzBDtkIOlaqfGeQd4/MGrHDWczeRpLFsjaZGddu0D8GNR1KuNQcQtUZiz5VZYrECeZryAExfq6FcZ3C458OFLSfA0DNjPLO9SpjeoIVYHuJsMg0xYyzotLYIIgnE0+WxnlE8wHYqse9dTF46co4a0a9hEHZ0PXr6SfHAOBIJm33ctJCJYPfLET1JN+xsHdG2yaF12TQv3pIh61b/AMC/HeefvGfyiWCZCrqf948CO44KSKwjp5hINIrifg7n5LP3Mp58x5UTU9W5gNT5NaOWPFaveElj3UEH+j/hG+Dy2LuYHpDcYU6qcSXQ7dC/JYwfFyMGnUPLLaUhBYeE9gaM3pVNBiKCCMaJHGoRV9QHsgyMCGUjUEHmCMM/RZ20Rz1tlJPJW8angf8AuvVyBBGoI8ktLMo12x3a5CyafmODqJE/RbDTwD8YUI2kTTxlg63T4NwxBZi5bonD6HwOnI+0ZnaEkmwLRpS3HB011ZYQxAxmte5VrR2JYrtCaoRHKxVD99A5kHBWtTrS2JmALERwqXYgDn1DGa03zHQUXvZdYqRWSV3gRSSoEJI8k4myi3FXsF1AVnliWcFCCdRo/lO2NGc6c9FGuL4jzbLTegd652JH2ezK66ornd1Lr7f+O88/eM/sNYpIW10OhUjrDKRyKkag41mny2rLIdNNXeMEnD6eAYr/AMOmKwc89yDQ+vTGXQL3mFW3N8XZhEFnN8xl0UADathok/2UHlGp6R3f4faQysCGUjUEHmCMZ7QpqTwakL1nigU9eyPjQyMEHcNdBjpH/Yv5bHSP+xfy2Okf9i/lsZ2tz/zCJRSU+t1rAnGaS6c4bPmse71SpXbT4uOmOW+M+2jZq/Kw1jtH64XGezwOOzJE9B0PqIr46R/2L+Wx0j/sX8tjpH/Yv5bHSP8AsX8tizZhrRyzzWrfD3rGg3HXhJGugA8MGK70is+fMr9RgqAbKsJ/UiAJ9JOPyfzH/kNipmOVjNMoSvl0FTzOUTTxbIZd++QycHXUriwM2pdILkFS++fGpBQSnNsSB6nuNhUdvd7vXElEW+mOQU7dyJtr1a1qvXjlkV+4gHQNjMUq510TzOSeF7005qWISiV7aPKzOhcvidMlyyjWyfMq2pEfnk1YzzyEeKTcOLEst9spee28jF249hTK41buUtoMTJEf7l2ZSmNXIUyIINr6eIxmcubZtbyitdE1+awlyG3D9+Vo3Yr969uz+rBJas2BBGtFkRrMrTOFMtZ203PjpH8nl38pjpH8nl38pjpH8nl38pjpGUdSrDZl3I+qpjpGkMESRxpsy47UQaAddXHSCKKNCzu65aqqo5kk1cZ/WykHU27VegZLQ/yEXmq6J+m2OkfyeXfymOkccKFiq7MvOm8ljzq46R/J5d/KY6R/J5d/KYt23nty2Zp7PD4jyS8yRCkajl3DECv4SqzA/FI0xl1xPGvmBjf4s0YH+1jPaZ7282FpP66plwHXkeogg+DA6EH0H2McMSDVpJGCKo9JOMyzBv8A7OjNMnygUJi8F7nu2oKo+KpkbGQVR4GeeyR/UkWKUh7hXgeID4XkfX2EuWXmOps0iIi5/wAomhST/SBwk1Mcs1qoQijxsxdZj9LDVcK8bqGV1IKsDyII5jypYqWEKTQv7l1PcfRiKelPFw5YHHYZPAjCSVZoGgkhI7LRuNpQ+gjGX17UQIimWLV49RodhbXbijNe3IzTPHrvaP3DOOTle4nFZ1zQg31dA62SEEY4gOoPZAGK1Np9vFdBq7hOQLNqdB3DFQ0LVl7E9YoOHJK8nFZ2HiWGuAVZSCD3g4rQTV8psZfScAgQQTKAYx+jqBigc6pZZDXluRJzkEYSV49eRfvPvNY4o0Lu7HRVVRqSSeQGHTJ0cPQouNOPp1rYsL+2OM+s++XlygsXuZcg1MGvOeqP2vH38xhJYJo1eORDqrKw1BB9mpZDowB1KkjXr9lGNrhG7Q6mPIH0nyqynkynUH2/XLcvMc2Y+E0x7cVb1Adtx6h7e0zpGzLEpALkDUKCe84mk405BjgkKLNJH1+bwHuhj5zTYkutKTJokgiFng967yoSnEfSN5xftOV1Mz2asTPr+hvG0Yt/Pqv18W/n1X6+Lfz6r9fFr59V+vi18+q/XxZ+fVvrYs/Pq31sWfn1b62J46WZW/70qm3X0isMC8io4bQK+moXxxY+fVvrYs00bPKCW8uhsBrN+sZRvrQGE9byfm4uZVlUf3P4OT3A0c8MpRzJOsTE7IpcFWXIMwIIOhBEDYzvIrVm1TF3MrZlip3Y2gO+D3bq7znrj1GOjQy7K8ykqSUJ72zNbSQPw5ZoU5D9BCNWx53asdJ8oqUa+/YJrNupBHGC3cuMomzSTIruZZVJTMogsPS04leRJO0G7Q0OE+5N/JYbT3ieqKzZiezFD8jEzHC1lkoS32jjB7FYayJz7zHoTjLfuNmyrJsrSubVCKWMyxSTl9Ecdz7eWMsHRWezGBEJJPP0qSyiFLJ/A79xjx/80Ojn/wDJjo1HWy4I4oWL2uZXotAWeJYyRF4IGxlgyyhVy21Zs2Hk45jubyUjROrd2MZU/R3jw1JQkknnsaWrJgWf8zTe41TGVS5VkNuxWlS1LItm7JTGs4hKdmPTku7XU4ynzaXo1l+cR2r7S8rpfSMpF47cZJld/OKNi1PLmtrhU6q1n4LgHVTI7v7gYqcerfsUrDVJuPWkkgI7cL98bggj2osteBpNo5uRyUelj1DAa7MzWLj/AJ9ic75D6gToPQPeEDkxmMlowdUY6lfUfDEaHaF1VQOyvIeoe1cOYgSV5e+KeI74nH6rDHDeSL79H/i5UOyRD+qwIx5lfy7Mob9KwYhMiTwgrpJHqu5CrkEYpv0hv0IKcE8VApUqQwMzqBC0jM5JckktgRPfy2xUM+zcEM8Zj37dRy15YqW8ryaxTsQ1qmWmq80lEDg8WR5peoYpVcpvZjLdeKfLRZtV3nffKteUuFCudSN6HTDxS5vm1HMqk0cQ30bFCONImGpIfrixVzC7XoyU6cVWoaleGOZg0rlXklLSPsGJY5rea+eQXxF26yJpFFCBrySEcPA8yamapiHUOCU4e3+rAnyXKQErQQ1DBZsRohjjjtzb2Dqg8FG7ET9EYLaSpS8z0uGGOXjJVaxv0MQP6G7TAT7pdKctzn/Aa8MUeF959117+DzxVqZX0jnlsWhJl/HtpJKgQokvEUGLs4WU38vy2sYhHs2GiHBbXU679+K1ro9Qtw2XgTL+FZnMEvHSJpeIQIt/6OuIqGUZ9YlnvQSUuPYhksLtnNWXeoXifpKdDgCoOj+X5TBV2dccdFnKtv169Q+KyZtlFa3V41mlx61qvbl4xjlhDqRoeRDYiuW2leSSWKstWIbz1Ikak6KvIakn2rVJ7xtzjxhojif8wp790QWYr8I8Euqd/wD6kbH372aGT14V/XtyNI/7I19+9m5lNuB/167pKn7GbEE+ZZrmkOX01nYrCkkitIZJSvXtREJ0GKaZnlsdacTU94gs1rW7Y6rJqykFCGGEeWhllq0iPrtZoIy4B0xkktDpDZrVoxReZLED2ojKjFJdQ6DTt4rx3uLHE0Z3FUkl9xG8gGxHbuUkHFWtl2Q34I0mf72EherHOxkYnxfERhy6Dj3N0ckbww8xIY3UNs/SxF5/Yptbig17TwIQpkHo1OFnqu0irKAQpMTlG0105FTivPacSGJQHCzcL3fBdgFk29+0nFcrQUm2+19kG2UQEO2mgO84h3xbNYuFLxXD66GKPbukU6c0BGKopZg7pUm7REzxglkAA13jaRtxlrJHmNapJJaWZUjeSZI2jdFAdZCG0UEYcT5ckJEhV9JmbdxF61AXZt9u91m6Qr+rBWiX/iJ98PNFX6P5U8ScaRFRpbFsOQEI57RhvnM/18N85n+vhvnM/wBfDfOZ/r4IhmzYV7A48x3JLDJt5t1dsDGY14aVpL9eWhxJrkFmLlJANJCW9Ghx0hnis1qcNdLkXGzKeKpvJkNeEAJuL6JGAMSyzT5DfSKJEJkd3gYBQvMscZ7Rz+nao/dG5Zo2qsEdXZpcVzaARt/cFx0yQ5lnt2dKmXZXBYrXYrU3EjmS00DbCBpu3yDbi3Zjj6XZDmHm/D0OYVaMMDTJFroH9xjMYMng6NZjl1+xcpy0jZN9k0gVJ1RmEYQknFyTpLkc9fKalcRkzWKNSBqTuB4SSzGbEc8tHKBAkb+5mlSPQ7vQ7c8dJ5J6Oaa5lXlygUsuyxmqSJwodkKdgE6AhmGLXnk2e3JPNuA3FdWzcuG2aakFMSmtH0SvwmzwiY0lazCQm/kGIxf2J/dH6UzrDHVeSUwyxzlJY4gNXXQ7htxmSUszzzosKkUlSSKewKFhONZ4LAOExbVM0yzKmpzivI0D+aLKJQZQCisNeR9tAUAkk8gBgh8xs2b/APo2pC8Y+BCPLo7X6EI9U9lIj+xvev5OZN/1FzyAO6ESKOSyIdrj4GB8v9BzCjbJ8EhnRn/2NfbXNjK7Es9UhiAHliaFtR39lz7eVsZtYShGRzVZdTK4/UjDHAWONAqKOQVRoB5eo57lAPzyP3r+TmTf9Rc8nUuc5uB6hdl8u6GxA8Ui+KSDacbr+WTGpYb/ABmwAxzf6xCG996w5PQVF8PObvab4VjUfG9h/Rb2X2T6q9qOQ/sHvX8nMm/6i55P6UZrfzqVpv4/YaQ5tUenL6Z62s0J+FN4999eY5rbsA+MavwIv/TjHsNEt1ZYCfDiKV1xpZEfBtL+ZYgPDlX4GU+9Pycyb/qLmPvq05FhHjLINkY+FiMditWihX1RqFHsO3lliC+P1azhpB8KajAII1B986CtSnm+TQtjrgy+vG3rVAD7HSjnZM8B7kuxL99T/WoNw9IPlyzzCSVDx5C4nhTq3KIwpVz4Eke33q8EULmaezGI14moCpH1nf3kkdXk/JzJv+ouY1RJRmVz0RVT96U/rS6fFPsdY5onjceKuNDjWeOssE3+drngv+1ffP8ASEjrfOZFh/i9lw7FKNbsEo5xSVSJAwwK+ZVtEuQdwbudPGN+aH3mkMMPRjKZHdjoAqT3CcFJc4kWSFDzjpxdmBPhGrn0t7LTzXPJ2Ufo21W1/vlPvn/DZ7la/AlhJf4PZa2b6LRhHi1o8M/1KScIZZMtrsJNO1pIgYjX3kZpupYo9doZ25bj3KObHuGJb/Fy2ErCuqJMaDTyPLp3VU4o2d7kY26ZXWQr4MiBSPZdVrLaFlfSyNJC/wCwL7565M9DfBDWmk/h9kDBlVR7sw7uPZ1ghHxd5x1165rfNmMX8PvKSb76haBXCLMOW2Ru6ME6tpzAxLuzG7Vi1VNj2RxApdl/7usg1ESd/PGhqXWsVx41rxMq6ehX3L7Lqs5Xfrt643ilT+L3z7hcwsfEjEX/AO32X/aeYyNCT/5avpBF8DBN3w466eeXAB4LaItL/wA33mOxJbvyeqvFwV1+GbGkVc+a5h/+JYI7Z/zT6N6tfZdSZu8T/qz1pU/4tPfPXDQlRfRxnUn/AIPYlZ7A4EbD8Ey9nd8A68BYYIUijXwVBoMfer1Ws/8ArYN0bf1qV95/e4MphgjP6U0rO/7EXCyQzRtHIh5MrjQg4Z5aDcFJG5ywj/BOfTt6j6R7Ht1rdawP9VIC37Nff3LUjydY959Z8nXppr76/9k=" alt="نقاط النقر العصبي EFT على الجسم" style="max-width: 95%; height: auto; border-radius: 6px; border: 1px solid #D9E2E7;">
+    </div>
+
+
+        <div class="purpose-box">
+            <strong>الغرض:</strong>
+            استخدام تقنية النقر على نقاط الطاقة لتقليل الشدة العاطفية المرتبطة بذكريات أو مشاعر محددة.
+        </div>
+
+        <div class="safety-box">
+            <strong>تنبيه السلامة:</strong>
+            النقر قد يطرح محتوى شديدًا. امشِ ببطء.
+            إذا زاد الضيق أو ظهرت ذكريات جديدة، توقف وتأريض.
+        </div>
+
+        <div class="card">
+
+            <h2 class="section-title">
+                قاعدة الإعداد
+            </h2>
+
+            <div class="setup-statement">
+                «على الرغم من أنني أشعر بـ [هذا]، فإنني أقبل نفسي بعمق وشمول»
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">
+                    ما القضية أو الشعور الذي تعمل معه؟
+                </label>
+
+                <div class="writing-field short"></div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">
+                    أكمل قاعدة الإعداد الخاصة بك
+                </label>
+
+                <div class="writing-field medium"></div>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2 class="section-title">
+                تقييم الشدة قبل النقر
+            </h2>
+
+            <p class="instruction">
+                مستوى الضيق قبل النقر (0–10)
+            </p>
+
+            <div class="suds-wrapper">
+
+                <div class="suds-label-row">
+                    <span>0 = لا ضيق</span>
+                    <span>10 = أعلى شدة</span>
+                </div>
+
+                <div class="suds-scale">
+                    <div class="suds-node">0</div>
+                    <div class="suds-node">1</div>
+                    <div class="suds-node">2</div>
+                    <div class="suds-node">3</div>
+                    <div class="suds-node">4</div>
+                    <div class="suds-node">5</div>
+                    <div class="suds-node">6</div>
+                    <div class="suds-node">7</div>
+                    <div class="suds-node">8</div>
+                    <div class="suds-node">9</div>
+                    <div class="suds-node">10</div>
+                </div>
+
+                <div class="suds-writing">
+                    <span class="suds-writing-label">
+                        مستواي قبل النقر:
+                    </span>
+
+                    <span class="suds-writing-line"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+        <span>Tool ID: TRC-EFT_TAPPING</span>
+        <span>مسودة للمراجعة السريرية</span>
+        <span>صفحة 1 من 4</span>
+    </footer>
+
+</section>
+
+
+<!-- =======================================================
+     PAGE 2 — TAPPING SEQUENCE
+     ======================================================= -->
+
+<section class="page">
+
+    <div class="page-content">
+
+        <header class="header">
+            <div class="header-brand">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </div>
+
+            <div class="clinical-badge">
+                مسودة للمراجعة السريرية
+            </div>
+        </header>
+
+        <h2 class="page-title">
+            تسلسل النقر
+        </h2>
+
+        <p class="instruction">
+            انقر كل نقطة 5–7 مرات بينما تقول عبارة التذكير.
+        </p>
+
+        <div class="visual-container">
+
+            <div class="diagram-area">
+
+                <div class="head-shape"></div>
+                <div class="neck-shape"></div>
+                <div class="torso-shape"></div>
+                <div class="hand-shape"></div>
+
+                <div class="tap-point tp-1">1</div>
+                <div class="tap-point tp-2">2</div>
+                <div class="tap-point tp-3">3</div>
+                <div class="tap-point tp-4">4</div>
+                <div class="tap-point tp-5">5</div>
+                <div class="tap-point tp-6">6</div>
+                <div class="tap-point tp-7">7</div>
+                <div class="tap-point tp-8">8</div>
+
+                <div class="diagram-note">
+                    رسم توضيحي مبسط لمواضع النقر
+                </div>
+
+            </div>
+
+            <div class="points-list">
+
+                <div class="point-item">
+                    <div class="point-number">1</div>
+                    <div>
+                        <div class="point-name">نقطة حافة اليد</div>
+                        <div class="point-name-en">Karate Chop</div>
+                    </div>
+                </div>
+
+                <div class="point-item">
+                    <div class="point-number">2</div>
+                    <div>
+                        <div class="point-name">قمة الرأس</div>
+                    </div>
+                </div>
+
+                <div class="point-item">
+                    <div class="point-number">3</div>
+                    <div>
+                        <div class="point-name">الحاجب</div>
+                    </div>
+                </div>
+
+                <div class="point-item">
+                    <div class="point-number">4</div>
+                    <div>
+                        <div class="point-name">جانب العين</div>
+                    </div>
+                </div>
+
+                <div class="point-item">
+                    <div class="point-number">5</div>
+                    <div>
+                        <div class="point-name">تحت العين</div>
+                    </div>
+                </div>
+
+                <div class="point-item">
+                    <div class="point-number">6</div>
+                    <div>
+                        <div class="point-name">تحت الأنف</div>
+                    </div>
+                </div>
+
+                <div class="point-item">
+                    <div class="point-number">7</div>
+                    <div>
+                        <div class="point-name">الذقن</div>
+                    </div>
+                </div>
+
+                <div class="point-item">
+                    <div class="point-number">8</div>
+                    <div>
+                        <div class="point-name">الترقوة</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2 class="section-title">
+                عبارة التذكير
+            </h2>
+
+            <div class="field-group">
+
+                <label class="field-label">
+                    ما العبارة القصيرة التي تبقيك متركزًا؟
+                </label>
+
+                <div class="writing-field long"></div>
+
+            </div>
+
+            <div class="teal-box" style="margin-bottom:0;">
+                <strong>التسلسل:</strong>
+                انقر كل نقطة 5–7 مرات بينما تقول عبارة التذكير.
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+        <span>Tool ID: TRC-EFT_TAPPING</span>
+        <span>مسودة للمراجعة السريرية</span>
+        <span>صفحة 2 من 4</span>
+    </footer>
+
+</section>
+
+
+<!-- =======================================================
+     PAGE 3 — REASSESSMENT
+     ======================================================= -->
+
+<section class="page">
+
+    <div class="page-content">
+
+        <header class="header">
+            <div class="header-brand">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </div>
+
+            <div class="clinical-badge">
+                مسودة للمراجعة السريرية
+            </div>
+        </header>
+
+        <h2 class="page-title">
+            إعادة التقييم
+        </h2>
+
+        <div class="teal-box reassessment-note">
+            بعد جولة واحدة، توقف للحظة ولاحظ ما تغير قبل أن تقرر الاستمرار.
+        </div>
+
+        <div class="card">
+
+            <h2 class="section-title">
+                مستوى الضيق بعد جولة واحدة (0–10)
+            </h2>
+
+            <div class="suds-wrapper">
+
+                <div class="suds-label-row">
+                    <span>0 = لا ضيق</span>
+                    <span>10 = أعلى شدة</span>
+                </div>
+
+                <div class="suds-scale">
+                    <div class="suds-node">0</div>
+                    <div class="suds-node">1</div>
+                    <div class="suds-node">2</div>
+                    <div class="suds-node">3</div>
+                    <div class="suds-node">4</div>
+                    <div class="suds-node">5</div>
+                    <div class="suds-node">6</div>
+                    <div class="suds-node">7</div>
+                    <div class="suds-node">8</div>
+                    <div class="suds-node">9</div>
+                    <div class="suds-node">10</div>
+                </div>
+
+                <div class="suds-writing">
+                    <span class="suds-writing-label">
+                        مستواي بعد جولة واحدة:
+                    </span>
+
+                    <span class="suds-writing-line"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="field-group">
+                <label class="field-label">
+                    هل تحول الشعور؟
+                </label>
+
+                <div class="writing-field short"></div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">
+                    ماذا تغيّر؟
+                </label>
+
+                <div class="writing-field medium"></div>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2 class="section-title">
+                جولات إضافية
+            </h2>
+
+            <p class="instruction" style="color:var(--alert-text);font-weight:700;">
+                إذا SUDS &gt; 2، استمر بقاعدة إعداد معدّلة.
+            </p>
+
+            <div class="field-group">
+
+                <label class="field-label">
+                    قاعدة إعداد معدّلة
+                </label>
+
+                <div class="writing-field medium"></div>
+
+            </div>
+
+            <div class="suds-wrapper">
+
+                <label class="field-label">
+                    الضيق بعد الجولات الإضافية (0–10)
+                </label>
+
+                <div class="suds-scale">
+                    <div class="suds-node">0</div>
+                    <div class="suds-node">1</div>
+                    <div class="suds-node">2</div>
+                    <div class="suds-node">3</div>
+                    <div class="suds-node">4</div>
+                    <div class="suds-node">5</div>
+                    <div class="suds-node">6</div>
+                    <div class="suds-node">7</div>
+                    <div class="suds-node">8</div>
+                    <div class="suds-node">9</div>
+                    <div class="suds-node">10</div>
+                </div>
+
+                <div class="suds-writing">
+                    <span class="suds-writing-label">
+                        مستواي بعد الجولات الإضافية:
+                    </span>
+
+                    <span class="suds-writing-line"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+        <span>Tool ID: TRC-EFT_TAPPING</span>
+        <span>مسودة للمراجعة السريرية</span>
+        <span>صفحة 3 من 4</span>
+    </footer>
+
+</section>
+
+
+<!-- =======================================================
+     PAGE 4 — CLOSURE + SAFETY
+     ======================================================= -->
+
+<section class="page">
+
+    <div class="page-content">
+
+        <header class="header">
+            <div class="header-brand">
+                Tamkinly | مركز التعافي من الصدمات (TRC)
+            </div>
+
+            <div class="clinical-badge">
+                مسودة للمراجعة السريرية
+            </div>
+        </header>
+
+        <h2 class="page-title">
+            الإغلاق
+        </h2>
+
+        <div class="card">
+
+            <div class="field-group">
+                <label class="field-label">
+                    ماذا لاحظت خلال النقر؟
+                </label>
+
+                <div class="writing-field medium"></div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">
+                    ما الذي يشعر بأنه مختلف الآن؟
+                </label>
+
+                <div class="writing-field medium"></div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">
+                    ماذا أريد أن أتذكر من هذه الجلسة؟
+                </label>
+
+                <div class="writing-field medium"></div>
+            </div>
+
+        </div>
+
+        <div class="teal-box">
+
+            <strong>فحص التأريض:</strong><br>
+
+            ارجع إلى اللحظة الحاضرة —
+            خذ نفسًا عميقًا ولاحظ ما حولك.
+
+        </div>
+
+        <div class="alert-box">
+
+            <strong>متى تتوقف؟</strong>
+
+            <ul class="stop-list">
+                <li>إذا زاد SUDS بدلاً من أن ينخفض.</li>
+                <li>إذا ظهرت مادة صدمية جديدة.</li>
+                <li>إذا شعرت بالفيضان أو التفارق.</li>
+            </ul>
+
+        </div>
+
+        <div class="card">
+
+            <h2 class="section-title">
+                جهات اتصال الطوارئ والدعم
+            </h2>
+
+            <p class="small-note" style="margin-bottom:9px;">
+                اكتب هنا الجهات أو الأشخاص الموثوقين الذين يمكنك الرجوع إليهم عند الحاجة.
+            </p>
+
+            <div class="contact-block">
+
+                <div class="contact-row">
+                    <span class="contact-label">جهة الاتصال / الاسم:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+                <div class="contact-row">
+                    <span class="contact-label">رقم / وسيلة الاتصال:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+                <div class="contact-row">
+                    <span class="contact-label">ملاحظة:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+            </div>
+
+            <div class="contact-block">
+
+                <div class="contact-row">
+                    <span class="contact-label">جهة الاتصال / الاسم:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+                <div class="contact-row">
+                    <span class="contact-label">رقم / وسيلة الاتصال:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+                <div class="contact-row">
+                    <span class="contact-label">ملاحظة:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+            </div>
+
+            <div class="contact-block">
+
+                <div class="contact-row">
+                    <span class="contact-label">جهة الاتصال / الاسم:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+                <div class="contact-row">
+                    <span class="contact-label">رقم / وسيلة الاتصال:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+                <div class="contact-row">
+                    <span class="contact-label">ملاحظة:</span>
+                    <span class="contact-line"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="safety-box">
+
+            إذا زاد الضيق أو شعرت بالفيضان أو التفارق،
+            توقف عن التمرين وارجع إلى التأريض.
+            إذا احتجت إلى دعم إضافي، استخدم جهة الاتصال الموثوقة التي كتبتها أعلاه.
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+        <span>Tool ID: TRC-EFT_TAPPING</span>
+        <span>مسودة للمراجعة السريرية</span>
+        <span>صفحة 4 من 4</span>
+    </footer>
+
+</section>
+
+</body>
+</html>

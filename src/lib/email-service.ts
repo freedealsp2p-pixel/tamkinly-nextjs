@@ -140,7 +140,7 @@ export async function sendPurchaseConfirmationEmail(
       break;
     case 'bundle':
       htmlContent = EmailTemplates.bundlePurchase(options.name, options.accessKey, locale);
-      subject = locale === 'ar' ? 'مرحباً بك في VIP! باقتك الشاملة جاهزة! 👑' : 'Welcome to VIP! Your Complete Bundle is Ready! 👑';
+      subject = locale === 'ar' ? 'مرحباً بك في VIP! باقة الإتقان جاهزة! 👑' : 'Welcome to VIP! Your Mastery Subscription is Ready! 👑';
       break;
     default:
       htmlContent = EmailTemplates.purchaseConfirmation(options.name, options.accessKey, options.productName, tierMap[options.productType] || 'basic', locale);
@@ -604,12 +604,191 @@ export async function sendEmail(options: {
   return { success: true };
 }
 
+
+// ============================================
+// PAYMENT RECEIVED EMAIL (no token - sent at checkout)
+// Token is sent separately after payment confirmation
+// ============================================
+
+export async function sendPaymentReceivedEmail(
+  options: { to: string; name: string; productName: string; orderNumber: string; locale?: string }
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  const provider = getActiveProvider();
+  const locale = options.locale || 'en';
+  
+  const htmlContent = locale === 'ar' 
+    ? `<div dir="rtl" style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 0 auto; background: #F6F8FA; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #0F1C2E, #1F6F78); border-radius: 16px; padding: 40px; text-align: center;">
+          <h1 style="color: #3DD4B0; margin-bottom: 10px;">تم استلام دفعتك!</h1>
+          <p style="color: #ffffff; font-size: 18px;">شكراً لك ${options.name} 🎉</p>
+        </div>
+        <div style="background: white; border-radius: 12px; padding: 30px; margin-top: 20px;">
+          <h2 style="color: #0F1C2E;">تفاصيل الطلب</h2>
+          <p style="color: #8A94A6;">المنتج: <strong style="color: #0F1C2E;">${options.productName}</strong></p>
+          <p style="color: #8A94A6;">رقم الطلب: <strong style="color: #0F1C2E;">${options.orderNumber}</strong></p>
+          <div style="background: #F8EEEF; border-left: 4px solid #B88A8E; padding: 15px; margin: 20px 0; border-radius: 8px;">
+            <p style="color: #0F1C2E; margin: 0;">⏳ <strong>رمز الوصول الخاص بك قيد التجهيز</strong></p>
+            <p style="color: #8A94A6; margin-top: 8px;">بعد تأكيد الدفع، سيتم إرسال رمز الوصول الشخصي إلى هذا البريد الإلكتروني. الرمز مرتبط ببريدك ولا يمكن لغيرك استخدامه.</p>
+          </div>
+          <p style="color: #8A94A6; font-size: 14px;">عادة ما يتم التأكيد خلال بضع دقائق. تحقق من بريدك الوارد قريباً!</p>
+        </div>
+        <div style="text-align: center; padding: 20px; color: #8A94A6; font-size: 12px;">
+          <p>تمكنلي - منصة تحويل الهوية</p>
+        </div>
+      </div>`
+    : `<div style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 0 auto; background: #F6F8FA; padding: 20px;">
+        <div style="background: linear-gradient(135deg, #0F1C2E, #1F6F78); border-radius: 16px; padding: 40px; text-align: center;">
+          <h1 style="color: #3DD4B0; margin-bottom: 10px;">Payment Received!</h1>
+          <p style="color: #ffffff; font-size: 18px;">Thank you ${options.name} 🎉</p>
+        </div>
+        <div style="background: white; border-radius: 12px; padding: 30px; margin-top: 20px;">
+          <h2 style="color: #0F1C2E;">Order Details</h2>
+          <p style="color: #8A94A6;">Product: <strong style="color: #0F1C2E;">${options.productName}</strong></p>
+          <p style="color: #8A94A6;">Order: <strong style="color: #0F1C2E;">${options.orderNumber}</strong></p>
+          <div style="background: #F8EEEF; border-left: 4px solid #B88A8E; padding: 15px; margin: 20px 0; border-radius: 8px;">
+            <p style="color: #0F1C2E; margin: 0;">⏳ <strong>Your access token is being prepared</strong></p>
+            <p style="color: #8A94A6; margin-top: 8px;">After payment confirmation, your personal access token will be sent to this email. The token is linked to your email and cannot be used by anyone else.</p>
+          </div>
+          <p style="color: #8A94A6; font-size: 14px;">Confirmation usually takes a few minutes. Check your inbox soon!</p>
+        </div>
+        <div style="text-align: center; padding: 20px; color: #8A94A6; font-size: 12px;">
+          <p>Tamkinly - Identity Transformation Platform</p>
+        </div>
+      </div>`;
+
+  const subject = locale === 'ar' 
+    ? 'تم استلام دفعتك - رمز الوصول قيد التجهيز ⏳'
+    : 'Payment Received - Your Access Token is Coming Soon ⏳';
+
+  if (provider === 'brevo') {
+    return BrevoClient.emails.send({
+      to: [{ email: options.to, name: options.name }],
+      sender: {
+        name: 'Tamkinly',
+        email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com',
+      },
+      subject,
+      htmlContent,
+      tags: ['payment-received'],
+    });
+  }
+  
+  console.log(`[EMAIL FALLBACK] Payment received email to ${options.to}`);
+  return { success: true };
+}
+
+
+// ============================================
+// ORDER RECEIVED EMAIL (Pending Payment)
+// ============================================
+
+export interface OrderReceivedEmailOptions {
+  to: string;
+  name: string;
+  orderNumber: string;
+  productName: string;
+  amount: number;
+  locale?: 'en' | 'ar';
+}
+
+export async function sendOrderReceivedEmail(
+  options: OrderReceivedEmailOptions
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  const provider = getActiveProvider();
+  const locale = options.locale || 'en';
+  const isAr = locale === 'ar';
+  const subject = isAr
+    ? 'تم استلام طلبك - بانتظار تأكيد الدفع'
+    : 'Order Received - Awaiting Payment Confirmation';
+
+  const htmlContent = `
+<!DOCTYPE html>
+<html dir="${isAr ? 'rtl' : 'ltr'}">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; }
+    .header { background: linear-gradient(135deg, #0F1C2E 0%, #1F6F78 100%); padding: 40px 30px; text-align: center; }
+    .header h1 { color: #3DD4B0; margin: 0; font-size: 24px; }
+    .header p { color: #ffffff; margin: 8px 0 0; font-size: 14px; }
+    .content { padding: 30px; }
+    .order-card { background: #F6F8FA; border: 2px solid #e2e8f0; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .order-row { display: flex; justify-content: space-between; margin: 8px 0; }
+    .order-label { color: #8A94A6; font-size: 14px; }
+    .order-value { color: #0F1C2E; font-weight: 600; font-size: 14px; }
+    .amount { color: #1F6F78; font-size: 24px; font-weight: 700; }
+    .warning-box { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 8px; padding: 16px; margin: 20px 0; }
+    .warning-box p { color: #F57F17; font-size: 13px; margin: 0; }
+    .footer { background-color: #0F1C2E; padding: 20px 30px; text-align: center; }
+    .footer p { color: #8A94A6; font-size: 12px; margin: 4px 0; }
+    .footer a { color: #3DD4B0; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>${isAr ? 'تم استلام طلبك!' : 'Order Received!'}</h1>
+      <p>${isAr ? 'شكراً لك، نحن بانتظار تأكيد الدفع' : 'Thank you, we are awaiting payment confirmation'}</p>
+    </div>
+    <div class="content">
+      <p>${isAr ? 'مرحباً' : 'Hello'} ${options.name},</p>
+      <p>${isAr ? 'لقد استلمنا طلبك بنجاح. بمجرد تأكيد دفعك، سيتم إرسال رمز الوصول الخاص بك إلى هذا البريد الإلكتروني.' : 'We have successfully received your order. Once your payment is confirmed, your access code will be sent to this email address.'}</p>
+      <div class="order-card">
+        <div class="order-row">
+          <span class="order-label">${isAr ? 'رقم الطلب' : 'Order Number'}</span>
+          <span class="order-value" style="font-family: monospace;">${options.orderNumber}</span>
+        </div>
+        <div class="order-row">
+          <span class="order-label">${isAr ? 'المنتج' : 'Product'}</span>
+          <span class="order-value">${options.productName}</span>
+        </div>
+        <div class="order-row">
+          <span class="order-label">${isAr ? 'المبلغ' : 'Amount'}</span>
+          <span class="amount">$${options.amount}</span>
+        </div>
+        <div class="order-row">
+          <span class="order-label">${isAr ? 'الحالة' : 'Status'}</span>
+          <span class="order-value" style="color: #F57F17;">${isAr ? 'بانتظار الدفع' : 'Awaiting Payment'}</span>
+        </div>
+      </div>
+      <div class="warning-box">
+        <p><strong>${isAr ? 'مهم:' : 'Important:'}</strong> ${isAr ? 'سيتم إرسال رمز الوصول فقط بعد التحقق من الدفع. عادةً ما يستغرق ذلك بضع دقائق للبطاقات، أو حتى 24 ساعة للتحويلات البنكية.' : 'Your access code will ONLY be sent after payment verification. This typically takes a few minutes for card payments, or up to 24 hours for bank transfers.'}</p>
+      </div>
+      <p>${isAr ? 'إذا كان لديك أي أسئلة، لا تتردد في' : 'If you have any questions, feel free to'} <a href="https://tamkinly.com/contact" style="color: #1F6F78;">${isAr ? 'التواصل معنا' : 'contact us'}</a>.</p>
+    </div>
+    <div class="footer">
+      <p>&copy; 2026 Tamkinly. ${isAr ? 'جميع الحقوق محفوظة' : 'All rights reserved'}.</p>
+      <p><a href="https://tamkinly.com/privacy">${isAr ? 'سياسة الخصوصية' : 'Privacy Policy'}</a></p>
+    </div>
+  </div>
+</body>
+</html>`;
+
+  if (provider === 'brevo') {
+    return BrevoClient.emails.send({
+      to: [{ email: options.to, name: options.name }],
+      sender: {
+        name: 'Tamkinly',
+        email: process.env.BREVO_SENDER_EMAIL || 'noreply@tamkinly.com',
+      },
+      subject,
+      htmlContent,
+      tags: ['order-received', 'pending'],
+    });
+  }
+
+  console.log(`[EMAIL FALLBACK] Would send order received email to ${options.to}`);
+  return { success: true };
+}
+
 // ============================================
 // EXPORT DEFAULT
 // ============================================
 
 const EmailService = {
   sendPurchaseConfirmationEmail,
+  sendPaymentReceivedEmail,
   sendWelcomeEmail,
   sendFollowUpEmail,
   sendAbandonedCartEmail,
@@ -624,6 +803,7 @@ const EmailService = {
   sendSupportResolvedEmail,
   sendSpecialOfferEmail,
   sendBirthdayOfferEmail,
+  sendOrderReceivedEmail,
   storeContact,
   addContactToList,
   sendEmail,

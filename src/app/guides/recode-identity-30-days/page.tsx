@@ -147,7 +147,7 @@ export default function RecodeIdentityGuide() {
         {/* CTA */}
         <div className="mt-12 text-center">
           <h3 className="text-xl font-bold text-[#0F1C2E] mb-4">{getText('Ready to Start Your Transformation?', 'مستعد لبدء تحولك؟')}</h3>
-          <Link href="/products/bundle">
+          <Link href="/products/mastery">
             <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold h-12 px-8">
               {getText('Get the Full 30-Day Program', 'احصل على برنامج الـ 30 يوماً الكامل')}
               <ArrowRight className="w-4 h-4 ml-2" />

@@ -8,6 +8,10 @@ import { ArrowRight, Clock, User, Sparkles, Target, Users, Heart, Lightbulb, Che
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function WhoAmIWorksheetArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -264,6 +268,9 @@ export default function WhoAmIWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="worksheet" />
+
       <ArticleNavigation currentSlug="who-am-i-worksheet" />
 
       {/* Related Articles */}
@@ -288,26 +295,8 @@ export default function WhoAmIWorksheetArticle() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Ready to Discover Your Authentic Self?", "مستعد لاكتشاف ذاتك الأصيلة؟")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Get the complete \"Who Am I?\" worksheet with guided prompts based on psychological research.", "احصل على ورقة عمل \"من أنا؟\" الكاملة مع مطالبات موجهة مبنية على الأبحاث النفسية.")}
-            </p>
-            <Link href="/worksheets/who-am-i">
-              <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                {getText("Get the Worksheet", "احصل على ورقة العمل")}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-    </article>
+        <BlogConversionSection />
+      </article>
   );
 }
+

@@ -9,6 +9,10 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function PhysicsOfConsciousnessArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -172,6 +176,10 @@ export default function PhysicsOfConsciousnessArticle() {
         </div>
       </section>
 
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="quiz" />
+
+
       <ArticleNavigation currentSlug="physics-of-consciousness" />
 
       <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
@@ -184,13 +192,13 @@ export default function PhysicsOfConsciousnessArticle() {
               {getText("The Daily Reflection Practice helps you observe your thought patterns and replace them with conscious, structured inputs.", "ممارسة التأمل اليومي تساعدك على مراقبة أنماط تفكيرك واستبدالها بمدخلات واعية ومنظمة.")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/apps/daily-reflection-practice">
+              <Link href="/blog/daily-reflection-practice">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
                   {getText("Start Daily Reflection", "ابدأ التأمل اليومي")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/apps/who-am-i-worksheet">
+              <Link href="/blog/who-am-i-worksheet">
                 <Button variant="white" size="lg" className="px-8 font-semibold">
                   {getText("Explore Who You Are", "استكشف من أنت")}
                 </Button>
@@ -199,7 +207,9 @@ export default function PhysicsOfConsciousnessArticle() {
           </div>
         </div>
       </section>
-    </article>
+            <BlogConversionSection />
+      </article>
     </>
   );
 }
+

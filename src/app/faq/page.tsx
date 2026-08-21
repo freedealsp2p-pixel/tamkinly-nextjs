@@ -21,22 +21,24 @@ import {
   Download,
   RefreshCw,
   Shield,
+  Scale,
   Clock
 } from 'lucide-react';
 import { useTranslations } from '@/components/providers/LocaleProvider';
 
-const categoryIcons = [Package, CreditCard, Download, RefreshCw];
+const categoryIcons = [Package, CreditCard, Download, RefreshCw, Shield, Scale];
 const quickAnswerIcons = [Clock, Shield, RefreshCw, Download];
 
 export default function FAQPage() {
   const t = useTranslations("faqPage");
 
   // Build FAQ categories from translation data
-  const faqCategories = [0, 1, 2, 3].map((catIndex) => {
-    const questionCount = catIndex === 3 ? 2 : 3; // Returns & Refunds has 2 questions
+  const faqCategories = [0, 1, 2, 3, 4, 5].map((catIndex) => {
+    const questionCounts = [3, 3, 3, 2, 3, 3]; // Per-category question counts
+    const questionCount = questionCounts[catIndex] || 3;
     return {
       title: t(`categories.${catIndex}.title`),
-      icon: categoryIcons[catIndex],
+      icon: categoryIcons[catIndex] || categoryIcons[0],
       questions: Array.from({ length: questionCount }, (_, qIndex) => ({
         q: t(`categories.${catIndex}.questions.${qIndex}.q`),
         a: t(`categories.${catIndex}.questions.${qIndex}.a`)

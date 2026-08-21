@@ -22,11 +22,13 @@ import {
   Headphones,
   BookOpen,
   FileText,
+  RefreshCw,
   Target,
   Zap,
   Shield,
   Clock,
   Star,
+  Eye,
   Wrench
 } from 'lucide-react';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -37,10 +39,9 @@ import { AccessCodeInput } from '@/components/AccessCodeInput';
 // Access Tier Colors - High contrast for readability
 const tierColors: Record<string, { bg: string; text: string; border: string }> = {
   FREE: { bg: 'bg-[#3DD4B0]/20', text: 'text-[#2BC49E]', border: 'border-[#3DD4B0]/50' },
-  TRIAL: { bg: 'bg-amber-100', text: 'text-amber-800', border: 'border-amber-300' },
-  BASIC: { bg: 'bg-[#1F6F78]/20', text: 'text-[#1F6F78]', border: 'border-[#1F6F78]/50' },
-  PREMIUM: { bg: 'bg-purple-100', text: 'text-purple-800', border: 'border-purple-300' },
-  BUNDLE: { bg: 'bg-[#0F1C2E]', text: 'text-[#3DD4B0]', border: 'border-[#3DD4B0]' }
+  BASIC: { bg: 'bg-[#e6f3f4]', text: 'text-[#2A8A94]', border: 'border-[#cde7e9]' },
+  PREMIUM: { bg: 'bg-[#1F6F78]/20', text: 'text-[#1F6F78]', border: 'border-[#1F6F78]/50' },
+  MASTERY: { bg: 'bg-[#0F1C2E]', text: 'text-[#3DD4B0]', border: 'border-[#3DD4B0]' }
 };
 
 // App icons mapping
@@ -60,29 +61,39 @@ const appIconMap: Record<string, React.ElementType> = {
   'ai-identity-coach': Sparkles,
   'community-access': Users,
   'priority-support': Headphones,
+  'habit-tracker': Target,
+  'goal-system': Target,
+  'identity-recode-system': RefreshCw,
+  'journal-system': BookOpen,
+  'worksheets': FileText,
 };
 
 // App data (non-translatable fields only)
 const appsData = [
   { slug: 'identity-gap-quiz', icon: Brain, color: '#3DD4B0', tier: 'FREE', featured: true, freeApp: true, duration: '3 min', comingSoon: false, appKey: 'identityGapQuiz' },
-  { slug: 'values-clarification', icon: Heart, color: '#E57373', tier: 'FREE', featured: false, freeApp: true, duration: '5 min', comingSoon: false, appKey: 'valuesClarification' },
-  { slug: 'daily-reflection', icon: Sun, color: '#FFB74D', tier: 'FREE', featured: false, freeApp: true, duration: 'Daily', comingSoon: false, appKey: 'dailyReflection' },
-  { slug: 'trial-planner', icon: Calendar, color: '#1F6F78', tier: 'TRIAL', featured: false, freeApp: false, duration: '7 days', comingSoon: false, appKey: 'trialPlanner' },
-  { slug: 'executive-manual', icon: BookOpen, color: '#1F6F78', tier: 'BASIC', featured: true, freeApp: false, duration: 'PDF', comingSoon: false, appKey: 'executiveManual' },
-  { slug: 'daily-planner', icon: Calendar, color: '#3DD4B0', tier: 'BASIC', featured: true, freeApp: false, duration: '30 days', comingSoon: false, appKey: 'dailyPlanner' },
-  { slug: 'identity-baseline', icon: User, color: '#3DD4B0', tier: 'BASIC', featured: false, freeApp: false, duration: '15 min', comingSoon: false, appKey: 'identityBaseline' },
-  { slug: 'environmental-audit', icon: Home, color: '#1F6F78', tier: 'BASIC', featured: false, freeApp: false, duration: '10 min', comingSoon: false, appKey: 'environmentalAudit' },
-  { slug: 'decision-analysis', icon: TrendingUp, color: '#64B5F6', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Ongoing', comingSoon: false, appKey: 'decisionAnalysis' },
-  { slug: 'evidence-tracking', icon: BarChart3, color: '#FFB74D', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Daily', comingSoon: false, appKey: 'evidenceTracking' },
+  { slug: 'values-clarification', icon: Heart, color: '#C97B7B', tier: 'FREE', featured: false, freeApp: true, duration: '5 min', comingSoon: false, appKey: 'valuesClarification' },
+  { slug: 'daily-reflection', icon: Sun, color: '#2A8A94', tier: 'FREE', featured: false, freeApp: true, duration: 'Daily', comingSoon: false, appKey: 'dailyReflection' },
+  { slug: 'habit-tracker', icon: Target, color: '#1F6F78', tier: 'FREE', featured: true, freeApp: true, duration: 'Daily', comingSoon: false, appKey: 'habitTracker' },
+  { slug: 'trial-planner', icon: Calendar, color: '#1F6F78', tier: 'BASIC', featured: false, freeApp: false, duration: '7 days', comingSoon: false, appKey: 'trialPlanner' },
+  { slug: 'executive-manual', icon: BookOpen, color: '#1F6F78', tier: 'PREMIUM', featured: true, freeApp: false, duration: 'PDF', comingSoon: false, appKey: 'executiveManual' },
+  { slug: 'daily-planner', icon: Calendar, color: '#3DD4B0', tier: 'PREMIUM', featured: true, freeApp: false, duration: '30 days', comingSoon: false, appKey: 'dailyPlanner' },
+  { slug: 'identity-baseline', icon: User, color: '#3DD4B0', tier: 'PREMIUM', featured: false, freeApp: false, duration: '15 min', comingSoon: false, appKey: 'identityBaseline' },
+  { slug: 'environmental-audit', icon: Home, color: '#1F6F78', tier: 'PREMIUM', featured: false, freeApp: false, duration: '10 min', comingSoon: false, appKey: 'environmentalAudit' },
+  { slug: 'decision-analysis', icon: TrendingUp, color: '#2A8A94', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Ongoing', comingSoon: false, appKey: 'decisionAnalysis' },
+  { slug: 'evidence-tracking', icon: BarChart3, color: '#2A8A94', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Daily', comingSoon: false, appKey: 'evidenceTracking' },
   { slug: 'progress-dashboard', icon: BarChart3, color: '#8A94A6', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Always', comingSoon: false, appKey: 'progressDashboard' },
-  { slug: 'emotion-regulation', icon: Heart, color: '#E57373', tier: 'BUNDLE', featured: false, freeApp: false, duration: '10 min', comingSoon: false, appKey: 'emotionRegulation' },
-  { slug: 'ai-identity-coach', icon: Sparkles, color: '#3DD4B0', tier: 'BUNDLE', featured: true, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'aiIdentityCoach' },
-  { slug: 'community-access', icon: Users, color: '#1F6F78', tier: 'BUNDLE', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'communityAccess' },
-  { slug: 'priority-support', icon: Headphones, color: '#0F1C2E', tier: 'BUNDLE', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'prioritySupport' },
+  { slug: 'emotion-regulation', icon: Heart, color: '#C97B7B', tier: 'MASTERY', featured: false, freeApp: false, duration: '10 min', comingSoon: false, appKey: 'emotionRegulation' },
+  { slug: 'ai-identity-coach', icon: Sparkles, color: '#3DD4B0', tier: 'MASTERY', featured: true, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'aiIdentityCoach' },
+  { slug: 'community-access', icon: Users, color: '#1F6F78', tier: 'MASTERY', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'communityAccess' },
+  { slug: 'priority-support', icon: Headphones, color: '#0F1C2E', tier: 'MASTERY', featured: false, freeApp: false, duration: 'Unlimited', comingSoon: false, appKey: 'prioritySupport' },
+  { slug: 'goal-system', icon: Target, color: '#2A8A94', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Ongoing', comingSoon: false, appKey: 'goalSystem' },
+  { slug: 'identity-recode-system', icon: RefreshCw, color: '#1F6F78', tier: 'PREMIUM', featured: true, freeApp: false, duration: '30 days', comingSoon: false, appKey: 'identityRecodeSystem' },
+  { slug: 'journal-system', icon: BookOpen, color: '#3DD4B0', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'Daily', comingSoon: false, appKey: 'journalSystem' },
+  { slug: 'worksheets', icon: FileText, color: '#8A94A6', tier: 'PREMIUM', featured: false, freeApp: false, duration: 'PDF', comingSoon: false, appKey: 'worksheetsLib' },
 ];
 
 // Tier order for priority
-const tierOrder = ['BUNDLE', 'PREMIUM', 'BASIC', 'TRIAL', 'FREE'];
+const tierOrder = ['MASTERY', 'PREMIUM', 'BASIC', 'FREE'];
 
 export default function AppsPage() {
   const [selectedTier, setSelectedTier] = useState<string | null>('ALL');
@@ -97,19 +108,17 @@ export default function AppsPage() {
   // Group apps by tier
   const appsByTier = {
     FREE: appsData.filter(app => app.tier === 'FREE'),
-    TRIAL: appsData.filter(app => app.tier === 'TRIAL'),
     BASIC: appsData.filter(app => app.tier === 'BASIC'),
     PREMIUM: appsData.filter(app => app.tier === 'PREMIUM'),
-    BUNDLE: appsData.filter(app => app.tier === 'BUNDLE'),
+    MASTERY: appsData.filter(app => app.tier === 'MASTERY'),
   };
 
   // Get tier stats
   const tierStats = {
     FREE: { count: appsByTier.FREE.length, label: t('tierLabels.FREE'), price: '$0' },
-    TRIAL: { count: appsByTier.TRIAL.length, label: t('tierLabels.TRIAL'), price: '$7' },
-    BASIC: { count: appsByTier.BASIC.length, label: t('tierLabels.BASIC'), price: '$17' },
-    PREMIUM: { count: appsByTier.PREMIUM.length, label: t('tierLabels.PREMIUM'), price: '$27' },
-    BUNDLE: { count: appsByTier.BUNDLE.length, label: t('tierLabels.BUNDLE'), price: '$47' },
+    BASIC: { count: appsByTier.BASIC.length, label: t('tierLabels.BASIC'), price: '$7/mo' },
+    PREMIUM: { count: appsByTier.PREMIUM.length, label: t('tierLabels.PREMIUM'), price: '$17/mo' },
+    MASTERY: { count: appsByTier.MASTERY.length, label: t('tierLabels.MASTERY'), price: '$27/mo' },
   };
 
   // Generate SoftwareApplication schemas for SEO
@@ -120,9 +129,9 @@ export default function AppsPage() {
       url: `/apps/${app.slug}`,
       category: t(`apps.${app.appKey}.category`),
       offers: {
-        price: app.tier === 'FREE' ? 0 : app.tier === 'TRIAL' ? 7 : app.tier === 'BASIC' ? 17 : app.tier === 'PREMIUM' ? 27 : 47,
+        price: app.tier === 'FREE' ? 0 : app.tier === 'BASIC' ? 7 : app.tier === 'PREMIUM' ? 17 : 27,
       },
-      aggregateRating: app.featured ? { ratingValue: 4.9, reviewCount: 127 } : undefined,
+  
     })
   );
 
@@ -179,7 +188,7 @@ export default function AppsPage() {
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
-                {stats.label} ({stats.count}) - {stats.price}
+                {stats.label} ({stats.count})
               </Button>
             ))}
           </div>
@@ -226,6 +235,69 @@ export default function AppsPage() {
           </div>
         )}
 
+        {/* Recovery Programs Section */}
+        {selectedTier === 'ALL' && (
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <Badge className="bg-[#1F6F78]/20 text-[#1F6F78] border border-[#1F6F78]/50">
+                <Heart className="w-3.5 h-3.5 mr-1" />
+                {t('recoveryPrograms')}
+              </Badge>
+              <Link href="/recovery">
+                <Button variant="link" className="text-[#3DD4B0]">
+                  {t('exploreRecovery')} <ArrowRight className="w-4 h-4 ml-1" />
+                </Button>
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link href="/recovery/porn-recovery" className="group">
+                <Card className="h-full border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-[#F0FDF9] to-white">
+                  <CardContent className="p-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 bg-[#3DD4B0]/10 group-hover:scale-110 transition-transform duration-300">
+                      <Brain className="w-6 h-6 text-[#3DD4B0]" />
+                    </div>
+                    <Badge className="bg-[#3DD4B0]/20 text-[#2BC49E] mb-3">{t('recoveryFree')}</Badge>
+                    <h3 className="font-semibold text-lg text-[#0F1C2E] mb-2">{t('pornRecoveryName')}</h3>
+                    <p className="text-sm text-slate-600 mb-4 line-clamp-2">{t('pornRecoveryDesc')}</p>
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <Clock className="w-3 h-3" />
+                      {t('recoverySelfPaced')}
+                    </div>
+                    <div className="mt-4">
+                      <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]" size="sm">
+                        {t('startRecovery')}
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/recovery/trc" className="group">
+                <Card className="h-full border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-[#F6F8FA] to-white">
+                  <CardContent className="p-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 bg-[#1F6F78]/10 group-hover:scale-110 transition-transform duration-300">
+                      <Shield className="w-6 h-6 text-[#1F6F78]" />
+                    </div>
+                    <Badge className="bg-[#1F6F78]/20 text-[#1F6F78] mb-3">{t('recoveryFree')}</Badge>
+                    <h3 className="font-semibold text-lg text-[#0F1C2E] mb-2">{t('trcName')}</h3>
+                    <p className="text-sm text-slate-600 mb-4 line-clamp-2">{t('trcDesc')}</p>
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <Clock className="w-3 h-3" />
+                      {t('recoverySelfPaced')}
+                    </div>
+                    <div className="mt-4">
+                      <Button className="w-full bg-[#1F6F78] text-white hover:bg-[#1F6F78]/90" size="sm">
+                        {t('startRecovery')}
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+          </div>
+        )}
+
         {/* Other Tiers */}
         {Object.entries(appsByTier)
           .filter(([tier]) => tier !== 'FREE' && (selectedTier === 'ALL' || selectedTier === tier))
@@ -233,7 +305,7 @@ export default function AppsPage() {
             <div key={tier} className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <Badge className={`bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]/50`}>
-                  {tierStats[tier as keyof typeof tierStats].label} Package - {tierStats[tier as keyof typeof tierStats].price}
+                  {tierStats[tier as keyof typeof tierStats].label}
                 </Badge>
                 <Link href="/products">
                   <Button variant="link" className="text-[#3DD4B0]">
@@ -299,7 +371,7 @@ function AppCard({ app, isLocked, t, locale }: {
     } ${app.comingSoon ? 'opacity-90' : ''}`}>
       {app.comingSoon && (
         <div className="absolute top-4 right-4 z-10">
-          <Badge className="bg-amber-500/20 text-amber-600 border border-amber-500/50 text-xs">
+          <Badge className="bg-[#e6f3f4] text-[#2A8A94] border border-[#cde7e9] text-xs">
             <Wrench className="w-3 h-3 mr-1" />
             {t('comingSoon')}
           </Badge>
@@ -358,16 +430,10 @@ function AppCard({ app, isLocked, t, locale }: {
               </Button>
             </Link>
           ) : isLocked ? (
-            <Link href={
-              app.tier === 'TRIAL' ? '/products/trial' :
-              app.tier === 'BASIC' ? '/products/planner' :
-              app.tier === 'PREMIUM' ? '/products/premium' :
-              app.tier === 'BUNDLE' ? '/products/bundle' :
-              '/products'
-            }>
+            <Link href={`/apps/${app.slug}`}>
               <Button className="w-full bg-[#0F1C2E] text-white hover:bg-[#1a2d47] shadow-md" size="sm">
-                <Lock className="w-4 h-4 mr-2" />
-                {t('openAccess')} - ${app.tier === 'TRIAL' ? '7' : app.tier === 'BASIC' ? '17' : app.tier === 'PREMIUM' ? '27' : '47'}
+                <Eye className="w-4 h-4 mr-2" />
+                {t('openAccess')} - ${app.tier === 'BASIC' ? '7' : app.tier === 'PREMIUM' ? '17' : '27'}/mo
               </Button>
             </Link>
           ) : (

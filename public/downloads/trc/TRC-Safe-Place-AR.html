@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تصور المكان الآمن — Tamkinly | مركز تعافي الصدمات</title>
+
+<style>
+:root {
+  --navy: #0F1C2E;
+  --teal: #1F6F78;
+  --teal-soft: #E8F4F5;
+  --teal-border: #B2D8DC;
+
+  --slate: #334155;
+  --muted: #64748B;
+  --border: #D9E2E7;
+  --line: #CBD5E1;
+
+  --paper: #FFFFFF;
+  --page-bg: #F1F5F9;
+
+  --warning-bg: #FFF7ED;
+  --warning-border: #C2410C;
+  --warning-text: #7C2D12;
+
+  --soft-bg: #F8FAFC;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--slate);
+  font-family:
+    "Noto Sans Arabic",
+    "Noto Kufi Arabic",
+    Tahoma,
+    Arial,
+    sans-serif;
+  direction: rtl;
+  line-height: 1.45;
+}
+
+/* =========================
+   A4 PAGE
+   ========================= */
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  padding: 12mm 14mm;
+  margin: 20px auto;
+  background: var(--paper);
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  page-break-after: always;
+  break-after: page;
+
+  box-shadow: 0 4px 14px rgba(15, 28, 46, 0.08);
+}
+
+.page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.page-content {
+  flex: 1;
+  min-height: 0;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--border);
+
+  margin-bottom: 6mm;
+}
+
+.brand {
+  color: var(--navy);
+  font-size: 9pt;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
+h1 {
+  margin: 0 0 2mm;
+  color: var(--navy);
+  font-size: 19pt;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 0 0 4mm;
+  color: var(--teal);
+  font-size: 9.5pt;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.intro {
+  margin: 0 0 4mm;
+  color: var(--slate);
+  font-size: 8.5pt;
+  line-height: 1.5;
+}
+
+.section-title {
+  margin: 4mm 0 2mm;
+  color: var(--navy);
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+.instruction {
+  margin: 0 0 3mm;
+  color: var(--muted);
+  font-size: 8pt;
+  line-height: 1.45;
+}
+
+/* =========================
+   BOXES
+   ========================= */
+
+.box {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3mm 3.5mm;
+  margin-bottom: 4mm;
+}
+
+.box-title {
+  margin-bottom: 1mm;
+  font-size: 9pt;
+  font-weight: 700;
+}
+
+.box-body {
+  margin: 0;
+  color: var(--slate);
+  font-size: 8pt;
+  line-height: 1.45;
+}
+
+.safety-box {
+  background: var(--teal-soft);
+  border-color: var(--teal-border);
+}
+
+.safety-box .box-title {
+  color: var(--teal);
+}
+
+.warning-box {
+  background: var(--warning-bg);
+  border-color: #FDBA74;
+  border-right: 4px solid var(--warning-border);
+}
+
+.warning-box .box-title {
+  color: var(--warning-text);
+}
+
+.neutral-box {
+  background: var(--soft-bg);
+}
+
+.neutral-box .box-title {
+  color: var(--navy);
+}
+
+/* =========================
+   STEPS
+   ========================= */
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2mm;
+}
+
+.step {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #FFFFFF;
+  padding: 2.5mm 3mm;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 2.5mm;
+  margin-bottom: 1.5mm;
+}
+
+.step-number {
+  width: 7mm;
+  height: 7mm;
+  min-width: 7mm;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: var(--teal);
+  color: #FFFFFF;
+
+  font-size: 9pt;
+  font-weight: 700;
+}
+
+.step-title {
+  margin: 0;
+  color: var(--navy);
+  font-size: 9.5pt;
+  font-weight: 700;
+}
+
+.step-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 7.5pt;
+  line-height: 1.35;
+}
+
+.writing-lines {
+  margin-top: 1.5mm;
+}
+
+.writing-line {
+  width: 100%;
+  height: 6mm;
+  border-bottom: 1px dotted var(--line);
+}
+
+/* =========================
+   CHECK-IN
+   ========================= */
+
+.checkin {
+  margin-top: 4mm;
+  padding: 3mm 3.5mm;
+  background: var(--soft-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.checkin-title {
+  margin-bottom: 1mm;
+  color: var(--navy);
+  font-size: 9pt;
+  font-weight: 700;
+}
+
+.checkin-text {
+  margin: 0 0 2mm;
+  color: var(--muted);
+  font-size: 8pt;
+  line-height: 1.45;
+}
+
+/* =========================
+   PAGE 2
+   ========================= */
+
+.choice-list {
+  margin: 0;
+  padding-right: 5mm;
+}
+
+.choice-list li {
+  margin-bottom: 2mm;
+  color: var(--slate);
+  font-size: 8pt;
+  line-height: 1.45;
+}
+
+.contact-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+  margin-top: 3mm;
+}
+
+.contact-field {
+  display: flex;
+  align-items: baseline;
+  gap: 3mm;
+}
+
+.contact-label {
+  min-width: 52mm;
+  color: var(--navy);
+  font-size: 8pt;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.contact-line {
+  flex: 1;
+  height: 6mm;
+  border-bottom: 1px dotted var(--line);
+}
+
+.closure-area {
+  margin-top: 4mm;
+}
+
+.closure-lines .writing-line {
+  height: 8mm;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+  font-size: 7.5pt;
+
+  direction: ltr;
+}
+
+.footer-code {
+  direction: ltr;
+  text-align: left;
+}
+
+/* =========================
+   PRINT CONTROL
+   ========================= */
+
+.print-controls {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 7px 14px;
+  border-radius: 20px;
+
+  background: var(--navy);
+  color: #FFFFFF;
+
+  font-size: 11px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+}
+
+.print-button {
+  border: 0;
+  border-radius: 14px;
+  padding: 5px 12px;
+
+  background: #FFFFFF;
+  color: var(--navy);
+
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media print {
+  body {
+    background: #FFFFFF;
+  }
+
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm;
+    height: 297mm;
+    padding: 12mm 14mm;
+  }
+
+  .print-controls {
+    display: none !important;
+  }
+}
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    @media print {
+      body { background: none; }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Screen-only control -->
+<div class="print-controls">
+  <span>نسخة قابلة للطباعة — A4</span>
+  <button class="print-button" onclick="window.print()">طباعة / PDF</button>
+</div>
+
+
+<!-- =========================================================
+     PAGE 1
+     ========================================================= -->
+
+<section class="page">
+
+  <div class="page-content">
+
+    <header class="header">
+      <div class="brand">
+        Tamkinly | مركز تعافي الصدمات
+      </div>
+    </header>
+
+    <h1>تصور المكان الآمن</h1>
+
+    <p class="subtitle">
+      تمرين اختياري لبناء صورة ذهنية يمكن الرجوع إليها عندما تحتاج إلى مزيد من الاستقرار.
+    </p>
+
+    <p class="intro">
+      لا توجد طريقة صحيحة واحدة لبناء المكان الآمن.
+      يمكنك استخدام مكان حقيقي، أو مكان متخيل، أو صورة بسيطة لبيئة تشعر فيها بقدر أكبر من الأمان.
+      لا تحتاج إلى استرجاع أي تجربة مؤلمة أو تفسير ما يحدث داخلك أثناء التمرين.
+    </p>
+
+    <div class="box safety-box">
+      <div class="box-title">قبل أن تبدأ</div>
+
+      <p class="box-body">
+        هذا التمرين اختياري، وقد لا يكون مناسبًا في كل لحظة.
+        إذا أصبحت الصورة الذهنية مزعجة، أو ظهرت صور أو ذكريات اقتحامية،
+        توقف عن التصور وافتح عينيك ووجّه انتباهك إلى المكان الحالي.
+        يمكنك العودة إلى التأريض الحسي 5-4-3-2-1 أو إلى وسيلة دعم أخرى تناسبك.
+      </p>
+    </div>
+
+    <h2 class="section-title">خطوات التمرين</h2>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <h2 class="step-title">اختر وضعية مريحة ومناسبة لك</h2>
+        </div>
+
+        <p class="step-hint">
+          يمكنك إبقاء عينيك مفتوحتين أو إغلاقهما إذا كان ذلك مريحًا وآمنًا لك.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <h2 class="step-title">اختر مكانًا تشعر فيه بقدر أكبر من الأمان</h2>
+        </div>
+
+        <p class="step-hint">
+          يمكن أن يكون المكان حقيقيًا أو متخيلًا. لا تحتاج إلى اختيار مكان مثالي أو محدد.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <h2 class="step-title">استكشف المكان من خلال حواسك</h2>
+        </div>
+
+        <p class="step-hint">
+          لاحظ ما يمكن رؤيته أو سماعه أو لمسه أو شمه أو تذوقه، بالقدر الذي يناسبك.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">4</div>
+          <h2 class="step-title">لاحظ التفاصيل التي تجعل المكان أكثر ملاءمة</h2>
+        </div>
+
+        <p class="step-hint">
+          انتبه إلى المسافة، والإضاءة، والأصوات، والملمس، ودرجة الحرارة، أو أي تفاصيل أخرى تلاحظها.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <div class="step-number">5</div>
+          <h2 class="step-title">اختر كلمة أو عبارة قصيرة للعودة إلى الصورة</h2>
+        </div>
+
+        <p class="step-hint">
+          اخترها بنفسك إذا وجدت أن وجود كلمة أو عبارة يساعدك على تذكّر المكان.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="checkin">
+
+      <div class="checkin-title">
+        بعد التمرين: ماذا ألاحظ الآن؟
+      </div>
+
+      <p class="checkin-text">
+        لا توجد نتيجة مطلوبة. اكتب فقط ما تلاحظه الآن، أو اترك المساحة فارغة.
+      </p>
+
+      <div class="writing-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <span class="footer-code">
+      Tool ID: TRC-SAFE_PLACE&nbsp;&nbsp;|&nbsp;&nbsp;صفحة 1 من 3
+    </span>
+  </footer>
+
+</section>
+
+
+<!-- =========================================================
+     PAGE 2
+     ========================================================= -->
+
+<section class="page">
+
+  <div class="page-content">
+
+    <header class="header">
+      <div class="brand">
+        Tamkinly | مركز تعافي الصدمات
+      </div>
+    </header>
+
+    <h1>استكشاف المكان الآمن</h1>
+
+    <p class="instruction">
+      استخدم المساحات التالية لوصف ما تلاحظه في المكان الذي اخترته.
+      يمكنك ترك أي قسم فارغًا إذا لم يناسبك.
+    </p>
+
+
+    <div class="write-field-group">
+
+      <h2 class="section-title">
+        ما الذي أراه في مكاني الآمن؟
+      </h2>
+
+      <div class="writing-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="write-field-group">
+
+      <h2 class="section-title">
+        ما الذي أسمعه في مكاني الآمن؟
+      </h2>
+
+      <div class="writing-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="write-field-group">
+
+      <h2 class="section-title">
+        ما الذي أشعر بملمسه أو بدرجة حرارته؟
+      </h2>
+
+      <div class="writing-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="write-field-group">
+
+      <h2 class="section-title">
+        ما الذي ألاحظه من روائح؟
+      </h2>
+
+      <div class="writing-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="write-field-group">
+
+      <h2 class="section-title">
+        ما الذي ألاحظه من طعم؟
+      </h2>
+
+      <div class="writing-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="write-field-group">
+
+      <h2 class="section-title">
+        ما الكلمة أو العبارة التي اخترتها؟
+      </h2>
+
+      <div class="writing-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="box neutral-box" style="margin-top:4mm;">
+
+      <div class="box-title">
+        تذكير
+      </div>
+
+      <p class="box-body">
+        لا تحتاج إلى جعل المكان مثاليًا أو ثابتًا.
+        يمكنك تعديل الصورة، أو تركها، أو العودة إلى البيئة الحالية في أي وقت.
+      </p>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <span class="footer-code">
+      Tool ID: TRC-SAFE_PLACE&nbsp;&nbsp;|&nbsp;&nbsp;صفحة 2 من 3
+    </span>
+  </footer>
+
+</section>
+
+
+<!-- =========================================================
+     PAGE 3
+     ========================================================= -->
+
+<section class="page">
+
+  <div class="page-content">
+
+    <header class="header">
+      <div class="brand">
+        Tamkinly | مركز تعافي الصدمات
+      </div>
+    </header>
+
+    <h1>العودة إلى الحاضر والدعم</h1>
+
+    <p class="instruction">
+      يمكنك استخدام هذه الصفحة عندما تريد التوقف عن التصور والعودة إلى محيطك الحالي.
+    </p>
+
+
+    <div class="box teal-box">
+
+      <div class="box-title">
+        إذا أصبح المكان الآمن غير مريح
+      </div>
+
+      <ul class="choice-list">
+        <li>افتح عينيك إذا كانتا مغلقتين، وانظر إلى المكان الموجود حولك.</li>
+        <li>لاحظ شيئًا حقيقيًا وموجودًا أمامك الآن.</li>
+        <li>استخدم التأريض الحسي 5-4-3-2-1 إذا كان مناسبًا لك.</li>
+        <li>لا تجبر نفسك على استكمال التصور؛ يمكنك التوقف في أي وقت.</li>
+      </ul>
+
+    </div>
+
+
+    <div class="box warning-box">
+
+      <div class="box-title">
+        متى أتوقف؟
+      </div>
+
+      <p class="box-body">
+        توقف عن التمرين إذا أصبح التصور مؤلمًا أو ظهرت ذكريات أو صور اقتحامية،
+        أو شعرت بأنك أقل اتصالًا بالحاضر، أو لاحظت زيادة واضحة في الضيق.
+        لا تحتاج إلى إكمال الورقة.
+      </p>
+
+    </div>
+
+
+    <h2 class="section-title">
+      جهات الدعم التي أستطيع الرجوع إليها
+    </h2>
+
+    <p class="instruction">
+      يمكنك كتابة معلومات الدعم التي تريد الاحتفاظ بها في متناولك.
+    </p>
+
+
+    <div class="contact-grid">
+
+      <div class="contact-field">
+        <div class="contact-label">
+          شخص داعم موثوق:
+        </div>
+        <div class="contact-line"></div>
+      </div>
+
+      <div class="contact-field">
+        <div class="contact-label">
+          مختص بالصحة النفسية:
+        </div>
+        <div class="contact-line"></div>
+      </div>
+
+      <div class="contact-field">
+        <div class="contact-label">
+          خدمة دعم / خط مساعدة:
+        </div>
+        <div class="contact-line"></div>
+      </div>
+
+      <div class="contact-field">
+        <div class="contact-label">
+          خدمة الطوارئ المحلية:
+        </div>
+        <div class="contact-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="closure-area">
+
+      <h2 class="section-title">
+        ما الذي أحتاجه الآن؟
+      </h2>
+
+      <p class="instruction">
+        اكتب ما قد يساعدك في هذه اللحظة، أو اترك المساحة فارغة.
+      </p>
+
+      <div class="closure-lines">
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+        <div class="writing-line"></div>
+      </div>
+
+    </div>
+
+
+    <div class="box neutral-box" style="margin-top:5mm;">
+
+      <div class="box-title">
+        إخلاء المسؤولية
+      </div>
+
+      <p class="box-body">
+        هذه الورقة أداة تعليمية وداعمة للتوجه إلى الحاضر والتنظيم الذاتي.
+        لا تقدم تشخيصًا أو تقييمًا سريريًا، ولا تحل محل العلاج النفسي أو
+        التقييم الطبي أو الرعاية المتخصصة أو التدخل في حالات الأزمات.
+        إذا كنت في خطر فوري أو تمر بحالة طارئة، فالأولوية للسلامة وطلب
+        الدعم المناسب من الجهات المختصة في مكانك.
+      </p>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <span class="footer-code">
+      Tool ID: TRC-SAFE_PLACE&nbsp;&nbsp;|&nbsp;&nbsp;صفحة 3 من 3
+    </span>
+  </footer>
+
+</section>
+
+</body>
+</html>

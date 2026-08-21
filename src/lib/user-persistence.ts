@@ -516,7 +516,7 @@ export function hasAccess(requiredTier: string): boolean {
   const access = getAccessInfo();
   if (!access) return false;
   
-  const tierOrder = ['FREE', 'TRIAL', 'BASIC', 'PREMIUM', 'BUNDLE'];
+  const tierOrder = ['FREE', 'BASIC', 'BASIC', 'PREMIUM', 'MASTERY'];
   const userTierIndex = tierOrder.indexOf(access.tier);
   const requiredTierIndex = tierOrder.indexOf(requiredTier);
   

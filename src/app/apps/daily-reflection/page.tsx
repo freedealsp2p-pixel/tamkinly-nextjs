@@ -261,16 +261,16 @@ export default function DailyReflectionPage() {
     'الوعي الذاتي': '#3DD4B0',
     'Identity Shift': '#1F6F78',
     'تحوّل الهوية': '#1F6F78',
-    'Growth Mindset': '#64B5F6',
-    'عقلية النمو': '#64B5F6',
-    'Values Alignment': '#E57373',
-    'محاذاة القيم': '#E57373',
-    'Emotional Intelligence': '#BA68C8',
-    'الذكاء العاطفي': '#BA68C8',
-    'Environmental Design': '#FFB74D',
-    'التصميم البيئي': '#FFB74D',
-    'Future Self': '#81C784',
-    'الذات المستقبلية': '#81C784'
+    'Growth Mindset': '#2A8A94',
+    'عقلية النمو': '#2A8A94',
+    'Values Alignment': '#C97B7B',
+    'محاذاة القيم': '#C97B7B',
+    'Emotional Intelligence': '#2A8A94',
+    'الذكاء العاطفي': '#2A8A94',
+    'Environmental Design': '#2A8A94',
+    'التصميم البيئي': '#2A8A94',
+    'Future Self': '#3DD4B0',
+    'الذات المستقبلية': '#3DD4B0'
   };
 
   return (
@@ -283,8 +283,8 @@ export default function DailyReflectionPage() {
           </Link>
           <div className="flex items-center justify-between mt-2">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#FFB74D]/20 flex items-center justify-center">
-                <Sun className="w-5 h-5 text-[#FFB74D]" />
+              <div className="w-10 h-10 rounded-xl bg-[#2A8A94]/20 flex items-center justify-center">
+                <Sun className="w-5 h-5 text-[#2A8A94]" />
               </div>
               <div>
                 <h1 className="text-xl font-bold">{getText('Daily Reflection Prompt', 'محفّز التأمّل اليومي')}</h1>

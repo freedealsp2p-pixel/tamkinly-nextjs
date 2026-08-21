@@ -35,6 +35,10 @@ export const metadata: Metadata = {
     site: '@tamkinly',
     images: ['https://tamkinly.com/og-image.webp'],
   },
+  other: {
+    'DC.description': 'In-depth guides for identity transformation, habit change, and personal growth. Research-backed frameworks to help you become who you want to be.',
+    'DC.subject': 'identity transformation guides, behavior change, personal growth',
+  },
 };
 
 export default function GuidesLayout({

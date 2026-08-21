@@ -1,44 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import EmailService, { addContactToList } from '@/lib/email-service';
+import { addContactToList, sendOrderReceivedEmail } from '@/lib/email-service';
+import { applySecurity, CHECKOUT_RATE_LIMIT } from '@/lib/security';
 
-// Generate unique access code
-function generateAccessCode(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const segments = 3;
-  const segmentLength = 4;
-  
-  const codeSegments = [];
-  for (let i = 0; i < segments; i++) {
-    let segment = '';
-    for (let j = 0; j < segmentLength; j++) {
-      segment += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    codeSegments.push(segment);
-  }
-  
-  return `TMLY-${codeSegments.join('-')}`;
-}
-
-// Map product IDs to access tiers
-const productTierMap: Record<string, 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE'> = {
-  'trial': 'TRIAL',
-  'planner': 'BASIC',
+// Map product IDs to access tiers (NEW MODEL: 3 paid tiers)
+// Legacy IDs are aliased for backward compatibility with existing orders/links
+const productTierMap: Record<string, 'BASIC' | 'PREMIUM' | 'MASTERY'> = {
+  'basic': 'BASIC',
   'premium': 'PREMIUM',
-  'bundle': 'BUNDLE',
+  'mastery': 'MASTERY',
+  // Legacy aliases
+  'trial': 'BASIC',
+  'planner': 'PREMIUM',
+  'bundle': 'MASTERY',
 };
 
-// Product names map
+// Product names map (NEW MODEL)
 const productNames: Record<string, string> = {
-  'trial': '7-Day Trial',
-  'planner': 'Identity Recode Planner',
-  'premium': 'Premium Transformation',
-  'bundle': 'Complete Bundle',
+  'basic': 'Basic (Monthly)',
+  'premium': 'Premium (Monthly)',
+  'mastery': 'Mastery (Monthly)',
+  // Legacy aliases (for backward compat with old orders)
+  'trial': 'Basic (Monthly)',
+  'planner': 'Premium (Monthly)',
+  'bundle': 'Mastery (Monthly)',
 };
 
-// POST - Process checkout (supports direct product, localStorage cart, and server cart)
+// POST - Process checkout (ONLY creates a PENDING order)
+// Access codes are generated ONLY when payment is confirmed via webhook
 export async function POST(request: NextRequest) {
   try {
+  // Security: CSRF + rate limit
+  const securityBlocked = await applySecurity(request, CHECKOUT_RATE_LIMIT);
+  if (securityBlocked) return securityBlocked;
+
+
     const body = await request.json();
     const { name, email, productId, productName, price, cartItems: clientCartItems } = body;
 
@@ -58,10 +54,9 @@ export async function POST(request: NextRequest) {
 
     let orderItems: { productId: string; name: string; price: number; quantity: number }[] = [];
     let total = 0;
-    let accessTier: 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE' | null = null;
     let bestProductId: string | null = null;
 
-    // Priority 1: Direct product purchase from query params
+    // Priority 1: Direct product purchase
     if (productId && price !== undefined) {
       orderItems = [{
         productId,
@@ -70,10 +65,9 @@ export async function POST(request: NextRequest) {
         quantity: 1,
       }];
       total = price;
-      accessTier = productTierMap[productId] || null;
       bestProductId = productId;
     }
-    // Priority 2: Cart items from localStorage (sent from client)
+    // Priority 2: Cart items from localStorage
     else if (clientCartItems && Array.isArray(clientCartItems) && clientCartItems.length > 0) {
       orderItems = clientCartItems.map((item: { productId: string; name: string; price: number; quantity?: number }) => ({
         productId: item.productId,
@@ -83,8 +77,7 @@ export async function POST(request: NextRequest) {
       }));
       total = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-      // Find the highest tier product in cart for access
-      const tierOrder: Record<string, number> = { 'trial': 1, 'planner': 2, 'premium': 3, 'bundle': 4 };
+      const tierOrder: Record<string, number> = { 'basic': 1, 'premium': 2, 'mastery': 3, 'trial': 1, 'planner': 2, 'bundle': 3 };
       let bestTier = 0;
       for (const item of orderItems) {
         const tierLevel = tierOrder[item.productId] || 0;
@@ -92,9 +85,6 @@ export async function POST(request: NextRequest) {
           bestTier = tierLevel;
           bestProductId = item.productId;
         }
-      }
-      if (bestProductId) {
-        accessTier = productTierMap[bestProductId] || null;
       }
     }
     // Priority 3: Server-side cart via cookie
@@ -109,7 +99,6 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // Get cart items from database
       try {
         const dbCartItems = await db.cartItem.findMany({
           where: { cartId },
@@ -134,16 +123,13 @@ export async function POST(request: NextRequest) {
           return sum + item.product.price * item.quantity;
         }, 0);
 
-        // Find access tier
         const bundleItem = dbCartItems.find(item => 
           ['trial', 'planner', 'premium', 'bundle'].includes(item.productId)
         );
         if (bundleItem) {
-          accessTier = productTierMap[bundleItem.productId] || null;
           bestProductId = bundleItem.productId;
         }
 
-        // Clear cart items
         await db.cartItem.deleteMany({
           where: { cartId },
         });
@@ -166,7 +152,7 @@ export async function POST(request: NextRequest) {
     // Generate order number
     const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
 
-    // Create order
+    // Create PENDING order - NO access code generated yet
     const order = await db.order.create({
       data: {
         orderNumber,
@@ -186,68 +172,42 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Generate access code for products that grant app access
-    let accessCode: string | null = null;
+    // SECURITY FIX: Do NOT generate access code here
+    // Access codes are ONLY generated when payment is confirmed via webhook
+    // The webhook at /api/payment/webhook handles this after real payment verification
 
-    if (accessTier) {
-      accessCode = generateAccessCode();
-      
-      await db.appAccess.create({
-        data: {
-          code: accessCode,
-          email: email.toLowerCase(),
-          customerName: name || null,
-          productId: bestProductId || 'bundle',
-          productName: productNames[bestProductId || 'bundle'] || 'Transformation Package',
-          tier: accessTier,
-          isUsed: false,
-          isActive: true,
-        },
+    // Add to Brevo marketing list (not sensitive - just for newsletters)
+    try {
+      await addContactToList(email, name || 'Friend', {
+        type: (bestProductId || 'bundle') as 'trial' | 'planner' | 'premium' | 'bundle',
       });
+    } catch (brevoError) {
+      console.error('Failed to add contact to Brevo:', brevoError);
+    }
+    // Send order received email to customer
+    try {
+      const productName = orderItems.map(i => i.name).join(', ');
+      await sendOrderReceivedEmail({
+        to: email.toLowerCase(),
+        name: name || email.split('@')[0],
+        orderNumber: order.orderNumber,
+        productName,
+        amount: total,
+      });
+      console.log('Order received email sent to:', email);
+    } catch (emailError) {
+      console.error('Failed to send order received email:', emailError);
     }
 
-    // Send purchase confirmation email
-    if (accessTier && accessCode) {
-      try {
-        const productTypeMap: Record<string, 'trial' | 'planner' | 'premium' | 'bundle'> = {
-          'trial': 'trial',
-          'planner': 'planner',
-          'premium': 'premium',
-          'bundle': 'bundle',
-        };
-        const productType = productTypeMap[bestProductId || 'bundle'] || 'bundle';
-        
-        const emailResult = await EmailService.sendPurchaseConfirmationEmail({
-          to: email,
-          name: name || 'Friend',
-          productName: productNames[bestProductId || 'bundle'] || 'Transformation Package',
-          productType,
-          accessKey: accessCode,
-        });
-        
-        console.log(`Purchase email sent: ${emailResult.success ? 'YES' : 'NO'}`);
-      } catch (emailError) {
-        console.error('Failed to send purchase email:', emailError);
-      }
-      
-      // Add to Brevo for email sequences
-      try {
-        await addContactToList(email, name || 'Friend', {
-          type: (bestProductId || 'bundle') as 'trial' | 'planner' | 'premium' | 'bundle',
-          accessKey: accessCode,
-        });
-      } catch (brevoError) {
-        console.error('Failed to add contact to Brevo:', brevoError);
-      }
-    }
 
-    // Response
+    // Response - clearly indicates order is PENDING
     const response = NextResponse.json({
       success: true,
       orderId: order.id,
       orderNumber: order.orderNumber,
-      accessCode: accessCode,
-      message: 'Order completed successfully',
+      accessCode: null,
+      message: 'Order created. Awaiting payment confirmation. Your access token will be sent to your email once payment is verified.',
+      pendingVerification: true,
     });
 
     // Clear cart cookie if exists
@@ -267,3 +227,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+

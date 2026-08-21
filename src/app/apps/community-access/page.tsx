@@ -26,7 +26,7 @@ export default function CommunityAccessPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] text-white py-16 px-4">
         <div className="container mx-auto max-w-4xl text-center">
-          <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0] border border-[#3DD4B0]/50 mb-4">{getText('BUNDLE EXCLUSIVE', 'حصري للباقة الشاملة')}</Badge>
+          <Badge className="bg-[#3DD4B0]/20 text-[#3DD4B0] border border-[#3DD4B0]/50 mb-4">{getText('MASTERY EXCLUSIVE', 'حصري للباقة الشاملة')}</Badge>
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">{getText('Transformation Community', 'مجتمع التحول')}</h1>
           <p className="text-lg text-slate-300 max-w-2xl mx-auto">{getText('Join a supportive community of people committed to identity transformation. Share wins, get support, and stay accountable on your journey.', 'انضم إلى مجتمع داعم من الأشخاص الملتزمين بتحول الهوية. شارك إنجازاتك، احصل على الدعم، وابقَ ملتزماً في رحلتك.')}</p>
         </div>
@@ -40,15 +40,15 @@ export default function CommunityAccessPage() {
               <Lock className="w-8 h-8 text-[#3DD4B0]" />
             </div>
             <CardTitle className="text-2xl">{getText('Access Required', 'الوصول مطلوب')}</CardTitle>
-            <CardDescription className="text-base">{getText('The Transformation Community is included in the Complete Bundle ($47)', 'مجتمع التحول مضمّن في الباقة الشاملة ($47)')}</CardDescription>
+            <CardDescription className="text-base">{getText('The Transformation Community is included in the Mastery ($27/mo)', 'مجتمع التحول مضمّن في الإتقان ($27/شهر)')}</CardDescription>
           </CardHeader>
           <CardContent className="text-center">
-            <Link href="/products/bundle">
+            <Link href="/products/mastery">
               <Button className="w-full h-14 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold text-lg">
-                {getText('Get Complete Bundle - $47', 'احصل على الباقة الشاملة - $47')} <ArrowRight className="w-5 h-5 ml-2" />
+                {getText('Get Mastery - $27/mo', 'احصل على الإتقان - $27/شهر')} <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <p className="text-sm text-[#8A94A6] mt-3">{getText('One-time payment. Lifetime access.', 'دفعة واحدة. وصول مدى الحياة.')}</p>
+            <p className="text-sm text-[#8A94A6] mt-3">{getText('Monthly subscription. Cancel anytime.', 'اشتراك شهري. إلغاء في أي وقت.')}</p>
           </CardContent>
         </Card>
 
@@ -104,12 +104,12 @@ export default function CommunityAccessPage() {
 
         {/* CTA */}
         <div className="text-center">
-          <Link href="/products/bundle">
+          <Link href="/products/mastery">
             <Button className="h-14 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold text-lg px-8">
               {getText('Join the Community', 'انضم إلى المجتمع')} <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
-          <p className="text-sm text-[#8A94A6] mt-3">{getText('Included in Complete Bundle ($47) with AI Coach + All Apps', 'مضمّن في الباقة الشاملة ($47) مع مدرب AI + جميع التطبيقات')}</p>
+          <p className="text-sm text-[#8A94A6] mt-3">{getText('Included in Mastery ($27/mo) with AI Coach + All Apps', 'مضمّن في الإتقان ($27/شهر) مع مدرب AI + جميع التطبيقات')}</p>
         </div>
       </div>
     </div>

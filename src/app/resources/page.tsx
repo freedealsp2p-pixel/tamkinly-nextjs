@@ -98,7 +98,7 @@ function ResourcesSection() {
                         {resource.category}
                       </Badge>
                       {resource.comingSoon && (
-                        <Badge className="bg-amber-100 text-amber-700 text-xs">
+                        <Badge className="bg-[#e6f3f4] text-[#2A8A94] text-xs">
                           {t('comingSoon')}
                         </Badge>
                       )}

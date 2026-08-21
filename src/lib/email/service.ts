@@ -2,7 +2,7 @@
 // Handles email queueing, sending, and tracking
 
 import { db } from '@/lib/db';
-import { getSequenceByTrigger, type DripSequence } from './drip-sequences';
+import { getSequenceByTrigger, resolveTrigger, type DripSequence } from './drip-sequences';
 import EmailTemplates from '../email-templates';
 
 // Email template variables
@@ -225,7 +225,8 @@ export async function triggerEmailSequence(
   variables: EmailVariables
 ): Promise<{ success: boolean; message: string; queuedEmails?: number }> {
   try {
-    const sequence = await getEmailSequence(trigger);
+    const resolvedTrigger = resolveTrigger(trigger);
+    const sequence = getSequenceByTrigger(resolvedTrigger);
     
     if (!sequence) {
       return { success: false, message: `No active sequence found for trigger: ${trigger}` };
@@ -329,7 +330,7 @@ export async function sendQueuedEmails(): Promise<{ sent: number; failed: number
         await db.emailLog.create({
           data: {
             email: email.email,
-            type: getEmailType(email.sequenceId || ''),
+            type: getEmailType(email.sequenceId || '') as any,
             subject: email.subject,
             status: 'SENT'
           }
@@ -359,14 +360,19 @@ export async function sendQueuedEmails(): Promise<{ sent: number; failed: number
 
 // Get email type from sequence ID (simplified)
 function getEmailType(sequenceId: string): string {
-  if (sequenceId.includes('trial')) return 'TRIAL';
-  if (sequenceId.includes('basic') || sequenceId.includes('planner')) return 'BASIC';
-  if (sequenceId.includes('premium')) return 'PREMIUM';
-  if (sequenceId.includes('bundle')) return 'BUNDLE';
-  if (sequenceId.includes('quiz')) return 'QUIZ';
-  if (sequenceId.includes('milestone')) return 'MILESTONE';
-  if (sequenceId.includes('re_engagement')) return 'RE_ENGAGEMENT';
+  // Map to valid EmailType enum values from Prisma schema:
+  // ORDER_CONFIRMATION | ACCESS_KEY_DELIVERY | DAY_1_CHECKIN | DAY_7_MILESTONE |
+  // DAY_21_TURNING_POINT | DAY_30_COMPLETION | WELCOME | PASSWORD_RESET |
+  // LEAD_MAGNET | ABANDONED_CART | PRODUCT_LAUNCH | NEWSLETTER
   if (sequenceId.includes('abandoned')) return 'ABANDONED_CART';
+  if (sequenceId.includes('re_engagement')) return 'NEWSLETTER';
+  if (sequenceId.includes('lead_nurture') || sequenceId.includes('quiz')) return 'LEAD_MAGNET';
+  if (sequenceId.includes('trial') || sequenceId.includes('basic_onboarding')) return 'WELCOME';
+  if (sequenceId.includes('basic') || sequenceId.includes('planner')) return 'ACCESS_KEY_DELIVERY';
+  if (sequenceId.includes('premium')) return 'DAY_1_CHECKIN';
+  if (sequenceId.includes('bundle') || sequenceId.includes('mastery')) return 'DAY_7_MILESTONE';
+  if (sequenceId.includes('milestone')) return 'DAY_7_MILESTONE';
+  if (sequenceId.includes('upsell')) return 'PRODUCT_LAUNCH';
   return 'WELCOME';
 }
 

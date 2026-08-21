@@ -9,6 +9,9 @@ import { BlogArticle } from '@/lib/blog-articles';
 import { BlogArticleJsonLd } from '@/components/seo/JsonLd';
 import { ReadingProgressBar } from '@/components/blog/ReadingProgressBar';
 import { ArticleNavigation } from '@/components/blog/ArticleNavigation';
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
 import { ShareButtons } from '@/components/blog/ShareButtons';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
@@ -167,6 +170,9 @@ export function BlogArticleContentClient({ article }: { article: BlogArticle }) 
                 </Card>
               </div>
 
+              {/* Mid-Article Upgrade CTA - appears after key insights */}
+              <MidArticleUpgrade promoteTier="BASIC" variant="default" />
+
               <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
                 {getText('The Transformation Framework', 'إطار التحول')}
               </h2>
@@ -224,39 +230,17 @@ export function BlogArticleContentClient({ article }: { article: BlogArticle }) 
           </div>
         </section>
 
+        {/* Blog Article CTA - Product Recommendation */}
+        <BlogArticleCTA category={article.category} articleTitle={article.title} />
+
         {/* Article Navigation */}
         <ArticleNavigation currentSlug={article.slug} />
 
-        {/* CTA Section with Quiz Link */}
-        <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-                {getText('Does This Sound Like You?', 'هل هذا يصفك؟')}
-              </h2>
-              <p className="text-slate-300 mb-6">
-                {getText(
-                  'Take our free 3-minute Identity Gap Assessment and discover what is holding you back.',
-                  'خذ تقييم فجوة الهوية المجاني لـ 3 دقائق واكتشف ما يعيقك.'
-                )}
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/quiz">
-                  <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                    {getText('Start Free Assessment', 'ابدأ التقييم المجاني')}
-                    <ArrowRight className={`${isAr ? 'mr-2 rotate-180' : 'ml-2'} h-5 w-5`} />
-                  </Button>
-                </Link>
-                <Link href="/products">
-                  <Button variant="white" size="lg" className="px-8 font-semibold">
-                    {getText('View Products', 'عرض المنتجات')}
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Conversion Section - Paid Products + Free Assessment */}
+        <BlogConversionSection />
+
       </article>
     </>
   );
 }
+

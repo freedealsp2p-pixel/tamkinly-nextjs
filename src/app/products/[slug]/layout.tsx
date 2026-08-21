@@ -14,6 +14,14 @@ const productMetadata: Record<string, {
   price: number;
   keywords: string[];
 }> = {
+  'basic': {
+    name: 'Basic (Monthly)',
+    nameAr: 'أساسي (شهري)',
+    description: 'Start your identity transformation journey with the core planning tool. Perfect for testing the methodology.',
+    descriptionAr: 'ابدأ رحلة تحول هويتك بأداة التخطيط الأساسية. مثالي لتجربة المنهجية.',
+    price: 7,
+    keywords: ['basic plan', 'identity transformation', 'monthly subscription', 'self-development', 'tamkinly basic']
+  },
   'trial': {
     name: '7-Day Identity Reset Trial',
     nameAr: 'تجربة إعادة ضبط الهوية لمدة 7 أيام',
@@ -37,6 +45,14 @@ const productMetadata: Record<string, {
     descriptionAr: 'تحول شامل مع تحليلات متقدمة وتتبع القرارات وأدوات جمع الأدلة.',
     price: 27,
     keywords: ['premium transformation', 'advanced analytics', 'decision tracking', 'identity analytics', 'data-driven growth', 'transformation dashboard']
+  },
+  'mastery': {
+    name: 'Mastery (Monthly)',
+    nameAr: 'إتقان (شهري)',
+    description: 'The ultimate identity transformation experience: All apps + AI coaching + community access + priority support.',
+    descriptionAr: 'تجربة تحول الهوية المثالية: جميع التطبيقات + تدريب AI + وصول المجتمع + دعم ذو أولوية.',
+    price: 27,
+    keywords: ['mastery plan', 'complete transformation', 'AI coaching', 'identity mastery', 'full access', 'VIP support']
   },
   'bundle': {
     name: 'Complete Transformation Bundle',

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ماذا تفعل الصدمة بالجسد والدماغ — TRC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+:root{--primary:#1F6F78;--accent:#3DD4B0;--dark:#0F1C2E;--bg:#F8FAFC;--border:#CBD5E1;--alert-bg:#FFFBEB;--alert-border:#D97706;--alert-text:#92400E;--safety-bg:#FEF3C7;--safety-border:#B45309;--safety-text:#78350F;--teal-bg:#E6F4F5;--teal-text:#1F6F78;--writing-border:#9CA3AF;--footer:#475569}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Arabic',sans-serif;background:var(--bg);color:var(--dark);font-size:13px;line-height:1.8;direction:rtl}
+.page{width:210mm;min-height:297mm;padding:15mm;margin:0 auto 20px auto;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);page-break-after:always}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none;page-break-after:always}}
+.header-bar{background:var(--primary);color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.header-bar .title{font-size:18px;font-weight:700}
+.header-bar .meta{font-size:10px;opacity:.85;text-align:left}
+.section-title{font-size:16px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent);padding-bottom:6px;margin:20px 0 14px 0}
+.sub-title{font-size:14px;font-weight:600;color:var(--primary);margin:14px 0 8px 0}
+.purpose-box{background:var(--teal-bg);border-right:4px solid var(--primary);padding:12px 16px;border-radius:0 6px 6px 0;margin-bottom:16px}
+.purpose-box .label{font-size:11px;font-weight:600;color:var(--teal-text);margin-bottom:4px}
+.safety-alert{background:var(--safety-bg);border:2px solid var(--safety-border);border-radius:6px;padding:14px 16px;margin-bottom:16px}
+.safety-alert .alert-title{font-weight:700;color:var(--safety-text);font-size:14px;margin-bottom:6px}
+.safety-alert .alert-text{color:var(--safety-text);font-size:12px;line-height:1.7}
+.alert-box{background:var(--alert-bg);border:1px solid var(--alert-border);border-radius:6px;padding:12px 16px;margin-bottom:16px}
+.alert-box .alert-title{font-weight:600;color:var(--alert-text);font-size:12px;margin-bottom:4px}
+.alert-box .alert-text{color:var(--alert-text);font-size:11px}
+.content-text{font-size:13px;line-height:1.9;margin-bottom:12px}
+.bullet-list{list-style:none;padding:0;margin:0 0 14px 0}
+.bullet-list li{padding:4px 0;position:relative;padding-right:20px}
+.bullet-list li::before{content:"●";position:absolute;right:0;color:var(--accent);font-size:10px;top:6px}
+.num-list{list-style:none;padding:0;margin:0 0 14px 0;counter-reset:nl}
+.num-list li{padding:4px 0;position:relative;padding-right:32px;counter-increment:nl}
+.num-list li::before{content:counter(nl);position:absolute;right:0;color:#fff;background:var(--primary);width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;font-size:11px;font-weight:600;top:4px}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px}
+.info-card .card-title{font-weight:600;font-size:13px;color:var(--primary);margin-bottom:6px;border-bottom:1px dashed var(--border);padding-bottom:4px}
+.info-card .card-body{font-size:12px;line-height:1.8}
+.toc{background:var(--teal-bg);border-radius:6px;padding:14px 18px;margin-bottom:16px}
+.toc .toc-title{font-weight:600;color:var(--teal-text);font-size:13px;margin-bottom:8px}
+.toc .toc-item{font-size:12px;padding:3px 0;padding-right:16px;position:relative}
+.toc .toc-item::before{content:"◄";position:absolute;right:0;color:var(--accent);font-size:8px;top:5px}
+.brain-region{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.brain-region .region-icon{width:40px;height:40px;border-radius:8px;background:var(--teal-bg);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.brain-region .region-content{flex:1}
+.brain-region .region-name{font-weight:600;font-size:13px;color:var(--primary);margin-bottom:2px}
+.brain-region .region-desc{font-size:12px;line-height:1.7}
+.ref-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:11px}
+.ref-table th{background:var(--primary);color:#fff;padding:8px 10px;text-align:right;font-weight:600;font-size:11px}
+.ref-table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;vertical-align:top}
+.ref-table tr:nth-child(even) td{background:#F8FAFC}
+.contact-box{background:var(--dark);color:#fff;border-radius:6px;padding:14px 16px;margin-top:16px}
+.contact-box .contact-title{font-weight:600;font-size:13px;margin-bottom:8px;color:var(--accent)}
+.contact-box .contact-item{font-size:11px;margin-bottom:4px;opacity:.9}
+.clinical-gate{background:#F1F5F9;border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-top:14px;font-size:10px;color:#64748B}
+.clinical-gate .gate-label{font-weight:600;color:var(--primary);margin-bottom:4px}
+.page-footer{text-align:center;font-size:9px;color:var(--footer);margin-top:20px;padding-top:8px;border-top:1px solid var(--border)}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:600}
+.badge.stage{background:var(--teal-bg);color:var(--teal-text)}
+.badge.type{background:#E0F2FE;color:#0369A1}
+.badge.gate{background:#FEE2E2;color:#991B1B}
+.window-graph{background:var(--teal-bg);border-radius:8px;padding:16px;margin:14px 0;text-align:center}
+.window-bar{height:24px;border-radius:4px;margin:4px 0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600}
+.response-card{background:#fff;border:2px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px}
+.response-card .resp-title{font-weight:700;font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.response-card .resp-body{font-size:12px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+<div class="header-bar">
+  <div class="title">ماذا تفعل الصدمة بالجسد والدماغ</div>
+  <div class="meta">المرحلة: سلامة<br>النوع: دليل<br>TRC-What-Trauma-Does-AR</div>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:14px">
+  <span class="badge stage">المرحلة: سلامة</span>
+  <span class="badge type">النوع: دليل</span>
+  <span class="badge gate">بوابة مراجعة سريرية: مطلوبة</span>
+</div>
+<div class="purpose-box">
+  <div class="label">الغرض</div>
+  دليل تعليمي يشرح كيف تؤثر الصدمة على الدماغ والجسد والجهاز العصبي، لمساعدتك على فهم ردود أفعالك وتقليل لوم الذات. الفهم هو أول خطوة في التعافي.
+</div>
+<div class="safety-alert">
+  <div class="alert-title">⚠ تنبيه سلامة</div>
+  <div class="alert-text">
+    هذا المحتوى <strong>تعليمي وليس تشخيصيًا</strong>. لا يهدف إلى استبدال التقييم المهني. إذا كان المحتوى يثير ضيقًا شديدًا، توقف ومارس أداة تأريض أو تنفس، ثم عد بعد أن تستقر.
+  </div>
+</div>
+<div class="toc">
+  <div class="toc-title">جدول المحتويات</div>
+  <div class="toc-item">الصفحة 2: كيف تؤثر الصدمة على الدماغ والذاكرة</div>
+  <div class="toc-item">الصفحة 3: الجهاز العصبي الذاتي ونافذة التحمل</div>
+  <div class="toc-item">الصفحة 4: أنماط الاستجابة الأربعة</div>
+  <div class="toc-item">الصفحة 5: ذاكرة الجسد والصدمة والأمراض الجسدية</div>
+  <div class="toc-item">الصفحة 6: مسارات التعافي وجهات الاتصال</div>
+</div>
+<div class="content-text" style="margin-top:20px">
+  <strong>لماذا هذا الدليل؟</strong> بعد التجارب الصدمية، يتحول الدماغ والجسد إلى "وضع البقاء" — وتستمر حالة التنبّه العالي حتى بعد زوال التهديد. هذا ليس ضعفًا وليس خطأً منك — إنه استجابة بيولوجية مصممة لحمايتك. فهم ما يحدث داخل جسدك ودماغك يساعدك على:
+</div>
+<ul class="bullet-list">
+  <li>تقليل لوم الذات — "أنا لا أستجيب هكذا لأنني ضعيف، بل لأن دماغي يفعل ما صُمّم ليفعله"</li>
+  <li>التعرف على أنماطك الخاصة — فهم متى تكون في فرط تنبيغ أو نقص تنبيغ</li>
+  <li>اختيار أدوات التنظيم المناسبة — كل حالة تحتاج إلى استجابة مختلفة</li>
+</ul>
+<div class="page-footer">ماذا تفعل الصدمة بالجسد والدماغ — TRC © 2025 | المرحلة: سلامة | مرجع سريري: van der Kolk (2014), Porges (2011)</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<div class="section-title">كيف تؤثر الصدمة على الدماغ</div>
+<p class="content-text">الصدمة لا تترك ذكريات فقط — إنها تغيّر بنية الدماغ ووظيفته. هذه التغييرات ليست دائمة: التعافي ممكن عبر العلاج والممارسة.</p>
+
+<div class="brain-region">
+  <div class="region-icon">⚡</div>
+  <div class="region-content">
+    <div class="region-name">اللوزة الدماغية (Amygdala) — "إنذار الحريق"</div>
+    <div class="region-desc">مسؤولة عن كشف التهديد وإطلاق استجابة القتال-الفرار. بعد الصدمة، تصبح <strong>مفرطة النشاط</strong> — تكتشف التهديد حتى حيث لا يوجد تهديد حقيقي. هذا يفسّر: ردود الفعل المبالغ فيها، صعوبة التمييز بين الماضي والحاضر، شعور مستمر بالخطر.</div>
+  </div>
+</div>
+<div class="brain-region">
+  <div class="region-icon">🧠</div>
+  <div class="region-content">
+    <div class="region-name">قشر الفص الجبهي (Prefrontal Cortex) — "الفرامل"</div>
+    <div class="region-desc">مسؤولة عن التفكير المنطقي وضبط الانفعالات واتخاذ القرارات. بعد الصدمة، يقل نشاطها — فتفقد القدرة على "كبح" اللوزة الدماغية. هذا يفسّر: صعوبة التفكير بوضوح عند الضيق، اتخاذ قرارات متهورة، صعوبة ضبط الغضب أو الخوف.</div>
+  </div>
+</div>
+<div class="brain-region">
+  <div class="region-icon">📦</div>
+  <div class="region-content">
+    <div class="region-name">الحصين (Hippocampus) — "أرشيف الذكريات"</div>
+    <div class="region-desc">مسؤول عن تنظيم الذكريات في سياق زمني ومكاني. بعد الصدمة، يتقلص حجمه — فتصبح الذكريات الصدمية <strong>مشظاة ومفككة</strong>. هذا يفسّر: ذكريات على شكل شظايا (صور، أصوات، روائح)، شعور أن الحدث يحدث الآن وليس في الماضي.</div>
+  </div>
+</div>
+
+<div class="section-title">تأثير الصدمة على الذاكرة</div>
+
+<table class="ref-table">
+  <tr><th>النوع</th><th>الوصف</th><th>ماذا يحدث بعد الصدمة</th></tr>
+  <tr><td><strong>الذاكرة الصريحة</strong><br>(Explicit / Declarative)</td><td>ذكريات يمكنك سردها بالكلمات — أحداث وقصص منظمة زمنيًا</td><td>تصبح مشظاة أو غامضة — لا تستطيع سرد القصة بترتيب أو تذكر تفاصيل واضحة</td></tr>
+  <tr><td><strong>الذاكرة الضمنية</strong><br>(Implicit / Procedural)</td><td>ذكريات مخزنة في الجسد — ردود أفعال تلقائية، أحاسيس جسدية</td><td>تصبح مفرطة النشاط — محفز بسيط يطلق استجابة جسدية كأن التهديد حاضر الآن</td></tr>
+</table>
+
+<div class="info-card">
+  <div class="card-title">💡 النقطة الأساسية</div>
+  <div class="card-body">الذاكرة الضمنية لا تحتاج إلى وعي — جسدك "يتذكر" حتى لو لم تستطع سرد القصة بالكلمات. هذا يفسّر لماذا تشعر بأحاسيس جسدية قوية بدون سبب واضح، أو لماذا تتجنب أماكن أو أصواتًا أو روائح معينة.</div>
+</div>
+<div class="page-footer">ماذا تفعل الصدمة بالجسد والدماغ — TRC © 2025 | الصفحة 2 من 6</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+<div class="section-title">الجهاز العصبي الذاتي</div>
+<p class="content-text">الجهاز العصبي الذاتي يتحكم في وظائف الجسد اللإرادية (نبض القلب، التنفس، الهضم). له فرعان:</p>
+
+<div class="info-card">
+  <div class="card-title">⬆ الجهاز العصبي الودي (Sympathetic) — "دواسة الوقود"</div>
+  <div class="card-body">ينشّط استجابة القتال-الفرار: يزيد نبض القلب، يوسع الحدقتين، يوقف الهضم، يطلق الأدرينالين والكورتيزول. يجهّز الجسد للعمل.</div>
+</div>
+<div class="info-card">
+  <div class="card-title">⬇ الجهاز العصبي اللاودي (Parasympathetic) — "دواسة الفرامل"</div>
+  <div class="card-body">يعزز الراحة والاستشفاء: يبطئ نبض القلب، يعزز الهضم، يعزز الشعور بالأمان. لكن في حالة الضيق الشديد، يطلق استجابة "التجمد" (shut-down).</div>
+</div>
+
+<div class="section-title">نافذة التحمل (Window of Tolerance)</div>
+<p class="content-text">نافذة التحمل هي النطاق الذي يكون فيه الجهاز العصبي متوازنًا — قادرًا على التفكير والشعور والعمل بفعالية. خارج هذه النافذة، نفقد القدرة على الأداء:</p>
+
+<div class="window-graph">
+  <div class="window-bar" style="background:#DC2626;color:#fff;width:100%">⬆ فرط التنبيغ (Hyperarousal) — القتال / الفرار</div>
+  <div class="window-bar" style="background:#FEF3C7;color:var(--safety-text);width:80%;margin:0 auto">🟢 نافذة التحمل — الأداء الأمثل</div>
+  <div class="window-bar" style="background:#1E40AF;color:#fff;width:100%">⬇ نقص التنبيغ (Hypoarousal) — التجمد / التملق</div>
+</div>
+
+<table class="ref-table">
+  <tr><th>الحالة</th><th>الأعراض</th><th>ماذا يحدث في الدماغ</th></tr>
+  <tr><td><strong>فرط التنبيغ</strong></td><td>قلق، غضب، فرط تنبه، أرق، ذكريات نشطة، ارتعاد، توتر جسدي</td><td>اللوزة الدماغية مفرطة النشاط، قشر الفص الجبهي معطل، الجهاز الودي مسيطر</td></tr>
+  <tr><td><strong>ضمن النافذة</strong></td><td>هادئ وواعي، قادر على التفكير والشعور معًا، مرن عاطفيًا</td><td>توازن بين اللوزة والقشر الجبهي، الجهازين متوازنان</td></tr>
+  <tr><td><strong>نقص التنبيغ</strong></td><td>خدر، انفصال، فراغ عاطفي، شلل، إرهاق شديد، صمت</td><td>الجهاز اللاودي مسيطر (استجابة تجمد)، انفصال عن الأحاسيس الجسدية</td></tr>
+</table>
+
+<div class="alert-box">
+  <div class="alert-title">💡 تذكّر</div>
+  <div class="alert-text">كلتا الحالتين (فرط ونقص التنبيغ) هما استجابات بقاء — ليستا ضعفًا. الهدف من التعافي هو توسيع نافذة التحمل لتشمل حالات أكثر دون أن تفقد التوازن.</div>
+</div>
+<div class="page-footer">ماذا تفعل الصدمة بالجسد والدماغ — TRC © 2025 | الصفحة 3 من 6 | مرجع: Porges (2011) Polyvagal Theory</div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+<div class="section-title">أنماط الاستجابة الأربعة</div>
+<p class="content-text">عند مواجهة التهديد، يختار الجهاز العصبي استجابة من أربع — وكلها مصممة لحمايتك:</p>
+
+<div class="response-card" style="border-color:#DC2626">
+  <div class="resp-title"><span style="color:#DC2626">✊</span> <span style="color:#DC2626">1. القتال (Fight)</span></div>
+  <div class="resp-body">
+    <strong>إشارات الجسد:</strong> فك مشدود، قبضات، صوت مرتفع، عضلات مشدودة، تعبيرات وجه غاضبة، نبض قلب سريع<br>
+    <strong>متى يظهر:</strong> عندما يدرك الدماغ أن التهديد يمكن مواجهته مباشرة<br>
+    <strong>متى يكون تكيفيًا:</strong> عند وجود تهديد حقيقي يمكن إيقافه بالمواجهة<br>
+    <strong>متى يصبح مشكلًة:</strong> عندما يظهر بدون تهديد فعلي — غضب متفجر، نزاعات متكررة
+  </div>
+</div>
+
+<div class="response-card" style="border-color:#F59E0B">
+  <div class="resp-title"><span style="color:#F59E0B">🏃</span> <span style="color:#F59E0B">2. الفرار (Flight)</span></div>
+  <div class="resp-body">
+    <strong>إشارات الجسد:</strong> أرجل متوترة، عيون واسعة، فرط الحركة، عدم القدرة على الجلوس، حاجة ملحة للمغادرة<br>
+    <strong>متى يظهر:</strong> عندما يدرك الدماغ أن التهديد يمكن تجنبه بالهرب<br>
+    <strong>متى يكون تكيفيًا:</strong> عند وجود تهديد حقيقي والهرب هو الخيار الأأمن<br>
+    <strong>متى يصبح مشكلًة:</strong> تجنب مستمر للعلاقات أو الأماكن أو المواقف حتى الآمنة منها
+  </div>
+</div>
+
+<div class="response-card" style="border-color:#6366F1">
+  <div class="resp-title"><span style="color:#6366F1">❄️</span> <span style="color:#6366F1">3. التجمد (Freeze)</span></div>
+  <div class="resp-body">
+    <strong>إشارات الجسد:</strong> شلل، صمت، انفصال، خدر جسدي، صعوبة الكلام، شعور بالعجز<br>
+    <strong>متى يظهر:</strong> عندما يتعذر القتال والفرار — يغلق الجهاز العصبي كحل أخير<br>
+    <strong>متى يكون تكيفيًا:</strong> عندما يقلل عدم الحركة من خطر التهديد (مثل "التظاهر بالموت")<br>
+    <strong>متى يصبح مشكلًة:</strong> شلل في مواقف آمنة، صعوبة اتخاذ قرارات أو حماية النفس
+  </div>
+</div>
+
+<div class="response-card" style="border-color:#8B5CF6">
+  <div class="resp-title"><span style="color:#8B5CF6">🤝</span> <span style="color:#8B5CF6">4. التملق (Fawn)</span></div>
+  <div class="resp-body">
+    <strong>إشارات الجسد:</strong> إرضاء الآخرين، تجاهل الذات، صعوبة قول "لا"، فقدان الحدود، تبني مشاعر الآخرين<br>
+    <strong>متى يظهر:</strong> عندما يكون التهديد شخصًا مهمًا (والد، شريك) — إرضاؤه يبدو أأمن من المواجهة<br>
+    <strong>متى يكون تكيفيًا:</strong> في الطفولة — عندما يكون إرضاء مقدم الرعاية ضرورة للبقاء<br>
+    <strong>متى يصبح مشكلًة:</strong> في البلوغ — علاقات أحادية الجانب، فقدان الذات، صعوبة تحديد الحدود
+  </div>
+</div>
+
+<div class="page-footer">ماذا تفعل الصدمة بالجسد والدماغ — TRC © 2025 | الصفحة 4 من 6</div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+<div class="section-title">ذاكرة الجسد</div>
+<p class="content-text">الجسد يخزن الصدمة بطرق لا تستطيع العقل الواعي الوصول إليها. هذا المفهوم — "الجسد لا يكذب" — هو أساس كثير من ردود أفعالك:</p>
+
+<div class="info-card">
+  <div class="card-title">كيف يخزن الجسد الصدمة</div>
+  <div class="card-body">
+    <ul class="bullet-list">
+      <li><strong>أحاسيس جسدية:</strong> ثقل في الصدر، ضيق في الحلق، توتر في الكتفين — تظهر بدون سبب واضح</li>
+      <li><strong>ردود فعل تلقائية:</strong> تراجع عند سماع صوت معين، توتر عند لمس معين — حتى لو لم تدرك السبب</li>
+      <li><strong>أنماط حركية:</strong> تقوقع الكتفين، شد الفك، حبس التنفس — أنماط "حماية" تستمر بعد زوال التهديد</li>
+      <li><strong>محفزات جسدية:</strong> روائح، أصوات، أحاسيس لمسية تطلق استجابة كاملة — كأن الصدمة تحدث الآن</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-title">الصدمة والأمراض الجسدية</div>
+<p class="content-text">البحث يظهر ارتباطًا قويًا بين التجارب الصدمية والأمراض الجسدية. دراسة ACEs (التجارب المعاكسة في الطفولة) أظهرت أن:</p>
+
+<table class="ref-table">
+  <tr><th>الملاحظة</th><th>التفسير البيولوجي</th></tr>
+  <tr><td>ارتفاع ACEs يرتبط بأمراض قلبية وأوعية دموية</td><td>التهاب مزمن نتيجة ارتفاع الكورتيزول لفترات طويلة</td></tr>
+  <tr><td>ارتفاع ACEs يرتبط بأمراض مناعية ذاتية</td><td>اختلال الجهاز المناعي بسبب الضغط المزمن على الجهاز العصبي</td></tr>
+  <tr><td>ارتفاع ACEs يرتبط بألم مزمن وبدون سبب طبقي واضح</td><td>تغيير معالجة الألم في الدماغ — إحساس بالألم بدون محفز نسيجي</td></tr>
+  <tr><td>ارتفاع ACEs يرتبط بمشكلات هضمية (IBS، قولون عصبي)</td><td>المحور أمعاء-دماغ — الضعط المزمن يغيّر بكتيريا الأمعاء والتهاب</td></tr>
+</table>
+
+<div class="info-card">
+  <div class="card-title">💡 ماذا يعني هذا لك؟</div>
+  <div class="card-body">الأعراض الجسدية التي تعاني منها ليست "في رأسك" — لها أساس بيولوجي حقيقي. التعافي من الصدمة يمكن أن يحسّن الصحة الجسدية أيضًا. العلاج الجسدي (مثل اليوغا، EMDR، مسح الجسد) يعالج الذاكرة الضمنية مباشرة — حيث تعيش الصدمة.</div>
+</div>
+
+<div class="page-footer">ماذا تفعل الصدمة بالجسد والدماغ — TRC © 2025 | الصفحة 5 من 6 | مرجع: van der Kolk (2014)</div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page">
+<div class="section-title">مسارات التعافي</div>
+<p class="content-text">الفهم هو الخطوة الأولى. الآن تعرف ماذا تفعله الصدمة — فماذا يمكنك أن تفعل حيال ذلك؟</p>
+
+<table class="ref-table">
+  <tr><th>المشكلة</th><th>أداة TRC</th><th>كيف تساعد</th></tr>
+  <tr><td>فرط تنبيغ / انفصال</td><td>تأريض 5-4-3-2-1</td><td>يعيدك إلى اللحظة الحاضرة ويخرجك من ذكرى الماضي</td></tr>
+  <tr><td>قلق / توتر</td><td>تنفس A52</td><td>ينشّط الجهاز اللاودي ويبطئ نبض القلب</td></tr>
+  <tr><td>حاجة للأمان</td><td>المكان الآمن</td><td>يبني إحساسًا بالأمان الداخلي</td></tr>
+  <tr><td>توتر جسدي</td><td>مسح الجسد</td><td>يزيد الوعي الجسدي ويطلق التوتر المخزن</td></tr>
+  <tr><td>محفزات</td><td>رسم المحفزات</td><td>يساعد على التعرف على المحفزات والتنظيم</td></tr>
+  <tr><td>عار / خجل</td><td>التعافي من العار</td><td>يميز بين العار والذنب ويعالج العار الداخلي</td></tr>
+  <tr><td>معالجة التجربة</td><td>يوميات التعافي</td><td>كتابة تعبيرية مع تعرض تدريجي</td></tr>
+</table>
+
+<div class="section-title">متى تطلب مساعدة مهنية</div>
+<ul class="bullet-list">
+  <li>أعراض تستمر لأكثر من شهر وتؤثر على عملك وعلاقاتك</li>
+  <li>نوبات ذعر متكررة أو كوابيس مرضية</li>
+  <li>أفكار بإيذاء النفس — اتصل بالطوارئ فورًا</li>
+  <li>استخدام مواد لتنظيم الأعراض (كحول، أدوية بدون وصفة)</li>
+  <li>صعوبة الأداء في الحياة اليومية (عمل، علاقات، رعاية ذاتية)</li>
+  <li>شعور بالانفصال عن الواقع أو عن جسدك بشكل متكرر</li>
+</ul>
+
+<div class="section-title">جهات الاتصال</div>
+<div class="contact-box">
+  <div class="contact-title">خطوط الطوارئ والدعم</div>
+  <div class="contact-item">📞 خط الدعم النفسي: 937 (مجاني في المملكة العربية السعودية)</div>
+  <div class="contact-item">📞 خط أزمة الصحة النفسية: 920-033-360</div>
+  <div class="contact-item">🌐 الدعم عبر الإنترنت: ncmh.org.sa</div>
+  <div class="contact-item">💬 في حالة الطوارئ: اتصل بالرقم 997 أو توجه لأقرب غرفة طوارئ</div>
+</div>
+
+<div class="clinical-gate">
+  <div class="gate-label">بوابة المراجعة السريرية: مطلوبة</div>
+  يجب مراجعة هذا المحتوى من قبل معالج أو مختص صحة نفسية مرخص قبل استخدامه مع العملاء. المراجع السريرية: van der Kolk, B. (2014). The Body Keeps the Score; Porges, S. (2011). The Polyvagal Theory.
+</div>
+<div class="page-footer">ماذا تفعل الصدمة بالجسد والدماغ — TRC © 2025 | الصفحة 6 من 6 | المرحلة: سلامة | الأداة الأم: what-trauma-does-to-the-body</div>
+</div>
+
+</body>
+</html>

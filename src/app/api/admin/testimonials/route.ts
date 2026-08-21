@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // Get all testimonials
 export async function GET(request: NextRequest) {
   try {
-    const password = request.nextUrl.searchParams.get('password');
+    const session = await getAdminSession();
     
-    if (!verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     const testimonials = await db.testimonial.findMany({
       orderBy: { createdAt: 'desc' },
@@ -41,9 +41,9 @@ export async function PATCH(request: NextRequest) {
   try {
     const { password, testimonialId, isApproved, isFeatured } = await request.json();
 
-    if (!verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     if (!testimonialId) {
       return NextResponse.json({ error: 'Testimonial ID required' }, { status: 400 });
@@ -78,9 +78,9 @@ export async function DELETE(request: NextRequest) {
   try {
     const { password, testimonialId } = await request.json();
 
-    if (!verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     if (!testimonialId) {
       return NextResponse.json({ error: 'Testimonial ID required' }, { status: 400 });

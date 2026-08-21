@@ -51,14 +51,14 @@ const iconMap: Record<string, React.ReactNode> = {
 const allAchievements = [
   { id: 'first_habit', nameEn: 'First Step', nameAr: 'الخطوة الأولى', icon: 'Zap', color: '#3DD4B0', category: 'HABITS', categoryAr: 'العادات' },
   { id: 'habit_week', nameEn: 'Week Warrior', nameAr: 'محارب الأسبوع', icon: 'Flame', color: '#FF6B6B', category: 'HABITS', categoryAr: 'العادات' },
-  { id: 'habit_month', nameEn: 'Month Master', nameAr: 'سيد الشهر', icon: 'Award', color: '#FFB74D', category: 'HABITS', categoryAr: 'العادات' },
-  { id: 'first_goal', nameEn: 'Visionary', nameAr: 'صاحب الرؤية', icon: 'Target', color: '#64B5F6', category: 'GOALS', categoryAr: 'الأهداف' },
+  { id: 'habit_month', nameEn: 'Month Master', nameAr: 'سيد الشهر', icon: 'Award', color: '#2A8A94', category: 'HABITS', categoryAr: 'العادات' },
+  { id: 'first_goal', nameEn: 'Visionary', nameAr: 'صاحب الرؤية', icon: 'Target', color: '#2A8A94', category: 'GOALS', categoryAr: 'الأهداف' },
   { id: 'goal_complete', nameEn: 'Goal Getter', nameAr: 'محقق الأهداف', icon: 'CheckCircle2', color: '#4CAF50', category: 'GOALS', categoryAr: 'الأهداف' },
-  { id: 'first_entry', nameEn: 'Reflection Starter', nameAr: 'بادئ التأمل', icon: 'BookOpen', color: '#E57373', category: 'JOURNAL', categoryAr: 'المذكرات' },
+  { id: 'first_entry', nameEn: 'Reflection Starter', nameAr: 'بادئ التأمل', icon: 'BookOpen', color: '#C97B7B', category: 'JOURNAL', categoryAr: 'المذكرات' },
   { id: 'writer_1000', nameEn: 'Writer', nameAr: 'الكاتب', icon: 'PenTool', color: '#7986CB', category: 'JOURNAL', categoryAr: 'المذكرات' },
   { id: 'baseline_complete', nameEn: 'Self-Aware', nameAr: 'واعٍ بذاته', icon: 'User', color: '#3DD4B0', category: 'IDENTITY', categoryAr: 'الهوية' },
   { id: 'audit_complete', nameEn: 'Environment Designer', nameAr: 'مصمم البيئة', icon: 'Home', color: '#1F6F78', category: 'IDENTITY', categoryAr: 'الهوية' },
-  { id: 'erq_complete', nameEn: 'Emotional Explorer', nameAr: 'مستكشف المشاعر', icon: 'Heart', color: '#E57373', category: 'IDENTITY', categoryAr: 'الهوية' },
+  { id: 'erq_complete', nameEn: 'Emotional Explorer', nameAr: 'مستكشف المشاعر', icon: 'Heart', color: '#C97B7B', category: 'IDENTITY', categoryAr: 'الهوية' },
   { id: 'first_evidence', nameEn: 'Evidence Collector', nameAr: 'جامع الأدلة', icon: 'FileCheck', color: '#4CAF50', category: 'CONSISTENCY', categoryAr: 'الاتساق' },
   { id: 'first_decision', nameEn: 'Decision Logger', nameAr: 'مسجل القرارات', icon: 'GitBranch', color: '#5C6BC0', category: 'CONSISTENCY', categoryAr: 'الاتساق' },
   { id: 'identity_30', nameEn: 'Identity Builder', nameAr: 'باني الهوية', icon: 'TrendingUp', color: '#3DD4B0', category: 'TRANSFORMATION', categoryAr: 'التحول' },
@@ -142,7 +142,7 @@ export default function UnifiedProgressDashboard() {
       slug: 'evidence-tracking',
       name: getText('Evidence Tracking', 'تتبع الأدلة'),
       icon: <Layers className="h-6 w-6" />,
-      color: 'from-amber-500 to-orange-500',
+      color: 'from-[#1F6F78] to-[#2A8A94]',
       description: getText('Document proof of transformation', 'وثّق دليل التحول'),
     },
     {
@@ -219,7 +219,7 @@ export default function UnifiedProgressDashboard() {
   }
 
   const phaseColor = progress?.phase === 'AWARENESS' 
-    ? 'from-amber-500 to-orange-500' 
+    ? 'from-[#1F6F78] to-[#2A8A94]' 
     : progress?.phase === 'RECODING' 
       ? 'from-violet-500 to-purple-500' 
       : 'from-emerald-500 to-teal-500';
@@ -262,7 +262,7 @@ export default function UnifiedProgressDashboard() {
             </div>
             <Progress value={progress?.identityScore || 0} className="h-3" />
             <div className="grid grid-cols-3 gap-4 mt-4 text-center text-sm">
-              <div className="text-amber-600">
+              <div className="text-[#4da8a2]">
                 <p className="font-medium">{getText('Awareness', 'الوعي')}</p>
                 <p className="text-xs text-slate-400">0-29</p>
               </div>
@@ -308,15 +308,15 @@ export default function UnifiedProgressDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-amber-50 to-orange-50">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-[#e8f4f3] to-[#e6f3f4]">
             <CardContent className="pt-4 pb-4">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-amber-500 text-white">
+                <div className="p-2 rounded-xl bg-[#1F6F78] text-white">
                   <Target className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-amber-700">{progress?.journey?.goalsCompleted || 0}</p>
-                  <p className="text-xs text-amber-600">{getText('Goals Done', 'أهداف محققة')}</p>
+                  <p className="text-xl font-bold text-[#1F6F78]">{progress?.journey?.goalsCompleted || 0}</p>
+                  <p className="text-xs text-[#4da8a2]">{getText('Goals Done', 'أهداف محققة')}</p>
                 </div>
               </div>
             </CardContent>
@@ -377,7 +377,7 @@ export default function UnifiedProgressDashboard() {
         {(progress?.assessments?.identityBaseline || progress?.assessments?.environmentalAudit || progress?.assessments?.erq) && (
           <div className="mb-8">
             <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <Brain className="h-5 w-5 text-[#BA68C8]" />
+              <Brain className="h-5 w-5 text-[#2A8A94]" />
               {getText('Assessment Results', 'نتائج التقييم')}
             </h2>
             <div className="grid md:grid-cols-3 gap-4">
@@ -408,7 +408,7 @@ export default function UnifiedProgressDashboard() {
                 </Card>
               )}
               {progress?.assessments?.erq && (
-                <Card className="border-l-4 border-l-[#E57373]">
+                <Card className="border-l-4 border-l-[#C97B7B]">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm font-medium">{getText('ERQ Assessment', 'تقييم ERQ')}</CardTitle>
                   </CardHeader>
@@ -438,7 +438,7 @@ export default function UnifiedProgressDashboard() {
         <Card className="border-0 shadow-lg">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-amber-500" />
+              <Trophy className="h-5 w-5 text-[#3DD4B0]" />
               {getText('Achievements', 'الإنجازات')}
             </CardTitle>
             <CardDescription>{getText('Milestones in your transformation journey', 'معالم في رحلة تحولك')}</CardDescription>
@@ -452,7 +452,7 @@ export default function UnifiedProgressDashboard() {
                     key={badge.id}
                     className={`p-4 rounded-xl text-center transition-all ${
                       unlocked 
-                        ? 'bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200' 
+                        ? 'bg-gradient-to-br from-[#e8f4f3] to-[#e6f3f4] border border-[#b3d9d6]' 
                         : 'bg-slate-50 opacity-50'
                     }`}
                   >
@@ -464,7 +464,7 @@ export default function UnifiedProgressDashboard() {
                     >
                       {iconMap[badge.icon] || <Star className="h-5 w-5" />}
                     </div>
-                    <p className={`font-medium text-sm ${unlocked ? 'text-amber-700' : 'text-slate-400'}`}>
+                    <p className={`font-medium text-sm ${unlocked ? 'text-[#1F6F78]' : 'text-slate-400'}`}>
                       {locale === 'ar' ? badge.nameAr : badge.nameEn}
                     </p>
                     <Badge variant="outline" className="text-xs mt-1">{locale === 'ar' ? badge.categoryAr : badge.category}</Badge>

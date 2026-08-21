@@ -35,23 +35,23 @@ export default function TrialPlannerPage() {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-amber-100 flex items-center justify-center">
-              <Calendar className="w-8 h-8 text-amber-600" />
+            <div className="w-16 h-16 rounded-2xl bg-[#e6f3f4] flex items-center justify-center">
+              <Calendar className="w-8 h-8 text-[#2A8A94]" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Badge className="bg-amber-100 text-amber-800">{getText('TRIAL', 'تجربة')}</Badge>
+                <Badge className="bg-[#e6f3f4] text-[#2A8A94]">{getText('BASIC', 'تجربة')}</Badge>
                 <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0]">$7</Badge>
               </div>
-              <h1 className="text-3xl font-bold text-white">{getText('7-Day Trial Planner', 'مخطط تجربة 7 أيام')}</h1>
+              <h1 className="text-3xl font-bold text-white">{getText('Basic Planner — 7-Day Journey', 'مخطط أساسي — رحلة 7 أيام')}</h1>
             </div>
           </div>
 
           <Card className="bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
             <CardContent className="p-8 text-center">
-              <Lock className="w-16 h-16 text-amber-400 mx-auto mb-4" />
+              <Lock className="w-16 h-16 text-[#4aabb0] mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-white mb-4">
-                {getText('Unlock Your 7-Day Trial', 'افتح تجربتك لـ 7 أيام')}
+                {getText('Unlock Your Basic Journey', 'افتح رحلتك الأساسية')}
               </h2>
               <p className="text-slate-300 mb-6 max-w-xl mx-auto">
                 {getText(
@@ -73,7 +73,7 @@ export default function TrialPlannerPage() {
                 <Link href="/checkout?product=trial">
                   <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-14 text-lg font-semibold">
                     <Sparkles className="w-5 h-5 mr-2" />
-                    {getText('Start 7-Day Trial - $7', 'ابدأ تجربة 7 أيام - $7')}
+                    {getText('Start Basic - $7/mo', 'ابدأ أساسي - $7/شهر')}
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>

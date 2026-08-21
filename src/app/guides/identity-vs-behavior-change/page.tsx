@@ -203,12 +203,12 @@ export default function IdentityVsBehaviorGuide() {
               )}
             </p>
 
-            <div className="bg-amber-50 border-l-4 border-amber-400 p-6 my-8 rounded-r-lg">
+            <div className="bg-[#f8eded] border-l-4 border-[#C97B7B] p-6 my-8 rounded-r-lg">
               <div className="flex items-start gap-3">
-                <AlertTriangle className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                <AlertTriangle className="h-5 w-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-semibold text-amber-800 mb-2">{getText("The Willpower Depletion Problem", "مشكلة نفاد الإرادة")}</h4>
-                  <p className="text-amber-700 text-sm">
+                  <h4 className="font-semibold text-[#a86060] mb-2">{getText("The Willpower Depletion Problem", "مشكلة نفاد الإرادة")}</h4>
+                  <p className="text-[#C97B7B] text-sm">
                     {getText(
                       "Willpower is a finite resource. Studies show it depletes with use. Every decision, every resistance, every \"I should\" drains it. Behavior change that relies on willpower is fighting a losing battle.",
                       "الإرادة مورد محدود. تُظهر الدراسات أنها تنفد بالاستخدام. كل قرار، كل مقاومة، كل \"يجب أن\" تستنزفها. التغيير السلوكي الذي يعتمد على الإرادة يخسر معركة خاسرة."
@@ -448,7 +448,7 @@ export default function IdentityVsBehaviorGuide() {
               {getText("Ready for Structured Transformation?", "هل أنت مستعد لتحول منظم؟")}
             </h2>
             <p className="text-slate-300 mb-6">
-              {getText("The Identity Recode Planner provides a 30-day guided journey with daily exercises, journaling prompts, and progress tracking.", "يوفر مخطط إعادة برمجة الهوية رحلة موجهة لمدة 30 يومًا مع تمارين يومية وموجهات كتابة وتتبع التقدم.")}
+              {getText("The Premium subscription provides a 30-day guided journey with daily exercises, journaling prompts, and progress tracking.", "يوفر اشتراك المميز رحلة موجهة لمدة 30 يومًا مع تمارين يومية وموجهات كتابة وتتبع التقدم.")}
             </p>
             <Link href="/products">
               <Button size="xl" variant="accent" className="font-bold shadow-2xl shadow-[#3DD4B0]/30 hover:shadow-[#3DD4B0]/50">

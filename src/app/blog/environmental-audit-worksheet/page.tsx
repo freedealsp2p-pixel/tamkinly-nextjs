@@ -8,6 +8,10 @@ import { ArrowRight, Clock, User, Sparkles, Home, Building2, Users, CheckCircle,
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function EnvironmentalAuditWorksheetArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -310,6 +314,9 @@ export default function EnvironmentalAuditWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="free" />
+
       <ArticleNavigation currentSlug="environmental-audit-worksheet" />
 
       {/* Related Articles */}
@@ -334,26 +341,8 @@ export default function EnvironmentalAuditWorksheetArticle() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Audit Your Environment for Transformation", "دقّق بيئك من أجل التحول")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Get the complete Environmental Audit worksheet with assessment tools and action plans.", "احصل على ورقة عمل التدقيق البيئي الكاملة مع أدوات التقييم وخطط العمل.")}
-            </p>
-            <Link href="/worksheets/environmental-audit">
-              <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                {getText("Get the Worksheet", "احصل على ورقة العمل")}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-    </article>
+        <BlogConversionSection />
+      </article>
   );
 }
+

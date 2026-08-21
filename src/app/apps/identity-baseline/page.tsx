@@ -74,7 +74,7 @@ export default function IdentityBaselinePage() {
       description: getText('How well do your actions match your values?', 'ما مدى توافق أفعالك مع قيمك؟'),
       question: getText('Rate your value congruence', 'قيّم توافق قيمك'),
       icon: <Heart className="w-5 h-5" />,
-      color: '#FFB74D'
+      color: '#2A8A94'
     }
   ];
 
@@ -254,9 +254,9 @@ export default function IdentityBaselinePage() {
                 <h4 className="font-medium text-[#0F1C2E] mb-2">{getText('What is my biggest identity gap?', 'ما أكبر فجوة في هويّتي؟')}</h4>
                 <p className="text-[#2B2E34] text-sm">{data.identityGap || getText('Not provided', 'لم يُقدَّم')}</p>
               </div>
-              <div className="p-4 bg-[#FFB74D]/10 rounded-lg border border-[#FFB74D]/30">
+              <div className="p-4 bg-[#2A8A94]/10 rounded-lg border border-[#2A8A94]/30">
                 <h4 className="font-medium text-[#0F1C2E] mb-2 flex items-center gap-2">
-                  <Lightbulb className="w-4 h-4 text-[#FFB74D]" />
+                  <Lightbulb className="w-4 h-4 text-[#2A8A94]" />
                   {getText('Reflection', 'تأمّل')}
                 </h4>
                 <p className="text-[#2B2E34] text-sm">{data.reflection || getText('Not provided', 'لم يُقدَّم')}</p>
@@ -438,7 +438,7 @@ export default function IdentityBaselinePage() {
           <Card className="bg-white">
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-                <Lightbulb className="w-5 h-5 text-[#FFB74D]" />
+                <Lightbulb className="w-5 h-5 text-[#2A8A94]" />
                 {getText('Reflection Prompt', 'موجّه التأمّل')}
               </CardTitle>
               <CardDescription>
@@ -446,7 +446,7 @@ export default function IdentityBaselinePage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="p-4 bg-[#FFB74D]/10 rounded-lg border border-[#FFB74D]/30">
+              <div className="p-4 bg-[#2A8A94]/10 rounded-lg border border-[#2A8A94]/30">
                 <p className="text-lg font-medium text-[#0F1C2E]">
                   {reflectionPrompts[currentPrompt]}
                 </p>

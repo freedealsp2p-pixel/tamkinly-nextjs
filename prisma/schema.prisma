@@ -61,11 +61,10 @@ enum UserRole {
 // ============================================
 
 enum AccessTier {
-  FREE      // Lead Magnet - Free valuable apps
-  TRIAL     // 7-Day Trial - Limited access
-  BASIC     // Basic Package - 4 core apps
-  PREMIUM   // Premium Package - 6 apps
-  BUNDLE    // Complete Bundle - All 8 apps + exclusive
+  FREE      // Lead Magnet - Free valuable apps + identity quiz
+  BASIC     // Basic Monthly - 7-day discipline journey (was TRIAL)
+  PREMIUM   // Premium Monthly - 30-day journey + core apps (was BASIC)
+  MASTERY   // Mastery Monthly - AI Coach + Community + everything (was BUNDLE)
 }
 
 model AppAccess {

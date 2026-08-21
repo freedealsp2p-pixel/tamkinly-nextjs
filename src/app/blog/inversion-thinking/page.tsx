@@ -8,6 +8,10 @@ import { ArrowRight, Clock, User, AlertTriangle, Lightbulb, XCircle, CheckCircle
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function InversionThinkingArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -124,7 +128,7 @@ export default function InversionThinkingArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <XCircle className="h-5 w-5 text-[#FC6D26]" />
+                    <XCircle className="h-5 w-5 text-[#C97B7B]" />
                     <h3 className="font-semibold text-primary">{getText("Financial Failure", "الفشل المالي")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">
@@ -155,7 +159,7 @@ export default function InversionThinkingArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <XCircle className="h-5 w-5 text-[#FC6D26]" />
+                    <XCircle className="h-5 w-5 text-[#C97B7B]" />
                     <h3 className="font-semibold text-primary">{getText("Identity Failure", "فشل الهوية")}</h3>
                   </div>
                   <ul className="text-sm text-slate-600 space-y-1">
@@ -234,6 +238,9 @@ export default function InversionThinkingArticle() {
       </section>
 
       {/* Article Navigation */}
+      <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
+      <BlogArticleCTA ctaType="coach" />
+
       <ArticleNavigation currentSlug="inversion-thinking" />
 
       {/* Related Articles */}
@@ -258,26 +265,8 @@ export default function InversionThinkingArticle() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Avoid Failure. Achieve Transformation.", "تجنب الفشل. حقق التحول.")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Get the frameworks to see clearly and avoid what's holding you back.", "احصل على الأطر لترى بوضوح وتتجنب ما يعيقك.")}
-            </p>
-            <Link href="/products">
-              <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                {getText("Explore Products", "استكشف المنتجات")}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-    </article>
+        <BlogConversionSection />
+      </article>
   );
 }
+

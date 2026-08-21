@@ -186,7 +186,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   },
   privacy: {
     title: 'Privacy Policy | Your Data Protection',
-    titleAr: 'سياسة الخصوصية | حماية بياناتك - تمكينلي',
+    titleAr: 'سياسة الخصوصية | حماية بياناتك - تم��ينلي',
     description: 'Learn how Tamkinly protects your privacy and handles your data. We are committed to transparency and security in all our practices.',
     descriptionAr: 'تعرف على كيفية حماية تمكينلي لخصوصيتك والتعامل مع بياناتك. نحن ملتزمون بالشفافية والأمان في جميع ممارساتنا.',
     path: '/privacy',
@@ -247,7 +247,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   },
   account: {
     title: 'My Account | Manage Your Profile',
-    titleAr: 'حسابي | إدارة ملفك الشخصي - تمكينلي',
+    titleAr: 'حسابي | إدارة ملفكالشخصي - تمكينلي',
     description: 'Access your Tamkinly account to manage your profile, view purchases, and track your transformation progress.',
     descriptionAr: 'الوصول إلى حساب تمكينلي الخاص بك لإدارة ملفك الشخصي، ومشاهدة المشتريات، وتتبع تقدم تحولك.',
     path: '/account',
@@ -321,58 +321,57 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
 /**
  * Generate comprehensive page metadata with unique canonical URLs and OpenGraph data
  */
-export function generatePageMetadataFromConfig(pageKey: keyof typeof PAGE_METADATA): Metadata {
+export function generatePageMetadataFromConfig(pageKey: keyof typeof PAGE_METADATA, locale?: string): Metadata {
   const config = PAGE_METADATA[pageKey];
   if (!config) {
     console.warn(`Page metadata not found for key: ${pageKey}`);
     return {};
   }
 
-  const fullUrl = `${SEO_SITE_CONFIG.url}${config.path}`;
+  const isAr = locale === 'ar';
+  const title = isAr ? config.titleAr : config.title;
+  const description = isAr ? config.descriptionAr : config.description;
+  const siteName = isAr ? SEO_SITE_CONFIG.nameAr : SEO_SITE_CONFIG.name;
+  const basePath = isAr ? ('/ar' + config.path) : config.path;
+  const fullUrl = `${SEO_SITE_CONFIG.url}${basePath}`;
   const imageUrl = config.image 
     ? `${SEO_SITE_CONFIG.url}${config.image}` 
-    : `${SEO_SITE_CONFIG.url}${SEO_SITE_CONFIG.defaultImage}`;
+    : `${SEO_SITE_CONFIG.url}${config.path === '/' ? '/opengraph-image' : config.path + '/opengraph-image'}`;
 
   return {
-    title: config.title,
-    description: config.description,
+    title,
+    description,
     keywords: config.keywords,
     
-    // Canonical URL with correct path
-    // Using x-default only - Arabic content not yet available at separate URLs
     alternates: {
       canonical: fullUrl,
+      languages: {
+        'en-US': `${SEO_SITE_CONFIG.url}${config.path}`,
+        'ar-SA': `${SEO_SITE_CONFIG.url}/ar${config.path}`,
+        'x-default': `${SEO_SITE_CONFIG.url}${config.path}`,
+      },
     },
     
-    // Open Graph with correct URL
     openGraph: {
-      title: config.title,
-      description: config.description,
-      url: fullUrl, // Correct URL for each page
-      siteName: SEO_SITE_CONFIG.name,
-      locale: 'en_US',
+      title,
+      description,
+      url: fullUrl,
+      siteName,
+      locale: isAr ? 'ar_SA' : 'en_US',
+      alternateLocale: isAr ? 'en_US' : 'ar_SA',
       type: config.type || 'website',
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: config.title,
-        },
-      ],
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
     },
     
-    // Twitter Card
     twitter: {
       card: 'summary_large_image',
-      title: config.title,
-      description: config.description,
+      title,
+      description,
       site: SEO_SITE_CONFIG.twitterHandle,
       creator: SEO_SITE_CONFIG.twitterHandle,
       images: [imageUrl],
     },
     
-    // Robots configuration
     robots: config.noIndex 
       ? { index: false, follow: false }
       : {
@@ -387,13 +386,16 @@ export function generatePageMetadataFromConfig(pageKey: keyof typeof PAGE_METADA
           },
         },
     
-    // Additional metadata
     other: {
-      'language': 'en, ar',
-      'application-name': SEO_SITE_CONFIG.name,
+      'language': isAr ? 'ar' : 'en',
+      'application-name': siteName,
+      'DC.description': description,
+      'DC.subject': config.keywords.slice(0, 3).join(', '),
     },
   };
 }
+
+
 
 // ============================================
 // CONVENIENCE EXPORTS FOR EACH PAGE

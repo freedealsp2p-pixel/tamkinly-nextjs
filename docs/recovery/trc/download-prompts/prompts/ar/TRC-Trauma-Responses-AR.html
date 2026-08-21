@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أنماط الاستجابة للصدمة — مرجع سريع — TRC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+:root{--primary:#1F6F78;--accent:#3DD4B0;--dark:#0F1C2E;--bg:#F8FAFC;--border:#CBD5E1;--alert-bg:#FFFBEB;--alert-border:#D97706;--alert-text:#92400E;--safety-bg:#FEF3C7;--safety-border:#B45309;--safety-text:#78350F;--teal-bg:#E6F4F5;--teal-text:#1F6F78;--writing-border:#9CA3AF;--footer:#475569}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Arabic',sans-serif;background:var(--bg);color:var(--dark);font-size:13px;line-height:1.8;direction:rtl}
+.page{width:210mm;min-height:297mm;padding:15mm;margin:0 auto 20px auto;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);page-break-after:always}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none;page-break-after:always}}
+.header-bar{background:var(--primary);color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.header-bar .title{font-size:18px;font-weight:700}
+.header-bar .meta{font-size:10px;opacity:.85;text-align:left}
+.section-title{font-size:16px;font-weight:700;color:var(--primary);border-bottom:2px solid var(--accent);padding-bottom:6px;margin:20px 0 14px 0}
+.sub-title{font-size:14px;font-weight:600;color:var(--primary);margin:14px 0 8px 0}
+.purpose-box{background:var(--teal-bg);border-right:4px solid var(--primary);padding:12px 16px;border-radius:0 6px 6px 0;margin-bottom:16px}
+.purpose-box .label{font-size:11px;font-weight:600;color:var(--teal-text);margin-bottom:4px}
+.safety-alert{background:var(--safety-bg);border:2px solid var(--safety-border);border-radius:6px;padding:14px 16px;margin-bottom:16px}
+.safety-alert .alert-title{font-weight:700;color:var(--safety-text);font-size:14px;margin-bottom:6px}
+.safety-alert .alert-text{color:var(--safety-text);font-size:12px;line-height:1.7}
+.content-text{font-size:13px;line-height:1.9;margin-bottom:12px}
+.bullet-list{list-style:none;padding:0;margin:0 0 14px 0}
+.bullet-list li{padding:4px 0;position:relative;padding-right:20px}
+.bullet-list li::before{content:"●";position:absolute;right:0;color:var(--accent);font-size:10px;top:6px}
+.num-list{list-style:none;padding:0;margin:0 0 14px 0;counter-reset:nl}
+.num-list li{padding:4px 0;position:relative;padding-right:32px;counter-increment:nl}
+.num-list li::before{content:counter(nl);position:absolute;right:0;color:#fff;background:var(--primary);width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;font-size:11px;font-weight:600;top:4px}
+.writing-field{border:2px dotted var(--writing-border);border-radius:6px;padding:10px 14px;margin-bottom:12px;min-height:60px}
+.writing-field .field-label{font-size:11px;font-weight:600;color:var(--primary);margin-bottom:6px}
+.writing-field.medium{min-height:70px}
+.ref-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:11px}
+.ref-table th{background:var(--primary);color:#fff;padding:8px 10px;text-align:right;font-weight:600;font-size:11px}
+.ref-table td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;vertical-align:top}
+.ref-table tr:nth-child(even) td{background:#F8FAFC}
+.response-block{border:2px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px}
+.response-block .resp-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed var(--border)}
+.response-block .resp-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.response-block .resp-name{font-weight:700;font-size:15px}
+.response-block .resp-section{margin-bottom:8px}
+.response-block .resp-label{font-size:10px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
+.response-block .resp-content{font-size:12px;line-height:1.7}
+.plan-card{background:var(--teal-bg);border-radius:6px;padding:10px 14px;margin-bottom:8px}
+.plan-card .plan-title{font-weight:600;font-size:12px;color:var(--teal-text);margin-bottom:4px}
+.plan-card .plan-text{font-size:11px;line-height:1.6}
+.suds-row{display:flex;gap:2px;margin-bottom:6px}
+.suds-cell{flex:1;text-align:center;padding:6px 4px;border-radius:4px;font-size:9px}
+.contact-box{background:var(--dark);color:#fff;border-radius:6px;padding:14px 16px;margin-top:16px}
+.contact-box .contact-title{font-weight:600;font-size:13px;margin-bottom:8px;color:var(--accent)}
+.contact-box .contact-item{font-size:11px;margin-bottom:4px;opacity:.9}
+.clinical-gate{background:#F1F5F9;border:1px solid var(--border);border-radius:6px;padding:10px 14px;margin-top:14px;font-size:10px;color:#64748B}
+.clinical-gate .gate-label{font-weight:600;color:var(--primary);margin-bottom:4px}
+.page-footer{text-align:center;font-size:9px;color:var(--footer);margin-top:20px;padding-top:8px;border-top:1px solid var(--border)}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:600}
+.badge.stage{background:var(--teal-bg);color:var(--teal-text)}
+.badge.type{background:#E0F2FE;color:#0369A1}
+.badge.gate{background:#FEE2E2;color:#991B1B}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+<div class="header-bar">
+  <div class="title">أنماط الاستجابة للصدمة — مرجع سريع</div>
+  <div class="meta">المرحلة: تنظيم<br>النوع: مرجع<br>TRC-Trauma-Responses-AR</div>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:14px">
+  <span class="badge stage">المرحلة: تنظيم</span>
+  <span class="badge type">النوع: مرجع</span>
+  <span class="badge gate">بوابة مراجعة سريرية: مطلوبة</span>
+</div>
+<div class="purpose-box">
+  <div class="label">الغرض</div>
+  جدول مرجعي سريع لأنماط الاستجابة الأربعة للصدمة (قتال، فرار، تجمد، تملق) — يساعدك على التعرف على نمطك السائد واختيار أداة التنظيم المناسبة.
+</div>
+<div class="safety-alert">
+  <div class="alert-title">⚠ تنبيه سلامة</div>
+  <div class="alert-text">هذا مرجع تعليمي وليس تشخيصًا. إذا كانت ردود أفعالك تسبب لك ضيقًا شديدًا أو تؤثر على حياتك اليومية، اطلب مساعدة معالج مختص.</div>
+</div>
+
+<div class="section-title">الأنماط الأربعة — جدول مرجعي</div>
+
+<!-- FIGHT -->
+<div class="response-block" style="border-color:#DC2626">
+  <div class="resp-header">
+    <div class="resp-icon" style="background:#FEE2E2;color:#DC2626">✊</div>
+    <div class="resp-name" style="color:#DC2626">القتال (Fight)</div>
+  </div>
+  <div class="resp-section"><div class="resp-label">إشارات الجسد</div><div class="resp-content">فك مشدود، قبضات، صوت مرتفع، عضلات مشدودة، تعبيرات وجه غاضبة، نبض قلب سريع، رغبة في المواجهة أو التحطيم</div></div>
+  <div class="resp-section"><div class="resp-label">متى يظهر</div><div class="resp-content">عندما يدرك الدماغ أن التهديد يمكن مواجهته — أو عندما يكون الشخص قد تعلّم أن الغضب هو الطريقة الوحيدة للحصول على الأمان</div></div>
+  <div class="resp-section"><div class="resp-label">كيف توقِفه بأمان</div><div class="resp-content">① تنفس A52 لتهدئة الجهاز العصبي &nbsp; ② تمرين إرخاء عضلي تدريجي (خصوصًا الفك والكتفين) &nbsp; ③ نشاط بدني معتدل (مشية، تمط) لإخراج الطاقة &nbsp; ④ تأريض 5-4-3-2-1 للعودة للحاضرة</div></div>
+</div>
+
+<!-- FLIGHT -->
+<div class="response-block" style="border-color:#F59E0B">
+  <div class="resp-header">
+    <div class="resp-icon" style="background:#FEF3C7;color:#D97706">🏃</div>
+    <div class="resp-name" style="color:#D97706">الفرار (Flight)</div>
+  </div>
+  <div class="resp-section"><div class="resp-label">إشارات الجسد</div><div class="resp-content">أرجل متوترة، عيون واسعة، فرط الحركة، عدم القدرة على الجلوس، حاجة ملحة للمغادرة، توتر في الساقين والقدمين</div></div>
+  <div class="resp-section"><div class="resp-label">متى يظهر</div><div class="resp-content">عندما يدرك الدماغ أن الهرب هو الخيار الأأمن — أو عندما يكون الشخص قد تعلّم أن التجنب يقلل الألم</div></div>
+  <div class="resp-section"><div class="resp-label">كيف توقِفه بأمان</div><div class="resp-content">① تأريض 5-4-3-2-1 (خصوصًا الجسدي: لمس وتحرك) &nbsp; ② مسح الجسد لتحديد مكان التوتر &nbsp; ③ تنفس A52 &nbsp; ④ تذكّر نفسك: "أنا في أمان الآن، لا حاجة للهرب"</div></div>
+</div>
+
+<!-- FREEZE -->
+<div class="response-block" style="border-color:#6366F1">
+  <div class="resp-header">
+    <div class="resp-icon" style="background:#EEF2FF;color:#6366F1">❄️</div>
+    <div class="resp-name" style="color:#6366F1">التجمد (Freeze)</div>
+  </div>
+  <div class="resp-section"><div class="resp-label">إشارات الجسد</div><div class="resp-content">شلل، صمت، انفصال عن الواقع أو الجسد، خدر، صعوبة الكلام، شعور بالعجز التام، انخفاض نبض القلب</div></div>
+  <div class="resp-section"><div class="resp-label">متى يظهر</div><div class="resp-content">عندما يتعذر القتال والفرار — يغلق الجهاز العصبي كحل أخير. شائع في الصدمات التي تحدث في سن مبكرة أو عندما يكون مقدم التهديد مقدم رعاية</div></div>
+  <div class="resp-section"><div class="resp-label">كيف توقِفه بأمان</div><div class="resp-content">① حركة صغيرة أولًا (حرك إصبع، درّج قدميك) — لا تجبر نفسك على حركة كبيرة &nbsp; ② تنفس مع إطالة الزفير لتنشيط اللاودي &nbsp; ③ اشرب ماءً بارد أو اغسل وجهك بماء بارد &nbsp; ④ مسح الجسد لإعادة الوعي الجسدي</div></div>
+</div>
+
+<!-- FAWN -->
+<div class="response-block" style="border-color:#8B5CF6">
+  <div class="resp-header">
+    <div class="resp-icon" style="background:#F5F3FF;color:#8B5CF6">🤝</div>
+    <div class="resp-name" style="color:#8B5CF6">التملق (Fawn)</div>
+  </div>
+  <div class="resp-section"><div class="resp-label">إشارات الجسد</div><div class="resp-content">إرضاء الآخرين، تجاهل الذات، صعوبة قول "لا"، فقدان الحدود، تبني مشاعر الآخرين، شعور أن قيمتك مرتبطة بمدى إرضائك للآخرين</div></div>
+  <div class="resp-section"><div class="resp-label">متى يظهر</div><div class="resp-content">شائع في الصدمات العلائقية — خصوصًا عندما يكون مقدم التهديد شخصًا مهمًا. إرضاؤه يبدو أأمن من المواجهة أو الهرب</div></div>
+  <div class="resp-section"><div class="resp-label">كيف توقِفه بأمان</div><div class="resp-content">① مارس التأريض قبل الرد &nbsp; ② اسأل نفسك: "ماذا أريد أنا؟" قبل "ماذا يريد هو/هي؟" &nbsp; ③ ابدأ بـ"لا" صغيرة في مواقف أمنة &nbsp; ④ استخدم ورقة إعادة الصياغة لفحص الاعتقاد "أنا مسؤول عن مشاعر الآخرين"</div></div>
+</div>
+
+<div class="page-footer">أنماط الاستجابة للصدمة — TRC © 2025 | الصفحة 1 من 3 | المرجع سريري: Walker (2014), Fisher (2017)</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<div class="section-title">كيف أحدد نمطي السائد؟</div>
+<p class="content-text">معظمنا لديه نمط سائد (أساسي) ونمط ثانوي يظهر في ظروف معينة. املأ الحقول التالية لتحديد أنماطك:</p>
+
+<div class="writing-field medium">
+  <div class="field-label">النمط الأكثر شيوعًا لي: ☐ قتال &nbsp; ☐ فرار &nbsp; ☐ تجمد &nbsp; ☐ تملق</div>
+</div>
+
+<div class="writing-field medium">
+  <div class="field-label">النمط الثانوي (يظهر في ظروف معينة): ☐ قتال &nbsp; ☐ فرار &nbsp; ☐ تجمد &nbsp; ☐ تملق</div>
+</div>
+
+<div class="writing-field medium">
+  <div class="field-label">ما الإشارات التي ألاحظها أولًا في جسدي؟</div>
+  (مثال: "أول شيء ألاحظه هو شد في فكي" أو "أول شيء هو شعور بالحاجة للمغادرة")
+</div>
+
+<div class="writing-field medium">
+  <div class="field-label">في أي مواقف يظهر نمطي السائد؟</div>
+  (مثال: "عندما ينتقدني شخص" أو "عندما أكون في مكان مزدحم" أو "عندما أختلف مع شريكي")
+</div>
+
+<div class="section-title">خطة التنظيم لكل نمط</div>
+<p class="content-text">بناءً على نمطك السائد، إليك خطة التنظيم الموصى بها:</p>
+
+<div class="plan-card">
+  <div class="plan-title">✊ إذا كان نمطك القتال:</div>
+  <div class="plan-text">① تنفس A52 أولًا (5 ثوانٍ شهيق، 2 زفير) &nbsp; → &nbsp; ② إرخاء عضلي تدريجي (من الفك إلى الكتفين) &nbsp; → &nbsp; ③ نشاط بدني معتدل &nbsp; → &nbsp; ④ تأريض 5-4-3-2-1<br><strong>أداة TRC الموصى بها:</strong> تنفس A52 + تأريض 5-4-3-2-1</div>
+</div>
+<div class="plan-card">
+  <div class="plan-title">🏃 إذا كان نمطك الفرار:</div>
+  <div class="plan-text">① تأريض جسدي (لمس، حركة) &nbsp; → &nbsp; ② مسح الجسد لتحديد التوتر &nbsp; → &nbsp; ③ تنفس A52 &nbsp; → &nbsp; ④ المكان الآمن<br><strong>أداة TRC الموصى بها:</strong> تأريض 5-4-3-2-1 + مسح الجسد</div>
+</div>
+<div class="plan-card">
+  <div class="plan-title">❄️ إذا كان نمطك التجمد:</div>
+  <div class="plan-text">① حركة صغيرة جدًا (إصبع، قدم) &nbsp; → &nbsp; ② ماء بارد على الوجه &nbsp; → &nbsp; ③ تنفس مع إطالة الزفير &nbsp; → &nbsp; ④ مسح الجسد<br><strong>أداة TRC الموصى بها:</strong> مسح الجسد + تنفس A52</div>
+</div>
+<div class="plan-card">
+  <div class="plan-title">🤝 إذا كان نمطك التملق:</div>
+  <div class="plan-text">① تأريض قبل الرد &nbsp; → &nbsp; ② اسأل "ماذا أريد أنا؟" &nbsp; → &nbsp; ③ مارس قول "لا" في مواقف صغيرة &nbsp; → &nbsp; ④ إعادة صياغة الاعتقاد<br><strong>أداة TRC الموصى بها:</strong> تأريض 5-4-3-2-1 + إعادة الصياغة</div>
+</div>
+
+<div class="page-footer">أنماط الاستجابة للصدمة — TRC © 2025 | الصفحة 2 من 3</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+<div class="section-title">مسار التصعيد — مقياس SUDS</div>
+<p class="content-text">استخدم هذا المسار لتحديد ماذا تفعل عند كل مستوى ضيق:</p>
+
+<table class="ref-table">
+  <tr><th>SUDS</th><th>المستوى</th><th>ماذا تشعر</th><th>ماذا تفعل</th></tr>
+  <tr><td style="background:#DCFCE7;font-weight:700">0–2</td><td>راحة / هدوء</td><td>مرتاح، واعي، قادر على التفكير بوضوح</td><td>هذا هو هدفك — حافظ على هذه الحالة. يمكنك ممارسة أنشطة الحياة اليومية بكل ثقة.</td></tr>
+  <tr><td style="background:#FEF9C3;font-weight:700">3–4</td><td>ضيق خفيف</td><td>توتر طفيف، تشتت انتباه، ضيق في العين أو الفك</td><td>مارس تنفس A52 (3 أنفاس). لاحظ الإشارات الجسدية. لا تتجاهل — التنظيم المبكر يمنع التصعيد.</td></tr>
+  <tr><td style="background:#FEF3C7;font-weight:700">5–6</td><td>ضيق متوسط</td><td>توتر واضح، صعوبة التفكير، أحاسيس جسدية قوية، بداية نمط استجابة</td><td>تأريض 5-4-3-2-1 + تنفس A52. إذا ظهر نمط استجابة (قتال/فرار/تجمد/تملق)، اتبع خطة التنظيم المخصصة له.</td></tr>
+  <tr><td style="background:#FFEDD5;font-weight:700">7</td><td>⚠ عتبة التوقف</td><td>ضيق شديد، شعور بالفقدان السيطرة، ردود فعل قوية، بداية انفصال</td><td><strong>توقف عن أي معالجة.</strong> مارس تأريض فوري. إذا كنت تكتب في اليوميات — أغلق الجلسة. لا تتخذ قرارات مهمة في هذه الحالة.</td></tr>
+  <tr><td style="background:#FEE2E2;font-weight:700">8–9</td><td>ضيق حاد</td><td>نوبة ذعر أو غضب حاد أو انفصال تام أو شلل</td><td>مارس طوارئ التنظيم: ماء بارد على الوجه، حركة بسيطة، تنفس مع إطالة الزفير. إذا لم يتحسن خلال 10 دقائق — اطلب مساعدة.</td></tr>
+  <tr><td style="background:#FECACA;font-weight:700;color:#991B1B">10</td><td>🚨 أزمة</td><td>فقدان السيطرة التام، أفكار إيذاء، انفصال كامل</td><td><strong>اطلب المساعدة فورًا.</strong> اتصل 937 أو 997. لا تبقى وحدي. مارس أي شيء يساعدك حتى تصلك المساعدة.</td></tr>
+</table>
+
+<div class="section-title">جهات الاتصال</div>
+<div class="contact-box">
+  <div class="contact-title">خطوط الطوارئ والدعم</div>
+  <div class="contact-item">📞 خط الدعم النفسي: 937 (مجاني في المملكة العربية السعودية)</div>
+  <div class="contact-item">📞 خط أزمة الصحة النفسية: 920-033-360</div>
+  <div class="contact-item">🌐 الدعم عبر الإنترنت: ncmh.org.sa</div>
+  <div class="contact-item">💬 في حالة الطوارئ: اتصل بالرقم 997 أو توجه لأقرب غرفة طوارئ</div>
+</div>
+
+<div class="clinical-gate">
+  <div class="gate-label">بوابة المراجعة السريرية: مطلوبة</div>
+  يجب مراجعة هذا المحتوى من قبل معالج أو مختص صحة نفسية مرخص قبل استخدامه مع العملاء. المراجع السريرية: Walker, P. (2014). Complex PTSD: From Surviving to Thriving; Fisher, J. (2017). Healing the Fragmented Selves of Trauma Survivors.
+</div>
+<div class="page-footer">أنماط الاستجابة للصدمة — TRC © 2025 | الصفحة 3 من 3 | المرحلة: تنظيم | الأداة الأم: trauma-responses</div>
+</div>
+
+</body>
+</html>

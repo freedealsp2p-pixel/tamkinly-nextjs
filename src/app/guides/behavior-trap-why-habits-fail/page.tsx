@@ -139,7 +139,7 @@ export default function BehaviorTrapGuide() {
         </Card>
         <div className="mt-12 text-center">
           <h3 className="text-xl font-bold text-[#0F1C2E] mb-4">{getText('Ready to Break the Behavior Trap?', 'مستعد لكسر فخ السلوك؟')}</h3>
-          <Link href="/products/bundle">
+          <Link href="/products/mastery">
             <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold h-12 px-8">
               {getText('Start Your Identity Transformation', 'ابدأ تحول هويتك')}
               <ArrowRight className="w-4 h-4 ml-2" />

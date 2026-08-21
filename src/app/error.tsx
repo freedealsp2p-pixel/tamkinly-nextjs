@@ -20,8 +20,8 @@ export default function Error({
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
         {/* Error Icon */}
-        <div className="w-20 h-20 rounded-full bg-[#FFF3E8] flex items-center justify-center mx-auto mb-6">
-          <AlertCircle className="w-10 h-10 text-[#FC6D26]" />
+        <div className="w-20 h-20 rounded-full bg-[#F8EEEF] flex items-center justify-center mx-auto mb-6">
+          <AlertCircle className="w-10 h-10 text-[#C97B7B]" />
         </div>
 
         {/* Message */}

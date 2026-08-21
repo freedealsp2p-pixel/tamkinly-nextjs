@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, Sparkles, ArrowRight, Mail, Copy, Check, Lock, Zap, Brain, Target, Users, Clock, Gift, Star } from 'lucide-react';
+import { CheckCircle2, Sparkles, ArrowRight, Mail, Copy, Check, Lock, Zap, Brain, Target, Users, Clock, Gift, Star, Shield } from 'lucide-react';
 import { useTranslations } from "@/components/providers/LocaleProvider";
 
 const TIER_INFO: Record<string, { nameEn: string; nameAr: string; price: number; color: string; icon: React.ReactNode; features: { en: string; ar: string }[] }> = {
   trial: {
-    nameEn: 'Trial Access', nameAr: 'وصول تجريبي', price: 7, color: 'bg-amber-100 text-amber-800 border-amber-300',
+    nameEn: 'Trial Access', nameAr: 'وصول تجريبي', price: 7, color: 'bg-[#e6f3f4] text-[#2A8A94] border-[#cde7e9]',
     icon: <Clock className="w-5 h-5" />,
     features: [
       { en: '7-day identity planner', ar: 'مخطط هوية لـ 7 أيام' },
@@ -40,7 +40,7 @@ const TIER_INFO: Record<string, { nameEn: string; nameAr: string; price: number;
     ],
   },
   bundle: {
-    nameEn: 'Full Bundle', nameAr: 'الباقة الشاملة', price: 47, color: 'bg-[#0F1C2E] text-[#3DD4B0] border-[#3DD4B0]/50',
+    nameEn: 'Mastery (Monthly)', nameAr: 'إتقان (شهري)', price: 27, color: 'bg-[#0F1C2E] text-[#3DD4B0] border-[#3DD4B0]/50',
     icon: <Sparkles className="w-5 h-5" />,
     features: [
       { en: 'Everything in Premium', ar: 'كل ما في الباقة المميزة' },
@@ -100,26 +100,30 @@ function SuccessContent() {
         </div>
 
         {/* Access Code Card - THE KEY FEATURE */}
-        {accessCode && (
-          <Card className="border-2 border-[#3DD4B0] shadow-lg mb-6 bg-gradient-to-br from-white to-[#3DD4B0]/5">
+        <Card className="border-2 border-[#3DD4B0] shadow-lg mb-6 bg-gradient-to-br from-white to-[#3DD4B0]/5">
             <CardHeader className="text-center pb-2">
               <div className="w-12 h-12 rounded-full bg-[#3DD4B0]/20 flex items-center justify-center mx-auto mb-2">
-                <Lock className="w-6 h-6 text-[#3DD4B0]" />
+                <Mail className="w-6 h-6 text-[#1F6F78]" />
               </div>
-              <CardTitle className="text-lg">{getText('Your Access Code', 'رمز الوصول الخاص بك')}</CardTitle>
-              <CardDescription>{getText('Use this code to unlock your apps', 'استخدم هذا الرمز لفتح تطبيقاتك')}</CardDescription>
+              <CardTitle className="text-lg">{getText('Access Token Sent by Email', 'رمز الوصول يرسل عبر البريد الإلكتروني')}</CardTitle>
+              <CardDescription>{getText('Your personal access token will be sent to your email after payment confirmation', 'سيتم إرسال رمز الوصول الشخصي إلى بريدك الإلكتروني بعد تأكيد الدفع')}</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <div className="bg-[#0F1C2E] rounded-lg p-4 mb-3 flex items-center justify-between">
-                <span className="font-mono text-xl text-[#3DD4B0] tracking-widest">{accessCode}</span>
-                <Button variant="ghost" size="sm" onClick={copyCode} className="text-[#3DD4B0] hover:text-white">
-                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                </Button>
+              <div className="bg-[#0F1C2E] rounded-lg p-4 mb-3">
+                <p className="text-white font-medium flex items-center justify-center gap-2">
+                  <Mail className="w-4 h-4 text-[#3DD4B0]" />
+                  {getText('Check your email for your access token', 'تحقق من بريدك الإلكتروني لرمز الوصول')}
+                </p>
               </div>
-              <p className="text-xs text-slate-500">{getText('We also sent this code to your email', 'أرسلنا هذا الرمز أيضاً لبريدك الإلكتروني')}</p>
+              <p className="text-xs text-slate-500 mb-2">
+                {getText('The token is linked to your email and cannot be used by anyone else.', 'الرمز مرتبط ببريدك ولا يمكن لغيرك استخدامه.')}
+              </p>
+              <div className="flex items-center justify-center gap-2 text-[#1F6F78]">
+                <Shield className="w-4 h-4" />
+                <span className="text-xs">{getText('Personal & Secure', 'شخصي وآمن')}</span>
+              </div>
             </CardContent>
           </Card>
-        )}
 
         {/* What's Included */}
         <Card className="border border-slate-200 shadow-sm mb-6">
@@ -154,7 +158,7 @@ function SuccessContent() {
                 </div>
                 <div>
                   <p className="font-medium text-[#0F1C2E]">{getText('Go to Apps Page', 'اذهب لصفحة التطبيقات')}</p>
-                  <p className="text-sm text-slate-500">{getText('Visit tamkinly.com/apps to see all available tools', 'زر tamkinly.com/apps لمشاهدة جميع الأدوات')}</p>
+                  <p className="text-sm text-slate-500">{getText('Visit tamkinly.com/apps to access your tools with your token and email', 'زر tamkinly.com/apps للوصول لأدواتك برمزك وبريدك')}</p>
                 </div>
               </div>
               <div className="flex gap-3">

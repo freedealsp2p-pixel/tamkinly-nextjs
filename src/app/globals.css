@@ -41,6 +41,46 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Brand Color Tokens - Official Palette */
+  --color-brand-primary: #0F1C2E;
+  --color-brand-teal: #1F6F78;
+  --color-brand-teal-50: #e8f4f3;
+  --color-brand-teal-100: #d1e9e7;
+  --color-brand-teal-200: #b3d9d6;
+  --color-brand-teal-300: #80c2bd;
+  --color-brand-teal-400: #4da8a2;
+  --color-brand-teal-600: #1a5e66;
+  --color-brand-teal-700: #154d54;
+  --color-brand-mint: #3DD4B0;
+  --color-brand-mint-50: #edfbf6;
+  --color-brand-mint-100: #dbf7ed;
+  --color-brand-mint-200: #b6efdb;
+  --color-brand-mint-400: #54d7b0;
+  --color-brand-mint-600: #2bb89a;
+  --color-brand-mint-700: #1a9d80;
+  --color-brand-light-teal: #2A8A94;
+  --color-brand-light-teal-50: #e6f3f4;
+  --color-brand-light-teal-100: #cde7e9;
+  --color-brand-light-teal-200: #a8d5d8;
+  --color-brand-light-teal-400: #4aabb0;
+  --color-brand-light-teal-600: #237a83;
+  --color-brand-light-teal-700: #1c6a72;
+  --color-brand-soft-mint: #7AEEE0;
+  --color-brand-soft-mint-50: #f4fcfb;
+  --color-brand-soft-mint-100: #e9f9f7;
+  --color-brand-soft-mint-200: #d5f5f0;
+  --color-brand-soft-mint-400: #9ae7da;
+  --color-brand-warning: #C97B7B;
+  --color-brand-warning-50: #f8eded;
+  --color-brand-warning-100: #f1dbdb;
+  --color-brand-warning-200: #e4c0c0;
+  --color-brand-warning-400: #c48a8a;
+  --color-brand-warning-600: #b26565;
+  --color-brand-warning-700: #a86060;
+  --color-brand-muted: #8A94A6;
+  --color-brand-muted-50: #f1f3f6;
+  --color-brand-muted-100: #e3e7ec;
 }
 
 /* Tamkinly Brand Colors - RESONANT CLARITY */
@@ -82,19 +122,19 @@
   --accent-foreground: oklch(0.22 0.03 250);
   
   /* Destructive */
-  --destructive: #FC6D26;
+  --destructive: #C97B7B;
   
   /* Borders & Inputs */
   --border: oklch(0.9 0 0);
   --input: oklch(0.9 0 0);
   --ring: oklch(0.45 0.1 185);
   
-  /* Charts */
+  /* Charts - Using brand colors */
   --chart-1: oklch(0.45 0.1 185);
   --chart-2: oklch(0.85 0.15 165);
   --chart-3: oklch(0.22 0.03 250);
-  --chart-4: oklch(0.7 0.15 35);
-  --chart-5: oklch(0.6 0.12 280);
+  --chart-4: oklch(0.6 0.1 185);
+  --chart-5: oklch(0.7 0.12 200);
   
   /* Sidebar */
   --sidebar: oklch(0.98 0 0);
@@ -115,6 +155,21 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+}
+
+
+/* Safety pulse animation — subtle attention-drawing for SafetyResponse button */
+@keyframes safety-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(232, 104, 90, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 24px rgba(232, 104, 90, 0.5);
+  }
+}
+
+.animate-safety-pulse {
+  animation: safety-pulse 3s ease-in-out infinite;
 }
 
 /* Accordion animations */
@@ -245,5 +300,158 @@ html {
 }
 
 
-/* Dark mode overrides */
 
+/* ============================================
+   PRINT STYLES — Recovery Plan
+   ============================================ */
+@media print {
+  /* Hide non-essential UI elements */
+  header,
+  nav,
+  footer,
+  [data-cookie-banner],
+  .sticky,
+  button,
+  [aria-label="Close cookie consent"],
+  [aria-label="Switch Language"],
+  [aria-label="Search..."] {
+    display: none !important;
+  }
+
+  /* Reset backgrounds for print */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Remove sticky positioning */
+  .sticky {
+    position: static !important;
+  }
+
+  /* Show all sections in clean format */
+  section {
+    background: white !important;
+    color: black !important;
+    padding: 1rem 0 !important;
+    page-break-inside: avoid;
+  }
+
+  /* Headings — black for print */
+  h1, h2, h3, h4 {
+    color: black !important;
+    page-break-after: avoid;
+  }
+
+  /* Cards — simple borders for print */
+  [class*="rounded-3xl"],
+  [class*="rounded-2xl"],
+  [class*="bg-white"],
+  [class*="bg-\[#F6F8FA\]"] {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+
+  /* Dark sections — invert for print */
+  [class*="bg-\[#0F1C2E\]"] {
+    background: white !important;
+    color: black !important;
+    border: 2px solid #0F1C2E !important;
+  }
+
+  [class*="bg-\[#0F1C2E\]"] p,
+  [class*="bg-\[#0F1C2E\]"] span,
+  [class*="bg-\[#0F1C2E\]"] h2,
+  [class*="bg-\[#0F1C2E\]"] h3 {
+    color: black !important;
+  }
+
+  /* Teal text → dark teal for print contrast */
+  [class*="text-\[#3DD4B0\]"] {
+    color: #0F6B5A !important;
+  }
+
+  [class*="text-\[#1F6F78\]"] {
+    color: #1F6F78 !important;
+  }
+
+  /* Badges — simple border for print */
+  [class*="Badge"] {
+    background: white !important;
+    border: 1px solid #0F1C2E !important;
+    color: #0F1C2E !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+  }
+
+  /* Print-only header */
+  .print-only-header {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #0F1C2E;
+  }
+
+  .print-only-header h1 {
+    font-size: 20pt !important;
+    margin: 0 0 0.5rem 0 !important;
+  }
+
+  .print-only-header p {
+    font-size: 10pt !important;
+    color: #666 !important;
+    margin: 0 !important;
+  }
+
+  /* Page setup */
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+
+  /* AnimatePresence — show all hidden tabs/content */
+  [style*="height: 0"],
+  [style*="height:0"],
+  [style*="opacity: 0"],
+  [style*="opacity:0"] {
+    height: auto !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+
+  /* Links — show URL for print */
+  a[href^="/"]:after {
+    content: " (https://tamkinly.com" attr(href) ")";
+    font-size: 8pt;
+    color: #666;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #666;
+  }
+
+  /* Hide interactive form elements that don't make sense in print */
+  input[type="checkbox"],
+  textarea {
+    border: 1px solid #999 !important;
+    background: white !important;
+  }
+
+  /* Framer motion — reset transforms */
+  [style*="transform"],
+  [style*="opacity"] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Print-only header — hidden on screen */
+.print-only-header {
+  display: none;
+}

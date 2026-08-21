@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // Get comprehensive statistics
 export async function GET(request: NextRequest) {
   try {
-    const password = request.nextUrl.searchParams.get('password');
+    const session = await getAdminSession();
     
-    if (!verifyAdminPassword(password)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     // Total users
     const totalUsers = await db.user.count();
@@ -34,11 +34,15 @@ export async function GET(request: NextRequest) {
     const conversionRate = totalCodes > 0 ? (usedCodes / totalCodes) * 100 : 0;
 
     // Revenue estimation by tier
+    // NEW MODEL: monthly subscription tiers (legacy aliases retained for old data)
     const tierPrices: Record<string, number> = {
-      TRIAL: 7,
+      BASIC: 7,
+      PREMIUM: 17,
+      MASTERY: 27,
+      // Legacy aliases (for historical data)
+      BASIC: 7,
       PLANNER: 17,
-      PREMIUM: 27,
-      BUNDLE: 47,
+      MASTERY: 47,
     };
 
     const codesByTier = await db.appAccess.groupBy({

@@ -1,28 +1,33 @@
 'use client';
 
-import { Download, FileText, HardDrive } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { FileText, HardDrive } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
+import { BilingualDownloadButton } from "@/components/ui/bilingual-download-button";
 
+// Map each product to its BILINGUAL_FILES key
 const productKeys = [
-  { key: "executiveManual", file: "/Executive-Manual.pdf", pages: 6, size: "74 KB" },
-  { key: "identityBaseline", file: "/Identity-Baseline-Worksheet.pdf", pages: 12, size: "75 KB" },
-  { key: "environmentalAudit", file: "/Environmental-Audit.pdf", pages: 8, size: "62 KB" },
-  { key: "decisionPattern", file: "/Decision-Pattern-Analysis.pdf", pages: 7, size: "58 KB" },
-  { key: "evidenceTracking", file: "/Evidence-Tracking-System.pdf", pages: 8, size: "60 KB" },
-  { key: "progressDashboard", file: "/Progress-Dashboard-Guide.pdf", pages: 7, size: "58 KB" }
+  // BASIC tier
+  { key: "sevenDaysSystem", bilingualKey: "7-DAYS-SYSTEM", pages: 30, size: "5.0 MB" },
+  // PREMIUM tier
+  { key: "executiveManual", bilingualKey: "EXECUTIVE-MANUAL", pages: 6, size: "74 KB" },
+  { key: "identityBaseline", bilingualKey: "IDENTITY-BASELINE", pages: 12, size: "75 KB" },
+  { key: "environmentalAudit", bilingualKey: "ENVIRONMENTAL-AUDIT", pages: 8, size: "62 KB" },
+  { key: "decisionPattern", bilingualKey: "DECISION-PATTERN", pages: 7, size: "58 KB" },
+  { key: "evidenceTracking", bilingualKey: "EVIDENCE-TRACKING", pages: 8, size: "60 KB" },
+  { key: "progressDashboard", bilingualKey: "PROGRESS-DASHBOARD", pages: 7, size: "58 KB" },
 ];
 
 export default function DownloadsPage() {
   const t = useTranslations('downloadsPage');
   const { locale } = useLocale();
-  const totalSize = "387 KB";
-  const totalPages = 48;
+  const totalSize = "5.0 MB";
+  const totalPages = 66;
+  const isAr = locale === 'ar';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-slate-900 py-12 px-4" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-slate-900 py-12 px-4" dir={isAr ? 'rtl' : 'ltr'}>
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -78,12 +83,14 @@ export default function DownloadsPage() {
                   </div>
                 </div>
                 
-                <a href={product.file} download className="mt-4 block">
-                  <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-medium">
-                    <Download className="w-4 h-4 mr-2" />
-                    {t('downloadFile')}
-                  </Button>
-                </a>
+                <div className="mt-4">
+                  <BilingualDownloadButton
+                    fileKey={product.bilingualKey}
+                    variant="primary"
+                    showSize={false}
+                    className="w-full"
+                  />
+                </div>
               </CardContent>
             </Card>
           ))}

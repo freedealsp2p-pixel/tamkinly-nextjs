@@ -1,6 +1,11 @@
 /**
  * Products Service - Local Next.js Implementation
- * Handles all product operations locally with Prisma
+ * NEW MODEL (2026-07-02): Monthly Subscription with 3 paid tiers + 1 free lead magnet
+ *
+ * FREE     → $0  - Identity Quiz + free apps (lead magnet)
+ * BASIC    → $7/month  - 7-day discipline journey (was BASIC)
+ * PREMIUM  → $17/month - 30-day journey + core apps (was BASIC)
+ * MASTERY  → $27/month - AI Coach + Community + everything (was MASTERY)
  */
 
 import { db } from './db';
@@ -15,99 +20,103 @@ export interface Product {
   description: string;
   shortDesc: string;
   category: string;
-  type: 'TRIAL' | 'DIGITAL_PDF' | 'INTERACTIVE_APP' | 'BUNDLE';
-  accessTier: 'FREE' | 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE' | null;
+  type: 'FREE' | 'SUBSCRIPTION_MONTHLY' | 'DIGITAL_PDF' | 'INTERACTIVE_APP';
+  accessTier: 'FREE' | 'BASIC' | 'PREMIUM' | 'MASTERY' | null;
   image: string | null;
   features: string[];
   isActive: boolean;
   isFeatured: boolean;
+  billingPeriod: 'monthly' | 'one-time';
 }
 
-// Local Products Data
+// Local Products Data (3 paid tiers — FREE is shown separately as lead magnet)
 export const LOCAL_PRODUCTS: Product[] = [
   {
-    id: 'trial',
-    name: '7-Day Trial',
-    slug: 'trial',
+    id: 'basic',
+    name: 'Basic',
+    slug: 'basic',
     price: 7,
     comparePrice: 15,
-    description: 'Experience the full Identity Recode system for 7 days. Perfect for testing the methodology before committing to the full program.',
-    shortDesc: '7-Day guided transformation journey',
-    category: 'trial',
-    type: 'TRIAL',
-    accessTier: 'TRIAL',
-    image: null,
-    features: ['7-Day Guided Journey', 'Daily identity prompts', 'Evidence tracking', 'Progress dashboard'],
-    isActive: true,
-    isFeatured: false,
-  },
-  {
-    id: 'planner',
-    name: 'Identity Recode Planner',
-    slug: 'planner',
-    price: 17,
-    comparePrice: 29,
-    description: 'The complete 30-day transformation system with interactive apps and PDF downloads. Based on evidence-based psychology and identity science.',
-    shortDesc: '30-day digital planner with print version',
-    category: 'planner',
-    type: 'DIGITAL_PDF',
+    description: 'Start with a focused 7-day discipline journey into identity transformation. The perfect entry point to test the methodology before committing deeper.',
+    shortDesc: '7-day guided discipline journey',
+    category: 'subscription',
+    type: 'SUBSCRIPTION_MONTHLY',
     accessTier: 'BASIC',
     image: null,
-    features: ['30-Day Identity Planner', 'Executive Manual', 'Identity Baseline Worksheet', 'Digital + Print PDFs', 'Lifetime access'],
+    features: ['7-Day Guided Discipline Journey', 'Daily identity prompts', 'Evidence tracking basics', 'Progress dashboard', '7 Days System PDF (downloadable)', 'Cancel anytime'],
     isActive: true,
-    isFeatured: true,
+    isFeatured: false,
+    billingPeriod: 'monthly',
   },
   {
     id: 'premium',
-    name: 'Premium Transformation',
+    name: 'Premium',
     slug: 'premium',
-    price: 27,
-    comparePrice: 44,
-    description: 'Everything in Planner plus advanced analytics and decision tracking tools. Perfect for data-driven transformation.',
-    shortDesc: 'Complete package with analytics',
-    category: 'premium',
-    type: 'BUNDLE',
+    price: 17,
+    comparePrice: 29,
+    description: 'The complete 30-day transformation system with interactive apps and PDF downloads. Based on evidence-based psychology and identity science.',
+    shortDesc: '30-day transformation + interactive apps',
+    category: 'subscription',
+    type: 'SUBSCRIPTION_MONTHLY',
     accessTier: 'PREMIUM',
     image: null,
-    features: ['Everything in Planner', 'Decision Pattern Analysis', 'Evidence Tracking System', 'Progress Dashboard', 'Priority support'],
+    features: ['Everything in Basic', '30-Day Identity Planner', 'Executive Manual', 'Identity Baseline Worksheet', 'Digital + Print PDFs', 'Decision Pattern Analysis', 'Cancel anytime'],
     isActive: true,
     isFeatured: true,
+    billingPeriod: 'monthly',
   },
   {
-    id: 'bundle',
-    name: 'Complete Bundle',
-    slug: 'bundle',
-    price: 47,
+    id: 'mastery',
+    name: 'Mastery',
+    slug: 'mastery',
+    price: 27,
     comparePrice: 91,
-    description: 'The ultimate package: All apps + AI coaching + community access + priority support. Best value for committed individuals.',
-    shortDesc: 'All products + AI Coach + Community',
-    category: 'bundle',
-    type: 'BUNDLE',
-    accessTier: 'BUNDLE',
+    description: 'The ultimate package: All apps + AI coaching + community access + priority support. Best value for committed individuals ready for total transformation.',
+    shortDesc: 'Everything + AI Coach + Community',
+    category: 'subscription',
+    type: 'SUBSCRIPTION_MONTHLY',
+    accessTier: 'MASTERY',
     image: null,
-    features: ['All PDF products', 'All Interactive Apps', 'AI Identity Coach', 'Transformation Community', 'Priority Support', 'Lifetime updates'],
+    features: ['Everything in Premium', 'All Interactive Apps', 'AI Identity Coach', 'Transformation Community', 'Priority Support', 'Emotion Regulation Toolkit', 'Cancel anytime'],
     isActive: true,
     isFeatured: true,
+    billingPeriod: 'monthly',
   },
 ];
 
-// Product ID mapping for access tiers
-export const PRODUCT_TIER_MAP: Record<string, 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE'> = {
-  'trial': 'TRIAL',
-  'planner': 'BASIC',
-  'premium': 'PREMIUM',
-  'bundle': 'BUNDLE',
+// Legacy product ID aliases for backward compatibility with existing orders/codes
+// Maps old product IDs to new ones (for webhook, checkout, etc.)
+export const PRODUCT_ID_ALIASES: Record<string, string> = {
+  'trial': 'basic',       // old BASIC → new BASIC
+  'planner': 'premium',   // old BASIC → new PREMIUM
+  'premium': 'mastery',   // old PREMIUM → new MASTERY (merged)
+  'bundle': 'mastery',    // old MASTERY → new MASTERY
+  'basic': 'basic',
+  'mastery': 'mastery',
 };
 
-// Get product price by ID
+// Product ID mapping for access tiers (NEW MODEL)
+export const PRODUCT_TIER_MAP: Record<string, 'BASIC' | 'PREMIUM' | 'MASTERY'> = {
+  'basic': 'BASIC',
+  'premium': 'PREMIUM',
+  'mastery': 'MASTERY',
+  // Legacy aliases (for backward compatibility)
+  'trial': 'BASIC',
+  'planner': 'PREMIUM',
+  'bundle': 'MASTERY',
+};
+
+// Get product price by ID (with legacy alias support)
 export function getProductPrice(productId: string): number {
-  const product = LOCAL_PRODUCTS.find(p => p.id === productId);
+  const resolvedId = PRODUCT_ID_ALIASES[productId] || productId;
+  const product = LOCAL_PRODUCTS.find(p => p.id === resolvedId);
   return product?.price || 0;
 }
 
-// Get product by ID
+// Get product by ID (with legacy alias support)
 export function getProductById(id: string): Product | undefined {
-  return LOCAL_PRODUCTS.find(p => p.id === id);
+  const resolvedId = PRODUCT_ID_ALIASES[id] || id;
+  return LOCAL_PRODUCTS.find(p => p.id === resolvedId);
 }
 
 // Get all active products
@@ -145,14 +154,15 @@ export const ProductsService = {
     return products;
   },
 
-  // Get single product by ID
+  // Get single product by ID (with legacy alias support)
   async get(id: string): Promise<Product | null> {
-    return LOCAL_PRODUCTS.find(p => p.id === id) || null;
+    return getProductById(id) || null;
   },
 
-  // Get product by slug
+  // Get product by slug (with legacy alias support)
   async getBySlug(slug: string): Promise<Product | null> {
-    return LOCAL_PRODUCTS.find(p => p.slug === slug) || null;
+    const resolvedSlug = PRODUCT_ID_ALIASES[slug] || slug;
+    return LOCAL_PRODUCTS.find(p => p.slug === resolvedSlug) || null;
   },
 
   // Sync products to database (for local caching)
@@ -168,10 +178,10 @@ export const ProductsService = {
             id: product.id,
             name: product.name,
             slug: product.slug,
-            description: product.description,
-            shortDesc: product.shortDesc,
             price: product.price,
             comparePrice: product.comparePrice,
+            description: product.description,
+            shortDesc: product.shortDesc,
             category: product.category,
             type: product.type,
             accessTier: product.accessTier,
@@ -182,16 +192,20 @@ export const ProductsService = {
           },
           update: {
             name: product.name,
+            slug: product.slug,
             price: product.price,
             comparePrice: product.comparePrice,
             description: product.description,
+            shortDesc: product.shortDesc,
+            accessTier: product.accessTier,
             features: JSON.stringify(product.features),
             isActive: product.isActive,
             isFeatured: product.isFeatured,
           },
         });
         synced++;
-      } catch {
+      } catch (err) {
+        console.error(`Failed to sync product ${product.id}:`, err);
         skipped++;
       }
     }
@@ -199,5 +213,3 @@ export const ProductsService = {
     return { synced, skipped };
   },
 };
-
-export default ProductsService;

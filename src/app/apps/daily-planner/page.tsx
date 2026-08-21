@@ -44,7 +44,7 @@ export default function DailyPlannerPage() {
                 </div>
               ))}
             </div>
-            <Link href="/products/planner">
+            <Link href="/products/premium">
               <Button className="w-full h-12 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold">
                 {getText('Get Access - $17', 'احصل على الوصول - $17')} <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

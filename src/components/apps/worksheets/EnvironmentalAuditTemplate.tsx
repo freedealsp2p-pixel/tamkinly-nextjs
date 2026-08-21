@@ -73,7 +73,7 @@ const dimensions: DimensionScore[] = [
     score: 0,
     description: 'How the people around you influence your identity and behavior',
     icon: <Users className="w-5 h-5" />,
-    color: '#64B5F6',
+    color: '#2A8A94',
     questions: [
       'The people around me support the identity I am building.',
       'I spend enough time with people who model the behavior I want.',
@@ -91,7 +91,7 @@ const dimensions: DimensionScore[] = [
     score: 0,
     description: 'Whether you have easy access to what you need for success',
     icon: <Zap className="w-5 h-5" />,
-    color: '#FFB74D',
+    color: '#2A8A94',
     questions: [
       'I have access to the tools I need to follow through.',
       'My routines are realistic for my current life situation.',
@@ -109,7 +109,7 @@ const dimensions: DimensionScore[] = [
     score: 0,
     description: 'Environmental cues that trigger desired behaviors',
     icon: <Lightbulb className="w-5 h-5" />,
-    color: '#BA68C8',
+    color: '#2A8A94',
     questions: [
       'My environment contains cues that prompt the right actions.',
       'I have placed reminders where they will be seen.',
@@ -186,7 +186,7 @@ export default function EnvironmentalAuditTemplate() {
     if (score >= 80) return { label: 'Supportive', color: 'text-green-600', bg: 'bg-green-100' };
     if (score >= 60) return { label: 'Neutral', color: 'text-blue-600', bg: 'bg-blue-100' };
     if (score >= 40) return { label: 'Mixed', color: 'text-yellow-600', bg: 'bg-yellow-100' };
-    return { label: 'Blocking', color: 'text-[#FC6D26]', bg: 'bg-[#FFE4CC]' };
+    return { label: 'Blocking', color: 'text-[#C97B7B]', bg: 'bg-[#F0E0E2]' };
   };
 
   if (showResults) {
@@ -251,7 +251,7 @@ export default function EnvironmentalAuditTemplate() {
         <Card>
           <CardHeader>
             <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-[#E57373]" />
+              <AlertTriangle className="w-5 h-5 text-[#C97B7B]" />
               Friction Map
             </CardTitle>
           </CardHeader>
@@ -261,7 +261,7 @@ export default function EnvironmentalAuditTemplate() {
                 <div 
                   key={index} 
                   className={`p-2 rounded-lg text-sm text-center ${
-                    frictionLevels[item.name] === 'high' ? 'bg-[#FFE4CC] text-[#C44D0A]' :
+                    frictionLevels[item.name] === 'high' ? 'bg-[#F0E0E2] text-[#A86565]' :
                     frictionLevels[item.name] === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
                     frictionLevels[item.name] === 'low' ? 'bg-green-100 text-green-800' :
                     'bg-gray-100 text-gray-600'
@@ -272,8 +272,8 @@ export default function EnvironmentalAuditTemplate() {
               ))}
             </div>
             {highFrictionItems.length > 0 && (
-              <div className="mt-4 p-3 bg-[#FFF3E8] rounded-lg">
-                <p className="text-sm text-[#C44D0A]">
+              <div className="mt-4 p-3 bg-[#F8EEEF] rounded-lg">
+                <p className="text-sm text-[#A86565]">
                   <strong>High Friction Areas:</strong> {highFrictionItems.join(', ')}
                 </p>
               </div>
@@ -291,9 +291,9 @@ export default function EnvironmentalAuditTemplate() {
               <span className="text-[#0F1C2E]">Strongest Supportive Factor</span>
               <Badge className="bg-green-100 text-green-800">{strongestArea.name}</Badge>
             </div>
-            <div className="flex items-center justify-between p-3 bg-[#FFF3E8] rounded-lg">
+            <div className="flex items-center justify-between p-3 bg-[#F8EEEF] rounded-lg">
               <span className="text-[#0F1C2E]">Strongest Blocking Factor</span>
-              <Badge className="bg-[#FFE4CC] text-[#C44D0A]">{weakestArea.name}</Badge>
+              <Badge className="bg-[#F0E0E2] text-[#A86565]">{weakestArea.name}</Badge>
             </div>
             <div className="p-3 bg-[#3DD4B0]/10 rounded-lg">
               <p className="text-sm text-[#0F1C2E] font-medium mb-2">
@@ -347,7 +347,7 @@ export default function EnvironmentalAuditTemplate() {
     return (
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <Badge className="bg-[#E57373]/10 text-[#E57373] border-0 mb-2">
+          <Badge className="bg-[#C97B7B]/10 text-[#C97B7B] border-0 mb-2">
             Final Step: Friction Map
           </Badge>
           <span className="text-sm text-[#8A94A6]">Mark each item by friction level</span>
@@ -356,8 +356,8 @@ export default function EnvironmentalAuditTemplate() {
         <Card className="border-0 shadow-lg">
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-[#E57373]/20 flex items-center justify-center">
-                <AlertTriangle className="w-6 h-6 text-[#E57373]" />
+              <div className="w-12 h-12 rounded-xl bg-[#C97B7B]/20 flex items-center justify-center">
+                <AlertTriangle className="w-6 h-6 text-[#C97B7B]" />
               </div>
               <div>
                 <CardTitle className="text-xl text-[#0F1C2E]">Resistance Map</CardTitle>
@@ -378,7 +378,7 @@ export default function EnvironmentalAuditTemplate() {
                       onClick={() => handleFrictionChange(item.name, level)}
                       className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
                         frictionLevels[item.name] === level
-                          ? level === 'high' ? 'bg-[#FC6D26] text-white' :
+                          ? level === 'high' ? 'bg-[#C97B7B] text-white' :
                             level === 'moderate' ? 'bg-yellow-500 text-white' :
                             'bg-green-500 text-white'
                           : 'bg-white border border-gray-200 text-gray-600 hover:border-gray-400'

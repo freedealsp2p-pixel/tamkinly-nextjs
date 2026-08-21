@@ -7,52 +7,41 @@ import { getCurrentUser } from '@/lib/auth-helpers';
 
 // ============================================
 // Tamkinly AI Coach — Groq API + Config File
-// Version: 4.0
+// Version: 6.0 — 2 free questions + PREMIUM/MASTERY access
 // ============================================
 
-// Initialize Groq client
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
-// Cache the system prompt in memory (read once, reuse)
+// Cache the system prompt in memory
 let cachedSystemPrompt: string | null = null;
 let systemPromptLoadTime = 0;
 const SYSTEM_PROMPT_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-/**
- * Load system prompt from config file with caching
- */
+// Free question limit per session
+const MAX_FREE_MESSAGES = 4; // 2 user messages + 2 AI responses = 2 conversation turns
+
 async function getSystemPrompt(): Promise<string> {
   const now = Date.now();
-  
-  // Return cached prompt if still fresh
   if (cachedSystemPrompt && (now - systemPromptLoadTime) < SYSTEM_PROMPT_CACHE_TTL) {
     return cachedSystemPrompt;
   }
-
   try {
     const configPath = join(process.cwd(), 'config', 'coach-config.md');
     const fileContent = await readFile(configPath, 'utf-8');
-    
-    // Extract only the prompt content (skip comment lines starting with #)
     const promptLines = fileContent
       .split('\n')
       .filter(line => !line.startsWith('#'))
       .join('\n')
       .trim();
-    
     cachedSystemPrompt = promptLines;
     systemPromptLoadTime = now;
-    
     console.log('[AI Coach] System prompt loaded from config file (' + promptLines.length + ' chars)');
     return cachedSystemPrompt;
   } catch (error) {
     console.error('[AI Coach] Failed to load config file:', error);
-    
-    // Fallback to a minimal prompt if file is not found
-    const fallbackPrompt = `You are Tamkinly (تَمكينلي), a personal identity transformation coach. You help visitors understand and apply the Tamkinly system. You are warm, precise, and evidence-based. You speak the user\'s language. You never use hype or pressure. You help people close the gap between who they are and who they are becoming.`;
-    
+    const fallbackPrompt = `You are Tamkinly, a personal identity transformation coach. You help visitors understand and apply the Tamkinly system. You are warm, precise, and evidence-based. You speak the user's language. You never use hype or pressure. You help people close the gap between who they are and who they are becoming.`;
     if (!cachedSystemPrompt) {
       cachedSystemPrompt = fallbackPrompt;
       systemPromptLoadTime = now;
@@ -67,33 +56,90 @@ interface Message {
   timestamp: string;
 }
 
-// Maximum conversation history to send to AI (to stay within token limits)
 const MAX_HISTORY_MESSAGES = 20;
+
+/**
+ * Verify if an access code is valid and has PREMIUM+ tier
+ */
+async function verifyAccessCode(code: string): Promise<{ valid: boolean; tier?: string; error?: string }> {
+  try {
+    const access = await db.appAccess.findUnique({
+      where: { code: code.toUpperCase() },
+    });
+    if (!access) {
+      return { valid: false, error: 'Invalid access code' };
+    }
+    if (access.expiresAt && new Date() > access.expiresAt) {
+      return { valid: false, error: 'Access code has expired' };
+    }
+    if (!access.isActive) {
+      return { valid: false, error: 'Access code is no longer active' };
+    }
+    // Update usage
+    await db.appAccess.update({
+      where: { id: access.id },
+      data: {
+        isUsed: true,
+        usedAt: access.usedAt || new Date(),
+        lastUsedAt: new Date(),
+        usageCount: { increment: 1 },
+      },
+    });
+    return { valid: true, tier: access.tier };
+  } catch (error) {
+    console.error('[AI Coach] Access code verification error:', error);
+    return { valid: false, error: 'Verification failed' };
+  }
+}
+
+/**
+ * Check if user has PREMIUM+ access (via auth session or access code)
+ */
+async function hasPremiumAccess(user: Awaited<ReturnType<typeof getCurrentUser>>, accessCode?: string): Promise<{ hasAccess: boolean; tier?: string }> {
+  // Check access code first
+  if (accessCode) {
+    const result = await verifyAccessCode(accessCode);
+    if (result.valid) {
+      const TIER_HIERARCHY: Record<string, number> = { FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4 };
+      const tierLevel = TIER_HIERARCHY[result.tier || 'FREE'] || 0;
+      if (tierLevel >= TIER_HIERARCHY['PREMIUM']) {
+        return { hasAccess: true, tier: result.tier };
+      }
+    }
+  }
+  
+  // Check user session
+  if (user?.accessTier) {
+    const TIER_HIERARCHY: Record<string, number> = { FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4 };
+    const userTierLevel = TIER_HIERARCHY[user.accessTier] || 0;
+    if (userTierLevel >= TIER_HIERARCHY['PREMIUM']) {
+      return { hasAccess: true, tier: user.accessTier };
+    }
+  }
+  
+  return { hasAccess: false };
+}
 
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
-    
-    const { sessionId, message } = await request.json();
+    const { sessionId, message, accessCode } = await request.json();
 
     if (!message) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
     }
-
     if (!sessionId) {
       return NextResponse.json({ error: 'Session ID is required' }, { status: 400 });
     }
 
-    // Get the system prompt
     const systemPrompt = await getSystemPrompt();
 
-    // Get or create conversation from database
+    // Get or create conversation
     let conversation = await db.aICoachConversation.findUnique({
       where: { sessionId },
     });
 
     let history: Message[] = [];
-    
     if (conversation) {
       try {
         history = JSON.parse(conversation.messages);
@@ -101,7 +147,6 @@ export async function POST(request: NextRequest) {
         history = [];
       }
     } else {
-      // Create new conversation
       conversation = await db.aICoachConversation.create({
         data: {
           sessionId,
@@ -112,7 +157,25 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Add user message to history
+    // Count user messages (not system) to determine free usage
+    const userMessageCount = history.filter(m => m.role === 'user').length;
+
+    // Check access: after 2 free user messages, require access
+    if (userMessageCount >= 2) {
+      const access = await hasPremiumAccess(user, accessCode);
+      if (!access.hasAccess) {
+        return NextResponse.json({
+          success: false,
+          freeLimitReached: true,
+          freeMessagesUsed: userMessageCount,
+          maxFreeMessages: 2,
+          message: 'You have used your 2 free questions. Get Premium ($17/mo) or Mastery ($27/mo) to continue.',
+          redirectUrl: '/products',
+        }, { status: 403 });
+      }
+    }
+
+    // Add user message
     const userMessage: Message = {
       role: 'user',
       content: message,
@@ -120,10 +183,7 @@ export async function POST(request: NextRequest) {
     };
     history.push(userMessage);
 
-    // Prepare messages for Groq API
-    // Take only recent messages to stay within token limits
     const recentHistory = history.slice(-MAX_HISTORY_MESSAGES);
-    
     const messagesForAI = [
       { role: 'system' as const, content: systemPrompt },
       ...recentHistory.map(m => ({
@@ -132,7 +192,6 @@ export async function POST(request: NextRequest) {
       })),
     ];
 
-    // Call Groq API
     const completion = await groq.chat.completions.create({
       messages: messagesForAI,
       model: 'llama-3.3-70b-versatile',
@@ -142,12 +201,10 @@ export async function POST(request: NextRequest) {
     });
 
     const aiResponse = completion.choices[0]?.message?.content;
-
     if (!aiResponse) {
       return NextResponse.json({ error: 'No response from AI' }, { status: 500 });
     }
 
-    // Add AI response to history
     const assistantMessage: Message = {
       role: 'assistant',
       content: aiResponse,
@@ -155,7 +212,6 @@ export async function POST(request: NextRequest) {
     };
     history.push(assistantMessage);
 
-    // Update conversation in database
     await db.aICoachConversation.update({
       where: { sessionId },
       data: {
@@ -166,51 +222,34 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    const newUserMessageCount = history.filter(m => m.role === 'user').length;
+    const remainingFree = Math.max(0, 2 - newUserMessageCount);
+
     return NextResponse.json({
       success: true,
       response: aiResponse,
       messageCount: history.filter(m => m.role !== 'system').length,
+      freeMessagesRemaining: remainingFree,
+      freeLimitReached: newUserMessageCount >= 2,
     });
   } catch (error) {
     console.error('[AI Coach] Error:', error);
     const errorMsg = error instanceof Error ? error.message : 'Unknown error';
     
     if (errorMsg.includes('API key') || errorMsg.includes('authentication')) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'AI Coach configuration error. Please contact support.',
-          unavailable: true,
-        },
-        { status: 503 }
-      );
+      return NextResponse.json({ success: false, error: 'AI Coach configuration error. Please contact support.', unavailable: true }, { status: 503 });
     }
-    
     if (errorMsg.includes('rate limit') || errorMsg.includes('quota')) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'AI Coach is busy right now. Please try again in a moment.',
-          unavailable: true,
-        },
-        { status: 429 }
-      );
+      return NextResponse.json({ success: false, error: 'AI Coach is busy right now. Please try again in a moment.', unavailable: true }, { status: 429 });
     }
     
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Something went wrong. Please try again.',
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: 'Something went wrong. Please try again.' }, { status: 500 });
   }
 }
 
 export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser();
-    
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get('sessionId');
 
@@ -223,54 +262,40 @@ export async function GET(request: NextRequest) {
     });
 
     if (!conversation) {
-      return NextResponse.json({
-        success: true,
-        messages: [],
-        messageCount: 0,
-      });
+      return NextResponse.json({ success: true, messages: [], messageCount: 0, freeMessagesRemaining: 2 });
     }
 
     const messages: Message[] = JSON.parse(conversation.messages);
+    const userMessageCount = messages.filter(m => m.role === 'user').length;
+    const remainingFree = Math.max(0, 2 - userMessageCount);
 
     return NextResponse.json({
       success: true,
       messages: messages.filter(m => m.role !== 'system'),
       messageCount: conversation.messageCount,
       userId: user?.id,
+      freeMessagesRemaining: remainingFree,
+      freeLimitReached: userMessageCount >= 2,
     });
   } catch (error) {
     console.error('[AI Coach] GET error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get conversation' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to get conversation' }, { status: 500 });
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
     await getCurrentUser();
-    
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get('sessionId');
-
     if (!sessionId) {
       return NextResponse.json({ error: 'Session ID is required' }, { status: 400 });
     }
-
-    await db.aICoachConversation.delete({
-      where: { sessionId },
-    }).catch(() => {
-      // Ignore if not found
-    });
-
+    await db.aICoachConversation.delete({ where: { sessionId } }).catch(() => {});
     return NextResponse.json({ success: true, message: 'Conversation cleared' });
   } catch (error) {
     console.error('[AI Coach] DELETE error:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete conversation' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to delete conversation' }, { status: 500 });
   }
 }
 

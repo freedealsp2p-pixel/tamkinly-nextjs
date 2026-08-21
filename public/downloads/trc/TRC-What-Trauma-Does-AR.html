@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ماذا تفعل الصدمة بالجسد؟ | Tamkinly - TRC</title>
+
+  <style>
+    :root {
+      --primary: #1F6F78;
+      --accent: #3DD4B0;
+      --dark: #0F1C2E;
+      --bg: #F8FAFC;
+      --border: #CBD5E1;
+
+      --alert-bg: #FFFBEB;
+      --alert-border: #D97706;
+      --alert-text: #92400E;
+
+      --safety-bg: #FEF3C7;
+      --safety-border: #B45309;
+      --safety-text: #78350F;
+
+      --teal-bg: #E6F4F5;
+      --teal-text: #1F6F78;
+
+      --footer-text: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    html {
+      margin: 0;
+      padding: 0;
+      background: #E2E8F0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #E2E8F0;
+      color: var(--dark);
+      font-family: "Noto Sans Arabic", "Arial", "Tahoma", sans-serif;
+      direction: rtl;
+      line-height: 1.6;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 15mm;
+      margin: 15px auto;
+      background: #FFFFFF;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    @media print {
+      html,
+      body {
+        background: #FFFFFF;
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        box-shadow: none;
+        overflow: hidden;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* --------------------------------
+       HEADER
+    -------------------------------- */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .brand-subtitle {
+      font-size: 10px;
+      color: #64748B;
+    }
+
+    .status-badge {
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      color: #475569;
+
+      font-size: 9px;
+      padding: 3px 8px;
+      border-radius: 4px;
+
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* --------------------------------
+       CONTENT
+    -------------------------------- */
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: var(--dark);
+      margin: 0 0 12px 0;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    h2 {
+      font-size: 16px;
+      color: var(--primary);
+      margin: 14px 0 8px 0;
+
+      font-weight: 700;
+
+      border-right: 3px solid var(--accent);
+      padding-right: 8px;
+
+      line-height: 1.4;
+
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 14px;
+      color: var(--dark);
+      margin: 10px 0 5px 0;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    p {
+      font-size: 11.5px;
+      margin: 0 0 9px 0;
+      color: #334155;
+      text-align: justify;
+      line-height: 1.65;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    .en-term {
+      font-family: Arial, sans-serif;
+      direction: ltr;
+      display: inline-block;
+      font-size: 0.9em;
+      color: #475569;
+      unicode-bidi: isolate;
+    }
+
+    ul {
+      line-height: 1.55;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* --------------------------------
+       BOXES
+    -------------------------------- */
+
+    .purpose-box {
+      background: #F1F5F9;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .purpose-box p {
+      margin: 0;
+      font-size: 11.5px;
+      color: #1E293B;
+      font-weight: 500;
+    }
+
+    .safety-box {
+      background: var(--safety-bg);
+      border: 1px solid var(--safety-border);
+      color: var(--safety-text);
+
+      padding: 11px 14px;
+      border-radius: 6px;
+      margin: 10px 0 14px 0;
+
+      font-size: 11px;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .safety-box-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .safety-box p {
+      color: var(--safety-text);
+      font-size: 10.8px;
+      margin: 0;
+    }
+
+    .teal-box {
+      background: var(--teal-bg);
+      border-right: 4px solid var(--primary);
+      color: var(--teal-text);
+
+      padding: 11px 14px;
+      border-radius: 4px;
+      margin: 11px 0;
+
+      font-size: 11.5px;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .teal-box p {
+      color: var(--teal-text);
+    }
+
+    .neutral-box {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      padding: 11px 13px;
+      margin: 10px 0;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* --------------------------------
+       CARDS
+    -------------------------------- */
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 9px 0;
+    }
+
+    .card {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 11px;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .card-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .card p {
+      font-size: 10.5px;
+      line-height: 1.55;
+    }
+
+    .card ul {
+      margin: 4px 0 0 0;
+      padding-right: 16px;
+
+      font-size: 10.5px;
+      color: #334155;
+    }
+
+    .card li {
+      margin-bottom: 3px;
+    }
+
+    /* --------------------------------
+       DIAGRAMS
+    -------------------------------- */
+
+    .svg-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin: 9px 0;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .diagram-caption {
+      text-align: center;
+      color: #64748B;
+      font-size: 9.5px;
+      margin: 2px 0 8px 0;
+    }
+
+    /* --------------------------------
+       FOOTER
+    -------------------------------- */
+
+    .footer {
+      border-top: 1px solid var(--border);
+
+      padding-top: 7px;
+      margin-top: 8px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 8.5px;
+      color: var(--footer-text);
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* --------------------------------
+       EMERGENCY CONTACT FIELDS
+    -------------------------------- */
+
+    .contact-field {
+      margin: 7px 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .contact-label {
+      display: block;
+      font-size: 10px;
+      color: #475569;
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+
+    .input-line {
+      border-bottom: 1px dashed #94A3B8;
+      height: 22px;
+      width: 100%;
+    }
+
+    /* --------------------------------
+       SMALL HELPERS
+    -------------------------------- */
+
+    .small {
+      font-size: 10px !important;
+    }
+
+    .muted {
+      color: #64748B !important;
+    }
+
+    .key-message {
+      margin-top: 8px;
+      padding: 9px 12px;
+
+      background: #FEF3C7;
+      border: 1px solid #B45309;
+      border-radius: 5px;
+
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .key-message strong {
+      color: #78350F;
+      font-size: 10.5px;
+    }
+
+    .key-message span {
+      color: #78350F;
+      font-size: 10.5px;
+    }
+
+    .avoid-break {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       PAGE 1 — INTRODUCTION
+  ========================================================== -->
+
+  <div class="page">
+
+    <div>
+      <div class="header">
+        <div class="brand">
+          <span class="brand-title">Tamkinly — تمكينلي</span>
+          <span class="brand-subtitle">مركز التعافي من الصدمات (TRC)</span>
+        </div>
+
+        <div class="status-badge">
+          مسودة للمراجعة السريرية
+        </div>
+      </div>
+
+      <div class="content">
+
+        <h1>ماذا تفعل الصدمة بالجسد؟</h1>
+
+        <div class="purpose-box">
+          <p>
+            <strong>الغرض من هذا الدليل:</strong>
+            معرفة نفسية مبسطة حول كيفية تأثير تجارب الصدمة على الدماغ والجهاز العصبي والجسد، ولماذا قد تظهر استجابات تبدو مربكة أو غير مفهومة لدى بعض الأشخاص.
+          </p>
+        </div>
+
+        <div class="safety-box">
+
+          <div class="safety-box-title">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M12 9v2"></path>
+              <path d="M12 15h.01"></path>
+              <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"></path>
+            </svg>
+
+            تنبيه سلامة مهم
+          </div>
+
+          <p>
+            القراءة عن تأثير الصدمة يمكن أن تكون محفّزة أو تثير بعض الضيق.
+            إذا شعرت بزيادة الضيق أثناء القراءة، توقف وخذ استراحة وارجع لاحقًا.
+            يمكنك العودة إلى تمرين التأريض 5-4-3-2-1 إذا كان ذلك مناسبًا لك.
+          </p>
+
+        </div>
+
+        <h2>مقدمة عامة</h2>
+
+        <p>
+          الصدمة النفسية قد تحدث عندما يمر الشخص بتجربة شديدة التهديد أو الضغط
+          تتجاوز قدرته في تلك اللحظة على الاستيعاب أو التكيف. وقد تؤثر آثار هذه
+          التجارب في الذاكرة والانتباه والانفعالات والاستثارة الجسدية والسلوك.
+        </p>
+
+        <p>
+          لا توجد استجابة واحدة موحدة لجميع الأشخاص بعد التجارب الصادمة.
+          فقد تظهر استجابات مختلفة باختلاف الشخص والتجربة والسياق والموارد المتاحة
+          والدعم الذي يحصل عليه. كما أن وجود استجابة معينة لا يعني تلقائيًا وجود
+          اضطراب نفسي، فقد تكون بعض الاستجابات جزءًا من محاولات الجسم والعقل
+          للتعامل مع الخطر أو استعادة الإحساس بالأمان.
+        </p>
+
+        <div class="teal-box">
+          <p style="margin:0;">
+            <strong>الفكرة الأساسية:</strong>
+            فهم الاستجابة لا يعني تشخيصها. الهدف من هذا الدليل هو تقديم إطار
+            تعليمي يساعد على فهم بعض ردود الفعل، وليس تحديد ما إذا كان الشخص
+            يعاني من اضطراب أو يحتاج إلى علاج بعينه.
+          </p>
+        </div>
+
+        <h2>نظرة عامة على محتوى الدليل</h2>
+
+        <div class="card-grid">
+
+          <div class="card">
+            <div class="card-title">1. الدماغ والتهديد</div>
+            <p style="margin:0;">
+              كيف قد تتأثر طريقة معالجة التهديد والذاكرة والتنظيم.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">2. الجهاز العصبي الذاتي</div>
+            <p style="margin:0;">
+              فهم الاستثارة ودور الجهاز الودّي ونظير الودّي.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">3. استجابات التهديد</div>
+            <p style="margin:0;">
+              القتال، الفرار، التجمّد، والتملق
+              <span class="en-term">(4F)</span>.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">4. الذاكرة والجسد</div>
+            <p style="margin:0;">
+              لماذا قد تظهر استجابات جسدية أو انفعالية مرتبطة بالمثيرات.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">5. نافذة التحمل</div>
+            <p style="margin:0;">
+              فرط الاستثارة ونقص الاستثارة والمنطقة المثلى.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">6. مسارات الدعم والتعافي</div>
+            <p style="margin:0;">
+              نظرة مختصرة على بعض أساليب العلاج والدعم.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+      <span>Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+      <span>صفحة 1 من 6</span>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 2 — BRAIN
+  ========================================================== -->
+
+  <div class="page">
+
+    <div>
+      <div class="header">
+        <div class="brand">
+          <span class="brand-title">Tamkinly — تمكينلي</span>
+          <span class="brand-subtitle">مركز التعافي من الصدمات (TRC)</span>
+        </div>
+
+        <div class="status-badge">
+          مسودة للمراجعة السريرية
+        </div>
+      </div>
+
+      <div class="content">
+
+        <h1>كيف يمكن أن تتأثر طريقة عمل الدماغ بعد تجربة صادمة؟</h1>
+
+        <p>
+          يعمل الدماغ كنظام متكامل ينسق بين الوظائف الحيوية والانتباه والذاكرة
+          والتقييم والتنظيم. عند التعرض لخطر شديد أو تجربة صادمة، قد تتغير
+          طريقة تفاعل بعض هذه الأنظمة لدى بعض الأشخاص، خصوصًا عندما تكون
+          إشارات التهديد حاضرة أو يتم تذكّرها.
+        </p>
+
+        <h2>
+          1. اللوزة الدماغية
+          <span class="en-term">(Amygdala)</span>
+        </h2>
+
+        <p>
+          ترتبط اللوزة الدماغية باكتشاف التهديد ومعالجة المعلومات الانفعالية
+          المرتبطة بالخطر. بعد تجربة صادمة، قد يصبح نظام كشف التهديد أكثر حساسية
+          لدى بعض الأفراد، فيستجيب بسرعة لمثيرات أو إشارات تشبه التجربة الأصلية
+          أو تذكّر بها.
+        </p>
+
+        <div class="neutral-box">
+          <p style="margin:0; font-size:10.8px;">
+            <strong>تشبيه تعليمي:</strong>
+            يمكن تشبيه نظام كشف التهديد بجهاز إنذار شديد الحساسية قد يستجيب
+            أحيانًا لإشارات تشبه الخطر السابق، حتى عندما لا يكون الخطر نفسه
+            موجودًا في الحاضر.
+          </p>
+        </div>
+
+        <h2>
+          2. الحصين
+          <span class="en-term">(Hippocampus)</span>
+        </h2>
+
+        <p>
+          يرتبط الحصين بعمليات معالجة الذاكرة والسياق الزمني والمكاني للأحداث.
+          وقد تؤثر التجارب الصادمة في الطريقة التي تُسجَّل أو تُسترجع بها بعض
+          الذكريات، بحيث قد تبدو بعض التفاصيل شديدة الحضور أو يصعب أحيانًا
+          وضعها فورًا في سياقها الزمني كموقف انتهى في الماضي.
+        </p>
+
+        <h2>
+          3. قشرة الفص الجبهي
+          <span class="en-term">(Prefrontal Cortex)</span>
+        </h2>
+
+        <p>
+          ترتبط مناطق من قشرة الفص الجبهي بوظائف مثل الانتباه والتخطيط واتخاذ
+          القرار والتنظيم الانفعالي الواعي. عندما يكون الشخص في حالة استثارة
+          عالية أو يشعر بتهديد قوي، قد يصبح الوصول إلى بعض مهارات التفكير
+          التحليلي والتنظيم أكثر صعوبة مؤقتًا.
+        </p>
+
+        <!-- Brain Diagram -->
+        <div class="svg-container">
+
+          <svg
+            width="420"
+            height="180"
+            viewBox="0 0 420 180"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="رسم تعليمي مبسط لمناطق دماغية مرتبطة بالتهديد والذاكرة والتنظيم"
+          >
+
+            <path
+              d="M120 140
+                 C80 140 50 110 50 80
+                 C50 45 90 25 150 25
+                 C210 25 280 20 330 50
+                 C370 75 370 110 340 135
+                 C310 160 250 155 210 150
+                 C180 150 150 160 120 140 Z"
+              fill="#F1F5F9"
+              stroke="#1F6F78"
+              stroke-width="2"
+            />
+
+            <!-- Prefrontal -->
+            <path
+              d="M70 70
+                 C70 45 110 30 150 30
+                 C140 60 130 90 100 110
+                 C80 100 70 85 70 70 Z"
+              fill="#E6F4F5"
+              stroke="#3DD4B0"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="105"
+              y="64"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="10"
+              fill="#1F6F78"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              قشرة الفص الجبهي
+            </text>
+
+            <text
+              x="105"
+              y="78"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#475569"
+              text-anchor="middle"
+              direction="ltr"
+            >
+              Prefrontal Cortex
+            </text>
+
+            <!-- Amygdala -->
+            <circle
+              cx="210"
+              cy="105"
+              r="14"
+              fill="#FEF3C7"
+              stroke="#B45309"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="210"
+              y="108"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="9"
+              fill="#78350F"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              اللوزة
+            </text>
+
+            <text
+              x="210"
+              y="132"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#78350F"
+              text-anchor="middle"
+            >
+              Amygdala
+            </text>
+
+            <!-- Hippocampus -->
+            <path
+              d="M240 100
+                 C260 85 290 90 295 110
+                 C270 115 250 110 240 100 Z"
+              fill="#E2E8F0"
+              stroke="#0F1C2E"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="280"
+              y="95"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="10"
+              fill="#0F1C2E"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              الحصين
+            </text>
+
+            <text
+              x="280"
+              y="107"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#475569"
+              text-anchor="middle"
+            >
+              Hippocampus
+            </text>
+
+            <!-- Connections -->
+            <line
+              x1="140"
+              y1="80"
+              x2="196"
+              y2="100"
+              stroke="#CBD5E1"
+              stroke-width="1"
+              stroke-dasharray="3 3"
+            />
+
+            <line
+              x1="224"
+              y1="105"
+              x2="240"
+              y2="103"
+              stroke="#CBD5E1"
+              stroke-width="1"
+              stroke-dasharray="3 3"
+            />
+
+          </svg>
+
+        </div>
+
+        <p class="diagram-caption">
+          رسم تعليمي مبسط — لا يمثل تشريحًا دقيقًا أو قياسًا لنشاط الدماغ.
+        </p>
+
+        <div class="teal-box">
+
+          <p style="margin:0;">
+            <strong>توضيح مهم:</strong>
+            هذه الأوصاف مخصصة للفهم التعليمي. لا تعني وجود تلف دائم في الدماغ،
+            ولا تعني أن أي منطقة تتوقف عن العمل بالكامل. استجابات الدماغ
+            ديناميكية وتتأثر بالسياق والحالة الحالية والخبرة الفردية.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+      <span>Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+      <span>صفحة 2 من 6</span>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 3 — AUTONOMIC NERVOUS SYSTEM
+  ========================================================== -->
+
+  <div class="page">
+
+    <div>
+      <div class="header">
+        <div class="brand">
+          <span class="brand-title">Tamkinly — تمكينلي</span>
+          <span class="brand-subtitle">مركز التعافي من الصدمات (TRC)</span>
+        </div>
+
+        <div class="status-badge">
+          مسودة للمراجعة السريرية
+        </div>
+      </div>
+
+      <div class="content">
+
+        <h1>الجهاز العصبي الذاتي والاستثارة</h1>
+
+        <p>
+          يقوم الجهاز العصبي الذاتي
+          <span class="en-term">(Autonomic Nervous System)</span>
+          بتنظيم العديد من الوظائف الجسدية التلقائية، مثل معدل ضربات القلب
+          والتنفس والهضم وبعض جوانب توتر العضلات، دون الحاجة إلى تحكم واعٍ
+          مستمر.
+        </p>
+
+        <h2>
+          1. الجهاز الودّي
+          <span class="en-term">(Sympathetic Nervous System)</span>
+        </h2>
+
+        <p>
+          يساهم الجهاز الودّي في زيادة الاستثارة والاستعداد للتفاعل عندما
+          يدرك الجسم تهديدًا أو ضغطًا. وقد تظهر لدى بعض الأشخاص استجابات مثل:
+        </p>
+
+        <ul
+          style="
+            font-size: 10.8px;
+            color: #334155;
+            padding-right: 20px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+          "
+        >
+          <li>تسارع ضربات القلب وزيادة معدل التنفس.</li>
+          <li>زيادة التوتر العضلي والاستعداد للحركة.</li>
+          <li>ارتفاع الانتباه والتركيز على مصدر الخطر المحتمل.</li>
+        </ul>
+
+        <h2>
+          2. الجهاز نظير الودّي
+          <span class="en-term">(Parasympathetic Nervous System)</span>
+        </h2>
+
+        <p>
+          يشارك الجهاز نظير الودّي في العديد من الوظائف المرتبطة بالراحة
+          والهضم وخفض بعض جوانب الاستثارة واستعادة التوازن. لكن استجابات
+          التجمّد أو الانخفاض الشديد في النشاط الجسدي والانفعالي معقدة،
+          وتتداخل فيها آليات متعددة، ولا يمكن اختزالها بشكل مباشر في فرع واحد
+          من الجهاز العصبي.
+        </p>
+
+        <h2>
+          3. العصب المبهم
+          <span class="en-term">(Vagus Nerve)</span>
+        </h2>
+
+        <p>
+          العصب المبهم مكوّن مهم من مكونات الجهاز العصبي، وتمتد أليافه بين
+          الدماغ وعدد من أعضاء الجسم، بما في ذلك القلب والجهاز الهضمي.
+          ويشارك في تنظيم بعض جوانب الوظائف الذاتية والتواصل بين الدماغ
+          والجسم. ومع ذلك، فهو جزء من شبكة عصبية وفسيولوجية أوسع، ولا ينبغي
+          اعتباره مسارًا منفردًا أو مفتاحًا حاسمًا للشفاء من الصدمة.
+        </p>
+
+        <!-- Arousal Diagram -->
+        <div class="svg-container">
+
+          <div style="text-align: center; margin: 12px 0;">
+    <img src="data:image/jpeg;base64,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" alt="ماذا تفعل الصدمة بالجسد — توضيح أجهزة الجسم" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #D9E2E7;">
+    </div>
+
+        </div>
+
+        <p class="diagram-caption">
+          نموذج تعليمي عام؛ لا تمثل الاستجابة دائمًا مسارًا خطيًا أو متطابقًا لدى الجميع.
+        </p>
+
+        <div class="teal-box">
+
+          <p style="margin:0;">
+            <strong>مهم:</strong>
+            هدف الجهاز العصبي ليس أن يبقى في حالة هدوء دائم. الاستثارة جزء
+            طبيعي من الحياة، والهدف هو القدرة على التكيف والعودة إلى مستوى
+            مناسب من التنظيم عندما تسمح الظروف بذلك.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+      <span>Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+      <span>صفحة 3 من 6</span>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 4 — 4F
+  ========================================================== -->
+
+  <div class="page">
+
+    <div>
+      <div class="header">
+        <div class="brand">
+          <span class="brand-title">Tamkinly — تمكينلي</span>
+          <span class="brand-subtitle">مركز التعافي من الصدمات (TRC)</span>
+        </div>
+
+        <div class="status-badge">
+          مسودة للمراجعة السريرية
+        </div>
+      </div>
+
+      <div class="content">
+
+        <h1>
+          استجابات التهديد الشائعة:
+          <span class="en-term">Fight / Flight / Freeze / Fawn</span>
+        </h1>
+
+        <p>
+          يمكن استخدام هذه المصطلحات لوصف أنماط مختلفة قد تظهر عند التعامل
+          مع الخطر أو التهديد الشديد. وهي ليست اختبارًا تشخيصيًا أو تصنيفًا
+          ثابتًا، وقد تظهر بدرجات وأشكال مختلفة من شخص لآخر.
+        </p>
+
+        <div class="card-grid">
+
+          <!-- Fight -->
+          <div
+            class="card"
+            style="border-top: 3px solid #1F6F78;"
+          >
+            <div class="card-title">
+              1. القتال
+              <span class="en-term">(Fight)</span>
+            </div>
+
+            <p style="margin-bottom:4px;">
+              استعداد لمواجهة التهديد بشكل مباشر.
+            </p>
+
+            <ul>
+              <li>حدة الانفعال أو الغضب.</li>
+              <li>الرغبة في الدفاع عن النفس أو الجدال.</li>
+              <li>زيادة الاستعداد والتوتر للمواجهة.</li>
+            </ul>
+          </div>
+
+          <!-- Flight -->
+          <div
+            class="card"
+            style="border-top: 3px solid #3DD4B0;"
+          >
+            <div class="card-title">
+              2. الفرار
+              <span class="en-term">(Flight)</span>
+            </div>
+
+            <p style="margin-bottom:4px;">
+              محاولة الابتعاد عن مصدر الخطر أو تجنب ما يثير الشعور بالتهديد.
+            </p>
+
+            <ul>
+              <li>الشعور بالقلق أو الدافع للهروب.</li>
+              <li>تجنب بعض المواقف أو الأماكن.</li>
+              <li>الانشغال المستمر لتجنب المشاعر الصعبة.</li>
+            </ul>
+          </div>
+
+          <!-- Freeze -->
+          <div
+            class="card"
+            style="border-top: 3px solid #D97706;"
+          >
+            <div class="card-title">
+              3. التجمّد
+              <span class="en-term">(Freeze)</span>
+            </div>
+
+            <p style="margin-bottom:4px;">
+              استجابة قد يظهر فيها التوقف أو صعوبة الحركة أو الاستجابة عند
+              الشعور بتهديد شديد.
+            </p>
+
+            <ul>
+              <li>صعوبة مؤقتة في الحركة أو الكلام.</li>
+              <li>الشعور بالتنميل أو الانفصال عن الإحساس.</li>
+              <li>بطء الاستجابة أو صعوبة اتخاذ القرار.</li>
+            </ul>
+          </div>
+
+          <!-- Fawn -->
+          <div
+            class="card"
+            style="border-top: 3px solid #475569;"
+          >
+            <div class="card-title">
+              4. التملق / إرضاء الآخرين
+              <span class="en-term">(Fawn)</span>
+            </div>
+
+            <p style="margin-bottom:4px;">
+              محاولة تقليل التهديد أو تجنب الصراع من خلال التركيز الشديد
+              على إرضاء الطرف الآخر أو التكيف معه.
+            </p>
+
+            <ul>
+              <li>محاولة تجنب الصراع بأي ثمن.</li>
+              <li>تقديم احتياجات الآخرين على الذات بشكل متكرر.</li>
+              <li>صعوبة إظهار الرفض أو وضع الحدود.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 4F diagram -->
+        <div class="svg-container">
+
+          <svg
+            width="400"
+            height="105"
+            viewBox="0 0 400 105"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="استجابات التهديد الأربع"
+          >
+
+            <circle
+              cx="60"
+              cy="52"
+              r="30"
+              fill="#E6F4F5"
+              stroke="#1F6F78"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="60"
+              y="50"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="10"
+              fill="#1F6F78"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              القتال
+            </text>
+
+            <text
+              x="60"
+              y="63"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#1F6F78"
+              text-anchor="middle"
+            >
+              Fight
+            </text>
+
+
+            <circle
+              cx="150"
+              cy="52"
+              r="30"
+              fill="#E6F4F5"
+              stroke="#3DD4B0"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="150"
+              y="50"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="10"
+              fill="#1F6F78"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              الفرار
+            </text>
+
+            <text
+              x="150"
+              y="63"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#1F6F78"
+              text-anchor="middle"
+            >
+              Flight
+            </text>
+
+
+            <circle
+              cx="240"
+              cy="52"
+              r="30"
+              fill="#FFFBEB"
+              stroke="#D97706"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="240"
+              y="50"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="10"
+              fill="#92400E"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              التجمّد
+            </text>
+
+            <text
+              x="240"
+              y="63"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#92400E"
+              text-anchor="middle"
+            >
+              Freeze
+            </text>
+
+
+            <circle
+              cx="330"
+              cy="52"
+              r="30"
+              fill="#F1F5F9"
+              stroke="#475569"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="330"
+              y="50"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="10"
+              fill="#0F1C2E"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              التملق
+            </text>
+
+            <text
+              x="330"
+              y="63"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#0F1C2E"
+              text-anchor="middle"
+            >
+              Fawn
+            </text>
+
+          </svg>
+
+        </div>
+
+        <div class="key-message">
+
+          <strong>الرسالة المفتاحية:</strong>
+
+          <span>
+            هذه الاستجابات يمكن أن تكون محاولات بقاء أو تكيف مع التهديد.
+            ظهور أيٍّ منها لا يعني ضعفًا في الشخصية أو عيبًا أخلاقيًا.
+          </span>
+
+        </div>
+
+        <div class="neutral-box">
+
+          <p style="margin:0; font-size:10.5px;">
+            <strong>ملاحظة:</strong>
+            قد ينتقل الشخص بين أكثر من استجابة، وقد تظهر الاستجابة نفسها
+            بشكل مختلف حسب الموقف. كما أن هذه المصطلحات لا تفسر وحدها
+            كل سلوك أو عرض بعد تجربة صادمة.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+      <span>Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+      <span>صفحة 4 من 6</span>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 5 — BODY RESPONSES & MEMORY
+  ========================================================== -->
+
+  <div class="page">
+
+    <div>
+      <div class="header">
+        <div class="brand">
+          <span class="brand-title">Tamkinly — تمكينلي</span>
+          <span class="brand-subtitle">مركز التعافي من الصدمات (TRC)</span>
+        </div>
+
+        <div class="status-badge">
+          مسودة للمراجعة السريرية
+        </div>
+      </div>
+
+      <div class="content">
+
+        <h1>
+          لماذا قد أشعر باستجابة جسدية دون أن أفهم السبب فورًا؟
+        </h1>
+
+        <div class="teal-box">
+
+          <p style="margin:0;">
+            يمكن للتجارب شديدة الضغط أن ترتبط بأنماط مستمرة في الذاكرة
+            والانتباه والاستثارة الجسدية. لذلك قد يلاحظ بعض الأشخاص استجابة
+            جسدية أو انفعالية مفاجئة عند مواجهة موقف أو إحساس أو مكان أو
+            رائحة أو صوت يذكّرهم بالخبرة السابقة، حتى قبل أن يدركوا بوعي
+            ما الذي أثار هذه الاستجابة.
+          </p>
+
+        </div>
+
+        <h2>هل "يخزن الجسد الصدمة" حرفيًا؟</h2>
+
+        <p>
+          يُستخدم تعبير "ذاكرة الجسد" أحيانًا لوصف الطريقة التي قد تظهر بها
+          آثار التجارب الشديدة في الأحاسيس الجسدية أو الاستثارة أو أنماط
+          التوتر. لكن من المهم فهم هذا التعبير باعتباره وصفًا وظيفيًا وليس
+          ادعاءً بأن الصدمة تُخزَّن حرفيًا كمادة داخل الخلايا أو العضلات أو
+          الأعضاء.
+        </p>
+
+        <p>
+          قد ترتبط التجارب الصادمة بتغيرات في الذاكرة والانتباه والاستجابة
+          للتهديد والتنظيم الفسيولوجي، وقد تظهر هذه العمليات في شكل أعراض
+          أو إحساسات جسدية حقيقية. وتختلف هذه الأنماط من شخص لآخر.
+        </p>
+
+        <h2>
+          لماذا قد تظهر مشاعر أو إحساسات "بدون سبب واضح"؟
+        </h2>
+
+        <p>
+          قد لا يكون الرابط بين الموقف الحالي والتجربة السابقة واضحًا
+          للتفكير الواعي في اللحظة نفسها. فقد تلتقط الحواس إشارات تشبه
+          عناصر من حدث سابق، مثل صوت أو رائحة أو مكان أو إحساس جسدي،
+          فيستجيب الدماغ والجسم بسرعة لهذه الإشارة.
+        </p>
+
+        <p>
+          <strong>
+            لكن ليس كل إحساس جسدي أو انزعاج دليلًا على وجود ذكرى صدمية.
+          </strong>
+          فالأجساد تستجيب لعدد كبير من العوامل الطبية والبيئية والنفسية
+          واليومية، وقد تتشابه بعض الأعراض بين حالات مختلفة.
+        </p>
+
+        <h2>التوتر الجسدي والألم</h2>
+
+        <p>
+          قد ترتبط الخبرات المجهدة أو المستمرة لدى بعض الأفراد بزيادة
+          التوتر العضلي أو اضطرابات النوم أو تغيرات في تجربة الألم والحساسية
+          الجسدية. لكن الأعراض الجسدية تتأثر بعوامل كثيرة، ولذلك لا ينبغي
+          افتراض أن الصدمة هي السبب الوحيد لأي عرض جسدي مستمر.
+        </p>
+
+        <div class="neutral-box">
+
+          <h3 style="margin-top:0; color:#1F6F78;">
+            الفهم المتوازن للاستجابة الجسدية
+          </h3>
+
+          <p style="margin-bottom:0;">
+            أن تكون الاستجابة الجسدية حقيقية ومزعجة هو أمر واقعي، حتى إن
+            لم يتضح سببها المباشر في اللحظة نفسها. فهم هذه الاستجابة يمكن
+            أن يساعد الشخص على التعامل مع جسده دون لوم الذات. وفي الوقت
+            نفسه، الأعراض الجديدة أو الشديدة أو المستمرة تستحق تقييمًا
+            طبيًا مناسبًا، ولا ينبغي تفسيرها تلقائيًا على أنها أثر للصدمة.
+          </p>
+
+        </div>
+
+        <div class="safety-box">
+
+          <div class="safety-box-title">
+            متى أطلب تقييمًا متخصصًا؟
+          </div>
+
+          <p>
+            إذا كانت الأعراض الجسدية أو النفسية شديدة، مستمرة، تعيق الحياة
+            اليومية، أو تثير قلقًا بشأن الصحة، فمن المناسب طلب تقييم من
+            مختص صحي مؤهل بدل الاعتماد على التفسير الذاتي وحده.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+      <span>Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+      <span>صفحة 5 من 6</span>
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 6 — WINDOW OF TOLERANCE & RECOVERY
+  ========================================================== -->
+
+  <div class="page">
+
+    <div>
+      <div class="header">
+        <div class="brand">
+          <span class="brand-title">Tamkinly — تمكينلي</span>
+          <span class="brand-subtitle">مركز التعافي من الصدمات (TRC)</span>
+        </div>
+
+        <div class="status-badge">
+          مسودة للمراجعة السريرية
+        </div>
+      </div>
+
+      <div class="content">
+
+        <h1>نافذة التحمل ومسارات التعافي</h1>
+
+        <h2>
+          نافذة التحمل
+          <span class="en-term">(Window of Tolerance)</span>
+        </h2>
+
+        <p>
+          نافذة التحمل هي نموذج تعليمي يُستخدم لوصف النطاق الذي يستطيع فيه
+          الشخص التعامل مع الضغوط والاستثارة مع الحفاظ نسبيًا على القدرة
+          على التفكير والتواصل والتنظيم. وقد تختلف هذه النافذة حسب الشخص
+          والظروف والنوم والدعم والحالة الصحية ومستوى الأمان.
+        </p>
+
+        <!-- Window Diagram -->
+        <div class="svg-container">
+
+          <svg
+            width="420"
+            height="135"
+            viewBox="0 0 420 135"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="رسم نافذة التحمل"
+          >
+
+            <!-- Hyperarousal -->
+            <rect
+              x="20"
+              y="10"
+              width="380"
+              height="34"
+              rx="4"
+              fill="#FEF3C7"
+              stroke="#B45309"
+              stroke-width="1"
+            />
+
+            <text
+              x="210"
+              y="25"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="9"
+              fill="#78350F"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              فرط الاستثارة
+            </text>
+
+            <text
+              x="210"
+              y="37"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#78350F"
+              text-anchor="middle"
+            >
+              Hyperarousal — توتر مرتفع ويقظة شديدة وصعوبة في الهدوء
+            </text>
+
+
+            <!-- Optimal Zone -->
+            <rect
+              x="20"
+              y="50"
+              width="380"
+              height="36"
+              rx="4"
+              fill="#E6F4F5"
+              stroke="#1F6F78"
+              stroke-width="1.5"
+            />
+
+            <text
+              x="210"
+              y="65"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="9"
+              fill="#1F6F78"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              نافذة التحمل
+            </text>
+
+            <text
+              x="210"
+              y="78"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#1F6F78"
+              text-anchor="middle"
+            >
+              Optimal Zone — حضور وتفكير وتنظيم وتواصل نسبي
+            </text>
+
+
+            <!-- Hypoarousal -->
+            <rect
+              x="20"
+              y="92"
+              width="380"
+              height="34"
+              rx="4"
+              fill="#F1F5F9"
+              stroke="#475569"
+              stroke-width="1"
+            />
+
+            <text
+              x="210"
+              y="107"
+              font-family="Arial, Tahoma, sans-serif"
+              font-size="9"
+              fill="#0F1C2E"
+              text-anchor="middle"
+              font-weight="bold"
+            >
+              نقص الاستثارة
+            </text>
+
+            <text
+              x="210"
+              y="119"
+              font-family="Arial, sans-serif"
+              font-size="8"
+              fill="#475569"
+              text-anchor="middle"
+            >
+              Hypoarousal — خمول وبلادة وانخفاض الطاقة أو الإحساس
+            </text>
+
+          </svg>
+
+        </div>
+
+        <p class="diagram-caption">
+          نموذج تعليمي؛ الحدود بين المناطق ليست قياسات طبية ثابتة.
+        </p>
+
+        <h2>كيف يمكن أن تتسع نافذة التحمل؟</h2>
+
+        <p>
+          يمكن أن يساهم العلاج النفسي المناسب، وبناء البيئات الآمنة،
+          وتطوير مهارات التنظيم، وتحسين النوم، والدعم الاجتماعي، وتعلم
+          التعرف إلى الإشارات الجسدية والانفعالية في مساعدة بعض الأشخاص
+          على التعامل مع الاستثارة والعودة التدريجية إلى التوازن.
+        </p>
+
+        <h2>مسارات الدعم والتعافي</h2>
+
+        <ul
+          style="
+            font-size: 10.5px;
+            color: #334155;
+            padding-right: 18px;
+            margin-top: 3px;
+            margin-bottom: 8px;
+          "
+        >
+
+          <li>
+            <strong>العلاج النفسي المتخصص:</strong>
+            توجد أساليب علاجية مبنية على الأدلة لمعالجة الآثار النفسية
+            للتجارب الصادمة، ويُختار النهج المناسب بحسب الحالة والتقييم.
+          </li>
+
+          <li>
+            <strong>
+              معالجة حركات العين وإزالة التحسس وإعادة المعالجة
+              (<span class="en-term">EMDR</span>):
+            </strong>
+            أسلوب علاجي يستخدمه متخصصون مدربون ضمن سياق علاجي مناسب.
+          </li>
+
+          <li>
+            <strong>
+              العلاج المعرفي السلوكي
+              (<span class="en-term">CBT</span>):
+            </strong>
+            يمكن أن يساعد في التعامل مع بعض الأفكار والمشاعر والسلوكيات
+            والأعراض المرتبطة بالضغط النفسي والصدمات.
+          </li>
+
+          <li>
+            <strong>التأمل والوعي الجسدي:</strong>
+            قد تكون بعض ممارسات الوعي والتنظيم الذاتي مفيدة كجزء من خطة
+            دعم متكاملة، لكنها ليست بديلًا عن التقييم أو العلاج المتخصص
+            عندما تكون هناك حاجة إليه.
+          </li>
+
+        </ul>
+
+        <h2>جهات اتصال الطوارئ والدعم المحلي</h2>
+
+        <p class="small muted" style="margin-bottom:5px;">
+          اكتب هنا جهات الاتصال المحلية الموثوقة التي يمكنك الرجوع إليها
+          عند الحاجة. اترك الحقول فارغة إلى أن تملأها بمعلوماتك المحلية.
+        </p>
+
+        <div class="contact-field">
+          <span class="contact-label">جهة اتصال / اسم:</span>
+          <div class="input-line"></div>
+        </div>
+
+        <div class="contact-field">
+          <span class="contact-label">جهة اتصال / اسم:</span>
+          <div class="input-line"></div>
+        </div>
+
+        <div class="contact-field">
+          <span class="contact-label">جهة اتصال / اسم:</span>
+          <div class="input-line"></div>
+        </div>
+
+        <div class="safety-box" style="margin-top:9px;">
+
+          <div class="safety-box-title">
+            تنبيه سلامة أخير
+          </div>
+
+          <p>
+            إذا شعرت أنك في خطر فوري أو غير قادر على الحفاظ على سلامتك،
+            لا تعتمد على هذا الدليل وحده. تواصل فورًا مع خدمات الطوارئ
+            المحلية أو اطلب مساعدة مباشرة من شخص موثوق أو مختص.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | مركز التعافي من الصدمات (TRC)</span>
+      <span>Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+      <span>صفحة 6 من 6</span>
+    </div>
+
+  </div>
+
+</body>
+</html>

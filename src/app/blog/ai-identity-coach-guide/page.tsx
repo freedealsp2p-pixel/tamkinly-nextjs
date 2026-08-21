@@ -8,6 +8,10 @@ import { ArrowRight, Clock, User, Sparkles, Brain, MessageCircle, Target, Heart,
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function AIIdentityCoachGuideArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -138,8 +142,8 @@ export default function AIIdentityCoachGuideArticle() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-[#BA68C8]/10 flex items-center justify-center mb-4">
-                    <Heart className="h-6 w-6 text-[#BA68C8]" />
+                  <div className="w-12 h-12 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mb-4">
+                    <Heart className="h-6 w-6 text-[#2A8A94]" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">{getText("Cognitive Behavioral Approaches", "المناهج المعرفية السلوكية")}</h3>
                   <p className="text-sm text-slate-600">
@@ -149,8 +153,8 @@ export default function AIIdentityCoachGuideArticle() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-full bg-[#64B5F6]/10 flex items-center justify-center mb-4">
-                    <Sparkles className="h-6 w-6 text-[#64B5F6]" />
+                  <div className="w-12 h-12 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mb-4">
+                    <Sparkles className="h-6 w-6 text-[#2A8A94]" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">{getText("Values-Based Coaching", "التدريب القائم على القيم")}</h3>
                   <p className="text-sm text-slate-600">
@@ -214,8 +218,8 @@ export default function AIIdentityCoachGuideArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#BA68C8]/10 flex items-center justify-center flex-shrink-0">
-                      <Brain className="h-5 w-5 text-[#BA68C8]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#2A8A94]/10 flex items-center justify-center flex-shrink-0">
+                      <Brain className="h-5 w-5 text-[#2A8A94]" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-primary mb-2">{getText("Self-Authorship", "تأليف الذات")}</h3>
@@ -235,8 +239,8 @@ export default function AIIdentityCoachGuideArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#E57373]/10 flex items-center justify-center flex-shrink-0">
-                      <Heart className="h-5 w-5 text-[#E57373]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#C97B7B]/10 flex items-center justify-center flex-shrink-0">
+                      <Heart className="h-5 w-5 text-[#C97B7B]" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-primary mb-2">{getText("Emotion Regulation", "تنظيم المشاعر")}</h3>
@@ -436,6 +440,9 @@ export default function AIIdentityCoachGuideArticle() {
       </section>
 
       {/* Article Navigation */}
+      <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
+      <BlogArticleCTA ctaType="coach" />
+
       <ArticleNavigation currentSlug="ai-identity-coach-guide" />
 
       {/* Related Articles */}
@@ -460,34 +467,8 @@ export default function AIIdentityCoachGuideArticle() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge className="mb-4 bg-[#3DD4B0]/20 text-[#3DD4B0] border-0">{getText("BUNDLE Exclusive", "حصري للحزمة")}</Badge>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Get Your AI Transformation Companion", "احصل على رفيق تحولك بالذكاء الاصطناعي")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Access the AI Identity Coach and the complete transformation toolkit with BUNDLE.", "ادخل إلى مدرب الهوية بالذكاء الاصطناعي ومجموعة أدوات التحول الكاملة مع الحزمة.")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products">
-                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  {getText("Get the BUNDLE", "احصل على الحزمة")}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/apps/ai-identity-coach">
-                <Button variant="white" size="lg" className="px-8">
-                  {getText("Preview Coach", "معاينة المدرب")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
+        <BlogConversionSection />
+      </article>
   );
 }
+

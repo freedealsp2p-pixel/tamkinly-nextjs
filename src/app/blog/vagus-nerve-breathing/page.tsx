@@ -9,6 +9,10 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function VagusNerveBreathingArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -94,10 +98,10 @@ export default function VagusNerveBreathingArticle() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-5 text-center">
-                  <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-3">
-                    <Activity className="h-6 w-6 text-amber-500" />
+                  <div className="w-12 h-12 rounded-full bg-[#e6f3f4] flex items-center justify-center mx-auto mb-3">
+                    <Activity className="h-6 w-6 text-[#2A8A94]" />
                   </div>
-                  <h3 className="font-semibold text-amber-600 mb-1">{getText("2 sec", "٢ ثانية")}</h3>
+                  <h3 className="font-semibold text-[#2A8A94] mb-1">{getText("2 sec", "٢ ثانية")}</h3>
                   <p className="text-sm text-slate-500">{getText("Hold. Let oxygen saturate the bloodstream.", "احبس. دع الأكسجين يتشبع في الدم.")}</p>
                 </CardContent>
               </Card>
@@ -185,6 +189,10 @@ export default function VagusNerveBreathingArticle() {
         </div>
       </section>
 
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="daily" />
+
+
       <ArticleNavigation currentSlug="vagus-nerve-breathing" />
 
       <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
@@ -197,13 +205,13 @@ export default function VagusNerveBreathingArticle() {
               {getText("The ERQ Emotional Regulation Worksheet gives you the structure to observe, measure, and transform your emotional patterns with precision.", "ورقة عمل التنظيم العاطفي ERQ تمنحك الهيكل لمراقبة وقياس وتحويل أنماطك العاطفية بدقة.")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/apps/erq-emotional-regulation-worksheet">
+              <Link href="/blog/erq-emotional-regulation-worksheet">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
                   {getText("Start Emotional Regulation", "ابدأ التنظيم العاطفي")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/apps/daily-reflection-practice">
+              <Link href="/blog/daily-reflection-practice">
                 <Button variant="white" size="lg" className="px-8 font-semibold">
                   {getText("Daily Reflection Practice", "ممارسة التأمل اليومي")}
                 </Button>
@@ -212,7 +220,9 @@ export default function VagusNerveBreathingArticle() {
           </div>
         </div>
       </section>
-    </article>
+            <BlogConversionSection />
+      </article>
     </>
   );
 }
+

@@ -33,8 +33,8 @@ const habitIcons: Record<string, React.ReactNode> = {
 
 const habitColors = [
   { name: 'Coral', value: 'bg-rose-500', light: 'bg-rose-100 text-rose-700' },
-  { name: 'Orange', value: 'bg-orange-500', light: 'bg-orange-100 text-orange-700' },
-  { name: 'Amber', value: 'bg-amber-500', light: 'bg-amber-100 text-amber-700' },
+  { name: 'Orange', value: 'bg-[#2A8A94]', light: 'bg-[#e6f3f4] text-[#2A8A94]' },
+  { name: 'Amber', value: 'bg-[#7AEEE0]', light: 'bg-[#f4fcfb] text-[#1F6F78]' },
   { name: 'Emerald', value: 'bg-emerald-500', light: 'bg-emerald-100 text-emerald-700' },
   { name: 'Teal', value: 'bg-teal-500', light: 'bg-teal-100 text-teal-700' },
   { name: 'Cyan', value: 'bg-cyan-500', light: 'bg-cyan-100 text-cyan-700' },
@@ -207,15 +207,15 @@ export default function HabitTrackerPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-amber-50 to-orange-50">
+          <Card className="border-0 shadow-lg bg-gradient-to-br from-[#e8f4f3] to-[#e6f3f4]">
             <CardContent className="pt-6">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-amber-500 text-white">
+                <div className="p-2 rounded-xl bg-[#1F6F78] text-white">
                   <Flame className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-amber-700">{maxStreak}</p>
-                  <p className="text-xs text-amber-600">{getText('Best Streak', 'أفضل سلسلة')}</p>
+                  <p className="text-2xl font-bold text-[#1F6F78]">{maxStreak}</p>
+                  <p className="text-xs text-[#4da8a2]">{getText('Best Streak', 'أفضل سلسلة')}</p>
                 </div>
               </div>
             </CardContent>
@@ -333,7 +333,7 @@ export default function HabitTrackerPage() {
                           </h3>
                           <div className="flex items-center gap-3 text-sm text-slate-500">
                             <span className="flex items-center gap-1">
-                              <Flame className="h-3 w-3 text-amber-500" />
+                              <Flame className="h-3 w-3 text-[#3DD4B0]" />
                               {habit.streak} {getText('day streak', 'أيام متتالية')}
                             </span>
                             <span className="flex items-center gap-1">
@@ -359,7 +359,7 @@ export default function HabitTrackerPage() {
                     {/* Streak Badge */}
                     {habit.streak >= 7 && (
                       <div className="pr-4">
-                        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-sm font-medium">
+                        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#edfbf6] text-[#1F6F78] text-sm font-medium">
                           <Flame className="h-4 w-4" />
                           {habit.streak}
                         </div>

@@ -19,15 +19,23 @@ export function Footer() {
     { href: "/about", label: t("aboutUs") },
     { href: "/methodology", label: t("ourMethodology") },
     { href: "/resources", label: t("resources") },
+    { href: "/guides", label: t("guides") },
+    { href: "/downloads", label: t("downloads") },
     { href: "/contact", label: t("contact") },
     { href: "/blog", label: t("blog") },
   ];
 
   const productLinks = [
     { href: "/products", label: t("allProducts") },
-    { href: "/products/trial", label: t("trialProduct") },
-    { href: "/products/planner", label: t("plannerProduct") },
-    { href: "/products/bundle", label: t("bundleProduct") },
+    { href: "/products/basic", label: t("basicProduct") },
+    { href: "/products/premium", label: t("premiumProduct") },
+    { href: "/products/mastery", label: t("masteryProduct") },
+  ];
+
+  const recoveryLinks = [
+    { href: "/recovery", label: t("recoveryHub") },
+    { href: "/recovery/porn-recovery", label: t("pornRecovery") },
+    { href: "/recovery/trc", label: t("traumaRecovery") },
   ];
 
   const appsLinks = [
@@ -40,6 +48,7 @@ export function Footer() {
 
   const supportLinks = [
     { href: "/faq", label: t("faq") },
+    { href: "/search", label: t("search") },
     { href: "/privacy", label: t("privacyPolicy") },
     { href: "/terms", label: t("termsOfService") },
     { href: "/refund", label: t("refundPolicy") },
@@ -53,9 +62,9 @@ export function Footer() {
   return (
     <footer className="bg-primary text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2 md:col-span-1 lg:col-span-2">
             <Link href="/" className="inline-block">
               <span className="font-serif text-2xl font-bold text-accent">
                 Tamkinly
@@ -86,8 +95,8 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="font-semibold text-white mb-4">{t("company")}</h3>
-            <ul className="space-y-3">
+            <h3 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider lg:mb-4 lg:text-base lg:normal-case lg:tracking-normal">{t("company")}</h3>
+            <ul className="space-y-2 lg:space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -103,7 +112,7 @@ export function Footer() {
 
           {/* Products Links */}
           <div>
-            <h3 className="font-semibold text-white mb-4">{t("products")}</h3>
+            <h3 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider lg:mb-4 lg:text-base lg:normal-case lg:tracking-normal">{t("products")}</h3>
             <ul className="space-y-3">
               {productLinks.map((link) => (
                 <li key={link.href}>
@@ -118,9 +127,26 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Recovery Links */}
+          <div>
+            <h3 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider lg:mb-4 lg:text-base lg:normal-case lg:tracking-normal">{t("recovery")}</h3>
+            <ul className="space-y-3">
+              {recoveryLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-slate-300 hover:text-accent transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Apps Links */}
           <div>
-            <h3 className="font-semibold text-white mb-4">{t("apps")}</h3>
+            <h3 className="font-semibold text-white mb-3 text-sm uppercase tracking-wider lg:mb-4 lg:text-base lg:normal-case lg:tracking-normal">{t("apps")}</h3>
             <ul className="space-y-3">
               {appsLinks.map((link) => (
                 <li key={link.href}>
@@ -138,7 +164,7 @@ export function Footer() {
 
         {/* Support Links Row */}
         <div className="mt-8 pt-8 border-t border-white/10">
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-slate-400">
             {supportLinks.map((link) => (
               <Link
                 key={link.href}

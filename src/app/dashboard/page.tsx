@@ -40,6 +40,7 @@ import {
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
+import OnboardingProgress from '@/components/account/OnboardingProgress';
 
 // Types for /api/progress response
 interface QuizResults {
@@ -153,6 +154,16 @@ export default function DashboardPage() {
   const [codeSuccess, setCodeSuccess] = useState<string | null>(null);
   const [referralCopied, setReferralCopied] = useState(false);
   const [referralInfo, setReferralInfo] = useState<{ code: string; totalReferrals: number; currentTier: string; nextTierAt: number | null } | null>(null);
+  const [showRecovery, setShowRecovery] = useState(false);
+  // Check if user has discovered Recovery
+  useEffect(() => {
+    try {
+      const discovered = localStorage.getItem('tamkinly_recovery_discovered');
+      if (discovered === 'true') {
+        setShowRecovery(true);
+      }
+    } catch {}
+  }, []);
 
   useEffect(() => {
     // Load quiz results from localStorage (works for both auth and anon users)
@@ -312,8 +323,8 @@ export default function DashboardPage() {
   // Get guidance icon color based on score
   const guidanceColor = useMemo(() => {
     if (!quizResults) return '#8A94A6';
-    if (quizResults.overallScore <= 40) return '#FC6D26';
-    if (quizResults.overallScore <= 70) return '#FFB74D';
+    if (quizResults.overallScore <= 40) return '#C97B7B';
+    if (quizResults.overallScore <= 70) return '#2A8A94';
     return '#3DD4B0';
   }, [quizResults]);
 
@@ -323,9 +334,9 @@ export default function DashboardPage() {
     return [
       { key: 'identityClarity', label: t('identityClarity'), value: quizResults.identityClarity, color: '#3DD4B0', icon: User },
       { key: 'environmentalAlignment', label: t('environmentalAlignment'), value: quizResults.environmentalAlignment, color: '#1F6F78', icon: Compass },
-      { key: 'emotionalRegulation', label: t('emotionalRegulation'), value: quizResults.emotionalRegulation, color: '#E57373', icon: Heart },
-      { key: 'decisionQuality', label: t('decisionQuality'), value: quizResults.decisionQuality, color: '#64B5F6', icon: Brain },
-      { key: 'progressMomentum', label: t('progressMomentum'), value: quizResults.progressMomentum, color: '#FFB74D', icon: TrendingUp },
+      { key: 'emotionalRegulation', label: t('emotionalRegulation'), value: quizResults.emotionalRegulation, color: '#C97B7B', icon: Heart },
+      { key: 'decisionQuality', label: t('decisionQuality'), value: quizResults.decisionQuality, color: '#2A8A94', icon: Brain },
+      { key: 'progressMomentum', label: t('progressMomentum'), value: quizResults.progressMomentum, color: '#2A8A94', icon: TrendingUp },
     ];
   }, [quizResults, t]);
 
@@ -360,13 +371,13 @@ export default function DashboardPage() {
                 Tamkinly
               </Link>
               <Badge variant="outline" className="hidden sm:inline-flex">
-                {status === 'authenticated' ? t('premium') : t('free')}
+                {status === 'authenticated' ? (session?.user?.accessTier || t('free')) : t('free')}
               </Badge>
             </div>
             <div className="flex items-center gap-4">
               {status === 'authenticated' ? (
                 <>
-                  <Link href="/settings">
+                  <Link href="/account">
                     <Button variant="ghost" size="icon">
                       <Settings className="h-5 w-5" />
                     </Button>
@@ -420,7 +431,7 @@ export default function DashboardPage() {
                     {codeLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : t('activateCode')}
                   </Button>
                 </div>
-                {codeError && <p className="text-[#FF8C42] text-xs mb-2">{codeError}</p>}
+                {codeError && <p className="text-[#B88A8E] text-xs mb-2">{codeError}</p>}
                 {codeSuccess && <p className="text-green-400 text-xs mb-2">{codeSuccess}</p>}
 
                 <Link href="/auth/signup?callbackUrl=/dashboard">
@@ -474,9 +485,9 @@ export default function DashboardPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
             { label: t('identityScore'), value: `${data.identityScore}%`, icon: Brain, color: '#3DD4B0' },
-            { label: t('currentStreak'), value: `${data.journey?.journalStreak || 0} ${t('days')}`, icon: Flame, color: '#FFB74D' },
+            { label: t('currentStreak'), value: `${data.journey?.journalStreak || 0} ${t('days')}`, icon: Flame, color: '#2A8A94' },
             { label: t('totalVotes'), value: data.journey?.totalVotes || 0, icon: CheckCircle2, color: '#1F6F78' },
-            { label: t('habitsDone'), value: data.apps?.habits?.completedToday || 0, icon: Target, color: '#64B5F6' },
+            { label: t('habitsDone'), value: data.apps?.habits?.completedToday || 0, icon: Target, color: '#2A8A94' },
           ].map((stat, idx) => (
             <Card key={idx} className="border-0 shadow-sm">
               <CardContent className="p-4">
@@ -494,10 +505,49 @@ export default function DashboardPage() {
           ))}
         </div>
 
+        {/* Quick Access to Apps */}
+        <Card className="mb-8 border-0 shadow-sm bg-gradient-to-br from-[#0F1C2E] to-[#1F6F78]">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div>
+                <h3 className="text-lg font-bold text-white mb-1">{t('yourApps')}</h3>
+                <p className="text-slate-300 text-sm">{t('yourAppsDesc')}</p>
+              </div>
+              <Link href="/apps">
+                <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E]">
+                  {t('openApps')}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+              <Link href="/apps/identity-gap-quiz" className="bg-white/5 hover:bg-white/10 rounded-lg p-3 text-center transition-colors">
+                <Brain className="h-5 w-5 text-[#3DD4B0] mx-auto mb-1" />
+                <span className="text-xs text-white">{t('quiz')}</span>
+              </Link>
+              <Link href="/apps/daily-reflection" className="bg-white/5 hover:bg-white/10 rounded-lg p-3 text-center transition-colors">
+                <Sun className="h-5 w-5 text-[#3DD4B0] mx-auto mb-1" />
+                <span className="text-xs text-white">{t('reflection')}</span>
+              </Link>
+              <Link href="/apps/habit-tracker" className="bg-white/5 hover:bg-white/10 rounded-lg p-3 text-center transition-colors">
+                <Target className="h-5 w-5 text-[#3DD4B0] mx-auto mb-1" />
+                <span className="text-xs text-white">{t('habits')}</span>
+              </Link>
+              <Link href="/apps/ai-identity-coach" className="bg-white/5 hover:bg-white/10 rounded-lg p-3 text-center transition-colors">
+                <Sparkles className="h-5 w-5 text-[#3DD4B0] mx-auto mb-1" />
+                <span className="text-xs text-white">{t('aiCoach')}</span>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Main Grid */}
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Column - Progress */}
           <div className="lg:col-span-2 space-y-6">
+          {/* Onboarding Progress */}
+          <OnboardingProgress />
+
             {/* Assessment Results Card */}
             {quizResults ? (
               <Card className="border-0 shadow-sm">
@@ -633,7 +683,7 @@ export default function DashboardPage() {
                 </div>
 
                 {journeyDay === 0 && (
-                  <Link href="/apps/identity-planner" className="block">
+                  <Link href="/apps/identity-recode-system" className="block">
                     <Button className="w-full bg-[#1F6F78] text-white hover:bg-[#185c63]">
                       {t('startJourney')}
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -645,10 +695,10 @@ export default function DashboardPage() {
                 {journeyDay > 0 && (
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-100">
                     {[
-                      { label: t('bestStreak'), value: data.journey?.maxStreak || 0, icon: Flame, color: '#FFB74D' },
+                      { label: t('bestStreak'), value: data.journey?.maxStreak || 0, icon: Flame, color: '#2A8A94' },
                       { label: t('wordsWritten'), value: data.journey?.totalWords || 0, icon: PenLine, color: '#3DD4B0' },
                       { label: t('decisionsLogged'), value: data.journey?.decisionsLogged || 0, icon: Scale, color: '#1F6F78' },
-                      { label: t('evidenceRecords'), value: data.journey?.evidenceRecords || 0, icon: Shield, color: '#64B5F6' },
+                      { label: t('evidenceRecords'), value: data.journey?.evidenceRecords || 0, icon: Shield, color: '#2A8A94' },
                     ].map((stat, idx) => (
                       <div key={idx} className="text-center p-2 rounded-lg bg-slate-50">
                         <stat.icon className="h-4 w-4 mx-auto mb-1" style={{ color: stat.color }} />
@@ -741,7 +791,7 @@ export default function DashboardPage() {
                     >
                       <div className="flex items-center gap-2">
                         {achievement.completed ? (
-                          <Star className="h-5 w-5 text-[#FFB74D] fill-current" />
+                          <Star className="h-5 w-5 text-[#2A8A94] fill-current" />
                         ) : (
                           <Star className="h-5 w-5 text-slate-300" />
                         )}
@@ -774,8 +824,8 @@ export default function DashboardPage() {
                   {[
                     { label: t('habitsToday'), value: `${data.apps?.habits?.completedToday || 0}/${data.apps?.habits?.total || 0}`, icon: CheckCircle2, color: '#3DD4B0' },
                     { label: t('goalsInProgress'), value: data.apps?.goals?.inProgress || 0, icon: Target, color: '#1F6F78' },
-                    { label: t('goalsCompleted'), value: data.apps?.goals?.completed || 0, icon: Award, color: '#FFB74D' },
-                    { label: t('journalStreak'), value: `${data.apps?.journal?.streak || 0} ${t('days')}`, icon: BookOpen, color: '#64B5F6' },
+                    { label: t('goalsCompleted'), value: data.apps?.goals?.completed || 0, icon: Award, color: '#2A8A94' },
+                    { label: t('journalStreak'), value: `${data.apps?.journal?.streak || 0} ${t('days')}`, icon: BookOpen, color: '#2A8A94' },
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between p-2 rounded hover:bg-slate-50 transition-colors">
                       <div className="flex items-center gap-2">
@@ -789,7 +839,50 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Upgrade Card */}
+
+            {/* Recovery Programs Card — shown only if user discovered Recovery */}
+            {showRecovery && (
+            <Card className="border-0 shadow-sm border-l-4 border-l-[#1F6F78]">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#1F6F78]/10 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-[#1F6F78]" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-[#0F1C2E]">{t('recoveryPrograms')}</h3>
+                    <p className="text-xs text-slate-500">{t('recoveryProgramsDesc')}</p>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <Link href="/recovery/porn-recovery" className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#F0FDF9] transition-colors group">
+                    <div className="w-8 h-8 rounded-lg bg-[#3DD4B0]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <Brain className="h-4 w-4 text-[#3DD4B0]" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[#0F1C2E]">{t('pornRecovery')}</p>
+                      <p className="text-xs text-slate-500">{t('pornRecoveryShort')}</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#3DD4B0] transition-colors" />
+                  </Link>
+                  <Link href="/recovery/trc" className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#F6F8FA] transition-colors group">
+                    <div className="w-8 h-8 rounded-lg bg-[#1F6F78]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <Shield className="h-4 w-4 text-[#1F6F78]" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[#0F1C2E]">{t('trcProgram')}</p>
+                      <p className="text-xs text-slate-500">{t('trcShort')}</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#1F6F78] transition-colors" />
+                  </Link>
+                </div>
+                <Link href="/recovery" className="block mt-4">
+                  <Button variant="outline" className="w-full border-[#1F6F78] text-[#1F6F78] hover:bg-[#1F6F78] hover:text-white text-sm">
+                    {t('exploreRecovery')}
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+            )}
             <Card className="border-0 shadow-sm bg-gradient-to-br from-[#0F1C2E] to-[#1F6F78]">
               <CardContent className="p-6">
                 <div className="text-center">

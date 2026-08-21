@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyRecaptcha } from '@/lib/recaptcha';
 import { db } from '@/lib/db';
+import { applySecurity, API_RATE_LIMIT } from '@/lib/security';
 
 // ============================================
 // VALIDATION TYPES
@@ -117,7 +118,7 @@ function generateContactEmailHtml(data: ContactFormData): string {
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 0 auto; padding: 20px;">
         <tr>
           <td style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
-            <h1 style="margin: 0; color: #f59e0b; font-size: 24px; font-weight: 700;">
+            <h1 style="margin: 0; color: #2A8A94; font-size: 24px; font-weight: 700;">
               New Contact Form Submission
             </h1>
           </td>
@@ -131,7 +132,7 @@ function generateContactEmailHtml(data: ContactFormData): string {
                   <p style="margin: 5px 0 0 0; color: #1e293b; font-size: 16px; font-weight: 600;">
                     ${data.name}
                   </p>
-                  <a href="mailto:${data.email}" style="color: #f59e0b; text-decoration: none; font-size: 14px;">
+                  <a href="mailto:${data.email}" style="color: #2A8A94; text-decoration: none; font-size: 14px;">
                     ${data.email}
                   </a>
                 </td>
@@ -147,7 +148,7 @@ function generateContactEmailHtml(data: ContactFormData): string {
               <tr>
                 <td style="padding: 15px 0;">
                   <span style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Message</span>
-                  <div style="margin-top: 10px; padding: 15px; background-color: #f8fafc; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                  <div style="margin-top: 10px; padding: 15px; background-color: #f8fafc; border-radius: 8px; border-left: 4px solid #2A8A94;">
                     <p style="margin: 0; color: #334155; font-size: 15px; line-height: 1.6; white-space: pre-wrap;">
                       ${data.message}
                     </p>
@@ -163,7 +164,7 @@ function generateContactEmailHtml(data: ContactFormData): string {
               Received on ${timestamp}
             </p>
             <p style="margin: 10px 0 0 0; color: #64748b; font-size: 14px;">
-              <a href="mailto:${data.email}" style="color: #f59e0b; text-decoration: none;">
+              <a href="mailto:${data.email}" style="color: #2A8A94; text-decoration: none;">
                 Reply to ${data.name}
               </a>
             </p>
@@ -188,7 +189,7 @@ function generateAutoReplyHtml(name: string): string {
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 0 auto; padding: 20px;">
         <tr>
           <td style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 40px 30px; text-align: center; border-radius: 12px 12px 0 0;">
-            <h1 style="margin: 0; color: #f59e0b; font-size: 28px; font-weight: 700;">
+            <h1 style="margin: 0; color: #2A8A94; font-size: 28px; font-weight: 700;">
               Message Received!
             </h1>
             <p style="margin: 15px 0 0 0; color: #cbd5e1; font-size: 16px;">
@@ -215,7 +216,7 @@ function generateAutoReplyHtml(name: string): string {
           <td style="background-color: #f8fafc; padding: 20px; text-align: center; border-radius: 0 0 12px 12px; border: 1px solid #e2e8f0; border-top: none;">
             <p style="margin: 0; color: #64748b; font-size: 14px;">
               Best regards,<br>
-              <span style="color: #f59e0b; font-weight: 600;">The Tamkinly Team</span>
+              <span style="color: #2A8A94; font-weight: 600;">The Tamkinly Team</span>
             </p>
           </td>
         </tr>
@@ -289,6 +290,11 @@ async function sendBrevoNotification(data: ContactFormData): Promise<{ success: 
 
 export async function POST(request: NextRequest) {
   try {
+  // Security: CSRF + rate limit
+  const securityBlocked = await applySecurity(request, API_RATE_LIMIT);
+  if (securityBlocked) return securityBlocked;
+
+
     // Step 1: Parse request body
     let body: unknown;
     try {

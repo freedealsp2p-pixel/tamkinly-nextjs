@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { 
-  ArrowRight, 
+import {
+  ArrowRight,
   Compass,
   Layers,
   RefreshCw,
@@ -18,9 +18,13 @@ import {
   Clock,
   TrendingUp,
   Lightbulb,
-  HelpCircle
+  HelpCircle,
+  Feather,
+  ListChecks,
+  ShieldCheck
 } from "lucide-react";
 import { useTranslations } from "@/components/providers/LocaleProvider";
+import RecoveryPathways from '@/components/recovery/RecoveryPathways';
 
 // ═══════════════════════════════════════════════════════════════
 // HERO SECTION - Minimal & Calm
@@ -401,6 +405,144 @@ function WhatIfSection() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// PRE-LAUNCH SECTION - Dealing with the Psychological Weight
+// ═══════════════════════════════════════════════════════════════
+
+function PreLaunchSection() {
+  const t = useTranslations("methodologyPage");
+
+  const weightCards = [0, 1, 2, 3].map((idx) => ({
+    title: t(`preLaunch.weightCards.${idx}.title`),
+    description: t(`preLaunch.weightCards.${idx}.description`)
+  }));
+
+  const smallSteps = [0, 1, 2, 3].map((idx) => t(`preLaunch.smallSteps.${idx}`));
+
+  return (
+    <section className="py-20 lg:py-28 bg-gradient-to-b from-white to-[#F6F8FA]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-[#C97B7B]/10 text-[#C97B7B] border-0 px-4 py-2">
+              <Feather className="w-3.5 h-3.5 mr-1.5" />
+              {t("preLaunch.badge")}
+            </Badge>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-6 leading-tight">
+              {t("preLaunch.title")}
+            </h2>
+            <p className="text-lg text-[#2B2E34] leading-relaxed max-w-2xl mx-auto">
+              {t("preLaunch.subtitle")}
+            </p>
+          </div>
+
+          {/* The Pattern You Recognize */}
+          <div className="mb-16 p-8 bg-white rounded-2xl shadow-sm border-l-4 border-[#C97B7B]">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#C97B7B]/10 flex items-center justify-center flex-shrink-0">
+                <RefreshCw className="w-5 h-5 text-[#C97B7B]" />
+              </div>
+              <h3 className="font-semibold text-xl text-[#0F1C2E]">
+                {t("preLaunch.patternTitle")}
+              </h3>
+            </div>
+            <p className="text-[#2B2E34] leading-relaxed text-lg">
+              {t("preLaunch.patternText")}
+            </p>
+          </div>
+
+          {/* Why Starting Feels Heavy — 4 cards */}
+          <div className="mb-16">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F1C2E] mb-8 text-center">
+              {t("preLaunch.weightTitle")}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {weightCards.map((card, idx) => (
+                <Card key={idx} className="border border-slate-200 bg-white hover:shadow-md transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-3 mb-3">
+                      <span className="w-7 h-7 rounded-full bg-[#0F1C2E] text-[#3DD4B0] flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        {idx + 1}
+                      </span>
+                      <h4 className="font-semibold text-[#0F1C2E] pt-0.5">{card.title}</h4>
+                    </div>
+                    <p className="text-sm text-[#2B2E34] leading-relaxed pl-10">
+                      {card.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* The Reframe — large quote */}
+          <div className="mb-16 p-8 lg:p-12 bg-[#0F1C2E] rounded-2xl text-center">
+            <Lightbulb className="w-8 h-8 text-[#3DD4B0] mx-auto mb-4" />
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#3DD4B0] mb-4">
+              {t("preLaunch.reframeTitle")}
+            </h3>
+            <p className="text-lg sm:text-xl text-white leading-relaxed max-w-2xl mx-auto italic">
+              {t("preLaunch.reframeText")}
+            </p>
+          </div>
+
+          {/* The Smallest Possible Step */}
+          <div className="mb-16 p-8 bg-white rounded-2xl shadow-sm border-2 border-[#3DD4B0]/30">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg bg-[#3DD4B0]/20 flex items-center justify-center flex-shrink-0">
+                <ListChecks className="w-5 h-5 text-[#1F6F78]" />
+              </div>
+              <h3 className="font-semibold text-xl text-[#0F1C2E]">
+                {t("preLaunch.smallStepTitle")}
+              </h3>
+            </div>
+            <p className="text-[#2B2E34] mb-6 leading-relaxed">
+              {t("preLaunch.smallStepIntro")}
+            </p>
+            <div className="space-y-3">
+              {smallSteps.map((step, idx) => (
+                <div key={idx} className="flex items-start gap-3 p-4 bg-[#F6F8FA] rounded-lg">
+                  <span className="w-7 h-7 rounded-full bg-[#1F6F78] text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                    {idx + 1}
+                  </span>
+                  <p className="text-[#0F1C2E] pt-0.5">{step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Permission You Didn't Know You Needed */}
+          <div className="mb-16 p-8 bg-[#1F6F78]/10 rounded-2xl border-l-4 border-[#1F6F78]">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#1F6F78] flex items-center justify-center flex-shrink-0">
+                <ShieldCheck className="w-5 h-5 text-white" />
+              </div>
+              <h3 className="font-semibold text-xl text-[#0F1C2E]">
+                {t("preLaunch.permissionTitle")}
+              </h3>
+            </div>
+            <p className="text-[#2B2E34] leading-relaxed text-lg">
+              {t("preLaunch.permissionText")}
+            </p>
+          </div>
+
+          {/* If You've Read This Far — closing */}
+          <div className="text-center p-8 border-t border-slate-200">
+            <Sparkles className="w-6 h-6 text-[#3DD4B0] mx-auto mb-4" />
+            <h3 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">
+              {t("preLaunch.closingTitle")}
+            </h3>
+            <p className="text-[#2B2E34] leading-relaxed max-w-xl mx-auto">
+              {t("preLaunch.closingText")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
 // Q8 — COMPARISON TABLE
 // ═══════════════════════════════════════════════════════════════
 
@@ -589,7 +731,9 @@ function CTASection() {
           </div>
         </div>
       </div>
-    </section>
+    
+      <RecoveryPathways />
+</section>
   );
 }
 
@@ -605,6 +749,7 @@ export default function MethodologyPage() {
       <WhatSection />
       <HowSection />
       <WhatIfSection />
+      <PreLaunchSection />
       <ComparisonSection />
       <HonestResultsSection />
       <CTASection />

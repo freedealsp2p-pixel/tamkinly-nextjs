@@ -13,7 +13,7 @@ const allArticles = [
   { slug: "values-clarification-tool", title: "Values Clarification Tool: Find What Truly Matters", titleAr: "أداة توضيح القيم: اكتشف ما يهم حقاً", category: "FREE App", categoryAr: "تطبيق مجاني" },
   { slug: "daily-reflection-practice", title: "Daily Reflection Practice: The Science of Self-Transformation", titleAr: "ممارسة التأمل اليومي: علم التحول الذاتي", category: "FREE App", categoryAr: "تطبيق مجاني" },
   { slug: "identity-recode-system-guide", title: "Identity Recode System: Complete 30-Day Transformation", titleAr: "نظام إعادة صياغة الهوية: تحول كامل في 30 يوم", category: "BASIC App", categoryAr: "تطبيق أساسي" },
-  { slug: "ai-identity-coach-guide", title: "AI Identity Coach: Your Personal Transformation Guide", titleAr: "مدرب الهوية بالذكاء الاصطناعي: دليلك الشخصي للتحول", category: "BUNDLE App", categoryAr: "تطبيق الحزمة" },
+  { slug: "ai-identity-coach-guide", title: "AI Identity Coach: Your Personal Transformation Guide", titleAr: "مدرب الهوية بالذكاء الاصطناعي: دليلك الشخصي للتحول", category: "MASTERY App", categoryAr: "تطبيق الإتقان" },
 
   // Worksheet Articles
   { slug: "who-am-i-worksheet", title: "Who Am I Worksheet: The Complete Identity Exploration", titleAr: "ورقة عمل من أنا: الاستكشاف الكامل للهوية", category: "Worksheet", categoryAr: "ورقة عمل" },

@@ -186,12 +186,12 @@ export default function RefundPolicyPage() {
                 {/* Non-Refundable */}
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('exceptions')}</h2>
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <div className="bg-[#f8eded] border border-[#e4c0c0] rounded-lg p-4">
                     <div className="flex items-start gap-3">
-                      <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                      <AlertCircle className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
                       <div>
-                        <h4 className="font-medium text-amber-800 mb-1">{t('afterThirtyDays')}</h4>
-                        <p className="text-sm text-amber-700">
+                        <h4 className="font-medium text-[#a86060] mb-1">{t('afterThirtyDays')}</h4>
+                        <p className="text-sm text-[#C97B7B]">
                           {t('afterThirtyDaysDesc')}
                         </p>
                       </div>

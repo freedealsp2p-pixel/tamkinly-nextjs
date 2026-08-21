@@ -58,7 +58,7 @@ export const KEYWORDS = {
     'values clarification',
     'daily reflection',
     'behavioral change',
-    'atomic habits',
+    'identity-based transformation',
     'self-authorship',
     'identity gap',
     'emotional regulation',
@@ -72,7 +72,7 @@ export const KEYWORDS = {
     'توضيح القيم',
     'التأمل اليومي',
     'تغيير السلوك',
-    'العادات الذرية',
+    'التحول القائم على الهوية',
     'تأليف الذات',
     'فجوة الهوية',
     'التنظيم العاطفي',
@@ -664,7 +664,7 @@ export const PRODUCTS_METADATA: Metadata = generatePageMetadata({
   description: 'Start free with powerful identity tools, then upgrade as you grow. Transparent pricing for identity transformation products. Free tier available with no credit card required.',
   descriptionAr: 'ابدأ مجاناً مع أدوات هوية قوية، ثم قم بالترقية مع نموك. أسعار شفافة لمنتجات تحويل الهوية. طبقة مجانية متاحة بدون الحاجة لبطاقة ائتمان.',
   path: '/products',
-  keywords: ['identity transformation pricing', 'personal development tools', 'habit tracker pricing', 'أسعار تحويل الهوية', 'أدوات التطوير الشخصي'],
+  keywords: ['identity transformation pricing', 'personal development tools', 'identity transformation tools pricing', 'أسعار تحويل الهوية', 'أدوات التطوير الشخصي'],
 });
 
 export const APPS_METADATA: Metadata = generatePageMetadata({
@@ -698,7 +698,7 @@ export const METHODOLOGY_METADATA: Metadata = generatePageMetadata({
   title: 'Methodology | Evidence-Based Transformation',
   titleAr: 'المنهجية | تحويل مبنى على الأدلة',
   description: 'Our methodology combines neuroscience, psychology, and practical frameworks for lasting identity transformation. Based on Atomic Habits, Self-Authorship, and CBT research.',
-  descriptionAr: 'تجمع منهجيتنا بين العلوم العصبية وعلم النفس والأطر العملية لتحويل هوية دائم. مبنية على أبحاث العادات الذرية وتأليف الذات والعلاج السلوكي المعرفي.',
+  descriptionAr: 'تجمع منهجيتنا بين العلوم العصبية وعلم النفس والأطر العملية لتحويل هوية دائم. مبنية على أبحاث تأليف الذات واللدونة العصبية والعلاج السلوكي المعرفي.',
   path: '/methodology',
   keywords: ['transformation methodology', 'identity science', 'evidence-based self-development', 'منهجية التحول', 'علم الهوية'],
 });

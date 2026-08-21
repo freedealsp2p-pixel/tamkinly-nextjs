@@ -1,49 +1,40 @@
 /**
  * Admin Authentication Utilities
  * 
- * IMPORTANT: In production, set ADMIN_PASSWORD environment variable!
- * The fallback is only for development and should NEVER be used in production.
+ * DEPRECATED: Use admin-auth-jwt.ts instead for JWT-based sessions.
+ * This file is kept for backward compatibility only.
  */
 
-// Default password for development and fallback
-const DEFAULT_ADMIN_PASSWORD = 'Tamkinly@26';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
 /**
  * Verify admin password against environment variable
- * @param password - The password to verify
- * @returns true if password is correct
+ * @deprecated Use getAdminSession() from admin-auth-jwt.ts instead
  */
 export function verifyAdminPassword(password: string): boolean {
-  const adminPassword = process.env.ADMIN_PASSWORD;
-  
-  // Use environment variable if set, otherwise use default
-  const validPassword = adminPassword || DEFAULT_ADMIN_PASSWORD;
-  
-  return password === validPassword;
+  if (!ADMIN_PASSWORD) {
+    console.error('⚠️ ADMIN_PASSWORD not set in environment');
+    return false;
+  }
+  return password === ADMIN_PASSWORD;
 }
 
 /**
  * Get the current admin password (for internal API use)
- * @returns The valid admin password
+ * @deprecated Use JWT-based admin auth instead
  */
 export function getAdminPassword(): string {
-  return process.env.ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
+  return ADMIN_PASSWORD;
 }
 
 /**
  * Get admin password hint for development only
- * Shows a hint in the UI for developers
  */
 export function getAdminPasswordHint(): string | null {
   if (process.env.NODE_ENV === 'production') {
-    return null; // Never show hint in production
+    return null;
   }
-  
-  const adminPassword = process.env.ADMIN_PASSWORD;
-  if (!adminPassword) {
-    return 'Set ADMIN_PASSWORD in .env file';
-  }
-  return null;
+  return 'Set ADMIN_PASSWORD in .env file';
 }
 
 /**
@@ -53,5 +44,6 @@ export function isAdminAuthConfigured(): boolean {
   if (process.env.NODE_ENV === 'production') {
     return !!process.env.ADMIN_PASSWORD;
   }
-  return true; // Development mode doesn't require configuration
+  return true;
 }
+

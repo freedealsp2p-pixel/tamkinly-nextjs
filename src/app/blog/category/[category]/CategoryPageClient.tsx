@@ -25,7 +25,7 @@ const CATEGORY_ALIASES: Record<string, string> = {
 const subCategoryIconMap: Record<string, string> = {
   'FREE App': 'Smartphone',
   'BASIC App': 'Smartphone',
-  'BUNDLE App': 'Smartphone',
+  'MASTERY App': 'Smartphone',
   'Worksheet': 'FileText',
   'Identity Shift': 'Sparkles',
   'Transformation': 'Sparkles',
@@ -177,7 +177,7 @@ export default function CategoryPageClient({ category }: CategoryPageClientProps
                     {getText(article.category, article.categoryAr)}
                   </span>
                   {article.featured && (
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-[#e6f3f4] text-[#2A8A94] text-xs font-semibold">
                       {getText("Featured", "مميز")}
                     </span>
                   )}

@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // Get all orders
 export async function GET(request: NextRequest) {
   try {
-    const password = request.nextUrl.searchParams.get('password');
+    const session = await getAdminSession();
 
-    if (!verifyAdminPassword(password || '')) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     const status = request.nextUrl.searchParams.get('status') || '';
     const search = request.nextUrl.searchParams.get('search') || '';
@@ -141,9 +141,9 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
     const { orderId, status, password, generateCode } = body;
 
-    if (!verifyAdminPassword(password || '')) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
     const updateData: {
       status: string;
@@ -208,12 +208,12 @@ function generateAccessCode(): string {
   return `TMLY-${segment()}-${segment()}`;
 }
 
-function getTierFromProductId(productId: string): 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE' {
-  const tierMap: Record<string, 'TRIAL' | 'BASIC' | 'PREMIUM' | 'BUNDLE'> = {
-    'trial': 'TRIAL',
+function getTierFromProductId(productId: string): 'BASIC' | 'BASIC' | 'PREMIUM' | 'MASTERY' {
+  const tierMap: Record<string, 'BASIC' | 'BASIC' | 'PREMIUM' | 'MASTERY'> = {
+    'trial': 'BASIC',
     'planner': 'BASIC',
     'premium': 'PREMIUM',
-    'bundle': 'BUNDLE',
+    'bundle': 'MASTERY',
   };
   return tierMap[productId.toLowerCase()] || 'BASIC';
 }

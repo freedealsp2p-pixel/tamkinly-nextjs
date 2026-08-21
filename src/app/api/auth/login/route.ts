@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import bcrypt from 'bcryptjs';
+import { applySecurity, AUTH_RATE_LIMIT } from '@/lib/security';
 
 // Rate limiting (simple in-memory, consider Redis for production)
 const rateLimit = new Map<string, { count: number; lastRequest: number }>();
@@ -33,6 +34,11 @@ function checkRateLimit(ip: string): boolean {
 // Login user
 export async function POST(request: NextRequest) {
   try {
+  // Security: CSRF + rate limit
+  const securityBlocked = await applySecurity(request, AUTH_RATE_LIMIT);
+  if (securityBlocked) return securityBlocked;
+
+
     // Rate limiting
     const ip = request.headers.get('x-forwarded-for') || 'unknown';
     if (!checkRateLimit(ip)) {
@@ -108,7 +114,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Get highest access tier
-    const tiers = ['FREE', 'TRIAL', 'BASIC', 'PREMIUM', 'BUNDLE'];
+    const tiers = ['FREE', 'BASIC', 'BASIC', 'PREMIUM', 'MASTERY'];
     const userTiers = user.accessCodes.map(code => code.tier);
     const highestTier = userTiers.length > 0 
       ? tiers[Math.max(...userTiers.map(t => tiers.indexOf(t)))]

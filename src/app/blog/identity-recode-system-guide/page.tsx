@@ -7,6 +7,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, BookOpen, Target, Zap, Calendar, CheckCircle2, Lock, Layers } from "lucide-react";
 import { useLocale } from '@/components/providers/LocaleProvider';
 
+import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
+import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
+import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+
 export default function IdentityRecodeSystemGuideArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -148,8 +152,8 @@ export default function IdentityRecodeSystemGuideArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#64B5F6]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#64B5F6] font-bold">3</span>
+                    <div className="w-10 h-10 rounded-xl bg-[#2A8A94]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#2A8A94] font-bold">3</span>
                     </div>
                     <div>
                       <h3 className="font-semibold text-primary mb-2">{getText("Daily Evidence Accumulation Cycle", "دورة تراكم الأدلة اليومية")}</h3>
@@ -164,8 +168,8 @@ export default function IdentityRecodeSystemGuideArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#BA68C8]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#BA68C8] font-bold">4</span>
+                    <div className="w-10 h-10 rounded-xl bg-[#2A8A94]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#2A8A94] font-bold">4</span>
                     </div>
                     <div>
                       <h3 className="font-semibold text-primary mb-2">{getText("Weekly Integration Protocol", "بروتوكول التكامل الأسبوعي")}</h3>
@@ -180,8 +184,8 @@ export default function IdentityRecodeSystemGuideArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#FFB74D]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#FFB74D] font-bold">5</span>
+                    <div className="w-10 h-10 rounded-xl bg-[#2A8A94]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#2A8A94] font-bold">5</span>
                     </div>
                     <div>
                       <h3 className="font-semibold text-primary mb-2">{getText("Monthly Identity Lock Protocol", "بروتوكول تأمين الهوية الشهري")}</h3>
@@ -196,8 +200,8 @@ export default function IdentityRecodeSystemGuideArticle() {
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#E57373]/10 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#E57373] font-bold">6</span>
+                    <div className="w-10 h-10 rounded-xl bg-[#C97B7B]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#C97B7B] font-bold">6</span>
                     </div>
                     <div>
                       <h3 className="font-semibold text-primary mb-2">{getText("System Failure Recovery", "استعادة فشل النظام")}</h3>
@@ -288,8 +292,8 @@ export default function IdentityRecodeSystemGuideArticle() {
               </Card>
               <Card className="border-0 shadow-sm">
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#BA68C8]/10 flex items-center justify-center mx-auto mb-4">
-                    <Zap className="h-6 w-6 text-[#BA68C8]" />
+                  <div className="w-12 h-12 rounded-full bg-[#2A8A94]/10 flex items-center justify-center mx-auto mb-4">
+                    <Zap className="h-6 w-6 text-[#2A8A94]" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">{getText("Emotion Regulation", "تنظيم المشاعر")}</h3>
                   <p className="text-sm text-slate-600">{getText("ERQ-based assessment tool", "أداة تقييم قائمة على ERQ")}</p>
@@ -440,34 +444,11 @@ export default function IdentityRecodeSystemGuideArticle() {
           </div>
         </div>
       </section>
+      <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
+      <BlogArticleCTA ctaType="recode" />
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <Badge className="mb-4 bg-[#1F6F78]/30 text-white border-0">BASIC</Badge>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
-              {getText("Ready to Recode Your Identity?", "هل أنت مستعد لإعادة برمجة هويتك؟")}
-            </h2>
-            <p className="text-slate-300 mb-6">
-              {getText("Get the complete 30-day transformation system with all worksheets and tracking tools.", "احصل على نظام التحول الكامل لمدة 30 يومًا مع جميع أوراق العمل وأدوات التتبع.")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products">
-                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  {getText("Get Identity Recode System", "احصل على نظام إعادة برمجة الهوية")}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/apps/identity-recode-system">
-                <Button variant="white" size="lg" className="px-8">
-                  {getText("Preview System", "معاينة النظام")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </article>
+        <BlogConversionSection />
+      </article>
   );
 }
+

@@ -13,6 +13,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/images') ||
     pathname.startsWith('/favicon') ||
+    pathname.startsWith('/downloads') ||
     pathname === '/robots.txt' ||
     pathname === '/sitemap.xml' ||
     pathname === '/manifest.json' ||
@@ -54,11 +55,18 @@ export function middleware(request: NextRequest) {
   }
 
   // Handle /en/ prefix - redirect to bare path (English is default, no prefix needed)
+  // FIX: Set NEXT_LOCALE=en cookie on redirect so layout metadata reads correct locale
   if (localeMatch === defaultLocale) {
     const pathWithoutLocale = pathname.replace(new RegExp(`^/${defaultLocale}`), '') || '/';
     const url = request.nextUrl.clone();
     url.pathname = pathWithoutLocale;
-    return NextResponse.redirect(url);
+    const response = NextResponse.redirect(url);
+    response.cookies.set('NEXT_LOCALE', defaultLocale, {
+      maxAge: 365 * 24 * 60 * 60,
+      path: '/',
+      sameSite: 'lax',
+    });
+    return response;
   }
 
   // For default locale (en), no prefix needed
@@ -78,6 +86,6 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|images|favicon|robots|sitemap|manifest|sw|workbox|browserconfig).*)'],
+  matcher: ['/((?!api|_next|images|favicon|robots|sitemap|manifest|sw|workbox|browserconfig|downloads).*)'],
 };
 

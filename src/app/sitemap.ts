@@ -4,100 +4,90 @@ import { getAllBlogArticleSlugs } from '@/lib/blog-articles';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SEO_SITE_CONFIG.url;
+  const now = new Date();
 
   // Static pages - English
   const staticPagesEn = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 1.0 },
-    { url: `${baseUrl}/products`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.9 },
-    { url: `${baseUrl}/apps`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.9 },
-    { url: `${baseUrl}/quiz`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.9 },
-    { url: `${baseUrl}/methodology`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.6 },
-    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.8 },
-    { url: `${baseUrl}/resources`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.7 },
-    { url: `${baseUrl}/faq`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.6 },
-    { url: `${baseUrl}/guides`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.7 },
-    { url: `${baseUrl}/referral`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: baseUrl, lastModified: now, changeFrequency: 'weekly' as const, priority: 1.0 },
+    { url: `${baseUrl}/products`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: `${baseUrl}/products/basic`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/products/premium`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/products/mastery`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/apps`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: `${baseUrl}/quiz`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${baseUrl}/methodology`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'daily' as const, priority: 0.8 },
+    { url: `${baseUrl}/resources`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.7 },
+    { url: `${baseUrl}/faq`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/guides`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.7 },
+    { url: `${baseUrl}/recovery`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${baseUrl}/recovery/trc`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/recovery/porn-recovery`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
   ];
 
-  // Static pages - Arabic (hreflang)
-  const staticPagesAr = staticPagesEn.map(page => ({
+  // Recovery TRC pages
+  const recoveryTrcPages = [
+    'grounding', 'safe-place', 'body-scan', 'a52', 'eft-tapping',
+    'shame-recovery', 'thought-reframing', 'trauma-journal', 'journey', 'worksheets',
+    'regulation-toolkit', 'what-trauma-does-to-the-body', 'what-happens-during-trauma-responses',
+  ].map((slug) => ({
+    url: `${baseUrl}/recovery/trc/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  // Arabic versions of all static + recovery pages
+  const arPages = [
+    ...staticPagesEn,
+    ...recoveryTrcPages,
+  ].map((page) => ({
     ...page,
     url: page.url.replace(baseUrl, `${baseUrl}/ar`),
     priority: page.priority * 0.9,
   }));
 
-  // Blog articles - dynamically generated from blog-articles lib
+  // Blog articles - English + Arabic
   const blogSlugs = getAllBlogArticleSlugs();
-  const blogPages = blogSlugs.map((slug) => ({
-    url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  const blogPages = blogSlugs.flatMap((slug) => [
+    { url: `${baseUrl}/blog/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${baseUrl}/ar/blog/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.63 },
+  ]);
 
-  // Guide pages
-  const guidePages = [
+  // Guide pages - English + Arabic
+  const guideSlugs = [
     'recode-identity-30-days',
     'behavior-trap-why-habits-fail',
     'environment-shapes-you',
     'identity-vs-behavior-change',
-  ].map((slug) => ({
-    url: `${baseUrl}/guides/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  ];
+  const guidePages = guideSlugs.flatMap((slug) => [
+    { url: `${baseUrl}/guides/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${baseUrl}/ar/guides/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.63 },
+  ]);
 
-  // App pages
-  const appPages = [
-    'identity-gap-quiz',
-    'values-clarification',
-    'daily-reflection',
-    'trial-planner',
-    'executive-manual',
-    'daily-planner',
-    'identity-baseline',
-    'environmental-audit',
-    'decision-analysis',
-    'evidence-tracking',
-    'progress-dashboard',
-    'emotion-regulation',
-    'ai-identity-coach',
-    'goal-system',
-    'habit-tracker',
-    'journal-system',
-    'identity-recode-system',
-    'worksheets',
-    'community-access',
-    'priority-support',
-  ].map((slug) => ({
-    url: `${baseUrl}/apps/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }));
-
-  // Product pages
-  const productPages = [
-    'trial',
-    'planner',
-    'premium',
-    'bundle',
-  ].map((slug) => ({
-    url: `${baseUrl}/products/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }));
+  // App pages - English + Arabic
+  const appSlugs = [
+    'identity-gap-quiz', 'values-clarification', 'daily-reflection',
+    'trial-planner', 'executive-manual', 'daily-planner', 'identity-baseline',
+    'environmental-audit', 'decision-analysis', 'evidence-tracking',
+    'progress-dashboard', 'emotion-regulation', 'ai-identity-coach',
+    'goal-system', 'habit-tracker', 'journal-system', 'identity-recode-system',
+    'worksheets', 'community-access', 'priority-support',
+  ];
+  const appPages = appSlugs.flatMap((slug) => [
+    { url: `${baseUrl}/apps/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/ar/apps/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.54 },
+  ]);
 
   return [
     ...staticPagesEn,
-    ...staticPagesAr,
+    ...recoveryTrcPages,
+    ...arPages,
     ...blogPages,
     ...guidePages,
     ...appPages,
-    ...productPages,
   ];
 }

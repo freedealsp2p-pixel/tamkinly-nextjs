@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
 
     // Set expiration for trial
     let expiresAt: Date | undefined;
-    if (accessTier === 'TRIAL') {
+    if (accessTier === 'BASIC') {
       expiresAt = new Date();
       expiresAt.setDate(expiresAt.getDate() + 7); // 7-day trial
     }
@@ -79,12 +79,12 @@ function generateAccessCode(): string {
 // Map productId to tier
 function getTierFromProductId(productId: string): AccessTier {
   const tierMap: Record<string, AccessTier> = {
-    'trial': 'TRIAL',
+    'trial': 'BASIC',
     'planner': 'BASIC',
     'basic': 'BASIC',
     'premium': 'PREMIUM',
-    'bundle': 'BUNDLE',
-    'full': 'BUNDLE',
+    'bundle': 'MASTERY',
+    'full': 'MASTERY',
   };
   return tierMap[productId.toLowerCase()] || 'BASIC';
 }
