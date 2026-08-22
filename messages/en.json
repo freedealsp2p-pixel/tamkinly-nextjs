@@ -1166,8 +1166,8 @@
         ]
       },
       "basic": {
-        "name": "7-Day Trial",
-        "shortName": "Trial",
+        "name": "Basic (Monthly)",
+        "shortName": "Basic",
         "description": "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
         "features": [
           "7-Day Guided Journey",
@@ -1228,7 +1228,7 @@
       },
       {
         "q": "What's the difference between tiers?",
-        "a": "FREE: 3 basic apps. TRIAL: 7-day full access. BASIC ($17): 4 core apps + PDFs. PREMIUM ($27): 7 apps + analytics. BUNDLE ($47): All 11 apps + AI Coach + Community + Priority Support."
+        "a": "FREE: 3 basic apps (Identity Gap Assessment, Values Clarification, Daily Reflection). BASIC ($7/mo): 1 app (7-Day Trial Planner). PREMIUM ($17/mo): 11 apps including core transformation tools, analytics, and evidence tracking. MASTERY ($27/mo): All 16 apps including AI Identity Coach, Community, and Priority Support."
       },
       {
         "q": "How do I access the apps after purchase?",
