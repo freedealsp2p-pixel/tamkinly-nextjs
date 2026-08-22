@@ -63,7 +63,6 @@ export function DefaultJsonLd() {
             target: 'https://tamkinly.com',
           },
         },
-
       ]}
     />
   );
@@ -169,7 +168,234 @@ export function AppPageJsonLd({
 
   });
 
-  cd: 'Credit Card, PayPal',
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Apps', url: '/apps' },
+    { name, url: `/apps/${slug}` },
+  ]);
+
+  return (
+    <JsonLd
+      data={[
+        generateOrganizationSchema(),
+        appSchema,
+        breadcrumbSchema,
+      ]}
+    />
+  );
+}
+
+/**
+ * Product Page JSON-LD Props
+ */
+interface ProductPageJsonLdProps {
+  name: string;
+  nameAr?: string;
+  description: string;
+  price: number;
+  currency?: string;
+  slug: string;
+  features?: string[];
+  tier?: string;
+}
+
+/**
+ * Product Page schemas - for pricing/product pages
+ */
+export function ProductPageJsonLd({
+  name,
+  nameAr,
+  description,
+  price,
+  currency = 'USD',
+  slug,
+  features,
+  tier,
+}: ProductPageJsonLdProps) {
+  const productSchema = generateProductSchema({
+    name,
+    nameAr,
+    description,
+    price,
+    currency,
+    url: `/products#${slug}`,
+    category: 'Digital Product',
+    features,
+    tier,
+  });
+
+  return (
+    <JsonLd
+      data={[
+        generateOrganizationSchema(),
+        productSchema,
+      ]}
+    />
+  );
+}
+
+/**
+ * FAQ Page JSON-LD Props
+ */
+interface FAQPageJsonLdProps {
+  questions: Array<{
+    question: string;
+    questionAr?: string;
+    answer: string;
+    answerAr?: string;
+  }>;
+}
+
+/**
+ * FAQ Page schemas
+ */
+export function FAQPageJsonLd({ questions }: FAQPageJsonLdProps) {
+  const faqSchema = generateFAQSchema(questions);
+
+  return (
+    <JsonLd
+      data={[
+        generateOrganizationSchema(),
+        faqSchema,
+      ]}
+    />
+  );
+}
+
+/**
+ * How-To Guide JSON-LD Props
+ */
+interface HowToPageJsonLdProps {
+  name: string;
+  nameAr?: string;
+  description: string;
+  steps: Array<{
+    name: string;
+    text: string;
+    image?: string;
+  }>;
+  totalTime?: string;
+}
+
+/**
+ * How-To Guide schemas
+ */
+export function HowToPageJsonLd({
+  name,
+  nameAr,
+  description,
+  steps,
+  totalTime,
+}: HowToPageJsonLdProps) {
+  const howToSchema = generateHowToSchema({
+    name,
+    nameAr,
+    description,
+    steps,
+    totalTime,
+  });
+
+  return (
+    <JsonLd
+      data={[
+        generateOrganizationSchema(),
+        howToSchema,
+      ]}
+    />
+  );
+}
+
+/**
+ * Course Page JSON-LD Props
+ */
+interface CoursePageJsonLdProps {
+  name: string;
+  nameAr?: string;
+  description: string;
+  slug: string;
+  educationalLevel?: string;
+  timeRequired?: string;
+}
+
+/**
+ * Course Page schemas
+ */
+export function CoursePageJsonLd({
+  name,
+  nameAr,
+  description,
+  slug,
+  educationalLevel,
+  timeRequired,
+}: CoursePageJsonLdProps) {
+  const courseSchema = generateCourseSchema({
+    name,
+    nameAr,
+    description,
+    url: `/courses/${slug}`,
+    educationalLevel,
+    timeRequired,
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Courses', url: '/courses' },
+    { name, url: `/courses/${slug}` },
+  ]);
+
+  return (
+    <JsonLd
+      data={[
+        generateOrganizationSchema(),
+        courseSchema,
+        breadcrumbSchema,
+      ]}
+    />
+  );
+}
+
+/**
+ * Breadcrumb only JSON-LD
+ */
+interface BreadcrumbJsonLdProps {
+  items: Array<{
+    name: string;
+    url: string;
+  }>;
+}
+
+export function BreadcrumbJsonLd({ items }: BreadcrumbJsonLdProps) {
+  const breadcrumbSchema = generateBreadcrumbSchema(items);
+
+  return <JsonLd data={[breadcrumbSchema]} />;
+}
+
+/**
+ * Local Business JSON-LD (for contact/about pages)
+ */
+export function LocalBusinessJsonLd() {
+  return (
+    <JsonLd
+      data={[
+        {
+          '@context': 'https://schema.org',
+          '@type': 'ProfessionalService',
+          name: 'Tamkinly',
+          description: 'Digital products for identity transformation and personal development',
+          url: 'https://tamkinly.com',
+          telephone: '+1-555-123-4567',
+          email: 'hello@tamkinly.com',
+          address: {
+            '@type': 'PostalAddress',
+            addressCountry: 'Global',
+          },
+          geo: {
+            '@type': 'GeoCoordinates',
+          },
+          openingHours: 'Mo-Fr 09:00-17:00',
+          priceRange: '$$',
+          currenciesAccepted: 'USD',
+          paymentAccepted: 'Credit Card, PayPal',
           areaServed: 'Worldwide',
         },
       ]}
@@ -225,4 +451,3 @@ export function VideoJsonLd({
     />
   );
 }
-
