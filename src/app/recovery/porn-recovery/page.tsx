@@ -14,8 +14,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://tamkinly.com/recovery/porn-recovery',
     languages: {
-      'en': 'https://tamkinly.com/recovery/porn-recovery',
-      'ar': 'https://tamkinly.com/ar/recovery/porn-recovery',
+      'en-US': 'https://tamkinly.com/recovery/porn-recovery',
+      'ar-SA': 'https://tamkinly.com/ar/recovery/porn-recovery',
+      'x-default': 'https://tamkinly.com/recovery/porn-recovery',
     },
   },
   openGraph: {
@@ -36,3 +37,5 @@ export default function Page() {
     </>
   );
 }
+
+

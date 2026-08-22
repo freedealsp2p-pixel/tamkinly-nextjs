@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Get highest access tier
-    const tiers = ['FREE', 'BASIC', 'BASIC', 'PREMIUM', 'MASTERY'];
+    const tiers = ['FREE', 'BASIC', 'PREMIUM', 'MASTERY'];
     const userTiers = user.accessCodes.map(code => code.tier);
     const highestTier = userTiers.length > 0 
       ? tiers[Math.max(...userTiers.map(t => tiers.indexOf(t)))]
@@ -129,7 +129,6 @@ export async function POST(request: NextRequest) {
         role: user.role,
         accessTier: highestTier,
         accessCodes: user.accessCodes.map(code => ({
-          code: code.code,
           tier: code.tier,
           productId: code.productId,
           isUsed: code.isUsed,

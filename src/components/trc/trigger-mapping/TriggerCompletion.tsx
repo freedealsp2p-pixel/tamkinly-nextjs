@@ -92,7 +92,7 @@ export default function TriggerCompletion({ locale, entriesCount }: TriggerCompl
           <SuggestedNextStep
             title={t.completionNextStepTitle}
             description={t.completionNextStepDesc}
-            href="/recovery/trc/safety-plan"
+            href="/recovery/trc/worksheets/safety-plan"
             isPrimary
           />
         </motion.div>

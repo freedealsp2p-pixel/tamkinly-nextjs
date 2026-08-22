@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: 'https://tamkinly.com/guides',
+    languages: {
+      'en-US': 'https://tamkinly.com/guides',
+      'ar-SA': 'https://tamkinly.com/ar/guides',
+      'x-default': 'https://tamkinly.com/guides',
+    },
   },
   openGraph: {
     title: 'Guides | Deep Transformation Resources',
@@ -48,3 +53,4 @@ export default function GuidesLayout({
 }) {
   return children;
 }
+

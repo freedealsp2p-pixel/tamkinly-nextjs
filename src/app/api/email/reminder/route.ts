@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { sendDailyReminderEmail, sendWeeklySummaryEmail, isValidEmail, isEmailConfigured } from '@/lib/email';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // ============================================
 // REQUEST VALIDATION
@@ -56,6 +57,17 @@ type WeeklySummaryRequest = z.infer<typeof WeeklySummarySchema>;
 
 export async function POST(request: NextRequest) {
   try {
+    // Auth: require CRON_API_KEY or admin session
+    const authHeader = request.headers.get('authorization');
+    const cronKey = process.env.CRON_API_KEY;
+    const session = await getAdminSession();
+    
+    if (!session) {
+      if (!cronKey || authHeader !== `Bearer ${cronKey}`) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+    }
+
     // Check if email is configured
     if (!isEmailConfigured()) {
       return NextResponse.json(

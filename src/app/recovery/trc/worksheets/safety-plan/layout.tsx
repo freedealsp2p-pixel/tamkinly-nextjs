@@ -20,7 +20,28 @@ const metadataByLocale = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return metadataByLocale[locale];
+  const m = metadataByLocale[locale];
+  const basePath = locale === 'ar' ? 'https://tamkinly.com/ar/recovery/trc/worksheets/safety-plan' : 'https://tamkinly.com/recovery/trc/worksheets/safety-plan';
+  return {
+    title: m.title,
+    description: m.description,
+    alternates: {
+      canonical: basePath,
+      languages: {
+        'en-US': 'https://tamkinly.com/recovery/trc/worksheets/safety-plan',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/worksheets/safety-plan',
+        'x-default': 'https://tamkinly.com/recovery/trc/worksheets/safety-plan',
+      },
+    },
+    openGraph: {
+      title: m.title,
+      description: m.description,
+      url: basePath,
+      siteName: 'Tamkinly',
+      locale: locale === 'ar' ? 'ar_SA' : 'en_US',
+      type: 'website',
+    },
+  };
 }
 
 export default function SafetyPlanLayout({ children }: { children: React.ReactNode }) {

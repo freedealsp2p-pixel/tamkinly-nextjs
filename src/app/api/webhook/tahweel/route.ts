@@ -28,16 +28,18 @@ function generateAccessCode(): string {
 // Verify Tahweel webhook signature
 function verifyTahweelSignature(payload: string, signature: string | null): boolean {
   if (!signature) return false;
-  
-  const secret = process.env.TAHWEEL_SECRET_KEY || process.env.TAHWEEL_WEBHOOK_SECRET;
+  const secret = process.env.TAHWEEL_WEBHOOK_SECRET;
   if (!secret) {
-    console.warn('Tahweel webhook secret not configured');
-    return true; // Allow in demo mode
+    console.error('TAHWEEL_WEBHOOK_SECRET not configured — rejecting webhook');
+    return false;
   }
-  
-  // In production, verify HMAC signature
-  // For now, accept all webhooks in demo mode
-  return true;
+  try {
+    const crypto = require('crypto');
+    const expectedSig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSig));
+  } catch {
+    return false;
+  }
 }
 
 // Get product type from product ID
@@ -125,9 +127,9 @@ async function handleSuccessfulPayment(paymentData: {
     });
     
     if (emailResult.success) {
-      console.log(`✅ Purchase email sent to ${customerEmail} using ${productType} template`);
+      console.log(`Purchase email sent to ${customerEmail} using ${productType} template`);
     } else {
-      console.error(`❌ Failed to send purchase email: ${emailResult.error}`);
+      console.error(`Failed to send purchase email: ${emailResult.error}`);
     }
   } catch (emailError) {
     console.error('Failed to send purchase email:', emailError);
@@ -142,7 +144,7 @@ async function handleSuccessfulPayment(paymentData: {
       type: productType,
       accessKey: accessCode,
     });
-    console.log(`✅ Contact stored in Brevo: ${customerEmail}`);
+    console.log(`Contact stored in Brevo: ${customerEmail}`);
   } catch (brevoError) {
     console.error('Failed to store contact in Brevo:', brevoError);
   }
@@ -230,70 +232,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
-
-// GET - Test access code generation and email sending
-export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const email = searchParams.get('email');
-  const productId = searchParams.get('productId') || 'premium';
-  const orderId = searchParams.get('orderId') || 'TEST-' + Date.now();
-  const sendEmail = searchParams.get('sendEmail') === 'true';
-
-  if (!email) {
-    return NextResponse.json(
-      { error: 'Email is required for testing. Use ?email=test@example.com' },
-      { status: 400 }
-    );
-  }
-
-  // Generate test access code
-  const code = generateAccessCode();
-  const accessTier = PRODUCT_TIER_MAP[productId] || 'BASIC';
-  const productType = getProductType(productId);
-  const product = LOCAL_PRODUCTS.find(p => p.id === productId);
-
-  // Check if user exists
-  const existingUser = await db.user.findUnique({
-    where: { email: email.toLowerCase() },
-  });
-
-  const accessCode = await db.appAccess.create({
-    data: {
-      code,
-      email: email.toLowerCase(),
-      userId: existingUser?.id || null,
-      productId,
-      productName: product?.name || 'Test Product',
-      orderId,
-      tier: accessTier,
-      isUsed: false,
-      isActive: true,
-    },
-  });
-
-  // Send test email if requested
-  let emailResult = null;
-  if (sendEmail) {
-    emailResult = await EmailService.sendPurchaseConfirmationEmail({
-      to: email,
-      name: 'Test User',
-      productName: product?.name || 'Test Product',
-      productType: productType,
-      accessKey: code,
-    });
-  }
-
-  return NextResponse.json({
-    success: true,
-    message: 'Test access code generated',
-    code: accessCode.code,
-    email: accessCode.email,
-    productId: accessCode.productId,
-    productName: accessCode.productName,
-    tier: accessCode.tier,
-    orderId: accessCode.orderId,
-    emailSent: sendEmail ? emailResult : 'not requested',
-    hint: 'Add &sendEmail=true to test email sending',
-  });
 }

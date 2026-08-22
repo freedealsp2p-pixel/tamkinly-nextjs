@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/body-scan',
-        ar: 'https://tamkinly.com/ar/recovery/trc/body-scan',
+        'en-US': 'https://tamkinly.com/recovery/trc/body-scan',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/body-scan',
+        'x-default': 'https://tamkinly.com/recovery/trc/body-scan',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function BodyscanLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

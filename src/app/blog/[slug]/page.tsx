@@ -46,6 +46,11 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 
     alternates: {
       canonical: fullUrl,
+      languages: {
+        'en-US': fullUrl,
+        'ar-SA': `https://tamkinly.com/ar/blog/${slug}`,
+        'x-default': fullUrl,
+      },
     },
 
     openGraph: {
@@ -108,3 +113,4 @@ export default async function BlogArticlePage({ params }: PageParams) {
 
   return <BlogArticleContentClient article={article} />;
 }
+

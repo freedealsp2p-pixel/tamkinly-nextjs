@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
 
-export default function TRCLayout() {
+export default function TRCRedirect() {
   redirect('/recovery/trc');
 }

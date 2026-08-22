@@ -25,8 +25,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/journey',
-        ar: 'https://tamkinly.com/ar/recovery/trc/journey',
+        'en-US': 'https://tamkinly.com/recovery/trc/journey',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/journey',
+        'x-default': 'https://tamkinly.com/recovery/trc/journey',
       },
     },
     openGraph: {
@@ -48,3 +49,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function JourneyLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
+
+
+

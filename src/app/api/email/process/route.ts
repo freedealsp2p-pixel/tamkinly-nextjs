@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     const authHeader = request.headers.get('authorization');
     const apiKey = process.env.CRON_API_KEY;
 
-    if (apiKey && authHeader !== `Bearer ${apiKey}`) {
+    if (!apiKey || authHeader !== `Bearer ${apiKey}`) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }

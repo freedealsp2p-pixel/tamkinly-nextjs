@@ -99,11 +99,13 @@ export async function GET(request: NextRequest) {
 // Update user role
 export async function PATCH(request: NextRequest) {
   try {
-    const { password, userId, role } = await request.json();
+    const session = await getAdminSession();
 
     if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+    const { userId, role } = await request.json();
 
     if (!userId || !role || !['CUSTOMER', 'ADMIN', 'EDITOR'].includes(role)) {
       return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 });
@@ -132,11 +134,13 @@ export async function PATCH(request: NextRequest) {
 // Delete user
 export async function DELETE(request: NextRequest) {
   try {
-    const { password, userId } = await request.json();
+    const session = await getAdminSession();
 
     if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+    const { userId } = await request.json();
 
     if (!userId) {
       return NextResponse.json({ error: 'User ID required' }, { status: 400 });

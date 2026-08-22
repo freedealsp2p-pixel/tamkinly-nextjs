@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/thought-reframing',
-        ar: 'https://tamkinly.com/ar/recovery/trc/thought-reframing',
+        'en-US': 'https://tamkinly.com/recovery/trc/thought-reframing',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/thought-reframing',
+        'x-default': 'https://tamkinly.com/recovery/trc/thought-reframing',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function ThoughtreframingLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

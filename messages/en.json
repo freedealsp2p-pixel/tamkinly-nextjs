@@ -352,7 +352,7 @@
     "blog": "Blog",
     "trialProduct": "7-Day Trial — $7",
     "plannerProduct": "Identity Planner — $17",
-    "bundleProduct": "Complete Bundle — $47",
+    "bundleProduct": "Mastery — $27",
     "apps": "Apps",
     "allApps": "All Apps",
     "identityQuiz": "Identity Quiz",
@@ -946,7 +946,7 @@
     "unlockApps": "Unlock Apps",
     "noCode": "Don't have a code?",
     "getBundleText": "Get access with the Complete Bundle",
-    "getBundle": "Get Bundle — $47",
+    "getBundle": "Get Mastery — $27",
     "tierError": "Your access tier ({tier}) does not meet the requirement for this app ({required}). Please upgrade to a higher plan.",
     "verifyFailed": "Failed to verify access",
     "networkError": "Network error. Please try again."
@@ -1779,7 +1779,7 @@
         },
         "4": {
           "feature": "Price range",
-          "tamkinly": "$0 – $47",
+          "tamkinly": "$0 – $27",
           "habitApps": "$5 – $30/mo",
           "books": "$10 – $30",
           "coaching": "$100 – $500/session"

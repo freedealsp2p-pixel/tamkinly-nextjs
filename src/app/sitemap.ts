@@ -25,6 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/recovery`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${baseUrl}/recovery/trc`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
     { url: `${baseUrl}/recovery/porn-recovery`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/recovery/porn-recovery/journey`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/recovery/porn-recovery/downloads`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
   ];
 
   // Recovery TRC pages
@@ -32,6 +34,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'grounding', 'safe-place', 'body-scan', 'a52', 'eft-tapping',
     'shame-recovery', 'thought-reframing', 'trauma-journal', 'journey', 'worksheets',
     'regulation-toolkit', 'what-trauma-does-to-the-body', 'what-happens-during-trauma-responses',
+    'grounding-guide', 'grounding/printable', 'regulation-guide', 'secondary-trauma',
+    'worksheets/safety-plan', 'worksheets/trigger-mapping', 'downloads',
   ].map((slug) => ({
     url: `${baseUrl}/recovery/trc/${slug}`,
     lastModified: now,

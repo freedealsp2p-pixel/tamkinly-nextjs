@@ -2,10 +2,32 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { verifyAdminPassword } from '@/lib/admin-auth';
 
+// Extract password from Authorization header or query param (deprecated)
+function extractCredentials(request: NextRequest): string | null {
+  // Primary: check Authorization header
+  const authHeader = request.headers.get('authorization');
+  if (authHeader) {
+    // Support both "Bearer <password>" and raw password
+    if (authHeader.startsWith('Bearer ')) {
+      return authHeader.slice(7);
+    }
+    return authHeader;
+  }
+
+  // Deprecated: check query param with warning
+  const queryPassword = request.nextUrl.searchParams.get('password');
+  if (queryPassword) {
+    console.warn('[Security] Password in query string is deprecated. Use Authorization header instead.');
+    return queryPassword;
+  }
+
+  return null;
+}
+
 // Get all access codes (admin only - simple password protection)
 export async function GET(request: NextRequest) {
   try {
-    const password = request.nextUrl.searchParams.get('password');
+    const password = extractCredentials(request);
 
     // Use unified admin password verification
     if (!verifyAdminPassword(password || '')) {

@@ -29,8 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/grounding',
-        ar: 'https://tamkinly.com/ar/recovery/trc/grounding',
+        'en-US': 'https://tamkinly.com/recovery/trc/grounding',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/grounding',
+        'x-default': 'https://tamkinly.com/recovery/trc/grounding',
       },
     },
     openGraph: {
@@ -52,3 +53,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function GroundingLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

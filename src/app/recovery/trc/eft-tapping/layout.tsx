@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/eft-tapping',
-        ar: 'https://tamkinly.com/ar/recovery/trc/eft-tapping',
+        'en-US': 'https://tamkinly.com/recovery/trc/eft-tapping',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/eft-tapping',
+        'x-default': 'https://tamkinly.com/recovery/trc/eft-tapping',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function EfttappingLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

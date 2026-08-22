@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/shame-recovery',
-        ar: 'https://tamkinly.com/ar/recovery/trc/shame-recovery',
+        'en-US': 'https://tamkinly.com/recovery/trc/shame-recovery',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/shame-recovery',
+        'x-default': 'https://tamkinly.com/recovery/trc/shame-recovery',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function ShamerecoveryLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

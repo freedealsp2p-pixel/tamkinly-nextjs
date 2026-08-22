@@ -85,6 +85,11 @@ export async function GET(request: NextRequest) {
 // Create new order
 export async function POST(request: NextRequest) {
   try {
+    const session = await getAdminSession();
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const body = await request.json();
     const { customerEmail, customerName, items, total, paymentMethod, transactionId, notes } = body;
 
@@ -138,12 +143,14 @@ export async function POST(request: NextRequest) {
 // Update order status
 export async function PUT(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { orderId, status, password, generateCode } = body;
+    const session = await getAdminSession();
 
     if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+    const body = await request.json();
+    const { orderId, status, generateCode } = body;
 
     const updateData: {
       status: string;

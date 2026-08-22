@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/a52',
-        ar: 'https://tamkinly.com/ar/recovery/trc/a52',
+        'en-US': 'https://tamkinly.com/recovery/trc/a52',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/a52',
+        'x-default': 'https://tamkinly.com/recovery/trc/a52',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function A52Layout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

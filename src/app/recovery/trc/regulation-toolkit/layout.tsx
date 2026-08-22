@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/regulation-toolkit',
-        ar: 'https://tamkinly.com/ar/recovery/trc/regulation-toolkit',
+        'en-US': 'https://tamkinly.com/recovery/trc/regulation-toolkit',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/regulation-toolkit',
+        'x-default': 'https://tamkinly.com/recovery/trc/regulation-toolkit',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RegulationtoolkitLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
+
+
+

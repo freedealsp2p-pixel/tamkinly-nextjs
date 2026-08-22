@@ -25,8 +25,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/porn-recovery/journey',
-        ar: 'https://tamkinly.com/ar/recovery/porn-recovery/journey',
+        'en-US': 'https://tamkinly.com/recovery/porn-recovery/journey',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/porn-recovery/journey',
+        'x-default': 'https://tamkinly.com/recovery/porn-recovery/journey',
       },
     },
     openGraph: {
@@ -48,3 +49,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function PornRecoveryJourneyLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
+
+
+

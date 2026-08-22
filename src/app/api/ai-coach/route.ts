@@ -59,6 +59,16 @@ interface Message {
 const MAX_HISTORY_MESSAGES = 20;
 
 /**
+ * Verify conversation ownership to prevent IDOR
+ */
+function verifyConversationOwnership(conversation: { userId: string | null } | null, user: { id: string } | null): boolean {
+  if (!conversation) return true; // New conversation, allowed
+  if (!conversation.userId) return true; // Unclaimed conversation, allowed
+  if (!user) return false; // Anonymous trying to access claimed conversation
+  return conversation.userId === user.id;
+}
+
+/**
  * Verify if an access code is valid and has PREMIUM+ tier
  */
 async function verifyAccessCode(code: string): Promise<{ valid: boolean; tier?: string; error?: string }> {
@@ -100,7 +110,7 @@ async function hasPremiumAccess(user: Awaited<ReturnType<typeof getCurrentUser>>
   if (accessCode) {
     const result = await verifyAccessCode(accessCode);
     if (result.valid) {
-      const TIER_HIERARCHY: Record<string, number> = { FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4 };
+      const TIER_HIERARCHY: Record<string, number> = { FREE: 0, BASIC: 1, PREMIUM: 3, MASTERY: 4 };
       const tierLevel = TIER_HIERARCHY[result.tier || 'FREE'] || 0;
       if (tierLevel >= TIER_HIERARCHY['PREMIUM']) {
         return { hasAccess: true, tier: result.tier };
@@ -110,7 +120,7 @@ async function hasPremiumAccess(user: Awaited<ReturnType<typeof getCurrentUser>>
   
   // Check user session
   if (user?.accessTier) {
-    const TIER_HIERARCHY: Record<string, number> = { FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4 };
+    const TIER_HIERARCHY: Record<string, number> = { FREE: 0, BASIC: 1, PREMIUM: 3, MASTERY: 4 };
     const userTierLevel = TIER_HIERARCHY[user.accessTier] || 0;
     if (userTierLevel >= TIER_HIERARCHY['PREMIUM']) {
       return { hasAccess: true, tier: user.accessTier };
@@ -138,6 +148,11 @@ export async function POST(request: NextRequest) {
     let conversation = await db.aICoachConversation.findUnique({
       where: { sessionId },
     });
+
+    // Verify ownership of existing conversation
+    if (conversation && !verifyConversationOwnership(conversation, user)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+    }
 
     let history: Message[] = [];
     if (conversation) {
@@ -265,6 +280,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: true, messages: [], messageCount: 0, freeMessagesRemaining: 2 });
     }
 
+    if (!verifyConversationOwnership(conversation, user)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+    }
+
     const messages: Message[] = JSON.parse(conversation.messages);
     const userMessageCount = messages.filter(m => m.role === 'user').length;
     const remainingFree = Math.max(0, 2 - userMessageCount);
@@ -285,12 +304,21 @@ export async function GET(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    await getCurrentUser();
+    const user = await getCurrentUser();
     const { searchParams } = new URL(request.url);
     const sessionId = searchParams.get('sessionId');
     if (!sessionId) {
       return NextResponse.json({ error: 'Session ID is required' }, { status: 400 });
     }
+
+    // Verify ownership before deleting
+    const conversation = await db.aICoachConversation.findUnique({
+      where: { sessionId },
+    });
+    if (conversation && !verifyConversationOwnership(conversation, user)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+    }
+
     await db.aICoachConversation.delete({ where: { sessionId } }).catch(() => {});
     return NextResponse.json({ success: true, message: 'Conversation cleared' });
   } catch (error) {
@@ -298,4 +326,3 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to delete conversation' }, { status: 500 });
   }
 }
-

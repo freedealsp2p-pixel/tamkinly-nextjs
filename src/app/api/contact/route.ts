@@ -13,6 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyRecaptcha } from '@/lib/recaptcha';
 import { db } from '@/lib/db';
 import { applySecurity, API_RATE_LIMIT } from '@/lib/security';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // ============================================
 // VALIDATION TYPES
@@ -388,11 +389,16 @@ export async function POST(request: NextRequest) {
 }
 
 // ============================================
-// GET HANDLER - List contact messages (admin)
+// GET HANDLER - List contact messages (admin only)
 // ============================================
 
 export async function GET() {
   try {
+    const session = await getAdminSession();
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const messages = await db.contactMessage.findMany({
       orderBy: { createdAt: 'desc' },
       take: 50,
@@ -406,19 +412,4 @@ export async function GET() {
       { status: 500 }
     );
   }
-}
-
-// ============================================
-// OPTIONS HANDLER (CORS)
-// ============================================
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
 }

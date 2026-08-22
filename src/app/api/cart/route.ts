@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     if (!productId) {
       return NextResponse.json(
         { error: 'Product ID is required' },
-        { status: 400 }
+        { status: 404 }
       );
     }
 
@@ -182,6 +182,15 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    // Verify ownership
+    const cartId = getCartId(request);
+    if (cartId) {
+      const item = await db.cartItem.findUnique({ where: { id: itemId } });
+      if (item && item.cartId !== cartId) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+      }
+    }
+
     if (quantity <= 0) {
       // Remove item if quantity is 0 or less
       await db.cartItem.delete({
@@ -194,9 +203,9 @@ export async function PUT(request: NextRequest) {
       });
     }
 
-    const cartId = getCartId(request);
-    const cartItems = cartId ? await db.cartItem.findMany({
-      where: { cartId },
+    const updatedCartId = getCartId(request);
+    const cartItems = updatedCartId ? await db.cartItem.findMany({
+      where: { cartId: updatedCartId },
       include: { product: true },
     }) : [];
 
@@ -241,13 +250,22 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
+    // Verify ownership
+    const cartId = getCartId(request);
+    if (cartId) {
+      const item = await db.cartItem.findUnique({ where: { id: itemId } });
+      if (item && item.cartId !== cartId) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+      }
+    }
+
     await db.cartItem.delete({
       where: { id: itemId },
     });
 
-    const cartId = getCartId(request);
-    const cartItems = cartId ? await db.cartItem.findMany({
-      where: { cartId },
+    const updatedCartId = getCartId(request);
+    const cartItems = updatedCartId ? await db.cartItem.findMany({
+      where: { cartId: updatedCartId },
       include: { product: true },
     }) : [];
 

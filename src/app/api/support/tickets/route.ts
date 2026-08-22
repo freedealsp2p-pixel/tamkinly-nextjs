@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { nanoid } from 'nanoid';
 import { applySecurity, API_RATE_LIMIT } from '@/lib/security';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
 // Generate a unique ticket number
 function generateTicketNumber(): string {
@@ -70,9 +71,14 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// GET - List tickets (for admin or user lookup)
+// GET - List tickets (admin only)
 export async function GET(request: NextRequest) {
   try {
+    const session = await getAdminSession();
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
     const email = searchParams.get('email');
     const status = searchParams.get('status');

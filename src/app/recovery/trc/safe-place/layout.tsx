@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/safe-place',
-        ar: 'https://tamkinly.com/ar/recovery/trc/safe-place',
+        'en-US': 'https://tamkinly.com/recovery/trc/safe-place',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/safe-place',
+        'x-default': 'https://tamkinly.com/recovery/trc/safe-place',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function SafeplaceLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

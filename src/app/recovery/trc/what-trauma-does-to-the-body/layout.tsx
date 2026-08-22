@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/what-trauma-does-to-the-body',
-        ar: 'https://tamkinly.com/ar/recovery/trc/what-trauma-does-to-the-body',
+        'en-US': 'https://tamkinly.com/recovery/trc/what-trauma-does-to-the-body',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/what-trauma-does-to-the-body',
+        'x-default': 'https://tamkinly.com/recovery/trc/what-trauma-does-to-the-body',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function WhattraumadoestothebodyLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
+
+
+

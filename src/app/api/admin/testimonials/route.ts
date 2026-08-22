@@ -39,11 +39,13 @@ export async function GET(request: NextRequest) {
 // Update testimonial (approve/disapprove/feature)
 export async function PATCH(request: NextRequest) {
   try {
-    const { password, testimonialId, isApproved, isFeatured } = await request.json();
+    const session = await getAdminSession();
 
     if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+    const { testimonialId, isApproved, isFeatured } = await request.json();
 
     if (!testimonialId) {
       return NextResponse.json({ error: 'Testimonial ID required' }, { status: 400 });
@@ -76,11 +78,13 @@ export async function PATCH(request: NextRequest) {
 // Delete testimonial
 export async function DELETE(request: NextRequest) {
   try {
-    const { password, testimonialId } = await request.json();
+    const session = await getAdminSession();
 
     if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+    const { testimonialId } = await request.json();
 
     if (!testimonialId) {
       return NextResponse.json({ error: 'Testimonial ID required' }, { status: 400 });

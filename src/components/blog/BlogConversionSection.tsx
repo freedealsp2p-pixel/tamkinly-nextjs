@@ -72,7 +72,7 @@ export function BlogConversionSection({ promoteProduct = 'recode' }: BlogConvers
             {/* BASIC Plan */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/[0.07] hover:border-white/15 transition-all duration-300">
               <div className={`flex items-center gap-2 mb-3 ${isAr ? 'flex-row-reverse' : ''}`}>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1F6F78]/30 text-[#3DD4B0]">BASIC</span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1F6F78]/30 text-[#3DD4B0]">PREMIUM</span>
                 <span className="text-white font-bold">$17</span>
               </div>
               <h3 className={`text-white font-serif text-lg font-bold mb-2 ${isAr ? 'text-right' : ''}`}>

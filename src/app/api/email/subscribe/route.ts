@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { subscribeEmail, triggerEmailSequence } from '@/lib/email/service';
+import { applySecurity, API_RATE_LIMIT } from '@/lib/security';
 
 // Subscribe to email list
 export async function POST(request: NextRequest) {
   try {
+  // Security: rate limiting
+  const securityBlocked = await applySecurity(request, API_RATE_LIMIT);
+  if (securityBlocked) return securityBlocked;
+
     const { email, name, source } = await request.json();
 
     if (!email) {
@@ -44,3 +49,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+

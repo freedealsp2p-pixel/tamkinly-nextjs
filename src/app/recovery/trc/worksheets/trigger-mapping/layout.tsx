@@ -21,23 +21,30 @@ const metadataByLocale = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return metadataByLocale[locale];
+  const m = metadataByLocale[locale];
+  const basePath = locale === 'ar' ? 'https://tamkinly.com/ar/recovery/trc/worksheets/trigger-mapping' : 'https://tamkinly.com/recovery/trc/worksheets/trigger-mapping';
+  return {
+    title: m.title,
+    description: m.description,
+    alternates: {
+      canonical: basePath,
+      languages: {
+        'en-US': 'https://tamkinly.com/recovery/trc/worksheets/trigger-mapping',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/worksheets/trigger-mapping',
+        'x-default': 'https://tamkinly.com/recovery/trc/worksheets/trigger-mapping',
+      },
+    },
+    openGraph: {
+      title: m.title,
+      description: m.description,
+      url: basePath,
+      siteName: 'Tamkinly',
+      locale: locale === 'ar' ? 'ar_SA' : 'en_US',
+      type: 'website',
+    },
+  };
 }
 
-/**
- * Therapeutic (immersive) layout for the Trigger Mapping interactive tool.
- *
- * Wraps the page in RecoveryShell with sectionType='therapeutic', which
- * renders the RecoveryHeader and auto-mounts a floating TherapeuticExit
- * (exit arrow + confirmation dialog) at the bottom-right of the viewport.
- *
- * Backed by: TRC Framework Section ج(ز) Worksheet Type 1
- * TRC Framework Section ب(2) Regulation Stage
- */
-export default function TriggerMappingLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function TriggerMappingLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell sectionType="therapeutic">{children}</RecoveryShell>;
 }

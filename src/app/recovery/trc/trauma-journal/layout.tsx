@@ -27,8 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/trauma-journal',
-        ar: 'https://tamkinly.com/ar/recovery/trc/trauma-journal',
+        'en-US': 'https://tamkinly.com/recovery/trc/trauma-journal',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/trauma-journal',
+        'x-default': 'https://tamkinly.com/recovery/trc/trauma-journal',
       },
     },
     openGraph: {
@@ -50,3 +51,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function TraumajournalLayout({ children }: { children: React.ReactNode }) {
   return <RecoveryShell>{children}</RecoveryShell>;
 }
+
+
+

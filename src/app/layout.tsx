@@ -73,8 +73,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SEO_SITE_CONFIG.url,
     languages: {
-      'en': SEO_SITE_CONFIG.url,
-      'ar': `${SEO_SITE_CONFIG.url}/ar`,
+      'en-US': SEO_SITE_CONFIG.url,
+      'ar-SA': `${SEO_SITE_CONFIG.url}/ar`,
+      'x-default': SEO_SITE_CONFIG.url,
     },
   },
   

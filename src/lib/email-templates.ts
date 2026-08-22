@@ -376,7 +376,7 @@ export function getDay14FollowUpHtml(name: string, currentTier: string = 'basic'
   const isAr = locale === 'ar';
 
   const upgradeMap: Record<string, { en: string; ar: string; price: string }> = {
-    trial: { en: 'Identity Recode Planner', ar: 'مخطط إعادة صياغة الهوية', price: '$27' },
+    trial: { en: 'Basic (Monthly)', ar: 'أساسي (شهري)', price: '$7/mo' },
     basic: { en: 'Premium (Monthly)', ar: 'مميز (شهري)', price: '$17/mo' },
     premium: { en: 'Mastery (Monthly)', ar: 'إتقان (شهري)', price: '$27/mo' },
   };

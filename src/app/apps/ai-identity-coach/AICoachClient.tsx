@@ -137,7 +137,7 @@ function FreeLimitReached({ locale, onAccessGranted }: { locale: string; onAcces
           }));
           onAccessGranted();
         } else {
-          setCodeError(getText('This code does not include AI Coach access. You need Premium ($17/mo) or Mastery ($27/mo).', 'هذا الرمز لا يشمل وصول المدرب الذكي. تحتاج باقة المميز ($17/شهر) أو الإتقان ($27/شهر).'));
+          setCodeError(getText('This code does not include AI Coach access. You need the Mastery plan ($27/mo).', 'هذا الرمز لا يشمل وصول المدرب الذكي. تحتاج باقة الإتقان ($27/شهر).'));
         }
       } else {
         setCodeError(data.error || getText('Invalid access code', 'رمز الوصول غير صالح'));
@@ -161,7 +161,7 @@ function FreeLimitReached({ locale, onAccessGranted }: { locale: string; onAcces
           </h2>
           <p className="text-slate-600 mb-6 leading-relaxed">
             {getText(
-              'Every visitor gets 2 free questions with the AI Identity Coach. To continue, get Premium ($17/mo) or Mastery ($27/mo) — your personal code will be sent to you.',
+              'Every visitor gets 2 free questions with the AI Identity Coach. To continue, get Mastery ($27/mo) — your personal code will be sent to you.',
               'يحصل كل زائر على سؤالين مجانيين مع مدرب الهوية الذكي. لمواصلة رحلة التحوّل مع وصول غير محدود، احصل على الباقة الشاملة — سيتم إرسال رمزك الشخصي إليك.'
             )}
           </p>
@@ -191,11 +191,11 @@ function FreeLimitReached({ locale, onAccessGranted }: { locale: string; onAcces
           <Link href="/products/mastery">
             <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-bold h-12 text-base">
               <Zap className={`w-5 h-5 ${isRTL ? 'ml-2' : 'mr-2'}`} />
-              {getText('Premium — $17/mo', 'احصل على الإتقان — $27/شهر')}
+              {getText('Mastery — $27/mo', 'احصل على الإتقان — $27/شهر')}
             </Button>
           </Link>
           <p className="text-xs text-slate-500 mt-3">
-            {getText('Premium: AI Coach + 6 tools. Bundle: AI Coach + all 15 tools + personal token.', 'يشمل المدرب الذكي + جميع الأدوات الـ 15 + رمز الوصول الشخصي')}
+            {getText('Mastery: AI Coach + all 20 tools + personal access token.', 'يشمل المدرب الذكي + جميع الأدوات الـ 15 + رمز الوصول الشخصي')}
           </p>
         </CardContent>
       </Card>
@@ -351,7 +351,7 @@ function AICoachLanding({ locale, onStartChat }: { locale: string; onStartChat: 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/products/mastery">
                   <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-bold">
-                    {getText('Get Access - from $17/mo', 'احصل على الباقة - $17/شهر')}
+                    {getText('Get Access - from $27/mo', 'احصل على الباقة - $27/شهر')}
                     <ArrowRight className={`${isRTL ? 'mr-2 rotate-180' : 'ml-2'} h-5 w-5`} />
                   </Button>
                 </Link>
@@ -656,7 +656,7 @@ export default function AIIdentityCoachPage() {
           <p className="text-xs text-[#1F6F78]">
             <Gift className="w-3 h-3 inline mr-1" />
             {getText(
-              `You have ${freeMessagesRemaining} free question${freeMessagesRemaining > 1 ? 's' : ''} remaining. Get Premium ($17/mo) or Mastery ($27/mo) for unlimited access.`,
+              `You have ${freeMessagesRemaining} free question${freeMessagesRemaining > 1 ? 's' : ''} remaining. Get Mastery ($27/mo) for unlimited access.`,
               `\u0645\u062a\u0628\u0642\u064a ${freeMessagesRemaining} \u0633\u0624\u0627\u0644${freeMessagesRemaining > 1 ? '\u0627\u0646' : ''} \u0645\u062c\u0627\u0646\u0627\u064b. \u0627\u062d\u0635\u0644 \u0639\u0644\u0649 \u0627\u0644\u0628\u0627\u0642\u0629 \u0627\u0644\u0634\u0627\u0645\u0644\u0629 \u0644\u0648\u0635\u0648\u0644 \u063a\u064a\u0631 \u0645\u062d\u062f\u0648\u062f.`
             )}
           </p>

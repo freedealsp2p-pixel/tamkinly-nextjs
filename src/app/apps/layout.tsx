@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   keywords: PAGE_METADATA.apps.keywords,
   alternates: {
     canonical: 'https://tamkinly.com/apps',
+    languages: {
+      'en-US': 'https://tamkinly.com/apps',
+      'ar-SA': 'https://tamkinly.com/ar/apps',
+      'x-default': 'https://tamkinly.com/apps',
+    },
   },
   openGraph: {
     title: PAGE_METADATA.apps.title,
@@ -34,3 +39,4 @@ export default function AppsLayout({
     </AppAccessGuard>
   );
 }
+

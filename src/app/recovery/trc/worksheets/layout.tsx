@@ -25,8 +25,9 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: fullUrl,
       languages: {
-        en: 'https://tamkinly.com/recovery/trc/worksheets',
-        ar: 'https://tamkinly.com/ar/recovery/trc/worksheets',
+        'en-US': 'https://tamkinly.com/recovery/trc/worksheets',
+        'ar-SA': 'https://tamkinly.com/ar/recovery/trc/worksheets',
+        'x-default': 'https://tamkinly.com/recovery/trc/worksheets',
       },
     },
     openGraph: {
@@ -48,3 +49,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function WorksheetsLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
+
+
+
