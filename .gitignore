@@ -54,3 +54,7 @@ db/*.db
 # Database files
 db/custom.db
 prisma/db/
+tamkinly.db
+*.db
+.next/
+logs/
