@@ -93,14 +93,14 @@ export default function RecoveryHubPage() {
   const isPrStepCompleted = (stepId: string): boolean => {
     try {
       return localStorage.getItem(`tamkinly_pr_${stepId}_done`) === 'true' ||
-             (prSummary?.isStarted && getPornRecoveryState()?.completedSteps?.includes(stepId));
+             (prSummary?.isStarted && getPornRecoveryState()?.completedSteps?.includes(stepId) || false);
     } catch { return false; }
   };
 
   const isTrcStepCompleted = (stepId: string): boolean => {
     try {
       return localStorage.getItem(`tamkinly_trc_${stepId}_done`) === 'true' ||
-             (trcSummary?.isStarted && getTrcState()?.completedSteps?.includes(stepId));
+             (trcSummary?.isStarted && getTrcState()?.completedSteps?.includes(stepId) || false);
     } catch { return false; }
   };
 

@@ -220,8 +220,8 @@ export default function RecoveryBrain() {
         </motion.div>
 
         <SectionDownloadButton
-          files={[{ fileKey: 'REC-05-PATTERN-RECOGNITION' }]}
-          sectionKey="brain"
+          fileKey="REC-05-PATTERN-RECOGNITION"
+          program="porn-recovery"
         />
       </div>
     </section>

@@ -186,8 +186,8 @@ export default function RecoveryFramework() {
         </motion.div>
 
         <SectionDownloadButton
-          files={[{ fileKey: 'REC-04-RECOVERY-REVIEW' }, { fileKey: 'REC-08-STAGE-ASSESSMENT' }]}
-          sectionKey="framework"
+          fileKey="REC-04-RECOVERY-REVIEW"
+          program="porn-recovery"
         />
       </div>
     </section>

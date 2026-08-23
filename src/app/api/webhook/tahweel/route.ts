@@ -13,7 +13,7 @@ function generateAccessCode(): string {
   const segments = 3;
   const segmentLength = 4;
   
-  const codeSegments = [];
+  const codeSegments: string[] = [];
   for (let i = 0; i < segments; i++) {
     let segment = '';
     for (let j = 0; j < segmentLength; j++) {
@@ -194,7 +194,6 @@ export async function POST(request: NextRequest) {
       });
       
       return NextResponse.json({
-        success: true,
         message: 'Payment processed successfully',
         ...result,
       });

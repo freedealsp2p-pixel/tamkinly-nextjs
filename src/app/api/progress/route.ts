@@ -439,7 +439,7 @@ export async function POST(request: NextRequest) {
           create: {
             userId,
             achievementId: 'first-quiz',
-            category: 'assessment',
+            category: 'ENGAGEMENT',
             tier: 'FREE',
             progress: 100,
             completed: true,

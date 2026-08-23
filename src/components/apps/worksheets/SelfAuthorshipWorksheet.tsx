@@ -253,6 +253,7 @@ export default function SelfAuthorshipWorksheet() {
                         style={{ 
                           backgroundColor: `${phase.color}20`, 
                           color: phase.color,
+                          // @ts-expect-error ringColor is a Tailwind utility, not a CSS property
                           ringColor: isCurrent ? phase.color : undefined
                         }}
                       >

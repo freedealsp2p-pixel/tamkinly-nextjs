@@ -8,7 +8,7 @@ import BrevoClient, { BREVO_TEMPLATES } from './brevo';
 import EmailTemplates from './email-templates';
 
 export type EmailProvider = 'brevo' | 'fallback';
-export type ProductType = 'trial' | 'planner' | 'premium' | 'bundle';
+export type ProductType = 'trial' | 'planner' | 'premium' | 'bundle' | 'basic' | 'mastery';
 
 export interface PurchaseEmailOptions {
   to: string;
@@ -115,11 +115,13 @@ export async function sendPurchaseConfirmationEmail(
   const locale = options.locale || 'en';
   
   // Generate HTML based on product type using new templates
-  const tierMap: Record<ProductType, 'trial' | 'basic' | 'premium' | 'bundle'> = {
+  const tierMap: Record<ProductType, string> = {
     trial: 'trial',
     planner: 'basic',
     premium: 'premium',
     bundle: 'bundle',
+    basic: 'basic',
+    mastery: 'bundle',
   };
 
   let htmlContent: string;
@@ -139,6 +141,14 @@ export async function sendPurchaseConfirmationEmail(
       subject = locale === 'ar' ? 'باقة التحول المتقدمة جاهزة! 🌟' : 'Your Premium Transformation Package is Ready! 🌟';
       break;
     case 'bundle':
+      htmlContent = EmailTemplates.bundlePurchase(options.name, options.accessKey, locale);
+      subject = locale === 'ar' ? 'مرحباً بك في VIP! باقة الإتقان جاهزة! 👑' : 'Welcome to VIP! Your Mastery Subscription is Ready! 👑';
+      break;
+    case 'basic':
+      htmlContent = EmailTemplates.plannerPurchase(options.name, options.accessKey, locale);
+      subject = locale === 'ar' ? 'مخطط إعادة صياغة الهوية جاهز! 📋' : 'Your Identity Recode Planner is Ready! 📋';
+      break;
+    case 'mastery':
       htmlContent = EmailTemplates.bundlePurchase(options.name, options.accessKey, locale);
       subject = locale === 'ar' ? 'مرحباً بك في VIP! باقة الإتقان جاهزة! 👑' : 'Welcome to VIP! Your Mastery Subscription is Ready! 👑';
       break;
@@ -559,7 +569,7 @@ export async function storeContact(
     attributes: {
       NAME: name,
       FIRSTNAME: name.split(' ')[0],
-      CUSTOMER_TYPE: options?.type,
+      CUSTOMER_TYPE: options?.type as any,
       ACCESS_KEY: options?.accessKey,
       QUIZ_SCORE: options?.quizScore,
       LAST_ACTIVITY: new Date().toISOString().split('T')[0],

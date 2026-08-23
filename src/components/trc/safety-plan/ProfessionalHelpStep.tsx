@@ -2,14 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
-import type { Locale, ProfessionalCriteria } from '@/lib/trc/safety-plan/types';
+import type { Locale, ProfessionalCriterion } from '@/lib/trc/safety-plan/types';
 import { PROFESSIONAL_CRITERIA_OPTIONS } from '@/lib/trc/safety-plan/types';
 import { getTranslations } from '@/lib/trc/safety-plan/translations';
 
 interface ProfessionalHelpStepProps {
   locale: Locale;
-  selected: ProfessionalCriteria[];
-  onUpdate: (criteria: ProfessionalCriteria[]) => void;
+  selected: ProfessionalCriterion[];
+  onUpdate: (criteria: ProfessionalCriterion[]) => void;
   onNext: () => void;
   onBack: () => void;
 }
@@ -18,7 +18,7 @@ export default function ProfessionalHelpStep({ locale, selected, onUpdate, onNex
   const t = getTranslations(locale);
   const isRtl = locale === 'ar';
 
-  const toggleCriteria = (criteria: ProfessionalCriteria) => {
+  const toggleCriteria = (criteria: ProfessionalCriterion) => {
     if (selected.includes(criteria)) {
       onUpdate(selected.filter(c => c !== criteria));
     } else {
@@ -33,7 +33,7 @@ export default function ProfessionalHelpStep({ locale, selected, onUpdate, onNex
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: 'easeOut' as any }}
         className="max-w-2xl w-full"
       >
         <div className="flex items-center gap-3 mb-2">
@@ -46,13 +46,13 @@ export default function ProfessionalHelpStep({ locale, selected, onUpdate, onNex
 
         {/* Criteria chips */}
         <div className="flex flex-wrap gap-2 mb-6">
-          {PROFESSIONAL_CRITERIA_OPTIONS.map(criteria => {
-            const isSelected = selected.includes(criteria);
-            const isHigh = criteria === 'suicidal-thoughts' || criteria === 'self-harm';
+          {PROFESSIONAL_CRITERIA_OPTIONS.map(opt => {
+            const isSelected = selected.includes(opt.id);
+            const isHigh = opt.id === 'suicidal-thoughts' || opt.id === 'self-harm';
             return (
               <button
-                key={criteria}
-                onClick={() => toggleCriteria(criteria)}
+                key={opt.id}
+                onClick={() => toggleCriteria(opt.id)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isSelected
                     ? isHigh
@@ -61,7 +61,7 @@ export default function ProfessionalHelpStep({ locale, selected, onUpdate, onNex
                     : 'bg-[#F0F7F7] text-slate-600 hover:bg-[#1F6F78]/10 border border-[#1F6F78]/10'
                 }`}
               >
-                {t.professionalCriteria[criteria]}
+                {locale === 'ar' ? opt.labelAr : opt.labelEn}
               </button>
             );
           })}

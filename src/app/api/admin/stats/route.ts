@@ -40,9 +40,9 @@ export async function GET(request: NextRequest) {
       PREMIUM: 17,
       MASTERY: 27,
       // Legacy aliases (for historical data)
-      BASIC: 7,
       PLANNER: 17,
-      MASTERY: 47,
+      TRIAL: 7,
+      BUNDLE: 27,
     };
 
     const codesByTier = await db.appAccess.groupBy({
@@ -90,8 +90,8 @@ export async function GET(request: NextRequest) {
 
     // Orders stats
     const totalOrders = await db.order.count();
-    const completedOrders = await db.order.count({ where: { status: 'completed' } });
-    const pendingOrders = await db.order.count({ where: { status: 'pending' } });
+    const completedOrders = await db.order.count({ where: { status: 'COMPLETED' } });
+    const pendingOrders = await db.order.count({ where: { status: 'PENDING' } });
 
     return NextResponse.json({
       success: true,

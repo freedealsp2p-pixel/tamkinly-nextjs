@@ -48,6 +48,8 @@ model User {
   referrals    Referral[]  @relation("ReferrerUser")
   referredBy   Referral[]  @relation("ReferredUser")
   notifications Notification[]
+
+  worksheets      WorksheetData[]
 }
 
 enum UserRole {
@@ -1270,6 +1272,24 @@ model Referral {
 
   @@map("referrals")
 }
+
+// Worksheet Data (used by worksheets API)
+model WorksheetData {
+  id            String    @id @default(cuid())
+  userId        String
+  worksheetType String
+  data          String    // JSON string
+  score         Float?
+  completedAt   DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([worksheetType])
+  @@map("worksheet_data")
+}
+
 
 model Notification {
   id        String   @id @default(cuid())

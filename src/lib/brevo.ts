@@ -15,7 +15,7 @@ export interface BrevoContact {
     LASTNAME?: string;
     NAME?: string;
     PHONE?: string;
-    CUSTOMER_TYPE?: 'trial' | 'planner' | 'premium' | 'bundle';
+    CUSTOMER_TYPE?: 'trial' | 'planner' | 'premium' | 'bundle' | 'basic' | 'mastery';
     PURCHASE_DATE?: string;
     ACCESS_KEY?: string;
     PRODUCT_NAME?: string;
@@ -408,7 +408,7 @@ export const BrevoEmails = {
     email: string,
     name: string,
     day: 3 | 7 | 14,
-    productType: 'trial' | 'planner' | 'premium' | 'bundle' | 'general'
+    productType: string
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     let templateId: number;
     

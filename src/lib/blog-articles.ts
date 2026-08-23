@@ -711,7 +711,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     readTime: '10 min read',
     readTimeAr: '١٠ دقيقة قراءة',
     featured: false,
-    tier: 'PREMIUM',
+    tier: 'MASTERY',
     datePublished: '2026-07-12',
     dateModified: '2026-07-12',
     author: 'Abdallah Chouaf',

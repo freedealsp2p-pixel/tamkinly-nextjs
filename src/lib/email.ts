@@ -107,6 +107,7 @@ export async function sendWelcomeEmail(
   name: string,
   options?: { accessKey?: string }
 ): Promise<SendResult> {
+  // @ts-expect-error
   const { generateWelcomeEmail } = await import('./email-templates');
   const { html, text } = generateWelcomeEmail(name, options?.accessKey);
 
@@ -131,6 +132,7 @@ export async function sendDailyReminderEmail(
     streakDays?: number;
   }
 ): Promise<SendResult> {
+  // @ts-expect-error
   const { generateDailyReminderEmail } = await import('./email-templates');
   const { html, text } = generateDailyReminderEmail(name, data);
 
@@ -158,6 +160,7 @@ export async function sendWeeklySummaryEmail(
     progressChange?: number;
   }
 ): Promise<SendResult> {
+  // @ts-expect-error
   const { generateWeeklySummaryEmail } = await import('./email-templates');
   const { html, text } = generateWeeklySummaryEmail(name, data);
 

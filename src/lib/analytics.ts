@@ -127,7 +127,7 @@ export interface EventParams {
   error_message?: string;
   
   // Custom parameters
-  [key: string]: string | number | boolean | undefined;
+  [key: string]: string | number | boolean | undefined | unknown[];
 }
 
 // Purchase event specific parameters

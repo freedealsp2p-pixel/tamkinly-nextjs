@@ -239,7 +239,7 @@ export async function triggerEmailSequence(
       scheduledAt.setHours(scheduledAt.getHours() + step.delayHours);
       
       const personalizedSubject = replaceVariables(step.subject, variables);
-      const personalizedContent = replaceVariables(step.content || '', variables);
+      const personalizedContent = replaceVariables((step as any).content || '', variables);
       
       await queueEmail({
         email: variables.email,

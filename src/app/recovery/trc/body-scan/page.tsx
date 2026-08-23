@@ -137,7 +137,7 @@ export default function BodyScanPage() {
         </div>
       )}
 
-      <MedicalDisclaimer program="trc" />
+      <MedicalDisclaimer />
 
       {renderPhase()}
 

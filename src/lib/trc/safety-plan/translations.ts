@@ -99,3 +99,11 @@ export const t: TranslationMap = {
 export function getText(key: string, locale: Locale): string {
   return t[key]?.[locale] || key;
 }
+
+export function getTranslations(locale: Locale): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const [key, translations] of Object.entries(t)) {
+    result[key] = translations[locale] || translations["en"] || key;
+  }
+  return result;
+}

@@ -22,10 +22,9 @@ export async function POST(request: NextRequest) {
     // Map tier to product ID
     const tierToProductId: Record<string, string> = {
       'FREE': 'free',
-      'BASIC': 'trial',
-      'BASIC': 'planner',
+      'BASIC': 'basic',
       'PREMIUM': 'premium',
-      'MASTERY': 'bundle',
+      'MASTERY': 'mastery',
     };
 
     const codes: string[] = [];
@@ -83,3 +82,4 @@ function generateAccessCode(): string {
     Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
   return `TMLY-${segment()}-${segment()}`;
 }
+

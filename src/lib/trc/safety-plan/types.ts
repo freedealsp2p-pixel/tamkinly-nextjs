@@ -101,3 +101,16 @@ export type SafetyPlanAction =
   | { type: 'SET_CUSTOM_CRITERION'; text: string }
   | { type: 'UPDATE_EXIT_PLAN'; payload: Partial<ExitPlan> }
   | { type: 'LOAD_PLAN'; plan: SafetyPlanData };
+
+export const DISTRESS_LEVELS: Array<DistressStep["level"]> = ["mild", "moderate", "high", "crisis"];
+
+export const PROFESSIONAL_CRITERIA_OPTIONS: { id: ProfessionalCriterion; labelEn: string; labelAr: string }[] = [
+  { id: "suicidal-thoughts", labelEn: "Suicidal thoughts or urges", labelAr: "أفكار أو رغبات انتحارية" },
+  { id: "self-harm", labelEn: "Self-harm behaviors", labelAr: "سلوكيات إيذاء النفس" },
+  { id: "panic-attacks", labelEn: "Panic attacks", labelAr: "نوبات هلع" },
+  { id: "cant-function", labelEn: "Can not function daily", labelAr: "عدم القدرة على أداء المهام اليومية" },
+  { id: "dissociation", labelEn: "Dissociation or numbness", labelAr: "انفصال أو خدر" },
+  { id: "flashbacks", labelEn: "Flashbacks or intrusive memories", labelAr: "نوبات ماض أو ذكريات مزعجة" },
+  { id: "cant-sleep", labelEn: "Severe sleep disruption", labelAr: "اضطراب نوم شديد" },
+  { id: "custom", labelEn: "Other concern", labelAr: "مخاوف أخرى" },
+];

@@ -278,7 +278,7 @@ async function sendBrevoNotification(data: ContactFormData): Promise<{ success: 
       console.error('[Contact] Failed to send auto-reply via Brevo:', err);
     });
 
-    return { success: true, messageId: adminResult.messageId };
+    return { success: true };
   } catch (error) {
     console.error('[Contact] Brevo email error:', error);
     return { success: false, error: error instanceof Error ? error.message : 'Email service error' };

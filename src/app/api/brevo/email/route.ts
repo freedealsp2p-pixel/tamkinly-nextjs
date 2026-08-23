@@ -55,11 +55,13 @@ export async function POST(request: NextRequest) {
         break;
 
       case 'quiz':
-        result = await BrevoClient.emails.sendQuizResults(to, name || 'Friend', {
-          clarityScore: data?.clarityScore || 0,
-          alignmentScore: data?.alignmentScore || 0,
-          momentumScore: data?.momentumScore || 0,
-        });
+        const totalScore = Math.round(((data?.clarityScore || 0) + (data?.alignmentScore || 0) + (data?.momentumScore || 0)) / 3);
+        const insights = [
+          data?.clarityScore ? "Clarity: " + String(data.clarityScore) : null,
+          data?.alignmentScore ? "Alignment: " + String(data.alignmentScore) : null,
+          data?.momentumScore ? "Momentum: " + String(data.momentumScore) : null,
+        ].filter(Boolean) as string[];
+        result = await BrevoClient.emails.sendQuizResults(to, name || 'Friend', 'identity-gap', totalScore, insights);
         break;
 
       case 'custom':

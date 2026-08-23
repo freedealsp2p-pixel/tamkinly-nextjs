@@ -25,7 +25,7 @@ export default function SupportPeopleStep({ locale, people, onAdd, onRemove, onN
 
   const handleAdd = () => {
     if (!name.trim()) return;
-    onAdd({ name: name.trim(), relation: relation.trim(), contactMethod, whenToContact: whenToContact.trim() });
+    onAdd({ id: Date.now().toString(), name: name.trim(), relation: relation.trim(), contactMethod, whenToContact: whenToContact.trim() });
     setName(''); setRelation(''); setContactMethod('phone'); setWhenToContact('');
   };
 

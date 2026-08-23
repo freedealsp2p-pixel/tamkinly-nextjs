@@ -18,10 +18,10 @@ export default function SafetyPlanReview({ locale, plan, onEdit, onSave }: Safet
 
   const hasWarningSigns = plan.warningSigns.physical.length > 0 || plan.warningSigns.emotional.length > 0 || plan.warningSigns.behavioral.length > 0 || !!plan.warningSigns.custom;
   const hasStabilize = !!(plan.stabilizeTools.breathing || plan.stabilizeTools.grounding || plan.stabilizeTools.safePlace || plan.stabilizeTools.bodyScan) || plan.stabilizeTools.otherTools.length > 0;
-  const hasSupport = plan.supportSources.length > 0;
+  const hasSupport = plan.supportPeople.length > 0;
   const hasSafePlaces = plan.safePlaces.length > 0;
-  const hasDistress = plan.distressSteps.some(s => s.action);
-  const hasProfessional = plan.professionalHelpCriteria.length > 0;
+  const hasDistress = plan.distressSteps.some(s => s.actionAr || s.actionEn);
+  const hasProfessional = plan.professionalCriteria.length > 0;
   const hasExit = !!(plan.exitPlan.stopSignal || plan.exitPlan.firstAction);
 
   const Section = ({ title, phase, hasContent, children }: { title: string; phase: PlanPhase; hasContent: boolean; children: React.ReactNode }) => (
@@ -43,7 +43,7 @@ export default function SafetyPlanReview({ locale, plan, onEdit, onSave }: Safet
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: 'easeOut' as any }}
         className="max-w-2xl w-full"
       >
         <div className="flex items-center gap-3 mb-2">
@@ -78,7 +78,7 @@ export default function SafetyPlanReview({ locale, plan, onEdit, onSave }: Safet
         {/* Support People */}
         <Section title={t.reviewSupportSection} phase="support-people" hasContent={hasSupport}>
           <div className="space-y-1">
-            {plan.supportSources.map((person, idx) => (
+            {plan.supportPeople.map((person, idx) => (
               <p key={idx} className="text-xs text-slate-600">{person.name}{person.relation ? ` (${person.relation})` : ''} — {person.contactMethod}</p>
             ))}
           </div>
@@ -96,8 +96,8 @@ export default function SafetyPlanReview({ locale, plan, onEdit, onSave }: Safet
         {/* Distress Steps */}
         <Section title={t.reviewDistressSection} phase="distress-steps" hasContent={hasDistress}>
           <div className="space-y-1">
-            {plan.distressSteps.map(step => step.action && (
-              <p key={step.level} className="text-xs text-slate-600"><span className="font-semibold capitalize">{step.level}:</span> {step.action}</p>
+            {plan.distressSteps.map(step => (locale === 'ar' ? step.actionAr : step.actionEn) && (
+              <p key={step.level} className="text-xs text-slate-600"><span className="font-semibold capitalize">{step.level}:</span> {locale === 'ar' ? step.actionAr : step.actionEn}</p>
             ))}
           </div>
         </Section>
@@ -105,9 +105,9 @@ export default function SafetyPlanReview({ locale, plan, onEdit, onSave }: Safet
         {/* Professional Help */}
         <Section title={t.reviewProfessionalSection} phase="professional-help" hasContent={hasProfessional}>
           <div className="flex flex-wrap gap-1">
-            {plan.professionalHelpCriteria.map(c => (
+            {plan.professionalCriteria.map(c => (
               <span key={c} className={`px-2 py-0.5 rounded text-xs ${c === 'suicidal-thoughts' || c === 'self-harm' ? 'bg-[#E8685A]/10 text-[#E8685A]' : 'bg-[#1F6F78]/10 text-[#1F6F78]'}`}>
-                {t.professionalCriteria[c]}
+                {c}
               </span>
             ))}
           </div>

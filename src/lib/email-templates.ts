@@ -144,7 +144,7 @@ export function getPurchaseConfirmationHtml(
   name: string,
   accessKey: string,
   productName: string,
-  tier: 'trial' | 'basic' | 'premium' | 'bundle' = 'basic',
+  tier: 'trial' | 'basic' | 'premium' | 'bundle' | 'mastery' = 'basic',
   locale: 'en' | 'ar' = 'en'
 ): string {
   const dir = locale === 'ar' ? 'rtl' : 'ltr';

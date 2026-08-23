@@ -6,19 +6,16 @@ import { getAdminSession } from '@/lib/admin-auth-jwt';
 export async function GET(request: NextRequest) {
   try {
     const session = await getAdminSession();
-
     if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     const status = request.nextUrl.searchParams.get('status') || '';
     const search = request.nextUrl.searchParams.get('search') || '';
 
     // Build where clause
-    const where: {
-      status?: string;
-      OR?: Array<{ customerEmail: { contains: string } } | { customerName: { contains: string } } | { orderNumber: { contains: string } }>;
-    } = {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const where: any = {};
 
     if (status) {
       where.status = status.toUpperCase();
@@ -35,47 +32,26 @@ export async function GET(request: NextRequest) {
     const orders = await db.order.findMany({
       where,
       orderBy: { createdAt: 'desc' },
-      include: {
-        items: true,
-      },
+      include: { items: true },
     });
 
-    // Get access codes for each order
     const ordersWithCodes = await Promise.all(
       orders.map(async (order) => {
         const accessCodes = await db.appAccess.findMany({
           where: { email: order.customerEmail },
-          select: {
-            code: true,
-            tier: true,
-            isUsed: true,
-            productId: true,
-          },
+          select: { code: true, tier: true, isUsed: true, productId: true },
         });
-
         return {
-          id: order.id,
-          orderNumber: order.orderNumber,
-          email: order.customerEmail,
-          customerName: order.customerName,
-          status: order.status,
-          total: order.total,
-          currency: order.currency,
-          paymentMethod: order.paymentMethod,
-          paymentId: order.paymentId,
-          transactionId: order.transactionId,
-          notes: order.notes,
-          items: order.items,
-          createdAt: order.createdAt,
-          accessCodes,
+          id: order.id, orderNumber: order.orderNumber, email: order.customerEmail,
+          customerName: order.customerName, status: order.status, total: order.total,
+          currency: order.currency, paymentMethod: order.paymentMethod, paymentId: order.paymentId,
+          transactionId: order.transactionId, notes: order.notes, items: order.items,
+          createdAt: order.createdAt, accessCodes,
         };
       })
     );
 
-    return NextResponse.json({
-      success: true,
-      orders: ordersWithCodes,
-    });
+    return NextResponse.json({ success: true, orders: ordersWithCodes });
   } catch (error) {
     console.error('Get orders error:', error);
     return NextResponse.json({ error: 'Failed to fetch orders' }, { status: 500 });
@@ -97,43 +73,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // Generate order number
     const orderNumber = `TMLY-${Date.now().toString(36).toUpperCase()}`;
 
-    // Create order with items
     const order = await db.order.create({
       data: {
-        orderNumber,
-        customerEmail: customerEmail.toLowerCase(),
-        customerName,
-        subtotal: total,
-        total,
-        paymentMethod: paymentMethod || 'skrill',
-        transactionId,
-        notes,
-        status: 'PENDING',
+        orderNumber, customerEmail: customerEmail.toLowerCase(), customerName,
+        subtotal: total, total, paymentMethod: paymentMethod || 'skrill',
+        transactionId, notes, status: 'PENDING',
         items: {
           create: items.map((item: { productId: string; productName: string; price: number; quantity?: number }) => ({
-            productId: item.productId,
-            productName: item.productName,
-            price: item.price,
-            quantity: item.quantity || 1,
+            productId: item.productId, productName: item.productName, price: item.price, quantity: item.quantity || 1,
           })),
         },
       },
-      include: {
-        items: true,
-      },
+      include: { items: true },
     });
 
-    return NextResponse.json({
-      success: true,
-      order: {
-        id: order.id,
-        orderNumber: order.orderNumber,
-        status: order.status,
-      },
-    });
+    return NextResponse.json({ success: true, order: { id: order.id, orderNumber: order.orderNumber, status: order.status } });
   } catch (error) {
     console.error('Create order error:', error);
     return NextResponse.json({ error: 'Failed to create order' }, { status: 500 });
@@ -144,83 +100,56 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const session = await getAdminSession();
-
     if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     const body = await request.json();
     const { orderId, status, generateCode } = body;
 
-    const updateData: {
-      status: string;
-      fulfilledAt?: Date;
-      paidAt?: Date;
-    } = { status };
-
+    const updateData: { status: "PENDING"|"PROCESSING"|"COMPLETED"|"CANCELLED"|"REFUNDED"; fulfilledAt?: Date; paidAt?: Date } = { status: status as "PENDING"|"PROCESSING"|"COMPLETED"|"CANCELLED"|"REFUNDED" };
     if (status === 'COMPLETED') {
       updateData.fulfilledAt = new Date();
       updateData.paidAt = new Date();
     }
 
-    const order = await db.order.update({
-      where: { id: orderId },
-      data: updateData,
-    });
+    const order = await db.order.update({ where: { id: orderId }, data: updateData });
 
-    // Generate access code if requested
     if (generateCode && status === 'COMPLETED') {
-      const orderWithItems = await db.order.findUnique({
-        where: { id: orderId },
-        include: { items: true },
-      });
-
+      const orderWithItems = await db.order.findUnique({ where: { id: orderId }, include: { items: true } });
       if (orderWithItems && orderWithItems.items.length > 0) {
-        // Generate access code for each item
         for (const item of orderWithItems.items) {
           const code = generateAccessCode();
           const tier = getTierFromProductId(item.productId);
-
           await db.appAccess.create({
             data: {
-              code,
-              email: orderWithItems.customerEmail.toLowerCase(),
-              customerName: orderWithItems.customerName || '',
-              productId: item.productId,
-              tier,
-              orderId: orderWithItems.orderNumber,
-              isUsed: false,
-              isActive: true,
+              code, email: orderWithItems.customerEmail.toLowerCase(),
+              customerName: orderWithItems.customerName || '', productId: item.productId,
+              tier, orderId: orderWithItems.orderNumber, isUsed: false, isActive: true,
             },
           });
         }
       }
     }
 
-    return NextResponse.json({
-      success: true,
-      order,
-    });
+    return NextResponse.json({ success: true, order });
   } catch (error) {
     console.error('Update order error:', error);
     return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });
   }
 }
 
-// Helper functions
 function generateAccessCode(): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const segment = () =>
-    Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  const segment = () => Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
   return `TMLY-${segment()}-${segment()}`;
 }
 
-function getTierFromProductId(productId: string): 'BASIC' | 'BASIC' | 'PREMIUM' | 'MASTERY' {
-  const tierMap: Record<string, 'BASIC' | 'BASIC' | 'PREMIUM' | 'MASTERY'> = {
-    'trial': 'BASIC',
-    'planner': 'BASIC',
+function getTierFromProductId(productId: string): 'BASIC' | 'PREMIUM' | 'MASTERY' {
+  const tierMap: Record<string, 'BASIC' | 'PREMIUM' | 'MASTERY'> = {
+    'trial': 'BASIC', 'planner': 'BASIC', 'basic': 'BASIC',
     'premium': 'PREMIUM',
-    'bundle': 'MASTERY',
+    'bundle': 'MASTERY', 'mastery': 'MASTERY',
   };
   return tierMap[productId.toLowerCase()] || 'BASIC';
 }

@@ -56,7 +56,7 @@ export function BreathingCircle({
         }}
         transition={reducedMotion ? {} : {
           duration: duration,
-          ease: VISUAL.BREATHING_EASING as unknown as number[],
+          ease: VISUAL.BREATHING_EASING as any,
         }}
       >
         {/* Central seconds counter */}

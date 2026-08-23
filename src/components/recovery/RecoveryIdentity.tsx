@@ -287,8 +287,8 @@ export default function RecoveryIdentity() {
         </motion.div>
 
         <SectionDownloadButton
-          files={[{ fileKey: 'REC-10-IDENTITY-CARDS' }]}
-          sectionKey="identity"
+          fileKey="REC-10-IDENTITY-CARDS"
+          program="porn-recovery"
         />
       </div>
     </section>

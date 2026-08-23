@@ -33,9 +33,11 @@ import {
   Package,
   CircleDot,
   ChevronRight,
-  Mail
+  Mail,
+  Loader2,
 } from 'lucide-react';
 
+import { Input } from "@/components/ui/input";
 // Types
 type QuizResults = {
   overallScore: number;
@@ -496,7 +498,7 @@ export default function QuizResultsPage() {
   }, [results]);
   // Flag Recovery as discovered for Dashboard integration
   useEffect(() => {
-    if (results?.emotionalRegulation < 40) {
+    if (results?.emotionalRegulation != null && results.emotionalRegulation < 40) {
       try { localStorage.setItem('tamkinly_recovery_discovered', 'true'); } catch {}
     }
   }, [results?.emotionalRegulation]);

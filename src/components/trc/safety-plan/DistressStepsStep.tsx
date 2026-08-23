@@ -49,7 +49,8 @@ export default function DistressStepsStep({ locale, steps, onUpdate, onNext, onB
   const handleActionChange = (level: string, action: string) => {
     const updated = DISTRESS_LEVELS.map(l => ({
       level: l,
-      action: l === level ? action : (steps.find(s => s.level === l)?.action || ''),
+      actionAr: l === level ? action : (steps.find(s => s.level === l)?.actionAr || ''),
+      actionEn: l === level ? action : (steps.find(s => s.level === l)?.actionEn || ''),
     }));
     onUpdate(updated);
   };
@@ -59,7 +60,7 @@ export default function DistressStepsStep({ locale, steps, onUpdate, onNext, onB
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: 'easeOut' as any }}
         className="max-w-2xl w-full"
       >
         <div className="flex items-center gap-3 mb-2">
@@ -74,7 +75,7 @@ export default function DistressStepsStep({ locale, steps, onUpdate, onNext, onB
         <div className="space-y-4 mb-8">
           {DISTRESS_LEVELS.map(level => {
             const step = steps.find(s => s.level === level);
-            const action = step?.action || '';
+            const action = step ? (locale === 'ar' ? step.actionAr : step.actionEn) : '';
             const color = LEVEL_COLORS[level];
             const bgColor = LEVEL_BG[level];
 

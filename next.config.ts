@@ -34,7 +34,6 @@ const nextConfig: NextConfig = {
   // NOTE: ignoreBuildErrors was true; we keep it true for now because
   // the codebase has accumulated type errors. Setting to false would
   // block the build. TODO: clean up TS errors and set to false.
-  typescript: { ignoreBuildErrors: true },
   
   // Enable strict mode for catching subtle bugs (was disabled)
   reactStrictMode: false, // keep false in production to avoid double-render overhead

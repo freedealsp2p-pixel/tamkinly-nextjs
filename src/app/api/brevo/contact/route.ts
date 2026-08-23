@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     const result = await BrevoClient.contacts.upsert({
       email,
       attributes,
-      listIds: [...new Set(targetLists)],
+      listIds: [...new Set(targetLists)] as number[],
     });
 
     if (!result.success) {

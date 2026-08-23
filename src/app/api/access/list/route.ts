@@ -1,40 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyAdminPassword } from '@/lib/admin-auth';
+import { getAdminSession } from '@/lib/admin-auth-jwt';
 
-// Extract password from Authorization header or query param (deprecated)
+// Extract credentials from Authorization header ONLY (no query string)
 function extractCredentials(request: NextRequest): string | null {
-  // Primary: check Authorization header
   const authHeader = request.headers.get('authorization');
-  if (authHeader) {
-    // Support both "Bearer <password>" and raw password
-    if (authHeader.startsWith('Bearer ')) {
-      return authHeader.slice(7);
-    }
-    return authHeader;
+  if (!authHeader) return null;
+  if (authHeader.startsWith('Bearer ')) {
+    return authHeader.slice(7);
   }
-
-  // Deprecated: check query param with warning
-  const queryPassword = request.nextUrl.searchParams.get('password');
-  if (queryPassword) {
-    console.warn('[Security] Password in query string is deprecated. Use Authorization header instead.');
-    return queryPassword;
-  }
-
-  return null;
+  return authHeader;
 }
 
-// Get all access codes (admin only - simple password protection)
+// Get all access codes (admin only)
 export async function GET(request: NextRequest) {
   try {
-    const password = extractCredentials(request);
-
-    // Use unified admin password verification
-    if (!verifyAdminPassword(password || '')) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
+    // Prefer JWT session, fall back to Authorization header password
+    const session = await getAdminSession();
+    if (!session) {
+      const creds = extractCredentials(request);
+      if (!creds) {
+        return NextResponse.json(
+          { success: false, error: 'Unauthorized' },
+          { status: 401 }
+        );
+      }
+      const { verifyAdminPassword } = await import('@/lib/admin-auth');
+      if (!verifyAdminPassword(creds)) {
+        return NextResponse.json(
+          { success: false, error: 'Unauthorized' },
+          { status: 401 }
+        );
+      }
     }
 
     try {
@@ -60,7 +57,6 @@ export async function GET(request: NextRequest) {
       });
     } catch (dbError) {
       console.error('Database error:', dbError);
-      // Return empty codes array if database error
       return NextResponse.json({
         success: true,
         codes: [],
@@ -76,15 +72,24 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// Delete an access code
+// Delete an access code (admin only - JWT required)
 export async function DELETE(request: NextRequest) {
   try {
-    const { id, password } = await request.json();
-
-    if (!verifyAdminPassword(password || '')) {
+    const session = await getAdminSession();
+    if (!session) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
+      );
+    }
+
+    const body = await request.json();
+    const { id } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Access code ID is required' },
+        { status: 400 }
       );
     }
 

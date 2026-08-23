@@ -168,8 +168,8 @@ export default function RecoveryFutureSelf() {
         </AnimatePresence>
 
         <SectionDownloadButton
-          files={[{ fileKey: 'REC-11-FUTURE-SELF-LETTER' }]}
-          sectionKey="futureSelf"
+          fileKey="REC-11-FUTURE-SELF-LETTER"
+          program="porn-recovery"
         />
       </div>
     </section>

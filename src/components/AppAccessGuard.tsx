@@ -9,8 +9,6 @@ import { useLocale } from '@/components/providers/LocaleProvider';
 
 const TIER_HIERARCHY: Record<string, number> = {
   FREE: 0, BASIC: 1, PREMIUM: 2, MASTERY: 3,
-  // Legacy aliases (back-compat)
-  BASIC: 1, MASTERY: 3,
 };
 
 const APP_TIERS: Record<string, string> = {

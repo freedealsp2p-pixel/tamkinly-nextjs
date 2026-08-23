@@ -183,7 +183,7 @@ export const ProductsService = {
             description: product.description,
             shortDesc: product.shortDesc,
             category: product.category,
-            type: product.type,
+            type: product.type as any,
             accessTier: product.accessTier,
             image: product.image,
             features: JSON.stringify(product.features),

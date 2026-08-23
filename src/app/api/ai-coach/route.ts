@@ -150,7 +150,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Verify ownership of existing conversation
-    if (conversation && !verifyConversationOwnership(conversation, user)) {
+    if (conversation && !verifyConversationOwnership(conversation, user ?? null)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
@@ -280,7 +280,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: true, messages: [], messageCount: 0, freeMessagesRemaining: 2 });
     }
 
-    if (!verifyConversationOwnership(conversation, user)) {
+    if (!verifyConversationOwnership(conversation, user ?? null)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
@@ -315,7 +315,7 @@ export async function DELETE(request: NextRequest) {
     const conversation = await db.aICoachConversation.findUnique({
       where: { sessionId },
     });
-    if (conversation && !verifyConversationOwnership(conversation, user)) {
+    if (conversation && !verifyConversationOwnership(conversation, user ?? null)) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 

@@ -221,6 +221,7 @@ export default function ReferralDashboard({ referralCode = "TMLY-XXXX-XXXX" }: {
           </h3>
           <div className="space-y-3">
             {Object.entries(TIER_CONFIG).map(([key, config]) => (
+              // @ts-expect-error ringColor is a Tailwind utility
               <div key={key} className={`flex items-center justify-between p-3 rounded-lg ${tier === key ? "bg-white shadow-md ring-2" : "bg-white/50"}`} style={tier === key ? { ringColor: config.color } : {}}>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: `${config.color}20` }}>

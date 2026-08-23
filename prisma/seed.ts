@@ -86,7 +86,7 @@ async function main() {
       nameAr: 'مخطط تجريبي 7 أيام',
       description: 'Experience the full Identity Recode system for 7 days with guided daily prompts and evidence tracking.',
       descriptionAr: 'جرب نظام إعادة تشفير الهوية الكامل لمدة 7 أيام مع موجهات يومية وتتبع الأدلة.',
-      minTier: AccessTier.TRIAL,
+      minTier: AccessTier.BASIC,
       isFreeApp: false,
       icon: 'Calendar',
       color: '#1F6F78',
@@ -273,7 +273,7 @@ async function main() {
       nameAr: 'تنظيم العواطف',
       description: 'Assess your emotional regulation strategies based on the validated ERQ questionnaire.',
       descriptionAr: 'قيّم استراتيجيات تنظيم العواطف لديك بناءً على استبيان ERQ المعتمد.',
-      minTier: AccessTier.BUNDLE,
+      minTier: AccessTier.MASTERY,
       isFreeApp: false,
       icon: 'Heart',
       color: '#E57373',
@@ -294,7 +294,7 @@ async function main() {
       nameAr: 'مدرب الهوية الذكي',
       description: 'Get personalized coaching insights and recommendations powered by AI. Your 24/7 transformation companion.',
       descriptionAr: 'احصل على رؤى وتوصيات تدريب مخصصة مدعومة بالذكاء الاصطناعي.',
-      minTier: AccessTier.BUNDLE,
+      minTier: AccessTier.MASTERY,
       isFreeApp: false,
       icon: 'Sparkles',
       color: '#3DD4B0',
@@ -316,7 +316,7 @@ async function main() {
       nameAr: 'مجتمع التحول',
       description: 'Connect with others on the same journey. Share wins, get support, and stay accountable.',
       descriptionAr: 'تواصل مع الآخرين في نفس الرحلة. شارك الانتصارات واحصل على الدعم.',
-      minTier: AccessTier.BUNDLE,
+      minTier: AccessTier.MASTERY,
       isFreeApp: false,
       icon: 'Users',
       color: '#1F6F78',
@@ -338,7 +338,7 @@ async function main() {
       nameAr: 'الدعم المتميز',
       description: 'Get priority access to our support team with guaranteed 24-hour response time plus exclusive monthly live sessions.',
       descriptionAr: 'احصل على وصول ذو أولوية إلى فريق الدعم مع ضمان الرد خلال 24 ساعة.',
-      minTier: AccessTier.BUNDLE,
+      minTier: AccessTier.MASTERY,
       isFreeApp: false,
       icon: 'Headphones',
       color: '#0F1C2E',
@@ -375,10 +375,10 @@ async function main() {
   
   const tierCounts = {
     FREE: apps.filter(a => a.minTier === AccessTier.FREE).length,
-    TRIAL: apps.filter(a => a.minTier === AccessTier.TRIAL).length,
+    TRIAL: apps.filter(a => a.minTier === AccessTier.BASIC).length,
     BASIC: apps.filter(a => a.minTier === AccessTier.BASIC).length,
     PREMIUM: apps.filter(a => a.minTier === AccessTier.PREMIUM).length,
-    BUNDLE: apps.filter(a => a.minTier === AccessTier.BUNDLE).length,
+    BUNDLE: apps.filter(a => a.minTier === AccessTier.MASTERY).length,
   };
   
   console.log(`🆓 FREE (Lead Magnet): ${tierCounts.FREE} apps`);
@@ -409,7 +409,7 @@ async function main() {
       currency: 'USD',
       type: 'TRIAL' as const,
       category: 'trial',
-      accessTier: AccessTier.TRIAL,
+      accessTier: AccessTier.BASIC,
       includedApps: JSON.stringify(['trial-planner', 'identity-gap-quiz', 'values-clarification', 'daily-reflection']),
       features: JSON.stringify([
         '7-Day Guided Journey',
@@ -515,7 +515,7 @@ async function main() {
       currency: 'USD',
       type: 'BUNDLE' as const,
       category: 'bundle',
-      accessTier: AccessTier.BUNDLE,
+      accessTier: AccessTier.MASTERY,
       includedApps: JSON.stringify(['daily-planner', 'decision-analysis', 'evidence-tracking', 'progress-dashboard', 'emotion-regulation', 'ai-identity-coach', 'community-access', 'priority-support']),
       features: JSON.stringify([
         'All PDF products',

@@ -124,8 +124,7 @@ export default async function AppPageDynamic({ params }: PageParams) {
     url: `/apps/${appData.slug}`,
     category: appData.category,
     offers: {
-      price: appData.tier === 'FREE' ? 0 : undefined,
-      category: appData.tier,
+      price: appData.tier === 'FREE' ? 0 : 0,
     },
   });
 

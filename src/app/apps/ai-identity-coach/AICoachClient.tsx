@@ -43,7 +43,7 @@ interface Message {
 // Tier hierarchy for access check
 // ============================================
 const TIER_HIERARCHY: Record<string, number> = {
-  FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4,
+  FREE: 0, BASIC: 1, PREMIUM: 2, MASTERY: 3,
 };
 
 // ============================================
@@ -127,7 +127,7 @@ function FreeLimitReached({ locale, onAccessGranted }: { locale: string; onAcces
       });
       const data = await response.json();
       if (response.ok && data.valid) {
-        const TIER_HIERARCHY_LOCAL: Record<string, number> = { FREE: 0, BASIC: 1, BASIC: 2, PREMIUM: 3, MASTERY: 4 };
+        const TIER_HIERARCHY_LOCAL: Record<string, number> = { FREE: 0, BASIC: 1, PREMIUM: 2, MASTERY: 3 };
         const tierLevel = TIER_HIERARCHY_LOCAL[data.tier] || 0;
         if (tierLevel >= TIER_HIERARCHY_LOCAL['PREMIUM']) {
           localStorage.setItem('tamkinly_access', JSON.stringify({

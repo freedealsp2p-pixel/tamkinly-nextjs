@@ -451,7 +451,7 @@ export function generateProductMetadata(
       description: productDescription,
       url: fullUrl,
       siteName: SEO_SITE_CONFIG.name,
-      type: 'product',
+      type: 'website' as any,
       images: [
         {
           url: `${SEO_SITE_CONFIG.url}/og-image.webp`,

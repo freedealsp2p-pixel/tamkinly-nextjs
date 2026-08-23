@@ -36,7 +36,7 @@ export async function checkAppAccess(appSlug: string, accessCode?: string): Prom
   const requiredLevel = TIER_HIERARCHY[appConfig.tier] || 0;
 
   // Try to get authenticated user
-  let user = null;
+  let user: any = null;
   try {
     user = await getCurrentUser();
   } catch {

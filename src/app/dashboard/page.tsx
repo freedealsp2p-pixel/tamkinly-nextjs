@@ -37,6 +37,7 @@ import {
   Gift,
   Copy,
   Check,
+  Sun,
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';

@@ -570,7 +570,7 @@ export default function IdentityQuizPage() {
                 
                 {question.subtitle && (
                   <p className="text-[#8A94A6] mb-8 text-lg">
-                    {getText(question.subtitle, question.subtitleAr)}
+                    {getText(question.subtitle, question.subtitleAr || '')}
                   </p>
                 )}
 

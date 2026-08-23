@@ -40,7 +40,7 @@ export default function RecoveryPage() {
       <RecoveryHero />
       <RecoveryEligibilityNotice context="porn-recovery" />
       <div id="recognition">
-        <RecoveryRecognition onComplete={() => markStepStarted('recognition')} />
+        <RecoveryRecognition />
       </div>
       <div id="brain">
         <RecoveryBrain />

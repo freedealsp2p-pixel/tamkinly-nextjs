@@ -56,7 +56,7 @@ export function BlogArticleContentClient({ article }: { article: BlogArticle }) 
                 className={`mb-4 px-4 py-2 border-accent/30 text-accent bg-accent/10 ${
                   article.tier === 'FREE' ? 'border-green-400/50 text-green-400 bg-green-400/10' :
                   article.tier === 'BASIC' ? 'border-blue-400/50 text-blue-400 bg-blue-400/10' :
-                  article.tier === 'BUNDLE' ? 'border-purple-400/50 text-purple-400 bg-purple-400/10' : ''
+                  article.tier === 'MASTERY' ? 'border-purple-400/50 text-purple-400 bg-purple-400/10' : ''
                 }`}
               >
                 {localCategory}

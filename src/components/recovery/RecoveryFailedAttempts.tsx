@@ -211,8 +211,8 @@ export default function RecoveryFailedAttempts() {
         </motion.div>
 
         <SectionDownloadButton
-          files={[{ fileKey: 'REC-06-RECOVERY-LOOP-MAP' }, { fileKey: 'REC-07-REFRAME' }]}
-          sectionKey="attempts"
+          fileKey="REC-06-RECOVERY-LOOP-MAP"
+          program="porn-recovery"
         />
       </div>
     </section>

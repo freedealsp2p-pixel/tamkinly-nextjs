@@ -66,6 +66,7 @@ export async function POST(request: NextRequest) {
       description: safeDescription,
       successUrl: `${baseUrl}/payment/success?orderId=${encodeURIComponent(finalOrderId)}`,
       cancelUrl: `${baseUrl}/payment/cancel?orderId=${encodeURIComponent(finalOrderId)}`,
+      webhookUrl: (process.env.NEXT_PUBLIC_BASE_URL || 'https://tamkinly.com') + '/api/payment/webhook',
       metadata: {
         productId: productId || '',
         customerEmail,

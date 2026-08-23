@@ -18,8 +18,8 @@ import { useLocale, useTranslations } from '@/components/providers/LocaleProvide
 export type RecoveryProgram = 'trc' | 'porn-recovery';
 
 export interface SafetyResponseProps {
-  assetId: string;
-  program: RecoveryProgram;
+  assetId?: string;
+  program?: RecoveryProgram;
   fallbackHref?: string;
   className?: string;
 }
@@ -37,8 +37,8 @@ function getReadingRoute(program: RecoveryProgram): string {
 }
 
 export function SafetyResponse({
-  assetId,
-  program,
+  assetId = "default",
+  program = "porn-recovery",
   fallbackHref,
   className,
 }: SafetyResponseProps) {

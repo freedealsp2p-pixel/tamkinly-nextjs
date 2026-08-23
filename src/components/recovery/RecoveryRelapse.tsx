@@ -263,8 +263,8 @@ export default function RecoveryRelapse() {
         </motion.div>
 
         <SectionDownloadButton
-          files={[{ fileKey: 'REC-09-RELAPSE-SCENARIO-REVIEW' }]}
-          sectionKey="relapse"
+          fileKey="REC-09-RELAPSE-SCENARIO-REVIEW"
+          program="porn-recovery"
         />
       </div>
     </section>

@@ -86,7 +86,7 @@ export default function A52Page() {
         </div>
       )}
 
-      <MedicalDisclaimer program="trc" />
+      <MedicalDisclaimer />
 
       <AnimatePresence mode="wait">
         {state.phase === 'entry' && (

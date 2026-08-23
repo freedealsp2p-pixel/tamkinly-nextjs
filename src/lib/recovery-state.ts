@@ -284,7 +284,7 @@ export function markTrcStepCompleted(stepId: string): TrcState {
   // Calculate progress based on ALL available steps (Wave 2 = 9 steps)
   const allAvailableStepIds = TRC_STEPS.filter(s => s.isAvailable).map(s => s.id);
   const availableStepsCount = allAvailableStepIds.length;
-  const completedAvailableCount = state.completedSteps.filter(s => allAvailableStepIds.includes(s)).length;
+  const completedAvailableCount = state.completedSteps.filter(s => allAvailableStepIds.includes(s as any)).length;
   state.totalProgress = Math.round((completedAvailableCount / availableStepsCount) * 100);
   if (state.totalProgress >= 100) {
     state.completionState = 'completed';

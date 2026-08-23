@@ -95,7 +95,7 @@ export default function SafePlacePage() {
         </div>
       )}
 
-      <MedicalDisclaimer program="trc" />
+      <MedicalDisclaimer />
 
       <AnimatePresence mode="wait">
         {state.phase === 'entry' && (
