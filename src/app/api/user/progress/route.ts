@@ -12,21 +12,12 @@ export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.id) {
-      // Return demo data for unauthenticated users
-      return NextResponse.json({
-        isAuthenticated: false,
-        identityScore: 50,
-        phase: 'Awareness',
-        currentStreak: 0,
-        bestStreak: 0,
-        totalVotes: 0,
-        habitsCompleted: 0,
-        wordsWritten: 0,
-        achievements: [],
-        recentActivity: [],
-      });
-    }
+  if (!session?.user?.id) {
+    return NextResponse.json(
+      { error: 'Authentication required' },
+      { status: 401 }
+    );
+  }
 
     const userId = (session.user as any).id;
 

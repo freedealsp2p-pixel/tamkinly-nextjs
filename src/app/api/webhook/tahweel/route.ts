@@ -161,9 +161,8 @@ async function handleSuccessfulPayment(paymentData: {
 export async function POST(request: NextRequest) {
   try {
     const rawBody = await request.text();
-    const body = JSON.parse(rawBody);
-    
-    // Verify signature
+
+    // Verify signature BEFORE parsing body
     const signature = request.headers.get('x-tahweel-signature') || 
                       request.headers.get('x-webhook-signature');
     
@@ -173,7 +172,18 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
-    
+
+    // Parse body after signature verification
+    let body: any;
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      return NextResponse.json(
+        { error: 'Invalid JSON payload' },
+        { status: 400 }
+      );
+    }
+
     console.log('Tahweel webhook received:', JSON.stringify(body, null, 2));
     
     // Parse webhook event
@@ -227,7 +237,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Tahweel webhook error:', error);
     return NextResponse.json(
-      { error: 'Webhook processing failed', details: String(error) },
+      { error: 'Webhook processing failed' },
       { status: 500 }
     );
   }

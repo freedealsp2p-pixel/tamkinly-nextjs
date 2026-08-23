@@ -145,3 +145,42 @@
 2026-08-23 18:22:56 -04:00:     at async l (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:9746)
 2026-08-23 18:22:56 -04:00:     at async o (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:10787)
 2026-08-23 18:22:56 -04:00:     at async Module.N [as handler] (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:11894)
+2026-08-23 18:51:29 -04:00: Tahweel webhook error: SyntaxError: Unexpected end of JSON input
+2026-08-23 18:51:29 -04:00:     at JSON.parse (<anonymous>)
+2026-08-23 18:51:29 -04:00:     at C (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:4951)
+2026-08-23 18:51:29 -04:00:     at async l (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:9746)
+2026-08-23 18:51:29 -04:00:     at async o (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:10787)
+2026-08-23 18:51:29 -04:00:     at async Module.N [as handler] (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:11894)
+2026-08-23 18:51:36 -04:00: Tahweel webhook error: SyntaxError: Unexpected end of JSON input
+2026-08-23 18:51:36 -04:00:     at JSON.parse (<anonymous>)
+2026-08-23 18:51:36 -04:00:     at C (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:4951)
+2026-08-23 18:51:36 -04:00:     at async l (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:9746)
+2026-08-23 18:51:36 -04:00:     at async o (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:10787)
+2026-08-23 18:51:36 -04:00:     at async Module.N [as handler] (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:11894)
+2026-08-23 18:51:42 -04:00: Tahweel webhook error: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+2026-08-23 18:51:42 -04:00:     at JSON.parse (<anonymous>)
+2026-08-23 18:51:42 -04:00:     at C (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:4951)
+2026-08-23 18:51:42 -04:00:     at async l (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:9746)
+2026-08-23 18:51:42 -04:00:     at async o (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:10787)
+2026-08-23 18:51:42 -04:00:     at async Module.N [as handler] (.next/server/chunks/[root-of-the-server]__1c3uicx._.js:1:11894)
+2026-08-23 18:51:50 -04:00: TAHWEEL_WEBHOOK_SECRET not configured — rejecting webhook
+2026-08-23 19:29:00 -04:00: Error: The Server Reference ID did not match the expected format. Received "e83e15df".
+2026-08-23 19:29:00 -04:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-08-23 19:29:00 -04:00:     at ignore-listed frames
+2026-08-23 19:29:02 -04:00: Error: The Server Reference ID did not match the expected format. Received "b51960b0".
+2026-08-23 19:29:02 -04:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-08-23 19:29:02 -04:00:     at ignore-listed frames
+2026-08-23 19:32:22 -04:00: ⨯ Error: ENOENT: no such file or directory, open '/var/www/tamkinly/.next/standalone/.next/server/edge/chunks/node_modules_next_dist_compiled_@vercel_og_yoga_0athij3.wasm'
+2026-08-23 19:32:22 -04:00:     at ignore-listed frames {
+2026-08-23 19:32:22 -04:00:   errno: -2,
+2026-08-23 19:32:22 -04:00:   code: 'ENOENT',
+2026-08-23 19:32:22 -04:00:   syscall: 'open',
+2026-08-23 19:32:22 -04:00:   path: '/var/www/tamkinly/.next/standalone/.next/server/edge/chunks/node_modules_next_dist_compiled_@vercel_og_yoga_0athij3.wasm'
+2026-08-23 19:32:22 -04:00: }
+2026-08-23 19:32:22 -04:00: ⨯ Error: ENOENT: no such file or directory, open '/var/www/tamkinly/.next/standalone/.next/server/edge/chunks/node_modules_next_dist_compiled_@vercel_og_yoga_0athij3.wasm'
+2026-08-23 19:32:22 -04:00:     at ignore-listed frames {
+2026-08-23 19:32:22 -04:00:   errno: -2,
+2026-08-23 19:32:22 -04:00:   code: 'ENOENT',
+2026-08-23 19:32:22 -04:00:   syscall: 'open',
+2026-08-23 19:32:22 -04:00:   path: '/var/www/tamkinly/.next/standalone/.next/server/edge/chunks/node_modules_next_dist_compiled_@vercel_og_yoga_0athij3.wasm'
+2026-08-23 19:32:22 -04:00: }

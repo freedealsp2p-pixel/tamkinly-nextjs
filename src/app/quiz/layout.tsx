@@ -6,7 +6,12 @@ import { QUIZ_METADATA } from '@/lib/seo-pages';
 import { FAQPageJsonLd } from '@/components/seo/JsonLd';
 import { QuizFaqSection } from './quiz-faq-section';
 
-export const metadata: Metadata = QUIZ_METADATA;
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata() {
+  const locale = await getLocale();
+  return generatePageMetadataFromConfig('quiz', locale);
+}
 
 const quizFAQEn = [
   {

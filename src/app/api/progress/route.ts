@@ -10,12 +10,10 @@ export async function GET(request: NextRequest) {
     const userId = session?.user?.id;
 
     if (!userId) {
-      // Return demo data for anonymous users
-      return NextResponse.json({
-        success: true,
-        isDemo: true,
-        progress: getDemoProgress(),
-      });
+      return NextResponse.json(
+        { success: false, error: 'Authentication required' },
+        { status: 401 }
+      );
     }
 
     // Get transformation journey

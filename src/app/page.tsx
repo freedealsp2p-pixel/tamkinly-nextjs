@@ -897,8 +897,6 @@ function RecoverySection() {
 export default function Home() {
   return (
     <>
-      {/* JSON-LD Structured Data for SEO */}
-      <DefaultJsonLd />
 
       <HeroSection />
       <SelfIdentificationSection />
