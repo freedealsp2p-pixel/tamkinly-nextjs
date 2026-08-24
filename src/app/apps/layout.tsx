@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { PAGE_METADATA } from '@/lib/seo-pages';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
 import { AppAccessGuard } from '@/components/AppAccessGuard';
 
 import { getLocale } from '@/lib/get-locale';

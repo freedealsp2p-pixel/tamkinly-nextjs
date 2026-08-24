@@ -6,3 +6,81 @@
 
 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
   Creating an optimized production build ...
+▲ Next.js 16.2.12 (Turbopack)
+- Environments: .env.local, .env
+- Experiments (use with caution):
+  ✓ memoryBasedWorkersCount
+  · optimizePackageImports
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.9min
+  Running TypeScript ...
+Failed to type check.
+
+./src/app/apps/layout.tsx:10:10
+Type error: Cannot find name 'generatePageMetadataFromConfig'.
+
+  [90m 8 |[0m [36mexport[0m [36masync[0m [36mfunction[0m generateMetadata() {
+  [90m 9 |[0m   [36mconst[0m locale = [36mawait[0m getLocale();
+[31m[1m>[0m [90m10 |[0m   [36mreturn[0m generatePageMetadataFromConfig([32m'apps'[0m, locale);
+  [90m   |[0m          [31m[1m^[0m
+  [90m11 |[0m }
+  [90m12 |[0m
+  [90m13 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAppsLayout[0m({
+Next.js build worker exited with code: 1 and signal: null
+BUILD_FAILED
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [tamkinly-prod](ids: [ 12 ])
+[PM2] [tamkinly-prod](12) ✓
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 12 │ tamkinly-prod    │ default     │ N/A     │ fork    │ 0        │ 0      │ 495  │ waiting … │ 0%       │ 0b       │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                │ 3.0.0         │ 2925412  │ online   │ 0    │ 0.3%     │ 17.8mb   │ root     │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 81.9% | ram usage: 25.8% | eth0: ⇓ 0mb/s ⇑ 0.001mb/s | disk: ⇓ 60.345mb/s ⇑ 24.163mb/s / 67.94% |
+▲ Next.js 16.2.12 (Turbopack)
+- Environments: .env.local, .env
+- Experiments (use with caution):
+  ✓ memoryBasedWorkersCount
+  · optimizePackageImports
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.5min
+  Running TypeScript ...
+Failed to type check.
+
+./src/app/layout.tsx:63:20
+Type error: Cannot find name 'generatePageMetadataFromConfig'.
+
+  [90m61 |[0m [36mexport[0m [36masync[0m [36mfunction[0m generateMetadata(): [33mPromise[0m<[33mMetadata[0m> {
+  [90m62 |[0m   [36mconst[0m locale = [36mawait[0m getLocaleFromCookies();
+[31m[1m>[0m [90m63 |[0m   [36mconst[0m pageMeta = generatePageMetadataFromConfig([32m'home'[0m, locale);
+  [90m   |[0m                    [31m[1m^[0m
+  [90m64 |[0m
+  [90m65 |[0m   [36mreturn[0m {
+  [90m66 |[0m     ...pageMeta,
+Next.js build worker exited with code: 1 and signal: null
+BUILD_FAILED
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [tamkinly-prod](ids: [ 12 ])
+[PM2] [tamkinly-prod](12) ✓
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 12 │ tamkinly-prod    │ default     │ N/A     │ fork    │ 0        │ 0      │ 505  │ waiting … │ 0%       │ 0b       │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                │ 3.0.0         │ 2925412  │ online   │ 0    │ 0.3%     │ 18.0mb   │ root     │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 87.1% | ram usage: 25.6% | eth0: ⇓ 0.001mb/s ⇑ 0.001mb/s | disk: ⇓ 64.262mb/s ⇑ 27.14mb/s / 67.94% |

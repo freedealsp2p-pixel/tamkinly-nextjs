@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BLOG_METADATA, SEO_SITE_CONFIG } from '@/lib/seo-pages';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
 
 // Override blog-specific metadata
 import { getLocale } from '@/lib/get-locale';

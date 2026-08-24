@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { PRODUCTS_METADATA } from '@/lib/seo-pages';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
 import { getLocale } from '@/lib/get-locale';
 
 export const dynamic = "force-dynamic";

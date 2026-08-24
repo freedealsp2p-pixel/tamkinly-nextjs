@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import { SEO_SITE_CONFIG, HOME_METADATA, PAGE_METADATA } from "@/lib/seo-pages";
+import { SEO_SITE_CONFIG, PAGE_METADATA, generatePageMetadataFromConfig } from "@/lib/seo-pages";
 import { Analytics } from "@/components/Analytics";
 import { DefaultJsonLd } from "@/components/seo/JsonLd";
 import { CookieConsent } from "@/components/CookieConsent";
