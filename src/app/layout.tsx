@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import { SEO_SITE_CONFIG, PAGE_METADATA, generatePageMetadataFromConfig } from "@/lib/seo-pages";
+import { SEO_SITE_CONFIG, PAGE_METADATA, HOME_METADATA } from "@/lib/seo-pages";
 import { Analytics } from "@/components/Analytics";
 import { DefaultJsonLd } from "@/components/seo/JsonLd";
 import { CookieConsent } from "@/components/CookieConsent";
@@ -60,8 +60,7 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-  const pageMeta = generatePageMetadataFromConfig('home', locale);
-
+    const config = PAGE_METADATA["home"];
   return {
     ...pageMeta,
     metadataBase: new URL(SEO_SITE_CONFIG.url),

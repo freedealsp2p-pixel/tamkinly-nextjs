@@ -84,3 +84,42 @@ Module
 │ 0  │ pm2-logrotate                │ 3.0.0         │ 2925412  │ online   │ 0    │ 0.3%     │ 18.0mb   │ root     │
 └────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
 host metrics | cpu: 87.1% | ram usage: 25.6% | eth0: ⇓ 0.001mb/s ⇑ 0.001mb/s | disk: ⇓ 64.262mb/s ⇑ 27.14mb/s / 67.94% |
+▲ Next.js 16.2.12 (Turbopack)
+- Environments: .env.local, .env
+- Experiments (use with caution):
+  ✓ memoryBasedWorkersCount
+  · optimizePackageImports
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.7min
+  Running TypeScript ...
+Failed to type check.
+
+./src/app/layout.tsx:74:9
+Type error: Object literal may only specify known properties, and 'apple' does not exist in type 'URL | IconDescriptor'.
+
+  [90m72 |[0m       { url: [32m"/favicon-32x32.png?v=12"[0m, sizes: [32m"32x32"[0m, [36mtype[0m: [32m"image/png"[0m },
+  [90m73 |[0m       { url: [32m"/favicon-16x16.png?v=12"[0m, sizes: [32m"16x16"[0m, [36mtype[0m: [32m"image/png"[0m },
+[31m[1m>[0m [90m74 |[0m       { apple: [{ url: [32m"/apple-touch-icon.png?v=12"[0m, sizes: [32m"180x180"[0m, [36mtype[0m: [32m"image/png"[0m }...
+  [90m   |[0m         [31m[1m^[0m
+  [90m75 |[0m       { other: [{ rel: [32m"mask-icon"[0m, url: [32m"/logo-icon.svg"[0m, color: [32m"#0F1C2E"[0m }] },
+  [90m76 |[0m     ],
+  [90m77 |[0m
+Next.js build worker exited with code: 1 and signal: null
+BUILD_FAILED
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [tamkinly-prod](ids: [ 12 ])
+[PM2] [tamkinly-prod](12) ✓
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 12 │ tamkinly-prod    │ default     │ N/A     │ fork    │ 0        │ 0      │ 515  │ waiting … │ 0%       │ 0b       │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                │ 3.0.0         │ 2925412  │ online   │ 0    │ 0.2%     │ 15.4mb   │ root     │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 100% | ram usage: 94% | eth0: ⇓ 0.001mb/s ⇑ 0.001mb/s | disk: ⇓ 64.687mb/s ⇑ 30.428mb/s / 67.94% |

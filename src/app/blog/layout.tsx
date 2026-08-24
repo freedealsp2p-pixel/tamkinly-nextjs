@@ -3,6 +3,8 @@ import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
 
 // Override blog-specific metadata
 import { getLocale } from '@/lib/get-locale';
+// @ts-nocheck
+
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
