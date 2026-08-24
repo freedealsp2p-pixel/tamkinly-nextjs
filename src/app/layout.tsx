@@ -70,9 +70,11 @@ export async function generateMetadata(): Promise<Metadata> {
       { url: "/favicon.png?v=12", sizes: "96x96", type: "image/png" },
       { url: "/favicon-32x32.png?v=12", sizes: "32x32", type: "image/png" },
       { url: "/favicon-16x16.png?v=12", sizes: "16x16", type: "image/png" },
-      { apple: [{ url: "/apple-touch-icon.png?v=12", sizes: "180x180", type: "image/png" }] },
-      { other: [{ rel: "mask-icon", url: "/logo-icon.svg", color: "#0F1C2E" }] },
+      { url: "/apple-touch-icon.png?v=12", sizes: "180x180", type: "image/png", rel: "apple-touch-icon" },
     ],
+    other: {
+      "mask-icon": { url: "/logo-icon.svg", color: "#0F1C2E" },
+    },
 
     manifest: "/manifest.json",
 
