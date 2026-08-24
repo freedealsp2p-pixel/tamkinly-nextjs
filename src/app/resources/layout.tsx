@@ -1,13 +1,7 @@
 import type { Metadata } from 'next';
 import { RESOURCES_METADATA } from '@/lib/seo-pages';
-import { getLocale } from '@/lib/get-locale';
 
-export const dynamic = "force-dynamic";
-
-export async function generateMetadata() {
-  const locale = await getLocale();
-  return generatePageMetadataFromConfig('resources', locale);
-}
+export const metadata: Metadata = RESOURCES_METADATA;
 
 export default function ResourcesLayout({
   children,
