@@ -55,7 +55,7 @@ function BodyOutlineSVG({ highlightPart }: { highlightPart: string }) {
   const dimColor = COLORS.textMuted;
 
   return (
-    <svg viewBox="0 0 100 100" className="w-48 h-64 mx-auto" aria-label="Body outline">
+    <svg aria-hidden="true" viewBox="0 0 100 100" className="w-48 h-64 mx-auto" aria-label="Body outline">
       {/* Head */}
       <ellipse
         cx="50" cy="10" rx="9" ry="10"

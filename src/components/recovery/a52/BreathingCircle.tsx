@@ -72,7 +72,7 @@ export function BreathingCircle({
         </div>
 
         {/* SVG Progress Ring */}
-        <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 280 280">
+        <svg aria-hidden="true" className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 280 280">
           <circle
             cx="140" cy="140" r="135"
             fill="none"

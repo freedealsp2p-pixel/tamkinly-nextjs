@@ -313,9 +313,11 @@ export function generateWebSiteSchema() {
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     inLanguage: ['en', 'ar'],
-    // SearchAction removed: robots.txt disallows /search/ for all bots.
-    // Adding SearchAction pointing to a disallowed path creates a conflicting signal.
-    // Re-add if/when /search is opened to crawlers.
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_CONFIG.url}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
   };
 }
 

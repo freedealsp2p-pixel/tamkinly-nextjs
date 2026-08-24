@@ -20,7 +20,7 @@ export default function CompletionScreen({ onRepeat }: CompletionScreenProps) {
         {/* Acknowledgment */}
         <div className="text-center">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 bg-[#1F6F78]/10">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1F6F78" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1F6F78" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
               <polyline points="22 4 12 14.01 9 11.01" />
             </svg>

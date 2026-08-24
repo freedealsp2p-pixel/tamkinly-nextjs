@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import { SEO_SITE_CONFIG, PAGE_METADATA, HOME_METADATA, generatePageMetadataFromConfig } from "@/lib/seo-pages";
+import { SEO_SITE_CONFIG, PAGE_METADATA, HOME_METADATA } from "@/lib/seo-pages";
 import { Analytics } from "@/components/Analytics";
 import { DefaultJsonLd } from "@/components/seo/JsonLd";
 import { CookieConsent } from "@/components/CookieConsent";
@@ -60,9 +60,9 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocaleFromCookies();
-    // Home metadata via generatePageMetadataFromConfig
+    const config = PAGE_METADATA["home"];
   return {
-    ...generatePageMetadataFromConfig('home', locale),
+    ...pageMeta,
     metadataBase: new URL(SEO_SITE_CONFIG.url),
 
     icons: [
@@ -121,21 +121,6 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://t.contentsquare.net" />
         <link rel="dns-prefetch" href="https://static.hotjar.com" />
         <link rel="preconnect" href="https://t.contentsquare.net" />
-        {/* WebSite JSON-LD — single instance on every page */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'Tamkinly',
-              alternateName: 'تمكينلي',
-              description: 'A space to rebuild the human from within. Digital products for identity transformation and personal development.',
-              url: 'https://tamkinly.com',
-              inLanguage: ['en', 'ar'],
-            }),
-          }}
-        />
       </head>
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}
