@@ -72,10 +72,6 @@ export async function generateMetadata(): Promise<Metadata> {
       { url: "/favicon-16x16.png?v=12", sizes: "16x16", type: "image/png" },
       { url: "/apple-touch-icon.png?v=12", sizes: "180x180", type: "image/png", rel: "apple-touch-icon" },
     ],
-    other: {
-      "mask-icon": { url: "/logo-icon.svg", color: "#0F1C2E" },
-    },
-
     manifest: "/manifest.json",
 
     applicationName: locale === 'ar' ? SEO_SITE_CONFIG.nameAr : SEO_SITE_CONFIG.name,
@@ -88,6 +84,7 @@ export async function generateMetadata(): Promise<Metadata> {
     formatDetection: { telephone: false, email: true, address: false },
 
     other: {
+      "mask-icon": "/logo-icon.svg",
       "mobile-web-app-capable": "yes",
       "apple-mobile-web-app-capable": "yes",
       "theme-color": "#0F1C2E",
