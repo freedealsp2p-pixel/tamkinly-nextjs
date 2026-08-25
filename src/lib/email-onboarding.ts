@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * Email Onboarding Sequence for Tamkinly
  * 5-email journey over 14 days to retain and engage new users
@@ -227,8 +226,8 @@ export function getOnboardingProgress(currentDay: number): {
   currentEmail: OnboardingEmail | undefined;
 } {
   const totalSteps = ONBOARDING_EMAILS.length;
+  const currentEmail = getEmailForDay(currentDay);
   const completedSteps = ONBOARDING_EMAILS.filter(e => e.day <= currentDay).length;
-  // @ts-expect-error possibly undefined
   
   return {
     currentStep: completedSteps,

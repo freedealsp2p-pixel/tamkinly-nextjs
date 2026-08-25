@@ -5,7 +5,6 @@ const SITE_URL = 'https://tamkinly.com';
 
 import { getLocale } from '@/lib/get-locale';
 import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
-// @ts-nocheck
 
 export const dynamic = "force-dynamic";
 

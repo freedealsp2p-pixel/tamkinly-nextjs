@@ -60,19 +60,19 @@ while true; do
             ;;
         4)
             echo "📋 Showing logs (Ctrl+C to exit)..."
-            run_ssh "pm2 logs tamkinly-nextjs --lines 50"
+            run_ssh "pm2 logs tamkinly-prod --lines 50"
             ;;
         5)
             echo "🔄 Restarting..."
-            run_ssh "pm2 restart tamkinly-nextjs && pm2 status"
+            run_ssh "pm2 restart tamkinly-prod && pm2 status"
             ;;
         6)
             echo "⏹️ Stopping..."
-            run_ssh "pm2 stop tamkinly-nextjs && pm2 status"
+            run_ssh "pm2 stop tamkinly-prod && pm2 status"
             ;;
         7)
             echo "▶️ Starting..."
-            run_ssh "pm2 start tamkinly-nextjs && pm2 status"
+            run_ssh "pm2 start tamkinly-prod && pm2 status"
             ;;
         8)
             echo "💾 Creating backup..."
@@ -80,7 +80,7 @@ while true; do
             ;;
         9)
             echo "🧹 Cleaning and rebuilding..."
-            run_ssh "cd /var/www/tamkinly && rm -rf .next && NODE_OPTIONS='--max-old-space-size=768' bun run build && cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/ 2>/dev/null && pm2 restart tamkinly-nextjs"
+            run_ssh "cd /var/www/tamkinly && rm -rf .next && NODE_OPTIONS='--max-old-space-size=768' npx next build && cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/ 2>/dev/null && pm2 restart tamkinly-prod"
             ;;
         10)
             echo "📈 Server resources..."

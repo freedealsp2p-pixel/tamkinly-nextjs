@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 
 import { getLocale } from '@/lib/get-locale';
 import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
-// @ts-nocheck
 
 export const dynamic = "force-dynamic";
 

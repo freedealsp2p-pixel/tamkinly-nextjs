@@ -3,7 +3,6 @@ import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
 import { AppAccessGuard } from '@/components/AppAccessGuard';
 
 import { getLocale } from '@/lib/get-locale';
-// @ts-nocheck
 
 export const dynamic = "force-dynamic";
 
