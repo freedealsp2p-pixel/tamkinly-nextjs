@@ -511,16 +511,32 @@ interface BreadcrumbItem {
   url: string;
 }
 
+// Common breadcrumb name translations for bilingual support
+const BREADCRUMB_TRANSLATIONS: Record<string, string> = {
+  'Home': 'الرئيسية',
+  'Products': 'المنتجات',
+  'Blog': 'المدونة',
+  'Apps': 'التطبيقات',
+  'Courses': 'الدورات',
+  'Guides': 'الأدلة',
+  'FAQ': 'الأسئلة الشائعة',
+  'Recovery': 'التعافي',
+};
+
 export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: `${SITE_CONFIG.url}${item.url}`,
-    })),
+    itemListElement: items.map((item, index) => {
+      const arName = item.nameAr || BREADCRUMB_TRANSLATIONS[item.name];
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        ...(arName ? { alternateName: arName } : {}),
+        item: `\${SITE_CONFIG.url}\${item.url}`,
+      };
+    }),
   };
 }
 

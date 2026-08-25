@@ -129,7 +129,9 @@ export default async function RootLayout({
               '@type': 'WebSite',
               name: 'Tamkinly',
               alternateName: 'تمكينلي',
-              description: 'A space to rebuild the human from within. Digital products for identity transformation and personal development.',
+              description: locale === 'ar'
+                ? 'مساحة لإعادة بناء الإنسان من الداخل. منتجات رقمية لتحويل الهوية والتطوير الشخصي.'
+                : 'A space to rebuild the human from within. Digital products for identity transformation and personal development.',
               url: 'https://tamkinly.com',
               inLanguage: ['en', 'ar'],
             }),
@@ -141,7 +143,7 @@ export default async function RootLayout({
        
       >
         {/* JSON-LD Structured Data — Organization, WebSite, SearchAction, Speakable for AI crawlers */}
-        <DefaultJsonLd />
+        <DefaultJsonLd locale={locale} />
         {/* Skip Navigation Link for Accessibility */}
         <a
           href="#main-content"

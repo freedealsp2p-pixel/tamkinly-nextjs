@@ -43,19 +43,47 @@ import {
  * Default schemas for the home page
  * Includes Organization, WebSite, and enhanced metadata
  */
-export function DefaultJsonLd() {
+export function DefaultJsonLd({ locale }: { locale?: string }) {
+  const isAr = locale === 'ar';
   return (
     <JsonLd
       data={[
-        generateOrganizationSchema(),
-        // Note: WebSite schema intentionally NOT included here to avoid
-        // duplicate Organization schema when child pages add their own JSON-LD.
-        // WebSite schema is rendered via <head> script in root layout instead.
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'Tamkinly',
+          alternateName: isAr ? 'تمكينلي' : 'Tamkinly',
+          description: isAr
+            ? 'مساحة لإعادة بناء الإنسان من الداخل. بدون ضغط. بدون حكم على الذات. بدون تحفيز مؤقت. منتجات رقمية لتحويل الهوية والتطوير الشخصي.'
+            : 'A space to rebuild the human from within. Without pressure. Without self-judgment. Without temporary motivation. Digital products for identity transformation and personal development.',
+          url: 'https://tamkinly.com',
+          logo: 'https://tamkinly.com/logo.webp',
+          sameAs: [
+            'https://twitter.com/tamkinly',
+            'https://instagram.com/tamkinly',
+            'https://linkedin.com/company/tamkinly',
+          ],
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            availableLanguage: ['English', 'Arabic'],
+            email: 'hello@tamkinly.com',
+          },
+          foundingDate: '2024',
+          areaServed: 'Worldwide',
+          knowsAbout: [
+            isAr ? 'تحويل الهوية' : 'Identity Transformation',
+            isAr ? 'التطوير الشخصي' : 'Personal Development',
+            isAr ? 'تكوين العادات' : 'Habit Formation',
+            isAr ? 'تحسين الذات' : 'Self-Improvement',
+          ],
+        },
+        // Note: WebSite schema is rendered via <head> script in root layout.
         // Speakable specification for voice search
         {
           '@context': 'https://schema.org',
           '@type': 'WebPage',
-          name: 'Tamkinly - Identity Transformation Tools',
+          name: isAr ? 'تمكينلي - أدوات تحويل الهوية' : 'Tamkinly - Identity Transformation Tools',
           speakable: {
             '@type': 'SpeakableSpecification',
             cssSelector: ['.hero-title', '.hero-subtitle', '.cta-button'],

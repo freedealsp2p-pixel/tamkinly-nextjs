@@ -6,10 +6,10 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata() {
   const locale = await getLocale();
-  return generatePageMetadataFromConfig('refund', locale);
+  return generatePageMetadataFromConfig('recovery-porn-recovery', locale);
 }
 
-export default function RefundLayout({
+export default function PornRecoveryLayout({
   children,
 }: {
   children: React.ReactNode;

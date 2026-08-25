@@ -1,7 +1,13 @@
 import type { Metadata } from 'next';
-import { CONTACT_METADATA } from '@/lib/seo-pages';
+import { getLocale } from '@/lib/get-locale';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
 
-export const metadata: Metadata = CONTACT_METADATA;
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata() {
+  const locale = await getLocale();
+  return generatePageMetadataFromConfig('contact', locale);
+}
 
 export default function ContactLayout({
   children,

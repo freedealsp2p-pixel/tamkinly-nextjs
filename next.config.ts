@@ -152,6 +152,28 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Recovery path redirects
+      // Legacy TRC redirects (locale-aware — config redirects run before middleware)
+      // AR prefix must be preserved: /ar/trc -> /ar/recovery/trc, not /recovery/trc
+      {
+        source: '/ar/trc/:path*',
+        destination: '/ar/recovery/trc/:path*',
+        permanent: true,
+      },
+      {
+        source: '/ar/trc',
+        destination: '/ar/recovery/trc',
+        permanent: true,
+      },
+      {
+        source: '/trc/:path*',
+        destination: '/recovery/trc/:path*',
+        permanent: true,
+      },
+      {
+        source: '/trc',
+        destination: '/recovery/trc',
+        permanent: true,
+      },
       {
         source: '/recovery/hub',
         destination: '/recovery',

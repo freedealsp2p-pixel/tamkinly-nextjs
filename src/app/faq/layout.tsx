@@ -1,9 +1,15 @@
 import type { Metadata } from 'next';
-import { FAQ_METADATA } from '@/lib/seo-pages';
+import { getLocale } from '@/lib/get-locale';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
 
-export const metadata: Metadata = FAQ_METADATA;
+export const dynamic = 'force-dynamic';
 
-export default function FAQLayout({
+export async function generateMetadata() {
+  const locale = await getLocale();
+  return generatePageMetadataFromConfig('faq', locale);
+}
+
+export default function FaqLayout({
   children,
 }: {
   children: React.ReactNode;
