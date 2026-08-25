@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
-import { DASHBOARD_METADATA } from '@/lib/seo-pages';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
+import { getLocale } from '@/lib/get-locale';
 
-export const metadata: Metadata = DASHBOARD_METADATA;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generatePageMetadataFromConfig('dashboard', locale);
+}
 
 export default function DashboardLayout({
   children,

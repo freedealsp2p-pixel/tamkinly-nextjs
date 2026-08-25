@@ -13,7 +13,7 @@ const NAV_ITEMS = [
 
 export function RecoveryHeader() {
   const t = useTranslations('recoveryNav');
-  const { direction } = useLocale();
+  const { direction, locale } = useLocale();
   const pathname = usePathname();
 
   const getActiveKey = (): string => {
@@ -24,10 +24,12 @@ export function RecoveryHeader() {
   };
   const activeKey = getActiveKey();
 
+  const ariaLabel = locale === 'ar' ? 'التنقل في التعافي' : 'Recovery navigation';
+
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center gap-1 h-14 overflow-x-auto" role="navigation" aria-label="Recovery navigation">
+        <nav className="flex items-center gap-1 h-14 overflow-x-auto" role="navigation" aria-label={ariaLabel}>
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = activeKey === item.key;

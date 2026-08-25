@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
-import { CART_METADATA } from '@/lib/seo-pages';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
+import { getLocale } from '@/lib/get-locale';
 
-export const metadata: Metadata = CART_METADATA;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generatePageMetadataFromConfig('cart', locale);
+}
 
 export default function CartLayout({
   children,

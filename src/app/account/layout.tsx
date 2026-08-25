@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
-import { ACCOUNT_METADATA } from '@/lib/seo-pages';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
+import { getLocale } from '@/lib/get-locale';
 
-export const metadata: Metadata = ACCOUNT_METADATA;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generatePageMetadataFromConfig('account', locale);
+}
 
 export default function AccountLayout({
   children,

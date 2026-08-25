@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
-import { TERMS_METADATA } from '@/lib/seo-pages';
+import { generatePageMetadataFromConfig } from '@/lib/seo-pages';
+import { getLocale } from '@/lib/get-locale';
 
-export const metadata: Metadata = TERMS_METADATA;
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generatePageMetadataFromConfig('terms', locale);
+}
 
 export default function TermsLayout({
   children,

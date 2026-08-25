@@ -137,35 +137,35 @@ const productIcons: Record<string, React.ElementType> = {
   aiCoach: Brain,
   quiz: Sparkles,
 };
-// Questions for the wizard
+// Questions for the wizard - keys match the translation file structure
 const questions = [
   {
-    titleKey: 'questions.goal.title',
+    titleKey: 'question1',
     field: 'goal' as const,
     options: [
-      { key: 'habits' as const, labelKey: 'questions.goal.options.habits', icon: Repeat },
-      { key: 'productivity' as const, labelKey: 'questions.goal.options.productivity', icon: Zap },
-      { key: 'identity' as const, labelKey: 'questions.goal.options.identity', icon: Brain },
-      { key: 'focus' as const, labelKey: 'questions.goal.options.focus', icon: Target },
+      { key: 'habits' as const, labelKey: 'options.habits', icon: Repeat },
+      { key: 'productivity' as const, labelKey: 'options.productivity', icon: Zap },
+      { key: 'identity' as const, labelKey: 'options.identity', icon: Brain },
+      { key: 'focus' as const, labelKey: 'options.focus', icon: Target },
     ],
   },
   {
-    titleKey: 'questions.time.title',
+    titleKey: 'question2',
     field: 'time' as const,
     options: [
-      { key: '5-10min' as const, labelKey: 'questions.time.options.quick', icon: Clock },
-      { key: '15-30min' as const, labelKey: 'questions.time.options.moderate', icon: Target },
-      { key: '30plus' as const, labelKey: 'questions.time.options.deep', icon: Calendar },
+      { key: '5-10min' as const, labelKey: 'timeOptions.5-10min', icon: Clock },
+      { key: '15-30min' as const, labelKey: 'timeOptions.15-30min', icon: Clock },
+      { key: '30plus' as const, labelKey: 'timeOptions.30plus', icon: Calendar },
     ],
   },
   {
-    titleKey: 'questions.challenge.title',
+    titleKey: 'question3',
     field: 'challenge' as const,
     options: [
-      { key: 'startingHabits' as const, labelKey: 'questions.challenge.options.starting', icon: RotateCcw },
-      { key: 'stayingConsistent' as const, labelKey: 'questions.challenge.options.consistent', icon: CheckCircle2 },
-      { key: 'knowingWhoIAm' as const, labelKey: 'questions.challenge.options.identity', icon: Star },
-      { key: 'managingTime' as const, labelKey: 'questions.challenge.options.time', icon: Clock },
+      { key: 'startingHabits' as const, labelKey: 'challengeOptions.startingHabits', icon: RotateCcw },
+      { key: 'stayingConsistent' as const, labelKey: 'challengeOptions.stayingConsistent', icon: CheckCircle2 },
+      { key: 'knowingWhoIAm' as const, labelKey: 'challengeOptions.knowingWhoIAm', icon: Star },
+      { key: 'managingTime' as const, labelKey: 'challengeOptions.managingTime', icon: Clock },
     ],
   },
 ];
@@ -224,7 +224,7 @@ export default function ProductRecommender() {
                 {currentStep > 0 && (
                   <button onClick={() => goToStep(currentStep - 1)} className="mb-4 text-slate-400 hover:text-[#3DD4B0] transition-colors text-sm flex items-center gap-1 cursor-pointer">
                     <ChevronRight className="w-4 h-4 rotate-180" />
-                    Back
+                    {t('back')}
                   </button>
                 )}
                 <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-8">{t(questions[currentStep].titleKey)}</h2>
@@ -259,7 +259,7 @@ export default function ProductRecommender() {
                 <div className="text-center mb-6">
                   <Sparkles className="w-12 h-12 text-[#3DD4B0] mx-auto mb-4" />
                   <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-2">{t('result.title')}</h2>
-                  <p className="text-slate-300">{t('result.subtitle')}</p>
+                  <p className="text-slate-300">{t('resultTitle')}</p>
                 </div>
                 <div className="bg-white/[0.07] rounded-xl p-6 mb-6">
                   <div className="flex items-center gap-4 mb-4">
@@ -267,22 +267,22 @@ export default function ProductRecommender() {
                       {(() => { const Ic = productIcons[recommendation.productKey] || Star; return <Ic className="w-6 h-6 text-[#3DD4B0]" />; })()}
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white">{t(`result.products.${recommendation.productKey}.name`)}</h3>
+                      <h3 className="text-lg font-bold text-white">{t(`products.${recommendation.productKey}.name`)}</h3>
                       <p className="text-[#3DD4B0] font-semibold">{recommendation.price}{recommendation.isFree ? '' : '/mo'}</p>
                     </div>
                   </div>
-                  <p className="text-slate-300 text-sm mb-4">{t(`result.products.${recommendation.productKey}.reason`)}</p>
+                  <p className="text-slate-300 text-sm mb-4">{t(`products.${recommendation.productKey}.description`)}</p>
                   <Link href={recommendation.href}>
                     <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold h-11">
-                      {recommendation.isFree ? t('ctaStartFree') : t('ctaGetStarted')}
+                      {recommendation.isFree ? t('ctaFree') : t('ctaGetStarted')}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>
                 </div>
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/10">
                   <div className="flex-1 min-w-0">
-                    <p className="text-white font-medium text-sm">{t(`result.products.${recommendation.altProductKey}.name`)}</p>
-                    <p className="text-slate-400 text-xs mt-0.5 line-clamp-2">{t(`result.products.${recommendation.altProductKey}.reason`)}</p>
+                    <p className="text-white font-medium text-sm">{t(`products.${recommendation.altProductKey}.name`)}</p>
+                    <p className="text-slate-400 text-xs mt-0.5 line-clamp-2">{t(`products.${recommendation.altProductKey}.description`)}</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 </div>
