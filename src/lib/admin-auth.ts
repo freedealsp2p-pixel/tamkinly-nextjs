@@ -47,3 +47,9 @@ export function isAdminAuthConfigured(): boolean {
   return true;
 }
 
+
+
+// Re-export for content management API routes
+export { getAdminSession as verifyAdmin } from "./admin-auth-jwt";
+
+export { getAdminSession } from "./admin-auth-jwt";

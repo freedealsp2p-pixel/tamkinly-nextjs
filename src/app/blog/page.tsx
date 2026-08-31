@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema } from "@/lib/seo";
 import { BLOG_CATEGORIES } from "@/lib/blog-articles";
 import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
+import { BlogBreadcrumb } from '@/components/blog/BlogBreadcrumb';
 
 const categoryIconMap: Record<string, React.ElementType> = {
   Smartphone, FileText, Sparkles, Brain, TrendingUp,
@@ -374,6 +376,18 @@ export default function BlogPage() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
+  // DB Articles (admin-created)
+  const [dbArticles, setDbArticles] = useState<any[]>([]);
+  const [dbLoading, setDbLoading] = useState(true);
+
+  useEffect(() => {
+    const lang = locale === 'ar' ? 'ar' : 'en';
+    fetch(`/api/articles?language=${lang}`)
+      .then(r => r.json())
+      .then(data => { setDbArticles(Array.isArray(data) ? data : []); setDbLoading(false); })
+      .catch(() => setDbLoading(false));
+  }, [locale]);
+
   // Breadcrumb schema
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -401,6 +415,10 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
+
+      <div className="bg-white border-b border-slate-100" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+        <BlogBreadcrumb items={[]} />
+      </div>
 
       {/* Start Here Section */}
       <section className="py-12 lg:py-16 bg-gradient-to-b from-primary/[0.03] to-slate-50 border-b border-accent/10" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -512,6 +530,59 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
+
+      {/* DB Articles (Admin-Created) */}
+      {dbArticles.length > 0 && (
+      <section className="py-16 lg:py-20 bg-white" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-[#1F6F78]/10 flex items-center justify-center">
+                <FileText className="h-5 w-5 text-[#1F6F78]" />
+              </div>
+              <div>
+                <h2 className="font-serif text-3xl font-bold text-[#0F1C2E]">
+                  {locale === 'ar' ? 'أحدث المقالات' : 'Latest Articles'}
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {dbArticles.slice(0, 6).map((a: any) => (
+              <Link key={a.id} href={`/blog/${a.slug}`}>
+                <Card className="h-full border-0 shadow-sm bg-white hover:shadow-md transition-all cursor-pointer group">
+                  <CardContent className="p-6">
+                    {a.categories?.length > 0 && (
+                      <Badge variant="outline" className="mb-3 text-xs text-[#1F6F78] border-[#1F6F78]/30">
+                        {locale === 'ar' && a.categories[0].nameAr ? a.categories[0].nameAr : a.categories[0].name}
+                      </Badge>
+                    )}
+                    <h3 className="font-semibold text-lg text-[#0F1C2E] mb-2 group-hover:text-[#1F6F78] transition-colors">
+                      {a.title}
+                    </h3>
+                    {a.excerpt && (
+                      <p className="text-sm text-slate-600 mb-4 line-clamp-3">{a.excerpt}</p>
+                    )}
+                    {a.featuredImage && (
+                      <img src={a.featuredImage} alt={a.title} className="w-full h-40 object-cover rounded-lg mb-3" />
+                    )}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500 flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {a.readTimeMinutes ? `${a.readTimeMinutes} min` : '5 min'}
+                      </span>
+                      <span className="text-[#1F6F78] text-sm flex items-center gap-1">
+                        {locale === 'ar' ? 'اقرأ' : 'Read'} <ArrowRight className={`h-3 w-3 ${locale === 'ar' ? 'rotate-180' : ''}`} />
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+      )}
 
       {/* Apps Section */}
       <section className="py-16 lg:py-20 bg-white" dir={locale === 'ar' ? 'rtl' : 'ltr'}>

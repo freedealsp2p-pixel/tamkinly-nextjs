@@ -31,6 +31,7 @@ const APP_TIERS: Record<string, string> = {
   'decision-analysis': 'PREMIUM',
   'evidence-tracking': 'PREMIUM',
   'progress-dashboard': 'PREMIUM',
+  'therapeutic-protocols': 'PREMIUM',
   // MASTERY — Everything + AI Coach + Community (was MASTERY)
   'emotion-regulation': 'MASTERY',
   'ai-identity-coach': 'MASTERY',
@@ -142,19 +143,19 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
         if (data.error?.includes('not yet active') || data.error?.includes('pending')) {
           setCodeError(getText(
             'Payment confirmation is pending. Your token will be activated after payment is confirmed.',
-            'Payment confirmation is pending. Your token will be activated after payment is confirmed.'
+            'يتم التأكد من الدفع. سيتم تفعيل رمزك بعد التأكيد.'
           ));
         } else if (data.error?.includes('different email') || data.error?.includes('does not match')) {
           setCodeError(getText(
             'This token is linked to a different email. Use the email you purchased with.',
-            'This token is linked to a different email. Use the email you purchased with.'
+            'هذا الرمز مرتبط ببريد إلكتروني آخر. استخدم البريد الذي شرت به.'
           ));
         } else {
-          setCodeError(data.error || getText('Invalid access code', 'Invalid access code'));
+          setCodeError(data.error || getText('Invalid access code', 'رمز وصول غير صالح'));
         }
       }
     } catch {
-      setCodeError(getText('Verification failed. Please try again.', 'Verification failed. Please try again.'));
+      setCodeError(getText('Verification failed. Please try again.', 'فشل التحقق. حاول إعادة المحاولة.'));
     } finally {
       setVerifying(false);
     }
@@ -178,8 +179,8 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
                     <Eye className="w-6 h-6 text-[#3DD4B0]" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-[#0F1C2E]">{getText('Preview Mode', 'Preview Mode')}</h2>
-                    <p className="text-sm text-slate-500">{getText('You can see this app but need access to use it', 'You can see this app but need access to use it')}</p>
+                    <h2 className="text-xl font-bold text-[#0F1C2E]">{getText('Preview Mode', 'وضع المعاينة')}</h2>
+                    <p className="text-sm text-slate-500">{getText('You can see this app but need access to use it', 'يمكنك رؤية هذا التطبيق لكنك تحتاج إلى صلاحية لاستخدامه')}</p>
                   </div>
                 </div>
                 <button 
@@ -192,7 +193,7 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
               <div className="flex items-center gap-2">
                 <Lock className="w-4 h-4 text-[#B88A8E]" />
                 <span className="text-sm font-medium text-[#B88A8E]">
-                  {getText('Requires ' + requiredTier + ' package or higher', 'Requires ' + requiredTier + ' package or higher')}
+                  {getText('Requires ' + requiredTier + ' package or higher', 'يتطلب باقة ' + requiredTier + ' أو أعلى')}
                 </span>
               </div>
             </div>
@@ -204,10 +205,10 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
                     <Key className="w-5 h-5 text-[#3DD4B0]" />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold text-sm">{getText('Enter Your Access Token & Email', 'Enter Your Access Token & Email')}</h3>
+                    <h3 className="text-white font-semibold text-sm">{getText('Enter Your Access Token & Email', 'أدخل رمز الوصول والبريد الإلكتروني')}</h3>
                     <p className="text-slate-400 text-xs flex items-center gap-1">
                       <Shield className="w-3 h-3" />
-                      {getText('Your token is linked to your purchase email', 'Your token is linked to your purchase email')}
+                      {getText('Your token is linked to your purchase email', 'رمزك مرتبط ببريدك الإلكتروني المستخدم في الشراء')}
                     </p>
                   </div>
                 </div>
@@ -239,18 +240,18 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
                     disabled={verifying || !accessCode.trim() || !email.trim()}
                     className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] h-10 font-semibold"
                   >
-                    {verifying ? <Loader2 className="h-4 w-4 animate-spin" /> : getText('Verify & Unlock', 'Verify & Unlock')}
+                    {verifying ? <Loader2 className="h-4 w-4 animate-spin" /> : getText('Verify & Unlock', 'تحقّ وافتح')}
                   </Button>
                 </div>
                 {codeError && <p className="text-[#B88A8E] text-xs mt-2 text-center">{codeError}</p>}
               </div>
               
               <div className="text-center pt-2">
-                <p className="text-sm text-[#8A94A6] mb-3">{getText('Or get access now:', 'Or get access now:')}</p>
+                <p className="text-sm text-[#8A94A6] mb-3">{getText('Or get access now:', 'أو احصل على الصلاحية الآن:')}</p>
                 {tierProduct && (
                   <Link href={'/products/' + tierProduct.slug}>
                     <Button className="w-full h-12 bg-[#0F1C2E] text-white hover:bg-[#1a2d47] font-semibold text-base">
-                      {getText('Get ' + tierProduct.nameEn + ' - $' + tierProduct.price, 'Get ' + tierProduct.nameEn + ' - $' + tierProduct.price)}
+                      {getText('Get ' + tierProduct.nameEn + ' - $' + tierProduct.price, 'احصل على ' + tierProduct.nameAr + ' - $' + tierProduct.price)}
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>
@@ -258,8 +259,8 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
               </div>
               
               <div className="flex items-center justify-center gap-4 text-xs text-[#8A94A6] mt-4">
-                <div className="flex items-center gap-1"><Shield className="w-3 h-3 text-[#3DD4B0]" /><span>{getText('Secure', 'Secure')}</span></div>
-                <div className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-[#3DD4B0]" /><span>{getText('Instant Access', 'Instant Access')}</span></div>
+                <div className="flex items-center gap-1"><Shield className="w-3 h-3 text-[#3DD4B0]" /><span>{getText('Secure', 'آمن')}</span></div>
+                <div className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-[#3DD4B0]" /><span>{getText('Instant Access', 'وصول فوري')}</span></div>
               </div>
             </div>
           </div>
@@ -273,7 +274,7 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
             className="bg-[#3DD4B0] text-[#0F1C2E] px-5 py-3 rounded-full shadow-lg hover:bg-[#2BC49E] flex items-center gap-2 font-semibold text-sm"
           >
             <Lock className="w-4 h-4" />
-            {getText('Unlock This App', 'Unlock This App')}
+            {getText('Unlock This App', 'افتح هذا التطبيق')}
           </button>
         </div>
       )}

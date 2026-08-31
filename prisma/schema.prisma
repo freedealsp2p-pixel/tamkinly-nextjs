@@ -1308,3 +1308,100 @@ model Notification {
   @@map("notifications")
 }
 
+
+
+// ============================================
+// CONTENT ARCHITECTURE
+// ============================================
+
+enum ContentTargetType {
+  ARTICLE
+  TOOL
+  RECOVERY_SECTION
+  THERAPEUTIC_PROTOCOL
+  ASSESSMENT
+  INTERVENTION
+  EXPERIENCE
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model ArticleCategory {
+  id          String            @id @default(cuid())
+  name        String
+  nameAr      String?
+  slug        String            @unique
+  description String?
+  sortOrder   Int               @default(0)
+  isActive    Boolean           @default(true)
+  articles    Article[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@map("article_categories")
+}
+
+model ArticleTopic {
+  id        String            @id @default(cuid())
+  name      String
+  nameAr    String?
+  slug      String            @unique
+  isActive  Boolean           @default(true)
+  articles  Article[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@map("article_topics")
+}
+
+model Article {
+  id              String            @id @default(cuid())
+  language        String
+  linkedArticleId String?
+  linkedArticle   Article?          @relation("LinkedArticles", fields: [linkedArticleId], references: [id])
+  linkedArticles  Article[]         @relation("LinkedArticles")
+  title           String
+  slug            String            @unique
+  excerpt         String?
+  body            String            @default("")
+  featuredImage   String?
+  imageCaption    String?
+  metaTitle       String?
+  metaDescription String?
+  metaKeywords    String?
+  ogImage         String?
+  status          ArticleStatus     @default(DRAFT)
+  accessTier      String?
+  authorId        String?
+  publishedAt     DateTime?
+  sortOrder       Int               @default(0)
+  isFeatured      Boolean           @default(false)
+  readTimeMinutes Int?
+  categories      ArticleCategory[]
+  topics          ArticleTopic[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([language])
+  @@index([status])
+  @@index([linkedArticleId])
+  @@map("articles")
+}
+
+model ContentRelationship {
+  id          String             @id @default(cuid())
+  sourceType  ContentTargetType
+  sourceId    String
+  targetType  ContentTargetType
+  targetSlug  String
+  label       String?
+  sortOrder   Int                @default(0)
+  createdAt   DateTime           @default(now())
+
+  @@index([sourceType, sourceId])
+  @@index([targetType, targetSlug])
+  @@map("content_relationships")
+}

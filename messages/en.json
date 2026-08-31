@@ -4627,5 +4627,132 @@
       "reason": "Based on your assessment results",
       "retake": "Retake Assessment"
     }
+  },
+  "therapeuticProtocols": {
+    "hub": {
+      "title": "Hypnotic Therapeutic Protocols",
+      "subtitle": "Three protocols designed to decouple painful memories and rebuild neural pathways. Each protocol follows a defined therapeutic sequence with guided hypnotic text.",
+      "disclaimer": "These tools are educational and developmental aids, not a substitute for specialized psychological treatment. If you are in acute psychological crisis, consult a qualified professional."
+    },
+    "protocols": {
+      "temporalDecoupling": {
+        "title": "The Temporal Decoupling Protocol",
+        "subtitle": "Awakening from the Illusion of Memory",
+        "description": "A hypnotic protocol for decoupling painful memories through a single question: \"How did I arrive at this moment?\" — Based on Memory Reconsolidation.",
+        "hero": {
+          "title": "Temporal Decoupling",
+          "subtitle": "Awakening from the Illusion of Memory",
+          "startBtn": "Begin the Exercise",
+          "learnBtn": "How does it work?"
+        },
+        "intro": "Have you ever suddenly realized, mid-dream, that you were dreaming? In that delicate instant, when you pause inside the dream and ask yourself a simple question — \"How did I get here? Where was I a moment ago?\" — something strange tends to happen: the fabric of the dream trembles, the illusion collapses, and you instantly awaken into your safe reality.",
+        "intro2": "What if I told you that your traumas and disturbing memories operate on the exact same mechanism?",
+        "claim": "Today, we will withdraw this power. We will play the mind's game of decoupling through a protocol called: \"Where did it begin?\".",
+        "steps": {
+          "next": "Next",
+          "prev": "Previous",
+          "restart": "Restart",
+          "complete": "I have completed the exercise",
+          "cue": "Hypnotic cue",
+          "reflection": "Momentary reflection"
+        },
+        "outro": {
+          "title": "Here... the memory collapses. And you awaken.",
+          "body": "What you learned is not a trick — it is a skill. Every time you practice it on a memory, its grip loosens. Your subconscious learns that the illusion is no longer safe, and that the new questions have become part of your awareness.",
+          "ctaRetry": "Repeat the exercise",
+          "disclaimer": "This exercise is an educational and developmental tool, not a substitute for specialized psychological treatment. If you are experiencing acute trauma, please consult a professional."
+        },
+        "shared": {
+          "backToProtocols": "Back to Protocols",
+          "goBack": "Go Back"
+        }
+      },
+      "alternativeCode": {
+        "title": "The Alternative Code Protocol",
+        "subtitle": "Neutralizing the Memory and Redirecting It",
+        "description": "Transform a painful name into a code for a new world. Hypnotic neural substitution protocol — Based on Memory Reconsolidation and Conditioned Association Decoupling.",
+        "hero": {
+          "title": "The Alternative Code",
+          "subtitle": "Neutralizing the Memory and Redirecting It",
+          "startBtn": "Begin the Exercise",
+          "learnBtn": "How does it work?"
+        },
+        "intro": "As a psychotherapist, I can confirm that this exercise draws upon one of the deepest mechanisms in neuropsychology: \"memory reconsolidation\" and \"conditioned association decoupling.\"",
+        "intro2": "Names are not mere letters — they are \"launch buttons\" that trigger cascades of emotional chemistry in the brain.",
+        "claim": "We withdraw the emotional charge from the pain of longing — and inject it into an immersive, pleasurable imagined experience.",
+        "steps": {
+          "next": "Next",
+          "prev": "Previous",
+          "restart": "Restart",
+          "complete": "I have completed the exercise",
+          "cue": "Hypnotic cue",
+          "reflection": "Momentary reflection"
+        },
+        "outro": {
+          "title": "The name has been linked to an entirely new neural pathway.",
+          "body": "Each time your mind attempts to summon this name, it will no longer find the old story — it will find your new world. The old emotional charge has been drained, replaced by a world of your choosing. This is not forgetting — this is liberation.",
+          "ctaRetry": "Repeat with another name",
+          "disclaimer": "This exercise is an educational and developmental tool, not a substitute for specialized psychological treatment."
+        },
+        "shared": {
+          "backToProtocols": "Back to Protocols",
+          "goBack": "Go Back"
+        }
+      },
+      "whiteMirror": {
+        "title": "The White Mirror Protocol",
+        "subtitle": "Pattern Interrupt and Recoding",
+        "description": "Forcefully halt the cycle of negative thoughts in a moment of complete void, and speak your new idea in your inner guide's voice. Just 4 steps.",
+        "safety": {
+          "badge": "Read before starting",
+          "title": "This exercise is not for everyone",
+          "body": "This protocol uses a \"pattern interrupt\" technique that may produce a temporary mental void or a sense of dissociation. This experience is safe for most people, but may trigger acute anxiety in some.",
+          "doNotUse": "Do not practice this exercise if you experience:",
+          "condition0": "Panic attacks or acute anxiety episodes",
+          "condition1": "Depersonalization/Derealization disorder",
+          "condition2": "Severe fear of darkness (Nyctophobia)",
+          "condition3": "Untreated acute psychological trauma",
+          "condition4": "Active psychotic disorders or schizophrenia",
+          "alternative": "If any of these apply to you, we recommend our other protocols (Temporal Decoupling or The Alternative Code), which are gentler on the nervous system.",
+          "accept": "I understand, and wish to proceed safely"
+        },
+        "hero": {
+          "title": "The White Mirror",
+          "subtitle": "Pattern Interrupt and Recoding",
+          "startBtn": "Begin the Exercise",
+          "learnBtn": "How does it work?"
+        },
+        "intro": "This exercise is designed to forcefully halt the cycle of negative thoughts, and plant a new idea in the moment of complete stillness — in a safe and effective way.",
+        "intro2": "We preserve the essence of the \"mental void\" and the \"new voice\" — but we transfer it from the realm of fleeting illusion to the realm of safe, sustainable psychological application.",
+        "claim": "The secret is not in saying the idea once to make it magic — but in feeling complete certainty while uttering it in that precise moment.",
+        "steps": {
+          "next": "Next",
+          "prev": "Previous",
+          "restart": "Restart",
+          "complete": "I have completed the exercise",
+          "cue": "Hypnotic cue",
+          "reflection": "Momentary reflection"
+        },
+        "outro": {
+          "title": "What you began today, completes in a week.",
+          "body": "This exercise is not a spell said once, but a skill built through repetition. Each day you repeat it, the new voice grows stronger and the old one weaker. After a week, you will not need to think about it — it will be your natural voice.",
+          "ctaRetry": "Repeat the exercise",
+          "disclaimer": "This exercise is an educational and developmental tool, not a substitute for specialized psychological treatment. If you experience acute anxiety during practice, stop immediately and consult a professional."
+        },
+        "shared": {
+          "backToProtocols": "Back to Protocols",
+          "goBack": "Go Back"
+        }
+      }
+    },
+    "shared": {
+      "backToProtocols": "Back to Protocols",
+      "goBack": "Go back"
+    },
+    "protocolNames": {
+      "temporalDecoupling": "Temporal Decoupling",
+      "alternativeCode": "The Alternative Code",
+      "whiteMirror": "The White Mirror"
+    }
   }
 }
