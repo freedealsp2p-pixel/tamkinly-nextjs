@@ -4,7 +4,7 @@ import { join } from 'path'
 import { existsSync } from 'fs'
 import { verifyAdmin } from '@/lib/admin-auth'
 
-const UPLOAD_DIR = join(process.cwd(), 'public', 'uploads', 'articles')
+const UPLOAD_DIR = process.env.UPLOAD_DIR || join(process.cwd(), 'public', 'uploads', 'articles')
 const ALLOWED = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
 const MAX_SIZE = 5 * 1024 * 1024
 
