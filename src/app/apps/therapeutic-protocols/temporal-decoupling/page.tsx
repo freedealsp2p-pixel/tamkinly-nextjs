@@ -1,7 +1,7 @@
 'use client';
 
 import { useReducer, useCallback } from 'react';
-import { TherapeuticShell, ProtocolHero, ProtocolStepCard, ProtocolCompletion } from '@/components/therapeutic';
+import { TherapeuticShell, ProtocolHero, ProtocolStepCard, ProtocolCompletion, ProtocolRelatedArticles } from '@/components/therapeutic';
 import { createProtocolReducer } from '@/components/therapeutic/types';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import { TEMPORAL_DECOUPLING_META, TEMPORAL_DECOUPLING_STEPS } from '@/lib/therapeutic-protocols/temporal-decoupling';
@@ -49,15 +49,18 @@ export default function TemporalDecouplingPage() {
   return (
     <TherapeuticShell sectionType={state.phase === 'active' ? 'therapeutic' : 'standard'}>
       {state.phase === 'entry' && (
-        <ProtocolHero
-          translationKey={TK}
-          stepCount={TEMPORAL_DECOUPLING_META.totalSteps}
-          durationLabel={isAr ? "12 دقيقة" : "12 min"}
-          breadcrumbs={breadcrumbs}
-          accentColor={TEMPORAL_DECOUPLING_META.accentColor}
-          onStart={handleStart}
-          learnMoreTargetId="mechanism-section"
-        />
+        <>
+          <ProtocolHero
+            translationKey={TK}
+            stepCount={TEMPORAL_DECOUPLING_META.totalSteps}
+            durationLabel={isAr ? "12 دقيقة" : "12 min"}
+            breadcrumbs={breadcrumbs}
+            accentColor={TEMPORAL_DECOUPLING_META.accentColor}
+            onStart={handleStart}
+            learnMoreTargetId="mechanism-section"
+          />
+          <ProtocolRelatedArticles protocolSlug='temporal-decoupling' accentColor={TEMPORAL_DECOUPLING_META.accentColor} />
+        </>
       )}
 
       {state.phase === 'active' && (
@@ -75,15 +78,18 @@ export default function TemporalDecouplingPage() {
       )}
 
       {state.phase === 'completion' && (
-        <ProtocolCompletion
-          translationKey={TK}
-          accentColor={TEMPORAL_DECOUPLING_META.accentColor}
-          suggestedNext={[
-            { label: isAr ? 'الشفرة البديلة' : 'The Alternative Code', href: '/apps/therapeutic-protocols/alternative-code' },
-            { label: isAr ? 'المرآة البيضاء' : 'The White Mirror', href: '/apps/therapeutic-protocols/white-mirror' },
-          ]}
-          onRepeat={handleRestart}
-        />
+        <>
+          <ProtocolCompletion
+            translationKey={TK}
+            accentColor={TEMPORAL_DECOUPLING_META.accentColor}
+            suggestedNext={[
+              { label: isAr ? 'الشفرة البديلة' : 'The Alternative Code', href: '/apps/therapeutic-protocols/alternative-code' },
+              { label: isAr ? 'المرآة البيضاء' : 'The White Mirror', href: '/apps/therapeutic-protocols/white-mirror' },
+            ]}
+            onRepeat={handleRestart}
+          />
+          <ProtocolRelatedArticles protocolSlug='temporal-decoupling' accentColor={TEMPORAL_DECOUPLING_META.accentColor} />
+        </>
       )}
     </TherapeuticShell>
   );

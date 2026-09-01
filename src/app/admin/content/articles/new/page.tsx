@@ -87,11 +87,11 @@ export default function NewArticlePage() {
       ]);
       if (catRes.ok) {
         const catData = await catRes.json();
-        setCategories(catData.data || []);
+        setCategories(Array.isArray(catData) ? catData : (catData.data || []));
       }
       if (topicRes.ok) {
         const topicData = await topicRes.json();
-        setTopics(topicData.data || []);
+        setTopics(Array.isArray(topicData) ? topicData : (topicData.data || []));
       }
     } catch {
       // Non-critical: categories and topics can be set later

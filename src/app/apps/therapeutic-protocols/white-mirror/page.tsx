@@ -8,6 +8,7 @@ import {
   ProtocolStepCard,
   ProtocolCompletion,
   ProtocolSafetyWarning,
+  ProtocolRelatedArticles,
 } from '@/components/therapeutic';
 import { RepetitionCounter } from '@/components/therapeutic/RepetitionCounter';
 import { createProtocolReducer } from '@/components/therapeutic/types';
@@ -101,14 +102,17 @@ export default function WhiteMirrorPage() {
   return (
     <TherapeuticShell sectionType={state.phase === 'active' ? 'therapeutic' : 'standard'}>
       {state.phase === 'entry' && (
-        <ProtocolHero
-          translationKey={TK}
-          stepCount={WHITE_MIRROR_META.totalSteps}
-          durationLabel={isAr ? '9 دقائق' : '9 min'}
-          breadcrumbs={breadcrumbs}
-          accentColor={WHITE_MIRROR_META.accentColor}
-          onStart={handleStart}
-        />
+        <>
+          <ProtocolHero
+            translationKey={TK}
+            stepCount={WHITE_MIRROR_META.totalSteps}
+            durationLabel={isAr ? '9 دقائق' : '9 min'}
+            breadcrumbs={breadcrumbs}
+            accentColor={WHITE_MIRROR_META.accentColor}
+            onStart={handleStart}
+          />
+          <ProtocolRelatedArticles protocolSlug='white-mirror' accentColor={WHITE_MIRROR_META.accentColor} />
+        </>
       )}
 
       {state.phase === 'active' && (
@@ -127,15 +131,18 @@ export default function WhiteMirrorPage() {
       )}
 
       {state.phase === 'completion' && (
-        <ProtocolCompletion
-          translationKey={TK}
-          accentColor={WHITE_MIRROR_META.accentColor}
-          suggestedNext={[
-            { label: isAr ? 'التفكيك الزمني' : 'Temporal Decoupling', href: '/apps/therapeutic-protocols/temporal-decoupling' },
-            { label: isAr ? 'الشفرة البديلة' : 'The Alternative Code', href: '/apps/therapeutic-protocols/alternative-code' },
-          ]}
-          onRepeat={handleRestart}
-        />
+        <>
+          <ProtocolCompletion
+            translationKey={TK}
+            accentColor={WHITE_MIRROR_META.accentColor}
+            suggestedNext={[
+              { label: isAr ? 'التفكيك الزمني' : 'Temporal Decoupling', href: '/apps/therapeutic-protocols/temporal-decoupling' },
+              { label: isAr ? 'الشفرة البديلة' : 'The Alternative Code', href: '/apps/therapeutic-protocols/alternative-code' },
+            ]}
+            onRepeat={handleRestart}
+          />
+          <ProtocolRelatedArticles protocolSlug='white-mirror' accentColor={WHITE_MIRROR_META.accentColor} />
+        </>
       )}
     </TherapeuticShell>
   );

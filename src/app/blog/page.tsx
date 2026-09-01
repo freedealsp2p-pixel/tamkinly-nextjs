@@ -542,7 +542,7 @@ export default function BlogPage() {
               </div>
               <div>
                 <h2 className="font-serif text-3xl font-bold text-[#0F1C2E]">
-                  {locale === 'ar' ? 'أحدث المقالات' : 'Latest Articles'}
+                  {t('latestArticles')}
                 </h2>
               </div>
             </div>
@@ -550,14 +550,14 @@ export default function BlogPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {dbArticles.slice(0, 6).map((a: any) => (
               <Link key={a.id} href={`/blog/${a.slug}`}>
-                <Card className="h-full border-0 shadow-sm bg-white hover:shadow-md transition-all cursor-pointer group">
+                <Card className="h-full border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group">
                   <CardContent className="p-6">
                     {a.categories?.length > 0 && (
                       <Badge variant="outline" className="mb-3 text-xs text-[#1F6F78] border-[#1F6F78]/30">
                         {locale === 'ar' && a.categories[0].nameAr ? a.categories[0].nameAr : a.categories[0].name}
                       </Badge>
                     )}
-                    <h3 className="font-semibold text-lg text-[#0F1C2E] mb-2 group-hover:text-[#1F6F78] transition-colors">
+                    <h3 className="font-semibold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
                       {a.title}
                     </h3>
                     {a.excerpt && (
@@ -571,8 +571,8 @@ export default function BlogPage() {
                         <Clock className="h-3 w-3" />
                         {a.readTimeMinutes ? `${a.readTimeMinutes} min` : '5 min'}
                       </span>
-                      <span className="text-[#1F6F78] text-sm flex items-center gap-1">
-                        {locale === 'ar' ? 'اقرأ' : 'Read'} <ArrowRight className={`h-3 w-3 ${locale === 'ar' ? 'rotate-180' : ''}`} />
+                      <span className="text-accent text-sm flex items-center gap-1">
+                        {t('read')} <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
                   </CardContent>
@@ -673,7 +673,7 @@ export default function BlogPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {worksheetArticles.map((article) => (
               <Link key={article.slug} href={`/blog/${article.slug}`}>
-                <Card className="h-full border-0 shadow-sm bg-white hover:shadow-md transition-all cursor-pointer group">
+                <Card className="h-full border-0 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer group">
                   <CardContent className="p-6">
                     <Badge variant="outline" className="mb-3 text-xs text-[#1F6F78] border-[#1F6F78]/30">
                       {getText(article.category, article.categoryAr)}

@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   // Check DB first (admin-created articles)
   try {
     const dbArticle = await db.article.findFirst({
-      where: { slug, status: 'PUBLISHED', language: isAr ? 'ar' : 'en' },
+      where: { slug, status: 'PUBLISHED' },
     });
     if (dbArticle) {
       const title = dbArticle.metaTitle || dbArticle.title;
@@ -138,7 +138,7 @@ export default async function BlogArticlePage({ params }: PageParams) {
   // Check DB first (admin-created articles) - locale-aware
   try {
     const dbArticle = await db.article.findFirst({
-      where: { slug, status: 'PUBLISHED', language: isAr ? 'ar' : 'en' },
+      where: { slug, status: 'PUBLISHED' },
       include: {
         categories: { select: { id: true, name: true, nameAr: true, slug: true } },
         topics: { select: { id: true, name: true, nameAr: true, slug: true } },

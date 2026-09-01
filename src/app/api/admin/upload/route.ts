@@ -1,16 +1,18 @@
-'use server'
-
 import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
 import { existsSync } from 'fs'
+import { verifyAdmin } from '@/lib/admin-auth'
 
 const UPLOAD_DIR = join(process.cwd(), 'public', 'uploads', 'articles')
 const ALLOWED = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
-const MAX_SIZE = 5 * 1024 * 1024 // 5MB
+const MAX_SIZE = 5 * 1024 * 1024
 
 export async function POST(request: NextRequest) {
   try {
+    const auth = await verifyAdmin()
+    if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
     const formData = await request.formData()
     const file = formData.get('file') as File | null
     if (!file) return NextResponse.json({ error: 'No file' }, { status: 400 })

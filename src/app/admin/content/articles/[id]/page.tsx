@@ -48,6 +48,7 @@ interface Article {
   topicIds?: string[];
   imageCaption?: string;
   readTimeMinutes?: number;
+  linkedArticleId?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -135,7 +136,7 @@ export default function EditArticlePage() {
       const res = await fetch('/api/admin/articles');
       if (!res.ok) throw new Error('Failed to fetch articles');
       const json = await res.json();
-      const articles: Article[] = json.data || [];
+      const articles: Article[] = Array.isArray(json) ? json : (json.data || []);
       setAllArticles(articles);
 
       const article = articles.find((a) => a.id === articleId);
@@ -182,7 +183,7 @@ export default function EditArticlePage() {
   useEffect(() => {
     loadArticle();
     loadCategoriesAndTopics();
-    loadRelationships();
+    loadTranslationLink();
   }, [loadArticle]);
 
   async function loadCategoriesAndTopics() {
@@ -193,28 +194,27 @@ export default function EditArticlePage() {
       ]);
       if (catRes.ok) {
         const catData = await catRes.json();
-        setCategories(catData.data || []);
+        setCategories(Array.isArray(catData) ? catData : (catData.data || []));
       }
       if (topicRes.ok) {
         const topicData = await topicRes.json();
-        setTopics(topicData.data || []);
+        setTopics(Array.isArray(topicData) ? topicData : (topicData.data || []));
       }
     } catch {
       // Non-critical
     }
   }
 
-  async function loadRelationships() {
+  async function loadTranslationLink() {
     try {
-      const res = await fetch('/api/admin/relationships');
+      const res = await fetch('/api/admin/articles');
       if (res.ok) {
         const json = await res.json();
-        const rels: Relationship[] = json.data || [];
-        const rel = rels.find(
-          (r) => r.type === 'translation' && r.articleId === articleId
-        );
-        if (rel) {
-          setLinkedArticleId(rel.linkedArticleId);
+        const all: Article[] = Array.isArray(json) ? json : (json.data || []);
+        // Find if any article links back to this one
+        const linked = all.find(a => a.linkedArticleId === articleId);
+        if (linked) {
+          setLinkedArticleId(linked.id);
         }
       }
     } catch {
@@ -362,14 +362,15 @@ export default function EditArticlePage() {
   async function handleLinkVersion(targetArticleId: string) {
     setLinking(true);
     try {
-      await fetch('/api/admin/relationships', {
-        method: 'POST',
+      await fetch('/api/admin/articles', {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          articleId,
-          linkedArticleId: targetArticleId,
-          type: 'translation',
-        }),
+        body: JSON.stringify({ id: articleId, linkedArticleId: targetArticleId }),
+      });
+      await fetch('/api/admin/articles', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: targetArticleId, linkedArticleId: articleId }),
       });
       setLinkedArticleId(targetArticleId);
       setShowLinkModal(false);
@@ -384,17 +385,17 @@ export default function EditArticlePage() {
   async function handleUnlinkVersion() {
     if (!linkedArticleId) return;
     try {
-      const res = await fetch('/api/admin/relationships');
-      if (res.ok) {
-        const json = await res.json();
-        const rels = json.data || [];
-        const rel = rels.find(
-          (r: any) => r.type === 'translation' && r.articleId === articleId
-        );
-        if (rel) {
-          await fetch(`/api/admin/relationships?id=${rel.id}`, { method: 'DELETE' });
-        }
-      }
+      // Unlink the other article too
+      await fetch('/api/admin/articles', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: linkedArticleId, linkedArticleId: null }),
+      });
+      await fetch('/api/admin/articles', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: articleId, linkedArticleId: null }),
+      });
       setLinkedArticleId(null);
       setNotification('Language version unlinked.');
     } catch {
