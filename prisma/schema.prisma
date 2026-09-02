@@ -67,6 +67,7 @@ enum AccessTier {
   BASIC     // Basic Monthly - 7-day discipline journey (was TRIAL)
   PREMIUM   // Premium Monthly - 30-day journey + core apps (was BASIC)
   MASTERY   // Mastery Monthly - AI Coach + Community + everything (was BUNDLE)
+  PROTOCOL  // One-time premium therapeutic protocol access
 }
 
 model AppAccess {
@@ -79,6 +80,7 @@ model AppAccess {
   customerName String?
   productName  String?
   productId    String?   // Product identifier (basic, premium, bundle)
+  protocolSlug String?   // Specific protocol slug for protocol-tier access (e.g., 'temporal-decoupling')
   orderId      String?   // Order ID
   
   // Status
@@ -468,6 +470,7 @@ enum ProductType {
   INTERACTIVE_APP
   BUNDLE
   TRIAL
+  THERAPEUTIC_PROTOCOL  // Premium one-time therapeutic protocol
 }
 
 // ============================================
@@ -1308,100 +1311,97 @@ model Notification {
   @@map("notifications")
 }
 
-
-
 // ============================================
-// CONTENT ARCHITECTURE
+// CONTENT ARCHITECTURE (Articles, Categories, Topics, Relationships)
 // ============================================
-
-enum ContentTargetType {
-  ARTICLE
-  TOOL
-  RECOVERY_SECTION
-  THERAPEUTIC_PROTOCOL
-  ASSESSMENT
-  INTERVENTION
-  EXPERIENCE
-}
 
 enum ArticleStatus {
   DRAFT
   PUBLISHED
+  ARCHIVED
+}
+
+enum ContentTargetType {
+  ARTICLE
+  PROTOCOL
+  THERAPEUTIC_PROTOCOL
+  TOOL
+  APP
 }
 
 model ArticleCategory {
-  id          String            @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   nameAr      String?
-  slug        String            @unique
+  slug        String   @unique
   description String?
-  sortOrder   Int               @default(0)
-  isActive    Boolean           @default(true)
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   articles    Article[]
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
 
   @@map("article_categories")
 }
 
 model ArticleTopic {
-  id        String            @id @default(cuid())
-  name      String
-  nameAr    String?
-  slug      String            @unique
-  isActive  Boolean           @default(true)
-  articles  Article[]
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
+  id          String   @id @default(cuid())
+  name        String
+  nameAr      String?
+  slug        String   @unique
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  articles    Article[]
 
   @@map("article_topics")
 }
 
 model Article {
-  id              String            @id @default(cuid())
-  language        String
-  linkedArticleId String?
-  linkedArticle   Article?          @relation("LinkedArticles", fields: [linkedArticleId], references: [id])
-  linkedArticles  Article[]         @relation("LinkedArticles")
-  title           String
-  slug            String            @unique
-  excerpt         String?
-  body            String            @default("")
-  featuredImage   String?
-  imageCaption    String?
-  metaTitle       String?
-  metaDescription String?
-  metaKeywords    String?
-  ogImage         String?
-  status          ArticleStatus     @default(DRAFT)
-  accessTier      String?
-  authorId        String?
-  publishedAt     DateTime?
-  sortOrder       Int               @default(0)
-  isFeatured      Boolean           @default(false)
-  readTimeMinutes Int?
-  categories      ArticleCategory[]
-  topics          ArticleTopic[]
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  id                String         @id @default(cuid())
+  title             String
+  slug              String         @unique
+  language          String         @default("en")
+  content           String         // Markdown or rich text
+  body              String         // Aliased content field for component compatibility
+  featuredImage     String?        // Cover image path
+  imageCaption      String?        // Image alt/caption
+  excerpt           String?
+  metaTitle         String?
+  metaDescription  String?
+  coverImage        String?
+  status            ArticleStatus  @default(DRAFT)
+  isFeatured        Boolean        @default(false)
+  readTimeMinutes   Int?
+  publishedAt       DateTime?
+  linkedArticleId   String?
+  linkedArticle     Article?       @relation("LinkedArticles", fields: [linkedArticleId], references: [id], onDelete: SetNull)
+  linkedArticles    Article[]      @relation("LinkedArticles")
+  authorId          String?
+  categories        ArticleCategory[]
+  topics            ArticleTopic[]
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
 
-  @@index([language])
+  @@index([slug])
   @@index([status])
-  @@index([linkedArticleId])
+  @@index([language])
   @@map("articles")
 }
 
 model ContentRelationship {
-  id          String             @id @default(cuid())
+  id          String           @id @default(cuid())
   sourceType  ContentTargetType
   sourceId    String
   targetType  ContentTargetType
   targetSlug  String
   label       String?
-  sortOrder   Int                @default(0)
-  createdAt   DateTime           @default(now())
+  sortOrder   Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 
   @@index([sourceType, sourceId])
   @@index([targetType, targetSlug])
   @@map("content_relationships")
 }
+
