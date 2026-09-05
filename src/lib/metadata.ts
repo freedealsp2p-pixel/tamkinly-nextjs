@@ -38,7 +38,7 @@ export const siteMetadata = {
   products: {
     title: 'Products & Pricing',
     description:
-      'Start free with powerful identity tools, then upgrade as you grow. One-time payments. 30-day satisfaction guarantee. No subscriptions.',
+      'Start free with powerful identity tools, then upgrade as you grow. Flexible monthly plans from $7/mo. Cancel anytime.',
     keywords: 'identity transformation products, identity planner, \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0647\u0648\u064a\u0629',
   },
   about: {

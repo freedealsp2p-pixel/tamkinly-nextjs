@@ -477,52 +477,6 @@ export const DOWNLOADS_METADATA = generatePageMetadataFromConfig('downloads');
 // ============================================
 
 /**
- * Generate metadata for product detail pages
- */
-export function generateProductMetadata(
-  productName: string,
-  productDescription: string,
-  productSlug: string,
-  price: number
-): Metadata {
-  const fullUrl = `${SEO_SITE_CONFIG.url}/products/${productSlug}`;
-  const title = `${productName} | Identity Transformation - Tamkinly`;
-  
-  return {
-    title,
-    description: `${productDescription} Get instant access for $${price}. 30-day money-back guarantee.`,
-    keywords: [...PAGE_METADATA.products.keywords, productName.toLowerCase()],
-    
-    alternates: {
-      canonical: fullUrl,
-    },
-    
-    openGraph: {
-      title,
-      description: productDescription,
-      url: fullUrl,
-      siteName: SEO_SITE_CONFIG.name,
-      type: 'website' as any,
-      images: [
-        {
-          url: `${SEO_SITE_CONFIG.url}/og-image.webp`,
-          width: 1200,
-          height: 630,
-          alt: productName,
-        },
-      ],
-    },
-    
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description: productDescription,
-      site: SEO_SITE_CONFIG.twitterHandle,
-    },
-  };
-}
-
-/**
  * Generate metadata for blog post pages
  */
 export function generateBlogPostMetadata(

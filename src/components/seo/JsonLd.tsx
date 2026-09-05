@@ -33,7 +33,6 @@ import {
   generateArticleSchema,
   generateBreadcrumbSchema,
   generateSoftwareAppSchema,
-  generateProductSchema,
   generateFAQSchema,
   generateHowToSchema,
   generateCourseSchema,
@@ -231,55 +230,6 @@ export function AppPageJsonLd({
 }
 
 /**
- * Product Page JSON-LD Props
- */
-interface ProductPageJsonLdProps {
-  name: string;
-  nameAr?: string;
-  description: string;
-  price: number;
-  currency?: string;
-  slug: string;
-  features?: string[];
-  tier?: string;
-}
-
-/**
- * Product Page schemas - for pricing/product pages
- */
-export function ProductPageJsonLd({
-  name,
-  nameAr,
-  description,
-  price,
-  currency = 'USD',
-  slug,
-  features,
-  tier,
-}: ProductPageJsonLdProps) {
-  const productSchema = generateProductSchema({
-    name,
-    nameAr,
-    description,
-    price,
-    currency,
-    url: `/products#${slug}`,
-    category: 'Digital Product',
-    features,
-    tier,
-  });
-
-  return (
-    <JsonLd
-      data={[
-        // Organization omitted - rendered by DefaultJsonLd in root layout
-        productSchema,
-      ]}
-    />
-  );
-}
-
-/**
  * FAQ Page JSON-LD Props
  */
 interface FAQPageJsonLdProps {
@@ -440,7 +390,7 @@ export function LocalBusinessJsonLd() {
           openingHours: 'Mo-Fr 09:00-17:00',
           priceRange: '$$',
           currenciesAccepted: 'USD',
-          paymentAccepted: 'Credit Card, PayPal',
+          paymentAccepted: 'Credit Card, Telegram Payments',
           areaServed: 'Worldwide',
         },
       ]}

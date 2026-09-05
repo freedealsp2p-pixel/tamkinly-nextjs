@@ -14,12 +14,12 @@ const CSP_DIRECTIVES = [
   // Images: allow https (for og:image, user avatars, etc.) + data + blob
   "img-src 'self' data: blob: https:",
   // Connect: API endpoints + analytics beacons
-  "connect-src 'self' https://api.brevo.com https://backend.tahweel.io https://www.google-analytics.com https://*.google-analytics.com https://*.contentsquare.net https://*.hotjar.com https://challenges.cloudflare.com https://cloudflareinsights.com",
+  "connect-src 'self' https://api.brevo.com https://www.google-analytics.com https://*.google-analytics.com https://*.contentsquare.net https://*.hotjar.com https://challenges.cloudflare.com https://cloudflareinsights.com",
   "frame-src 'self' https://challenges.cloudflare.com",
   "frame-ancestors 'none'", // equivalent to X-Frame-Options: DENY
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self' https://wise.com https://tamkinly.com",
+  "form-action 'self' https://tamkinly.com",
   "manifest-src 'self'",
   "worker-src 'self' blob:",
   "upgrade-insecure-requests",

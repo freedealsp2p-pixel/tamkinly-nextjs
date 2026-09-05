@@ -27,8 +27,7 @@ import {
   Copy,
   Check,
   ExternalLink,
-  CreditCard,
-  Smartphone
+  CreditCard
 } from 'lucide-react';
 import { useTranslations, useLocale } from '@/components/providers/LocaleProvider';
 import { getCart, type CartData } from '@/lib/cart-client';
@@ -492,66 +491,7 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
                       </div>
                     </div>
                     <p className="text-center text-sm text-[#8A94A6] mt-2">{t('bankTransferTime')}</p>
-                    
-                    {/* Coming Soon Payment Methods - Tahweel + Coda */}
-                    <div className="relative my-6"><Separator /><span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm font-medium text-[#0F1C2E]">{t('comingSoonPayments')}</span></div>
-                    <div className="space-y-4">
-                      <p className="text-center text-sm text-[#8A94A6]">{t('comingSoonPaymentsDesc')}</p>
 
-                      {/* Tahweel Card Payment - Coming Soon */}
-                      <div className="relative bg-gradient-to-br from-slate-100 to-slate-50 rounded-xl p-6 border-2 border-dashed border-slate-300">
-                        <div className="absolute top-4 right-4">
-                          <Badge className="bg-amber-100 text-amber-800 border-amber-300 hover:bg-amber-200 px-3 py-1 text-xs font-semibold">
-                            <Clock className="w-3 h-3 mr-1 inline" />
-                            {t('comingSoonBadge')}
-                          </Badge>
-                        </div>
-                        <div className="flex items-center gap-3 mb-4 pr-24">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1F6F78] to-[#0F4F56] flex items-center justify-center">
-                            <CreditCard className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <p className="font-bold text-lg text-[#0F1C2E]">{t('tahweelComingSoon')}</p>
-                            <p className="text-slate-500 text-sm">{t('tahweelComingSoonDesc')}</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mt-3">
-                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">Visa</span>
-                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">Mastercard</span>
-                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">mada</span>
-                          <span className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-600 font-mono">Apple Pay</span>
-                        </div>
-                      </div>
-
-                      {/* Coda Digital Wallets - Coming Soon */}
-                      <div className="relative bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-6 border-2 border-dashed border-purple-200">
-                        <div className="absolute top-4 right-4">
-                          <Badge className="bg-amber-100 text-amber-800 border-amber-300 hover:bg-amber-200 px-3 py-1 text-xs font-semibold">
-                            <Clock className="w-3 h-3 mr-1 inline" />
-                            {t('comingSoonBadge')}
-                          </Badge>
-                        </div>
-                        <div className="flex items-center gap-3 mb-4 pr-24">
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#6366F1] flex items-center justify-center">
-                            <Smartphone className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <p className="font-bold text-lg text-[#0F1C2E]">{t('codaComingSoon')}</p>
-                            <p className="text-slate-500 text-sm">{t('codaComingSoonDesc')}</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mt-3">
-                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">STC Pay</span>
-                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">Apple Pay</span>
-                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">Google Pay</span>
-                          <span className="bg-white border border-purple-200 rounded px-2 py-1 text-xs text-purple-700 font-mono">Samsung Pay</span>
-                        </div>
-                      </div>
-
-                      <p className="text-center text-xs text-[#8A94A6] italic">{t('stayTuned')}</p>
-                    </div>
-
-                    
                     {/* ============================================ */}
                     {/* TRIBUTE PAYMENT (Telegram) */}
                     {/* ============================================ */}

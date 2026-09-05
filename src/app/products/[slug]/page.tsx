@@ -436,7 +436,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                     <span className="text-xl text-slate-400 line-through">${config.comparePrice}</span>
                   )}
                   <Badge variant="outline" className="text-slate-300 border-slate-600">
-                    {t('productDetail.oneTimePayment')}
+                    {t('productDetail.monthlySubscription')}
                   </Badge>
                 </div>
                 

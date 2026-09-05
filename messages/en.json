@@ -473,6 +473,7 @@
     "mostPopular": "Most Popular",
     "save": "Save",
     "oneTimePayment": "One-time payment",
+    "monthlySubscription": "Monthly subscription",
     "aboutProduct": "About This Product",
     "keyBenefits": "Key Benefits",
     "whatsIncluded": "What's Included",
@@ -881,8 +882,8 @@
     "diff2Desc": "We won't tell you to 'just think positive' or 'manifest your dreams.' Real transformation requires honest self-confrontation.",
     "diff3Title": "Depth Over Hacks",
     "diff3Desc": "Quick tips don't create lasting change. We go deep, because that's where real transformation happens.",
-    "diff4Title": "One-Time Purchase",
-    "diff4Desc": "No subscriptions. No upsells. No hidden fees. Buy once, own forever—including all future updates.",
+    "diff4Title": "Flexible by Design",
+    "diff4Desc": "Start free and upgrade when you're ready. Monthly plans from $7/mo, cancel anytime — specialized protocols are one-time $99 with lifetime access.",
     "foundersBadge": "The Founders",
     "foundersTitle": "Born From Experience, Not Theory",
     "foundersSubtitle": "We didn't start with a business plan. We started with a shared realization—that the life we were living wasn't the one we were capable of.",
@@ -1366,15 +1367,15 @@
         "questions": [
           {
             "q": "What payment methods do you accept?",
-            "a": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and other secure payment methods through our payment processor. All transactions are encrypted and secure."
+            "a": "Payments are accepted via Tribute inside Telegram (t.me/tamkinly) — a secure, encrypted payment platform. Contact us on Telegram to complete your purchase, and your access details arrive right after confirmation."
           },
           {
             "q": "Is there a subscription fee?",
-            "a": "No! All our products are one-time purchases. You pay once and get lifetime access, including any future updates to the product. No hidden fees, no recurring charges."
+            "a": "Yes — our core products run on flexible monthly subscriptions: Basic $7/mo, Premium $17/mo, and Mastery $27/mo, cancel anytime. Specialized recovery protocols ($99) are one-time purchases with lifetime access."
           },
           {
             "q": "Do you offer discounts?",
-            "a": "We occasionally run promotions and offer bundle discounts. Sign up for our newsletter to stay informed about special offers. We also offer special pricing for educational institutions and therapists."
+            "a": "We occasionally run promotional offers. Sign up for our newsletter to stay informed about special offers. We also offer special pricing for educational institutions and therapists."
           }
         ]
       },
@@ -1808,14 +1809,7 @@
     "total": "Total",
     "comingSoonBadge": "Coming Soon",
     "product": "Product",
-    "monthlyAccess": "Monthly Access",
-    "codaComingSoon": "Coda Payments Coming Soon",
-    "codaComingSoonDesc": "We are working on integrating Coda Payments for a smoother experience. In the meantime, please use the available payment methods.",
-    "tahweelComingSoon": "Tahweel Payments Coming Soon",
-    "tahweelComingSoonDesc": "Tahweel integration is in progress. Please check back soon or use an alternative payment method.",
-    "comingSoonPayments": "More Payment Methods Coming Soon",
-    "comingSoonPaymentsDesc": "Additional payment options are being added to serve you better. Thank you for your patience.",
-    "stayTuned": "Stay Tuned"
+    "monthlyAccess": "Monthly Access"
   },
   "searchPage": {
     "badge": "Search",
@@ -2394,37 +2388,6 @@
       "helpDesc": "If you experienced any issues during checkout, please don't hesitate to contact our support team. We're here to help you complete your purchase.",
       "backToProducts": "Back to Products",
       "contactSupport": "Contact Support"
-    },
-    "demo": {
-      "paymentSuccessful": "Payment Successful!",
-      "redirecting": "Redirecting to confirmation page...",
-      "securePaymentGateway": "Secure Payment Gateway",
-      "orderId": "Order ID",
-      "emailLabel": "Email",
-      "total": "Total",
-      "paymentMethod": "Payment Method",
-      "card": "Card",
-      "bankTransfer": "Bank Transfer",
-      "securePaymentBy": "Secure payment powered by Tahweel",
-      "cardNumber": "Card Number",
-      "expiry": "Expiry",
-      "cvv": "CVV",
-      "nameOnCard": "Name on Card",
-      "demoNotice": "Demo Mode: This is a test payment. Use card 4242 4242 4242 4242 with any future expiry date.",
-      "bankTransferDetails": "Bank Transfer Details",
-      "transferAmount": "Transfer the amount to the following account:",
-      "bankName": "Bank Name:",
-      "demoBank": "Demo Bank",
-      "accountNumber": "Account Number:",
-      "iban": "IBAN:",
-      "reference": "Reference:",
-      "processing": "Processing...",
-      "pay": "Pay",
-      "sslSecured": "SSL Secured",
-      "encrypted": "Encrypted",
-      "cancelPayment": "Cancel Payment",
-      "paymentFailed": "Payment failed. Please try again.",
-      "paymentError": "Payment processing error. Please try again."
     }
   },
   "homePage": {

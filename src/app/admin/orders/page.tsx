@@ -364,7 +364,7 @@ export default function OrdersAdminPage() {
 
                     {selectedOrder.transactionId && (
                       <div className="p-3 bg-slate-50 rounded-lg">
-                        <p className="text-xs text-[#8A94A6]">Skrill Transaction ID</p>
+                        <p className="text-xs text-[#8A94A6]">Transaction ID</p>
                         <p className="font-mono text-sm text-[#0F1C2E]">{selectedOrder.transactionId}</p>
                       </div>
                     )}

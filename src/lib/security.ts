@@ -22,8 +22,6 @@ const ALLOWED_ORIGINS = new Set([
 // - Webhooks: authenticated via HMAC signature
 // - NextAuth callbacks: authenticated via NextAuth internals
 const CSRF_EXEMPT_PATHS = new Set([
-  '/api/payment/webhook',
-  '/api/webhook/tahweel',
   '/api/auth/[...nextauth]', // NextAuth handles its own CSRF
 ]);
 

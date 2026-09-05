@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
     const order = await db.order.create({
       data: {
         orderNumber, customerEmail: customerEmail.toLowerCase(), customerName,
-        subtotal: total, total, paymentMethod: paymentMethod || 'skrill',
+        subtotal: total, total, paymentMethod: paymentMethod || 'tribute',
         transactionId, notes, status: 'PENDING',
         items: {
           create: items.map((item: { productId: string; productName: string; price: number; quantity?: number }) => ({

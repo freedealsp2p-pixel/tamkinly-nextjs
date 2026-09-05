@@ -10,8 +10,8 @@ export default async function Image() {
   return generatePageImage({
     title: 'Products & Pricing',
     subtitle: 'Identity Transformation Tools',
-    description: 'Start free with powerful identity tools. One-time payments. 30-day guarantee.',
-    tags: ['Free Tier', 'No Subscriptions', '30-Day Guarantee'],
+    description: 'Start free with powerful identity tools. Flexible monthly plans from $7/mo. Cancel anytime.',
+    tags: ['Free Tier', 'Monthly Plans', 'Cancel Anytime'],
     accentColor: '#1F6F78',
   });
 }
