@@ -110,7 +110,6 @@ export default function GoalSystemPage() {
   const [goals, setGoals] = useState<Goal[]>(demoGoals);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
-  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
@@ -118,7 +117,6 @@ export default function GoalSystemPage() {
     if (saved) {
       setGoals(JSON.parse(saved));
     }
-    setHydrated(true);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
   
@@ -203,7 +201,6 @@ export default function GoalSystemPage() {
   const completedGoals = goals.filter(g => g.status === 'COMPLETED').length;
   const inProgressGoals = goals.filter(g => g.status === 'IN_PROGRESS').length;
 
-  if (!hydrated) return null;
 
   return (
 <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50/30" dir={locale === 'ar' ? 'rtl' : 'ltr'}>

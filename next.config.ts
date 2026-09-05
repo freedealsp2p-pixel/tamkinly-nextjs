@@ -174,6 +174,19 @@ const nextConfig: NextConfig = {
         destination: '/recovery/trc',
         permanent: true,
       },
+      // /recovery/trc/worksheets was a client-side redirect stub (rendered null, no h1 ->
+      // SSR gap + invalid sitemap entry). Replaced with permanent 308 redirects; removed
+      // from sitemap.ts (2026-09-06)
+      {
+        source: '/recovery/trc/worksheets',
+        destination: '/recovery/trc/downloads',
+        permanent: true,
+      },
+      {
+        source: '/ar/recovery/trc/worksheets',
+        destination: '/ar/recovery/trc/downloads',
+        permanent: true,
+      },
       // Legacy product redirects (old pricing model retired 2026-09 -> current tiers)
       // Old bundle/complete-bundle links now resolve to Mastery $27; trial/planner to Basic/Premium
       // AR prefix preserved explicitly (config redirects run before locale middleware)

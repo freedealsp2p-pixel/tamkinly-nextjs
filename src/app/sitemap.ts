@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Recovery TRC pages
   const recoveryTrcPages = [
     'grounding', 'safe-place', 'body-scan', 'a52', 'eft-tapping',
-    'shame-recovery', 'thought-reframing', 'trauma-journal', 'journey', 'worksheets',
+    'shame-recovery', 'thought-reframing', 'trauma-journal', 'journey',
     'regulation-toolkit', 'what-trauma-does-to-the-body', 'what-happens-during-trauma-responses',
     'grounding-guide', 'grounding/printable', 'regulation-guide', 'secondary-trauma',
     'worksheets/safety-plan', 'worksheets/trigger-mapping', 'downloads',

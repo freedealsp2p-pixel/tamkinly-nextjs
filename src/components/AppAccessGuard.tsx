@@ -103,12 +103,13 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
   }
   
+  // SSR/hydration fix (2026-09-06): while the access check runs (server render + first
+  // client render), render the app content itself instead of a spinner. The page shell
+  // (h1, marketing copy) becomes visible to crawlers, fixing the client-only SSR gap on
+  // all paid app pages. After the client-side check completes, non-entitled visitors get
+  // the blurred preview + unlock overlay below (identical behavior to before).
   if (isChecking) {
-    return (
-      <div className="min-h-screen bg-[#F6F8FA] flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-[#3DD4B0] animate-spin" />
-      </div>
-    );
+    return <>{children}</>;
   }
   
   if (hasAccess) {
