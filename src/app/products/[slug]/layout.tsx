@@ -39,12 +39,12 @@ const productMetadata: Record<string, {
     keywords: ['identity planner', '30-day transformation', 'identity recode', 'personal development planner', 'habit transformation', 'identity journal']
   },
   'premium': {
-    name: 'Premium Transformation Package',
-    nameAr: 'باقة التحول المتميزة',
+    name: 'Premium (Monthly)',
+    nameAr: 'مميز (شهري)',
     description: 'Comprehensive transformation with advanced analytics, decision tracking, and evidence collection tools. Data-driven identity transformation for committed individuals.',
     descriptionAr: 'تحول شامل مع تحليلات متقدمة وتتبع القرارات وأدوات جمع الأدلة.',
-    price: 27,
-    keywords: ['premium transformation', 'advanced analytics', 'decision tracking', 'identity analytics', 'data-driven growth', 'transformation dashboard']
+    price: 17,
+    keywords: ['premium plan', 'advanced analytics', 'decision tracking', 'identity analytics', 'data-driven growth', 'transformation dashboard']
   },
   'mastery': {
     name: 'Mastery (Monthly)',
@@ -53,14 +53,6 @@ const productMetadata: Record<string, {
     descriptionAr: 'تجربة تحول الهوية المثالية: جميع التطبيقات + تدريب AI + وصول المجتمع + دعم ذو أولوية.',
     price: 27,
     keywords: ['mastery plan', 'complete transformation', 'AI coaching', 'identity mastery', 'full access', 'VIP support']
-  },
-  'bundle': {
-    name: 'Complete Transformation Bundle',
-    nameAr: 'باقة التحول الكاملة',
-    description: 'The ultimate identity transformation experience: All apps + AI coaching + community access + priority support. Everything you need for complete transformation.',
-    descriptionAr: 'تجربة تحول الهوية المثالية: جميع التطبيقات + تدريب AI + وصول المجتمع + دعم ذو أولوية.',
-    price: 47,
-    keywords: ['complete bundle', 'transformation package', 'AI coaching', 'identity bundle', 'full transformation', 'VIP access']
   }
 };
 

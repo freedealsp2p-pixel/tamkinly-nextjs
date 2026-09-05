@@ -92,7 +92,7 @@ const products = [
     name: 'Mastery (Monthly)',
     nameAr: 'إتقان (شهري)',
     price: '$27/mo',
-    originalPrice: '$91',
+    originalPrice: '',
     description: 'The ultimate package: All apps + AI coaching + community access',
     descriptionAr: 'الحزمة النهائية: كل التطبيقات + مدرب AI + مجتمع',
     features: ['Everything in Premium', 'All Interactive Apps', 'AI Identity Coach', 'Transformation Community', 'Priority Support', 'Emotion Regulation Toolkit', 'Cancel anytime'],

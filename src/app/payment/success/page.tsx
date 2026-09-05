@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, Sparkles, ArrowRight, Mail, Copy, Check, Lock, Zap, Brain, Target, Users, Clock, Gift, Star, Shield } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Mail, Copy, Check, Lock, Zap, Brain, Target, Users, Clock, Gift, Star, Shield } from 'lucide-react';
 import { useTranslations } from "@/components/providers/LocaleProvider";
 
 const TIER_INFO: Record<string, { nameEn: string; nameAr: string; price: number; color: string; icon: React.ReactNode; features: { en: string; ar: string }[] }> = {
@@ -30,24 +30,13 @@ const TIER_INFO: Record<string, { nameEn: string; nameAr: string; price: number;
     ],
   },
   premium: {
-    nameEn: 'Premium Package', nameAr: 'الباقة المميزة', price: 27, color: 'bg-purple-100 text-purple-800 border-purple-300',
+    nameEn: 'Premium (Monthly)', nameAr: 'مميز (شهري)', price: 17, color: 'bg-purple-100 text-purple-800 border-purple-300',
     icon: <Brain className="w-5 h-5" />,
     features: [
       { en: 'Everything in Basic', ar: 'كل ما في الباقة الأساسية' },
       { en: 'Decision pattern analysis', ar: 'تحليل أنماط القرار' },
       { en: 'Evidence tracking system', ar: 'نظام تتبع الأدلة' },
       { en: 'Progress dashboard', ar: 'لوحة تتبع التقدم' },
-    ],
-  },
-  bundle: {
-    nameEn: 'Mastery (Monthly)', nameAr: 'إتقان (شهري)', price: 27, color: 'bg-[#0F1C2E] text-[#3DD4B0] border-[#3DD4B0]/50',
-    icon: <Sparkles className="w-5 h-5" />,
-    features: [
-      { en: 'Everything in Premium', ar: 'كل ما في الباقة المميزة' },
-      { en: 'AI Identity Coach', ar: 'مدرب الهوية بالذكاء الاصطناعي' },
-      { en: 'Emotion regulation toolkit', ar: 'أدوات تنظيم المشاعر' },
-      { en: 'Community access', ar: 'الوصول للمجتمع' },
-      { en: 'Priority support', ar: 'الدعم ذو الأولوية' },
     ],
   },
 };

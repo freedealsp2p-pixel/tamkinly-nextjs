@@ -36,7 +36,6 @@ const slugToTranslationKey: Record<string, string> = {
   // Legacy slugs redirect to new translation keys
   'trial': 'basic',
   'planner': 'premium',
-  'bundle': 'mastery',
 };
 
 const productsConfig: Record<string, {
@@ -70,7 +69,7 @@ const productsConfig: Record<string, {
     id: "mastery",
     slug: "mastery",
     price: 27,
-    comparePrice: 91,
+    comparePrice: 0,
     popular: false,
     icon: Award,
     color: "#0F1C2E"
@@ -93,15 +92,6 @@ const productsConfig: Record<string, {
     popular: true,
     icon: Calendar,
     color: "#3DD4B0"
-  },
-  'bundle': {
-    id: "mastery",
-    slug: "mastery",
-    price: 27,
-    comparePrice: 91,
-    popular: false,
-    icon: Award,
-    color: "#0F1C2E"
   }
 };
 
@@ -161,12 +151,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         t(`${productKey}.highlights.save`),
         t(`${productKey}.highlights.analytics`)
       ];
-    } else if (slug === 'bundle') {
-      return [
-        t(`${productKey}.highlights.save`),
-        t(`${productKey}.highlights.aiCoaching`),
-        t(`${productKey}.highlights.vipAccess`)
-      ];
     }
     return [];
   };
@@ -190,12 +174,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { title: t(`${productKey}.benefits.dataDriven.title`), description: t(`${productKey}.benefits.dataDriven.description`) },
         { title: t(`${productKey}.benefits.patterns.title`), description: t(`${productKey}.benefits.patterns.description`) },
         { title: t(`${productKey}.benefits.evidence.title`), description: t(`${productKey}.benefits.evidence.description`) }
-      ];
-    } else if (slug === 'bundle') {
-      return [
-        { title: t(`${productKey}.benefits.complete.title`), description: t(`${productKey}.benefits.complete.description`) },
-        { title: t(`${productKey}.benefits.aiGuidance.title`), description: t(`${productKey}.benefits.aiGuidance.description`) },
-        { title: t(`${productKey}.benefits.community.title`), description: t(`${productKey}.benefits.community.description`) }
       ];
     }
     return [];
@@ -242,13 +220,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.apps.evidence.name`), description: t(`${productKey}.apps.evidence.description`) },
         { name: t(`${productKey}.apps.dashboard.name`), description: t(`${productKey}.apps.dashboard.description`) }
       ];
-    } else if (slug === 'bundle') {
-      return [
-        { name: t(`${productKey}.apps.allPremium.name`), description: t(`${productKey}.apps.allPremium.description`) },
-        { name: t(`${productKey}.apps.aiCoach.name`), description: t(`${productKey}.apps.aiCoach.description`) },
-        { name: t(`${productKey}.apps.emotion.name`), description: t(`${productKey}.apps.emotion.description`) },
-        { name: t(`${productKey}.apps.community.name`), description: t(`${productKey}.apps.community.description`) }
-      ];
     }
     return [];
   };
@@ -280,16 +251,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.freeForever`) },
         { name: t(`${productKey}.includes.analytics`), value: t(`${productKey}.includes.yes`) }
       ];
-    } else if (slug === 'bundle') {
-      return [
-        { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
-        { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
-        { name: t(`${productKey}.includes.pdfDownloads`), value: t(`${productKey}.includes.all`) },
-        { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.priority`) },
-        { name: t(`${productKey}.includes.aiCoach`), value: t(`${productKey}.includes.unlimited`) },
-        { name: t(`${productKey}.includes.community`), value: t(`${productKey}.includes.monthlyAccess`) },
-        { name: t(`${productKey}.includes.liveQA`), value: t(`${productKey}.includes.monthly`) }
-      ];
     }
     return [];
   };
@@ -316,13 +277,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.specs.analytics`), value: t(`${productKey}.specs.analyticsValue`) },
         { name: t(`${productKey}.specs.export`), value: t(`${productKey}.specs.exportValue`) },
         { name: t(`${productKey}.specs.dashboard`), value: t(`${productKey}.specs.dashboardValue`) }
-      ];
-    } else if (slug === 'bundle') {
-      return [
-        { name: t(`${productKey}.specs.aiCoach`), value: t(`${productKey}.specs.aiCoachValue`) },
-        { name: t(`${productKey}.specs.community`), value: t(`${productKey}.specs.communityValue`) },
-        { name: t(`${productKey}.specs.supportHours`), value: t(`${productKey}.specs.supportHoursValue`) },
-        { name: t(`${productKey}.specs.bonus`), value: t(`${productKey}.specs.bonusValue`) }
       ];
     }
     return [];

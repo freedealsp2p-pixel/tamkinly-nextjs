@@ -100,7 +100,7 @@ const productsData: Record<string, {
     name: "Mastery (Monthly)",
     nameAr: "إتقان (شهري)",
     price: 27,
-    comparePrice: 91,
+    comparePrice: 0,
     icon: Award,
     tier: "MASTERY",
     tierAr: "إتقان",
@@ -133,19 +133,6 @@ const productsData: Record<string, {
     tierAr: "مميز",
     features: ["Everything in Basic", "30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs", "Decision Pattern Analysis", "Cancel anytime"],
     featuresAr: ["كل ما في الباقة الأساسية", "مخطط الهوية لمدة 30 يوم", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "PDF رقمي + للطباعة", "تحليل أنماط القرارات", "إلغاء في أي وقت"],
-    billingPeriod: "monthly"
-  },
-  'bundle': {
-    id: "mastery",
-    name: "Mastery (Monthly)",
-    nameAr: "إتقان (شهري)",
-    price: 27,
-    comparePrice: 91,
-    icon: Award,
-    tier: "MASTERY",
-    tierAr: "إتقان",
-    features: ["Everything in Premium", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support", "Emotion Regulation Toolkit", "Cancel anytime"],
-    featuresAr: ["كل ما في الباقة المميزة", "جميع التطبيقات التفاعلية", "مدرب الهوية بالذكاء الاصطناعي", "مجتمع التحول", "دعم ذو أولوية", "أدوات تنظيم المشاعر", "إلغاء في أي وقت"],
     billingPeriod: "monthly"
   }
 };

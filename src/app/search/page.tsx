@@ -22,7 +22,7 @@ import { useTranslations, useLocale } from '@/components/providers/LocaleProvide
 const searchableContent = [
   // Main Pages
   { title: 'Home', titleAr: 'الرئيسية', path: '/', type: 'page', description: 'Tamkinly - Return to your center', descriptionAr: 'تمكينلي - عد إلى مركزك', keywords: ['home', 'main', 'start', 'landing'] },
-  { title: 'Products & Pricing', titleAr: 'المنتجات والأسعار', path: '/products', type: 'page', description: 'Start free with powerful identity tools, then upgrade as you grow', descriptionAr: 'ابدأ مجاناً مع أدوات هوية قوية، ثم قم بالترقية مع نموك', keywords: ['pricing', 'buy', 'purchase', 'planner', 'bundle', 'premium', 'trial'] },
+  { title: 'Products & Pricing', titleAr: 'المنتجات والأسعار', path: '/products', type: 'page', description: 'Start free with powerful identity tools, then upgrade as you grow', descriptionAr: 'ابدأ مجاناً مع أدوات هوية قوية، ثم قم بالترقية مع نموك', keywords: ['pricing', 'buy', 'purchase', 'planner', 'premium', 'trial'] },
   { title: 'Apps', titleAr: 'التطبيقات', path: '/apps', type: 'page', description: 'Interactive transformation tools', descriptionAr: 'أدوات تحول تفاعلية', keywords: ['tools', 'applications', 'apps'] },
   { title: 'Methodology', titleAr: 'المنهجية', path: '/methodology', type: 'page', description: 'Our evidence-based transformation approach', descriptionAr: 'نهجنا المبني على الأدلة للتحول', keywords: ['method', 'approach', 'how', 'process'] },
   { title: 'About Us', titleAr: 'من نحن', path: '/about', type: 'page', description: 'Learn about Tamkinly and our mission', descriptionAr: 'تعرف على تمكينلي ومهمتنا', keywords: ['about', 'team', 'founders', 'story', 'mission'] },

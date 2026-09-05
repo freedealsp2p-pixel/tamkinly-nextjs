@@ -101,7 +101,7 @@ function mapCategoryToCTAType(category: string): CTAType {
   if (cat.includes('liberation') || cat.includes('self-liberation')) return 'daily';
   if (cat.includes('strategy') || cat.includes('commitment') || cat.includes('excellence')) return 'recode';
   if (cat.includes('wealth') || cat.includes('millionaire')) return 'recode';
-  if (cat.includes('basic') || cat.includes('bundle') || cat.includes('transformation')) return 'recode';
+  if (cat.includes('basic') || cat.includes('transformation')) return 'recode';
   if (cat.includes('identity') || cat.includes('self-image')) return 'quiz';
   if (cat.includes('discipline') || cat.includes('procrastinat')) return 'recode';
   if (cat.includes('coach') || cat.includes('ai')) return 'coach';

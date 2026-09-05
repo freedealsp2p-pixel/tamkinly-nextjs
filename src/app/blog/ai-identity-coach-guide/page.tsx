@@ -365,11 +365,11 @@ export default function AIIdentityCoachGuideArticle() {
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("The BUNDLE Tier Advantage", "ميزة مستوى الحزمة")}
+              {getText("The Mastery Tier Advantage", "ميزة مستوى الإتقان")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("The AI Identity Coach is an exclusive feature of the BUNDLE tier—our most comprehensive transformation package. The BUNDLE combines:", "مدرب الهوية بالذكاء الاصطناعي ميزة حصرية في مستوى الحزمة—حزمة التحول الأكثر شمولاً لدينا. تجمع الحزمة بين:")}
+              {getText("The AI Identity Coach is an exclusive feature of the Mastery tier—our most comprehensive transformation plan. Mastery combines:", "مدرب الهوية بالذكاء الاصطناعي ميزة حصرية في مستوى الإتقان—باقة التحول الأكثر شمولاً لدينا. يجمع الإتقان بين:")}
             </p>
 
             <div className="space-y-4 my-8">
@@ -405,25 +405,25 @@ export default function AIIdentityCoachGuideArticle() {
 
             <div className="flex items-center gap-2 text-[#3DD4B0] mt-12 mb-4">
               <Lock className="h-5 w-5" />
-              <span className="font-semibold">{getText("BUNDLE Tier Exclusive", "حصري لمستوى الحزمة")}</span>
+              <span className="font-semibold">{getText("Mastery Tier Exclusive", "حصري لمستوى الإتقان")}</span>
             </div>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
-                "The BUNDLE tier is designed for those who want the complete transformation experience—combining structured systems with personalized coaching support. It's the closest you can get to having a personal transformation coach available whenever you need one.",
-                "مستوى الحزمة مصمم لمن يريدون تجربة التحول الكاملة—يجمع بين الأنظمة المنظمة والدعم التدريبي المخصص. إنه أقرب ما يمكنك الحصول عليه إلى مدرب تحول شخصي متاح كلما احتجت إليه."
+                "The Mastery tier is designed for those who want the complete transformation experience—combining structured systems with personalized coaching support. It's the closest you can get to having a personal transformation coach available whenever you need one.",
+                "مستوى الإتقان مصمم لمن يريدون تجربة التحول الكاملة—يجمع بين الأنظمة المنظمة والدعم التدريبي المخصص. إنه أقرب ما يمكنك الحصول عليه إلى مدرب تحول شخصي متاح كلما احتجت إليه."
               )}
             </p>
 
             <div className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] p-8 rounded-xl my-10 text-center">
-              <Badge className="mb-4 bg-[#3DD4B0]/20 text-[#3DD4B0] border-0">BUNDLE</Badge>
+              <Badge className="mb-4 bg-[#3DD4B0]/20 text-[#3DD4B0] border-0">MASTERY</Badge>
               <h3 className="text-white text-xl font-bold mb-3">{getText("Experience AI-Powered Coaching", "اختبر التدريب المدعوم بالذكاء الاصطناعي")}</h3>
               <p className="text-slate-300 mb-6">
-                {getText("Get 24/7 access to the AI Identity Coach with the complete BUNDLE package.", "احصل على وصول على مدار الساعة لمدرب الهوية بالذكاء الاصطناعي مع حزمة الحزمة الكاملة.")}
+                {getText("Get 24/7 access to the AI Identity Coach with Mastery — $27.", "احصل على وصول على مدار الساعة لمدرب الهوية بالذكاء الاصطناعي مع باقة الإتقان — $27.")}
               </p>
               <Link href="/products">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
-                  {getText("Get the BUNDLE", "احصل على الحزمة")}
+                  {getText("Get Mastery — $27", "احصل على باقة الإتقان — $27")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>

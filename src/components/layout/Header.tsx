@@ -20,7 +20,7 @@ import { NotificationBell } from "@/components/NotificationBell";
 // Search pages data - comprehensive list for better search
 const searchablePages = [
   { titleKey: "navigation.home", path: "/", keywords: ["home", "main", "start", "landing", "الرئيسية"] },
-  { titleKey: "navigation.products", path: "/products", keywords: ["pricing", "buy", "purchase", "planner", "bundle", "premium", "trial", "المنتجات", "الأسعار"] },
+  { titleKey: "navigation.products", path: "/products", keywords: ["pricing", "buy", "purchase", "planner", "premium", "trial", "المنتجات", "الأسعار"] },
   { titleKey: "navigation.apps", path: "/apps", keywords: ["tools", "applications", "quiz", "assessment", "التطبيقات", "الأدوات"] },
   { titleKey: "navigation.quiz", path: "/quiz", keywords: ["quiz", "assessment", "test", "identity", "gap", "اختبار", "تقييم", "فجوة"] },
   { titleKey: "navigation.methodology", path: "/methodology", keywords: ["method", "approach", "how", "process", "المنهجية"] },

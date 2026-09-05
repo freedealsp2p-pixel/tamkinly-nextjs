@@ -70,7 +70,7 @@ export const LOCAL_PRODUCTS: Product[] = [
     name: 'Mastery',
     slug: 'mastery',
     price: 27,
-    comparePrice: 91,
+    comparePrice: null,
     description: 'The ultimate package: All apps + AI coaching + community access + priority support. Best value for committed individuals ready for total transformation.',
     shortDesc: 'Everything + AI Coach + Community',
     category: 'subscription',

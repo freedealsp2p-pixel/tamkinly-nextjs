@@ -293,7 +293,6 @@ function ProductCard({ product, t }: {
     tier: string;
     icon: React.ElementType;
     popular: boolean;
-    isBundle?: boolean;
     featured?: boolean;
   };
   t: ReturnType<typeof useTranslations>;
@@ -350,23 +349,13 @@ function ProductCard({ product, t }: {
   return (
     <Card className={`relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white ${
       product.popular ? 'ring-2 ring-[#3DD4B0]' : ''
-    } ${product.isBundle ? 'md:col-span-2 lg:col-span-1' : ''}`}>
+    }`}>
       {/* Popular Badge */}
       {product.popular && (
         <div className="absolute top-4 right-4 z-10">
           <Badge className="bg-[#3DD4B0] text-[#0F1C2E] font-semibold">
             <Star className="w-3 h-3 mr-1 fill-current" />
             {t('mostPopular')}
-          </Badge>
-        </div>
-      )}
-      
-      {/* Bundle Badge */}
-      {product.isBundle && (
-        <div className="absolute top-4 right-4 z-10">
-          <Badge className="bg-[#0F1C2E] text-white font-semibold">
-            <Monitor className="w-3 h-3 mr-1" />
-            {t('bestValue')}
           </Badge>
         </div>
       )}
@@ -522,10 +511,10 @@ function ProductCard({ product, t }: {
 function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   // Product data with non-translatable fields
   const products = [
-    { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, color: "#3DD4B0", popular: false, isBundle: false, billingPeriod: "free" },
-    { id: "basic", nameKey: "basic", price: 7, comparePrice: 15, tier: "BASIC", icon: Clock, featured: false, popular: false, isBundle: false, billingPeriod: "monthly" },
-    { id: "premium", nameKey: "premium", price: 17, comparePrice: 29, tier: "PREMIUM", icon: Calendar, featured: true, popular: true, isBundle: false, billingPeriod: "monthly" },
-    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 91, tier: "MASTERY", icon: Award, featured: true, popular: false, isBundle: false, billingPeriod: "monthly" },
+    { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, color: "#3DD4B0", popular: false, billingPeriod: "free" },
+    { id: "basic", nameKey: "basic", price: 7, comparePrice: 15, tier: "BASIC", icon: Clock, featured: false, popular: false, billingPeriod: "monthly" },
+    { id: "premium", nameKey: "premium", price: 17, comparePrice: 29, tier: "PREMIUM", icon: Calendar, featured: true, popular: true, billingPeriod: "monthly" },
+    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, featured: true, popular: false, billingPeriod: "monthly" },
   ];
 
   return (

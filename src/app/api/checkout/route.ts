@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
       }));
       total = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-      const tierOrder: Record<string, number> = { 'basic': 1, 'premium': 2, 'mastery': 3, 'trial': 1, 'planner': 2, 'bundle': 3 };
+      const tierOrder: Record<string, number> = { 'basic': 1, 'premium': 2, 'mastery': 3, 'trial': 1, 'planner': 2 };
       let bestTier = 0;
       for (const item of orderItems) {
         const tierLevel = tierOrder[item.productId] || 0;
@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
         }, 0);
 
         const bundleItem = dbCartItems.find(item => 
-          ['trial', 'planner', 'premium', 'bundle'].includes(item.productId)
+          ['trial', 'planner', 'premium'].includes(item.productId)
         );
         if (bundleItem) {
           bestProductId = bundleItem.productId;
@@ -179,7 +179,7 @@ export async function POST(request: NextRequest) {
     // Add to Brevo marketing list (not sensitive - just for newsletters)
     try {
       await addContactToList(email, name || 'Friend', {
-        type: (bestProductId || 'bundle') as 'trial' | 'planner' | 'premium' | 'bundle',
+        type: (bestProductId || 'mastery') as 'trial' | 'planner' | 'premium' | 'bundle' | 'mastery',
       });
     } catch (brevoError) {
       console.error('Failed to add contact to Brevo:', brevoError);

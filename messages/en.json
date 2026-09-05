@@ -303,7 +303,7 @@
     "loading": "Loading...",
     "translate": "Translate",
     "promoDescription": "Limited time offer: the complete Mastery package — $27",
-    "viewBundle": "View Bundle",
+    "viewBundle": "View Mastery — $27",
     "dismiss": "Dismiss",
     "skipToContent": "Skip to main content"
   },
@@ -342,7 +342,6 @@
     "contact": "Contact",
     "allProducts": "All Products",
     "identityRecodePlanner": "Identity Recode Planner",
-    "bundlePackages": "Bundle Packages",
     "faq": "FAQ",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
@@ -352,7 +351,6 @@
     "blog": "Blog",
     "trialProduct": "7-Day Trial — $7",
     "plannerProduct": "Identity Planner — $17",
-    "bundleProduct": "Mastery — $27",
     "apps": "Apps",
     "allApps": "All Apps",
     "identityQuiz": "Identity Quiz",
@@ -448,11 +446,6 @@
         "name": "Premium Transformation",
         "description": "Comprehensive transformation with advanced tools",
         "bestFor": "Committed individuals seeking complete transformation"
-      },
-      "bundle": {
-        "name": "Complete Bundle",
-        "description": "The ultimate identity transformation experience",
-        "bestFor": "Those who want the complete transformation experience"
       }
     },
     "whatsIncluded": "What's Included:",
@@ -466,7 +459,7 @@
     "joinThousands": "Join thousands who have already begun their journey back to themselves. Your transformation starts with a single decision.",
     "beginTransformation": "Begin Your Transformation",
     "personalizedMessages": {
-      "high": "You have a strong foundation. The Premium Bundle will help you optimize and master your identity transformation with advanced tools and frameworks.",
+      "high": "You have a strong foundation. The Premium plan will help you optimize and master your identity transformation with advanced tools and frameworks.",
       "medium": "You're ready for transformation. The Identity Recode Planner is perfectly suited for your journey - it will guide you through a complete 30-day identity reconstruction.",
       "low": "There's significant potential waiting to be unlocked. The Planner will help you rebuild your identity foundation from the ground up.",
       "veryLow": "Your transformation journey starts with a single step. The 7-Day Reset is the perfect introduction to discover what's possible."
@@ -811,113 +804,6 @@
             "content": "I recommend this to clients. The decision pattern analysis alone is worth the upgrade."
           }
         ]
-      },
-      "bundle": {
-        "name": "Complete Bundle",
-        "tier": "BUNDLE",
-        "description": "The ultimate package: All apps + AI coaching + community access + priority support.",
-        "longDescription": "The Complete Bundle is our most comprehensive offering. Get everything we've built: all products, all apps, AI-powered identity coaching, access to our transformation community, and priority support with 24-hour response time. This is the fastest path to transformation.",
-        "cta": "Get Complete Bundle",
-        "highlights": {
-          "save": "Mastery — $27",
-          "aiCoaching": "AI coaching",
-          "vipAccess": "VIP access"
-        },
-        "benefits": {
-          "complete": {
-            "title": "Complete Transformation",
-            "description": "Every tool, every resource, every support option"
-          },
-          "aiGuidance": {
-            "title": "AI-Powered Guidance",
-            "description": "Get personalized coaching from our AI identity coach"
-          },
-          "community": {
-            "title": "Community Connection",
-            "description": "Connect with others on the same journey"
-          }
-        },
-        "features": [
-          "All PDF products ($27 value)",
-          "All Interactive Apps",
-          "AI Identity Coach (GPT-4 powered)",
-          "Transformation Community",
-          "Emotion Regulation (ERQ)",
-          "Priority Support (24hr response)",
-          "Monthly live Q&A sessions",
-          "Direct founding team access",
-          "Early access to new features"
-        ],
-        "apps": {
-          "allPremium": {
-            "name": "All Core Apps",
-            "description": "Everything in Premium (7 apps)"
-          },
-          "aiCoach": {
-            "name": "AI Identity Coach",
-            "description": "GPT-4 powered coaching anytime"
-          },
-          "emotion": {
-            "name": "Emotion Regulation (ERQ)",
-            "description": "Advanced emotional intelligence training"
-          },
-          "community": {
-            "name": "Community Access",
-            "description": "Private transformation community"
-          }
-        },
-        "includes": {
-          "duration": "Duration",
-          "durationValue": "Lifetime",
-          "appsAccess": "Apps Access",
-          "appsValue": "All 15 Apps",
-          "pdfDownloads": "PDF Downloads",
-          "all": "Yes - All",
-          "support": "Support",
-          "priority": "Priority (24hr)",
-          "aiCoach": "AI Coach",
-          "unlimited": "Unlimited",
-          "community": "Community",
-          "lifetimeAccess": "Lifetime Access",
-          "liveQA": "Live Q&A",
-          "monthly": "Monthly"
-        },
-        "specs": {
-          "aiCoach": "AI Coach",
-          "aiCoachValue": "GPT-4 Powered",
-          "community": "Community",
-          "communityValue": "Private Discord",
-          "supportHours": "Support Hours",
-          "supportHoursValue": "24hr Response",
-          "bonus": "Bonus",
-          "bonusValue": "Founding Team Access"
-        },
-        "faqs": [
-          {
-            "q": "Is the AI Coach actually helpful?",
-            "a": "Our AI Coach uses GPT-4 with custom training on identity transformation. Users report it provides breakthrough insights between sessions."
-          },
-          {
-            "q": "What's the community like?",
-            "a": "A private Discord with 500+ members on transformation journeys. Weekly challenges, accountability partners, and genuine support."
-          },
-          {
-            "q": "How do I contact the founding team?",
-            "a": "Bundle members get a direct email line to the founding team with 48-hour response time."
-          }
-        ],
-        "testimonials": [
-          {
-            "name": "Sarah M.",
-            "role": "Life Coach",
-            "content": "I've recommended the Bundle to 20+ clients. The AI coach alone provides incredible value between sessions."
-          },
-          {
-            "name": "Omar R.",
-            "role": "Executive",
-            "content": "The community and live Q&As made the difference. Worth every dollar for the support alone."
-          }
-        ]
       }
     },
     "addToCart": "Add to Cart",
@@ -945,8 +831,6 @@
     "verifying": "Verifying...",
     "unlockApps": "Unlock Apps",
     "noCode": "Don't have a code?",
-    "getBundleText": "Get access with the Complete Bundle",
-    "getBundle": "Get Mastery — $27",
     "tierError": "Your access tier ({tier}) does not meet the requirement for this app ({required}). Please upgrade to a higher plan.",
     "verifyFailed": "Failed to verify access",
     "networkError": "Network error. Please try again."
@@ -1037,7 +921,6 @@
     "trial": "Trial",
     "basic": "BASIC",
     "premium": "Premium",
-    "bundle": "Bundle",
     "mostPopular": "Most Popular",
     "bestValue": "Best Value",
     "startFreeNow": "Start Free Now",
@@ -1143,26 +1026,6 @@
           "Best value",
           "Save $17",
           "Analytics included"
-        ]
-      },
-      "bundle": {
-        "name": "Complete Bundle",
-        "shortName": "Bundle",
-        "description": "The ultimate package: All apps + AI coaching + community access + priority support.",
-        "features": [
-          "All PDF products ($27 value)",
-          "All Interactive Apps",
-          "AI Identity Coach",
-          "Transformation Community",
-          "Emotion Regulation (ERQ)",
-          "Priority Support (24hr response)",
-          "Monthly live Q&A sessions",
-          "Direct founding team access"
-        ],
-        "highlights": [
-          "Mastery — $27",
-          "AI coaching",
-          "VIP access"
         ]
       },
       "basic": {
@@ -1291,13 +1154,13 @@
     "openAccess": "Open Access",
     "viewDetails": "View Details",
     "ctaTitle": "Ready to Unlock All Apps?",
-    "ctaSubtitle": "Get the Complete Bundle for full access to all 15+ transformation tools, plus AI coaching and community.",
+    "ctaSubtitle": "Unlock every interactive tool with Mastery — $27/month.",
     "tierLabels": {
       "FREE": "Free",
       "TRIAL": "Trial",
       "BASIC": "Basic",
       "PREMIUM": "Premium",
-      "BUNDLE": "Bundle",
+      "BUNDLE": "Mastery",
       "MASTERY": "Mastery"
     },
     "apps": {
@@ -2020,7 +1883,7 @@
     "categoryProductivityGrowth": "Productivity & Growth",
     "categoryFreeApp": "FREE App",
     "categoryBasicApp": "BASIC App",
-    "categoryBundleApp": "BUNDLE App",
+    "categoryBundleApp": "Mastery App",
     "categoryWorksheet": "Worksheet",
     "categoryIdentityShift": "Identity Shift",
     "categoryTransformation": "Transformation",
@@ -2035,7 +1898,7 @@
     "categoryMentalClarity": "Mental Clarity",
     "tierFree": "FREE",
     "tierBasic": "BASIC",
-    "tierBundle": "BUNDLE",
+    "tierBundle": "Mastery",
     "startHereTitle": "Start Here",
     "startHereSubtitle": "New to Tamkinly? These three articles will give you the foundation.",
     "startHereArticle1Title": "The Identity Gap: Why You Know What to Do But Don't Do It",
@@ -2690,7 +2553,6 @@
     "productLabels": {
       "identity-recode": "Identity Recode Planner",
       "daily-planner": "Daily Planner",
-      "bundle": "Complete Bundle",
       "worksheet": "Worksheets Package"
     },
     "activateCode": "Activate Code",
@@ -2820,7 +2682,7 @@
     "tier1Desc": "Get 7 extra days of trial access for each referral",
     "tier2Title": "4-9 Referrals: Basic App Access",
     "tier2Desc": "Unlock 4 core apps for 30 days free",
-    "tier3Title": "10+ Referrals: Premium Bundle",
+    "tier3Title": "10+ Referrals: Premium Access",
     "tier3Desc": "Get full premium access for 90 days free",
     "nextReward": "Next reward at {count} referrals",
     "shareText": "Transform your identity with Tamkinly!",
@@ -2842,12 +2704,12 @@
     "statusCompleted": "Completed",
     "rewardTrialExtension": "Trial Extension",
     "rewardBasicAccess": "Basic App Access",
-    "rewardPremiumBundle": "Premium Bundle",
+    "rewardPremiumBundle": "Premium Access",
     "claimed": "Claimed",
     "claimReward": "Claim Reward",
     "tier1Name": "Trial Extension",
     "tier2Name": "Basic Access",
-    "tier3Name": "Premium Bundle"
+    "tier3Name": "Premium Access"
   },
   "recoveryPage": {
     "downloads": {
@@ -4405,12 +4267,12 @@
     "basicBenefit3": "Progress tracking dashboard",
     "getBasic": "Get Basic Plan",
     "bestValue": "BEST VALUE",
-    "bundleTitle": "Full Transformation Bundle",
-    "bundleDesc": "Everything in Basic, plus AI coaching, advanced worksheets, and priority support.",
+    "bundleTitle": "Mastery",
+    "bundleDesc": "Everything in Premium, plus all interactive apps, AI identity coaching, and priority support.",
     "bundleBenefit1": "AI-powered identity coach sessions",
-    "bundleBenefit2": "15+ specialized worksheets & tools",
+    "bundleBenefit2": "All 15+ interactive apps & tools",
     "bundleBenefit3": "Priority support & community access",
-    "getBundle": "Get Mastery Bundle",
+    "getBundle": "Get Mastery — $27",
     "freeAssessment": "Take Free Identity Assessment",
     "viewAllPlans": "View All Plans"
   },
@@ -4540,7 +4402,7 @@
   },
   "midArticleUpgrade": {
     "minimalText": "Want to go deeper with structured tools?",
-    "viewPackage": "View Package",
+    "viewPackage": "View Plans",
     "upgradeSubheading": "Upgrade for structured support",
     "getStarted": "Get Started",
     "comparePlans": "Compare Plans",
@@ -4559,7 +4421,7 @@
       "benefit3": "Guided recovery exercises & techniques"
     },
     "tierMASTERY": {
-      "heading": "Complete Transformation Bundle",
+      "heading": "Mastery",
       "description": "The full suite: AI coaching, all worksheets, community access, and priority support for your journey.",
       "benefit1": "AI-powered identity coaching sessions",
       "benefit2": "15+ specialized worksheets & tools",

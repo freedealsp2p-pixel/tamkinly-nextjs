@@ -397,7 +397,7 @@ async function handlePaymentSuccess(data: {
         email: customerEmail,
         name: customerEmail.split('@')[0],
         access_code: accessCode,
-        product_name: getProductName(productId || 'bundle'),
+        product_name: getProductName(productId || 'mastery'),
         product_tier: productType,
       });
       console.log('Onboarding sequence triggered:', sequence, 'for', customerEmail);

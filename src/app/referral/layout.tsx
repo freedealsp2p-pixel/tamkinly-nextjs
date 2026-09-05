@@ -19,8 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: isAr ? 'برنامج الإحالة | ادعُ أصدقاك واحصل على مكافآت - تمكينلي' : 'Referral Program | Invite Friends & Earn Rewards - Tamkinly',
     description: isAr
-      ? 'شارك تمكينلي مع أصدقائك واحصل على مكافآت. احصل على تمديدات مجانية ووصول للتطبيقات وحزم متميزة مقابل كل إحالة ناجحة.'
-      : 'Share Tamkinly with friends and earn rewards. Get free trial extensions, app access, and premium bundles for every successful referral.',
+      ? 'شارك تمكينلي مع أصدقائك واحصل على مكافآت. احصل على تمديدات مجانية ووصول متميز للتطبيقات مقابل كل إحالة ناجحة.'
+      : 'Share Tamkinly with friends and earn rewards. Get free trial extensions and premium app access for every successful referral.',
     alternates: {
       canonical: basePath,
       languages: {
