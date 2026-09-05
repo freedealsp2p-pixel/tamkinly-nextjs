@@ -299,10 +299,10 @@
   "common": {
     "search": "Search...",
     "noResults": "No results found for",
-    "saveBundle": "Save $44 on Bundle (Limited)",
+    "saveBundle": "Mastery — $27 (Limited Time)",
     "loading": "Loading...",
     "translate": "Translate",
-    "promoDescription": "Limited time offer: Save $44 on the complete Identity Transformation Bundle",
+    "promoDescription": "Limited time offer: the complete Mastery package — $27",
     "viewBundle": "View Bundle",
     "dismiss": "Dismiss",
     "skipToContent": "Skip to main content"
@@ -819,7 +819,7 @@
         "longDescription": "The Complete Bundle is our most comprehensive offering. Get everything we've built: all products, all apps, AI-powered identity coaching, access to our transformation community, and priority support with 24-hour response time. This is the fastest path to transformation.",
         "cta": "Get Complete Bundle",
         "highlights": {
-          "save": "Save $44",
+          "save": "Mastery — $27",
           "aiCoaching": "AI coaching",
           "vipAccess": "VIP access"
         },
@@ -838,7 +838,7 @@
           }
         },
         "features": [
-          "All PDF products ($44 value)",
+          "All PDF products ($27 value)",
           "All Interactive Apps",
           "AI Identity Coach (GPT-4 powered)",
           "Transformation Community",
@@ -1150,7 +1150,7 @@
         "shortName": "Bundle",
         "description": "The ultimate package: All apps + AI coaching + community access + priority support.",
         "features": [
-          "All PDF products ($44 value)",
+          "All PDF products ($27 value)",
           "All Interactive Apps",
           "AI Identity Coach",
           "Transformation Community",
@@ -1160,7 +1160,7 @@
           "Direct founding team access"
         ],
         "highlights": [
-          "Save $44",
+          "Mastery — $27",
           "AI coaching",
           "VIP access"
         ]
@@ -1187,7 +1187,7 @@
         "shortName": "Mastery",
         "description": "The ultimate package: All apps + AI coaching + community access + priority support.",
         "features": [
-          "All PDF products ($44 value)",
+          "All PDF products ($27 value)",
           "All Interactive Apps",
           "AI Identity Coach",
           "Transformation Community",
@@ -1195,7 +1195,7 @@
           "Advanced Analytics"
         ],
         "highlights": [
-          "Save $44",
+          "Mastery — $27",
           "AI coaching",
           "VIP access"
         ],
