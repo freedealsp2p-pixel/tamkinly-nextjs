@@ -51,7 +51,7 @@ const productsConfig: Record<string, {
     id: "basic",
     slug: "basic",
     price: 7,
-    comparePrice: 15,
+    comparePrice: 0,
     popular: false,
     icon: Clock,
     color: "#1F6F78"
@@ -60,7 +60,7 @@ const productsConfig: Record<string, {
     id: "premium",
     slug: "premium",
     price: 17,
-    comparePrice: 29,
+    comparePrice: 0,
     popular: true,
     icon: Calendar,
     color: "#3DD4B0"
@@ -79,7 +79,7 @@ const productsConfig: Record<string, {
     id: "basic",
     slug: "basic",
     price: 7,
-    comparePrice: 15,
+    comparePrice: 0,
     popular: false,
     icon: Clock,
     color: "#1F6F78"
@@ -88,7 +88,7 @@ const productsConfig: Record<string, {
     id: "premium",
     slug: "premium",
     price: 17,
-    comparePrice: 29,
+    comparePrice: 0,
     popular: true,
     icon: Calendar,
     color: "#3DD4B0"

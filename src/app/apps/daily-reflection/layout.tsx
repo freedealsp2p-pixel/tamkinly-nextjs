@@ -19,7 +19,7 @@ export default function AppPageLayout({
           description={app.description}
           slug={app.slug}
           category={app.category}
-          isFree={app.tier === 'FREE'}
+          tier={app.tier}
         />
       )}
       {children}

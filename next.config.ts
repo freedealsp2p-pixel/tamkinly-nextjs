@@ -174,6 +174,49 @@ const nextConfig: NextConfig = {
         destination: '/recovery/trc',
         permanent: true,
       },
+      // Legacy product redirects (old pricing model retired 2026-09 -> current tiers)
+      // Old bundle/complete-bundle links now resolve to Mastery $27; trial/planner to Basic/Premium
+      // AR prefix preserved explicitly (config redirects run before locale middleware)
+      {
+        source: '/products/bundle',
+        destination: '/products/mastery',
+        permanent: true,
+      },
+      {
+        source: '/ar/products/bundle',
+        destination: '/ar/products/mastery',
+        permanent: true,
+      },
+      {
+        source: '/products/complete-bundle',
+        destination: '/products/mastery',
+        permanent: true,
+      },
+      {
+        source: '/ar/products/complete-bundle',
+        destination: '/ar/products/mastery',
+        permanent: true,
+      },
+      {
+        source: '/products/trial',
+        destination: '/products/basic',
+        permanent: true,
+      },
+      {
+        source: '/ar/products/trial',
+        destination: '/ar/products/basic',
+        permanent: true,
+      },
+      {
+        source: '/products/planner',
+        destination: '/products/premium',
+        permanent: true,
+      },
+      {
+        source: '/ar/products/planner',
+        destination: '/ar/products/premium',
+        permanent: true,
+      },
       {
         source: '/recovery/hub',
         destination: '/recovery',

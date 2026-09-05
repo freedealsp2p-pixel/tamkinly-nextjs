@@ -512,8 +512,8 @@ function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   // Product data with non-translatable fields
   const products = [
     { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, color: "#3DD4B0", popular: false, billingPeriod: "free" },
-    { id: "basic", nameKey: "basic", price: 7, comparePrice: 15, tier: "BASIC", icon: Clock, featured: false, popular: false, billingPeriod: "monthly" },
-    { id: "premium", nameKey: "premium", price: 17, comparePrice: 29, tier: "PREMIUM", icon: Calendar, featured: true, popular: true, billingPeriod: "monthly" },
+    { id: "basic", nameKey: "basic", price: 7, comparePrice: 0, tier: "BASIC", icon: Clock, featured: false, popular: false, billingPeriod: "monthly" },
+    { id: "premium", nameKey: "premium", price: 17, comparePrice: 0, tier: "PREMIUM", icon: Calendar, featured: true, popular: true, billingPeriod: "monthly" },
     { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, featured: true, popular: false, billingPeriod: "monthly" },
   ];
 

@@ -160,6 +160,17 @@ export function BlogArticleJsonLd({
 }
 
 /**
+ * Real pricing model: each app's JSON-LD offer must reflect the actual
+ * subscription tier price that unlocks it (FREE $0 / BASIC $7 / PREMIUM $17 / MASTERY $27).
+ */
+const APP_TIER_MONTHLY_PRICE: Record<string, number> = {
+  FREE: 0,
+  BASIC: 7,
+  PREMIUM: 17,
+  MASTERY: 27,
+};
+
+/**
  * App Page JSON-LD Props
  */
 interface AppPageJsonLdProps {
@@ -170,6 +181,7 @@ interface AppPageJsonLdProps {
   category: string;
   features?: string[];
   isFree?: boolean;
+  tier?: string;
 }
 
 /**
@@ -183,6 +195,7 @@ export function AppPageJsonLd({
   category,
   features,
   isFree = true,
+  tier,
 }: AppPageJsonLdProps) {
   const appSchema = generateSoftwareAppSchema({
     name,
@@ -192,7 +205,9 @@ export function AppPageJsonLd({
     category,
     features,
     offers: {
-      price: isFree ? 0 : 29,
+      price: tier
+        ? (APP_TIER_MONTHLY_PRICE[tier] ?? (isFree ? 0 : 7))
+        : (isFree ? 0 : 7),
       currency: 'USD',
     },
 
