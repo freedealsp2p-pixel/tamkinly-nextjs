@@ -86,6 +86,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/ar/apps/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.54 },
   ]);
 
+  // Premium Therapeutic Protocols - English + Arabic
+  const therapeuticProtocolSlugs = [
+    'temporal-decoupling',
+    'alternative-code',
+    'white-mirror',
+  ];
+  const therapeuticProtocolPages = [
+    { url: `${baseUrl}/apps/therapeutic-protocols`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    ...therapeuticProtocolSlugs.map((slug) => ({
+      url: `${baseUrl}/apps/therapeutic-protocols/${slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+  ];
+  const therapeuticProtocolPagesAr = therapeuticProtocolPages.map((page) => ({
+    ...page,
+    url: page.url.replace(baseUrl, `${baseUrl}/ar`),
+    priority: page.priority * 0.9,
+  }));
+
   return [
     ...staticPagesEn,
     ...recoveryTrcPages,
@@ -93,5 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogPages,
     ...guidePages,
     ...appPages,
+    ...therapeuticProtocolPages,
+    ...therapeuticProtocolPagesAr,
   ];
 }

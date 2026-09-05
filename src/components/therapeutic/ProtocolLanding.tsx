@@ -1,7 +1,7 @@
 /* v2 - production closure build */
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   Shield, Clock, ListOrdered, Lock, MessageCircle,
@@ -234,6 +234,28 @@ function TributePurchaseModal({
   const config = PROTOCOL_PRODUCTS[protocolSlug];
   const t = useTranslations('therapeuticProtocols');
 
+  // Accessibility: Escape closes the dialog; focus moves into the dialog on
+  // open and is restored to the previously focused element on close.
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const restoreFocusRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    restoreFocusRef.current = document.activeElement as HTMLElement | null;
+    dialogRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      restoreFocusRef.current?.focus();
+    };
+  }, [onClose]);
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
@@ -244,7 +266,9 @@ function TributePurchaseModal({
       aria-label={t('purchase.title')}
     >
       <div
-        className="bg-white rounded-2xl w-full max-w-md p-6 space-y-5 max-h-[90vh] overflow-y-auto"
+        ref={dialogRef}
+        tabIndex={-1}
+        className="bg-white rounded-2xl w-full max-w-md p-6 space-y-5 max-h-[90vh] overflow-y-auto outline-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
