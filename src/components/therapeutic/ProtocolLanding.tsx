@@ -349,6 +349,7 @@ function TributePurchaseModal({
               t('purchase.note1'),
               t('purchase.note2'),
               t('purchase.note3'),
+              t('purchase.note4'),
             ].map((note, idx) => (
               <li key={idx} className="text-xs text-[#0F1C2E]/60 flex items-start gap-1.5">
                 <ArrowRight className="w-3 h-3 mt-0.5 flex-shrink-0 text-[#1F6F78]" />

@@ -268,57 +268,6 @@ export function generatePageMetadata({
 
 /**
  * Organization Schema with enhanced data
- */
-export function generateOrganizationSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: SITE_CONFIG.nameEn,
-    alternateName: SITE_CONFIG.nameAr,
-    description: SITE_CONFIG.description,
-    url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/logo.webp`,
-    sameAs: [
-      'https://twitter.com/tamkinly',
-      'https://instagram.com/tamkinly',
-      'https://linkedin.com/company/tamkinly',
-    ],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'customer service',
-      availableLanguage: ['English', 'Arabic'],
-      email: 'hello@tamkinly.com',
-    },
-    foundingDate: '2024',
-    areaServed: 'Worldwide',
-    knowsAbout: [
-      'Identity Transformation',
-      'Personal Development',
-      'Habit Formation',
-      'Self-Improvement',
-    ],
-  };
-}
-
-/**
- * WebSite Schema with SearchAction
- * Fixed: Using direct URL string instead of EntryPoint for better compatibility
- */
-export function generateWebSiteSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: SITE_CONFIG.nameEn,
-    alternateName: SITE_CONFIG.nameAr,
-    description: SITE_CONFIG.description,
-    url: SITE_CONFIG.url,
-    inLanguage: ['en', 'ar'],
-    // SearchAction removed: robots.txt disallows /search/ for all bots.
-    // Adding SearchAction pointing to a disallowed path creates a conflicting signal.
-    // Re-add if/when /search is opened to crawlers.
-  };
-}
-
 /**
  * Product Schema for pricing tiers
  */
@@ -565,101 +514,6 @@ export function generateFAQSchema(items: FAQItem[]) {
   };
 }
 
-/**
- * Course Schema for educational content
- */
-interface CourseSchemaData {
-  name: string;
-  nameAr?: string;
-  description: string;
-  url: string;
-  provider?: string;
-  educationalLevel?: string;
-  timeRequired?: string;
-}
-
-export function generateCourseSchema({
-  name,
-  nameAr,
-  description,
-  url,
-  provider = SITE_CONFIG.nameEn,
-  educationalLevel = 'Beginner',
-  timeRequired,
-}: CourseSchemaData) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name,
-    alternateName: nameAr,
-    description,
-    url: `${SITE_CONFIG.url}${url}`,
-    provider: {
-      '@type': 'Organization',
-      name: provider,
-    },
-    educationalLevel,
-    timeRequired,
-    inLanguage: ['en', 'ar'],
-  };
-}
-
-/**
- * HowTo Schema for guides and tutorials
- */
-interface HowToStep {
-  name: string;
-  text: string;
-  image?: string;
-}
-
-interface HowToData {
-  name: string;
-  nameAr?: string;
-  description: string;
-  steps: HowToStep[];
-  totalTime?: string;
-  estimatedCost?: string;
-}
-
-export function generateHowToSchema({
-  name,
-  nameAr,
-  description,
-  steps,
-  totalTime,
-  estimatedCost,
-}: HowToData) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name,
-    alternateName: nameAr,
-    description,
-    totalTime,
-    estimatedCost: estimatedCost ? {
-      '@type': 'MonetaryAmount',
-      currency: 'USD',
-      value: estimatedCost,
-    } : undefined,
-    step: steps.map((step, index) => ({
-      '@type': 'HowToStep',
-      position: index + 1,
-      name: step.name,
-      text: step.text,
-      image: step.image,
-    })),
-  };
-}
-
-/**
- * Combine multiple JSON-LD schemas
- */
-export function combineSchemas(...schemas: object[]) {
-  return schemas.filter(Boolean);
-}
-
-// ============================================
 // PAGE-SPECIFIC METADATA EXPORTS
 // ============================================
 
@@ -744,13 +598,3 @@ export const FAQ_METADATA: Metadata = generatePageMetadata({
   keywords: ['tamkinly faq', 'help', 'questions answered', 'أسئلة تمكينلي', 'مساعدة'],
 });
 
-// ============================================
-// JSON-LD SCRIPT COMPONENT HELPER
-// ============================================
-
-/**
- * Generate script tag content for JSON-LD
- */
-export function generateJsonLdScript(schema: object) {
-  return JSON.stringify(schema);
-}

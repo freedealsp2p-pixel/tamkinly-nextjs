@@ -554,7 +554,7 @@ function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
               {t('sslSecured')}
             </span>
             <span>|</span>
-            <span>{t('comingSoonPayment')}</span>
+            <span>{t('paymentMethodsNote')}</span>
             <span>|</span>
             <span>{t('refundPolicy')}</span>
           </div>

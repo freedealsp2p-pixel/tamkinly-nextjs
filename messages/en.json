@@ -1125,7 +1125,7 @@
       "Priority Support",
       "Habit Tracker"
     ],
-    "comingSoonPayment": "Wise • Crypto • Bank Transfer (Coming Soon)",
+    "paymentMethodsNote": "Payment methods: Tribute via Telegram • Wise • Crypto (USDC/USDT) • Bank Transfer",
     "trustCancelAnytime": "Cancel anytime",
     "productRecommender": {
       "title": "Find Your Perfect Starting Point",
@@ -1367,7 +1367,7 @@
         "questions": [
           {
             "q": "What payment methods do you accept?",
-            "a": "Payments are accepted via Tribute inside Telegram (t.me/tamkinly) — a secure, encrypted payment platform. Contact us on Telegram to complete your purchase, and your access details arrive right after confirmation."
+            "a": "We accept payments via Tribute inside Telegram (t.me/tamkinly) with cards — as well as Crypto (USDC/USDT on the BEP20 network) or bank transfer via Wise for those unable to pay through Telegram. All methods are secure and encrypted, and your access details arrive as soon as payment is confirmed."
           },
           {
             "q": "Is there a subscription fee?",
@@ -4466,7 +4466,7 @@
       "oneTime": "One-time payment",
       "nonRefundable": "Non-refundable",
       "purchaseCta": "Purchase — $99",
-      "paymentMethod": "Payment via Tribute through Telegram",
+      "paymentMethod": "Payment via Tribute (Telegram) — or Crypto / Bank transfer via Wise on request",
       "perk1": "Complete guided therapeutic experience",
       "perk2": "Lifetime access to this protocol",
       "perk3": "Progress preserved locally on your device",
@@ -4483,7 +4483,8 @@
       "notesTitle": "Important notes:",
       "note1": "Access is granted manually after payment verification.",
       "note2": "You will receive an access code at the email you provided.",
-      "note3": "This is a one-time, non-refundable purchase."
+      "note3": "This is a one-time, non-refundable purchase.",
+      "note4": "Can't pay via Telegram? We also accept Crypto (USDC/USDT) and bank transfer via Wise — message us on Telegram and we'll provide the details."
     },
     "protocols": {
       "temporal-decoupling": {
