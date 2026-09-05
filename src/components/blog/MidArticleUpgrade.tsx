@@ -33,6 +33,7 @@ export function MidArticleUpgrade({ promoteTier = 'BASIC', productSlug, variant 
   const isAr = locale === 'ar';
   const tier = TIER_INFO[promoteTier];
   const href = productSlug || tier.slug;
+  const tierPrice = isAr ? tier.price.replace('/mo', '/شهر') : tier.price;
 
   if (variant === 'minimal') {
     return (
@@ -68,7 +69,7 @@ export function MidArticleUpgrade({ promoteTier = 'BASIC', productSlug, variant 
               <div className="flex-1">
                 <div className={`inline-flex items-center gap-2 mb-4 ${tier.badgeColor} px-3 py-1 rounded-full text-xs font-bold`}>
                   <Sparkles className="h-3.5 w-3.5" />
-                  {promoteTier} — {tier.price}
+                  {promoteTier} — {tierPrice}
                 </div>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mb-3">
                   {t(`tier${promoteTier}.heading`)}
@@ -110,7 +111,7 @@ export function MidArticleUpgrade({ promoteTier = 'BASIC', productSlug, variant 
           </div>
           <div className="flex-1">
             <div className={`inline-flex items-center gap-2 mb-2 ${tier.badgeColor} px-3 py-1 rounded-full text-xs font-bold`}>
-              {promoteTier} — {tier.price}
+              {promoteTier} — {tierPrice}
             </div>
             <h3 className="text-lg font-bold text-[#0F1C2E] mb-2">
               {t(`tier${promoteTier}.heading`)}

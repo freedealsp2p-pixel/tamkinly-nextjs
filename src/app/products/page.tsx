@@ -48,7 +48,7 @@ import { useToast } from "@/hooks/use-toast";
 import { addToCart } from "@/lib/cart-client";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateProductSchema, generateFAQSchema, generateBreadcrumbSchema } from "@/lib/seo";
-import { useTranslations } from "@/components/providers/LocaleProvider";
+import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
 
 import ProductRecommender from "@/components/products/ProductRecommender";
 
@@ -144,6 +144,8 @@ function HeroSection({ t }: { t: ReturnType<typeof useTranslations> }) {
 
 // App Access Matrix Section
 function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
+  const { locale } = useLocale();
+  const per = locale === 'ar' ? '/شهر' : '/mo';
   // Build allApps using translations - access flags for the 3 paid tiers only.
   // FREE apps (4) are shown separately as "Get started free" — not in this matrix.
   // BASIC tier unlocks ONLY trial-planner (1 app).
@@ -204,7 +206,7 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-[#0F1C2E]">{t(`products.${product.nameKey}.name`)}</h3>
                     <Badge style={{ backgroundColor: product.color, color: product.id === 'free' ? '#0F1C2E' : 'white' }}>
-                      {product.price === 0 ? t('free') : `$${product.price}/mo`}
+                      {product.price === 0 ? t('free') : `$${product.price}${per}`}
                     </Badge>
                   </div>
                   <div className="space-y-2">
@@ -297,6 +299,8 @@ function ProductCard({ product, t }: {
   t: ReturnType<typeof useTranslations>;
 }) {
   const Icon = product.icon;
+  const { locale } = useLocale();
+  const per = locale === 'ar' ? '/شهر' : '/mo';
   const isFree = product.price === 0;
   const { toast } = useToast();
   const [guaranteeOpen, setGuaranteeOpen] = useState(false);
@@ -392,7 +396,7 @@ function ProductCard({ product, t }: {
             <span className="text-4xl font-bold text-[#3DD4B0]">{t('free')}</span>
           ) : (
             <>
-              <span className="text-4xl font-bold text-[#0F1C2E]">${product.price}</span><span className="text-lg text-[#8A94A6]">/mo</span>
+              <span className="text-4xl font-bold text-[#0F1C2E]">${product.price}</span><span className="text-lg text-[#8A94A6]">{per}</span>
               {product.comparePrice && (
                 <span className="text-lg text-slate-400 line-through">${product.comparePrice}</span>
               )}
@@ -495,7 +499,7 @@ function ProductCard({ product, t }: {
                     : 'bg-[#0F1C2E] text-white hover:bg-[#1a2d47]'}`}
                 size="lg"
               >
-                {t('viewDetails')} - ${product.price}/mo
+                {t('viewDetails')} - ${product.price}${per}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

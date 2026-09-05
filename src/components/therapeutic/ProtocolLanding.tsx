@@ -294,7 +294,7 @@ function TributePurchaseModal({
 
         {/* Price confirmation */}
         <div className="bg-[#0F1C2E] rounded-xl p-4 text-center text-white">
-          <div className="text-3xl font-bold">$99 USD</div>
+          <div className="text-3xl font-bold">$99</div>
           <div className="text-xs text-white/50 mt-1">
             {t('landing.oneTime')} · {t('landing.nonRefundable')}
           </div>

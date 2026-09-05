@@ -787,7 +787,7 @@ export default function QuizResultsPage() {
                     <h4 className="font-bold text-[#0F1C2E] text-sm mb-1">
                       {getText(product.name, product.nameAr)}
                     </h4>
-                    <span className="text-lg font-bold" style={{ color: product.color }}>{product.price}</span>
+                    <span className="text-lg font-bold" style={{ color: product.color }}>{getText(product.price, product.price.replace('/mo', '/شهر'))}</span>
                     {recommendation?.recommendedProduct === product.id && (
                       <Badge 
                         className="mt-2 text-xs"

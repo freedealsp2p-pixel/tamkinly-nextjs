@@ -19,7 +19,7 @@ import {
   FileText,
   Star
 } from "lucide-react";
-import { useTranslations } from "@/components/providers/LocaleProvider";
+import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
 
 // Types
 type Goal = 'habits' | 'productivity' | 'identity' | 'focus';
@@ -172,6 +172,8 @@ const questions = [
 
 export default function ProductRecommender() {
   const t = useTranslations('productRecommender');
+  const { locale } = useLocale();
+  const isAr = locale === 'ar';
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<WizardAnswers>({ goal: null, time: null, challenge: null });
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('left');
@@ -268,7 +270,7 @@ export default function ProductRecommender() {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-white">{t(`products.${recommendation.productKey}.name`)}</h3>
-                      <p className="text-[#3DD4B0] font-semibold">{recommendation.price}{recommendation.isFree ? '' : '/mo'}</p>
+                      <p className="text-[#3DD4B0] font-semibold">{recommendation.price}{recommendation.isFree ? '' : (isAr ? '/شهر' : '/mo')}</p>
                     </div>
                   </div>
                   <p className="text-slate-300 text-sm mb-4">{t(`products.${recommendation.productKey}.description`)}</p>
