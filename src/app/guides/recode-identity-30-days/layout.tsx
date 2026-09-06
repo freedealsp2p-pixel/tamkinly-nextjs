@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
+import { getLocale } from '@/lib/get-locale';
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const isAr = locale === 'ar';
+  const enUrl = 'https://tamkinly.com/guides/recode-identity-30-days';
+  const arUrl = 'https://tamkinly.com/ar/guides/recode-identity-30-days';
+  return {
   title: 'How to Recode Your Identity in 30 Days | Step-by-Step Guide',
   description: 'A practical step-by-step guide to transforming your identity from the inside out. Based on neuroscience research showing 21-30 days for new neural pathways. Free guide with exercises.',
   keywords: [
@@ -14,12 +20,17 @@ export const metadata: Metadata = {
     'identity recode system',
   ],
   alternates: {
-    canonical: 'https://tamkinly.com/guides/recode-identity-30-days',
+    canonical: isAr ? arUrl : enUrl,
+    languages: {
+      'en-US': enUrl,
+      'ar-SA': arUrl,
+      'x-default': enUrl,
+    },
   },
   openGraph: {
     title: 'How to Recode Your Identity in 30 Days',
     description: 'A practical step-by-step guide to transforming your identity from the inside out. Based on neuroscience research showing 21-30 days for new neural pathways.',
-    url: 'https://tamkinly.com/guides/recode-identity-30-days',
+    url: isAr ? arUrl : enUrl,
     siteName: 'Tamkinly',
     type: 'article',
     publishedTime: '2026-02-15',
@@ -44,7 +55,8 @@ export const metadata: Metadata = {
     'DC.description': 'A practical step-by-step guide to transforming your identity from the inside out. Based on neuroscience research showing 21-30 days for new neural pathways.',
     'DC.subject': 'recode identity, 30 day transformation, identity change',
   },
-};
+  };
+}
 
 export default function GuideLayout({
   children,

@@ -75,13 +75,12 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   const article = getBlogArticleBySlug(slug);
 
   if (!article) {
-    return {
-      title: 'Article Not Found | Tamkinly Blog',
-      description: 'The requested article could not be found.',
-    };
+    notFound();
   }
 
-  const fullUrl = `https://tamkinly.com/blog/${article.slug}`;
+  const enUrl = `https://tamkinly.com/blog/${slug}`;
+  const arUrl = `https://tamkinly.com/ar/blog/${slug}`;
+  const fullUrl = isAr ? arUrl : enUrl;
   const imageUrl = article.image
     ? `https://tamkinly.com${article.image}`
     : 'https://tamkinly.com/og-image.webp';
@@ -93,9 +92,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     alternates: {
       canonical: fullUrl,
       languages: {
-        'en-US': fullUrl,
-        'ar-SA': `https://tamkinly.com/ar/blog/${slug}`,
-        'x-default': fullUrl,
+        'en-US': enUrl,
+        'ar-SA': arUrl,
+        'x-default': enUrl,
       },
     },
     openGraph: {

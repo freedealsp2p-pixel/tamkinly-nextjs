@@ -13,7 +13,7 @@ const sections = [
     titleAr: 'ما هي الصدمة الثانوية؟',
     titleEn: 'What Is Secondary Trauma?',
     bodyAr: 'الصدمة الثانوية (STS) تحدث عندما تتأثر أنت نفسك بالتعرض لصدمة شخص آخر. الآباء الذين يسمعون قصة طفلهم، المعالجون الذين يروون الجروح يومياً، الأزواج الذين يعيشون مع ناجٍ — كلهم معرضون. الأبحاث تظهر أن 69% من المهنيين النفسيين يعانون من مستوى متوسط أو أعلى من STS. هذا ليس ضعفاً — هذا استجابة طبيعية للإنسان الذي يهتم.',
-    bodyEn: 'Secondary Trauma (STS) occurs when you are affected by exposure to another person is trauma. Parents who hear their child is story, therapists who witness wounds daily, spouses who live with a survivor — all are at risk. Research shows 69% of mental health professionals experience moderate or higher STS. This is not weakness — it is a natural response for a caring human.',
+    bodyEn: 'Secondary Trauma (STS) occurs when you are affected by exposure to another person\'s trauma. Parents who hear their child\'s story, therapists who witness wounds daily, spouses who live with a survivor — all are at risk. Research shows 69% of mental health professionals experience moderate or higher STS. This is not weakness — it is a natural response for a caring human.',
   },
   {
     icon: AlertTriangle,
@@ -61,7 +61,7 @@ export default function SecondaryTraumaPage() {
           <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center bg-[#1F6F78]">
             <Heart className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-[#0F1C2E]">{isAr ? 'الصدمة الثانوية: عندما تتأثر بصرخة شخص آخر' : 'Secondary Trauma: When You Are Affected by Another is Cry'}</h1>
+          <h1 className="text-2xl font-bold text-[#0F1C2E]">{isAr ? 'الصدمة الثانوية: عندما تتأثر بصرخة شخص آخر' : 'Secondary Trauma: When You Are Affected by Another\'s Cry'}</h1>
         </div>
 
         {sections.map((s, i) => (

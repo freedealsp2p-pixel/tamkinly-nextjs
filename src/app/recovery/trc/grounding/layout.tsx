@@ -41,6 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Tamkinly',
       locale: locale === 'ar' ? 'ar_SA' : 'en_US',
       type: 'website',
+      images: [{ url: 'https://tamkinly.com/og-image.webp', width: 1200, height: 630, alt: 'Tamkinly' }],
     },
     twitter: {
       card: 'summary',

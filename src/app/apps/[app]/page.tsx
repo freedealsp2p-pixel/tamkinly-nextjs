@@ -7,6 +7,7 @@
  */
 
 import { Metadata } from 'next';
+import { getLocale } from '@/lib/get-locale';
 import { notFound } from 'next/navigation';
 import {
   getAppPageBySlug,
@@ -31,13 +32,14 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   const appData = getAppPageBySlug(app);
 
   if (!appData) {
-    return {
-      title: 'App Not Found | Tamkinly',
-      description: 'The requested app could not be found.',
-    };
+    notFound();
   }
 
-  const fullUrl = `https://tamkinly.com/apps/${appData.slug}`;
+  const locale = await getLocale();
+  const isAr = locale === 'ar';
+  const fullUrl = isAr ? `https://tamkinly.com/ar/apps/${appData.slug}` : `https://tamkinly.com/apps/${appData.slug}`;
+  const enUrl = `https://tamkinly.com/apps/${appData.slug}`;
+  const arUrl = `https://tamkinly.com/ar/apps/${appData.slug}`;
   const imageUrl = appData.image
     ? `https://tamkinly.com${appData.image}`
     : 'https://tamkinly.com/og-image.webp';
@@ -54,6 +56,11 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 
     alternates: {
       canonical: fullUrl,
+      languages: {
+        'en-US': enUrl,
+        'ar-SA': arUrl,
+        'x-default': enUrl,
+      },
     },
 
     openGraph: {
@@ -90,6 +97,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 // ============================================
 // STATIC PARAMS GENERATION
 // ============================================
+
+// Unknown app slugs are rejected at the router level (real 404)
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return getAllAppSlugs().map((slug) => ({

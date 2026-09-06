@@ -4,8 +4,37 @@ import type { NextRequest } from 'next/server';
 const locales = ['en', 'ar'];
 const defaultLocale = 'en';
 
+const VALID_PRODUCT_SLUGS = new Set([
+  'basic', 'premium', 'mastery', 'trial', 'planner',
+]);
+
+const VALID_APP_SLUGS = new Set([
+  'ai-identity-coach', 'community-access', 'daily-planner', 'daily-reflection',
+  'decision-analysis', 'emotion-regulation', 'environmental-audit', 'evidence-tracking',
+  'executive-manual', 'goal-system', 'habit-tracker', 'identity-baseline',
+  'identity-gap-quiz', 'identity-planner', 'identity-recode-system', 'journal-system',
+  'priority-support', 'progress-dashboard', 'therapeutic-protocols', 'trial-planner',
+  'values-clarification', 'worksheets',
+]);
+
+// Hard 404 for unknown dynamic slugs (Next 16 ignores dynamicParams on dynamic routes)
+function unknownSlug404(pathname: string): NextResponse | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments[0] === 'ar' || segments[0] === 'en') segments.shift();
+  if (segments[0] === 'products' && segments.length === 2 && !VALID_PRODUCT_SLUGS.has(segments[1])) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+  if (segments[0] === 'apps' && segments.length === 2 && !VALID_APP_SLUGS.has(segments[1])) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+  return null;
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  const slug404 = unknownSlug404(pathname);
+  if (slug404) return slug404;
 
   // Skip static files and API routes
   if (
@@ -60,7 +89,7 @@ export function middleware(request: NextRequest) {
     const pathWithoutLocale = pathname.replace(new RegExp(`^/${defaultLocale}`), '') || '/';
     const url = request.nextUrl.clone();
     url.pathname = pathWithoutLocale;
-    const response = NextResponse.redirect(url);
+    const response = NextResponse.redirect(url, 308);
     response.cookies.set('NEXT_LOCALE', defaultLocale, {
       maxAge: 365 * 24 * 60 * 60,
       path: '/',

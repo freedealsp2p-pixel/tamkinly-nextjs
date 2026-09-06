@@ -151,7 +151,7 @@ export default function AppsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">{t('headerTitle')}</h1>
+              <p className="text-2xl font-bold">{t('headerTitle')}</p>
               <p className="text-slate-300 text-sm">{t('headerSubtitle')}</p>
             </div>
             <Link href="/products">

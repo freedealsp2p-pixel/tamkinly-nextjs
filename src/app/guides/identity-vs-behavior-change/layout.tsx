@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
+import { getLocale } from '@/lib/get-locale';
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const isAr = locale === 'ar';
+  const enUrl = 'https://tamkinly.com/guides/identity-vs-behavior-change';
+  const arUrl = 'https://tamkinly.com/ar/guides/identity-vs-behavior-change';
+  return {
   title: 'Identity vs Behavior Change: Why Willpower Fails',
   description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation. Free guide with practical exercises.',
   keywords: [
@@ -14,12 +20,17 @@ export const metadata: Metadata = {
     'personal transformation guide',
   ],
   alternates: {
-    canonical: 'https://tamkinly.com/guides/identity-vs-behavior-change',
+    canonical: isAr ? arUrl : enUrl,
+    languages: {
+      'en-US': enUrl,
+      'ar-SA': arUrl,
+      'x-default': enUrl,
+    },
   },
   openGraph: {
     title: 'Identity vs Behavior Change: Why Willpower Always Fails',
     description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation.',
-    url: 'https://tamkinly.com/guides/identity-vs-behavior-change',
+    url: isAr ? arUrl : enUrl,
     siteName: 'Tamkinly',
     type: 'article',
     publishedTime: '2026-02-15',
@@ -45,7 +56,8 @@ export const metadata: Metadata = {
     'DC.description': 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation.',
     'DC.subject': 'identity vs behavior, willpower fails, identity transformation',
   },
-};
+  };
+}
 
 export default function GuideLayout({
   children,

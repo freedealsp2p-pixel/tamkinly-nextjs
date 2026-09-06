@@ -484,7 +484,7 @@ export function getAllAppSlugs(): string[] {
 /**
  * Generate metadata for an app page
  */
-export function generateAppPageMetadata(slug: string): Metadata {
+export function generateAppPageMetadata(slug: string, locale: string = 'en'): Metadata {
   const app = getAppPageBySlug(slug);
   
   if (!app) {
@@ -494,7 +494,10 @@ export function generateAppPageMetadata(slug: string): Metadata {
     };
   }
   
-  const fullUrl = `https://tamkinly.com/apps/${app.slug}`;
+  const isAr = locale === 'ar';
+  const fullUrl = isAr ? `https://tamkinly.com/ar/apps/${app.slug}` : `https://tamkinly.com/apps/${app.slug}`;
+  const enUrl = `https://tamkinly.com/apps/${app.slug}`;
+  const arUrl = `https://tamkinly.com/ar/apps/${app.slug}`;
   const imageUrl = app.image 
     ? `https://tamkinly.com${app.image}` 
     : `https://tamkinly.com/apps/${app.slug}/opengraph-image`;
@@ -511,6 +514,11 @@ export function generateAppPageMetadata(slug: string): Metadata {
     
     alternates: {
       canonical: fullUrl,
+      languages: {
+        'en-US': enUrl,
+        'ar-SA': arUrl,
+        'x-default': enUrl,
+      },
     },
     
     openGraph: {

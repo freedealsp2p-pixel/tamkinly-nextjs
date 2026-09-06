@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
+import { getLocale } from '@/lib/get-locale';
 import { generateAppPageMetadata, getAppPageBySlug } from '@/lib/app-pages';
 import { AppPageJsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = generateAppPageMetadata('evidence-tracking');
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generateAppPageMetadata('evidence-tracking', locale);
+}
 
 export default function AppPageLayout({
   children,

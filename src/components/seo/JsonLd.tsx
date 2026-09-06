@@ -54,9 +54,9 @@ export function DefaultJsonLd({ locale }: { locale?: string }) {
           url: 'https://tamkinly.com',
           logo: 'https://tamkinly.com/logo.webp',
           sameAs: [
-            'https://twitter.com/tamkinly',
             'https://instagram.com/tamkinly',
             'https://linkedin.com/company/tamkinly',
+            'https://t.me/tamkinly',
           ],
           contactPoint: {
             '@type': 'ContactPoint',

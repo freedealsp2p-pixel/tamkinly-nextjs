@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
+import { getLocale } from '@/lib/get-locale';
 import { generateAppPageMetadata, getAppPageBySlug } from '@/lib/app-pages';
 import { AppPageJsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = generateAppPageMetadata('identity-gap-quiz');
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generateAppPageMetadata('identity-gap-quiz', locale);
+}
 
 export default function AppPageLayout({
   children,

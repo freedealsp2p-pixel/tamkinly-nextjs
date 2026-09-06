@@ -19,7 +19,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: `${SITE_URL}/apps/therapeutic-protocols/white-mirror`,
+      canonical: isAr ? `${SITE_URL}/ar/apps/therapeutic-protocols/white-mirror` : `${SITE_URL}/apps/therapeutic-protocols/white-mirror`,
+      languages: {
+        'en-US': `${SITE_URL}/apps/therapeutic-protocols/white-mirror`,
+        'ar-SA': `${SITE_URL}/ar/apps/therapeutic-protocols/white-mirror`,
+        'x-default': `${SITE_URL}/apps/therapeutic-protocols/white-mirror`,
+      },
     },
     openGraph: {
       title,
@@ -28,6 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Tamkinly',
       type: 'website',
       locale: isAr ? 'ar_AR' : 'en_US',
+      images: [{ url: 'https://tamkinly.com/og-image.webp', width: 1200, height: 630, alt: title }],
     },
   };
 }

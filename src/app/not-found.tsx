@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Home, Search } from 'lucide-react';
 import { cookies } from 'next/headers';
+
+export const metadata: Metadata = {
+  title: 'Page Not Found | Tamkinly',
+  robots: { index: false, follow: false },
+};
 
 export default async function NotFound() {
   let locale = 'en';

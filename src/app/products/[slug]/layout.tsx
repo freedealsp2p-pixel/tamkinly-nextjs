@@ -4,6 +4,11 @@
  */
 
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getLocale } from '@/lib/get-locale';
+
+// Unknown slugs are rejected at the router level (real 404, no soft-404 streaming)
+export const dynamicParams = false;
 
 // Product metadata configuration
 const productMetadata: Record<string, {
@@ -67,13 +72,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = productMetadata[slug];
 
   if (!product) {
-    return {
-      title: 'Product Not Found | Tamkinly',
-      description: 'The requested product could not be found.',
-    };
+    notFound();
   }
 
-  const fullUrl = `https://tamkinly.com/products/${slug}`;
+  const locale = await getLocale();
+  const isAr = locale === 'ar';
+  const fullUrl = isAr ? `https://tamkinly.com/ar/products/${slug}` : `https://tamkinly.com/products/${slug}`;
+  const enUrl = `https://tamkinly.com/products/${slug}`;
+  const arUrl = `https://tamkinly.com/ar/products/${slug}`;
 
   return {
     title: `${product.name} | Tamkinly`,
@@ -82,6 +88,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     alternates: {
       canonical: fullUrl,
+      languages: {
+        'en-US': enUrl,
+        'ar-SA': arUrl,
+        'x-default': enUrl,
+      },
     },
 
     openGraph: {
