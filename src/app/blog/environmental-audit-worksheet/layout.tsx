@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 import { generateBlogArticleMetadata, getBlogArticleBySlug } from '@/lib/blog-articles';
+import { getLocale } from '@/lib/get-locale';
 import { BlogArticleJsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = generateBlogArticleMetadata('environmental-audit-worksheet');
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generateBlogArticleMetadata('environmental-audit-worksheet', locale);
+}
 
 export default function BlogArticleLayout({
   children,

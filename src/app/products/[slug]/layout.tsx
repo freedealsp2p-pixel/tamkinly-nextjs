@@ -30,7 +30,7 @@ const productMetadata: Record<string, {
   'trial': {
     name: '7-Day Identity Reset Trial',
     nameAr: 'تجربة إعادة ضبط الهوية لمدة 7 أيام',
-    description: 'Experience the full Identity Recode system for 7 days. Test the methodology with daily identity prompts, evidence tracking, and progress dashboard. Perfect for exploring transformation.',
+    description: 'Experience the full Identity Recode system for 7 days. Test daily identity prompts, evidence tracking, and the progress dashboard before upgrading.',
     descriptionAr: 'جرب نظام إعادة صياغة الهوية الكامل لمدة 7 أيام. اختبر المنهجية مع المطالبات اليومية وتتبع الأدلة ولوحة التقدم.',
     price: 7,
     keywords: ['identity reset', '7-day trial', 'identity transformation', 'self-development', 'personal growth', 'transformation trial']
@@ -46,7 +46,7 @@ const productMetadata: Record<string, {
   'premium': {
     name: 'Premium (Monthly)',
     nameAr: 'مميز (شهري)',
-    description: 'Comprehensive transformation with advanced analytics, decision tracking, and evidence collection tools. Data-driven identity transformation for committed individuals.',
+    description: 'Comprehensive transformation with advanced analytics, decision tracking, and evidence tools. Data-driven transformation for committed individuals.',
     descriptionAr: 'تحول شامل مع تحليلات متقدمة وتتبع القرارات وأدوات جمع الأدلة.',
     price: 17,
     keywords: ['premium plan', 'advanced analytics', 'decision tracking', 'identity analytics', 'data-driven growth', 'transformation dashboard']

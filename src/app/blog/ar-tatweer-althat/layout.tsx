@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -9,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/blog/ar-tatweer-althat';
   const arUrl = 'https://tamkinly.com/ar/blog/ar-tatweer-althat';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['تطوير الذات', 'كيف أطور نفسي', 'تغيير حياتي للأفضل', 'بناء شخصية قوية', 'أدوات تطوير الذات', 'self development Arabic', 'تطوير النفس'],
     alternates: {

@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const arUrl = 'https://tamkinly.com/ar/guides/recode-identity-30-days';
   return {
   title: 'How to Recode Your Identity in 30 Days | Step-by-Step Guide',
-  description: 'A practical step-by-step guide to transforming your identity from the inside out. Based on neuroscience research showing 21-30 days for new neural pathways. Free guide with exercises.',
+  description: 'A practical step-by-step guide to transforming your identity from the inside out, based on neuroscience research on building new neural pathways.',
   keywords: [
     'recode identity',
     'identity transformation 30 days',
@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
   },
   openGraph: {
     title: 'How to Recode Your Identity in 30 Days',
-    description: 'A practical step-by-step guide to transforming your identity from the inside out. Based on neuroscience research showing 21-30 days for new neural pathways.',
+    description: 'A practical step-by-step guide to transforming your identity from the inside out, grounded in neuroscience research on neural pathways.',
     url: isAr ? arUrl : enUrl,
     siteName: 'Tamkinly',
     type: 'article',

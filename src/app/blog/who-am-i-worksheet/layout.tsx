@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 import { generateBlogArticleMetadata, getBlogArticleBySlug } from '@/lib/blog-articles';
+import { getLocale } from '@/lib/get-locale';
 import { BlogArticleJsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = generateBlogArticleMetadata('who-am-i-worksheet');
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generateBlogArticleMetadata('who-am-i-worksheet', locale);
+}
 
 export default function BlogArticleLayout({
   children,

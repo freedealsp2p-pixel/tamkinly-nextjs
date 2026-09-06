@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
   const title = 'Self Discipline Tips That Actually Work: The Science of Identity Recode';
-  const description = 'Self discipline is not punishment or willpower — it is the highest form of self-love expressed through identity. Learn the science-backed approach to discipline that makes it automatic, not forced.';
+  const description = 'Self discipline is not punishment or willpower — it is the highest form of self-love, made automatic through identity-based systems.';
   const enUrl = 'https://tamkinly.com/blog/self-discipline-science';
   const arUrl = 'https://tamkinly.com/ar/blog/self-discipline-science';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['self discipline tips', 'self discipline', 'discipline science', 'identity recode', 'how to be disciplined', 'discipline framework', 'lasting discipline'],
     alternates: {

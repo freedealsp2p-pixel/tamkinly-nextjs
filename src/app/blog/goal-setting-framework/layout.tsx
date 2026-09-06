@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
   const title = 'Goal Setting Framework: Identity-Aligned Goals That Actually Work';
-  const description = 'SMART goals and OKRs fail because they ignore identity. Learn the identity-aligned goal setting framework that creates goals you actually achieve — because they are expressions of who you are becoming, not obligations you force yourself to pursue.';
+  const description = 'SMART goals and OKRs fail because they ignore identity. Learn the identity-aligned goal setting framework that creates goals you actually achieve.';
   const enUrl = 'https://tamkinly.com/blog/goal-setting-framework';
   const arUrl = 'https://tamkinly.com/ar/blog/goal-setting-framework';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['goal setting framework', 'identity-aligned goals', 'goal setting', 'how to set goals', 'goal achievement', 'identity goals', 'effective goal setting'],
     alternates: {

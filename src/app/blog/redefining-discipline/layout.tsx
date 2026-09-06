@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 import { generateBlogArticleMetadata, getBlogArticleBySlug } from '@/lib/blog-articles';
+import { getLocale } from '@/lib/get-locale';
 import { BlogArticleJsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = generateBlogArticleMetadata('redefining-discipline');
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return generateBlogArticleMetadata('redefining-discipline', locale);
+}
 
 export default function BlogArticleLayout({ children }: { children: React.ReactNode }) {
   const article = getBlogArticleBySlug('redefining-discipline');

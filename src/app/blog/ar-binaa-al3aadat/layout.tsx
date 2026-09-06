@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -9,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/blog/ar-binaa-al3aadat';
   const arUrl = 'https://tamkinly.com/ar/blog/ar-binaa-al3aadat';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['بناء العادات', 'كيف أكوّن عادة جديدة', 'التخلص من العادات السيئة', 'عادات الصباح', 'الاستمرارية في العادات', 'building habits Arabic', 'عادات يومية'],
     alternates: {

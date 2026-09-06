@@ -43,7 +43,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   home: {
     title: 'Tamkinly | Return to Your Center - Identity Transformation Tools',
     titleAr: 'تمكينلي | عد إلى مركزك - أدوات تحويل الهوية',
-    description: 'Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, identity recode, and personal development. Start your journey today.',
+    description: 'Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, identity recode, and personal growth.',
     descriptionAr: 'اكتشف فجوة هويتك مع تقييمنا المجاني في 3 دقائق. أدوات مبنية على الأدلة لتحويل الهوية وتكوين العادات والتطوير الشخصي. ابدأ رحلتك اليوم.',
     path: '/',
     keywords: [
@@ -60,7 +60,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   products: {
     title: 'Products & Pricing | Identity Transformation Tools',
     titleAr: 'المنتجات والأسعار | أدوات تحويل الهوية - تمكينلي',
-    description: 'Start free with powerful identity tools, then upgrade as you grow. Transparent pricing for identity transformation products. Free tier available with no credit card required.',
+    description: 'Start free with powerful identity tools, then upgrade as you grow. Transparent pricing for identity transformation products. No credit card required.',
     descriptionAr: 'ابدأ مجاناً مع أدوات هوية قوية، ثم قم بالترقية مع نموك. أسعار شفافة لمنتجات تحويل الهوية. طبقة مجانية متاحة بدون الحاجة لبطاقة ائتمان.',
     path: '/products',
     keywords: [
@@ -155,7 +155,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   methodology: {
     title: 'Methodology | Evidence-Based Transformation',
     titleAr: 'المنهجية | تحويل مبني على الأدلة - تمكينلي',
-    description: 'Our methodology combines neuroscience, psychology, and practical frameworks for lasting identity transformation. Based on Atomic Habits, Self-Authorship, and CBT research.',
+    description: 'Our methodology combines neuroscience, psychology, and practical frameworks for lasting identity transformation, grounded in CBT research.',
     descriptionAr: 'تجمع منهجيتنا بين العلوم العصبية وعلم النفس والأطر العملية لتحويل هوية دائم. مبنية على أبحاث العادات الذرية وتأليف الذات والعلاج السلوكي المعرفي.',
     path: '/methodology',
     keywords: [
@@ -213,7 +213,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   'recovery-porn-recovery': {
     title: 'Recovery Journey | Tamkinly',
     titleAr: 'رحلة التعافي | تمكينلي',
-    description: 'A free, evidence-based recovery journey. Understand the behavioral loop, build practical tools (HALT, Trigger Journal, Emergency Plan), and become who you want to be — without self-blame.',
+    description: 'A free, evidence-based recovery journey. Understand the behavioral loop, build practical tools (HALT, Trigger Journal, Emergency Plan) — without self-blame.',
     descriptionAr: 'رحلة تعافي مجانية وقائمة على الأدلة. افهم الحلقة السلوكية، وابنِ أدوات عملية (HALT، يومية المحفزات، خطة الطوارئ)، وكن الشخص الذي تريد أن تكون — بدون لوم الذات.',
     path: '/recovery/porn-recovery',
     keywords: [

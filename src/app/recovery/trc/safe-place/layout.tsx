@@ -14,7 +14,7 @@ async function getLocale(): Promise<'en' | 'ar'> {
 
 const metadataByLocale = {
   en: { title: "Safe Place Exercise | Tamkinly", description: "A guided imagery exercise for building a mental safe place." },
-  ar: { title: "\u062a\u0645\u0631\u064a\u0646 \u0627\u0644\u0645\u0643\u0627\u0646 \u0627\u0644\u0622\u0645\u0646 | Tamkinly", description: "\u062a\u0645\u0631\u064a\u0646 \u062a\u062e\u064a\u0644\u064a \u0645\u0648\u062c\u0651\u0647 \u0644\u0628\u0646\u0627\u0621 \u0645\u0643\u0627\u0646 \u0622\u0645\u0646 \u0630\u0647\u0646\u064a." },
+  ar: { title: "\u062a\u0645\u0631\u064a\u0646 \u0627\u0644\u0645\u0643\u0627\u0646 \u0627\u0644\u0622\u0645\u0646 | Tamkinly", description: "تمرين تخيلي موجّه لبناء مكان آمن ذهني تلجأ إليه وقت الضيق — تخيّل تفاصيله بإرشادات واضحة، واثبت فيه كلما احتجت إلى سكينة وطمأنينة." },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

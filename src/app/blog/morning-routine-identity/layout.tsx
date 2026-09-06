@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
   const title = 'Morning Routine for Self Improvement: Why Identity-Based Routines Actually Work';
-  const description = 'Most morning routines fail because they are built on behavior, not identity. Learn why identity-based morning routines create lasting change and how to design one that becomes who you are.';
+  const description = 'Most morning routines fail because they are built on behavior, not identity. Learn why identity-based routines create lasting change.';
   const enUrl = 'https://tamkinly.com/blog/morning-routine-identity';
   const arUrl = 'https://tamkinly.com/ar/blog/morning-routine-identity';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['morning routine for self improvement', 'morning routine', 'identity-based routine', 'self improvement morning', 'productive morning', 'morning habits', 'daily practice'],
     alternates: {

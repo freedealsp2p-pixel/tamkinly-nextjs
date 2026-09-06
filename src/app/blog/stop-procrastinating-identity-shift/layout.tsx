@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
   const title = 'How to Stop Procrastinating: The Identity Shift That Changes Everything';
-  const description = 'Procrastination is not a time management problem — it is an identity problem. Learn why identity-based approaches to overcoming procrastination work when everything else fails, and discover the framework for lasting change.';
+  const description = 'Procrastination is not a time management problem — it is an identity problem. Learn why identity-based approaches work when everything else fails.';
   const enUrl = 'https://tamkinly.com/blog/stop-procrastinating-identity-shift';
   const arUrl = 'https://tamkinly.com/ar/blog/stop-procrastinating-identity-shift';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['how to stop procrastinating', 'stop procrastinating', 'identity shift', 'overcome procrastination', 'procrastination solution', 'identity-based change', 'procrastination identity'],
     alternates: {

@@ -12,7 +12,7 @@ async function getLocale(): Promise<'en' | 'ar'> {
 
 const metadataByLocale = {
   en: { title: "TRC Journey \u2014 Your Recovery Path | Tamkinly", description: "Track your progress through the Trauma Recovery Components toolkit." },
-  ar: { title: "\u0631\u062d\u0644\u0629 TRC \u2014 \u0645\u0633\u0627\u0631 \u062a\u0639\u0627\u0641\u064a\u0643 | Tamkinly", description: "\u062a\u062a\u0628\u0651\u0639 \u062a\u0642\u062f\u0651\u0645\u0643 \u0639\u0628\u0631 \u0645\u062c\u0645\u0648\u0639\u0629 \u0623\u062f\u0648\u0627\u062a \u0627\u0644\u062a\u0639\u0627\u0641\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0645\u0627\u062a." },
+  ar: { title: "\u0631\u062d\u0644\u0629 TRC \u2014 \u0645\u0633\u0627\u0631 \u062a\u0639\u0627\u0641\u064a\u0643 | Tamkinly", description: "تتبّع تقدّمك عبر مجموعة أدوات التعافي من الصدمات: سجّل تمارينك اليومية، وراقب تطوّر حالتك، ولاحظ كيف يتعزّز تعافيك أسبوعاً بعد أسبوع." },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

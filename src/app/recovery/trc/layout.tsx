@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: isAr ? 'مركز التعافي من الصدمات (TRC) | Tamkinly' : 'Trauma Recovery Center (TRC) | Tamkinly',
     description: isAr
-      ? 'أدوات قائمة على الأدلة للتعافي من الصدمات.'
+      ? 'أدوات قائمة على الأدلة للتعافي من الصدمات: تمارين تأريض وتنفّس ومسح للجسد ويوميات للمعالجة — خطوات عملية آمنة خطوة بخطوة نحو التعافي.'
       : 'Evidence-based trauma recovery tools — grounding, breathing, body scan, and more.',
     robots: { index: true, follow: true },
     alternates: {
@@ -34,12 +34,13 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: isAr ? 'مركز التعافي من الصدمات (TRC) | Tamkinly' : 'Trauma Recovery Center (TRC) | Tamkinly',
       description: isAr
-        ? 'أدوات قائمة على الأدلة للتعافي من الصدمات.'
+        ? 'أدوات قائمة على الأدلة للتعافي من الصدمات: تمارين تأريض وتنفّس ومسح للجسد ويوميات للمعالجة — خطوات عملية آمنة خطوة بخطوة نحو التعافي.'
         : 'Evidence-based trauma recovery tools — grounding, breathing, body scan, and more.',
       url: basePath,
       siteName: 'Tamkinly',
       locale: isAr ? 'ar_SA' : 'en_US',
       type: 'website',
+      images: [{ url: 'https://tamkinly.com/og-image.webp', width: 1200, height: 630, alt: 'Tamkinly' }],
     },
   };
 }

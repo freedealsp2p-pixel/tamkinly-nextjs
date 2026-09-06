@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { db } from '@/lib/db';
 import {
   getBlogArticleBySlug,
+  smartPageTitle,
   getAllBlogArticleSlugs,
   BLOG_CATEGORIES,
 } from '@/lib/blog-articles';
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
       const baseUrl = isAr ? `https://tamkinly.com/ar/blog/${slug}` : `https://tamkinly.com/blog/${slug}`;
       const otherUrl = isAr ? `https://tamkinly.com/blog/${slug}` : `https://tamkinly.com/ar/blog/${slug}`;
       return {
-        title: `${title} | Tamkinly`,
+        title: smartPageTitle(title, ' | Tamkinly'),
         description: desc,
         alternates: {
           canonical: baseUrl,
@@ -86,7 +87,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     : 'https://tamkinly.com/og-image.webp';
 
   return {
-    title: `${article.title} | Tamkinly Blog`,
+    title: smartPageTitle(article.title, ' | Tamkinly Blog'),
     description: article.description,
     keywords: article.keywords,
     alternates: {

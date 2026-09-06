@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const arUrl = 'https://tamkinly.com/ar/guides/behavior-trap-why-habits-fail';
   return {
   title: 'The Behavior Trap: Why Habits Fail and How They Succeed',
-  description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails and how to build a new identity that supports your goals. Free guide.',
+  description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails — and how to build an identity that supports them.',
   keywords: [
     'behavior trap',
     'why habits fail',
@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
   },
   openGraph: {
     title: 'The Behavior Trap: Why Habits Fail and How They Succeed',
-    description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails and how to build a new identity that supports your goals.',
+    description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails — and how to build an identity that supports them.',
     url: isAr ? arUrl : enUrl,
     siteName: 'Tamkinly',
     type: 'article',
@@ -47,12 +47,12 @@ export async function generateMetadata(): Promise<Metadata> {
   twitter: {
     card: 'summary_large_image',
     title: 'The Behavior Trap: Why Habits Fail and How They Succeed',
-    description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails and how to build a new identity that supports your goals.',
+    description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails — and how to build an identity that supports them.',
     site: '@tamkinly',
     images: ['https://tamkinly.com/guides/behavior-trap-why-habits-fail/opengraph-image'],
   },
   other: {
-    'DC.description': 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails and how to build a new identity that supports your goals.',
+    'DC.description': 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails — and how to build an identity that supports them.',
     'DC.subject': 'behavior trap, why habits fail, identity-based habits',
   },
   };

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -9,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/blog/ar-khulasat-al-arbaeen';
   const arUrl = 'https://tamkinly.com/ar/blog/ar-khulasat-al-arbaeen';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['خلاصة الأربعين', 'التغيير نحو الأفضل', 'تطوير الذات', 'أهداف الحياة', 'الالتزام', 'التخطيط', 'العطاء', 'حكم الحياة'],
     alternates: {

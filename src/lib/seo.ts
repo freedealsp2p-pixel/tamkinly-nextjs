@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
   name: 'Tamkinly | تمكينلي',
   nameAr: 'تمكينلي',
   nameEn: 'Tamkinly',
-  description: 'A space to rebuild the human from within. Without pressure. Without self-judgment. Without temporary motivation. Digital products for identity transformation and personal development.',
+  description: 'A space to rebuild the human from within. Without pressure. Without self-judgment. Without temporary motivation. Digital products for identity transformation.',
   descriptionAr: 'مساحة لإعادة بناء الإنسان من الداخل. بدون ضغط. بدون حكم على الذات. بدون تحفيز مؤقت. منتجات رقمية لتحويل الهوية والتطوير الشخصي.',
   url: 'https://tamkinly.com',
   ogImage: '/og-image.webp',
@@ -520,7 +520,7 @@ export function generateFAQSchema(items: FAQItem[]) {
 export const HOME_METADATA: Metadata = generatePageMetadata({
   title: 'Tamkinly | Return to Your Center',
   titleAr: 'تمكينلي | عد إلى مركزك',
-  description: 'Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, habit formation, and personal development. Start your journey today.',
+  description: 'Discover your identity gap with our free 3-minute assessment. Evidence-based tools for identity transformation, habit formation, and personal growth.',
   descriptionAr: 'اكتشف فجوة هويتك مع تقييمنا المجاني في 3 دقائق. أدوات مبنية على الأدلة لتحويل الهوية وتكوين العادات والتطوير الشخصي. ابدأ رحلتك اليوم.',
   path: '/',
   keywords: [...KEYWORDS.primary, ...KEYWORDS.secondary.slice(0, 5)],
@@ -529,7 +529,7 @@ export const HOME_METADATA: Metadata = generatePageMetadata({
 export const PRODUCTS_METADATA: Metadata = generatePageMetadata({
   title: 'Products & Pricing | Identity Transformation Tools',
   titleAr: 'المنتجات والأسعار | أدوات تحويل الهوية',
-  description: 'Start free with powerful identity tools, then upgrade as you grow. Transparent pricing for identity transformation products. Free tier available with no credit card required.',
+  description: 'Start free with powerful identity tools, then upgrade as you grow. Transparent pricing for identity transformation products. No credit card required.',
   descriptionAr: 'ابدأ مجاناً مع أدوات هوية قوية، ثم قم بالترقية مع نموك. أسعار شفافة لمنتجات تحويل الهوية. طبقة مجانية متاحة بدون الحاجة لبطاقة ائتمان.',
   path: '/products',
   keywords: ['identity transformation pricing', 'personal development tools', 'identity transformation tools pricing', 'أسعار تحويل الهوية', 'أدوات التطوير الشخصي'],
@@ -565,7 +565,7 @@ export const ABOUT_METADATA: Metadata = generatePageMetadata({
 export const METHODOLOGY_METADATA: Metadata = generatePageMetadata({
   title: 'Methodology | Evidence-Based Transformation',
   titleAr: 'المنهجية | تحويل مبنى على الأدلة',
-  description: 'Our methodology combines neuroscience, psychology, and practical frameworks for lasting identity transformation. Based on Atomic Habits, Self-Authorship, and CBT research.',
+  description: 'Our methodology combines neuroscience, psychology, and practical frameworks for lasting identity transformation, grounded in CBT research.',
   descriptionAr: 'تجمع منهجيتنا بين العلوم العصبية وعلم النفس والأطر العملية لتحويل هوية دائم. مبنية على أبحاث تأليف الذات واللدونة العصبية والعلاج السلوكي المعرفي.',
   path: '/methodology',
   keywords: ['transformation methodology', 'identity science', 'evidence-based self-development', 'منهجية التحول', 'علم الهوية'],

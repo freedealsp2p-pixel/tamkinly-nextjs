@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   title: 'AI Identity Coach | Personal Transformation Companion',
   description: 'Talk to your AI identity coach — grounded in psychology and self-authorship. Ask about identity change, habits, and the Tamkinly system. Available now.',
   keywords: 'AI identity coach, AI coaching, \u0645\u062f\u0631\u0628 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0630\u0643\u064a',
-  alternates: {
-    canonical: 'https://tamkinly.com/apps/ai-identity-coach',
-  },
   openGraph: {
     title: 'AI Identity Coach | Personal Transformation Companion',
     description: 'Talk to your AI identity coach — grounded in psychology and self-authorship. Available 24/7 with personalized guidance.',

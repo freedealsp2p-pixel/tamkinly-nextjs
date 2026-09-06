@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -9,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/blog/ar-idarat-alwaqt';
   const arUrl = 'https://tamkinly.com/ar/blog/ar-idarat-alwaqt';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['إدارة الوقت', 'تنظيم الوقت اليومي', 'التخلص من المماطلة', 'time management Arabic', 'إنتاجية', 'تنظيم الوقت'],
     alternates: {

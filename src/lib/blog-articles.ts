@@ -423,7 +423,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'and-the-bamboo-kept-growing',
     title: 'And the Bamboo Kept Growing: Why Your Invisible Work Matters',
     titleAr: 'والخيزران استمر بالنمو: لماذا يهم عملك غير المرئي',
-    description: 'The Chinese bamboo tree grows nothing for five years then explodes 90 feet in six weeks. Your identity transformation follows the same law. Here is why the work you cannot see is the work that changes everything.',
+    description: 'The Chinese bamboo tree grows nothing for five years, then explodes 90 feet in six weeks. Your identity transformation follows the same law of invisible growth.',
     descriptionAr: 'شجرة الخيزران الصينية لا تنمو شيئا لخمس سنوات ثم تنفجر 90 قدما في ستة أسابيع. تحول هويتك يتبع نفس القانون.',
     category: 'Identity Shift',
     categoryAr: 'تحول الهوية',
@@ -440,7 +440,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'automatic-change',
     title: 'Automatic Change: How to Outsmart Your Brain and Make Positive Habits Stick',
     titleAr: 'التغيير التلقائي: كيف تتفوق على دماغك وتجعل العادات الإيجابية تلقائية',
-    description: 'Your brain is a prediction engine. Procrastination is not laziness. Willpower is not the answer. The real secret is understanding the predictive language of your nervous system and using prediction errors to make change automatic.',
+    description: 'Your brain is a prediction engine. The real secret to automatic change is understanding the predictive language of your nervous system — not willpower.',
     descriptionAr: 'دماغك محرك تنبؤ. المماطلة ليست كسلا. الإرادة ليست الجواب. السر الحقيقي في فهم اللغة التنبؤية لجهازك العصبي.',
     category: 'Identity Shift',
     categoryAr: 'تحول الهوية',
@@ -457,7 +457,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'physics-of-consciousness',
     title: 'The Physics of Consciousness: How Repetition Rewrites Your Identity',
     titleAr: 'فيزياء الوعي: كيف يعيد التكرار كتابة هويتك',
-    description: 'Reality does not happen to you. It happens within you. Your brain uses repetition to pave neural pathways defining your identity. Understand the predictive language and shift from victim to engineer.',
+    description: 'Reality happens within you. Your brain uses repetition to pave the neural pathways that define your identity — shift from victim to engineer.',
     descriptionAr: 'الواقع لا يحدث لك. يحدث داخلك. دماغك يستخدم التكرار لرصف المسارات العصبية التي تحدد هويتك.',
     category: 'Identity Shift',
     categoryAr: 'تحول الهوية',
@@ -491,7 +491,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'vagus-nerve-breathing',
     title: 'The Vagus Nerve Protocol: How 4-2-8-2 Breathing Rewires Your Stress Response',
     titleAr: 'بروتوكول العصب المبهم: كيف يعيد التنفس 4-2-8-2 تشكيل استجابتك للتوتر',
-    description: 'The Vagus Nerve is the master safety switch governing the shift from fight-or-flight to rest-and-digest. The 4-2-8-2 breathing technique leverages biomechanics to send immediate neural signals demanding systemic calm.',
+    description: 'The Vagus Nerve is your master safety switch. The 4-2-8-2 breathing technique uses biomechanics to send immediate neural signals demanding calm.',
     descriptionAr: 'العصب المبهم هو مفتاح الأمان الرئيسي الذي يحكم الانتقال من القتال أو الهرب إلى الراحة والهضم.',
     category: 'Mental Clarity',
     categoryAr: 'الوضوح الذهني',
@@ -510,7 +510,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'how-to-build-habits-that-stick',
     title: 'How to Build Habits That Stick: The Science of Identity-Based Habit Formation',
     titleAr: 'كيف تبني عادات تستمر: علم تكوين العادات المبنية على الهوية',
-    description: 'Stop relying on willpower. Learn the science-backed identity-based approach to building habits that become automatic — not forced. Based on neuroplasticity research and identity-based habit framework.',
+    description: 'Stop relying on willpower. Learn the science-backed identity-based approach to building habits that become automatic — not forced.',
     descriptionAr: 'توقف عن الاعتماد على الإرادة. تعلم النهج المبني على الهوية المدعوم بالعلم لبناء عادات تصبح تلقائية — ليست مفروضة. مبني على أبحاث المرونة العصبية وإطار العادات المبنية على الهوية.',
     category: 'Habit Formation',
     categoryAr: 'تكوين العادات',
@@ -527,7 +527,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'morning-routine-identity',
     title: 'Morning Routine for Self Improvement: Why Identity-Based Routines Actually Work',
     titleAr: 'روتين الصباح للتحسن الذاتي: لماذا تعمل الروتينات المبنية على الهوية فعلاً',
-    description: 'Most morning routines fail because they are built on behavior, not identity. Learn why identity-based morning routines create lasting change and how to design one that becomes who you are.',
+    description: 'Most morning routines fail because they are built on behavior, not identity. Learn why identity-based routines create lasting change.',
     descriptionAr: 'معظم الروتينات الصباحية تفشل لأنها مبنية على السلوك، لا الهوية. تعرف لماذا تخلق الروتينات الصباحية المبنية على الهوية تغييراً دائماً وكيف تصمم واحدة تصبح من أنت.',
     category: 'Daily Practice',
     categoryAr: 'الممارسة اليومية',
@@ -544,7 +544,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'stop-procrastinating-identity-shift',
     title: 'How to Stop Procrastinating: The Identity Shift That Changes Everything',
     titleAr: 'كيف تتوقف عن المماطلة: تحول الهوية الذي يغير كل شيء',
-    description: 'Procrastination is not a time management problem — it is an identity problem. Learn why identity-based approaches to overcoming procrastination work when everything else fails.',
+    description: 'Procrastination is not a time management problem — it is an identity problem. Learn why identity-based approaches work when everything else fails.',
     descriptionAr: 'المماطلة ليست مشكلة إدارة وقت — إنها مشكلة هوية. تعرف لماذا تعمل النهوج المبنية على الهوية للتغلب على المماطلة عندما تفشل كل شيء آخر.',
     category: 'Identity Shift',
     categoryAr: 'تحول الهوية',
@@ -561,7 +561,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'self-discipline-science',
     title: 'Self Discipline Tips That Actually Work: The Science of Identity Recode',
     titleAr: 'نصائح الانضباط الذاتي التي تعمل فعلاً: علم إعادة صياغة الهوية',
-    description: 'Self discipline is not punishment or willpower — it is the highest form of self-love expressed through identity. Learn the science-backed approach to discipline that makes it automatic, not forced.',
+    description: 'Self discipline is not punishment or willpower — it is the highest form of self-love, made automatic through identity-based systems.',
     descriptionAr: 'الانضباط الذاتي ليس عقاباً أو إرادة — إنه أعلى أشكال حب الذات المعبر عنها من خلال الهوية. تعلم النهج المدعوم بالعلم للانضباط الذي يجعله تلقائياً، غير مفروض.',
     category: 'Commitment',
     categoryAr: 'الالتزام',
@@ -578,7 +578,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'goal-setting-framework',
     title: 'Goal Setting Framework: Identity-Aligned Goals That Actually Work',
     titleAr: 'إطار تحديد الأهداف: أهداف متوافقة مع الهوية تعمل فعلاً',
-    description: 'SMART goals and OKRs fail because they ignore identity. Learn the identity-aligned goal setting framework that creates goals you actually achieve — because they are expressions of who you are becoming.',
+    description: 'SMART goals and OKRs fail because they ignore identity. Learn the identity-aligned goal setting framework that creates goals you actually achieve.',
     descriptionAr: 'أهداف SMART وOKRs تفشل لأنها تتجاهل الهوية. تعلم إطار تحديد الأهداف المتوافقة مع الهوية الذي يخلق أهدافاً تحققها فعلاً — لأنها تعبيرات عمن تصبح.',
     category: 'Execution',
     categoryAr: 'التنفيذ',
@@ -597,7 +597,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'ar-tatweer-althat',
     title: 'Self Development: The Complete Guide to Changing Your Life from Within',
     titleAr: 'تطوير الذات: الدليل الشامل لتغيير حياتك من الداخل',
-    description: 'The complete guide to identity-based self development. Discover why most self-improvement attempts fail and how to truly change your life from within through understanding and recoding your identity.',
+    description: 'The complete guide to identity-based self development: why most self-improvement attempts fail, and how to change your life from within.',
     descriptionAr: 'الدليل الشامل لتطوير الذات المبني على علم الهوية. اكتشف لماذا تفشل معظم محاولات التطوير وكيف تغير حياتك حقاً من الداخل عبر فهم الهوية وإعادة برمجتها.',
     category: 'تطوير الذات',
     categoryAr: 'تطوير الذات',
@@ -614,7 +614,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'ar-binaa-al3aadat',
     title: 'Building Habits: The Scientific Guide to Habits That Last a Lifetime',
     titleAr: 'بناء العادات: الدليل العلمي لعادات تدوم إلغاء في أي وقت',
-    description: 'The scientific guide to building lasting habits. Discover why new habits fail and how to build identity-based habits instead of relying on willpower. Based on latest neuroscience and behavioral research.',
+    description: 'The scientific guide to building lasting habits: why new habits fail, and how to build identity-based habits instead of relying on willpower.',
     descriptionAr: 'الدليل العلمي لبناء عادات تدوم. اكتشف لماذا تفشل العادات الجديدة وكيف تبني عادات تعتمد على الهوية وليس الإرادة. مبني على أحدث أبحاث علم الأعصاب والسلوك.',
     category: 'بناء العادات',
     categoryAr: 'بناء العادات',
@@ -631,7 +631,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'ar-tahqeeq-alahdaf',
     title: "Goal Achievement: Why You Don't Achieve Your Goals and the Method That Works",
     titleAr: 'تحقيق الأهداف: لماذا لا تحقق أهدافك والطريقة التي تعمل فعلاً',
-    description: 'Discover why traditional goal-setting fails and how the identity-aligned approach works. The complete guide to achieving your goals through identity transformation, not persistence.',
+    description: 'Discover why traditional goal-setting fails, and how identity transformation — not persistence — is the real path to achieving your goals.',
     descriptionAr: 'اكتشف لماذا تفشل الطرق التقليدية لتحقيق الأهداف وكيف يعمل نهج الهوية المتوافقة. الدليل الشامل لتحقيق أهدافك من خلال تحول الهوية لا المثابرة.',
     category: 'تحقيق الأهداف',
     categoryAr: 'تحقيق الأهداف',
@@ -686,7 +686,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'ar-hindasat-al-dimag',
     title: 'Brain Engineering: A Scientific Guide to Reshaping Your Life',
     titleAr: 'هندسة الدماغ: دليل علمي وعملي لإعادة تشكيل حياتك',
-    description: 'Discover how to rewire your brain through neuroplasticity. A practical two-part guide to lowering internal resistance, changing identity, and building lasting habits.',
+    description: 'Rewire your brain through neuroplasticity: a practical two-part guide to lowering internal resistance and building lasting habits.',
     descriptionAr: 'اكتشف كيف تعيد برمجة دماغك عبر المرونة العصبية. دليل عملي من جزأين لخفض المقاومة الداخلية وتغيير الهوية وبناء عادات جديدة تدوم.',
     category: 'Brain Science',
     categoryAr: 'علوم الدماغ',
@@ -759,7 +759,19 @@ export function getAllBlogArticleSlugs(): string[] {
 /**
  * Generate metadata for a blog article
  */
-export function generateBlogArticleMetadata(slug: string): Metadata {
+const TITLE_MAX = 65;
+
+export function smartPageTitle(text: string, suffix: string, max: number = TITLE_MAX): string {
+  const full = `${text}${suffix}`;
+  if (full.length <= max) return full;
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const sp = cut.lastIndexOf(' ');
+  return (sp > 30 ? cut.slice(0, sp) : cut) + '\u2026';
+}
+
+export function generateBlogArticleMetadata(slug: string, locale: string = 'en'): Metadata {
+  const isAr = locale === 'ar';
   const article = getBlogArticleBySlug(slug);
   
   if (!article) {
@@ -769,18 +781,25 @@ export function generateBlogArticleMetadata(slug: string): Metadata {
     };
   }
   
-  const fullUrl = `https://tamkinly.com/blog/${article.slug}`;
+  const enUrl = `https://tamkinly.com/blog/${article.slug}`;
+  const arUrl = `https://tamkinly.com/ar/blog/${article.slug}`;
+  const fullUrl = isAr ? arUrl : enUrl;
   const imageUrl = article.image 
     ? `https://tamkinly.com${article.image}` 
     : 'https://tamkinly.com/og-image.webp';
   
   return {
-    title: `${article.title} | Tamkinly Blog`,
+    title: smartPageTitle(article.title, ' | Tamkinly Blog'),
     description: article.description,
     keywords: article.keywords,
     
     alternates: {
       canonical: fullUrl,
+      languages: {
+        'en-US': enUrl,
+        'ar-SA': arUrl,
+        'x-default': enUrl,
+      },
     },
     
     openGraph: {

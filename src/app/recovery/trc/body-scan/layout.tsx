@@ -14,7 +14,7 @@ async function getLocale(): Promise<'en' | 'ar'> {
 
 const metadataByLocale = {
   en: { title: "Body Scan | Tamkinly", description: "A guided meditative exercise for scanning the body and identifying areas of tension." },
-  ar: { title: "\u0645\u0633\u062d \u0627\u0644\u062c\u0633\u062f | Tamkinly", description: "\u062a\u0645\u0631\u064a\u0646 \u062a\u0623\u0645\u0644\u064a \u0645\u0648\u062c\u0651\u0647 \u0644\u0645\u0633\u062d \u0627\u0644\u062c\u0633\u062f \u0648\u062a\u062d\u062f\u064a\u062f \u0645\u0646\u0627\u0637\u0642 \u0627\u0644\u062a\u0648\u062a\u0631." },
+  ar: { title: "\u0645\u0633\u062d \u0627\u0644\u062c\u0633\u062f | Tamkinly", description: "تمرين تأملي موجّه لمسح الجسد وتحديد مناطق التوتر خطوة بخطوة — استعد تواصلك مع إحساسك الجسدي، وأفرِغ التوتر المتراكم بعمق وأمان." },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = isAr ? 'البروتوكولات العلاجية | تمكينلي' : 'Therapeutic Protocols | Tamkinly';
   const description = isAr
     ? 'بروتوكولات علاجية موجّهة مبنية على علم النفس: فصل زمني، الشفرة البديلة، والمرآة البيضاء — أدوات عملية للتنظيم العاطفي والتخلص من السلوك القهري.'
-    : 'Guided therapeutic protocols grounded in psychology: Temporal Decoupling, The Alternative Code, and The White Mirror — practical tools for emotional regulation and breaking compulsive loops.';
+    : 'Guided therapeutic protocols grounded in psychology: Temporal Decoupling, The Alternative Code, and The White Mirror — tools for emotional regulation.';
   const enUrl = 'https://tamkinly.com/apps/therapeutic-protocols';
   const arUrl = 'https://tamkinly.com/ar/apps/therapeutic-protocols';
   return {

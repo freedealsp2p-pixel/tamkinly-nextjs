@@ -34,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'grounding', 'safe-place', 'body-scan', 'a52', 'eft-tapping',
     'shame-recovery', 'thought-reframing', 'trauma-journal', 'journey',
     'regulation-toolkit', 'what-trauma-does-to-the-body', 'what-happens-during-trauma-responses',
-    'grounding-guide', 'grounding/printable', 'regulation-guide', 'secondary-trauma',
+    'grounding-guide', 'regulation-guide', 'secondary-trauma',
     'worksheets/safety-plan', 'worksheets/trigger-mapping', 'downloads',
   ].map((slug) => ({
     url: `${baseUrl}/recovery/trc/${slug}`,

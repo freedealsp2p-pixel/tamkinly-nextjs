@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const arUrl = 'https://tamkinly.com/ar/guides/identity-vs-behavior-change';
   return {
   title: 'Identity vs Behavior Change: Why Willpower Fails',
-  description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation. Free guide with practical exercises.',
+  description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation.',
   keywords: [
     'identity vs behavior change',
     'willpower fails',

@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { getLocale } from '@/lib/get-locale';
+import { smartPageTitle } from '@/lib/blog-articles';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
   const title = 'How to Build Habits That Stick: The Science of Identity-Based Habit Formation';
-  const description = 'Stop relying on willpower. Learn the science-backed identity-based approach to building habits that become automatic — not forced. Based on neuroplasticity research and James Clear\'s identity-based habit framework.';
+  const description = 'Stop relying on willpower. Learn the science-backed identity-based approach to building habits that become automatic — not forced.';
   const enUrl = 'https://tamkinly.com/blog/how-to-build-habits-that-stick';
   const arUrl = 'https://tamkinly.com/ar/blog/how-to-build-habits-that-stick';
   return {
-    title: title + ' | Tamkinly Blog',
+    title: smartPageTitle(title, ' | Tamkinly Blog'),
     description,
     keywords: ['build habits that stick', 'habit formation', 'identity-based habits', 'science of habits', 'how to build habits', 'lasting habits', 'habit loop'],
     alternates: {

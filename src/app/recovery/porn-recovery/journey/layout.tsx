@@ -12,7 +12,7 @@ async function getLocale(): Promise<'en' | 'ar'> {
 
 const metadataByLocale = {
   en: { title: 'Recovery Journey | Tamkinly', description: 'Track your progress through the porn recovery journey.' },
-  ar: { title: 'رحلة التعافي | Tamkinly', description: 'تتبّع تقدّمك عبر رحلة التعافي.' },
+  ar: { title: 'رحلة التعافي | Tamkinly', description: 'تتبّع تقدّمك عبر رحلة التعافي: سجّل أيامك النظيفة، ولاحظ مثيراتك ومحفزات الانتكاس، وشاهد كيف تتقوّى عزيمتك يوماً بعد يوم.' },
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,6 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Tamkinly',
       locale: locale === 'ar' ? 'ar_SA' : 'en_US',
       type: 'website',
+      images: [{ url: 'https://tamkinly.com/og-image.webp', width: 1200, height: 630, alt: 'Tamkinly' }],
     },
     twitter: {
       card: 'summary',
