@@ -24,7 +24,7 @@ function CharismaArticleAR() {
         slug="ar-karizma-al-tatheer"
         datePublished="2026-07-12"
         dateModified="2026-07-12"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["كاريزما", "التأثير", "الجاذبية الاجتماعية", "charisma", "بناء العلاقات", "الحضور", "التأثير الإيجابي"]}
       />
     <article className="min-h-screen" dir="rtl">
@@ -47,7 +47,7 @@ function CharismaArticleAR() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                عبدالله الشواف
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">فريق تمكينلي</Link>
               </span>
             </div>
           </div>
@@ -250,7 +250,7 @@ function CharismaArticleEN() {
         slug="ar-karizma-al-tatheer"
         datePublished="2026-07-12"
         dateModified="2026-07-12"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["charisma", "influence", "social attraction", "كاريزما", "building relationships", "presence", "positive influence"]}
       />
     <article className="min-h-screen" dir="ltr">
@@ -273,7 +273,7 @@ function CharismaArticleEN() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Abdallah Chouaf
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">Tamkinly Team</Link>
               </span>
             </div>
           </div>

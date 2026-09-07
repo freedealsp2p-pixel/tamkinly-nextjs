@@ -25,7 +25,7 @@ function BrainEngineeringArticleAR() {
         slug="ar-hindasat-al-dimag"
         datePublished="2026-07-12"
         dateModified="2026-07-12"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["هندسة الدماغ", "المرونة العصبية", "إعادة برمجة الدماغ", "neuroplasticity", "تغيير الهوية", "بناء العادات", "تطوير الذات"]}
       />
     <article className="min-h-screen" dir="rtl">
@@ -48,7 +48,7 @@ function BrainEngineeringArticleAR() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                عبدالله الشواف
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">فريق تمكينلي</Link>
               </span>
             </div>
           </div>
@@ -285,7 +285,7 @@ function BrainEngineeringArticleEN() {
         slug="ar-hindasat-al-dimag"
         datePublished="2026-07-12"
         dateModified="2026-07-12"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["brain engineering", "neuroplasticity", "brain reprogramming", "هندسة الدماغ", "identity change", "habit building", "self development"]}
       />
     <article className="min-h-screen" dir="ltr">
@@ -308,7 +308,7 @@ function BrainEngineeringArticleEN() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Abdallah Chouaf
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">Tamkinly Team</Link>
               </span>
             </div>
           </div>

@@ -24,7 +24,7 @@ function FortySummaryArticleAR() {
         slug="ar-khulasat-al-arbaeen"
         datePublished="2026-07-12"
         dateModified="2026-07-12"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["خلاصة الأربعين", "التغيير نحو الأفضل", "تطوير الذات", "أهداف الحياة", "الالتزام", "التخطيط", "العطاء", "حكم الحياة"]}
       />
     <article className="min-h-screen" dir="rtl">
@@ -47,7 +47,7 @@ function FortySummaryArticleAR() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                عبدالله الشواف
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">فريق تمكينلي</Link>
               </span>
             </div>
           </div>
@@ -298,7 +298,7 @@ function FortySummaryArticleEN() {
         slug="ar-khulasat-al-arbaeen"
         datePublished="2026-07-12"
         dateModified="2026-07-12"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["life lessons", "positive change", "self development", "خلاصة الأربعين", "life goals", "commitment", "planning", "giving", "wisdom of life"]}
       />
     <article className="min-h-screen" dir="ltr">
@@ -321,7 +321,7 @@ function FortySummaryArticleEN() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Abdallah Chouaf
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">Tamkinly Team</Link>
               </span>
             </div>
           </div>

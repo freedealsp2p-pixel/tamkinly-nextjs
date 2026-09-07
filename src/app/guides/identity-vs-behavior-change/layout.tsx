@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
     type: 'article',
     publishedTime: '2026-02-15',
     modifiedTime: '2026-02-20',
-    authors: ['Abdallah Chouaf'],
+    authors: ['Tamkinly Team'],
     images: [
       {
         url: 'https://tamkinly.com/guides/identity-vs-behavior-change/opengraph-image',

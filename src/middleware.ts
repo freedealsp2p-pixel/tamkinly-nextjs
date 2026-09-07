@@ -17,6 +17,10 @@ const VALID_APP_SLUGS = new Set([
   'values-clarification', 'worksheets',
 ]);
 
+const VALID_AUTHOR_SLUGS = new Set([
+  'tamkinly-team',
+]);
+
 // Hard 404 for unknown dynamic slugs (Next 16 ignores dynamicParams on dynamic routes)
 function unknownSlug404(pathname: string): NextResponse | null {
   const segments = pathname.split('/').filter(Boolean);
@@ -25,6 +29,9 @@ function unknownSlug404(pathname: string): NextResponse | null {
     return new NextResponse('Not Found', { status: 404 });
   }
   if (segments[0] === 'apps' && segments.length === 2 && !VALID_APP_SLUGS.has(segments[1])) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+  if (segments[0] === 'blog' && segments[1] === 'author' && segments.length === 3 && !VALID_AUTHOR_SLUGS.has(segments[2])) {
     return new NextResponse('Not Found', { status: 404 });
   }
   return null;

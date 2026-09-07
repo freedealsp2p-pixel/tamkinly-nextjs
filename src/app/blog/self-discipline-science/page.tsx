@@ -25,7 +25,7 @@ export default function SelfDisciplineScienceArticle() {
         slug="self-discipline-science"
         datePublished="2026-03-28"
         dateModified="2026-03-28"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["self discipline tips", "self discipline", "discipline science", "identity recode", "how to be disciplined", "discipline framework", "lasting discipline"]}
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -45,7 +45,7 @@ export default function SelfDisciplineScienceArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Abdallah Chouaf", "عبدالله الشواف")}
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">{getText("Tamkinly Team", "فريق تمكينلي")}</Link>
               </span>
             </div>
           </div>

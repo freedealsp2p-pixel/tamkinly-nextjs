@@ -25,7 +25,7 @@ function IdaratAlwaqtArticleAR() {
         slug="ar-idarat-alwaqt"
         datePublished="2026-03-29"
         dateModified="2026-03-29"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["إدارة الوقت", "تنظيم الوقت اليومي", "التخلص من المماطلة", "time management Arabic", "إنتاجية", "تنظيم الوقت"]}
       />
     <article className="min-h-screen" dir="rtl">
@@ -48,7 +48,7 @@ function IdaratAlwaqtArticleAR() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                عبدالله الشواف
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">فريق تمكينلي</Link>
               </span>
             </div>
           </div>
@@ -281,7 +281,7 @@ function IdaratAlwaqtArticleEN() {
         slug="ar-idarat-alwaqt"
         datePublished="2026-03-29"
         dateModified="2026-03-29"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["time management", "daily time organization", "stop procrastinating", "إدارة الوقت", "productivity", "time organization"]}
       />
     <article className="min-h-screen" dir="ltr">
@@ -304,7 +304,7 @@ function IdaratAlwaqtArticleEN() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Abdallah Chouaf
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">Tamkinly Team</Link>
               </span>
             </div>
           </div>

@@ -27,7 +27,7 @@ export default function AndTheBambooKeptGrowingArticle() {
         slug="and-the-bamboo-kept-growing"
         datePublished="2026-05-09"
         dateModified="2026-05-09"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["bamboo tree", "patience", "identity transformation", "invisible work", "roots before growth", "consistency", "delayed results"]}
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -48,7 +48,7 @@ export default function AndTheBambooKeptGrowingArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Abdallah Chouaf", "عبدالله الشواف")}
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">{getText("Tamkinly Team", "فريق تمكينلي")}</Link>
               </span>
             </div>
           </div>

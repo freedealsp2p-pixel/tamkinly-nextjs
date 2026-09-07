@@ -25,7 +25,7 @@ export default function GoalSettingFrameworkArticle() {
         slug="goal-setting-framework"
         datePublished="2026-04-05"
         dateModified="2026-04-05"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["goal setting framework", "identity-aligned goals", "goal setting", "how to set goals", "goal achievement", "identity goals", "effective goal setting"]}
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -45,7 +45,7 @@ export default function GoalSettingFrameworkArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Abdallah Chouaf", "عبدالله الشواف")}
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">{getText("Tamkinly Team", "فريق تمكينلي")}</Link>
               </span>
             </div>
           </div>

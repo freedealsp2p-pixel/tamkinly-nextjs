@@ -25,7 +25,7 @@ export default function MorningRoutineIdentityArticle() {
         slug="morning-routine-identity"
         datePublished="2026-03-12"
         dateModified="2026-03-12"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["morning routine for self improvement", "morning routine", "identity-based routine", "self improvement morning", "productive morning", "morning habits", "daily practice"]}
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -45,7 +45,7 @@ export default function MorningRoutineIdentityArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Abdallah Chouaf", "عبدالله الشواف")}
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">{getText("Tamkinly Team", "فريق تمكينلي")}</Link>
               </span>
             </div>
           </div>

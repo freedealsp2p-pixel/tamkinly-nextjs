@@ -25,7 +25,7 @@ export default function StopProcrastinatingIdentityShiftArticle() {
         slug="stop-procrastinating-identity-shift"
         datePublished="2026-03-20"
         dateModified="2026-03-20"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["how to stop procrastinating", "stop procrastinating", "identity shift", "overcome procrastination", "procrastination solution", "identity-based change", "procrastination identity"]}
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
@@ -45,7 +45,7 @@ export default function StopProcrastinatingIdentityShiftArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Abdallah Chouaf", "عبدالله الشواف")}
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">{getText("Tamkinly Team", "فريق تمكينلي")}</Link>
               </span>
             </div>
           </div>

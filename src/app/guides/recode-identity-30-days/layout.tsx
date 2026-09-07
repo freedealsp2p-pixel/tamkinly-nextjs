@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName: 'Tamkinly',
     type: 'article',
     publishedTime: '2026-02-15',
-    authors: ['Abdallah Chouaf'],
+    authors: ['Tamkinly Team'],
     images: [
       {
         url: 'https://tamkinly.com/guides/recode-identity-30-days/opengraph-image',

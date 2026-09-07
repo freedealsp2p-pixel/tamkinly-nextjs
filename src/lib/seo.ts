@@ -19,7 +19,7 @@ export const SITE_CONFIG = {
   url: 'https://tamkinly.com',
   ogImage: '/og-image.webp',
   twitterHandle: '@tamkinly',
-  author: 'Tamkinly',
+  author: 'Tamkinly Team',
   language: 'en',
   locale: 'en_US',
   localeAr: 'ar_SA',
@@ -431,6 +431,7 @@ export function generateArticleSchema({
     author: {
       '@type': 'Person',
       name: author,
+      ...(author === 'Tamkinly Team' ? { url: `${SITE_CONFIG.url}/blog/author/tamkinly-team` } : {}),
     },
     publisher: {
       '@type': 'Organization',

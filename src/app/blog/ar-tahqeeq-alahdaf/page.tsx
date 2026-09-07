@@ -25,7 +25,7 @@ function TahqeeqAlahdafArticleAR() {
         slug="ar-tahqeeq-alahdaf"
         datePublished="2026-03-15"
         dateModified="2026-03-15"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["تحقيق الأهداف", "كيف أحقق أهدافي", "تحديد الأهداف الشخصية", "خطة لتحقيق الأهداف", "goal achievement Arabic", "أهداف شخصية"]}
       />
     <article className="min-h-screen" dir="rtl">
@@ -48,7 +48,7 @@ function TahqeeqAlahdafArticleAR() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                عبدالله الشواف
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">فريق تمكينلي</Link>
               </span>
             </div>
           </div>
@@ -274,7 +274,7 @@ function TahqeeqAlahdafArticleEN() {
         slug="ar-tahqeeq-alahdaf"
         datePublished="2026-03-15"
         dateModified="2026-03-15"
-        author="Abdallah Chouaf"
+        author="Tamkinly Team"
         keywords={["goal achievement", "how to achieve your goals", "personal goal setting", "goal achievement plan", "تحقيق الأهداف", "personal goals"]}
       />
     <article className="min-h-screen" dir="ltr">
@@ -297,7 +297,7 @@ function TahqeeqAlahdafArticleEN() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Abdallah Chouaf
+                <Link href="/blog/author/tamkinly-team" className="hover:text-accent transition-colors">Tamkinly Team</Link>
               </span>
             </div>
           </div>
