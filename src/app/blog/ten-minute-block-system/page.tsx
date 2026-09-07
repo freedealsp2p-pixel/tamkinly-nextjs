@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Brain, Sparkles, Zap, Target, CheckCircle } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -314,6 +315,8 @@ export default function TenMinuteBlockSystemArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="ten-minute-block-system" />
+
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="daily" />
 

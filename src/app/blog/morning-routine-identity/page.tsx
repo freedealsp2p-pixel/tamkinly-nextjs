@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Zap, Target, TrendingUp, Brain, Sunrise, Calendar, AlarmClock, Coffee, Sun } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -319,6 +320,8 @@ export default function MorningRoutineIdentityArticle() {
           </div>
         </div>
       </section>
+      <ArticleReferences slug="morning-routine-identity" />
+
 
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="daily" />

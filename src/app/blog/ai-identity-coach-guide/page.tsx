@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Brain, MessageCircle, Target, Heart, Zap, CheckCircle2, Lock } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -440,6 +441,8 @@ export default function AIIdentityCoachGuideArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="ai-identity-coach-guide" />
+
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="coach" />
 

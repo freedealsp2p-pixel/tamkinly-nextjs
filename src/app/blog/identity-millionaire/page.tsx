@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, TrendingUp, DollarSign, Target, Award } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -228,6 +229,8 @@ export default function IdentityMillionaireArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="identity-millionaire" />
+
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="recode" />
 

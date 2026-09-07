@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Home, Building2, Users, CheckCircle, Settings, ArrowUpRight } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -314,6 +315,8 @@ export default function EnvironmentalAuditWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="environmental-audit-worksheet" />
+
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="free" />
 

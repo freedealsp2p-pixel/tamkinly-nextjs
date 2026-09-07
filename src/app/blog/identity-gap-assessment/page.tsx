@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Brain, Target, TrendingUp, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -322,6 +323,8 @@ export default function IdentityGapAssessmentArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="identity-gap-assessment" />
+
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="quiz" />
 

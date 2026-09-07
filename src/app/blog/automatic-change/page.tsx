@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Zap, Target, TrendingUp, Brain, RefreshCw } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -197,6 +198,8 @@ export default function AutomaticChangeArticle() {
           </div>
         </div>
       </section>
+      <ArticleReferences slug="automatic-change" />
+
 
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="recode" />

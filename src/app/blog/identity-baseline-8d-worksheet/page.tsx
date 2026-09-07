@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Target, Layers, Brain, Heart, CheckCircle, Activity } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -303,6 +304,8 @@ export default function IdentityBaseline8DWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="identity-baseline-8d-worksheet" />
+
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="recode" />
 

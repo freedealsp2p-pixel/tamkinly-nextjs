@@ -11,6 +11,7 @@ import { db } from '@/lib/db';
 import {
   getBlogArticleBySlug,
   smartPageTitle,
+  generateBlogArticleMetadata,
   getAllBlogArticleSlugs,
   BLOG_CATEGORIES,
 } from '@/lib/blog-articles';
@@ -72,57 +73,14 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     }
   } catch {}
 
-  // Fallback to hardcoded articles
+  // Fallback to hardcoded articles — locale-aware bilingual metadata
   const article = getBlogArticleBySlug(slug);
 
   if (!article) {
     notFound();
   }
 
-  const enUrl = `https://tamkinly.com/blog/${slug}`;
-  const arUrl = `https://tamkinly.com/ar/blog/${slug}`;
-  const fullUrl = isAr ? arUrl : enUrl;
-  const imageUrl = article.image
-    ? `https://tamkinly.com${article.image}`
-    : 'https://tamkinly.com/og-image.webp';
-
-  return {
-    title: smartPageTitle(article.title, ' | Tamkinly Blog'),
-    description: article.description,
-    keywords: article.keywords,
-    alternates: {
-      canonical: fullUrl,
-      languages: {
-        'en-US': enUrl,
-        'ar-SA': arUrl,
-        'x-default': enUrl,
-      },
-    },
-    openGraph: {
-      title: article.title,
-      description: article.description,
-      url: fullUrl,
-      siteName: 'Tamkinly',
-      type: 'article',
-      publishedTime: article.datePublished,
-      modifiedTime: article.dateModified,
-      authors: [article.author],
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: article.title }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: article.description,
-      site: '@tamkinly',
-      images: [imageUrl],
-    },
-    other: {
-      'article:published_time': article.datePublished,
-      'article:modified_time': article.dateModified,
-      'article:author': article.author,
-      'article:section': article.category,
-    },
-  };
+  return generateBlogArticleMetadata(slug, locale);
 }
 
 export async function generateStaticParams() {

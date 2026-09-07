@@ -486,10 +486,10 @@
     "tryFreeVersion": "Try Free Version",
     "dayGuarantee": "30-Day Guarantee",
     "instantAccess": "Instant Access",
-    "lifetimeUpdates": "Lifetime Updates",
+    "lifetimeUpdates": "Continuous Updates",
     "moneyBack": "Money-Back",
     "noQuestionsAsked": "No questions asked",
-    "lifetimeAccess": "Lifetime Access",
+    "lifetimeAccess": "Instant Access",
     "productNotFound": "Product Not Found",
     "productNotFoundDesc": "The product you're looking for doesn't exist.",
     "browseAllProducts": "Browse All Products",
@@ -628,8 +628,8 @@
           "Identity Baseline Worksheet",
           "Environmental Audit Template",
           "Digital + Print PDFs",
-          "Lifetime access",
-          "All future updates included"
+          "Instant access",
+          "All updates included while subscribed"
         ],
         "apps": {
           "manual": {
@@ -651,7 +651,7 @@
         },
         "includes": {
           "duration": "Duration",
-          "durationValue": "Lifetime",
+          "durationValue": "Monthly subscription",
           "appsAccess": "Apps Access",
           "appsValue": "4 Core Apps",
           "pdfDownloads": "PDF Downloads",
@@ -659,7 +659,7 @@
           "support": "Support",
           "email": "Email",
           "updates": "Updates",
-          "freeForever": "Free Forever"
+          "freeForever": "Always included"
         },
         "specs": {
           "format": "Format",
@@ -678,7 +678,7 @@
           },
           {
             "q": "How long do I have access?",
-            "a": "Lifetime! Purchase once, access forever, including all future updates."
+            "a": "For as long as your subscription is active — flexible monthly billing, cancel anytime. All updates are included while subscribed."
           },
           {
             "q": "Can I print the materials?",
@@ -757,7 +757,7 @@
         },
         "includes": {
           "duration": "Duration",
-          "durationValue": "Lifetime",
+          "durationValue": "Monthly subscription",
           "appsAccess": "Apps Access",
           "appsValue": "7 Apps",
           "pdfDownloads": "PDF Downloads",
@@ -765,7 +765,7 @@
           "support": "Support",
           "priorityEmail": "Priority Email",
           "updates": "Updates",
-          "freeForever": "Free Forever",
+          "freeForever": "Always included",
           "analytics": "Analytics",
           "yes": "Yes"
         },
@@ -917,7 +917,7 @@
     "heroAppsCount": "Interactive Apps",
     "trustMoneyBack": "30-Day Money Back",
     "trustInstantAccess": "Instant Access",
-    "trustLifetimeAccess": "Lifetime Access",
+    "trustLifetimeAccess": "Instant Access",
     "free": "Free",
     "trial": "Trial",
     "basic": "BASIC",
@@ -1003,7 +1003,7 @@
           "Identity Baseline Worksheet",
           "Environmental Audit",
           "Digital + Print PDFs",
-          "Lifetime access"
+          "Instant access"
         ],
         "highlights": [
           "Most popular",
@@ -1340,8 +1340,8 @@
         "description": "Full refund within 30 days, no questions asked"
       },
       {
-        "title": "Lifetime Updates",
-        "description": "Get all future product updates for free"
+        "title": "Continuous Updates",
+        "description": "Get all product updates while your subscription is active"
       }
     ],
     "categories": [
@@ -1384,7 +1384,7 @@
         "questions": [
           {
             "q": "How long does my access last?",
-            "a": "Your access is lifetime! Once you purchase a product, you can access it forever through our web application. This includes any updates or improvements we make to the product."
+            "a": "It depends on your product: core products are monthly subscriptions — your access stays active for as long as your subscription is active, and you can cancel anytime. Specialized recovery protocols ($99) are one-time purchases with lifetime access."
           },
           {
             "q": "Can I access my products on multiple devices?",
@@ -1723,7 +1723,7 @@
     "shoppingCart": "Shopping Cart",
     "itemCount": "{count} item(s) in your cart",
     "clearCart": "Clear Cart",
-    "digitalProductLifetime": "Digital Product • Lifetime Access",
+    "digitalProductLifetime": "Digital Product • Instant Access",
     "orderSummary": "Order Summary",
     "tax": "Tax",
     "total": "Total",
@@ -1790,7 +1790,7 @@
     "youSave": "You Save",
     "instantAccessAfter": "Instant access after payment",
     "accessCodeSent": "Access code sent via email",
-    "lifetimeAccess": "Lifetime access",
+    "lifetimeAccess": "Instant access",
     "loadingCheckout": "Loading checkout...",
     "backToProduct": "Back to Product",
     "backToCart": "Back to Cart",
@@ -2200,7 +2200,7 @@
     "youMay": "You May",
     "youMay1": "Use products for personal use",
     "youMay2": "Print for personal use",
-    "youMay3": "Access updates forever",
+    "youMay3": "Access updates while your subscription is active",
     "youMayNot": "You May Not",
     "youMayNot1": "Share access codes",
     "youMayNot2": "Resell or redistribute",

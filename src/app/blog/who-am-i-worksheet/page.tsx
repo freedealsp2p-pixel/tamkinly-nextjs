@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Target, Users, Heart, Lightbulb, CheckCircle } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -268,6 +269,8 @@ export default function WhoAmIWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="who-am-i-worksheet" />
+
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="worksheet" />
 

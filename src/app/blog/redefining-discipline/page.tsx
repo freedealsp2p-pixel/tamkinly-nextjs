@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Heart, BookOpen, Dumbbell, Droplets, Hammer, Brain, Wind } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -179,6 +180,8 @@ export default function RedefiningDisciplineArticle() {
           </div>
         </div>
       </section>
+      <ArticleReferences slug="redefining-discipline" />
+
 
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="recode" />

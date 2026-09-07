@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, TreePine, Eye, Timer, TrendingUp, Shield, Layers } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -112,7 +113,7 @@ export default function AndTheBambooKeptGrowingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The bamboo wasn't doing nothing for five years. It was building a root system so vast and so deep that when the time came, it could sustain explosive growth that no other plant could match. Those 90 feet in six weeks weren't a miracle — they were the inevitable result of five years of underground preparation that nobody could see.",
-                "الخيزران لم يكن عاطلاً لخمس سنوات. كان يبني نظام جذور هائل وعميق لدرجة أنه عندما حان الوقت، استطاع أن ي sustaining نمواً انفجارياً لا يطاقله نبات آخر. تلك الـ ٩٠ قدماً في ستة أسابيع لم تكن معجزة — كانت النتيجة الحتمية لخمس سنوات من التحضير تحت الأرض لم يستطع أحد أن يراها."
+                "الخيزران لم يكن عاطلاً لخمس سنوات. كان يبني نظام جذور هائل وعميق لدرجة أنه عندما حان الوقت، استطاع أن يحقق نمواً انفجارياً لا يُضاهيه نبات آخر. تلك الـ ٩٠ قدماً في ستة أسابيع لم تكن معجزة — كانت النتيجة الحتمية لخمس سنوات من التحضير تحت الأرض لم يستطع أحد أن يراها."
               )}
             </p>
 
@@ -368,6 +369,8 @@ export default function AndTheBambooKeptGrowingArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="and-the-bamboo-kept-growing" />
+
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="quiz" />
 

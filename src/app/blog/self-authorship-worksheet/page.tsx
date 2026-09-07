@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, BookOpen, Compass, Shield, CheckCircle, ArrowUpRight } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -278,6 +279,8 @@ export default function SelfAuthorshipWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="self-authorship-worksheet" />
+
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="coach" />
 

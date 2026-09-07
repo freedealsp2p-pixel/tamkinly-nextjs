@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Zap, Target, TrendingUp, Brain, RefreshCw, Shield, AlertTriangle, Timer } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -274,6 +275,8 @@ export default function StopProcrastinatingIdentityShiftArticle() {
           </div>
         </div>
       </section>
+      <ArticleReferences slug="stop-procrastinating-identity-shift" />
+
 
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="coach" />

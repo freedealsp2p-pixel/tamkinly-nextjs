@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Target, TrendingUp, Brain, Timer, ArrowLeft } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
 
-export default function IdaratAlwaqtArticle() {
+function IdaratAlwaqtArticleAR() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
@@ -124,7 +125,7 @@ export default function IdaratAlwaqtArticle() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              عندما تماطل في كتابة تقرير، ليس لأنك لا تعرف كيف تنظم وقتك — بل لأن هويتك الحالية لا تتضمن "شخص يكتب تقارير بسهولة". المهمة تبدو غريبة عنك، ودماغك يقاومها كأي تهديد للهوية. لذلك تلتجئ إلى أنشئة مألوفة: التصفح، التنظيف، أي شيء تعرفه هويتك الحالية أنه "أنت".
+              عندما تماطل في كتابة تقرير، ليس لأنك لا تعرف كيف تنظم وقتك — بل لأن هويتك الحالية لا تتضمن "شخص يكتب تقارير بسهولة". المهمة تبدو غريبة عنك، ودماغك يقاومها كأي تهديد للهوية. لذلك تلتجئ إلى أنشطة مألوفة: التصفح، التنظيف، أي شيء تعرفه هويتك الحالية أنه "أنت".
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -208,7 +209,7 @@ export default function IdaratAlwaqtArticle() {
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              المماطلة ليست مشكلة تُحل بتقنيات أفضل — بل هيية تُستبدل بهوية أقوى. عندما تقول "أنا شخص يبدأ فوراً" بدلاً من "سأحاول ألا أماطل"، فأنت لا تغيّر كلماتك — بل تغيّر برنامجك العصبي. الهوية الجديدة تجعل البدء فوراً طبيعياً والمماطلة غير مريحة.
+              المماطلة ليست مشكلة تُحل بتقنيات أفضل — بل هوية تُستبدل بهوية أقوى. عندما تقول "أنا شخص يبدأ فوراً" بدلاً من "سأحاول ألا أماطل"، فأنت لا تغيّر كلماتك — بل تغيّر برنامجك العصبي. الهوية الجديدة تجعل البدء فوراً طبيعياً والمماطلة غير مريحة.
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -227,6 +228,8 @@ export default function IdaratAlwaqtArticle() {
           </div>
         </div>
       </section>
+      <ArticleReferences slug="ar-idarat-alwaqt" />
+
 
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="daily" />
@@ -259,6 +262,261 @@ export default function IdaratAlwaqtArticle() {
         </div>
       </section>
             <BlogConversionSection />
+      </article>
+    </>
+  );
+}
+
+export default function IdaratAlwaqtArticle() {
+  const { locale } = useLocale();
+  return locale === 'ar' ? <IdaratAlwaqtArticleAR /> : <IdaratAlwaqtArticleEN />;
+}
+
+function IdaratAlwaqtArticleEN() {
+  return (
+    <>
+      <BlogArticleJsonLd
+        headline="Real Time Management: Not Doing More, But Doing What Matters"
+        description="Discover the truth about time management. It is not doing more — it is doing what matters. How identity-based time management transforms your day."
+        slug="ar-idarat-alwaqt"
+        datePublished="2026-03-29"
+        dateModified="2026-03-29"
+        author="Abdallah Chouaf"
+        keywords={["time management", "daily time organization", "stop procrastinating", "إدارة الوقت", "productivity", "time organization"]}
+      />
+    <article className="min-h-screen" dir="ltr">
+      <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <Badge variant="outline" className="mb-4 px-4 py-2 border-accent/30 text-accent bg-accent/10">
+              Time Management
+            </Badge>
+            <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
+              Real Time Management: Not Doing More, But Doing What Matters
+            </h1>
+            <p className="text-accent text-lg mb-6" dir="rtl">
+              إدارة الوقت الحقيقية: ليس أكثر إنجازاً بل إنجاز الأهم
+            </p>
+            <div className="flex items-center gap-6 text-slate-400 text-sm">
+              <span className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                12 min read
+              </span>
+              <span className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                Abdallah Chouaf
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto prose prose-lg">
+
+            <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
+              Every time management tip you have ever read told you how to do more. But the real question is not "how do I do more?" — it is "how do I do what actually matters?". Real time management is not a productivity technique — it is an identity matter. Because who you are determines what you consider important, and what you consider important determines how you spend your time.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              The problem with most time management advice is that it treats symptoms, not the disease. It tells you about inbox zero, smart to-do lists, and Pomodoro techniques. But these tools do not solve the real problem — because the problem is not organizing your time; it is choosing what deserves your time. And you do not choose what deserves your time based on a schedule — you choose based on your identity.
+            </p>
+
+            <div className="bg-accent/5 border-l-4 border-accent p-6 my-8 rounded-r-lg">
+              <p className="text-slate-700 italic">
+                You cannot manage your time better until you know who you are. Because who you are determines what you consider important, and what you consider important determines how you spend your time. Real time management starts from within.
+              </p>
+            </div>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              The Productivity Trap: Why "More" Is Not "Better"
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Modern productivity culture sells you a dangerous idea: that value lies in the quantity of what you accomplish. "Get more done in less time!" — this is the slogan of every productivity app and every time management book. But this slogan hides a destructive truth: you can be extremely productive at things that never mattered.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Imagine spending an entire day completing small tasks: you organized your desk, replied to every message, updated your lists, and finished administrative chores. At the end of the day, you feel productive — but did you actually move toward your real goals? Did you get closer to the person you want to become? The answer is usually: no.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              This is the "productivity trap" — the feeling of accomplishment without real progress. The reason is obvious: you completed many things, but none of them align with your target identity. The person who wants to become a writer spends their time organizing notes instead of writing. The person who wants to become an entrepreneur spends their time reading articles about entrepreneurship instead of building their project. Productivity without identity alignment is just wasted energy.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 my-10">
+              <Card className="border-0 shadow-sm bg-red-50">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-red-800 mb-3">❌ Traditional Time Management</h3>
+                  <ul className="text-sm text-slate-600 space-y-2">
+                    <li>• Do more in less time</li>
+                    <li>• Divide the day into time blocks</li>
+                    <li>• Endless to-do lists</li>
+                    <li>• Guilt when falling behind</li>
+                    <li>• Productivity as an end in itself</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card className="border-0 shadow-sm bg-green-50">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-green-800 mb-3">✅ Identity-Based Time Management</h3>
+                  <ul className="text-sm text-slate-600 space-y-2">
+                    <li>• Do what matters based on your identity</li>
+                    <li>• Align time with values and goals</li>
+                    <li>• Specific tasks that express who you are</li>
+                    <li>• Satisfaction with your choices</li>
+                    <li>• Productivity as an expression of identity</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              Procrastination Is Not a Time Problem
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              The most misunderstood aspect of time management is procrastination. Most people believe procrastination is an organizational problem — "if I organized my time better, I would not procrastinate." But research shows procrastination is not a time problem — it is an emotional and identity problem. We procrastinate because the task in front of us makes us uncomfortable — and that discomfort stems from a gap between the task and our identity.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              When you procrastinate on writing a report, it is not because you do not know how to organize your time — it is because your current identity does not include "someone who writes reports easily." The task feels foreign to you, and your brain resists it as any threat to identity. So you retreat to familiar activities: browsing, cleaning, anything your current identity recognizes as "you."
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              The solution is not better time organizing techniques — it is shrinking the gap between your identity and the task. When you become "someone who writes easily," you will not need a technique to beat procrastination — because writing will become natural. As we explain in the <Link href="/blog/ten-minute-block-system" className="text-accent hover:underline">10-minute block system</Link>, starting with a very short period helps you overcome the initial resistance barrier and encourages the brain to adopt the new behavior.
+            </p>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              The Identity-Based Time Management System
+            </h2>
+
+            <div className="bg-primary/5 p-8 rounded-xl my-10">
+              <h3 className="font-semibold text-primary mb-4">
+                The Three Steps to Managing Your Time from Within
+              </h3>
+              <ol className="space-y-4 text-slate-600">
+                <li className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
+                  <span><strong>Define "what matters" based on your identity:</strong> ask yourself: "if I were the person I want to become, what is the most important thing I would do today?" This is not a to-do list — it is an identity question. The answer reveals what truly deserves your time.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
+                  <span><strong>Start with what matters using time blocks:</strong> dedicate the first block of your day (or at least the first 10 minutes) to the most important task that aligns with your identity. Use the <Link href="/apps/daily-planner" className="text-accent hover:underline">Daily Planner</Link> to design your day around what matters.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
+                  <span><strong>Evaluate your day by identity, not productivity:</strong> at the end of the day, do not ask "how much did I get done?" — ask "did I live today as the person I want to become?" This question changes the standard of success from quantity to alignment.</span>
+                </li>
+              </ol>
+            </div>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              Daily Time Organization: 3 Real Steps
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Instead of complex systems of time blocks and multiple apps, here is a simple identity-based system:
+            </p>
+
+            <div className="space-y-6 my-8">
+              <div className="bg-slate-50 p-6 rounded-xl">
+                <h3 className="font-semibold text-primary mb-2 flex items-center gap-2">
+                  <Timer className="h-5 w-5 text-accent" />
+                  Morning: The Identity Block (30-60 minutes)
+                </h3>
+                <p className="text-slate-600">The first hour of your day is dedicated to the most important activity that strengthens your target identity. No emails, no social media, no one else&apos;s tasks. This time is for you and your identity. If you want to become a writer, write. If you want to become an athlete, train. Starting with identity ensures the rest of your day aligns with it.</p>
+              </div>
+              <div className="bg-slate-50 p-6 rounded-xl">
+                <h3 className="font-semibold text-primary mb-2 flex items-center gap-2">
+                  <Target className="h-5 w-5 text-accent" />
+                  Midday: Alignment Tasks
+                </h3>
+                <p className="text-slate-600">Order your tasks by how well they align with your target identity — not by urgency or ease. Tasks that strengthen your identity come first, even if they are not the most pressing. Because what is urgent is not always important — and what is important always strengthens your identity.</p>
+              </div>
+              <div className="bg-slate-50 p-6 rounded-xl">
+                <h3 className="font-semibold text-primary mb-2 flex items-center gap-2">
+                  <Brain className="h-5 w-5 text-accent" />
+                  Evening: The Identity Review
+                </h3>
+                <p className="text-slate-600">Before sleeping, spend 5 minutes reviewing your day: "Did I live today as the person I want to become? Which action strengthened my identity most? What can be improved tomorrow?" This review works as a tool for strengthening identity and correcting course — not as a tool for self-blame.</p>
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              Why Productivity Apps Alone Do Not Work
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              You have probably tried dozens of time management and productivity apps. Yet you still feel your time is slipping away. The reason is not the apps — it is the assumption they were built on: that you already know what deserves your time. But do you? Have you clearly defined who you are and what truly matters to you?
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Apps are tools — and tools do not set goals. A tidy kitchen does not decide what to cook. A paintbrush does not decide what to paint. And a productivity app does not decide what deserves your time. That decision comes from within — from your identity. When you know who you are, you do not need an app to tell you what to do — you know. Apps become tools for executing your vision, not substitutes for it.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              That is why Tamkinly&apos;s <Link href="/apps/daily-planner" className="text-accent hover:underline">Daily Planner</Link> was designed differently: it does not start with tasks — it starts with identity. It first asks "who do you want to be today?" then helps you choose the tasks that express this identity. This order — identity first, then tasks — is what makes it a real time management tool rather than just another to-do list.
+            </p>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              From Procrastination to Focus: An Identity Journey
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Procrastination is not a problem solved by better techniques — it is an identity replaced by a stronger one. When you say "I am someone who starts immediately" instead of "I will try not to procrastinate," you are not changing your words — you are changing your neural program. The new identity makes starting immediately natural and procrastination uncomfortable.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              In the Arab heritage, Ibn Qayyim said: wasting time is more severe than death, for wasting time cuts you off from purpose and the eternal, while death merely cuts you off from this world and its people. This is not just a sermon — it is a deep understanding of time as the most precious resource. But time management does not mean filling every minute with activity — it means spending time on what deserves it, based on who you are and what you value.
+            </p>
+
+            <div className="flex items-center gap-2 text-accent mt-12 mb-8">
+              <TrendingUp className="h-5 w-5" />
+              <span className="font-semibold">The Bottom Line</span>
+            </div>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Real time management is not a technique — it is identity. When you know who you are, you automatically know what deserves your time. And when you know what deserves your time, you do not need apps and techniques to force yourself — because you simply choose what aligns with who you are. Stop trying to do more, and start doing what matters. And the only way to know what matters is to know who you are.
+            </p>
+
+          </div>
+        </div>
+      </section>
+      <ArticleReferences slug="ar-idarat-alwaqt" />
+
+      <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
+      <BlogArticleCTA ctaType="daily" />
+
+      <ArticleNavigation currentSlug="ar-idarat-alwaqt" />
+
+      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
+              Start Managing Your Time for Real
+            </h2>
+            <p className="text-slate-300 mb-6">
+              Identity-based tools for doing what truly matters
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/apps/daily-planner">
+                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
+                  Daily Planner
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/products/premium">
+                <Button variant="white" size="lg" className="px-8 font-semibold">
+                  Personal Planner
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <BlogConversionSection />
       </article>
     </>
   );

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Eye, Heart, Shield, CheckCircle, ArrowUpRight, Brain } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -344,6 +345,8 @@ export default function ERQEmotionalRegulationWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="erq-emotional-regulation-worksheet" />
+
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="daily" />
 

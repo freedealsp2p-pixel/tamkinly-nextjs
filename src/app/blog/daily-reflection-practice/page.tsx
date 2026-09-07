@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sun, BookOpen, Brain, Sparkles, Calendar, CheckCircle2, PenLine } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -378,6 +379,8 @@ export default function DailyReflectionPracticeArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="daily-reflection-practice" />
+
       <MidArticleUpgrade promoteTier="BASIC" variant="minimal" />
       <BlogArticleCTA ctaType="daily" />
 

@@ -10,6 +10,7 @@ import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 
 export default function IdentityRecodeSystemGuideArticle() {
   const { locale } = useLocale();
@@ -444,6 +445,8 @@ export default function IdentityRecodeSystemGuideArticle() {
           </div>
         </div>
       </section>
+      <ArticleReferences slug="identity-recode-system-guide" />
+
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="recode" />
 

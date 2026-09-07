@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Heart, ShieldCheck, Smartphone, Lightbulb, TrendingUp, Users, MessageCircle } from "lucide-react";
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
 
-export default function CharismaArticle() {
+function CharismaArticleAR() {
   const { locale } = useLocale();
 
   return (
@@ -119,6 +120,8 @@ export default function CharismaArticle() {
                 </CardContent>
               </Card>
             </div>
+      <ArticleReferences slug="ar-karizma-al-tatheer" />
+
 
             <MidArticleUpgrade promoteTier="PREMIUM" variant="default" />
 
@@ -209,7 +212,7 @@ export default function CharismaArticle() {
               ابدأ ببناء الكاريزما من الداخل
             </h2>
             <p className="text-slate-300 mb-6">
-              الكاريزma تبدأ بمعرفة قيمك ووضوح هويتك. ابدأ بأداة توضيح القيم المجانية، ثم عززها بالتأمل اليومي.
+              الكاريزما تبدأ بمعرفة قيمك ووضوح هويتك. ابدأ بأداة توضيح القيم المجانية، ثم عززها بالتأمل اليومي.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/apps/values-clarification">
@@ -221,6 +224,232 @@ export default function CharismaArticle() {
               <Link href="/apps/daily-reflection">
                 <Button variant="white" size="lg" className="px-8 font-semibold">
                   ابدأ التأمل اليومي
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <BlogConversionSection />
+    </article>
+    </>
+  );
+}
+
+export default function CharismaArticle() {
+  const { locale } = useLocale();
+  return locale === 'ar' ? <CharismaArticleAR /> : <CharismaArticleEN />;
+}
+
+function CharismaArticleEN() {
+  return (
+    <>
+      <BlogArticleJsonLd
+        headline="Charisma of Influence: How to Become the Person Everyone Loves Being Around"
+        description="Charisma is not a gift you are born with — it is a set of learnable behaviors. Four scientific secrets to building presence and positive influence."
+        slug="ar-karizma-al-tatheer"
+        datePublished="2026-07-12"
+        dateModified="2026-07-12"
+        author="Abdallah Chouaf"
+        keywords={["charisma", "influence", "social attraction", "كاريزما", "building relationships", "presence", "positive influence"]}
+      />
+    <article className="min-h-screen" dir="ltr">
+      <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <Badge variant="outline" className="mb-4 px-4 py-2 border-accent/30 text-accent bg-accent/10">
+              Relationships &amp; Influence
+            </Badge>
+            <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
+              Charisma of Influence: How to Become the Person Everyone Loves Being Around
+            </h1>
+            <p className="text-accent text-lg mb-6" dir="rtl">
+              كاريزما التأثير: كيف تصبح الشخص الذي يعشق الجميع التواجد حوله؟
+            </p>
+            <div className="flex items-center gap-6 text-slate-400 text-sm">
+              <span className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                10 min read
+              </span>
+              <span className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                Abdallah Chouaf
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto prose prose-lg">
+
+            <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
+              We all know that person who fills a room with contagious positive energy the moment they walk in — we feel comfortable around them and always want to stay close. Is this gift something people are born with? Scientific research says no; magnetic influence is a set of simple, consistent behaviors you can master to become a real influence in your circle. Charisma is not a mysterious gift — it is a neurological and social skill that can be trained like any other.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              For decades, researchers assumed charisma was innate — either you have it or you don&apos;t. But recent laboratory studies in social psychology revealed that what we call "charisma" is actually a combination of four measurable, trainable behaviors. The people we describe as influential are not smarter or more attractive than others — they have mastered a particular language of communication that makes others feel important. This language can be learned, and these behaviors can be trained until they become part of your social identity.
+            </p>
+
+            <div className="bg-accent/5 border-l-4 border-accent p-6 my-8 rounded-r-lg">
+              <p className="text-slate-700 italic">
+                Charisma is not what you say — it is how you make others feel about themselves in your presence. Real influencers do not try to look great — they try to make the people around them feel great.
+              </p>
+            </div>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              If you want to build strong relationships and leave an unforgettable mark on people, here are the four secrets of presence energy. These are not theoretical tips — they are behaviors backed by social psychology research that can be applied immediately in your daily life. Each secret builds on the one before it, and together they form what researchers call "emotional attraction" — the ability to create a feeling of safety and importance in those around you.
+            </p>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              1. Genuine Interest and Keeping Promises
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Real influencers do not care about looking great — they focus on making others feel great. They genuinely care, and if they say they will do something, they commit to it and deliver it. Reliability is the foundation of charisma. When people know you keep your word, they open their hearts to you before their minds. Research shows the human brain detects dishonesty in fractions of a second, even before your awareness registers it. For this reason, genuine interest cannot be faked in the long run — people feel the difference between someone who truly cares and someone pretending to.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Keeping small promises is the gateway to big trust. If you say "I will call you tomorrow," call. If you say "I will send you the file," send it. These small promises may seem trivial, but they accumulate in others&apos; subconscious as evidence of your reliability. After months of consistent commitment to these small promises, you acquire in others&apos; eyes an aura of seriousness that cannot be bought or faked. People forget what you said, but they never forget what you did when you promised.
+            </p>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              2. Leaving the Victim Role and Focusing on Solutions
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Nobody likes being around someone who constantly complains and displays problems without end. Attractive personalities do not come to you with lists of crises — they always focus their energy on the most important question: what can I do right now? How can we get past this? Practical positivity is a human magnet. This does not mean hiding your feelings or pretending to be happy — it means refusing to let your problems become your identity. The person who knows the solution looks confident, and confidence is naturally attractive.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Leaving the victim role is an internal decision before it is an external behavior. The victim waits for someone to come and rescue them, while the influential person takes responsibility — even partially — for their situation and starts moving. This shift in mindset changes your entire energy, and people feel it without you uttering a word. When you stop playing the victim, people begin to see you as a strong, stable person, and they are naturally drawn to you because you represent a safe haven away from drama and frustration.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 my-10">
+              <Card className="border-0 shadow-sm">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                    <Heart className="h-6 w-6 text-accent" />
+                  </div>
+                  <h3 className="font-semibold text-primary mb-2">Genuine Interest</h3>
+                  <p className="text-sm text-slate-600">Make others feel great instead of trying to look great. Reliability is the foundation of charisma.</p>
+                </CardContent>
+              </Card>
+              <Card className="border-0 shadow-sm">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                    <ShieldCheck className="h-6 w-6 text-accent" />
+                  </div>
+                  <h3 className="font-semibold text-primary mb-2">Focus on Solutions</h3>
+                  <p className="text-sm text-slate-600">Practical positivity is a magnet. Ask: what can I do right now? Instead of: why did this happen to me?</p>
+                </CardContent>
+              </Card>
+            </div>
+
+      <ArticleReferences slug="ar-karizma-al-tatheer" />
+
+      <MidArticleUpgrade promoteTier="PREMIUM" variant="default" />
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              3. Full Presence (Put Your Phone Away!)
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              In the age of digital distractions, giving someone your full attention has become the most precious gift you can offer. When you talk to someone, be present with your whole being, put your phone aside, and listen with your eyes and your mind. This presence sends a hidden message to the other person: you matter to me. In a world where everyone competes for our attention, full attention becomes a rare and precious currency. Whoever gives it to others appears royal in their eyes, because they give them what most people do not.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Full presence is not just putting away the phone — it is a mental state. It means listening to understand, not to reply. Noticing the other person&apos;s facial expressions and body language, not just their words. Asking follow-up questions that show you understood and cared. Research shows the average time a person waits before interrupting another is only 17 seconds — imagine the impact of that on your relationships. The person who truly listens — not just waiting for their turn to speak — acquires an aura of depth and wisdom in others&apos; eyes.
+            </p>
+
+            <div className="bg-accent/5 border-l-4 border-accent p-6 my-8 rounded-r-lg">
+              <p className="text-slate-700 italic">
+                In a world where everyone competes for our attention, full attention becomes a rare and precious currency. Whoever gives it to others appears royal in their eyes.
+              </p>
+            </div>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              4. Intellectual Openness and Validating Others&apos; Feelings
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              The influential person does not attack opposing opinions — they listen with flexibility and openness, especially to those who disagree with them. Even if you do not agree with the idea, use phrases like: "this is a really interesting perspective, I see where you are coming from." Validating others&apos; feelings and respecting their opinions builds bridges of trust that cannot be torn down. This behavior is so rare that it becomes your personal signature. Most people wait for their chance to attack the opposing view — so when they find someone who listens respectfully, they are strongly drawn to them.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              Intellectual openness does not mean abandoning your principles — it means respecting the other&apos;s right to their opinion. The difference between the influential person and others is that the influencer respects the person even when disagreeing with their idea. This comes from deep inner security — a person who feels threatened by every opposing opinion is a person unsure of their position. The influencer listens calmly, knowing that truth does not collapse just because another opinion was heard. This inner security automatically translates into charisma that cannot be faked.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 my-10">
+              <Card className="border-0 shadow-sm">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                    <Smartphone className="h-6 w-6 text-accent" />
+                  </div>
+                  <h3 className="font-semibold text-primary mb-2">Full Presence</h3>
+                  <p className="text-sm text-slate-600">Put your phone away. Listen to understand, not to reply. Full attention is the most precious gift in the age of distractions.</p>
+                </CardContent>
+              </Card>
+              <Card className="border-0 shadow-sm">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                    <Lightbulb className="h-6 w-6 text-accent" />
+                  </div>
+                  <h3 className="font-semibold text-primary mb-2">Intellectual Openness</h3>
+                  <p className="text-sm text-slate-600">Respect the opposing view. Validating others&apos; feelings builds bridges of trust that never fall.</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
+              Charisma Starts from Within
+            </h2>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              What unites these four secrets is that they all flow from deep inner security. You cannot give others your full attention while you are distracted by your own desires and fears. You cannot respect the opposing opinion while feeling internally threatened. Therefore, building charisma starts with building your relationship with yourself — knowing your values, clarifying your identity, building an inner confidence that does not waver. This is why values clarification tools and daily reflection are so powerful in indirectly improving social relationships.
+            </p>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              When you know who you are and what matters to you, you stop needing to prove yourself to others. And only then can you honestly give them your full attention. This is the paradox: the less you care about proving yourself, the more influence you have over others. People are drawn to those who do not need them for self-validation, because they represent psychological safety. Therefore, the shortest path to building charisma is not learning social techniques — it is building a healthy relationship with yourself first.
+            </p>
+
+            <div className="flex items-center gap-2 text-accent mt-12 mb-8">
+              <TrendingUp className="h-5 w-5" />
+              <span className="font-semibold">Always Remember</span>
+            </div>
+
+            <p className="text-slate-600 leading-relaxed mb-6">
+              People may forget what you said, and may forget what you did, but they will never forget how you made them feel in your presence. This is the final wisdom in the art of influence — the mark you leave is not in your information or achievements, but in the feeling you plant in the hearts of those you meet. Start today by practicing one of the four secrets, and you will notice the difference in how people receive you within weeks. Charisma is not a gift — it is a skill. And skills are built through consistent practice.
+            </p>
+
+          </div>
+        </div>
+      </section>
+
+      <BlogArticleCTA ctaType="values" />
+
+      <ArticleNavigation currentSlug="ar-karizma-al-tatheer" />
+
+      <section className="py-16 bg-gradient-to-br from-primary via-primary to-slate-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
+              Start Building Charisma from Within
+            </h2>
+            <p className="text-slate-300 mb-6">
+              Charisma starts with knowing your values and having a clear identity. Begin with the free values clarification tool, then strengthen it with daily reflection.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/apps/values-clarification">
+                <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">
+                  Discover Your Core Values
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/apps/daily-reflection">
+                <Button variant="white" size="lg" className="px-8 font-semibold">
+                  Start Daily Reflection
                 </Button>
               </Link>
             </div>

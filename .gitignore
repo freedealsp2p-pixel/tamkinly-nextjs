@@ -58,3 +58,6 @@ tamkinly.db
 *.db
 .next/
 logs/
+
+# build logs
+*.log

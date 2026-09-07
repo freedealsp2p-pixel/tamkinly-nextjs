@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Target, Zap, RefreshCw, CheckCircle, ArrowUpRight } from "lucide-react";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
+import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
@@ -225,7 +226,7 @@ export default function IdentityBasedHabitsWorksheetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Traditional goal-setting focuses on outcomes: \"I want to run a marathon.\" Identity-based habits focus on the person behind the goal: \"I am a runner.\" This distinction has profound implications for behavior change.",
-                "تركز設定 الأهداف التقليدية على النتائج: \"أريد أن أركض ماراثوناً.\" العادات القائمة على الهوية تركز على الشخص وراء الهدف: \"أنا عدّاء.\" هذا التمييز له آثار عميقة على تغيير السلوك."
+                "تركّز الأهداف التقليدية على النتائج: \"أريد أن أركض ماراثوناً.\" العادات القائمة على الهوية تركز على الشخص وراء الهدف: \"أنا عدّاء.\" هذا التمييز له آثار عميقة على تغيير السلوك."
               )}
             </p>
 
@@ -323,6 +324,8 @@ export default function IdentityBasedHabitsWorksheetArticle() {
       </section>
 
       {/* Article Navigation */}
+      <ArticleReferences slug="identity-based-habits-worksheet" />
+
       <MidArticleUpgrade promoteTier="MASTERY" variant="minimal" />
       <BlogArticleCTA ctaType="recode" />
 

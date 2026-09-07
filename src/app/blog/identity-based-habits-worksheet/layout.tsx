@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { generateBlogArticleMetadata, getBlogArticleBySlug } from '@/lib/blog-articles';
 import { getLocale } from '@/lib/get-locale';
-import { BlogArticleJsonLd } from '@/components/seo/JsonLd';
+import { generateBlogArticleMetadata } from '@/lib/blog-articles';
+import FAQPageSchema from '@/components/blog/FAQPageSchema';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -13,21 +13,9 @@ export default function BlogArticleLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const article = getBlogArticleBySlug('identity-based-habits-worksheet');
-
   return (
     <>
-      {article && (
-        <BlogArticleJsonLd
-          headline={article.title}
-          description={article.description}
-          slug={article.slug}
-          datePublished={article.datePublished}
-          dateModified={article.dateModified}
-          author={article.author}
-          keywords={article.keywords}
-        />
-      )}
+      <FAQPageSchema slug='identity-based-habits-worksheet' />
       {children}
     </>
   );

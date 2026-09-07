@@ -269,7 +269,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'identity-millionaire',
     title: 'The Identity Millionaire: Building Wealth Through Self-Transformation',
-    titleAr: 'المليونير الهوية: بناء الثروة من خلال التحول الذاتي',
+    titleAr: 'مليونير الهوية: بناء الثروة من خلال التحول الذاتي',
     description: 'True wealth starts with who you become, not what you acquire. The three stages of identity-based success.',
     descriptionAr: 'الثروة الحقيقية تبدأ بمن تصبح، لا بما تكتسبه. المراحل الثلاث للنجاح المبني على الهوية.',
     category: 'Wealth & Identity',
@@ -424,7 +424,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     title: 'And the Bamboo Kept Growing: Why Your Invisible Work Matters',
     titleAr: 'والخيزران استمر بالنمو: لماذا يهم عملك غير المرئي',
     description: 'The Chinese bamboo tree grows nothing for five years, then explodes 90 feet in six weeks. Your identity transformation follows the same law of invisible growth.',
-    descriptionAr: 'شجرة الخيزران الصينية لا تنمو شيئا لخمس سنوات ثم تنفجر 90 قدما في ستة أسابيع. تحول هويتك يتبع نفس القانون.',
+    descriptionAr: 'شجرة الخيزران الصينية لا تنمو شيئاً لخمس سنوات ثم تنفجر ٩٠ قدماً في ستة أسابيع. تحول هويتك يتبع نفس القانون.',
     category: 'Identity Shift',
     categoryAr: 'تحول الهوية',
     readTime: '9 min read',
@@ -439,7 +439,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'automatic-change',
     title: 'Automatic Change: How to Outsmart Your Brain and Make Positive Habits Stick',
-    titleAr: 'التغيير التلقائي: كيف تتفوق على دماغك وتجعل العادات الإيجابية تلقائية',
+    titleAr: 'التغيير التلقائي: كيف تجعل عاداتك الإيجابية تلقائية',
     description: 'Your brain is a prediction engine. The real secret to automatic change is understanding the predictive language of your nervous system — not willpower.',
     descriptionAr: 'دماغك محرك تنبؤ. المماطلة ليست كسلا. الإرادة ليست الجواب. السر الحقيقي في فهم اللغة التنبؤية لجهازك العصبي.',
     category: 'Identity Shift',
@@ -490,7 +490,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'vagus-nerve-breathing',
     title: 'The Vagus Nerve Protocol: How 4-2-8-2 Breathing Rewires Your Stress Response',
-    titleAr: 'بروتوكول العصب المبهم: كيف يعيد التنفس 4-2-8-2 تشكيل استجابتك للتوتر',
+    titleAr: 'بروتوكول العصب المبهم: تنفس 4-2-8-2 ضد التوتر',
     description: 'The Vagus Nerve is your master safety switch. The 4-2-8-2 breathing technique uses biomechanics to send immediate neural signals demanding calm.',
     descriptionAr: 'العصب المبهم هو مفتاح الأمان الرئيسي الذي يحكم الانتقال من القتال أو الهرب إلى الراحة والهضم.',
     category: 'Mental Clarity',
@@ -526,7 +526,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'morning-routine-identity',
     title: 'Morning Routine for Self Improvement: Why Identity-Based Routines Actually Work',
-    titleAr: 'روتين الصباح للتحسن الذاتي: لماذا تعمل الروتينات المبنية على الهوية فعلاً',
+    titleAr: 'روتين الصباح المبني على الهوية: لماذا يعمل فعلاً',
     description: 'Most morning routines fail because they are built on behavior, not identity. Learn why identity-based routines create lasting change.',
     descriptionAr: 'معظم الروتينات الصباحية تفشل لأنها مبنية على السلوك، لا الهوية. تعرف لماذا تخلق الروتينات الصباحية المبنية على الهوية تغييراً دائماً وكيف تصمم واحدة تصبح من أنت.',
     category: 'Daily Practice',
@@ -545,7 +545,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     title: 'How to Stop Procrastinating: The Identity Shift That Changes Everything',
     titleAr: 'كيف تتوقف عن المماطلة: تحول الهوية الذي يغير كل شيء',
     description: 'Procrastination is not a time management problem — it is an identity problem. Learn why identity-based approaches work when everything else fails.',
-    descriptionAr: 'المماطلة ليست مشكلة إدارة وقت — إنها مشكلة هوية. تعرف لماذا تعمل النهوج المبنية على الهوية للتغلب على المماطلة عندما تفشل كل شيء آخر.',
+    descriptionAr: 'المماطلة ليست مشكلة إدارة وقت — إنها مشكلة هوية. تعرف لماذا تعمل النهج المبنية على الهوية للتغلب على المماطلة عندما تفشل كل شيء آخر.',
     category: 'Identity Shift',
     categoryAr: 'تحول الهوية',
     readTime: '12 min read',
@@ -559,7 +559,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'self-discipline-science',
-    title: 'Self Discipline Tips That Actually Work: The Science of Identity Recode',
+    title: 'Self-Discipline Tips That Actually Work: The Science of Identity Recode',
     titleAr: 'نصائح الانضباط الذاتي التي تعمل فعلاً: علم إعادة صياغة الهوية',
     description: 'Self discipline is not punishment or willpower — it is the highest form of self-love, made automatic through identity-based systems.',
     descriptionAr: 'الانضباط الذاتي ليس عقاباً أو إرادة — إنه أعلى أشكال حب الذات المعبر عنها من خلال الهوية. تعلم النهج المدعوم بالعلم للانضباط الذي يجعله تلقائياً، غير مفروض.',
@@ -572,7 +572,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     dateModified: '2026-03-28',
     author: 'Abdallah Chouaf',
     authorAr: 'عبدالله الشواف',
-    keywords: ['self discipline tips', 'self discipline', 'discipline science', 'identity recode', 'how to be disciplined', 'discipline framework', 'lasting discipline'],
+    keywords: ['self-discipline tips', 'self-discipline', 'discipline science', 'identity recode', 'how to be disciplined', 'discipline framework', 'lasting discipline'],
   },
   {
     slug: 'goal-setting-framework',
@@ -612,8 +612,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'ar-binaa-al3aadat',
-    title: 'Building Habits: The Scientific Guide to Habits That Last a Lifetime',
-    titleAr: 'بناء العادات: الدليل العلمي لعادات تدوم إلغاء في أي وقت',
+    title: 'Building Habits: The Scientific Guide to Lasting Habits',
+    titleAr: 'بناء العادات: الدليل العلمي لعادات راسخة تدوم',
     description: 'The scientific guide to building lasting habits: why new habits fail, and how to build identity-based habits instead of relying on willpower.',
     descriptionAr: 'الدليل العلمي لبناء عادات تدوم. اكتشف لماذا تفشل العادات الجديدة وكيف تبني عادات تعتمد على الهوية وليس الإرادة. مبني على أحدث أبحاث علم الأعصاب والسلوك.',
     category: 'بناء العادات',
@@ -646,9 +646,9 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'ar-aldhibat-althati',
-    title: "Self Discipline: The Truth Nobody Tells You",
+    title: "Self-Discipline: The Truth Nobody Tells You",
     titleAr: 'الانضباط الذاتي: الحقيقة التي لا يخبرك بها أحد',
-    description: "Discover the truth about self discipline. It's not punishment or suppression - it's the highest form of self-love. How to redefine discipline through identity transformation, not willpower.",
+    description: "Discover the truth about self-discipline. It's not punishment or suppression - it's the highest form of self-love. How to redefine discipline through identity transformation, not willpower.",
     descriptionAr: 'اكتشف الحقيقة عن الانضباط الذاتي. ليس عقاباً ولا كبتاً — بل أعلى أشكال حب الذات. كيف تعيد تعريف الانضباط من خلال تحول الهوية وليس الإرادة.',
     category: 'الانضباط',
     categoryAr: 'الانضباط',
@@ -659,7 +659,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     dateModified: '2026-03-22',
     author: 'Abdallah Chouaf',
     authorAr: 'عبدالله الشواف',
-    keywords: ['الانضباط الذاتي', 'كيف أصبح منضبطاً', 'قوة الإرادة', 'self discipline Arabic', 'انضباط النفس', 'الالتزام الذاتي'],
+    keywords: ['الانضباط الذاتي', 'كيف أصبح منضبطاً', 'قوة الإرادة', 'self-discipline Arabic', 'انضباط النفس', 'الالتزام الذاتي'],
   },
   {
     slug: 'ar-idarat-alwaqt',
@@ -776,10 +776,15 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
   
   if (!article) {
     return {
-      title: 'Article Not Found | Tamkinly Blog',
-      description: 'The requested article could not be found.',
+      title: isAr ? 'المقال غير موجود | تمكنلي' : 'Article Not Found | Tamkinly Blog',
+      description: isAr ? 'المقال المطلوب غير متاح حالياً.' : 'The requested article could not be found.',
     };
   }
+  
+  // Locale-aware bilingual metadata: serve Arabic title/description on /ar/* paths
+  const title = isAr ? (article.titleAr || article.title) : article.title;
+  const description = isAr ? (article.descriptionAr || article.description) : article.description;
+  const suffix = isAr ? ' | تمكنلي' : ' | Tamkinly';
   
   const enUrl = `https://tamkinly.com/blog/${article.slug}`;
   const arUrl = `https://tamkinly.com/ar/blog/${article.slug}`;
@@ -789,8 +794,8 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
     : 'https://tamkinly.com/og-image.webp';
   
   return {
-    title: smartPageTitle(article.title, ' | Tamkinly Blog'),
-    description: article.description,
+    title: smartPageTitle(title, suffix),
+    description,
     keywords: article.keywords,
     
     alternates: {
@@ -803,8 +808,8 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
     },
     
     openGraph: {
-      title: article.title,
-      description: article.description,
+      title,
+      description,
       url: fullUrl,
       siteName: 'Tamkinly',
       type: 'article',
@@ -816,15 +821,15 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: article.title,
+          alt: title,
         },
       ],
     },
     
     twitter: {
       card: 'summary_large_image',
-      title: article.title,
-      description: article.description,
+      title,
+      description,
       site: '@tamkinly',
       images: [imageUrl],
     },
