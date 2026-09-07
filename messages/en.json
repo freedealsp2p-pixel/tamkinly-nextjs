@@ -4542,7 +4542,7 @@
       },
       "outro": {
         "title": "Protocol Complete",
-        "body": "You have completed the Alternative Code Protocol. The neural pathway has been redirected.",
+        "body": "You have completed the Alternative Code Protocol. Take a moment to notice what you experienced — there is nothing more you need to do right now.",
         "disclaimer": "This protocol is a psychological tool, not a medical treatment.",
         "ctaRetry": "Repeat the Protocol"
       }
@@ -4564,9 +4564,66 @@
       },
       "outro": {
         "title": "Protocol Complete",
-        "body": "You have completed the White Mirror Protocol. The new voice will grow stronger with daily repetition.",
+        "body": "You have completed the White Mirror Protocol. The new voice settles a little more with each daily repetition.",
         "disclaimer": "This protocol is a psychological tool, not a medical treatment.",
         "ctaRetry": "Repeat the Protocol"
+      }
+    },
+    "shared": {
+      "welcome": {
+        "eyebrow": "Private Guided Experience",
+        "stepsUnit": "steps",
+        "durationUnit": "minutes",
+        "whatYoullDo": "What you will do",
+        "prepNote": "Choose a quiet place where you will not be disturbed, and give yourself the full time without rushing.",
+        "beginCta": "Begin the Experience",
+        "approx": "~"
+      },
+      "preparation": {
+        "title": "Before we begin",
+        "subtitle": "A few gentle reminders",
+        "itemGuided": "This is a guided experience — each step tells you exactly what to do.",
+        "itemPause": "You can pause at any moment, for as long as you need.",
+        "itemExit": "You can leave safely at any time — leaving is never failure.",
+        "itemAudio": "Audio guidance is optional — the complete experience works fully in text.",
+        "itemReflection": "Reflection is optional — there are no right answers.",
+        "itemComfort": "Never force yourself through discomfort. Move at your own pace.",
+        "startCta": "Start the Session",
+        "back": "Back to the overview"
+      },
+      "session": {
+        "stepOf": "Step {n} of {total}",
+        "pause": "Pause",
+        "pausedTitle": "Session paused",
+        "pausedBody": "Take your time. When you are ready, continue exactly where you left off.",
+        "resume": "Resume the session",
+        "leaveHint": "You can leave safely anytime using the leave button.",
+        "reflectionOptional": "Optional reflection",
+        "audio": {
+          "label": "Audio guidance",
+          "optional": "Optional",
+          "play": "Play this step's guidance",
+          "playing": "Playing — you can stop anytime",
+          "stop": "Stop",
+          "unavailable": "Audio is not available on this device. The full text experience remains unchanged."
+        },
+        "leaveExperience": "Leave Experience"
+      },
+      "gate": {
+        "decline": "I prefer not to continue",
+        "declinedTitle": "Your choice is respected",
+        "declinedBody": "The White Mirror did not start. If you ever change your mind, you can return anytime — the experience will be here.",
+        "gentlerLabel": "Gentler alternatives for the nervous system",
+        "backToSafety": "Back to the safety information",
+        "backToWelcome": "Back to the protocols overview"
+      },
+      "completion": {
+        "returnPresent": "Take one slow breath. Notice the room around you — the sounds, the surface beneath you. Return your attention gently to the present.",
+        "reflectionTitle": "Optional reflection",
+        "reflectionPlaceholder": "If you wish, write a word or a sentence about this experience…",
+        "privacyNote": "This stays on this device only — nothing is sent or stored anywhere else.",
+        "whenReady": "When you are ready",
+        "backToProtocols": "Back to Therapeutic Protocols"
       }
     }
   }

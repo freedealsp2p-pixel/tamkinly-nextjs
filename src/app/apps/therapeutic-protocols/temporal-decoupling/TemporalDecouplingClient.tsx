@@ -1,44 +1,101 @@
 'use client';
 
-import { useReducer, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useReducer, useCallback, useEffect, useState } from 'react';
+import { useTranslations } from '@/components/providers/LocaleProvider';
 import {
-  TherapeuticShell, ProtocolHero, ProtocolStepCard, ProtocolCompletion,
+  TherapeuticShell, ExperienceWelcome, PreparationScreen,
+  ProtocolStepCard, ProtocolCompletion,
 } from '@/components/therapeutic';
-import { createProtocolReducer } from '@/components/therapeutic/types';
+import {
+  createProtocolReducer, loadPersistedProgress, persistProgress,
+  clearPersistedProgress,
+} from '@/components/therapeutic/types';
 import { TEMPORAL_DECOUPLING_META, TEMPORAL_DECOUPLING_STEPS } from '@/lib/therapeutic-protocols/temporal-decoupling';
 
+const SLUG = 'temporal-decoupling';
 const TK = 'therapeuticProtocols.temporalDecoupling';
 const { initialState, reducer } = createProtocolReducer(TEMPORAL_DECOUPLING_STEPS.length);
 
+/**
+ * Temporal Decoupling — premium guided experience.
+ * Journey: welcome -> preparation -> guided session (pausable) -> completion.
+ * The source protocol (7 steps, ~12 minutes) remains untouched.
+ */
 export default function TemporalDecouplingClient() {
-  const router = useRouter();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [restored, setRestored] = useState(false);
+  const ts = useTranslations('therapeuticProtocols.shared');
 
+  const totalSteps = TEMPORAL_DECOUPLING_STEPS.length;
   const step = TEMPORAL_DECOUPLING_STEPS[state.currentStep];
   const progress = state.phase === 'active'
-    ? ((state.currentStep + 1) / TEMPORAL_DECOUPLING_STEPS.length) * 100
+    ? ((state.currentStep + 1) / totalSteps) * 100
     : 0;
+
+  // Resume: restore saved position (device only) once on mount.
+  useEffect(() => {
+    const saved = loadPersistedProgress(SLUG);
+    if (saved) {
+      if (saved.phase === 'active' && saved.currentStep < totalSteps) {
+        dispatch({ type: 'START' });
+        // START resets to step 0; advance to the saved step.
+        // (dispatch batching keeps this a single visible state)
+        for (let i = 0; i < saved.currentStep; i++) {
+          dispatch({ type: 'NEXT_STEP' });
+        }
+      } else if (saved.phase === 'preparation') {
+        dispatch({ type: 'TO_PREPARATION' });
+      }
+    }
+    setRestored(true);
+  }, [totalSteps]);
+
+  // Persist position for resume; clear it once the experience completes.
+  useEffect(() => {
+    if (!restored) return;
+    if (state.phase === 'completion') {
+      clearPersistedProgress(SLUG);
+    } else if (state.phase === 'active' || state.phase === 'preparation') {
+      persistProgress(SLUG, { phase: state.phase, currentStep: state.currentStep });
+    }
+  }, [state.phase, state.currentStep, restored]);
+
+  const scrollTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleBegin = useCallback(() => {
+    dispatch({ type: 'TO_PREPARATION' });
+    scrollTop();
+  }, [scrollTop]);
 
   const handleStart = useCallback(() => {
     dispatch({ type: 'START' });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    scrollTop();
+  }, [scrollTop]);
+
+  const handleBackToWelcome = useCallback(() => {
+    dispatch({ type: 'BACK_TO_WELCOME' });
+    scrollTop();
+  }, [scrollTop]);
 
   const handleNext = useCallback(() => {
     dispatch({ type: 'NEXT_STEP' });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    scrollTop();
+  }, [scrollTop]);
 
   const handlePrev = useCallback(() => {
     dispatch({ type: 'PREV_STEP' });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    scrollTop();
+  }, [scrollTop]);
 
   const handleRestart = useCallback(() => {
     dispatch({ type: 'RESTART' });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    scrollTop();
+  }, [scrollTop]);
+
+  const handlePause = useCallback(() => dispatch({ type: 'PAUSE' }), []);
+  const handleResume = useCallback(() => dispatch({ type: 'RESUME' }), []);
 
   const breadcrumbs = [
     { label: 'Tamkinly', href: '/' },
@@ -48,16 +105,26 @@ export default function TemporalDecouplingClient() {
   ];
 
   return (
-    <TherapeuticShell sectionType={state.phase === 'active' ? 'therapeutic' : 'standard'}>
-      {state.phase === 'entry' && (
-        <ProtocolHero
+    <TherapeuticShell
+      sectionType={state.phase === 'active' ? 'therapeutic' : 'standard'}
+      exitProps={{ label: ts('session.leaveExperience') }}
+    >
+      {state.phase === 'welcome' && (
+        <ExperienceWelcome
           translationKey={TK}
-          stepCount={TEMPORAL_DECOUPLING_META.totalSteps}
-          durationLabel="12 min"
+          meta={TEMPORAL_DECOUPLING_META}
+          steps={TEMPORAL_DECOUPLING_STEPS}
           breadcrumbs={breadcrumbs}
           accentColor={TEMPORAL_DECOUPLING_META.accentColor}
+          onBegin={handleBegin}
+        />
+      )}
+
+      {state.phase === 'preparation' && (
+        <PreparationScreen
+          accentColor={TEMPORAL_DECOUPLING_META.accentColor}
           onStart={handleStart}
-          learnMoreTargetId="mechanism-section"
+          onBack={handleBackToWelcome}
         />
       )}
 
@@ -66,12 +133,15 @@ export default function TemporalDecouplingClient() {
           translationKey={TK}
           step={step}
           stepIndex={state.currentStep}
-          totalSteps={TEMPORAL_DECOUPLING_STEPS.length}
+          totalSteps={totalSteps}
           progress={progress}
           accentColor={TEMPORAL_DECOUPLING_META.accentColor}
           onNext={handleNext}
           onPrev={handlePrev}
           onRestart={handleRestart}
+          onPause={handlePause}
+          isPaused={state.isPaused}
+          onResume={handleResume}
         />
       )}
 

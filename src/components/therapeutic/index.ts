@@ -1,8 +1,14 @@
 export { TherapeuticShell } from './TherapeuticShell';
 export { ProtocolStepCard } from './ProtocolStepCard';
-export { ProtocolHero } from './ProtocolHero';
+export { ExperienceWelcome } from './ExperienceWelcome';
+export { PreparationScreen } from './PreparationScreen';
+export { WhiteMirrorGate } from './WhiteMirrorGate';
+export { StepAudio } from './StepAudio';
 export { ProtocolCompletion } from './ProtocolCompletion';
-export { ProtocolSafetyWarning } from './ProtocolSafetyWarning';
 export { ProtocolLanding } from './ProtocolLanding';
-export { ProtocolGate } from './ProtocolGate';
+export { NameDecoder } from './NameDecoder';
 export type { ProtocolStep, ProtocolMeta, ProtocolState, ProtocolAction, ProtocolPhase, BilingualText } from './types';
+export {
+  createProtocolReducer,
+  loadPersistedProgress, persistProgress, clearPersistedProgress,
+} from './types';
