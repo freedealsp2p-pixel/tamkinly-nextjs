@@ -21,6 +21,40 @@ const VALID_AUTHOR_SLUGS = new Set([
   'tamkinly-team',
 ]);
 
+const VALID_BLOG_SLUGS = new Set([
+  'identity-gap-assessment', 'values-clarification-tool', 'daily-reflection-practice',
+  'identity-recode-system-guide', 'ai-identity-coach-guide', 'who-am-i-worksheet',
+  'identity-based-habits-worksheet', 'self-authorship-worksheet',
+  'identity-baseline-8d-worksheet', 'environmental-audit-worksheet',
+  'erq-emotional-regulation-worksheet', 'physics-of-momentum', 'magic-in-work-you-avoid',
+  'identity-millionaire', 'all-in-or-nothing', 'five-steps-to-miracles',
+  'inversion-thinking', 'speed-as-strategy', 'ten-minute-block-system',
+  'work-on-yourself', 'becoming-exceptional', 'dopamine-reset',
+  'and-the-bamboo-kept-growing', 'automatic-change', 'physics-of-consciousness',
+  'redefining-discipline', 'vagus-nerve-breathing', 'how-to-build-habits-that-stick',
+  'morning-routine-identity', 'stop-procrastinating-identity-shift',
+  'self-discipline-science', 'goal-setting-framework', 'ar-tatweer-althat',
+  'ar-binaa-al3aadat', 'ar-tahqeeq-alahdaf', 'ar-aldhibat-althati', 'ar-idarat-alwaqt',
+  'ar-hindasat-al-dimag', 'ar-karizma-al-tatheer', 'ar-khulasat-al-arbaeen',
+  'app-guides', 'worksheets', 'identity-transformation', 'mindset-strategy',
+  'productivity-growth',
+]);
+
+const VALID_BLOG_CATEGORY_SLUGS = new Set([
+  'app-guides', 'worksheets', 'identity-transformation', 'mindset-strategy',
+  'productivity-growth', 'apps', 'basic-app', 'brain-science', 'commitment',
+  'daily-practice', 'excellence', 'execution', 'free-app', 'growth', 'habit-formation',
+  'identity', 'identity-shift', 'life-wisdom', 'mastery-app', 'mental-clarity',
+  'mindset', 'productivity', 'relationships-and-influence', 'self-image',
+  'self-liberation', 'strategy', 'tools', 'transformation', 'wealth-and-identity',
+  'worksheet',
+]);
+
+const VALID_GUIDE_SLUGS = new Set([
+  'identity-vs-behavior-change', 'recode-identity-30-days',
+  'behavior-trap-why-habits-fail', 'environment-shapes-you',
+]);
+
 // Hard 404 for unknown dynamic slugs (Next 16 ignores dynamicParams on dynamic routes)
 function unknownSlug404(pathname: string): NextResponse | null {
   const segments = pathname.split('/').filter(Boolean);
@@ -32,6 +66,26 @@ function unknownSlug404(pathname: string): NextResponse | null {
     return new NextResponse('Not Found', { status: 404 });
   }
   if (segments[0] === 'blog' && segments[1] === 'author' && segments.length === 3 && !VALID_AUTHOR_SLUGS.has(segments[2])) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+  if (segments[0] === 'blog' && segments.length === 2) {
+    if (segments[1] === 'author' || segments[1] === 'category') {
+      return new NextResponse('Not Found', { status: 404 });
+    }
+    if (!VALID_BLOG_SLUGS.has(segments[1])) {
+      return new NextResponse('Not Found', { status: 404 });
+    }
+  }
+  if (segments[0] === 'blog' && segments.length > 3) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+  if (segments[0] === 'blog' && segments.length === 3 && segments[1] === 'category' && !VALID_BLOG_CATEGORY_SLUGS.has(segments[2])) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+  if (segments[0] === 'guides' && segments.length === 2 && !VALID_GUIDE_SLUGS.has(segments[1])) {
+    return new NextResponse('Not Found', { status: 404 });
+  }
+  if (segments[0] === 'guides' && segments.length > 2) {
     return new NextResponse('Not Found', { status: 404 });
   }
   return null;
