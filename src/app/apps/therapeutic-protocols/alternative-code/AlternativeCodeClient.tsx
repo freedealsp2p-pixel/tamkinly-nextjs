@@ -32,6 +32,7 @@ export default function AlternativeCodeClient() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [restored, setRestored] = useState(false);
   const ts = useTranslations('therapeuticProtocols.shared');
+  const tpp = useTranslations('therapeuticProtocols.protocols');
 
   // Name Decoder state — memory only, never persisted.
   const [name, setName] = useState('');
@@ -134,10 +135,10 @@ export default function AlternativeCodeClient() {
   }, [name, words, handleNameChange, handleWordChange]);
 
   const breadcrumbs = [
-    { label: 'Tamkinly', href: '/' },
-    { label: '/apps', href: '/apps' },
-    { label: 'Therapeutic Protocols', href: '/apps/therapeutic-protocols' },
-    { label: 'Alternative Code' },
+    { label: ts('breadcrumbs.home'), href: '/' },
+    { label: ts('breadcrumbs.apps'), href: '/apps' },
+    { label: ts('breadcrumbs.protocols'), href: '/apps/therapeutic-protocols' },
+    { label: tpp('alternative-code.title') },
   ];
 
   return (
@@ -187,8 +188,8 @@ export default function AlternativeCodeClient() {
           translationKey={TK}
           accentColor={ALTERNATIVE_CODE_META.accentColor}
           suggestedNext={[
-            { label: 'The Temporal Decoupling', href: '/apps/therapeutic-protocols/temporal-decoupling' },
-            { label: 'The White Mirror', href: '/apps/therapeutic-protocols/white-mirror' },
+            { label: tpp('temporal-decoupling.title'), href: '/apps/therapeutic-protocols/temporal-decoupling' },
+            { label: tpp('white-mirror.title'), href: '/apps/therapeutic-protocols/white-mirror' },
           ]}
           onRepeat={handleRestart}
         />

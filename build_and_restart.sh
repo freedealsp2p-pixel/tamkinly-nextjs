@@ -8,6 +8,8 @@ NODE_OPTIONS=--max-old-space-size=768 npx next build >> /var/www/tamkinly/build.
 echo "Build finished at $(date)" >> /var/www/tamkinly/build.log
 
 if [ $? -eq 0 ]; then
+cp -r .next/static .next/standalone/.next/static
+ cp -r public .next/standalone/ 2>/dev/null
   echo "Build SUCCESS" >> /var/www/tamkinly/build.log
   pm2 restart tamkinly-prod >> /var/www/tamkinly/build.log 2>&1
   echo "PM2 restarted" >> /var/www/tamkinly/build.log

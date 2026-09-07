@@ -2,15 +2,19 @@
 
 import { ProtocolLanding } from '@/components/therapeutic/ProtocolLanding';
 import { WHITE_MIRROR_META, WHITE_MIRROR_SAFETY } from '@/lib/therapeutic-protocols/white-mirror';
-
-const breadcrumbs = [
-  { label: 'Tamkinly', href: '/' },
-  { label: '/apps', href: '/apps' },
-  { label: 'Therapeutic Protocols', href: '/apps/therapeutic-protocols' },
-  { label: 'White Mirror' },
-];
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 export default function WhiteMirrorLanding() {
+  const ts = useTranslations('therapeuticProtocols.shared');
+  const tpp = useTranslations('therapeuticProtocols.protocols');
+
+  const breadcrumbs = [
+    { label: ts('breadcrumbs.home'), href: '/' },
+    { label: ts('breadcrumbs.apps'), href: '/apps' },
+    { label: ts('breadcrumbs.protocols'), href: '/apps/therapeutic-protocols' },
+    { label: tpp('white-mirror.title') },
+  ];
+
   return (
     <ProtocolLanding
       protocolSlug="white-mirror"

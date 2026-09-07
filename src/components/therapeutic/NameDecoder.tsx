@@ -70,7 +70,10 @@ export function NameDecoder({
             spellCheck={false}
             className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white text-[#0F1C2E] text-lg text-center tracking-[0.3em] font-medium focus:outline-none focus:ring-2 transition-all duration-200"
             style={{ outlineColor: accentColor, ['--tw-ring-color' as string]: accentColor }}
-            dir="ltr"
+            // Follows the direction of the typed content: Arabic names render
+            // naturally RTL, Latin names LTR. When empty, it inherits the page
+            // direction (so the localized placeholder reads correctly).
+            dir="auto"
             maxLength={20}
           />
           <p className="mt-2 text-xs text-[#0F1C2E]/40 leading-relaxed">

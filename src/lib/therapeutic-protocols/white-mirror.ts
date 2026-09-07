@@ -24,8 +24,8 @@ export const WHITE_MIRROR_META: ProtocolMeta = {
     en: 'Tamkinly · An Identity Recoding Tool',
   },
   intro: {
-    ar: 'هذا التمرين مصمم لإيقاف عجلة الأفكار السلبية بقوة، وزرع فكرة جديدة في لحظة السكون التام، بطريقة آمنة وفعالة. يجمع بين تقنية «كسر النمط» (Pattern Interrupt) و«الفراغ الذهني» و«الصوت البديل» في بروتوكول واحد متكامل.',
-    en: 'This exercise is designed to forcefully halt the cycle of negative thoughts, and plant a new idea in the moment of complete stillness — in a safe and effective way. It combines the "Pattern Interrupt" technique, the "mental void," and the "alternative voice" into a single integrated protocol.',
+    ar: 'هذا التمرين مصمم لإيقاف عجلة الأفكار السلبية بقوة، وزرع فكرة جديدة في لحظة السكون التام، بطريقة آمنة وموجّهة. يجمع بين تقنية «كسر النمط» (Pattern Interrupt) و«الفراغ الذهني» و«الصوت البديل» في بروتوكول واحد متكامل.',
+    en: 'This exercise is designed to forcefully halt the cycle of negative thoughts, and plant a new idea in the moment of complete stillness — in a safe and guided way. It combines the "Pattern Interrupt" technique, the "mental void," and the "alternative voice" into a single integrated protocol.',
   },
   intro2: {
     ar: 'سنحافظ على جوهر «الفراغ الذهني» و«الصوت الجديد»، لكننا ننقله من مساحة الوهم العابر إلى مساحة التطبيق النفسي الآمن والمستدام.',
@@ -187,8 +187,8 @@ export const WHITE_MIRROR_STEPS: ProtocolStep[] = [
     durationLabel: { ar: 'دقيقتان', en: 'Two minutes' },
     duration: 120,
     intro: {
-      ar: 'التغيير يحتاج إلى دليل. هذا الصوت الجديد لن يصبح طبيعياً بمجرد قوله مرة. سيصبح طبيعياً بالتكرار اليومي.',
-      en: 'Change requires evidence. This new voice will not become natural by being said once. It will become natural through daily repetition.',
+      ar: 'التغيير يحتاج إلى تكرار. الصوت الجديد لا يصبح مألوفاً بقوله مرة واحدة — بل تنمو الألفة مع التكرار اليومي.',
+      en: 'Change requires repetition. A new voice does not become familiar by being said once — familiarity grows through daily practice.',
     },
     instructions: [
       {
@@ -200,8 +200,8 @@ export const WHITE_MIRROR_STEPS: ProtocolStep[] = [
         en: 'Make a commitment to repeat this mental exercise daily for a full week, at roughly the same time.',
       },
       {
-        ar: 'بعد أسبوع، سيتحول هذا «الصوت الجديد» من مجرد صدى غريب، إلى صوتك الداخلي الطبيعي.',
-        en: 'After a week, this "new voice" will transform from a strange echo into your natural inner voice.',
+        ar: 'بعد أسبوع من التكرار، لاحظ كيف يبدو لك هذا «الصوت الجديد» — فقد يبدو أقل غرابة، وأقرب إلى صوتك الداخلي.',
+        en: 'After a week of repetition, notice how this "new voice" sounds to you — it may feel less like a strange echo, and closer to your own inner voice.',
       },
     ],
     hypnotic_cue: {

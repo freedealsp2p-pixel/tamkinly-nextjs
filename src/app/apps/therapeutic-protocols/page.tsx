@@ -50,9 +50,9 @@ export default function TherapeuticProtocolsHub() {
   const t = useTranslations('therapeuticProtocols');
 
   const breadcrumbs = [
-    { label: 'Tamkinly', href: '/' },
-    { label: '/apps', href: '/apps' },
-    { label: isAr ? '\u0627\u0644\u0628\u0631\u0648\u062a\u0648\u0643\u0648\u0644\u0627\u062a \u0627\u0644\u0639\u0644\u0627\u062c\u064a\u0629' : 'Therapeutic Protocols' },
+    { label: t('shared.breadcrumbs.home'), href: '/' },
+    { label: t('shared.breadcrumbs.apps'), href: '/apps' },
+    { label: t('shared.breadcrumbs.protocols') },
   ];
 
   return (

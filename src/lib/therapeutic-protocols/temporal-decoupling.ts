@@ -35,7 +35,7 @@ export const TEMPORAL_DECOUPLING_META: ProtocolMeta = {
     en: 'Today, we will withdraw this power. We will play the mind\'s game of decoupling through a protocol called: "Where did it begin?"',
   },
   totalSteps: 7,
-  totalDuration: 840,
+  totalDuration: 720,
   accentColor: '#1F6F78', // Teal
 };
 
@@ -229,8 +229,8 @@ export const TEMPORAL_DECOUPLING_STEPS: ProtocolStep[] = [
     durationLabel: { ar: 'دقيقتان', en: 'Two minutes' },
     duration: 120,
     intro: {
-      ar: 'راقب ما سيحدث بصمت. ستدرك أن الذاكرة لا تحتاج أن تعطيك الفيلم كاملاً كي تجعلك تظن أنك عشته كاملاً.',
-      en: 'Observe, in silence, what happens. You will realize that the memory does not need to give you the full film in order to make you believe you lived it in full.',
+      ar: 'راقب ما يحدث بصمت. قد تلاحظ أن الذاكرة لا تحتاج أن تعطيك الفيلم كاملاً كي تجعلك تظن أنك عشته كاملاً.',
+      en: 'Observe, in silence, what happens. You may notice that the memory does not need to give you the full film in order to make you believe you lived it in full.',
     },
     instructions: [
       {
@@ -238,17 +238,17 @@ export const TEMPORAL_DECOUPLING_STEPS: ProtocolStep[] = [
         en: 'Breathe quietly. Allow the new realization to settle into your body — not only your mind.',
       },
       {
-        ar: 'لاحظ أن عقلك الباطن سيتجنب مستقبلاً إعادة تشغيل هذا الفيلم.',
-        en: 'Notice that your subconscious will, going forward, avoid replaying this film.',
+        ar: 'لاحظ ما تغيّر في طريقة عرض الفيلم الآن — قد تجد عقلك أقل حرصاً على إعادة تشغيله كما كان.',
+        en: 'Notice what has changed in how the film plays now — you may find the mind less eager to replay it as before.',
       },
       {
-        ar: 'لأنه يعلم الآن أنك تمتلك شفرة التفكيك، وأنه سيضطر لمواجهة نفس الأسئلة التي تكسر وهمه.',
-        en: 'Because it now knows you hold the decryption key — and that it will have to face the same questions that break its illusion.',
+        ar: 'وكلما أُعيد عرضه، فإنك تمتلك مفتاح التفكيك — الأسئلة نفسها التي تُرخي الوهم.',
+        en: 'And whenever it does replay, you hold the decryption key — the same questions that loosen the illusion.',
       },
     ],
     hypnotic_cue: {
-      ar: 'هنا.. تنهار الذكرى، وتستيقظ أنت.',
-      en: 'Here... the memory collapses. And you awaken.',
+      ar: 'هنا.. تُرخي الذكرى قبضتها. وتستيقظ أنت.',
+      en: 'Here... the memory loosens its grip. And you awaken.',
     },
     reflection: {
       ar: 'ما الإحساس الذي تشعر به في جسدك الآن مقارنة ببداية التمرين؟',

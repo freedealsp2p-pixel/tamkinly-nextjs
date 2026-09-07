@@ -25,6 +25,7 @@ export default function TemporalDecouplingClient() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [restored, setRestored] = useState(false);
   const ts = useTranslations('therapeuticProtocols.shared');
+  const tpp = useTranslations('therapeuticProtocols.protocols');
 
   const totalSteps = TEMPORAL_DECOUPLING_STEPS.length;
   const step = TEMPORAL_DECOUPLING_STEPS[state.currentStep];
@@ -98,10 +99,10 @@ export default function TemporalDecouplingClient() {
   const handleResume = useCallback(() => dispatch({ type: 'RESUME' }), []);
 
   const breadcrumbs = [
-    { label: 'Tamkinly', href: '/' },
-    { label: '/apps', href: '/apps' },
-    { label: 'Therapeutic Protocols', href: '/apps/therapeutic-protocols' },
-    { label: 'Temporal Decoupling' },
+    { label: ts('breadcrumbs.home'), href: '/' },
+    { label: ts('breadcrumbs.apps'), href: '/apps' },
+    { label: ts('breadcrumbs.protocols'), href: '/apps/therapeutic-protocols' },
+    { label: tpp('temporal-decoupling.title') },
   ];
 
   return (
@@ -150,8 +151,8 @@ export default function TemporalDecouplingClient() {
           translationKey={TK}
           accentColor={TEMPORAL_DECOUPLING_META.accentColor}
           suggestedNext={[
-            { label: 'The Alternative Code', href: '/apps/therapeutic-protocols/alternative-code' },
-            { label: 'The White Mirror', href: '/apps/therapeutic-protocols/white-mirror' },
+            { label: tpp('alternative-code.title'), href: '/apps/therapeutic-protocols/alternative-code' },
+            { label: tpp('white-mirror.title'), href: '/apps/therapeutic-protocols/white-mirror' },
           ]}
           onRepeat={handleRestart}
         />

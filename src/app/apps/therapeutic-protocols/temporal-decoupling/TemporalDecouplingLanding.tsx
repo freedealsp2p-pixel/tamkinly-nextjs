@@ -2,15 +2,19 @@
 
 import { ProtocolLanding } from '@/components/therapeutic/ProtocolLanding';
 import { TEMPORAL_DECOUPLING_META } from '@/lib/therapeutic-protocols/temporal-decoupling';
-
-const breadcrumbs = [
-  { label: 'Tamkinly', href: '/' },
-  { label: '/apps', href: '/apps' },
-  { label: 'Therapeutic Protocols', href: '/apps/therapeutic-protocols' },
-  { label: 'Temporal Decoupling' },
-];
+import { useTranslations } from '@/components/providers/LocaleProvider';
 
 export default function TemporalDecouplingLanding() {
+  const ts = useTranslations('therapeuticProtocols.shared');
+  const tpp = useTranslations('therapeuticProtocols.protocols');
+
+  const breadcrumbs = [
+    { label: ts('breadcrumbs.home'), href: '/' },
+    { label: ts('breadcrumbs.apps'), href: '/apps' },
+    { label: ts('breadcrumbs.protocols'), href: '/apps/therapeutic-protocols' },
+    { label: tpp('temporal-decoupling.title') },
+  ];
+
   return (
     <ProtocolLanding
       protocolSlug="temporal-decoupling"

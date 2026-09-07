@@ -23,8 +23,8 @@ export const ALTERNATIVE_CODE_META: ProtocolMeta = {
     en: 'Tamkinly · A Deep Liberation Tool',
   },
   intro: {
-    ar: 'بصفتي معالجاً نفسياً، أؤكد لك أن هذا التمرين يستند إلى واحدة من أعمق آليات علم النفس العصبي: «إعادة توطيد الذاكرة» و«فك الارتباط الشرطي».',
-    en: 'As a psychotherapist, I can confirm that this exercise draws upon one of the deepest mechanisms in neuropsychology: "memory reconsolidation" and "conditioned association decoupling."',
+    ar: 'من خلال تجاربي السابقة، وجدت أن هذا المنظور كان مفيداً لي: هذا التمرين يستلهم مفهومين معروفين في علم النفس العصبي هما «إعادة توطيد الذاكرة» و«فك الارتباط الشرطي».',
+    en: 'From my past experiences, I have found this perspective helpful: this exercise draws on two well-known concepts from neuropsychology — "memory reconsolidation" and "conditioned association decoupling."',
   },
   intro2: {
     ar: 'الأسماء ليست مجرد حروف؛ إنها «أزرار تشغيل» تطلق شلالاً من الكيمياء العاطفية في الدماغ. عندما نحاول محو الاسم، نحن نقاوم الدماغ، والمقاومة تزيد التثبيت. لكن عندما نستخدم الاسم ذاته كـ«شفرة مرور» لقصة جديدة تماماً، نحن نقوم بعملية «اختراق» (Hijacking) للمسار العصبي.',
@@ -193,8 +193,8 @@ export const ALTERNATIVE_CODE_STEPS: ProtocolStep[] = [
     durationLabel: { ar: 'دقيقتان', en: 'Two minutes' },
     duration: 120,
     intro: {
-      ar: 'ستُصدم من النتيجة. في كل مرة يحاول فيها عقلك استدعاء هذا «الاسم»، لن يجد الشخص المعني، بل ستندلع في وعيك فوراً تفاصيل القصة الجديدة.',
-      en: 'You will be shocked by the result. Each time your mind attempts to summon this "name," it will not find the person — instead, the details of the new story will instantly ignite in your awareness.',
+      ar: 'كثيراً ما يُفاجئ هذا الجزء من يجربه. في كل مرة يحاول فيها عقلك استدعاء هذا «الاسم»، قد تتقدم تفاصيل القصة الجديدة على الصورة القديمة.',
+      en: 'This step often surprises people. Each time your mind attempts to summon this "name," the new story may arrive first — before the old image.',
     },
     instructions: [
       {
@@ -206,13 +206,13 @@ export const ALTERNATIVE_CODE_STEPS: ProtocolStep[] = [
         en: 'Notice what happens automatically: did the old image arrive, or the new one?',
       },
       {
-        ar: 'لقد أصبح الاسم مرتبطاً بمسار عصبي جديد تماماً، وتم تفريغ الشحنة العاطفية القديمة.',
-        en: 'The name has now been linked to an entirely new neural pathway, and the old emotional charge has been drained.',
+        ar: 'أصبح الاسم الآن يقود إلى القصة الجديدة التي بنيتها — ارتباط بديل يستطيع عقلك اللجوء إليه بدلاً من الصورة القديمة.',
+        en: 'The name now leads to the new story you created — an alternative association your mind can reach for instead of the old image.',
       },
     ],
     hypnotic_cue: {
-      ar: 'ما لم تعد تستدعيه بكلمة قديمة، يصبح ماضياً لا يعود.',
-      en: 'What you no longer summon with the old word becomes a past that does not return.',
+      ar: 'ما لم تعد تستدعيه بالكلمة القديمة، ينزاح بلطف نحو الماضي.',
+      en: 'What you no longer summon with the old word drifts gently toward the past.',
     },
     reflection: {
       ar: 'عند سماع الاسم الآن، ما أول صورة وصلت لوعيك؟ القديمة أم الجديدة؟',

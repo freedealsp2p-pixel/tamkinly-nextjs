@@ -4504,15 +4504,8 @@
       }
     },
     "temporalDecoupling": {
-      "hero": {
-        "title": "The Temporal Decoupling Protocol",
-        "subtitle": "Awakening from the Illusion of Memory",
-        "startBtn": "Begin the Protocol",
-        "learnBtn": "Learn more about this technique"
-      },
       "steps": {
         "cue": "Hypnotic Cue",
-        "reflection": "Reflection",
         "prev": "Previous Step",
         "next": "Next Step",
         "restart": "Restart",
@@ -4526,15 +4519,8 @@
       }
     },
     "alternativeCode": {
-      "hero": {
-        "title": "The Alternative Code Protocol",
-        "subtitle": "Neutralizing the Memory and Redirecting It",
-        "startBtn": "Begin the Protocol",
-        "learnBtn": "Learn more about this technique"
-      },
       "steps": {
         "cue": "Hypnotic Cue",
-        "reflection": "Reflection",
         "prev": "Previous Step",
         "next": "Next Step",
         "restart": "Restart",
@@ -4548,15 +4534,8 @@
       }
     },
     "whiteMirror": {
-      "hero": {
-        "title": "The White Mirror Protocol",
-        "subtitle": "Pattern Interrupt and Recoding",
-        "startBtn": "Begin the Protocol",
-        "learnBtn": "Learn more about this technique"
-      },
       "steps": {
         "cue": "Hypnotic Cue",
-        "reflection": "Reflection",
         "prev": "Previous Step",
         "next": "Next Step",
         "restart": "Restart",
@@ -4570,6 +4549,11 @@
       }
     },
     "shared": {
+      "breadcrumbs": {
+        "home": "Tamkinly",
+        "apps": "Apps",
+        "protocols": "Therapeutic Protocols"
+      },
       "welcome": {
         "eyebrow": "Private Guided Experience",
         "stepsUnit": "steps",
