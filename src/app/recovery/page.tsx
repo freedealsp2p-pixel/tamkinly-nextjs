@@ -15,6 +15,7 @@ import {
 import { RECOVERY_JOURNEYS, PORN_RECOVERY_STAGES, TRC_STAGES, PORN_RECOVERY_STEPS, TRC_STEPS } from '@/lib/recovery-journey';
 import { getPornRecoverySummary, getTrcSummary, RecoveryProgramSummary, getPornRecoveryState, getTrcState } from '@/lib/recovery-state';
 import MedicalDisclaimer from '@/components/recovery/MedicalDisclaimer';
+import RecoverySearch from '@/components/recovery/RecoverySearch';
 import RecoveryDonation from '@/components/recovery/RecoveryDonation';
 import RecoveryEligibilityNotice from '@/components/recovery/RecoveryEligibilityNotice';
 
@@ -494,6 +495,11 @@ export default function RecoveryHubPage() {
           <RecoveryEligibilityNotice context="recovery-hub" />
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          SECTION 4.5: SEARCH RECOVERY ARTICLES & TOOLS
+          ═══════════════════════════════════════════════════════════ */}
+      <RecoverySearch />
 
       {/* ═══════════════════════════════════════════════════════════
           SECTION 5: AVAILABLE TOOLS QUICK ACCESS
