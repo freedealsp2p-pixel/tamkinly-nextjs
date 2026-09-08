@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import {
   Anchor, CheckCircle2, Circle, Compass, Eye, Flame, HelpCircle, Mic,
   Pause, Play, Puzzle, RotateCcw, Sunrise, VenetianMask, Wand2, type LucideIcon,
@@ -110,6 +110,16 @@ export function ProtocolStepCard({
 
   const StepIcon = STEP_ICONS[step.icon] ?? Circle;
 
+  // Accessibility: when the paused overlay opens (role="dialog", aria-modal),
+  // move keyboard focus to its primary action. Restores nothing on close —
+  // the overlay unmounts and focus returns to the document flow naturally.
+  const resumeButtonRef = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    if (isPaused) {
+      resumeButtonRef.current?.focus();
+    }
+  }, [isPaused]);
+
   return (
     <div className="min-h-screen flex flex-col bg-white" dir={direction}>
       {/* Header: step identifier + subtle orientation */}
@@ -158,7 +168,7 @@ export function ProtocolStepCard({
         </div>
 
         {/* Step Title */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#0F1C2E] mb-3">{title}</h2>
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#0F1C2E] mb-3">{title}</h1>
 
         {/* Current guidance — intro */}
         <p className="text-[#0F1C2E]/70 leading-[1.9] text-base mb-8">
@@ -236,7 +246,9 @@ export function ProtocolStepCard({
               onClick={onRestart}
               className="flex-1 px-4 py-3 rounded-xl bg-white border border-slate-200 text-[#0F1C2E]/60 font-medium hover:bg-slate-50 transition-colors duration-200 text-sm"
             >
-              {t('steps.restart')}
+              {/* On the first step "restart" actually returns to the overview —
+                  label it accordingly instead of implying the step resets. */}
+              {ts('preparation.back')}
             </button>
           )}
           {!isLast ? (
@@ -286,6 +298,7 @@ export function ProtocolStepCard({
             </div>
             <div className="space-y-3">
               <button
+                ref={resumeButtonRef}
                 onClick={onResume}
                 className="w-full px-6 py-3.5 rounded-xl text-white font-semibold transition-all duration-200 hover:shadow-lg active:scale-[0.98]"
                 style={{ backgroundColor: accentColor }}

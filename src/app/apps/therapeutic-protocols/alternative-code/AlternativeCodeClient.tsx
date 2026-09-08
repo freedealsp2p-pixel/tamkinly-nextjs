@@ -8,7 +8,7 @@ import {
 } from '@/components/therapeutic';
 import {
   createProtocolReducer, loadPersistedProgress, persistProgress,
-  clearPersistedProgress,
+  clearPersistedProgress, scrollToTop,
 } from '@/components/therapeutic/types';
 import { ALTERNATIVE_CODE_META, ALTERNATIVE_CODE_STEPS } from '@/lib/therapeutic-protocols/alternative-code';
 
@@ -70,9 +70,7 @@ export default function AlternativeCodeClient() {
     }
   }, [state.phase, state.currentStep, restored]);
 
-  const scrollTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  const scrollTop = useCallback(() => scrollToTop(), []);
 
   const handleBegin = useCallback(() => {
     dispatch({ type: 'TO_PREPARATION' });

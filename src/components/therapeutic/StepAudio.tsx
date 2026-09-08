@@ -173,7 +173,7 @@ export function StepAudio({ segments, accentColor = '#1F6F78', paused }: StepAud
             {ts('session.audio.optional')}
           </span>
         </p>
-        <p className="text-xs text-[#0F1C2E]/45 leading-relaxed">
+        <p className="text-xs text-[#0F1C2E]/45 leading-relaxed" aria-live="polite">
           {status === 'failed'
             ? ts('session.audio.unavailable')
             : isPlaying

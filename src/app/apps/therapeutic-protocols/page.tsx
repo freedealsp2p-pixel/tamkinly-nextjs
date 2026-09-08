@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Clock, Shield, Eye, Key, ArrowRight, Lock } from 'lucide-react';
+import { Clock, Shield, Eye, Key, ArrowRight, ArrowLeft, Lock } from 'lucide-react';
 import { useLocale, useTranslations } from '@/components/providers/LocaleProvider';
 import { RecoveryBreadcrumb } from '@/components/recovery/system';
 
@@ -48,6 +48,8 @@ export default function TherapeuticProtocolsHub() {
   const { direction, locale } = useLocale();
   const isAr = locale === 'ar';
   const t = useTranslations('therapeuticProtocols');
+  // Forward arrow follows the reading direction.
+  const ForwardIcon = isAr ? ArrowLeft : ArrowRight;
 
   const breadcrumbs = [
     { label: t('shared.breadcrumbs.home'), href: '/' },
@@ -146,7 +148,7 @@ export default function TherapeuticProtocolsHub() {
                     </div>
 
                     {/* Arrow */}
-                    <ArrowRight className="w-5 h-5 text-[#0F1C2E]/20 group-hover:text-[#1F6F78] transition-colors flex-shrink-0 mt-1" />
+                    <ForwardIcon className="w-5 h-5 text-[#0F1C2E]/20 group-hover:text-[#1F6F78] transition-colors flex-shrink-0 mt-1" />
                   </div>
                 </div>
               </Link>

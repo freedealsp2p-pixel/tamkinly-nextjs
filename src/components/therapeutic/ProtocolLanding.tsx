@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   Shield, Clock, ListOrdered, Lock, MessageCircle,
-  CheckCircle2, X, ExternalLink, ArrowRight,
+  CheckCircle2, X, ExternalLink, ArrowRight, ArrowLeft,
 } from 'lucide-react';
 import { useLocale, useTranslations } from '@/components/providers/LocaleProvider';
 import { RecoveryBreadcrumb } from '@/components/recovery/system';
@@ -350,12 +350,15 @@ function TributePurchaseModal({
               t('purchase.note2'),
               t('purchase.note3'),
               t('purchase.note4'),
-            ].map((note, idx) => (
-              <li key={idx} className="text-xs text-[#0F1C2E]/60 flex items-start gap-1.5">
-                <ArrowRight className="w-3 h-3 mt-0.5 flex-shrink-0 text-[#1F6F78]" />
-                {note}
-              </li>
-            ))}
+            ].map((note, idx) => {
+              const NoteArrow = isAr ? ArrowLeft : ArrowRight;
+              return (
+                <li key={idx} className="text-xs text-[#0F1C2E]/60 flex items-start gap-1.5">
+                  <NoteArrow className="w-3 h-3 mt-0.5 flex-shrink-0 text-[#1F6F78]" />
+                  {note}
+                </li>
+              );
+            })}
           </ul>
         </div>
 

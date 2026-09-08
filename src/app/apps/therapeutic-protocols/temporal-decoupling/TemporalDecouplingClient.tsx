@@ -8,7 +8,7 @@ import {
 } from '@/components/therapeutic';
 import {
   createProtocolReducer, loadPersistedProgress, persistProgress,
-  clearPersistedProgress,
+  clearPersistedProgress, scrollToTop,
 } from '@/components/therapeutic/types';
 import { TEMPORAL_DECOUPLING_META, TEMPORAL_DECOUPLING_STEPS } from '@/lib/therapeutic-protocols/temporal-decoupling';
 
@@ -61,9 +61,7 @@ export default function TemporalDecouplingClient() {
     }
   }, [state.phase, state.currentStep, restored]);
 
-  const scrollTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  const scrollTop = useCallback(() => scrollToTop(), []);
 
   const handleBegin = useCallback(() => {
     dispatch({ type: 'TO_PREPARATION' });

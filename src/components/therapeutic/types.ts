@@ -165,6 +165,19 @@ export function persistProgress(
   }
 }
 
+/**
+ * Scroll to the top of the viewport, respecting the user's reduced-motion
+ * preference (jumps instantly instead of animating). Shared by all three
+ * protocol clients so phase/step transitions never fight the OS setting.
+ */
+export function scrollToTop(): void {
+  if (typeof window === 'undefined') return;
+  const reduceMotion =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+
 /** Clear saved progress (called on completion). */
 export function clearPersistedProgress(slug: string): void {
   if (typeof window === 'undefined') return;

@@ -7,7 +7,7 @@ import {
 } from '@/components/therapeutic';
 import {
   createProtocolReducer, loadPersistedProgress, persistProgress,
-  clearPersistedProgress,
+  clearPersistedProgress, scrollToTop,
 } from '@/components/therapeutic/types';
 import { WHITE_MIRROR_META, WHITE_MIRROR_STEPS } from '@/lib/therapeutic-protocols/white-mirror';
 import { useRouter } from 'next/navigation';
@@ -69,9 +69,7 @@ export default function WhiteMirrorClient() {
     }
   }, [state.phase, state.currentStep, restored]);
 
-  const scrollTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  const scrollTop = useCallback(() => scrollToTop(), []);
 
   const handleBegin = useCallback(() => {
     dispatch({ type: 'OPEN_GATE' });

@@ -52,9 +52,9 @@ export function ProtocolCompletion({
           >
             <CheckCircle2 className="w-8 h-8" style={{ color: accentColor }} />
           </div>
-          <h2 className="text-2xl font-bold text-[#0F1C2E] mb-2">
+          <h1 className="text-2xl font-bold text-[#0F1C2E] mb-2">
             {t('outro.title')}
-          </h2>
+          </h1>
           <p className="text-[#0F1C2E]/55 leading-relaxed max-w-md mx-auto">
             {t('outro.body')}
           </p>
@@ -76,6 +76,7 @@ export function ProtocolCompletion({
             value={reflection}
             onChange={(e) => setReflection(e.target.value)}
             placeholder={ts('completion.reflectionPlaceholder')}
+            aria-label={ts('completion.reflectionTitle')}
             className="w-full h-20 px-4 py-3 rounded-xl border border-slate-200 text-[#0F1C2E] text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#1F6F78]/30 transition-all resize-none"
             maxLength={500}
           />
@@ -108,7 +109,7 @@ export function ProtocolCompletion({
               onClick={() => router.push(item.href)}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/60 border border-slate-100 text-[#0F1C2E]/65 text-sm hover:bg-white transition-colors duration-200"
             >
-              <span className="flex-1 text-right">{item.label}</span>
+              <span className="flex-1 text-start">{item.label}</span>
               <ForwardIcon className="w-4 h-4 text-[#0F1C2E]/35" />
             </button>
           ))}
