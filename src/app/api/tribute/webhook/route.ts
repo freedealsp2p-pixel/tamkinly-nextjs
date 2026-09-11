@@ -99,6 +99,8 @@ export async function GET() {
 // ============================================
 
 async function handleSubscriptionEvent(result: any) {
+  const startTime = Date.now();
+
   if (!result.tier) {
     console.warn('⚠️ Tribute webhook: Could not determine tier', {
       subscriptionId: result.subscriptionId,
@@ -209,6 +211,7 @@ async function handleCancellationEvent(result: any) {
 }
 
 async function handleDigitalProductEvent(result: any) {
+  const startTime = Date.now();
   const purchaseId = result.purchaseId;
   const productId = result.productId;
 
@@ -324,5 +327,3 @@ function generateAccessCode(): string {
   return `TMLY-${segment()}-${segment()}`;
 }
 
-// startTime needs to be accessible in handlers
-const startTime = Date.now();
