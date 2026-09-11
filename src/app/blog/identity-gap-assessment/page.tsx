@@ -12,6 +12,7 @@ import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 export default function IdentityGapAssessmentArticle() {
   const { locale } = useLocale();
@@ -60,6 +61,24 @@ export default function IdentityGapAssessmentArticle() {
                 "وجدت دراسة رائدة منشورة في مجلة Frontiers in Psychology (٢٠٢٠) أن \"فجوات الهوية\"—التناقضات بين كيفية رؤيتنا لأنفسنا وكيف نريد أن يرانا الآخرون—مرتبطة بشكل كبير بأعراض الاكتئاب. كلما كبرت الفجوة، زاد الضيق النفسي."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/identity-gap-current-future-self.webp"
+              width={2752}
+              height={1536}
+              alt={{
+                en: "Conceptual illustration showing the gap between the current self and desired future self.",
+                ar: "رسم توضيحي مفاهيمي يُظهر الفجوة بين الذات الحالية والذات المستقبلية المنشودة.",
+              }}
+              title={{
+                en: "Identity Gap: Current Self and Desired Future Self",
+                ar: "فجوة الهوية: الذات الحالية والذات المستقبلية المنشودة",
+              }}
+              caption={{
+                en: "The gap between the current self and the desired future self.",
+                ar: "الفجوة بين الذات الحالية والذات المستقبلية المرغوبة.",
+              }}
+            />
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
               {getText("What Is an Identity Gap?", "ما هي فجوة الهوية؟")}

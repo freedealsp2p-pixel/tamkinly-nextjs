@@ -12,6 +12,7 @@ import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 export default function ERQEmotionalRegulationWorksheetArticle() {
   const { locale } = useLocale();
@@ -59,6 +60,24 @@ export default function ERQEmotionalRegulationWorksheetArticle() {
                 "المشاعر ليست مجرد ردود فعل—إنها بيانات. القدرة على تنظيم الاستجابات العاطفية لا تتعلق بالكبت أو الإنكار؛ بل تتعلق باختيار كيف تتفاعل مع حياتك العاطفية. هذه هي الرؤية التي تقف خلف استبيان تنظيم المشاعر (ERQ)، الذي طوره جيمس غروس وأوليفر جون في بحثهما الرائد عام 2003."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/emotional-regulation-self-regulation.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "A person pausing during emotional activation and gradually regaining a grounded, deliberate response.",
+                ar: "شخص يتوقف لحظة أثناء التنشيط العاطفي ويستعيد تدريجيًا استجابة أهدأ وأكثر تعمدًا.",
+              }}
+              title={{
+                en: "Emotional Regulation and Self-Regulation",
+                ar: "التنظيم العاطفي والتنظيم الذاتي",
+              }}
+              caption={{
+                en: "A person pausing during emotional activation and gradually regaining a more grounded, deliberate response.",
+                ar: "شخص يتوقف أثناء التنشيط العاطفي ويستعيد تدريجيًا استجابة أكثر رسوخًا وتعمدًا.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

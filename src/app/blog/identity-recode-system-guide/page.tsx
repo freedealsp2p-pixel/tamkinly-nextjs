@@ -12,6 +12,8 @@ import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
+
 export default function IdentityRecodeSystemGuideArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
@@ -58,6 +60,24 @@ export default function IdentityRecodeSystemGuideArticle() {
                 "ماذا لو كان تغيير من أنت منهجيًا كتحديث البرمجيات؟ يطبق نظام إعادة برمجة الهوية مبادئ قائمة على الأدلة من علم النفس وعلم الأعصاب والعلوم السلوكية لإنشاء إطار تحويل كامل لمدة 30 يومًا."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/identity-transformation-methodology.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Visual model of the four stages of identity transformation, from scattered self-concept to an integrated new identity.",
+                ar: "نموذج بصري للمراحل الأربع لتحول الهوية، من مفهوم ذاتي مشتت إلى هوية جديدة متكاملة.",
+              }}
+              title={{
+                en: "The Four Stages of Identity Transformation",
+                ar: "المراحل الأربع لتحوّل الهوية",
+              }}
+              caption={{
+                en: "A visual model of identity transformation as a progressive journey from awareness to repeated action and an emerging new identity.",
+                ar: "نموذج بصري لتحوّل الهوية كرحلة تدريجية من الوعي إلى الفعل المتكرر وهوية جديدة تنبثق.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

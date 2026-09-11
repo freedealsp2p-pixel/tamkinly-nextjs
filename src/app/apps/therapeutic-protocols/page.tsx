@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { Clock, Shield, Eye, Key, ArrowRight, ArrowLeft, Lock } from 'lucide-react';
+import Image from 'next/image';
+import { Clock, Shield, ArrowRight, ArrowLeft, Lock } from 'lucide-react';
 import { useLocale, useTranslations } from '@/components/providers/LocaleProvider';
 import { RecoveryBreadcrumb } from '@/components/recovery/system';
 
 const PROTOCOLS = [
   {
     id: 'temporal-decoupling',
-    icon: Clock,
     color: '#1F6F78',
     stepCount: 7,
     durationLabel: { ar: '\u0661\u0662 \u062f\u0642\u064a\u0642\u0629', en: '12 minutes' },
@@ -17,10 +17,14 @@ const PROTOCOLS = [
     descriptionKey: 'description',
     href: '/apps/therapeutic-protocols/temporal-decoupling',
     requiresSafety: false,
+    image: '/uploads/protocols/temporal-decoupling-protocol.webp',
+    imageAlt: {
+      ar: 'بروتوكول التفكيك الزمني: تجربة موجّهة من 7 خطوات في نحو 12 دقيقة',
+      en: 'The Temporal Decoupling Protocol: a 7-step guided experience, about 12 minutes',
+    },
   },
   {
     id: 'alternative-code',
-    icon: Key,
     color: '#2A8A94',
     stepCount: 5,
     durationLabel: { ar: '\u0661\u0665 \u062f\u0642\u064a\u0642\u0629', en: '15 minutes' },
@@ -29,10 +33,14 @@ const PROTOCOLS = [
     descriptionKey: 'description',
     href: '/apps/therapeutic-protocols/alternative-code',
     requiresSafety: false,
+    image: '/uploads/protocols/alternative-code-protocol.webp',
+    imageAlt: {
+      ar: 'بروتوكول الشفرة البديلة: تجربة تفاعلية من 5 خطوات في نحو 15 دقيقة',
+      en: 'The Alternative Code Protocol: an interactive 5-step experience, about 15 minutes',
+    },
   },
   {
     id: 'white-mirror',
-    icon: Eye,
     color: '#0F1C2E',
     stepCount: 4,
     durationLabel: { ar: '\u0669 \u062f\u0642\u0627\u0626\u0642', en: '9 minutes' },
@@ -41,6 +49,11 @@ const PROTOCOLS = [
     descriptionKey: 'description',
     href: '/apps/therapeutic-protocols/white-mirror',
     requiresSafety: true,
+    image: '/uploads/protocols/white-mirror-protocol.webp',
+    imageAlt: {
+      ar: 'بروتوكول المرآة البيضاء: تجربة من 4 خطوات في نحو 9 دقائق مع بوابة أمان',
+      en: 'The White Mirror Protocol: a 4-step experience, about 9 minutes, with a safety gate',
+    },
   },
 ];
 
@@ -87,7 +100,6 @@ export default function TherapeuticProtocolsHub() {
         {/* Protocol Cards */}
         <div className="space-y-4">
           {PROTOCOLS.map((protocol) => {
-            const Icon = protocol.icon;
             return (
               <Link
                 key={protocol.id}
@@ -96,14 +108,15 @@ export default function TherapeuticProtocolsHub() {
               >
                 <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
                   <div className="flex items-start gap-4">
-                    {/* Icon */}
-                    <div
-                      className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: `${protocol.color}10` }}
-                    >
-                      <Icon
-                        className="w-6 h-6"
-                        style={{ color: protocol.color }}
+                    {/* Product thumbnail */}
+                    <div className="flex-shrink-0 w-20 sm:w-24 rounded-xl overflow-hidden border border-slate-200 bg-white">
+                      <Image
+                        src={protocol.image}
+                        alt={isAr ? protocol.imageAlt.ar : protocol.imageAlt.en}
+                        width={1408}
+                        height={768}
+                        sizes="96px"
+                        className="w-full h-auto"
                       />
                     </div>
 

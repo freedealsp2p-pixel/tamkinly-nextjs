@@ -12,6 +12,7 @@ import {
   DistressCheckIn,
 } from '@/components/recovery/system';
 import EnhancedSuggestedNextStep from '@/components/recovery/system/EnhancedSuggestedNextStep';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { useTrcState } from '@/hooks/useRecoveryState';
 
 // ──────────────────────────────────────────────────────────────
@@ -281,6 +282,25 @@ export default function ShameRecoveryPage() {
               <p className="text-base leading-relaxed text-[#0F1C2E]/80 mb-6">
                 {t('entry.description')}
               </p>
+
+              {/* Conceptual illustration — shame as an experience, not an identity */}
+              <ArticleFigure
+                src="/uploads/articles/shame-recovery-separating-self-from-shame.webp"
+                width={1376}
+                height={768}
+                alt={{
+                  en: "A person sitting calmly while a translucent cloud representing shame drifts past, separate from the self.",
+                  ar: "شخص يجلس بهدوء بينما تمر سحابة شفافة تمثل الخجل بجانبه، منفصلة عن الذات.",
+                }}
+                title={{
+                  en: "Separating the Self from Shame",
+                  ar: "فصل الذات عن الخجل",
+                }}
+                caption={{
+                  en: "A conceptual representation of recognizing shame as an experience rather than as a definition of the self.",
+                  ar: "تجسيد مفاهيمي للتعرف على الخجل كتجربة عابرة، لا كتعريف للذات.",
+                }}
+              />
 
               {/* What it is */}
               <div className="rounded-xl border border-[#1F6F78]/20 bg-white p-5 mb-6">

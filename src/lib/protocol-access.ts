@@ -44,6 +44,9 @@ export interface ProtocolProductConfig {
   /** Direct Tribute checkout links (digital product) */
   tributeTelegramLink?: string;
   tributeWebLink?: string;
+  /** Product visual (under /public) + localized accessibility description */
+  image?: string;
+  imageAlt?: { ar: string; en: string };
 }
 
 export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
@@ -63,6 +66,11 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     requiresSafety: false,
     tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcu',
     tributeWebLink: 'https://web.tribute.tg/p/Ecu',
+    image: '/uploads/protocols/temporal-decoupling-protocol.webp',
+    imageAlt: {
+      ar: 'علبة منتج بروتوكول التفكيك الزمني: تجربة علاجية موجّهة من 7 خطوات في نحو 12 دقيقة، مع خصوصية محمية، أداة عملية لإعادة توطيد الذاكرة وليست بديلاً عن الرعاية النفسية المتخصصة.',
+      en: 'The Temporal Decoupling Protocol product box: a 7-step guided therapeutic experience of about 12 minutes with protected privacy — a practical tool for memory reconsolidation, not a replacement for professional mental health care.',
+    },
   },
   'alternative-code': {
     slug: 'alternative-code',
@@ -80,6 +88,11 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     requiresSafety: false,
     tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcS',
     tributeWebLink: 'https://web.tribute.tg/p/EcS',
+    image: '/uploads/protocols/alternative-code-protocol.webp',
+    imageAlt: {
+      ar: 'بروتوكول الشفرة البديلة: تجربة علاجية تفاعلية من 5 خطوات في نحو 15 دقيقة تستخدم فاكّ الشفرة لتحويل اسم الشخص إلى مفتاح لإعادة توجيه الذاكرة.',
+      en: 'The Alternative Code Protocol: an interactive 5-step therapeutic experience of about 15 minutes that uses the Name Decoder to turn a person\'s name into a key for redirecting memory.',
+    },
   },
   'white-mirror': {
     slug: 'white-mirror',
@@ -97,6 +110,11 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     requiresSafety: true,
     tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcz',
     tributeWebLink: 'https://web.tribute.tg/p/Ecz',
+    image: '/uploads/protocols/white-mirror-protocol.webp',
+    imageAlt: {
+      ar: 'علبة منتج بروتوكول المرآة البيضاء: تجربة هادئة من 4 خطوات في نحو 9 دقائق لكسر النمط وإعادة التشفير، تبدأ ببوابة أمان وتوفر إرشاداً صوتياً اختيارياً وخصوصية محمية.',
+      en: 'The White Mirror Protocol product box: a quiet 4-step experience of about 9 minutes for pattern interrupt and recoding — starts with a safety gate, optional audio guidance, privacy protected.',
+    },
   },
 };
 

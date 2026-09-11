@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Shield, Clock, ListOrdered, Lock, MessageCircle,
   CheckCircle2, X, ExternalLink, ArrowRight, ArrowLeft,
@@ -82,6 +83,23 @@ export function ProtocolLanding({
             {isAr ? config.subtitle.ar : config.subtitle.en}
           </p>
         </div>
+
+        {/* Product visual */}
+        {config.image && (
+          <figure className="mb-8">
+            <div className="rounded-2xl overflow-hidden border border-slate-200/70 bg-white shadow-md">
+              <Image
+                src={config.image}
+                alt={isAr ? (config.imageAlt?.ar ?? '') : (config.imageAlt?.en ?? '')}
+                width={1408}
+                height={768}
+                priority
+                sizes="(min-width: 640px) 640px, 100vw"
+                className="w-full h-auto"
+              />
+            </div>
+          </figure>
+        )}
 
         {/* Protocol Info Card */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 mb-6">
