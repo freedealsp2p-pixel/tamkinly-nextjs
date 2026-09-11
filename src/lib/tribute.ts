@@ -39,11 +39,39 @@ export interface TributeWebhookPayload {
     
     // Digital product fields
     product_id?: number;
+    product_name?: string;
+    purchase_id?: number;
+    transaction_id?: number;
     user_id?: number;
     
     // Common
     cancel_reason?: string;
   };
+}
+
+// ============================================
+// PROTOCOL DIGITAL PRODUCTS (one-time $99 purchases)
+// ============================================
+// Each therapeutic protocol is a separate Tribute digital product.
+// The product IDs are configured via env vars (see .env).
+
+export const PROTOCOL_PRODUCT_ENV: Record<string, string> = {
+  'temporal-decoupling': 'TRIBUTE_PRODUCT_TEMPORAL_DECOUPLING',
+  'white-mirror': 'TRIBUTE_PRODUCT_WHITE_MIRROR',
+  'alternative-code': 'TRIBUTE_PRODUCT_ALTERNATIVE_CODE',
+};
+
+/**
+ * Resolve a Tribute digital product ID to a protocol slug.
+ * Returns null when the product is not one of the configured protocol products.
+ */
+export function getProtocolSlugForProductId(productId?: number): string | null {
+  if (!productId) return null;
+  for (const [slug, envName] of Object.entries(PROTOCOL_PRODUCT_ENV)) {
+    const raw = process.env[envName];
+    if (raw && parseInt(raw, 10) === productId) return slug;
+  }
+  return null;
 }
 
 // ============================================
@@ -146,6 +174,13 @@ export interface TributeWebhookResult {
   eventType: string;
   subscriptionId?: number;
   expiresAt?: string;
+  // Digital product fields
+  productId?: number;
+  productName?: string;
+  purchaseId?: number;
+  transactionId?: number;
+  trbUserId?: string;
+  protocolSlug?: string | null;
 }
 
 /**
@@ -167,6 +202,7 @@ export function processTributeWebhook(payload: TributeWebhookPayload): TributeWe
       eventType: name || 'unknown',
       subscriptionId: undefined,
       expiresAt: undefined,
+      protocolSlug: null,
     };
   }
   
@@ -193,6 +229,8 @@ export function processTributeWebhook(payload: TributeWebhookPayload): TributeWe
     else if (amount === 2700) tier = 'mastery';
   }
   
+  const protocolSlug = getProtocolSlugForProductId(data.product_id);
+
   return {
     tier,
     telegramUserId: data.telegram_user_id || 0,
@@ -203,6 +241,12 @@ export function processTributeWebhook(payload: TributeWebhookPayload): TributeWe
     eventType: name,
     subscriptionId: data.subscription_id,
     expiresAt: data.expires_at,
+    productId: data.product_id,
+    productName: data.product_name,
+    purchaseId: data.purchase_id,
+    transactionId: data.transaction_id,
+    trbUserId: data.trb_user_id,
+    protocolSlug,
   };
 }
 

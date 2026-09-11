@@ -56,6 +56,31 @@ interface Order {
 
 const ADMIN_PASSWORD = 'tamkinly2024';
 
+interface TributeDelivery {
+  code: string;
+  email: string;
+  isActive: boolean;
+  isUsed: boolean;
+}
+
+interface TributePurchase {
+  id: string;
+  orderNumber: string;
+  status: string;
+  total: number;
+  currency: string;
+  createdAt: string;
+  purchaseId: number | null;
+  productId: number | null;
+  productName: string | null;
+  protocolSlug: string | null;
+  telegramUserId: number | null;
+  telegramUsername: string | null;
+  trbUserId: string | null;
+  grant: string;
+  delivery: TributeDelivery | null;
+}
+
 export default function OrdersAdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
@@ -97,6 +122,61 @@ export default function OrdersAdminPage() {
       console.error('Failed to load orders:', error);
     } finally {
       setLoading(false);
+    }
+    loadTributePurchases();
+  };
+
+  // ============================================
+  // TRIBUTE DIGITAL PRODUCT PURCHASES
+  // ============================================
+  const [tributePurchases, setTributePurchases] = useState<TributePurchase[]>([]);
+  const [redeemEmails, setRedeemEmails] = useState<Record<string, string>>({});
+  const [redeemBusy, setRedeemBusy] = useState<string | null>(null);
+  const [redeemMsg, setRedeemMsg] = useState<Record<string, string>>({});
+
+  const loadTributePurchases = async () => {
+    try {
+      const response = await fetch('/api/admin/tribute-purchases');
+      const data = await response.json();
+      if (data.purchases) {
+        setTributePurchases(data.purchases);
+      }
+    } catch (error) {
+      console.error('Failed to load tribute purchases:', error);
+    }
+  };
+
+  const redeemTributePurchase = async (orderId: string) => {
+    const email = (redeemEmails[orderId] || '').trim();
+    if (!email) {
+      setRedeemMsg((m) => ({ ...m, [orderId]: 'Enter the buyer’s email first' }));
+      return;
+    }
+    setRedeemBusy(orderId);
+    setRedeemMsg((m) => ({ ...m, [orderId]: '' }));
+    try {
+      const response = await fetch('/api/admin/tribute-purchases', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId, email }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setRedeemMsg((m) => ({
+          ...m,
+          [orderId]: data.emailSent
+            ? `Granted ✓ Code ${data.code} emailed to ${data.email}`
+            : `Granted ✓ Code ${data.code} — email failed, send it manually to ${data.email}`,
+        }));
+        await loadTributePurchases();
+      } else {
+        setRedeemMsg((m) => ({ ...m, [orderId]: data.error || 'Redemption failed' }));
+      }
+    } catch (error) {
+      console.error('Failed to redeem purchase:', error);
+      setRedeemMsg((m) => ({ ...m, [orderId]: 'Network error' }));
+    } finally {
+      setRedeemBusy(null);
     }
   };
 
@@ -274,6 +354,80 @@ export default function OrdersAdminPage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Tribute Protocol Purchases (digital products via Tribute webhook) */}
+        <Card className="border-0 shadow-sm mb-8">
+          <CardHeader>
+            <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
+              <Key className="w-5 h-5 text-[#1F6F78]" />
+              Tribute Protocol Purchases
+              {tributePurchases.filter(p => p.grant === 'PENDING_EMAIL').length > 0 && (
+                <Badge className="bg-amber-100 text-amber-700">
+                  {tributePurchases.filter(p => p.grant === 'PENDING_EMAIL').length} awaiting email
+                </Badge>
+              )}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {tributePurchases.length === 0 ? (
+              <p className="text-sm text-[#8A94A6]">
+                No Tribute digital product purchases yet. Verified payments appear here automatically.
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {tributePurchases.map((p) => (
+                  <div key={p.id} className="p-4 rounded-lg border border-slate-200 bg-white">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div>
+                        <p className="font-semibold text-[#0F1C2E] text-sm">
+                          {p.productName || 'Tribute product'}
+                          <span className="text-[#8A94A6] font-normal"> · ${p.total.toFixed(2)} {p.currency}</span>
+                        </p>
+                        <p className="text-xs text-[#8A94A6] mt-0.5">
+                          Purchase #{p.purchaseId ?? '—'} · {p.protocolSlug || 'unmapped'}
+                          {p.telegramUsername ? ` · @${p.telegramUsername}` : ''} · {new Date(p.createdAt).toLocaleString()}
+                        </p>
+                      </div>
+                      {p.grant === 'REDEEMED' ? (
+                        <Badge className="bg-green-100 text-green-700">
+                          <CheckCircle2 className="w-3 h-3 mr-1" />
+                          {p.delivery?.code}
+                        </Badge>
+                      ) : p.grant === 'PENDING_EMAIL' ? (
+                        <Badge className="bg-amber-100 text-amber-700"><Clock className="w-3 h-3 mr-1" />Awaiting buyer email</Badge>
+                      ) : (
+                        <Badge className="bg-[#f8eded] text-[#a86060]"><XCircle className="w-3 h-3 mr-1" />{p.grant}</Badge>
+                      )}
+                    </div>
+                    {p.grant === 'PENDING_EMAIL' && (
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <Input
+                          type="email"
+                          placeholder="buyer@email.com"
+                          className="max-w-xs h-9 text-sm"
+                          value={redeemEmails[p.id] || ''}
+                          onChange={(e) => setRedeemEmails((m) => ({ ...m, [p.id]: e.target.value }))}
+                        />
+                        <Button
+                          size="sm"
+                          className="bg-[#1F6F78] hover:bg-[#17606a] text-white"
+                          disabled={redeemBusy === p.id}
+                          onClick={() => redeemTributePurchase(p.id)}
+                        >
+                          {redeemBusy === p.id ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4 mr-1" />}
+                          Grant &amp; email code
+                        </Button>
+                        {redeemMsg[p.id] && (
+                          <span className="text-xs text-[#1F6F78]">{redeemMsg[p.id]}</span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Orders List */}
         <div className="grid lg:grid-cols-3 gap-6">

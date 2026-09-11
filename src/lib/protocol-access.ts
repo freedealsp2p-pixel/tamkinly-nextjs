@@ -41,6 +41,9 @@ export interface ProtocolProductConfig {
   stepCount: number;
   durationLabel: { ar: string; en: string };
   requiresSafety: boolean;
+  /** Direct Tribute checkout links (digital product) */
+  tributeTelegramLink?: string;
+  tributeWebLink?: string;
 }
 
 export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
@@ -58,6 +61,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     stepCount: 7,
     durationLabel: { ar: '١٢ دقيقة', en: '12 minutes' },
     requiresSafety: false,
+    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcu',
+    tributeWebLink: 'https://web.tribute.tg/p/Ecu',
   },
   'alternative-code': {
     slug: 'alternative-code',
@@ -73,6 +78,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     stepCount: 5,
     durationLabel: { ar: '١٥ دقيقة', en: '15 minutes' },
     requiresSafety: false,
+    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcS',
+    tributeWebLink: 'https://web.tribute.tg/p/EcS',
   },
   'white-mirror': {
     slug: 'white-mirror',
@@ -88,6 +95,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     stepCount: 4,
     durationLabel: { ar: '٩ دقائق', en: '9 minutes' },
     requiresSafety: true,
+    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcz',
+    tributeWebLink: 'https://web.tribute.tg/p/Ecz',
   },
 };
 

@@ -209,8 +209,108 @@ async function handleCancellationEvent(result: any) {
 }
 
 async function handleDigitalProductEvent(result: any) {
-  // Similar to subscription but for one-time digital product purchases
-  return handleSubscriptionEvent(result);
+  const purchaseId = result.purchaseId;
+  const productId = result.productId;
+
+  if (!purchaseId) {
+    console.warn('⚠️ Tribute digital product event missing purchase_id — ignored', {
+      productId,
+      telegramUserId: result.telegramUserId,
+    });
+    return NextResponse.json({ success: true, message: 'Event received but missing purchase_id' });
+  }
+
+  // Idempotency: one order per Tribute purchase_id
+  const paymentKey = `tribute_prod_${purchaseId}`;
+  const existingOrder = await db.order.findFirst({
+    where: { paymentId: paymentKey },
+  });
+
+  if (existingOrder && existingOrder.status === 'COMPLETED') {
+    console.log('Tribute digital product already processed:', existingOrder.orderNumber);
+    return NextResponse.json({ success: true, message: 'Already processed' });
+  }
+
+  const customerEmail = result.email || `telegram_${result.telegramUserId || 0}@tribute.local`;
+  const orderNumber = `TRB-P${purchaseId}-${Date.now()}`;
+  const protocolSlug = result.protocolSlug || null;
+
+  const notesData = {
+    source: 'tribute_digital_product',
+    purchaseId,
+    productId: productId ?? null,
+    productName: result.productName || null,
+    transactionId: result.transactionId ?? null,
+    telegramUserId: result.telegramUserId || null,
+    telegramUsername: result.telegramUsername || null,
+    trbUserId: result.trbUserId || null,
+    protocolSlug,
+    grant: protocolSlug ? 'PENDING_EMAIL' : 'NO_PROTOCOL_MAPPING',
+  };
+
+  if (existingOrder) {
+    await db.order.update({
+      where: { id: existingOrder.id },
+      data: {
+        status: 'COMPLETED',
+        paymentMethod: 'tribute',
+        paidAt: new Date(),
+        fulfilledAt: new Date(),
+        notes: JSON.stringify(notesData),
+      },
+    });
+  } else {
+    await db.order.create({
+      data: {
+        orderNumber,
+        customerEmail,
+        status: 'COMPLETED',
+        subtotal: result.amount / 100,
+        total: result.amount / 100,
+        currency: (result.currency || 'usd').toUpperCase(),
+        paymentId: paymentKey,
+        transactionId: result.transactionId ? String(result.transactionId) : undefined,
+        paymentMethod: 'tribute',
+        paymentStatus: 'COMPLETED',
+        paidAt: new Date(),
+        fulfilledAt: new Date(),
+        notes: JSON.stringify(notesData),
+        items: {
+          create: {
+            productId: protocolSlug || String(productId ?? 'unknown'),
+            productName: result.productName || `Tribute product ${productId ?? ''}`.trim(),
+            price: result.amount / 100,
+            quantity: 1,
+          },
+        },
+      },
+    });
+  }
+
+  console.log('Tribute digital product purchase recorded:', {
+    purchaseId,
+    productId,
+    productName: result.productName,
+    protocolSlug: protocolSlug || '(unmapped product)',
+    grant: notesData.grant,
+    telegramUserId: result.telegramUserId,
+    telegramUsername: result.telegramUsername,
+    amount: result.amount,
+    currency: result.currency,
+  });
+
+  if (!protocolSlug) {
+    console.warn('⚠️ Tribute product is NOT mapped to a protocol — set TRIBUTE_PRODUCT_* env var', {
+      productId,
+    });
+  }
+
+  return NextResponse.json({
+    success: true,
+    message: 'Digital product purchase recorded',
+    protocolSlug,
+    processingTime: `${Date.now() - startTime}ms`,
+  });
 }
 
 // ============================================

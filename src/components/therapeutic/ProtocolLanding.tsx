@@ -326,9 +326,9 @@ function TributePurchaseModal({
           ))}
         </div>
 
-        {/* Telegram CTA */}
+        {/* Tribute checkout CTA — direct product link when configured */}
         <a
-          href={isAr ? 'https://t.me/tamkinly' : 'https://t.me/tamkinly'}
+          href={config.tributeTelegramLink || 'https://t.me/tamkinly'}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl text-white font-semibold transition-all duration-200 hover:shadow-lg active:scale-[0.98]"
@@ -338,6 +338,18 @@ function TributePurchaseModal({
           {t('purchase.telegramCta')}
           <ExternalLink className="w-4 h-4" />
         </a>
+
+        {config.tributeWebLink && (
+          <a
+            href={config.tributeWebLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl text-[#0F1C2E]/70 font-medium text-sm hover:bg-slate-100 transition-colors"
+          >
+            <ExternalLink className="w-4 h-4" />
+            {t('purchase.webCta')}
+          </a>
+        )}
 
         {/* Important notes */}
         <div className="bg-[#F5F9F8] rounded-xl p-4 space-y-2">
