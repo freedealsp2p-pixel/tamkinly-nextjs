@@ -377,7 +377,11 @@
     "traumaRecovery": "التعافي من الصدمات",
     "basicProduct": "أساسي — $7/شهر",
     "premiumProduct": "مميز — $17/شهر",
-    "masteryProduct": "إتقان — $27/شهر"
+    "masteryProduct": "إتقان — $27/شهر",
+    "protocolsHub": "البروتوكولات العلاجية",
+    "temporalDecoupling": "التفكيك الزمني — $99",
+    "whiteMirror": "المرآة البيضاء — $99",
+    "alternativeCode": "الشفرة البديلة — $99"
   },
   "search": {
     "identityQuiz": "اختبار فجوة الهوية",

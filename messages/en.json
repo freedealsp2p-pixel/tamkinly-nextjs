@@ -377,7 +377,11 @@
     "downloads": "Downloads",
     "basicProduct": "Basic — $7/mo",
     "premiumProduct": "Premium — $17/mo",
-    "masteryProduct": "Mastery — $27/mo"
+    "masteryProduct": "Mastery — $27/mo",
+    "protocolsHub": "Therapeutic Protocols",
+    "temporalDecoupling": "Temporal Decoupling — $99",
+    "whiteMirror": "White Mirror — $99",
+    "alternativeCode": "Alternative Code — $99"
   },
   "search": {
     "identityQuiz": "Identity Gap Quiz",

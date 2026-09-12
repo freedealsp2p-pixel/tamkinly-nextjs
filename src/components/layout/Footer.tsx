@@ -29,6 +29,10 @@ export function Footer() {
     { href: "/products/basic", label: t("basicProduct") },
     { href: "/products/premium", label: t("premiumProduct") },
     { href: "/products/mastery", label: t("masteryProduct") },
+    { href: "/apps/therapeutic-protocols", label: t("protocolsHub") },
+    { href: "/apps/therapeutic-protocols/temporal-decoupling", label: t("temporalDecoupling") },
+    { href: "/apps/therapeutic-protocols/white-mirror", label: t("whiteMirror") },
+    { href: "/apps/therapeutic-protocols/alternative-code", label: t("alternativeCode") },
   ];
 
   const recoveryLinks = [
