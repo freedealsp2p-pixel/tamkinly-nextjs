@@ -155,6 +155,24 @@ export default function PrivacyPolicyPage() {
 
                 <Separator />
 
+                {/* Journal & Worksheets Confidentiality */}
+                <div>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4 flex items-center gap-2">
+                    <Lock className="w-5 h-5 text-[#3DD4B0]" />
+                    {t('journalConfidentiality')}
+                  </h2>
+                  <p className="text-[#2B2E34] leading-relaxed mb-3">
+                    {t('journalConfidentialityDesc')}
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-[#2B2E34]">
+                    <li>{t('journalPoint1')}</li>
+                    <li>{t('journalPoint2')}</li>
+                    <li>{t('journalPoint3')}</li>
+                  </ul>
+                </div>
+
+                <Separator />
+
                 {/* Data Security */}
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('dataSecurity')}</h2>
@@ -166,6 +184,40 @@ export default function PrivacyPolicyPage() {
                     <li>{t('security2')}</li>
                     <li>{t('security3')}</li>
                     <li>{t('security4')}</li>
+                    <li>{t('security5')}</li>
+                    <li>{t('security6')}</li>
+                  </ul>
+                </div>
+
+                <Separator />
+
+                {/* Third-Party Services */}
+                <div>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('thirdPartyTitle')}</h2>
+                  <p className="text-[#2B2E34] leading-relaxed mb-3">
+                    {t('thirdPartyIntro')}
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-sm text-[#2B2E34]">
+                    <li>{t('tpBrevo')}</li>
+                    <li>{t('tpTribute')}</li>
+                    <li>{t('tpGroq')}</li>
+                    <li>{t('tpCloudflare')}</li>
+                    <li>{t('tpAnalytics')}</li>
+                  </ul>
+                </div>
+
+                <Separator />
+
+                {/* Data Retention */}
+                <div>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('dataRetention')}</h2>
+                  <p className="text-[#2B2E34] leading-relaxed mb-3">
+                    {t('dataRetentionDesc')}
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-[#2B2E34]">
+                    <li>{t('retentionPoint1')}</li>
+                    <li>{t('retentionPoint2')}</li>
+                    <li>{t('retentionPoint3')}</li>
                   </ul>
                 </div>
 
