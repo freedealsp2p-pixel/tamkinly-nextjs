@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ export default function HowToBuildHabitsThatStickArticle() {
         dateModified="2026-03-05"
         author="Tamkinly Team"
         keywords={["build habits that stick", "habit formation", "identity-based habits", "science of habits", "how to build habits", "lasting habits", "habit loop"]}
+        image="/uploads/articles/habits-that-stick-context-repetition.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,24 @@ export default function HowToBuildHabitsThatStickArticle() {
                 "لقد حاولت بناء عادات من قبل. بدأت بقوة — متحمساً، ملتزماً، مقتنعاً أن هذه المرة ستكون مختلفة. ولبضعة أيام، ربما حتى بضعة أسابيع، نجح الأمر. ثم جاءت الحياة. تلاشت العادة. لمت نفسك على غياب الانضباط، على عدم الاتساق الكافي، على عدم الرغبة بما يكفي. لكن إليك الحقيقة التي لم يخبرك بها أحد: المشكلة لم تكن أبداً في انضباطك. المشكلة كانت في نهجك."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/habits-that-stick-context-repetition.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Conceptual illustration of repeated behavior becoming an automatic everyday routine through consistent environmental cues.",
+                ar: "رسم توضيحي مفاهيمي لسلوك متكرر يتحول إلى روتين يومي تلقائي بدعم محفزات بيئية ثابتة.",
+              }}
+              title={{
+                en: "How Habits Become Part of Everyday Life",
+                ar: "كيف تصبح العادات جزءاً من الحياة اليومية",
+              }}
+              caption={{
+                en: "A conceptual view of how repeated behavior, supported by consistent environmental cues, can gradually become part of an everyday routine.",
+                ar: "نظرة مفاهيمية لكيفية تحول السلوك المتكرر، بدعم من محفزات بيئية ثابتة، إلى جزء من الروتين اليومي.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

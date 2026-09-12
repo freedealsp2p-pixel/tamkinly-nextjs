@@ -38,6 +38,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   // App Guides
   {
     slug: 'identity-gap-assessment',
+    image: '/uploads/articles/identity-gap-current-future-self.webp',
     title: 'The Identity Gap Assessment: Discover What\'s Holding You Back',
     titleAr: 'تقييم فجوة الهوية: اكتشف ما يعيقك',
     description: 'Research-backed assessment revealing the gap between who you are and who you want to become. Free 3-minute quiz with personalized insights.',
@@ -56,6 +57,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'values-clarification-tool',
+    image: '/uploads/articles/values-clarification-tool.webp',
     title: 'Values Clarification Tool: Find What Truly Matters',
     titleAr: 'أداة توضيح القيم: اكتشف ما يهم حقاً',
     description: 'Scientific method to discover your core values and align your life with what matters most. Based on ACT and positive psychology research.',
@@ -67,7 +69,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     featured: false,
     tier: 'FREE',
     datePublished: '2026-02-07',
-    dateModified: '2026-02-09',
+    dateModified: '2026-09-13',
     author: 'Tamkinly Team',
     authorAr: 'فريق تمكينلي',
     keywords: ['values clarification', 'core values', 'ACT therapy', 'positive psychology', 'self-discovery'],
@@ -92,6 +94,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'identity-recode-system-guide',
+    image: '/uploads/articles/identity-transformation-methodology.webp',
     title: 'Identity Recode System: Complete 30-Day Transformation',
     titleAr: 'نظام إعادة صياغة الهوية: تحول كامل في ٣٠ يوماً',
     description: 'Full identity transformation system with 6 interconnected components. Includes worksheets, trackers, and structured progression.',
@@ -215,6 +218,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'erq-emotional-regulation-worksheet',
+    image: '/uploads/articles/emotional-regulation-self-regulation.webp',
     title: 'ERQ Emotional Regulation: Master Your Inner World',
     titleAr: 'التنظيم العاطفي ERQ: أتقن عالمك الداخلي',
     description: 'Based on Gross & John\'s research. Cognitive reappraisal vs. suppression—the science of emotional intelligence.',
@@ -370,6 +374,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'work-on-yourself',
+    image: '/uploads/articles/psycho-cybernetics-self-image-transformation.webp',
     title: 'Work on Yourself: The Psycho-Cybernetics of Identity',
     titleAr: 'اعمل على نفسك: السايبرنيتيكا النفسية للهوية',
     description: 'Your self-image controls everything. Change the inner image, change everything.',
@@ -380,7 +385,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     readTimeAr: '١٠ دقائق قراءة',
     featured: true,
     datePublished: '2026-07-10',
-    dateModified: '2026-07-12',
+    dateModified: '2026-09-13',
     author: 'Tamkinly Team',
     authorAr: 'فريق تمكينلي',
     keywords: ['psycho-cybernetics', 'self-image', 'maxwell maltz', 'inner image', 'identity change'],
@@ -455,6 +460,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'physics-of-consciousness',
+    image: '/uploads/articles/physics-of-consciousness-repetition-patterns.webp',
     title: 'The Physics of Consciousness: How Repetition Rewrites Your Identity',
     titleAr: 'فيزياء الوعي: كيف يعيد التكرار كتابة هويتك',
     description: 'Reality happens within you. Your brain uses repetition to pave the neural pathways that define your identity — shift from victim to engineer.',
@@ -465,7 +471,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     readTimeAr: '١١ دقيقة قراءة',
     featured: false,
     datePublished: '2026-05-09',
-    dateModified: '2026-05-09',
+    dateModified: '2026-09-13',
     author: 'Tamkinly Team',
     authorAr: 'فريق تمكينلي',
     keywords: ['consciousness', 'neuroplasticity', 'repetition', 'identity reconstruction', 'metacognition'],
@@ -508,6 +514,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   // High-Volume SEO Articles
   {
     slug: 'how-to-build-habits-that-stick',
+    image: '/uploads/articles/habits-that-stick-context-repetition.webp',
     title: 'How to Build Habits That Stick: The Science of Identity-Based Habit Formation',
     titleAr: 'كيف تبني عادات تستمر: علم تكوين العادات المبنية على الهوية',
     description: 'Stop relying on willpower. Learn the science-backed identity-based approach to building habits that become automatic — not forced.',
@@ -518,7 +525,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     readTimeAr: '١١ دقيقة قراءة',
     featured: true,
     datePublished: '2026-03-05',
-    dateModified: '2026-03-05',
+    dateModified: '2026-09-13',
     author: 'Tamkinly Team',
     authorAr: 'فريق تمكينلي',
     keywords: ['build habits that stick', 'habit formation', 'identity-based habits', 'science of habits', 'how to build habits', 'lasting habits', 'habit loop'],
@@ -789,9 +796,13 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
   const enUrl = `https://tamkinly.com/blog/${article.slug}`;
   const arUrl = `https://tamkinly.com/ar/blog/${article.slug}`;
   const fullUrl = isAr ? arUrl : enUrl;
-  const imageUrl = article.image 
+  const hasArticleImage = Boolean(article.image);
+  const imageUrl = hasArticleImage
     ? `https://tamkinly.com${article.image}` 
     : 'https://tamkinly.com/og-image.webp';
+  // Declared OG dims must match the real asset: article photos are 1376x768, fallback brand OG is 1200x630
+  const ogWidth = hasArticleImage ? 1376 : 1200;
+  const ogHeight = hasArticleImage ? 768 : 630;
   
   return {
     title: smartPageTitle(title, suffix),
@@ -819,8 +830,8 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
       images: [
         {
           url: imageUrl,
-          width: 1200,
-          height: 630,
+          width: ogWidth,
+          height: ogHeight,
           alt: title,
         },
       ],

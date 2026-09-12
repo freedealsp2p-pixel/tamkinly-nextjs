@@ -8,6 +8,7 @@ import { ArrowRight, Clock, User, Heart, Star, Target, Compass, Sparkles, CheckC
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -59,6 +60,24 @@ export default function ValuesClarificationToolArticle() {
                 "قيمك هي البنية الخفية لهويتك. عندما تعرف ما يهمك حقًا، يصبح كل قرار أوضح، وكل فعل أكثر توافقًا، وكل خطوة للأمام أكثر هدفًا."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/values-clarification-tool.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Conceptual illustration of values clarification: weighing competing priorities and choosing the direction that best aligns with what genuinely matters.",
+                ar: "رسم توضيحي مفاهيمي لتوضيح القيم: الموازنة بين أولويات متنافسة واختيار الاتجاه الأكثر انسجاماً مع ما يهم فعلاً.",
+              }}
+              title={{
+                en: "Values Clarification: Choosing What Truly Matters",
+                ar: "توضيح القيم: اختيار ما يهم حقاً",
+              }}
+              caption={{
+                en: "A visual representation of values clarification: recognizing competing priorities and identifying the direction that best aligns with what genuinely matters to you.",
+                ar: "تمثيل بصري لتوضيح القيم: إدراك الأولويات المتنافسة وتحديد الاتجاه الأكثر انسجاماً مع ما يهمك حقاً.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

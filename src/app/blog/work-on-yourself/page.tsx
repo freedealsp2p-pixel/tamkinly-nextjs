@@ -8,6 +8,7 @@ import { ArrowRight, Clock, User, Brain, ScanFace, Sparkles, RefreshCw } from "l
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -56,6 +57,24 @@ export default function WorkOnYourselfArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText("\"If you want to be rich and happy for the rest of your life, learn this lesson well: Learn to work harder on yourself than you do on your job.\" — Jim Rohn", "\"إذا أردت أن تكون غنياً وسعيداً لبقية حياتك، تعلّم هذا الدرس جيداً: تعلّم أن تعمل على نفسك بجهد أكبر مما تعمل في وظيفتك.\" — جيم رون")}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/psycho-cybernetics-self-image-transformation.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Conceptual illustration of transforming the internal self-image that shapes how we see ourselves and act in the world.",
+                ar: "رسم توضيحي مفاهيمي لتحويل الصورة الذاتية الداخلية التي تشكل كيف نرى أنفسنا وكيف نتصرف في العالم.",
+              }}
+              title={{
+                en: "Work on Yourself: Transforming Your Self-Image",
+                ar: "اعمل على نفسك: تحويل صورتك الذاتية",
+              }}
+              caption={{
+                en: "A conceptual representation of changing the internal self-image that shapes how we see ourselves and act in the world.",
+                ar: "تمثيل مفاهيمي لتغيير الصورة الذاتية الداخلية التي تشكل كيف نرى أنفسنا وكيف نتصرف في العالم.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText("Income doesn't exceed personal development by much. Success is something you attract, not something you pursue. The key isn't chasing outcomes—it's becoming the person who naturally creates those outcomes.", "الدخل لا يتجاوز التطور الشخصي بكثير. النجاح شيء تجذبه، وليس شيء تطارده. المفتاح ليس في مطاردة النتائج — بل في أن تصبح الشخص الذي يخلق هذه النتائج بشكل طبيعي.")}

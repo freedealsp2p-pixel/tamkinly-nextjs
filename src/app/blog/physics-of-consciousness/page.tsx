@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -28,6 +29,7 @@ export default function PhysicsOfConsciousnessArticle() {
         dateModified="2026-05-09"
         author="Tamkinly Team"
         keywords={["consciousness", "neuroplasticity", "repetition", "identity reconstruction", "predictive coding", "metacognition", "neural programming", "law of familiarity"]}
+        image="/uploads/articles/physics-of-consciousness-repetition-patterns.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -63,6 +65,24 @@ export default function PhysicsOfConsciousnessArticle() {
                 "لطالما اعتقدنا أن الواقع شيء يحدث لنا. لكن الأبحاث الحديثة في البرمجة العصبية تثبت أن الواقع هو نتيجة لما يحدث داخلنا. الدماغ ليس مجرد مرآة تعكس العالم الخارجي — إنه محرك تنبؤي يستخدم التكرار كأداة لرصف المسارات العصبية التي تحدد هويتك. عندما تفهم كيف تبرمج أنظمتك العصبية باللغة والوعي، تنتقل من كونك ضحية للظروف إلى مهندس للواقع."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/physics-of-consciousness-repetition-patterns.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Conceptual illustration of how repeated patterns of thought and attention gradually shape our sense of self.",
+                ar: "رسم توضيحي مفاهيمي لكيفية تأثير أنماط التفكير والانتباه المتكررة تدريجياً في إحساسنا بهويتنا.",
+              }}
+              title={{
+                en: "The Physics of Consciousness: How Repetition Shapes Patterns",
+                ar: "فيزياء الوعي: كيف يشكّل التكرار الأنماط",
+              }}
+              caption={{
+                en: "A conceptual representation of how repeated patterns of thought and attention can gradually influence our sense of self.",
+                ar: "تمثيل مفاهيمي لكيفية تأثير أنماط التفكير والانتباه المتكررة تدريجياً في إحساسنا بهويتنا.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
