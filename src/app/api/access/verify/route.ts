@@ -88,63 +88,34 @@ export async function GET(request: NextRequest) {
     const email = request.nextUrl.searchParams.get('email');
     const code = request.nextUrl.searchParams.get('code');
 
-    if (!email && !code) {
+    // PRIVACY: require BOTH code and email. Probing with an email alone must not
+    // reveal whether an address holds premium access, and code-only lookups are
+    // handled by POST /api/access/verify (which also requires the email pair).
+    if (!email || !code) {
       return NextResponse.json({ hasAccess: false });
     }
 
-    // If both code and email are provided, verify they match together
-    if (code && email) {
-      const access = await db.appAccess.findUnique({
-        where: { code: code.toUpperCase() },
-      });
-
-      if (!access) {
-        return NextResponse.json({ hasAccess: false });
-      }
-
-      // Verify email matches
-      if (access.email && access.email.toLowerCase() !== email.toLowerCase()) {
-        return NextResponse.json({ hasAccess: false });
-      }
-
-      // Check expiration
-      if (access.expiresAt && new Date() > access.expiresAt) {
-        return NextResponse.json({ hasAccess: false });
-      }
-
-      return NextResponse.json({
-        hasAccess: true,
-        productId: access.productId,
-        tier: access.tier,
-      });
-    }
-
-    // Fallback: search by code only or email only
-    const where = code
-      ? { code: code.toUpperCase() }
-      : { email: email?.toLowerCase(), isUsed: true };
-
-    const access = await db.appAccess.findFirst({
-      where,
+    const access = await db.appAccess.findUnique({
+      where: { code: code.toUpperCase() },
     });
 
     if (!access) {
       return NextResponse.json({ hasAccess: false });
     }
 
+    // Verify email matches
+    if (access.email && access.email.toLowerCase() !== email.toLowerCase()) {
+      return NextResponse.json({ hasAccess: false });
+    }
+
     // Check expiration
     if (access.expiresAt && new Date() > access.expiresAt) {
-      return NextResponse.json({ hasAccess: false, error: 'expired' });
+      return NextResponse.json({ hasAccess: false });
     }
 
     // Check if active (payment confirmed)
     if (!access.isActive) {
-      return NextResponse.json({ hasAccess: false, error: 'not_active' });
-    }
-
-    // Verify email match for code+email lookups
-    if (email && access.email && access.email.toLowerCase() !== email.toLowerCase()) {
-      return NextResponse.json({ hasAccess: false, error: 'email_mismatch' });
+      return NextResponse.json({ hasAccess: false });
     }
 
     return NextResponse.json({

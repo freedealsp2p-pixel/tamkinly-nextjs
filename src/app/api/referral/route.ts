@@ -22,19 +22,22 @@ function getRewardTier(count: number): { tier: number; reward: string; nextTierA
 
 // Create a notification for the referrer
 async function createReferralNotification(referrerId: string, type: string, referredEmail: string) {
+  // PRIVACY: never expose another user's full email address to the referrer.
+  // Notifications are user-facing — always mask the referred user's email.
+  const maskedEmail = referredEmail === 'someone' ? referredEmail : maskEmail(referredEmail);
   const notifications: Record<string, { title: string; titleAr: string; message: string; messageAr: string; actionUrl: string }> = {
     REFERRAL_SUCCESS: {
       title: 'New Referral!',
       titleAr: 'إحالة جديدة!',
-      message: `${referredEmail} signed up using your referral link.`,
-      messageAr: `${referredEmail} سجّل باستخدام رابط الإحالة الخاص بك.`,
+      message: `${maskedEmail} signed up using your referral link.`,
+      messageAr: `${maskedEmail} سجّل باستخدام رابط الإحالة الخاص بك.`,
       actionUrl: '/referral',
     },
     REWARD_EARNED: {
       title: 'Reward Earned!',
       titleAr: 'مكافأة مكتسبة!',
-      message: `You earned a reward for referring ${referredEmail}.`,
-      messageAr: `كسبت مكافأة لإحالتك ${referredEmail}.`,
+      message: `You earned a reward for referring ${maskedEmail}.`,
+      messageAr: `كسبت مكافأة لإحالتك ${maskedEmail}.`,
       actionUrl: '/referral',
     },
     REWARD_TIER_UP: {
