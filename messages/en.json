@@ -46,7 +46,7 @@
     },
     "refund": {
       "title": "Refund Policy | 30-Day Money Back Guarantee - Tamkinly",
-      "description": "We offer a 30-day money-back guarantee on all products. If you're not satisfied, contact us for a full refund—no questions asked."
+      "description": "30-day money-back guarantee on all monthly app plans. Not satisfied? Contact us for a full refund — no questions asked. One-time therapeutic protocol purchases are non-refundable after the access code is issued."
     },
     "cart": {
       "title": "Shopping Cart | Complete Your Purchase - Tamkinly",
@@ -362,6 +362,7 @@
     "startFreeAssessment": "Start Free Assessment",
     "viewProducts": "View Products",
     "socialTwitter": "Twitter / X",
+    "socialTelegram": "Telegram",
     "socialInstagram": "Instagram",
     "socialLinkedin": "LinkedIn",
     "socialYoutube": "YouTube",
@@ -1104,7 +1105,7 @@
       },
       {
         "q": "Is there a money-back guarantee?",
-        "a": "Yes! We offer a 30-day money-back guarantee on all paid products. If you're not satisfied, simply contact us for a full refund—no questions asked."
+        "a": "Yes! We offer a 30-day money-back guarantee on all monthly app plans. If you're not satisfied, simply contact us for a full refund—no questions asked. Exception: one-time therapeutic protocol purchases are non-refundable once the access code is issued."
       },
       {
         "q": "Can I upgrade later?",
@@ -1405,7 +1406,7 @@
         "questions": [
           {
             "q": "What is your refund policy?",
-            "a": "We offer a 30-day money-back guarantee on all products. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked."
+            "a": "We offer a 30-day money-back guarantee on all monthly app plans. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked. Exception: one-time Therapeutic Protocol purchases are non-refundable once the personal access code has been issued."
           },
           {
             "q": "How do I request a refund?",
@@ -1435,7 +1436,7 @@
         "questions": [
           {
             "q": "What is your refund policy?",
-            "a": "We offer a 30-day money-back guarantee on all digital products. If you are not satisfied with your purchase, you can request a full refund within 30 days of the original purchase date. No questions asked."
+            "a": "We offer a 30-day money-back guarantee on all monthly app plans. If you are not satisfied with your purchase, you can request a full refund within 30 days of the original purchase date — no questions asked. Exception: one-time Therapeutic Protocol purchases become non-refundable once the personal access code has been issued."
           },
           {
             "q": "Do you offer any guarantees on results?",
@@ -2219,7 +2220,7 @@
   "termsPage": {
     "badge": "Terms of Service",
     "title": "Terms of Service",
-    "lastUpdated": "Last updated: April 2025",
+    "lastUpdated": "Last updated: September 2026",
     "youMay": "You May",
     "youMay1": "Use products for personal use",
     "youMay2": "Print for personal use",
@@ -2262,7 +2263,9 @@
     "governingLawDesc": "These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.",
     "questionsTerms": "Questions About Terms?",
     "questionsTermsDesc": "Contact us for any questions regarding these terms",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "paymentsAndRefunds": "Payments & Refunds",
+    "paymentsDesc": "Prices are shown in US dollars and may change at any time; the price in effect at the time of your purchase is the price that applies to you. Monthly app plans (Basic, Premium, Mastery) can be cancelled anytime and are covered by our 30-day money-back guarantee: if you are not satisfied, contact us within 30 days of purchase and we will refund you in full. One-time Therapeutic Protocol purchases are non-refundable once your personal access code has been issued, because the code cannot be deactivated after delivery. To request a refund, email hello@tamkinly.com from the address used for the purchase; approved refunds are returned to the original payment method. The same policy applies to purchases made through Telegram (Tribute), with refund requests handled through our support email."
   },
   "refundPage": {
     "badge": "Refund Policy",
@@ -2281,8 +2284,8 @@
     "ourPromise": "Our Promise",
     "ourPromiseDesc": "We stand behind our products 100%. If you're not completely satisfied with your purchase, we'll refund your money in full. No questions asked, no hard feelings.",
     "refundEligibility": "Refund Eligibility",
-    "allProductsEligible": "All Products Eligible",
-    "allProductsEligibleDesc": "Every product we sell is covered by our 30-day guarantee",
+    "allProductsEligible": "All Monthly Plans Eligible",
+    "allProductsEligibleDesc": "Every monthly app plan is covered by our 30-day guarantee. One-time Therapeutic Protocol purchases are the only exception — see Exceptions below.",
     "noReasonRequired": "No Reason Required",
     "noReasonRequiredDesc": "You don't need to explain why - just let us know you want a refund",
     "keepYourProgress": "Keep Your Progress",
@@ -2302,7 +2305,9 @@
     "otherMethods": "Other Methods: Refunded to the original payment source",
     "needRefund": "Need a Refund?",
     "needRefundDesc": "Contact our support team and we'll process your refund promptly",
-    "requestRefund": "Request Refund"
+    "requestRefund": "Request Refund",
+    "protocolsNonRefundable": "Therapeutic Protocols (One-Time Purchases)",
+    "protocolsNonRefundableDesc": "Protocol purchases become non-refundable once your personal access code has been issued, because the code cannot be deactivated after delivery."
   },
   "auth": {
     "signin": {
@@ -2647,7 +2652,7 @@
     "modalBody1": "If you complete the 30-day system — or even part of it — and feel the result wasn't worth the investment, we'll refund you in full.",
     "modalBody2": "No forms. No lengthy email threads. No questions.",
     "modalBody3": "We trust you. If you ask for a refund, we assume you gave it an honest try.",
-    "modalBody4": "To request a refund: email us at support@tamkinly.com within 30 days of purchase."
+    "modalBody4": "To request a refund: email us at hello@tamkinly.com within 30 days of purchase."
   },
   "referralPage": {
     "title": "Invite Friends, Earn Rewards",

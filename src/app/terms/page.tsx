@@ -148,6 +148,16 @@ export default function TermsOfServicePage() {
 
                 <Separator />
 
+                {/* Payments & Refunds */}
+                <div>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('paymentsAndRefunds')}</h2>
+                  <p className="text-[#2B2E34] leading-relaxed">
+                    {t('paymentsDesc')}
+                  </p>
+                </div>
+
+                <Separator />
+
                 {/* Intellectual Property */}
                 <div>
                   <h2 className="font-serif text-2xl font-bold text-[#0F1C2E] mb-4">{t('intellectualProperty')}</h2>

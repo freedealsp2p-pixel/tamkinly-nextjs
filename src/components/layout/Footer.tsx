@@ -1,10 +1,11 @@
 'use client';
 
 import Link from "next/link";
-import { Mail, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Mail, Instagram, Linkedin, Youtube, Send } from "lucide-react";
 import { useTranslations } from "@/components/providers/LocaleProvider";
 
 const socialLinkData = [
+  { href: "https://t.me/tamkinly", icon: Send, labelKey: "socialTelegram" as const },
   { href: "https://instagram.com/tamkinly", icon: Instagram, labelKey: "socialInstagram" as const },
   { href: "https://linkedin.com/company/tamkinly", icon: Linkedin, labelKey: "socialLinkedin" as const },
   { href: "https://youtube.com/@tamkinly", icon: Youtube, labelKey: "socialYoutube" as const },

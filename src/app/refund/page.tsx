@@ -197,6 +197,17 @@ export default function RefundPolicyPage() {
                       </div>
                     </div>
                   </div>
+                  <div className="bg-[#f8eded] border border-[#e4c0c0] rounded-lg p-4 mt-4">
+                    <div className="flex items-start gap-3">
+                      <AlertCircle className="w-5 h-5 text-[#C97B7B] flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-medium text-[#a86060] mb-1">{t('protocolsNonRefundable')}</h4>
+                        <p className="text-sm text-[#C97B7B]">
+                          {t('protocolsNonRefundableDesc')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <Separator />
