@@ -9,6 +9,7 @@ import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import { ArticleFigure } from '@/components/blog/ArticleFigure';
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -25,6 +26,18 @@ export default function WorkOnYourselfArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Work on Yourself: The Psycho-Cybernetics of Identity"
+        headlineAr="اعمل على نفسك: السايبرنيتيكا النفسية للهوية"
+        description="Your self-image controls everything. Change the inner image, change everything."
+        slug="work-on-yourself"
+        datePublished="2026-07-10"
+        dateModified="2026-09-13"
+        author="Tamkinly Team"
+        keywords={["psycho-cybernetics", "self-image", "maxwell maltz", "inner image", "identity change"]}
+        image="/uploads/articles/psycho-cybernetics-self-image-transformation.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -271,6 +284,7 @@ export default function WorkOnYourselfArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

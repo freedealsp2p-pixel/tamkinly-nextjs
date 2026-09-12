@@ -9,6 +9,7 @@ import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import { ArticleFigure } from '@/components/blog/ArticleFigure';
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -25,6 +26,18 @@ export default function ValuesClarificationToolArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Values Clarification Tool: Find What Truly Matters"
+        headlineAr="أداة توضيح القيم: اكتشف ما يهم حقاً"
+        description="Scientific method to discover your core values and align your life with what matters most. Based on ACT and positive psychology research."
+        slug="values-clarification-tool"
+        datePublished="2026-02-07"
+        dateModified="2026-09-13"
+        author="Tamkinly Team"
+        keywords={["values clarification", "core values", "ACT therapy", "positive psychology", "self-discovery"]}
+        image="/uploads/articles/values-clarification-tool.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -392,6 +405,7 @@ export default function ValuesClarificationToolArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 
