@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ export default function GoalSettingFrameworkArticle() {
         dateModified="2026-04-05"
         author="Tamkinly Team"
         keywords={["goal setting framework", "identity-aligned goals", "goal setting", "how to set goals", "goal achievement", "identity goals", "effective goal setting"]}
+        image="/uploads/articles/identity-aligned-goal-framework.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ export default function GoalSettingFrameworkArticle() {
                 "لقد وضعت أهدافاً من قبل. قرارات رأس السنة. أهداف ربع سنوية. مراجعات سنوية. ومثل معظم الناس، شاهدت تلك الأهداف تذبل وتموت، عادة خلال أسابيع من وضعها. الأبحاث قاسية: فقط 8 بالمائة من الناس يحققون قرارات رأس السنة. الهدف المتوسط يُتخلى عنه بحلول فبراير. أهداف OKRs المؤسسية تصبح تمارين ورقية. لوحات الرؤية تجمع الغبار. النمط متسق لدرجة أن معظم الناس توقفوا عن تصديق أن الأهداف تعمل على الإطلاق. لكن الأهداف تعمل — عندما تُبنى على الأساس الصحيح. وهذا الأساس ليس معايير SMART، أو أهداف التمدد، أو أنظمة المساءلة. إنه الهوية."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/identity-aligned-goal-framework.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Layered structure showing goals supported by an identity-based foundation",
+                ar: "بنية متعددة الطبقات تُظهر أهدافاً تقوم على أساس قائم على الهوية",
+              }}
+              title={{
+                en: "Goal Setting Framework: Build Goals on Identity",
+                ar: "إطار تحديد الأهداف: ابنِ أهدافك على الهوية",
+              }}
+              caption={{
+                en: "A conceptual view of goals becoming more coherent when they are grounded in identity and translated into practical action.",
+                ar: "نظرة مفاهيمية لأهداف تصبح أكثر اتساقاً عندما تُبنى على الهوية وتُترجم إلى عمل عملي.",
+              }}
+            />
+
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
               {getText("Why Traditional Goal Setting Fails", "لماذا يفشل تحديد الأهداف التقليدي")}

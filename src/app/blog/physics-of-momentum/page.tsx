@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -29,6 +30,7 @@ export default function PhysicsOfMomentumArticle() {
         dateModified="2024-10-15"
         author="Tamkinly Team"
         keywords={["habit formation", "identity transformation", "momentum", "personal development", "18 minutes"]}
+        image="/uploads/articles/behavioral-momentum-starting.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
@@ -65,6 +67,25 @@ export default function PhysicsOfMomentumArticle() {
                 "إذا أردت أن تصبح خبيراً في أي شيء، يلزمك ثلاثة أشهر بمعدل ١٨ دقيقة يومياً. وإذا أردت أن تصبح ماهراً، يلزمك ١٨ دقيقة يومياً لمدة عام."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/behavioral-momentum-starting.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "A small initial action developing into sustained forward movement",
+                ar: "حركة أولية صغيرة تتحول تدريجياً إلى زخم مستمر إلى الأمام",
+              }}
+              title={{
+                en: "Physics of Momentum: How Movement Becomes Easier Once It Starts",
+                ar: "فيزياء الزخم: كيف تصبح الحركة أسهل بمجرد أن تبدأ",
+              }}
+              caption={{
+                en: "A small initial action can change a state of inertia into sustained movement, illustrating the idea of behavioral momentum.",
+                ar: "فعلٌ أولي صغير يمكن أن يحوّل حالة من الجمود إلى حركة مستمرة، في تجسيد لفكرة الزخم السلوكي.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

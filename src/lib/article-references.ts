@@ -705,4 +705,40 @@ export const ARTICLE_REFERENCES: Record<string, ArticleRef[]> = {
       url: 'https://www.apa.org/monitor/2014/02/scarcity',
     },
   ],
-};
+
+  'porn-recovery-roadmap': [
+    {
+      title: 'Kraus, S. W., Voon, V., & Potenza, M. N. (2016). Neuroscience of Internet Pornography Addiction: A Review and Update.',
+      source: 'Behavioral Sciences (MDPI)',
+      url: 'https://doi.org/10.3390/bs6030017',
+    },
+    {
+      title: 'Bowen, S., & Marlatt, A. (2009). Surfing the urge: Brief mindfulness-based intervention for college student smokers.',
+      source: 'Psychology of Addictive Behaviors — APA',
+      url: 'https://doi.org/10.1037/a0013126',
+    },
+    {
+      title: 'Lally, P., van Jaarsveld, C. H. M., Potts, H. W. W., & Wardle, J. (2010). How are habits formed: Modelling habit formation in the real world.',
+      source: 'European Journal of Social Psychology — Wiley',
+      url: 'https://doi.org/10.1002/ejsp.674',
+    },
+  ],
+
+  'trauma-recovery-three-stages': [
+    {
+      title: 'Herman, J. L. (1992). Complex PTSD: A syndrome in survivors of prolonged and repeated trauma.',
+      source: 'Journal of Traumatic Stress — Wiley',
+      url: 'https://doi.org/10.1002/jts.2490050305',
+    },
+    {
+      title: 'van der Kolk, B. A. (2014). The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma.',
+      source: 'Viking / Penguin Random House',
+      url: 'https://www.penguinrandomhouse.com/books/314183/the-body-keeps-the-score-by-bessel-van-der-kolk-md/',
+    },
+    {
+      title: 'Porges, S. W. (2009). The polyvagal theory: New insights into adaptive reactions of the autonomic nervous system.',
+      source: 'Cleveland Clinic Journal of Medicine — PMC',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3108032/',
+    },
+  ],
+}

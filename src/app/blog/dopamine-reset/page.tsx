@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Brain, Zap, RefreshCw, Smartphone, Coffee } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function DopamineResetArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="The 24-Hour Dopamine Reset: Reclaiming Your Focus"
+        headlineAr="إعادة ضبط الدوبامين في ٢٤ ساعة: استعد تركيزك"
+        description="Reset your motivation system in just one day and rediscover natural drive."
+        slug="dopamine-reset"
+        datePublished="2026-07-28"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['dopamine reset', 'mental clarity', 'focus', 'motivation', 'brain reset']}
+        image="/uploads/articles/digital-stimulation-attention-reset.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function DopamineResetArticle() {
                 "هذا أهم من أهدافك. يفسر لماذا تبدو المهام البسيطة ساحقة، لماذا تتصفح لساعات وما زلت تشعر بالفراغ، لماذا يبدو التحفيز مستحيلاً للاستمرار."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/digital-stimulation-attention-reset.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person putting a smartphone aside and returning attention to a low-stimulation activity",
+                ar: "شخص يضع هاتفه الذكي جانباً ويعيد انتباهه إلى نشاط منخفض التحفيز",
+              }}
+              title={{
+                en: "The 24-Hour Dopamine Reset: Stepping Away From High Stimulation",
+                ar: "إعادة ضبط الدوبامين: الابتعاد عن التحفيز العالي",
+              }}
+              caption={{
+                en: "A conceptual representation of temporarily reducing digital stimulation and allowing attention to return to ordinary activities.",
+                ar: "تمثيل مفاهيمي لتقليل التحفيز الرقمي مؤقتاً والسماح للانتباه بالعودة إلى الأنشطة العادية.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -388,6 +421,7 @@ export default function DopamineResetArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

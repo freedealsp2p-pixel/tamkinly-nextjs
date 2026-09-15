@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, BookOpen, Compass, Shield, CheckCircle, ArrowUpRight } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function SelfAuthorshipWorksheetArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Self-Authorship Worksheet: Your Internal Voice Journey"
+        headlineAr="ورقة عمل تأليف الذات: رحلة صوتك الداخلي"
+        description="Based on Baxter Magolda's research. Move from external formulas to internally-defined identity through structured reflection."
+        slug="self-authorship-worksheet"
+        datePublished="2026-03-26"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['self-authorship', 'internal voice', 'baxter magolda', 'identity development', 'internal identity']}
+        image="/uploads/articles/self-authorship-journal-writing.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function SelfAuthorshipWorksheetArticle() {
                 "\"تأليف الذات هو القدرة الداخلية على تحديد معتقدات الفرد وهويته وعلاقاته الاجتماعية.\" هذا التعريف من عالمة النفس التربوية مارسيا باكستر ماغولدا يلخص جوهر ما يعنيه أن تصبح مؤلف حياتك الخاصة—رحلة من التشكيل بواسطة القوى الخارجية إلى تشكيل ذاتك."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/self-authorship-journal-writing.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person writing in an open journal, shaping their internal voice on paper",
+                ar: "شخص يكتب في دفتر مفتوح صائغاً صوته الداخلي على الورق",
+              }}
+              title={{
+                en: "Self-Authorship: Writing Your Internal Voice",
+                ar: "التأليف الذاتي: كتابة صوتك الداخلي",
+              }}
+              caption={{
+                en: "Self-authorship grows each time you put your own values and perspective into written words.",
+                ar: "ينمو التأليف الذاتي كلما وضعتَ قيمك ومنظورك في كلمات مكتوبة.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -310,6 +343,7 @@ export default function SelfAuthorshipWorksheetArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

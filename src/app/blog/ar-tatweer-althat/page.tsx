@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ function TatweerAlthatArticleAR() {
         dateModified="2026-03-01"
         author="Tamkinly Team"
         keywords={["تطوير الذات", "كيف أطور نفسي", "تغيير حياتي للأفضل", "بناء شخصية قوية", "أدوات تطوير الذات", "self development Arabic", "تطوير النفس"]}
+        image="/uploads/articles/self-development-changing-relationship.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ function TatweerAlthatArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               كل شخص يريد تطوير ذاته. لكن الغالبية تبدأ بالخطأ: تحاول تغيير أفعالها قبل أن تغيّر هويتها. النتيجة؟ تحاول وتفشل، ثم تحاول مرة أخرى وتفشل مرة أخرى، حتى تقتنع أن التغيير مستحيل. لكن الحقيقة أن التغيير ليس مستحيلاً — أنت فقط تبدأ من المكان الخطأ. تطوير الذات الحقيقي لا يبدأ بما تفعله، بل بمن تعتقد أنك عليه.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/self-development-changing-relationship.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "A person noticing their changing relationship with their environment and life as a symbol of self-development",
+                ar: "شخص يلاحظ تغير علاقته ببيئته وحياته كرمز لتطوير الذات",
+              }}
+              title={{
+                en: "Self-Development: Changing Your Relationship With Yourself and Your Life",
+                ar: "تطوير الذات: تغيير علاقتك بنفسك وبحياتك",
+              }}
+              caption={{
+                en: "A conceptual depiction of development as a change in our relationship with ourselves, our choices, and our environment.",
+                ar: "تصوير مفاهيمي للتطور بوصفه تغيراً في علاقتنا بأنفسنا واختياراتنا وبيئتنا.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               عندما تبحث عن "تطوير الذات" على الإنترنت، ستجد آلاف المقالات التي تخبرك بفعل أشياء: استيقظ مبكراً، مارس الرياضة، اقرأ كتباً، نظّم وقتك. لكن هذه النصائح تعالج الأعراض لا المرض. إنها مثل أن تعطي مسكناً لشخص يعاني من صداع بسبب ضعف النظر — المسكن يخفف الألم مؤقتاً، لكن المشكلة الحقيقية لا تُحل. المشكلة الحقيقية ليست في أفعالك، بل في الهوية التي تُوجّه هذه الأفعال.

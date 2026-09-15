@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -26,6 +27,7 @@ function CharismaArticleAR() {
         dateModified="2026-07-12"
         author="Tamkinly Team"
         keywords={["كاريزما", "التأثير", "الجاذبية الاجتماعية", "charisma", "بناء العلاقات", "الحضور", "التأثير الإيجابي"]}
+        image="/uploads/articles/charisma-warmth-competence-ar.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -61,6 +63,25 @@ function CharismaArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               نعرف جميعاً ذلك الشخص الذي ما إن يدخل إلى غرفة حتى يملأها بطاقة إيجابية معدية، نشعر بالراحة في وجوده ونرغب دائماً في البقاء قربه. هل هذه الميزة تولد مع الإنسان؟ الأبحاث العلمية تقول لا؛ التأثير الجاذب هو مجموعة من السلوكيات البسيطة والمتسقة التي يمكنك إتقانها لتصبح مؤثراً حقيقياً في محيطك. الكاريزما ليست هبة غامضة، بل مهارة عصبية واجتماعية يمكن تدريبها مثل أي مهارة أخرى.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/charisma-warmth-competence-ar.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Two people in a meeting where warmth and competence show through the interaction",
+                ar: "شخصان في لقاء يظهر فيه الدفء والكفاءة من خلال التفاعل",
+              }}
+              title={{
+                en: "Charisma of Influence: Warmth and Competence",
+                ar: "كاريزما التأثير: الدفء والكفاءة",
+              }}
+              caption={{
+                en: "A conceptual depiction of how warmth and competence combine to shape social impressions.",
+                ar: "تصوير مفاهيمي لكيف يمكن أن يجتمع الدفء والكفاءة في تشكيل الانطباع الاجتماعي.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               لعقود طويلة، ظن الباحثون أن الكاريزما صفة فطرية — إما أن تولد بها أو لا. لكن دراسات معملية حديثة في علم النفس الاجتماعي كشفت أن ما نسميه "كاريزما" هو في الحقيقة مزيج من أربعة سلوكيات قابلة للقياس والتدريب. الأشخاص الذين نصفهم بالمؤثرين ليسوا أذكى أو أجمل من غيرهم، بل هم يتقنون لغة معينة في التواصل تجعل الآخرين يشعرون بأهميتهم. هذه اللغة يمكن تعلمها، وهذه السلوكيات يمكن تدريبها حتى تصبح جزءاً من هويتك الاجتماعية.

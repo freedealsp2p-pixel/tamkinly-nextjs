@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ export default function StopProcrastinatingIdentityShiftArticle() {
         dateModified="2026-03-20"
         author="Tamkinly Team"
         keywords={["how to stop procrastinating", "stop procrastinating", "identity shift", "overcome procrastination", "procrastination solution", "identity-based change", "procrastination identity"]}
+        image="/uploads/articles/procrastination-avoidance-first-action.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ export default function StopProcrastinatingIdentityShiftArticle() {
                 "لقد جربت تقنية بومودورو. لقد حمّلت خمسة تطبيقات إنتاجية. لقد صنعت قوائم مهام، وضعت مواعيد نهائية، حجبت مواقع، استخدمت شركاء مساءلة، ووعدت نفسك بمكافآت. ومع ذلك — أنت لا تزال هنا. لا تزال تماطل. لا تزال تراقب الساعات تختفي في فراغ التجنب بينما العمل الذي تعرف أنه يجب عليك فعله يجلس هناك، يزداد ثقلاً مع كل دقيقة تمر. الذنب يتراكم. القلق يتصاعد. وغداً، ستفعل كل ذلك مرة أخرى."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/procrastination-avoidance-first-action.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person hesitating before beginning a manageable but meaningful task",
+                ar: "شخص يتردد قبل البدء بمهمة قابلة للإنجاز لكنها ذات معنى",
+              }}
+              title={{
+                en: "How to Stop Procrastinating: Start With the First Action",
+                ar: "كيف تتوقف عن التسويف: ابدأ بالفعل الأول",
+              }}
+              caption={{
+                en: "Procrastination can persist when the emotional resistance to starting feels larger than the task itself.",
+                ar: "قد يستمر التسويف عندما تبدو المقاومة العاطفية للبدء أكبر من المهمة نفسها.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

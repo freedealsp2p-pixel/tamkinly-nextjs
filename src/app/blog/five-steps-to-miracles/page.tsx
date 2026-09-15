@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Heart, Sun, Unlock, Shield } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function FiveStepsToMiraclesArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Five Steps to Miracles: A Framework for Identity Liberation"
+        headlineAr="خمس خطوات نحو المعجزات: إطار لتحرير الهوية"
+        description="Surrender the old versions of yourself. Step into who you were meant to be."
+        slug="five-steps-to-miracles"
+        datePublished="2026-06-03"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['miracles', 'identity liberation', 'transformation framework', 'self-surrender', 'personal rebirth']}
+        image="/uploads/articles/ordinary-actions-unexpected-change.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function FiveStepsToMiraclesArticle() {
                 "المعجزات ليست أحداثاً خارقة للطبيعة مخصصة لقلة محظوظة. إنها النتيجة الطبيعية لتحرير نفسك من الهوية التي كنت تمثلها للآخرين."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/ordinary-actions-unexpected-change.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Small deliberate actions creating an unexpected new possibility",
+                ar: "أفعال صغيرة متعمدة تخلق إمكانية جديدة غير متوقعة",
+              }}
+              title={{
+                en: "Five Steps to Miracles: How Small Choices Open New Possibilities",
+                ar: "خمس خطوات نحو المعجزات: كيف تفتح الخيارات الصغيرة إمكانات جديدة",
+              }}
+              caption={{
+                en: "A conceptual representation of unexpected change emerging from a sequence of ordinary, deliberate actions.",
+                ar: "تمثيل مفاهيمي لتغيير غير متوقع ينشأ من سلسلة أفعال عادية متعمدة.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -314,6 +347,7 @@ export default function FiveStepsToMiraclesArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Star, Shield, TrendingUp } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function BecomingExceptionalArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Becoming Exceptional: Why Ordinary Can Never Build Legacy"
+        headlineAr="التحول لاستثنائي: لماذا لا يمكن للعادي بناء إرث"
+        description="You cannot be exceptional while living an ordinary life. The courage to embrace what makes you different."
+        slug="becoming-exceptional"
+        datePublished="2026-07-19"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['exceptional', 'excellence', 'legacy', 'extraordinary life', 'personal greatness']}
+        image="/uploads/articles/becoming-exceptional-deliberate-practice.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -56,6 +70,25 @@ export default function BecomingExceptionalArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText("You cannot make yourself exceptional and live an ordinary life. To become exceptional, you must live an exceptional life. And an exceptional life doesn't always mean better—it means different enough that most people would reject it.", "لا يمكنك أن تصبح استثنائياً وتعيش حياة عادية. لتصبح استثنائياً، يجب أن تعيش حياة استثنائية. والحياة الاستثنائية لا تعني دائماً الأفضل — بل تعني مختلفة بما يكفي ليرفضها معظم الناس. وهذا ما عاشه ابن خلدون حين اختار العزلة لكتابة مقدمته الشهيرة، وما عاشه المتنبي حين رفض أن يكون شاعراً عادياً في بلاط خليفة، بل أراد أن يكون صوتاً استثنائياً يتجاوز عصره.")}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/becoming-exceptional-deliberate-practice.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person surrounded by evidence of years of deliberate practice",
+                ar: "شخص تحيط به أدلة سنوات من التدريب المتعمد",
+              }}
+              title={{
+                en: "Becoming Exceptional: What Repeated Practice Leaves Behind",
+                ar: "أن تصبح استثنائياً: ما يتركه التدريب المتكرر خلفه",
+              }}
+              caption={{
+                en: "Exceptional work often carries the physical evidence of sustained practice and refinement.",
+                ar: "غالباً ما يحمل العمل الاستثنائي الأدلة المادية على ممارسة وصقل مستمرين.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText("And when that happens, you must reject them too. Oil and water don't mix. This is what it truly means to be exceptional: you must become the exception.", "وعندما يحدث ذلك، يجب أن ترفضهم أنت أيضاً. الزيت والماء لا يمتزجان. هذا هو المعنى الحقيقي للاستثنائية: يجب أن تصبح الاستثناء. وكما قال أبو الطيب المتنبي: «ومن لا يطيق صعود الجبال يعش أبد الدهر بين الحفر» — فمن يرفض الصعود يبقى في القاع، ومن يختار الاستثنائية يدفع ثمنها غالياً لكنه يصل إلى القمة.")}
@@ -245,6 +278,7 @@ export default function BecomingExceptionalArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

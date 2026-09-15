@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Zap, Target, Rocket } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function SpeedAsStrategyArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Speed as Strategy: The Execution Edge"
+        headlineAr="السرعة كاستراتيجية: ميزة التنفيذ"
+        description="The gap between idea and reality is where power lives. Execute faster than everyone else."
+        slug="speed-as-strategy"
+        datePublished="2026-06-21"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['speed', 'execution', 'strategy', 'implementation', 'action taking']}
+        image="/uploads/articles/speed-of-execution-decision-action.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -56,6 +70,25 @@ export default function SpeedAsStrategyArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText("Speed is the one trait that separates the top 1% from everyone else. Not intelligence. Not resources. Not talent. Just speed of execution after a decision is made.", "السرعة هي الصفة الوحيدة التي تفصل أعلى ١٪ عن الجميع. ليس الذكاء. ليس الموارد. ليس الموهبة. فقط سرعة التنفيذ بعد اتخاذ القرار.")}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/speed-of-execution-decision-action.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person moving immediately from decision into action",
+                ar: "شخص ينتقل فوراً من القرار إلى الفعل",
+              }}
+              title={{
+                en: "Speed as Strategy: Close the Gap Between Decision and Action",
+                ar: "السرعة كاستراتيجية: اقفل الفجوة بين القرار والفعل",
+              }}
+              caption={{
+                en: "A visual metaphor for the strategic advantage created by moving from decision to execution without unnecessary delay.",
+                ar: "استعارة بصرية للميزة الاستراتيجية التي يخلقها الانتقال من القرار إلى التنفيذ دون تأخير غير ضروري.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText("Most people think success requires being smart, having money, or knowing the right people. But there's something even more fundamental: the ability to turn ideas into reality fast.", "معظم الناس يظنون أن النجاح يتطلب الذكاء أو امتلاك المال أو معرفة الأشخاص المناسبين. لكن هناك شيء أكثر أساسية: القدرة على تحويل الأفكار إلى واقع بسرعة.")}
@@ -238,6 +271,7 @@ export default function SpeedAsStrategyArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

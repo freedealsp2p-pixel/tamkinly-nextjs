@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Brain, MessageCircle, Target, Heart, Zap, CheckCircle2, Lock } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function AIIdentityCoachGuideArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="AI Identity Coach: Your Personal Transformation Guide"
+        headlineAr="مدرب الهوية بالذكاء الاصطناعي: دليلك الشخصي للتحول"
+        description="24/7 AI coaching powered by identity science. Personalized guidance for discovery, habits, self-authorship, and emotional regulation."
+        slug="ai-identity-coach-guide"
+        datePublished="2026-03-02"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['AI coach', 'identity coaching', 'artificial intelligence', 'personal transformation', '24/7 coaching']}
+        image="/uploads/articles/ai-identity-coach-reflection.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function AIIdentityCoachGuideArticle() {
                 "أقوى أداة تحول ليست تطبيقًا أو كتيب عمل—إنها محادثة. يجلب مدرب الهوية بالذكاء الاصطناعي أطر التدريب القائمة على الأدلة إلى حوار تفاعلي، متاح كلما احتجت إلى إرشاد أو وضوح أو دعم في رحلة تحولك."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/ai-identity-coach-reflection.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person using an AI tool for structured reflection about identity and choices",
+                ar: "شخص يستخدم أداة ذكاء اصطناعي للتأمل المنظم حول الهوية والخيارات",
+              }}
+              title={{
+                en: "AI Identity Coach: Using AI for Structured Self-Reflection",
+                ar: "مدرب الهوية الذكي: استخدام الذكاء الاصطناعي للتأمل المنظم",
+              }}
+              caption={{
+                en: "A conceptual representation of AI supporting structured reflection and clearer thinking about identity and personal choices.",
+                ar: "تمثيل مفاهيمي للذكاء الاصطناعي يدعم التأمل المنظم والتفكير الأوضح في الهوية والخيارات الشخصية.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -472,6 +505,7 @@ export default function AIIdentityCoachGuideArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

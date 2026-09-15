@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ export default function MorningRoutineIdentityArticle() {
         dateModified="2026-03-12"
         author="Tamkinly Team"
         keywords={["morning routine for self improvement", "morning routine", "identity-based routine", "self improvement morning", "productive morning", "morning habits", "daily practice"]}
+        image="/uploads/articles/morning-routine-environment-cues.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ export default function MorningRoutineIdentityArticle() {
                 "لقد حمّلت قوالب الروتين الصباحي. لقد ضبطت ست منبهات. لقد اشتريت الدفتر، والمكملات، وتطبيق التأمل. ولمدة ثلاثة أيام بالضبط، استيقظت الساعة 5 صباحاً تشعر كإله الإنتاجية. ثم جاء اليوم الرابع. دق المنبه ويدك وجدت زر التأجيل قبل أن يستيقظ دماغك. بحلول اليوم السابع، أصبح الروتين مجرد ذكرى وعدت للتمرير على هاتفك في السرير. يبدو مألوفاً؟ يجب أن يكون — لأن هذا ما يحدث لـ 92 بالمائة من الناس الذين يحاولون بناء روتين صباحي."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/morning-routine-environment-cues.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Morning environment arranged to support a consistent daily routine",
+                ar: "بيئة صباحية مرتبة لدعم روتين يومي متسق",
+              }}
+              title={{
+                en: "Morning Routine: Designing a Better Start to the Day",
+                ar: "روتين الصباح: تصميم بداية أفضل ليومك",
+              }}
+              caption={{
+                en: "A morning routine becomes easier to repeat when the environment supports the sequence of actions.",
+                ar: "يصبح روتين الصباح أسهل في التكرار عندما تدعم البيئة تسلسل الأفعال.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

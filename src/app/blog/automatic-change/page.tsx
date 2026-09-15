@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -28,6 +29,7 @@ export default function AutomaticChangeArticle() {
         dateModified="2026-05-09"
         author="Tamkinly Team"
         keywords={["automatic change", "prediction error", "habits", "neuroplasticity", "basal ganglia", "procrastination", "identity recode", "micro-steps"]}
+        image="/uploads/articles/automatic-change-predictive-patterns.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -63,6 +65,25 @@ export default function AutomaticChangeArticle() {
                 "دماغك ليس أداة للتفكير. إنه محرك تنبؤ. وظيفته الأساسية ليست التأمل أو التفكّر — بل التنبؤ بما ستفعله بعد ذلك، وإبقائك داخل منطقة الأمان. كل عادة لديك، كل نمط تكرره، كل مقاومة تشعر بها عندما تحاول التغيير — كل ذلك هو دماغك يُشغّل نموذجاً تنبؤياً مصمماً لشيء واحد: البقاء من خلال الألفة. وهذا يذكّرنا بمفهوم «النفس الأمّارة بالسوء» في التراث الإسلامي — تلك القوة الداخلية التي تميل نحو الألفة والراحة وتقاوم التغيير، حتى لو كان التغيير في صالحك. الفرق أن العلم الحديث يسمّيها «الجهاز العصبي»، والتراث يسمّيها «النفس»، لكن الحقيقة واحدة: المألوف يبدو آمناً حتى لو كان مدمّراً."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/automatic-change-predictive-patterns.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person following a familiar behavioral pattern before consciously choosing",
+                ar: "شخص يتبع نمطاً سلوكياً مألوفاً قبل أن يختار بوعي",
+              }}
+              title={{
+                en: "Automatic Change: When Familiar Patterns Guide Behavior",
+                ar: "التغيير التلقائي: عندما تقود الأنماط المألوفة السلوك",
+              }}
+              caption={{
+                en: "A conceptual view of how familiar patterns can influence what we expect and do next.",
+                ar: "نظرة مفاهيمية لكيفية تأثير الأنماط المألوفة في ما نتوقعه ونفعله تالياً.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

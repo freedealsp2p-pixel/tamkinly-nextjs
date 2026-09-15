@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -26,6 +27,7 @@ function FortySummaryArticleAR() {
         dateModified="2026-07-12"
         author="Tamkinly Team"
         keywords={["خلاصة الأربعين", "التغيير نحو الأفضل", "تطوير الذات", "أهداف الحياة", "الالتزام", "التخطيط", "العطاء", "حكم الحياة"]}
+        image="/uploads/articles/forty-integrated-transformation-ar.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -61,6 +63,25 @@ function FortySummaryArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               الهدف الأسمى للإنسان هو الارتقاء بذاته وتطوير حياته نحو الأفضل، لكن كثيرين يضلّون الطريق لغياب بوصلة واضحة. هذه المقالة ليست مجموعة نصائح نظرية فحسب، بل خلاصة تجارب عملية على مدى أربعين عاماً من العيش، تلخّص سبع مبادئ جوهرية تمنيت لو عرفتها قبل عشرين عاماً لتختصر عليّ الكثير من عناء التخبط والأخطاء. هذه ليست حكماً أكاديمية، بل دروساً مُختبرة في معترك الحياة، أُقدمها لك كما لو كنت أُقدمها لنسختي الأصغر.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/forty-integrated-transformation-ar.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "An integrated system of elements representing different stages of the self-development journey",
+                ar: "منظومة متكاملة من عناصر تمثل مراحل مختلفة من رحلة تطوير الذات",
+              }}
+              title={{
+                en: "The Forty Summary: How the Transformation Journey Integrates",
+                ar: "خلاصة الأربعين: كيف تتكامل رحلة التحول",
+              }}
+              caption={{
+                en: "A conceptual depiction of identity, habits, values, regulation, and execution integrating into one transformation system.",
+                ar: "تصوير مفاهيمي لتكامل الهوية والعادات والقيم والتنظيم والتنفيذ في منظومة واحدة للتحول.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               في الأربعين، يبدأ الإنسان بالتفكير بشكل مختلف عن العشرين أو الثلاثين. ليس لأنه أصبح حكيماً فجأة، بل لأنه تراكمت لديه تجارب كافية ليرى الأنماط المتكررة في الحياة. يرى أن بعض المبادئ تثبت صحتها مراراً وتكراراً، بينما أخرى تتلاشى كوهم. هذه المقالة هي محاولة لاختصار ما تعلمته في ربع قرن من البحث والتجربة، في سبع ركائز لا غنى عنها لأي تغيير حقيقي. كل ركيزة منها تستحق كتاباً كاملاً، لكنني سأقدمها هنا بتركيز يسهل استيعابه وتطبيقه.

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Eye, Heart, Shield, CheckCircle, ArrowUpRight, Brain } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
@@ -25,6 +26,18 @@ export default function ERQEmotionalRegulationWorksheetArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="ERQ Emotional Regulation: Master Your Inner World"
+        headlineAr="التنظيم العاطفي ERQ: أتقن عالمك الداخلي"
+        description="Based on Gross & John's research. Cognitive reappraisal vs. suppression—the science of emotional intelligence."
+        slug="erq-emotional-regulation-worksheet"
+        datePublished="2026-04-19"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['ERQ', 'emotional regulation', 'cognitive reappraisal', 'emotional intelligence', 'gross john']}
+        image="/uploads/articles/emotional-regulation-self-regulation.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -96,6 +109,25 @@ export default function ERQEmotionalRegulationWorksheetArticle() {
                 "يكشف نموذج عملية غروس لتنظيم المشاعر أن المشاعر يمكن التأثير عليها في نقاط مختلفة من العملية التوليدية. يركز ERQ على استراتيجيتين حظيتا بأكبر قدر من الاهتمام البحثي:"
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/emotional-regulation-reappraisal-suppression.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Wave redirected by one flexible structure and trapped behind another",
+                ar: "موجة تُعاد توجيهها بهيكل مرن وتحتجز خلف هيكل آخر",
+              }}
+              title={{
+                en: "Emotional Regulation: Change the Response, Not the Existence of Emotion",
+                ar: "التنظيم العاطفي: غيّر الاستجابة لا وجود المشاعر",
+              }}
+              caption={{
+                en: "A conceptual view of emotional regulation as changing how an emotional response is processed rather than simply hiding it.",
+                ar: "نظرة مفاهيمية للتنظيم العاطفي بوصفه تغييراً في كيفية معالجة الاستجابة العاطفية لا مجرد إخفائها.",
+              }}
+            />
+
 
             <div className="grid md:grid-cols-2 gap-6 my-10">
               <Card className="border-0 shadow-sm">
@@ -395,6 +427,7 @@ export default function ERQEmotionalRegulationWorksheetArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

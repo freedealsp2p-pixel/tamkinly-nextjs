@@ -12,6 +12,8 @@ import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 
 export default function IdentityBaseline8DWorksheetArticle() {
   const { locale } = useLocale();
@@ -35,6 +37,18 @@ export default function IdentityBaseline8DWorksheetArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Identity Baseline 8D: Holistic Self-Assessment"
+        headlineAr="خط الأساس 8D للهوية: تقييم ذاتي شامل"
+        description="Eight dimensions of identity: Physical, Intellectual, Emotional, Social, Occupational, Spiritual, Financial, Environmental."
+        slug="identity-baseline-8d-worksheet"
+        datePublished="2026-04-04"
+        dateModified="2026-09-16"
+        author="Tamkinly Team"
+        keywords={ ["identity baseline", "8 dimensions", "self-assessment", "holistic identity", "life dimensions"] }
+        image="/uploads/articles/identity-baseline-eight-dimensions.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -70,6 +84,24 @@ export default function IdentityBaseline8DWorksheetArticle() {
                 "التحول الحقيقي يتطلب نقطة بداية. قبل أن تتمكن من رسم مسار لمن تريد أن تصبح، يجب أن تفهم من أنت عبر كل بُعد من أبعاد حياتك. يوفر إطار خط أساس الهوية ثماني الأبعاد تلك الأساس الشامل."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/identity-baseline-eight-dimensions.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person observing eight interconnected areas of life as a holistic personal baseline",
+                ar: "شخص يتأمل ثمانية مجالات مترابطة من الحياة كخط أساس شامل للذات",
+              }}
+              title={{
+                en: "Identity Baseline 8D: Seeing the Whole Picture",
+                ar: "خط أساس الهوية ثماني الأبعاد: رؤية الصورة الكاملة",
+              }}
+              caption={{
+                en: "A holistic baseline looks across multiple areas of life to create a clearer picture of where transformation begins.",
+                ar: "يستعرض خط الأساس الشامل مجالات الحياة المتعددة ليرسم صورة أوضح عن نقطة انطلاق التحوّل.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -335,6 +367,8 @@ export default function IdentityBaseline8DWorksheetArticle() {
       </section>
         <BlogConversionSection />
       </article>
+
+      </>
   );
 }
 

@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Shield, AlertCircle, CheckCircle } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function AllInOrNothingArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="All In or Nothing: The Power of Full Commitment"
+        headlineAr="كل شيء أو لا شيء: قوة الالتزام الكامل"
+        description="Half-effort leaves you uncertain. Full commitment gives you clarity—even when you fail."
+        slug="all-in-or-nothing"
+        datePublished="2026-05-24"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['commitment', 'all in', 'full dedication', 'clarity', 'decision making']}
+        image="/uploads/articles/commitment-without-half-measures.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -56,6 +70,25 @@ export default function AllInOrNothingArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText("\"If you're going to do it, do it. Say what you can do, and do what you say. If you can't do it, don't say you can.\"", "\"إذا كنت ستفعلها، فافعلها. قل ما يمكنك فعله، وافعل ما تقوله. إذا لم تستطع، فلا تقل أنك تستطيع.\"")}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/commitment-without-half-measures.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person choosing one committed direction while leaving competing paths behind",
+                ar: "شخص يختار اتجاهاً واحداً بالتزام تاركاً المسارات المتنافسة خلفه",
+              }}
+              title={{
+                en: "All In or Nothing: The Cost of Divided Commitment",
+                ar: "كل شيء أو لا شيء: ثمن الالتزام المنقسم",
+              }}
+              caption={{
+                en: "A conceptual representation of the moment when commitment requires ending the negotiation between incompatible directions.",
+                ar: "تمثيل مفاهيمي لللحظة التي يتطلب فيها الالتزام إنهاء التفاوض بين اتجاهين لا يتوافقان.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText("Half-effort is the most expensive mistake you can make. Not because it fails—but because it leaves you uncertain. When you go all in, you get an answer. When you hold back, you get questions.", "نصف الجهد هو أغلى خطأ يمكنك ارتكابه. ليس لأنه يفشل — بل لأنه يتركك غير متأكد. عندما تنطلق بكامل قوتك، تحصل على إجابة. عندما تحجم، تحصل على أسئلة.")}
@@ -228,6 +261,7 @@ export default function AllInOrNothingArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ function BrainEngineeringArticleAR() {
         dateModified="2026-07-12"
         author="Tamkinly Team"
         keywords={["هندسة الدماغ", "المرونة العصبية", "إعادة برمجة الدماغ", "neuroplasticity", "تغيير الهوية", "بناء العادات", "تطوير الذات"]}
+        image="/uploads/articles/brain-patterns-repetition-pathways.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ function BrainEngineeringArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               هل شعرت يوماً أنك محاصر داخل عاداتك القديمة، أو أن هناك مقاومة داخلية تمنعك من تحقيق أهدافك؟ السر لا يكمن في قلة إرادتك، بل في طريقة عمل دماغك. لحسن الحظ، أثبت العلم أن الدماغ ليس كتلة ثابتة، بل يمتلك خاصية مذهلة تُدعى المرونة العصبية (Neuroplasticity)، وهي قدرة العقل على إعادة توجيه مساراته ووراثة عادات جديدة طوال حياتك. هذه ليست نظرية فحسب، بل حقيقة عصبية مثبتة مخبرياً، تعني أن التغيير الذي تبحث عنه ليس مستحيلاً — بل يتطلب فقط فهم لغة دماغك والتحدث بها.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/brain-patterns-repetition-pathways.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Repeating pathways in an abstract scene symbolizing the formation of mental patterns",
+                ar: "مسارات متكررة في منظر تجريدي ترمز إلى تشكل الأنماط الذهنية",
+              }}
+              title={{
+                en: "Brain Engineering: How Repetition Shapes Patterns",
+                ar: "هندسة الدماغ: أثر التكرار في تشكيل الأنماط",
+              }}
+              caption={{
+                en: "A visual metaphor for how repetition and experience can make some patterns more familiar than others.",
+                ar: "استعارة بصرية لكيف يمكن للتكرار والخبرة أن يجعلا بعض الأنماط أكثر ألفة من غيرها.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               لعقود طويلة، اعتقد العلماء أن الدماغ يتوقف عن النمو والتغير بعد مرحلة الطفولة. لكن أبحاث العقد الماضي قلبت هذه القناعة رأساً على عقب. اكتشف علماء الأعصاب أن الدماغ البالغ قادر على تكوين خلايا عصبية جديدة (Neurogenesis)، وبناء مسارات عصبية جديدة (Synaptic pathways)، وإعادة تنظيم نفسه بناءً على التجارب التي نمر بها. هذا يعني أنك لست سجين ماضيك أو جيناتك — أنت مهندس دماغك، والدماغ مادة قابلة للتشكيل طوال حياتك إذا عرفت كيف تتعامل معها.

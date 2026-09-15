@@ -12,6 +12,8 @@ import { useLocale } from '@/components/providers/LocaleProvider';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 
 export default function WhoAmIWorksheetArticle() {
   const { locale } = useLocale();
@@ -24,6 +26,18 @@ export default function WhoAmIWorksheetArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Who Am I Worksheet: The Complete Identity Exploration"
+        headlineAr="ورقة عمل من أنا: الاستكشاف الكامل للهوية"
+        description="Deep dive into self-concept clarity with research-backed questions. Explore personal, social, and possible selves dimensions."
+        slug="who-am-i-worksheet"
+        datePublished="2026-03-10"
+        dateModified="2026-09-16"
+        author="Tamkinly Team"
+        keywords={ ["who am i", "identity worksheet", "self-concept", "identity exploration", "personal identity"] }
+        image="/uploads/articles/who-am-i-self-concept-clarity.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,24 @@ export default function WhoAmIWorksheetArticle() {
                 "سؤال \"من أنا؟\" يتردد عبر قرون من الفكر البشري، ومع ذلك يبحر معظمنا في الحياة دون أن يجيبه حقاً. تُظهر الأبحاث أن الأفراد الذين يتمتعون بوضوح عالٍ في المفهوم الذاتي — المدى الذي تكون فيه معتقداتهم عن أنفسهم محددة بوضوح وثقة — يختبرون نتائج أفضل بكثير في الصحة النفسية والرضا عن الحياة."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/who-am-i-self-concept-clarity.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Woman observing multiple versions of herself, reflecting on identity and self-concept clarity",
+                ar: "امرأة تتأمل نسخاً متعددة من نفسها في تأمل للهوية ووضوح مفهوم الذات",
+              }}
+              title={{
+                en: "Who Am I? Seeing the Versions of Yourself",
+                ar: "من أنا؟ حين ترى نسخك المتعددة",
+              }}
+              caption={{
+                en: "Self-concept clarity begins when you can look at the different versions of yourself — past, present, and possible — and name the one you choose to build.",
+                ar: "يبدأ وضوح مفهوم الذات حين تنظر إلى نسخك المختلفة — الماضية والحاضرة والممكنة — وتختار النسخة التي تريد بناءها.",
+              }}
+            />
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -300,6 +332,8 @@ export default function WhoAmIWorksheetArticle() {
       </section>
         <BlogConversionSection />
       </article>
+
+      </>
   );
 }
 

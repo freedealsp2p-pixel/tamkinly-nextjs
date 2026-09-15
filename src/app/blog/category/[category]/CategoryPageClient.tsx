@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import { getCategoryBySlug, getArticlesForCategory, BLOG_CATEGORIES, BLOG_ARTICLES } from '@/lib/blog-articles';
 import { 
-  Smartphone, FileText, Sparkles, Brain, TrendingUp, 
+  Smartphone, FileText, Sparkles, Brain, TrendingUp, Shield, 
   ArrowRight, Clock, Tag, ChevronRight 
 } from 'lucide-react';
 import { useLocale } from '@/components/providers/LocaleProvider';
 
 const iconMap: Record<string, React.ElementType> = {
-  Smartphone, FileText, Sparkles, Brain, TrendingUp,
+  Smartphone, FileText, Sparkles, Brain, TrendingUp, Shield,
 };
 
 // Slug aliases: map common short slugs to their full category slugs
@@ -27,6 +27,7 @@ const subCategoryIconMap: Record<string, string> = {
   'BASIC App': 'Smartphone',
   'MASTERY App': 'Smartphone',
   'Worksheet': 'FileText',
+  'Recovery': 'Shield',
   'Identity Shift': 'Sparkles',
   'Transformation': 'Sparkles',
   'Self-Liberation': 'Sparkles',

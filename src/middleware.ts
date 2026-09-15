@@ -38,6 +38,8 @@ const VALID_BLOG_SLUGS = new Set([
   'ar-hindasat-al-dimag', 'ar-karizma-al-tatheer', 'ar-khulasat-al-arbaeen',
   'app-guides', 'worksheets', 'identity-transformation', 'mindset-strategy',
   'productivity-growth',
+  // Recovery pillar (2026-09-16)
+  'porn-recovery-roadmap', 'trauma-recovery-three-stages', 'recovery',
 ]);
 
 const VALID_BLOG_CATEGORY_SLUGS = new Set([
@@ -47,7 +49,7 @@ const VALID_BLOG_CATEGORY_SLUGS = new Set([
   'identity', 'identity-shift', 'life-wisdom', 'mastery-app', 'mental-clarity',
   'mindset', 'productivity', 'relationships-and-influence', 'self-image',
   'self-liberation', 'strategy', 'tools', 'transformation', 'wealth-and-identity',
-  'worksheet',
+  'worksheet', 'recovery',
 ]);
 
 const VALID_GUIDE_SLUGS = new Set([

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock, User, Sparkles, BookOpen, Target, Brain, Smartphone, FileText, TrendingUp } from "lucide-react";
+import { ArrowRight, Clock, User, Sparkles, BookOpen, Target, Brain, Smartphone, FileText, TrendingUp, Shield } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema } from "@/lib/seo";
 import { BLOG_CATEGORIES } from "@/lib/blog-articles";
@@ -13,7 +13,7 @@ import { useTranslations, useLocale } from "@/components/providers/LocaleProvide
 import { BlogBreadcrumb } from '@/components/blog/BlogBreadcrumb';
 
 const categoryIconMap: Record<string, React.ElementType> = {
-  Smartphone, FileText, Sparkles, Brain, TrendingUp,
+  Smartphone, FileText, Sparkles, Brain, TrendingUp, Shield,
 };
 
 const categoryNameMap: Record<string, string> = {
@@ -22,6 +22,7 @@ const categoryNameMap: Record<string, string> = {
   'Identity & Transformation': 'categoryIdentityTransformation',
   'Mindset & Strategy': 'categoryMindsetStrategy',
   'Productivity & Growth': 'categoryProductivityGrowth',
+  'Recovery': 'categoryRecovery',
 };
 
 const articleCategoryMap: Record<string, string> = {

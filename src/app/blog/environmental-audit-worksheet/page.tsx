@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Home, Building2, Users, CheckCircle, Settings, ArrowUpRight } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function EnvironmentalAuditWorksheetArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Environmental Audit Worksheet: Design Your Growth Space"
+        headlineAr="ورقة عمل التدقيق البيئي: صمم مساحة نموك"
+        description="Your environment shapes your identity. Audit physical, social, and digital environments for transformation success."
+        slug="environmental-audit-worksheet"
+        datePublished="2026-04-11"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['environmental audit', 'environment design', 'growth space', 'digital environment', 'physical environment']}
+        image="/uploads/articles/environment-behavior-choice-architecture.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function EnvironmentalAuditWorksheetArticle() {
                 "\"البيئة هي اليد الخفية التي تشكّل السلوك البشري.\" ملاحظة جيمس كلير تلتقط حقيقة أساسية غالباً ما يُتجاهلها في التطوير الشخصي: محيطك يؤثر باستمرار على خياراتك، غالباً دون وعيك."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/environment-behavior-choice-architecture.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Room containing environmental cues that make some behaviors easier than others",
+                ar: "غرفة تحوي إشارات بيئية تجعل بعض السلوكيات أسهل من غيرها",
+              }}
+              title={{
+                en: "Environmental Audit: Design the Space Around the Behavior",
+                ar: "تدقيق البيئة: صمّم المكان حول السلوك",
+              }}
+              caption={{
+                en: "A conceptual view of how small environmental choices can make some behaviors easier and others harder to perform.",
+                ar: "نظرة مفاهيمية لكيف تجعل الخيارات البيئية الصغيرة بعض السلوكيات أسهل وبعضها أصعب في الأداء.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -346,6 +379,7 @@ export default function EnvironmentalAuditWorksheetArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

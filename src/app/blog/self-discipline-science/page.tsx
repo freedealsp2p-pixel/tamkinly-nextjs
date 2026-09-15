@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ export default function SelfDisciplineScienceArticle() {
         dateModified="2026-03-28"
         author="Tamkinly Team"
         keywords={["self discipline tips", "self discipline", "discipline science", "identity recode", "how to be disciplined", "discipline framework", "lasting discipline"]}
+        image="/uploads/articles/self-discipline-choice.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ export default function SelfDisciplineScienceArticle() {
                 "اكتب 'نصائح الانضباط الذاتي' في أي محرك بحث وستحصل على نفس القائمة المعاد تدويرها: استيقظ مبكراً، ضع أهدافاً، أزل المشتتات، استخدم تقنية بومودورو، حاسب نفسك. هذه النصائح ليست خاطئة — إنها ببساطة غير مكتملة. إنها تعالج ميكانيكا الانضباط دون لمس المحرك الذي يحركه. النتيجة هي انضباط يدوم بالضبط ما تدوم إرادتك، والأبحاث تُظهر أنها موثوقة تقريباً كبطارية هاتف في الساعة 2 مساءً. لكن هناك نهجاً مختلفاً — متجذراً ليس في فرض السلوك بل في إعادة صياغة الهوية. وهو يغير كل شيء."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/self-discipline-choice.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person choosing an intentional task instead of an immediately tempting distraction",
+                ar: "شخص يختار مهمة مقصودة بدلاً من مشتت مغرٍ بشكل فوري",
+              }}
+              title={{
+                en: "The Science of Self-Discipline: Choosing the Next Action",
+                ar: "علم الانضباط الذاتي: اختيار الفعل التالي",
+              }}
+              caption={{
+                en: "Self-discipline is expressed in ordinary moments when an intentional action is chosen despite the availability of an easier distraction.",
+                ar: "يتجلّى الانضباط الذاتي في اللحظات العادية حين يُختار فعلٌ مقصود رغم توفّر مشتّتٍ أسهل.",
+              }}
+            />
+
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
               {getText("The Myth of Willpower-Based Discipline", "خرافة الانضباط المبني على الإرادة")}

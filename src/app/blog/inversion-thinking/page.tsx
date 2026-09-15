@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, AlertTriangle, Lightbulb, XCircle, CheckCircle } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function InversionThinkingArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Inversion Thinking: How to Win by Avoiding Failure"
+        headlineAr="التفكير العكسي: كيف تفوز بتجنب الفشل"
+        description="Charlie Munger's counterintuitive approach to success: ask how to lose, then don't do that."
+        slug="inversion-thinking"
+        datePublished="2026-06-12"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['inversion thinking', 'charlie munger', 'strategic thinking', 'problem solving', 'success strategy']}
+        image="/uploads/articles/inversion-thinking-failure-paths.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -56,6 +70,25 @@ export default function InversionThinkingArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText("\"All I want to know is where I'm going to die, so I'll never go there.\" — Charlie Munger", "\"كل ما أريد معرفته هو أين سأموت، حتى لا أذهب إلى هناك أبداً.\" — تشارلي مانجر")}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/inversion-thinking-failure-paths.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Strategist examining weak points in a complex structure to understand possible failure",
+                ar: "استراتيجي يفحص نقاط الضعف في بنية معقدة لفهم احتمالات الفشل",
+              }}
+              title={{
+                en: "Inversion Thinking: Study Failure Before It Happens",
+                ar: "التفكير العكسي: ادرس الفشل قبل أن يحدث",
+              }}
+              caption={{
+                en: "Examining how a system could fail can reveal weaknesses that remain invisible when we focus only on the desired outcome.",
+                ar: "فحص كيف قد يفشل نظامٌ ما يكشف نقاط ضعف تبقى غير مرئية حين نركّز على النتيجة المرغوبة وحدها.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText("This single quote from billionaire investor Charlie Munger reveals one of the most powerful thinking frameworks available. While everyone else asks \"How do I succeed?\" Munger asks \"How do I fail?\"—then simply avoids doing that.", "يكشف هذا الاقتباس الوحيد من المستثمر الملياردير تشارلي مانجر عن أحد أقوى أطر التفكير المتاحة. بينما يسأل الجميع \"كيف أنجح؟\" يسأل مانجر \"كيف أفشل؟\" — ثم يتجنب ببساطة القيام بذلك.")}
@@ -270,6 +303,7 @@ export default function InversionThinkingArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ function TahqeeqAlahdafArticleAR() {
         dateModified="2026-03-15"
         author="Tamkinly Team"
         keywords={["تحقيق الأهداف", "كيف أحقق أهدافي", "تحديد الأهداف الشخصية", "خطة لتحقيق الأهداف", "goal achievement Arabic", "أهداف شخصية"]}
+        image="/uploads/articles/identity-aligned-goals-ar.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ function TahqeeqAlahdafArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               كل عام تحدد أهدافاً، وكل عام لا تحققها. لست كسولاً ولست فاشلاً — المشكلة في الطريقة نفسها. تحقيق الأهداف لا يحتاج إلى إرادة أكثر أو تخطيط أفضل — يحتاج إلى هوية مختلفة. عندما تتوافق أهدافك مع هويتك، لا تحتاج إلى دافع لتحقيقها — تصبح الطبيعي الوحيد الممكن.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/identity-aligned-goals-ar.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "A person walking a path toward a goal built on a solid foundation",
+                ar: "شخص يسير على مسار نحو هدف مبني على أساس متين",
+              }}
+              title={{
+                en: "Goal Achievement: Building on an Identity Foundation",
+                ar: "تحقيق الأهداف: البناء على أساس الهوية",
+              }}
+              caption={{
+                en: "A conceptual view of goals maturing when they are built on a clear identity and translated into practical steps.",
+                ar: "تصوير مفاهيمي لأهداف تنضج عندما تُبنى على هوية واضحة وتُترجم إلى خطوات عملية.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               الإحصائيات صادمة: ٩٢٪ من الناس لا يحققون أهدافهم. والسبب ليس في الأهداف نفسها — بل في النهج المتبع. معظم مناهج تحقيق الأهداف تفترض أن المشكلة في التنفيذ: "تحتاج إلى خطة أفضل"، "تحتاج إلى مزيد من الانضباط"، "تحتاج إلى تتبع تقدمك". لكن هذه النصائح تعالج الأعراض، لا المرض. المرض الحقيقي هو فجوة بين أهدافك وهويتك.

@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ function AldhibatAlthatiArticleAR() {
         dateModified="2026-03-22"
         author="Tamkinly Team"
         keywords={["الانضباط الذاتي", "كيف أصبح منضبطاً", "قوة الإرادة", "self-discipline Arabic", "انضباط النفس", "الالتزام الذاتي"]}
+        image="/uploads/articles/self-discipline-attention-freedom.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ function AldhibatAlthatiArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               الانضباط الذاتي ليس ما تعتقد. ليس عقاباً تفرضه على نفسك. ليس كبتاً لرغباتك. وليس معركة يومية بينك وبين نفسك. الانضباط الذاتي الحقيقي هو أعلى أشكال حب الذات — وهو يأتي من تحول الهوية لا من قوة الإرادة.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/self-discipline-attention-freedom.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "A person maintaining focus amid a distraction-filled environment",
+                ar: "شخص يحافظ على تركيزه وسط بيئة مليئة بالمشتتات",
+              }}
+              title={{
+                en: "Self-Discipline: The Freedom of Attention",
+                ar: "الانضباط الذاتي: حرية الانتباه",
+              }}
+              caption={{
+                en: "A conceptual depiction of discipline as the ability to protect attention and choose what deserves it.",
+                ar: "تصوير مفاهيمي للانضباط بوصفه قدرة على حماية الانتباه واختيار ما يستحقه.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               الصورة السائدة عن الانضباط مدمّرة: شخص يستيقظ في الرابعة فجراً، يُجبر نفسه على التمرين، يقاوم كل إغراء، ويعيش حياة صارمة بلا متعة. هذه الصورة تجعل الانضباط يبدو كنوع من التعذيب الذاتي — ولذلك يهرب منه معظم الناس. لكن ماذا لو كانت هذه الصورة خاطئة تماماً؟ ماذا لو كان الانضباط الحقيقي لا يشعر بانضباط على الإطلاق؟

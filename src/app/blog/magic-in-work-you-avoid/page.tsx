@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, AlertTriangle, Sparkles, Compass } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function MagicInWorkYouAvoidArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="The Magic Is in the Work You Avoid"
+        headlineAr="السحر في العمل الذي تتجنبه"
+        description="That uncomfortable task you keep putting off? It holds the key to your transformation."
+        slug="magic-in-work-you-avoid"
+        datePublished="2026-05-06"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['avoidance', 'transformation', 'comfort zone', 'growth work', 'personal development']}
+        image="/uploads/articles/work-you-avoid-value.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function MagicInWorkYouAvoidArticle() {
                 "\"السحر الذي تبحث عنه في العمل الذي تتجنبه.\""
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/work-you-avoid-value.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person facing an unfinished task they have repeatedly avoided",
+                ar: "شخص يواجه مهمة غير مكتملة كان يتجنبها مراراً",
+              }}
+              title={{
+                en: "The Work You Avoid May Contain the Practice You Need",
+                ar: "العمل الذي تتجنبه قد يحتوي على الممارسة التي تحتاجها",
+              }}
+              caption={{
+                en: "The tasks we repeatedly avoid can sometimes contain the practice, skill, or decision we most need to develop.",
+                ar: "المهام التي نتجنبها تكراراً قد تحوي الممارسة أو المهارة أو القرار الذي نحتاج أكثر من غيره إلى تطويره.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -288,6 +321,7 @@ export default function MagicInWorkYouAvoidArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

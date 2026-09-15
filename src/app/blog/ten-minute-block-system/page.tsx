@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Brain, Sparkles, Zap, Target, CheckCircle } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function TenMinuteBlockSystemArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="The 10-Minute Block System: Breaking Through Every Obstacle"
+        headlineAr="نظام الكتل العشر دقائق: اختراق كل عقبة"
+        description="From paralysis to progress in just 10 minutes. A practical system for overcoming resistance."
+        slug="ten-minute-block-system"
+        datePublished="2026-07-01"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['10 minute block', 'productivity system', 'overcoming resistance', 'time blocking', 'progress']}
+        image="/uploads/articles/ten-minute-action-block.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function TenMinuteBlockSystemArticle() {
                 "ماذا لو كان الشيء الوحيد الذي تحتاجه لتجاوز العقبات والتقدم أسرع من ٩٩٪ من الناس هو نظام يومي بسيط من ١٠ دقائق؟"
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/ten-minute-action-block.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person focusing on one small action within a much larger project",
+                ar: "شخص يركز على فعل صغير واحد داخل مشروع أكبر بكثير",
+              }}
+              title={{
+                en: "The 10-Minute Block System: Make the Start Smaller",
+                ar: "نظام كتل العشر دقائق: اجعل البداية أصغر",
+              }}
+              caption={{
+                en: "A large project can become easier to approach when attention is narrowed to one small, actionable block.",
+                ar: "يصبح المشروع الكبير أسهل في المقاربة عندما يُضيَّق الانتباه إلى كتلة صغيرة قابلة للتنفيذ.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -346,6 +379,7 @@ export default function TenMinuteBlockSystemArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

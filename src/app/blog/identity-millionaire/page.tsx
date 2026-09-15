@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, TrendingUp, DollarSign, Target, Award } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function IdentityMillionaireArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="The Identity Millionaire: Building Wealth Through Self-Transformation"
+        headlineAr="مليونير الهوية: بناء الثروة من خلال التحول الذاتي"
+        description="True wealth starts with who you become, not what you acquire. The three stages of identity-based success."
+        slug="identity-millionaire"
+        datePublished="2026-05-15"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['wealth', 'identity millionaire', 'success mindset', 'self-transformation', 'financial success']}
+        image="/uploads/articles/identity-as-accumulated-asset.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -56,6 +70,25 @@ export default function IdentityMillionaireArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText("True wealth doesn't start with a strategy. It starts with an identity. The millionaire mindset isn't about money—it's about becoming the person capable of creating and holding wealth.", "الثروة الحقيقية لا تبدأ باستراتيجية. بل تبدأ بهوية. عقلية المليونير لا تتعلق بالمال — بل تتعلق بأن تصبح الشخص القادر على خلق الثروة والاحتفاظ بها.")}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/identity-as-accumulated-asset.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person surrounded by accumulated objects representing identity, skills, and experience",
+                ar: "شخص تحيط به أصول متراكمة تمثل الهوية والمهارات والخبرة",
+              }}
+              title={{
+                en: "The Identity Millionaire: Building Assets Within Yourself",
+                ar: "مليونير الهوية: بناء أصول داخل نفسك",
+              }}
+              caption={{
+                en: "A conceptual representation of identity as something accumulated through choices, skills, standards, and experience.",
+                ar: "تمثيل مفاهيمي للهوية بوصفها شيئاً يتراكم من خلال الخيارات والمهارات والمعايير والخبرة.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText("Consider the concept of the \"virtual millionaire\"—someone who has achieved financial freedom through identity transformation, not just accumulation. The path to wealth reveals itself in stages, each requiring a different version of yourself.", "تأمل مفهوم \"المليونير الافتراضي\" — شخص حقق الحرية المالية من خلال تحول الهوية، وليس فقط التراكم. يكشف طريق الثروة عن نفسه على مراحل، كل منها يتطلب نسخة مختلفة منك.")}
@@ -237,6 +270,7 @@ export default function IdentityMillionaireArticle() {
       <ArticleNavigation currentSlug="identity-millionaire" />
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sparkles, Target, Zap, RefreshCw, CheckCircle, ArrowUpRight } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function IdentityBasedHabitsWorksheetArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Identity-Based Habits Worksheet: James Clear's Method"
+        headlineAr="ورقة عمل العادات المبنية على الهوية: طريقة جيمس كلير"
+        description="Transform behaviors by changing who you believe you are. The three layers of habit change that create lasting transformation."
+        slug="identity-based-habits-worksheet"
+        datePublished="2026-03-18"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['identity-based habits', 'james clear', 'identity-based transformation', 'habit change', 'behavior transformation']}
+        image="/uploads/articles/identity-based-habits-repeated-evidence.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function IdentityBasedHabitsWorksheetArticle() {
                 "\"كل فعل تقوم به هو صوت لصالح نوع الشخص الذي ترغب في أن تصبحه.\" هذه الجملة الواحدة من كتاب جيمس كلير الأكثر مبيعاً العادات الذرية تلتقط رؤية ثورية: التغيير الدائم لا يأتي من التركيز على ما تريد تحقيقه—بل يأتي من التركيز على من تريد أن تصبح."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/identity-based-habits-repeated-evidence.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Repeated small actions stacking into evidence of the identity they reinforce",
+                ar: "أفعال صغيرة متكررة تتراكم كأدلة على الهوية التي تعززها",
+              }}
+              title={{
+                en: "Identity-Based Habits: Becoming Through Repetition",
+                ar: "العادات القائمة على الهوية: أن تصبح من خلال التكرار",
+              }}
+              caption={{
+                en: "A conceptual representation of how repeated actions can become evidence of the identity we are building.",
+                ar: "تمثيل مفاهيمي لكيفية تحوّل الأفعال المتكررة إلى أدلة على الهوية التي نبنيها.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -355,6 +388,7 @@ export default function IdentityBasedHabitsWorksheetArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -28,6 +29,7 @@ export default function RedefiningDisciplineArticle() {
         dateModified="2026-05-09"
         author="Tamkinly Team"
         keywords={["discipline", "self-love", "habits", "identity", "six pillars", "consistency", "growth", "commitment"]}
+        image="/uploads/articles/discipline-self-respect.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -63,6 +65,25 @@ export default function RedefiningDisciplineArticle() {
                 "غالباً يُساء فهم الانضباط كشكل صارم من عقاب الذات أو قفص مقيد يخنق الحرية الشخصية. لكن الواقع العميق هو أن الانضباط هو أعلى أشكال حب الذات. عندما تحتضن الانضباط، أنت تختار بوعي الإشباع طويل المدى لذاتك المستقبلية على حساب النزوات العابرة الفارغة لذاتك الحاضرة. إنه عقد مقدس توقعه مع إمكاناتك، تعد فيه بحماية أحلامك من أن تبددها رياح الفوضى والتشتت. الانضباط ليس حرماناً — إنه تحرير. يحرر روحك من عبودية الأهواء ويمكّن عقلك وجسدك من بلوغ ذروتهما."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/discipline-self-respect.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person calmly returning to a meaningful practice as an expression of self-discipline",
+                ar: "شخص يعود بهدوء إلى ممارسة ذات معنى تعبيراً عن الانضباط الذاتي",
+              }}
+              title={{
+                en: "Redefining Discipline: Reliability Without Self-Punishment",
+                ar: "إعادة تعريف الانضباط: الالتزام بلا عقاب ذاتي",
+              }}
+              caption={{
+                en: "A quieter view of discipline: returning to what matters without turning the process into punishment.",
+                ar: "نظرة هادئة للانضباط: العودة إلى ما يهم دون تحويل العملية إلى عقاب.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

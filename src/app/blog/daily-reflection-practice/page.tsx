@@ -5,9 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, User, Sun, BookOpen, Brain, Sparkles, Calendar, CheckCircle2, PenLine } from "lucide-react";
+import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -24,6 +26,18 @@ export default function DailyReflectionPracticeArticle() {
   ];
 
   return (
+    <>
+      <BlogArticleJsonLd
+        headline="Daily Reflection Practice: The Science of Self-Transformation"
+        headlineAr="ممارسة التأمل اليومي: علم التحول الذاتي"
+        description="Evidence-based journaling prompts that rewire neural pathways. 7 themes for consistent growth and identity evolution."
+        slug="daily-reflection-practice"
+        datePublished="2026-02-14"
+        dateModified="2026-09-14"
+        author="Tamkinly Team"
+        keywords={['daily reflection', 'journaling', 'neural pathways', 'self-transformation', 'identity evolution']}
+        image="/uploads/articles/daily-reflection-learning-from-experience.webp"
+      />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -59,6 +73,25 @@ export default function DailyReflectionPracticeArticle() {
                 "كل تحول هوية في التاريخ له شيء مشترك: التأمل الواعي. الممارسة اليومية لفحص أفكارك وأفعالك واختياراتك ليست علاجية فحسب—إنها كيف تبني بنشاط من تصبح."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/daily-reflection-learning-from-experience.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person reviewing everyday objects and experiences to identify patterns and lessons",
+                ar: "شخص يراجع آثاراً من يومه لاكتشاف الأنماط والدروس",
+              }}
+              title={{
+                en: "Daily Reflection: Turning Experience Into Learning",
+                ar: "التأمل اليومي: تحويل التجربة إلى تعلّم",
+              }}
+              caption={{
+                en: "Reflection creates a pause in which everyday experiences can be examined, patterns noticed, and lessons carried forward.",
+                ar: "يخلق التأمل وقفةً تُفحص فيها تجارب اليوم العادية، وتُلاحظ الأنماط، وتُحمل الدروس إلى الأمام.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
@@ -410,6 +443,7 @@ export default function DailyReflectionPracticeArticle() {
       </section>
         <BlogConversionSection />
       </article>
+    </>
   );
 }
 

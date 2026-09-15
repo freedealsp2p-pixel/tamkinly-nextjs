@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -28,6 +29,7 @@ export default function VagusNerveBreathingArticle() {
         dateModified="2026-05-09"
         author="Tamkinly Team"
         keywords={["vagus nerve", "4-2-8-2 breathing", "stress response", "parasympathetic nervous system", "HRV", "breathing technique", "anxiety", "emotional regulation"]}
+        image="/uploads/articles/slow-breathing-autonomic-regulation.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -63,6 +65,25 @@ export default function VagusNerveBreathingArticle() {
                 "الجهاز العصبي البشري تحفة من الهندسة البيولوجية، وفي صميمه يكمن العصب المبهم — أحد أهم القنوات التي تربط العقل بالأعضاء الداخلية. وظيفته تمتد إلى أبعد من مجرد نقل الإشارات. يعمل كمفتاح أمان رئيسي يحكم الانتقال من حالة التوتر والبقاء — القتال أو الهرب — إلى حالة التعافي والاستعادة — الراحة والهضم. في مواجهة ضغوط الحياة الحديثة المزمنة، القدرة على تحفيز هذا العصب بوعي ليست ترفاً. إنها ضرورة بيولوجية للحفاظ على التوازن المنهجي."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/slow-breathing-autonomic-regulation.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Calm breathing rendered as slow rhythmic waves of physiological regulation",
+                ar: "تنفس هادئ يُجسَّد كموجات إيقاعية بطيئة من التنظيم الفسيولوجي",
+              }}
+              title={{
+                en: "Vagus Nerve Protocol: Slow Breathing and Regulation",
+                ar: "بروتوكول العصب الحائر: التنفس البطيء والتنظيم",
+              }}
+              caption={{
+                en: "A conceptual representation of slow rhythmic breathing and its relationship to autonomic regulation.",
+                ar: "تمثيل مفاهيمي للتنفس الإيقاعي البطيء وعلاقته بالتنظيم الذاتي للجهاز العصبي.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

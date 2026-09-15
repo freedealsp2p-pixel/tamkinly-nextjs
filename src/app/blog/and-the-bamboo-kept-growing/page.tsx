@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
@@ -29,6 +30,7 @@ export default function AndTheBambooKeptGrowingArticle() {
         dateModified="2026-05-09"
         author="Tamkinly Team"
         keywords={["bamboo tree", "patience", "identity transformation", "invisible work", "roots before growth", "consistency", "delayed results"]}
+        image="/uploads/articles/invisible-progress-bamboo-roots.webp"
       />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
@@ -67,6 +69,25 @@ export default function AndTheBambooKeptGrowingArticle() {
                 "زارع غرس بذرة خيزران صيني. سقاها وانتظر. مر أسبوع. جثا على ركبتيه، أزاح التراب، بحث عن أي علامة حياة، ولم يرَ شيئاً."
               )}
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/invisible-progress-bamboo-roots.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Bamboo plant with extensive hidden roots representing invisible progress",
+                ar: "نبات بامبو بجذور خفية واسعة ترمز إلى التقدم غير المرئي",
+              }}
+              title={{
+                en: "And the Bamboo Kept Growing: The Progress You Cannot See",
+                ar: "واستمر البامبو في النمو: التقدم الذي لا تراه",
+              }}
+              caption={{
+                en: "A visual metaphor for progress that develops beneath the surface before becoming visible.",
+                ar: "استعارة بصرية للتقدم الذي ينمو تحت السطح قبل أن يصبح مرئياً.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(

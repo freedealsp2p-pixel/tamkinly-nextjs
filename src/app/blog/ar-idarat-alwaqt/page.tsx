@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ function IdaratAlwaqtArticleAR() {
         dateModified="2026-03-29"
         author="Tamkinly Team"
         keywords={["إدارة الوقت", "تنظيم الوقت اليومي", "التخلص من المماطلة", "time management Arabic", "إنتاجية", "تنظيم الوقت"]}
+        image="/uploads/articles/real-time-management-attention.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ function IdaratAlwaqtArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               كل نصائح إدارة الوقت التي قرأتها كانت تخبرك كيف تنجز أكثر. لكن السؤال الحقيقي ليس "كيف أنجز أكثر؟" بل "كيف أنجز ما يهم فعلاً؟". إدارة الوقت الحقيقية ليست تقنية إنتاجية — إنها مسألة هوية. لأن من أنت يحدد ما تراه مهماً، وما تراه مهماً يحدد كيف تقضي وقتك.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/real-time-management-attention.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Person concentrating on one chosen task while other demands remain in the background",
+                ar: "شخص يركز على مهمة واحدة اختارها بينما تبقى المطالب الأخرى في الخلفية",
+              }}
+              title={{
+                en: "Real Time Management: What Gets Your Attention",
+                ar: "إدارة الوقت الحقيقية: ما الذي يحظى بانتباهك",
+              }}
+              caption={{
+                en: "Effective time management begins with deciding which task deserves your attention while other demands remain in the background.",
+                ar: "تبدأ الإدارة الفعّالة للوقت بقرار يحدّد أي مهمة تستحق انتباهك بينما تبقى المطالب الأخرى في الخلفية.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               المشكلة مع معظم نصائح إدارة الوقت أنها تعالج الأعراض لا المرض. تخبرك بصناديق البريد الوارد صفر، وقوائم المهام الذكية،وتقنيات البومودورو. لكن هذه الأدوات لا تحل المشكلة الحقيقية — لأن المشكلة ليست في تنظيم الوقت، بل في اختيار ما يستحق الوقت. وأنت لا تختار ما يستحق وقتك بناءً على جدول — بل بناءً على هويتك.

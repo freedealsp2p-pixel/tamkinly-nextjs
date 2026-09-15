@@ -9,6 +9,7 @@ import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
 import { ArticleNavigation } from "@/components/blog/ArticleNavigation";
 import { ArticleReferences } from '@/components/blog/ArticleReferences';
 import { useLocale } from '@/components/providers/LocaleProvider';
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
@@ -27,6 +28,7 @@ function BinaaAl3aadatArticleAR() {
         dateModified="2026-03-08"
         author="Tamkinly Team"
         keywords={["بناء العادات", "كيف أكوّن عادة جديدة", "التخلص من العادات السيئة", "عادات الصباح", "الاستمرارية في العادات", "building habits Arabic", "عادات يومية"]}
+        image="/uploads/articles/habit-loop-everyday-context.webp"
       />
     <article className="min-h-screen" dir="rtl">
       <section className="bg-gradient-to-br from-primary via-primary to-slate-900 py-16 lg:py-24">
@@ -62,6 +64,25 @@ function BinaaAl3aadatArticleAR() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               كل شخص حاول بناء عادة جديدة يعرف هذه الدورة: تبدأ بحماس، تستمر بضعة أيام، ثم تعود لما كنت عليه. لست كسولاً ولست ضعيف الإرادة — المشكلة في الطريقة التي تتبعها لبناء العادات، لا فيك أنت. بناء العادات الحقيقي ليس معركة إرادة، بل هو عملية هندسة هوية.
             </p>
+
+            <ArticleFigure
+              src="/uploads/articles/habit-loop-everyday-context.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Conceptual depiction of the habit loop in an everyday context",
+                ar: "تصوير مفاهيمي لحلقة العادة في سياق الحياة اليومية",
+              }}
+              title={{
+                en: "Building Habits: How the Behavior Loop Forms",
+                ar: "بناء العادات: كيف تتشكل حلقة السلوك",
+              }}
+              caption={{
+                en: "A conceptual depiction of the habit loop forming from cue, behavior, and reward within daily life.",
+                ar: "تصوير مفاهيمي لحلقة العادة وهي تتشكل من الإشارة والسلوك والنتيجة داخل الحياة اليومية.",
+              }}
+            />
+
 
             <p className="text-slate-600 leading-relaxed mb-6">
               الأبحاث تُظهر أن ٩٢٪ من الناس يفشلون في الحفاظ على أهدافهم وعاداتهم الجديدة. لكن هذا لا يعني أن بناء العادات مستحيل — بل يعني أن معظم الناس يستخدمون الطريقة الخاطئة. يحاولون إضافة عادات جديدة إلى هوية قديمة، مثل أن تحاول تشغيل تطبيق حديث على هاتف قديم — النظام لا يتوافق. الحل ليس إضافة تطبيقات أكثر، بل تحديث النظام نفسه.
