@@ -124,11 +124,15 @@ export function BlogArticleJsonLd({
   image,
   wordCount,
 }: BlogArticleJsonLdProps) {
+  // Arabic-only articles live at /ar/blog/ar-* (the /blog/ar-* path 308-redirects there),
+  // so their Article/Breadcrumb schema URLs must point at the canonical AR path (2026-09-16).
+  const articleUrl = slug.startsWith('ar-') ? `/ar/blog/${slug}` : `/blog/${slug}`;
+
   const articleSchema = generateArticleSchema({
     headline,
     headlineAr,
     description,
-    url: `/blog/${slug}`,
+    url: articleUrl,
     datePublished,
     dateModified,
     author,
@@ -140,7 +144,7 @@ export function BlogArticleJsonLd({
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Blog', url: '/blog' },
-    { name: headline, url: `/blog/${slug}` },
+    { name: headline, url: articleUrl },
   ]);
 
   return (

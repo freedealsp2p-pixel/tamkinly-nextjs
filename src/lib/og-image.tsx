@@ -31,7 +31,11 @@ const COLORS = {
  */
 export function generateBlogArticleImage(article: BlogArticle | undefined, fallbackTitle?: string): ImageResponse {
   const title = article?.title || fallbackTitle || 'Tamkinly Blog';
-  const category = article?.category || 'Blog';
+  // Satori cannot shape Arabic script (lookupType: 5 / substFormat: 3 errors crash the
+  // edge OG render with a 502). Arabic-only articles carry an Arabic registry category,
+  // so fall back to the Latin 'Blog' badge whenever the category is Arabic-script (2026-09-16).
+  const rawCategory = article?.category || 'Blog';
+  const category = /[\u0600-\u06FF]/.test(rawCategory) ? 'Blog' : rawCategory;
   const description = article?.description || 'Science-backed identity transformation tools';
   const shortDesc = description.length > 100 ? description.substring(0, 100) + '...' : description;
   const tier = article?.tier;

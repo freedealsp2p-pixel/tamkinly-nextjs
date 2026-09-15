@@ -97,6 +97,18 @@ export function middleware(request: NextRequest) {
   const slug404 = unknownSlug404(pathname);
   if (slug404) return slug404;
 
+  // Arabic-only articles (ar-* slugs): 308 the English-path duplicate to the canonical
+  // Arabic URL. /blog/ar-* renders the same Arabic body under English chrome (EN H1 +
+  // self-canonical + index,follow = thin duplicate); the only real version is
+  // /ar/blog/ar-*. Runs before locale handling so the original path is matched once —
+  // no redirect-loop risk with the /ar/* rewrite below (2026-09-16).
+  const arArticleMatch = pathname.match(/^\/blog\/(ar-[a-z0-9-]+)\/?$/);
+  if (arArticleMatch) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/ar/blog/${arArticleMatch[1]}`;
+    return NextResponse.redirect(url, 308);
+  }
+
   // Skip static files and API routes
   if (
     pathname.startsWith('/api') ||

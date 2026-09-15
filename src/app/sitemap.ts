@@ -54,12 +54,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.priority * 0.9,
   }));
 
-  // Blog articles - English + Arabic
+  // Blog articles - English + Arabic.
+  // Arabic-only articles (ar-* slugs) exist ONLY at /ar/blog/* — the /blog/ar-* path is
+  // 308-redirected there, so it must not be listed in the sitemap (2026-09-16).
   const blogSlugs = getAllBlogArticleSlugs();
-  const blogPages = blogSlugs.flatMap((slug) => [
-    { url: `${baseUrl}/blog/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
-    { url: `${baseUrl}/ar/blog/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.63 },
-  ]);
+  const blogPages = blogSlugs.flatMap((slug) => {
+    const isArabicOnly = slug.startsWith('ar-');
+    const entries: MetadataRoute.Sitemap = [];
+    if (!isArabicOnly) {
+      entries.push({ url: `${baseUrl}/blog/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 });
+    }
+    entries.push({ url: `${baseUrl}/ar/blog/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: isArabicOnly ? 0.7 : 0.63 });
+    return entries;
+  });
 
   // Guide pages - English + Arabic
   const guideSlugs = [
