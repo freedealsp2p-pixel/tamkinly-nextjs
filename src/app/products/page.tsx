@@ -110,6 +110,21 @@ function HeroSection({ t }: { t: ReturnType<typeof useTranslations> }) {
             <span className="text-white font-semibold">{t('heroSubtitleBold')}</span>
             {t('heroSubtitleEnd')}
           </p>
+
+          {/* Default CTA — straight to the recommended plan */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
+            <Link href="/products/premium">
+              <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-14 font-semibold shadow-xl">
+                {t('heroCtaPrimary')}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="#plans">
+              <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 px-8 h-14 font-semibold bg-transparent">
+                {t('heroCtaSecondary')}
+              </Button>
+            </Link>
+          </div>
           
           {/* Quick Stats */}
           <div className="flex flex-wrap items-center justify-center gap-8 mb-8">
@@ -284,7 +299,7 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
 }
 
 // Product Card Component
-function ProductCard({ product, t }: { 
+function ProductCard({ product, t, matched }: { 
   product: {
     id: string;
     nameKey: string;
@@ -296,6 +311,7 @@ function ProductCard({ product, t }: {
     featured?: boolean;
   };
   t: ReturnType<typeof useTranslations>;
+  matched?: boolean;
 }) {
   const Icon = product.icon;
   const { locale } = useLocale();
@@ -348,14 +364,24 @@ function ProductCard({ product, t }: {
   
   return (
     <Card className={`relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white ${
-      product.popular ? 'ring-2 ring-[#3DD4B0]' : ''
+      product.popular ? 'ring-2 ring-[#3DD4B0] shadow-xl lg:scale-[1.04] z-10 relative' : ''
     }`}>
-      {/* Popular Badge */}
+      {/* Popular Badge — the single recommended plan */}
       {product.popular && (
         <div className="absolute top-4 right-4 z-10">
           <Badge className="bg-[#3DD4B0] text-[#0F1C2E] font-semibold">
             <Star className="w-3 h-3 mr-1 fill-current" />
             {t('mostPopular')}
+          </Badge>
+        </div>
+      )}
+
+      {/* Matches-your-answer badge (two-step decision) */}
+      {matched && !product.popular && (
+        <div className="absolute top-4 left-4 z-10">
+          <Badge className="bg-[#1F6F78] text-white font-semibold">
+            <CheckCircle2 className="w-3 h-3 mr-1" />
+            {t('matchesYou')}
           </Badge>
         </div>
       )}
@@ -376,6 +402,9 @@ function ProductCard({ product, t }: {
           </h3>
           <p className="text-slate-600 leading-relaxed text-sm">
             {t(`products.${product.nameKey}.description`)}
+          </p>
+          <p className="text-xs font-medium text-[#1F6F78] mt-2 leading-relaxed">
+            {t(`products.${product.nameKey}.bestFor`)}
           </p>
         </div>
         
@@ -509,16 +538,18 @@ function ProductCard({ product, t }: {
 
 // Products Grid Section
 function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
+  // Two-step decision state: which identity chip did the user pick?
+  const [answer, setAnswer] = useState<string | null>(null);
   // Product data with non-translatable fields
   const products = [
     { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, color: "#3DD4B0", popular: false, billingPeriod: "free" },
-    { id: "basic", nameKey: "basic", price: 7, comparePrice: 0, tier: "BASIC", icon: Clock, featured: false, popular: false, billingPeriod: "monthly" },
-    { id: "premium", nameKey: "premium", price: 17, comparePrice: 0, tier: "PREMIUM", icon: Calendar, featured: true, popular: true, billingPeriod: "monthly" },
-    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, featured: true, popular: false, billingPeriod: "monthly" },
+    { id: "basic", nameKey: "basic", price: 7, comparePrice: 15, tier: "BASIC", icon: Clock, popular: false, billingPeriod: "monthly" },
+    { id: "premium", nameKey: "premium", price: 17, comparePrice: 29, tier: "PREMIUM", icon: Calendar, popular: true, billingPeriod: "monthly" },
+    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, popular: false, billingPeriod: "monthly" },
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-[#F6F8FA]">
+    <section id="plans" className="py-16 lg:py-24 bg-[#F6F8FA] scroll-mt-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <Badge className="mb-4 bg-[#3DD4B0]/10 text-[#3DD4B0]">
@@ -533,14 +564,69 @@ function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
           </p>
         </div>
         
+        {/* Two-step decision: pick who you are, we highlight the plan */}
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 mb-10">
+          <h3 className="font-serif text-lg sm:text-xl font-bold text-[#0F1C2E] mb-1">
+            {t('choosePathTitle')}
+          </h3>
+          <p className="text-sm text-slate-500 mb-4">
+            {t('choosePathSubtitle')}
+          </p>
+          <div className="grid sm:grid-cols-3 gap-2">
+            {[
+              { id: 'basic', label: t('pathChipStarter') },
+              { id: 'premium', label: t('pathChipTransformer') },
+              { id: 'mastery', label: t('pathChipAllIn') },
+            ].map((chip) => (
+              <button
+                key={chip.id}
+                type="button"
+                onClick={() => {
+                  setAnswer(chip.id);
+                  if (typeof document !== 'undefined') {
+                    const el = document.getElementById(`plan-${chip.id}`);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }
+                }}
+                className={`text-sm rounded-xl border px-3 py-3 text-start transition-all duration-200 ${
+                  answer === chip.id
+                    ? 'border-[#1F6F78] ring-1 ring-[#1F6F78] bg-[#1F6F78]/5 text-[#0F1C2E] font-medium'
+                    : 'border-slate-200 text-slate-600 hover:border-[#1F6F78]/40 hover:bg-[#1F6F78]/[0.03]'
+                }`}
+              >
+                {chip.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {products.map((product) => (
-            <ProductCard 
-              key={product.id} 
-              product={product}
-              t={t}
-            />
+            <div key={product.id} id={`plan-${product.id}`} className={`scroll-mt-28 ${product.popular ? 'lg:-translate-y-3' : ''}`}>
+              <ProductCard
+                product={product}
+                t={t}
+                matched={answer === product.id}
+              />
+            </div>
           ))}
+        </div>
+
+        {/* Default CTA — one clear recommended path */}
+        <div className="max-w-3xl mx-auto mt-12 bg-white rounded-2xl border border-slate-100 shadow-sm p-6 sm:p-8 text-center">
+          <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#0F1C2E] mb-2">
+            {t('startHereTitle')}
+          </h3>
+          <p className="text-slate-600 text-sm sm:text-base mb-5">
+            {t('startHereBody')}
+          </p>
+          <Link href="/products/premium" className="inline-block">
+            <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-12 font-semibold shadow-lg">
+              {t('startHereButton')}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+          <p className="text-xs text-slate-400 mt-3">{t('startHereSecondary')}</p>
         </div>
         
         {/* Payment Methods Note */}

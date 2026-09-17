@@ -1032,7 +1032,8 @@
           "Best value",
           "Save $17",
           "Analytics included"
-        ]
+        ],
+        "bestFor": "Best for: the complete 30-day identity transformation — our default recommendation"
       },
       "basic": {
         "name": "Basic (Monthly)",
@@ -1049,7 +1050,8 @@
           "Full system access",
           "7 days",
           "Low risk"
-        ]
+        ],
+        "bestFor": "Best for: testing the methodology with one focused week"
       },
       "mastery": {
         "name": "Mastery Bundle",
@@ -1068,7 +1070,8 @@
           "AI coaching",
           "VIP access"
         ],
-        "cta": "Get Mastery"
+        "cta": "Get Mastery",
+        "bestFor": "Best for: total commitment — AI Coach, community, and every tool"
       },
       "worksheets": {
         "name": "Printable Worksheets Pack",
@@ -1142,7 +1145,19 @@
         "alternative": "Alternative Option",
         "retake": "Retake Quiz"
       }
-    }
+    },
+    "choosePathTitle": "Which sentence sounds like you?",
+    "choosePathSubtitle": "Pick the one closest to your situation — we will highlight the plan that fits. You can still compare everything below.",
+    "pathChipStarter": "I want to test the method first",
+    "pathChipTransformer": "I am ready for the full 30-day system",
+    "pathChipAllIn": "I want everything — plus the AI Coach",
+    "matchesYou": "Matches your answer",
+    "startHereTitle": "Not sure where to start?",
+    "startHereBody": "Most members begin with Premium — the complete system at the fair middle of the ladder.",
+    "startHereButton": "Start with Premium — $17/mo",
+    "startHereSecondary": "or compare all plans above",
+    "heroCtaPrimary": "Start with Premium — $17/mo",
+    "heroCtaSecondary": "Compare all plans"
   },
   "appsPage": {
     "headerTitle": "Tamkinly Apps",
