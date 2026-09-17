@@ -14,6 +14,66 @@ import { MedicalDisclaimer } from '@/components/recovery/system';
 import type { ProtocolSlug } from '@/lib/protocol-access';
 import { PROTOCOL_PRODUCTS } from '@/lib/protocol-access';
 
+/**
+ * Anti-choice-paralysis: one guided path across the three paid protocols.
+ * Rule 1: single visual recommendation (step 1 = start). 
+ * Rule 2: two-stage decision (does this feeling match? -> then buy).
+ * Rule 3: buyer-identity framing (forLine per protocol).
+ * Rule 4: sharp separation (start / next / advanced+safety stage labels).
+ * Rule 5: default CTA (non-start pages nudge to the recommended start;
+ *         each page points to the next step after completion).
+ */
+const PROTOCOL_PATH: Record<
+  ProtocolSlug,
+  {
+    step: number;
+    shortLabel: { ar: string; en: string };
+    stageLabel: { ar: string; en: string };
+    forLine: { ar: string; en: string };
+    chip: { ar: string; en: string };
+    isStart: boolean;
+    nextSlug?: ProtocolSlug;
+  }
+> = {
+  'temporal-decoupling': {
+    step: 1,
+    shortLabel: { ar: 'التفكيك الزمني', en: 'Temporal Decoupling' },
+    stageLabel: { ar: 'البداية الموصى بها', en: 'Recommended start' },
+    forLine: {
+      ar: 'لمن: ذكرى واحدة محددة لا تزال تنبثق رغم مرور السنون',
+      en: 'For: one specific memory that still surfaces years later',
+    },
+    chip: { ar: 'ذكرى واحدة تعيد تشغيل نفسها', en: 'One memory that keeps replaying' },
+    isStart: true,
+    nextSlug: 'alternative-code',
+  },
+  'alternative-code': {
+    step: 2,
+    shortLabel: { ar: 'الشفرة البديلة', en: 'Alternative Code' },
+    stageLabel: { ar: 'الخطوة التالية في المسار', en: 'Next step in the path' },
+    forLine: {
+      ar: 'لمن: محفّز معيّن — اسم أو مكان أو أغنية — يستدعي الشعور القديم تلقائياً',
+      en: 'For: a specific trigger — a name, a place, a song — that summons the old feeling automatically',
+    },
+    chip: { ar: 'محفّزات تُشعل استجابة قديمة تلقائياً', en: 'Triggers that fire an old response automatically' },
+    isStart: false,
+    nextSlug: 'white-mirror',
+  },
+  'white-mirror': {
+    step: 3,
+    shortLabel: { ar: 'المرآة البيضاء', en: 'White Mirror' },
+    stageLabel: { ar: 'للمتمرسين — بوابة أمان', en: 'Advanced — safety gate' },
+    forLine: {
+      ar: 'لمن: حلقة أفكار سلبية متكررة تريد كسرها بحسم — للمتمرسين فقط (بوابة أمان)',
+      en: 'For: a repeating negative thought loop you want to break decisively — advanced users only (safety gate)',
+    },
+    chip: { ar: 'ناقد داخلي صاخب لا يصمت', en: 'A loud inner critic that never quiets' },
+    isStart: false,
+  },
+};
+
+const PATH_ORDER: ProtocolSlug[] = ['temporal-decoupling', 'alternative-code', 'white-mirror'];
+
 interface ProtocolLandingProps {
   protocolSlug: ProtocolSlug;
   breadcrumbs: { label: string; href?: string }[];
@@ -54,6 +114,8 @@ export function ProtocolLanding({
   const [showPurchase, setShowPurchase] = useState(false);
 
   const t = useTranslations('therapeuticProtocols');
+  const path = PROTOCOL_PATH[protocolSlug];
+  const nextProto = path.nextSlug ? PROTOCOL_PRODUCTS[path.nextSlug] : null;
 
   return (
     <div className="min-h-screen bg-[#F5F9F8]" dir={direction}>
@@ -73,6 +135,89 @@ export function ProtocolLanding({
             {isAr ? 'تجربة علاجية مميزة' : 'Premium Therapeutic Experience'}
           </div>
         </div>
+
+        {/* Rule 1 + 4 — Guided path strip: 1 -> 2 -> 3, "you are here".
+            Cancels visual parity: one start, one next, one advanced. */}
+        <div className="mb-6" aria-label={isAr ? 'مسار البروتوكولات' : 'Protocol path'}>
+          <div className="flex items-center justify-between gap-1 rounded-2xl bg-white border border-slate-100 shadow-sm px-3 py-3">
+            {PATH_ORDER.map((slug, idx) => {
+              const node = PROTOCOL_PATH[slug];
+              const isCurrent = slug === protocolSlug;
+              const nodeAccent = PROTOCOL_PRODUCTS[slug].accentColor;
+              return (
+                <div key={slug} className="flex items-center flex-1 min-w-0">
+                  <div className="flex flex-col items-center min-w-0">
+                    <div
+                      className={`flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold flex-shrink-0 ${
+                        isCurrent
+                          ? 'text-white ring-4 ring-offset-0'
+                          : path.step > node.step
+                            ? 'text-white/90'
+                            : 'text-[#0F1C2E]/40 bg-slate-100'
+                      }`}
+                      style={
+                        isCurrent
+                          ? { backgroundColor: nodeAccent, boxShadow: `0 0 0 3px ${nodeAccent}30` }
+                          : path.step > node.step
+                            ? { backgroundColor: nodeAccent, opacity: 0.45 }
+                            : undefined
+                      }
+                    >
+                      {node.step}
+                    </div>
+                    <span
+                      className={`mt-1 text-[10px] leading-tight text-center max-w-[72px] truncate ${
+                        isCurrent ? 'font-bold text-[#0F1C2E]' : 'text-[#0F1C2E]/40'
+                      }`}
+                    >
+                      {isAr ? node.shortLabel.ar : node.shortLabel.en}
+                    </span>
+                    {isCurrent && (
+                      <span
+                        className="text-[9px] font-semibold mt-0.5"
+                        style={{ color: nodeAccent }}
+                      >
+                        {isAr ? 'أنت هنا' : 'You are here'}
+                      </span>
+                    )}
+                  </div>
+                  {idx < PATH_ORDER.length - 1 && (
+                    <div
+                      className={`flex-1 h-0.5 mx-1 rounded-full mb-0 ${
+                        path.step > node.step ? 'opacity-100' : 'opacity-30'
+                      }`}
+                      style={{ backgroundColor: config.accentColor }}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <p className="text-center text-[11px] text-[#0F1C2E]/50 mt-2">
+            {isAr
+              ? 'المسار الموصى به: التفكيك الزمني ← الشفرة البديلة ← المرآة البيضاء'
+              : 'Recommended path: Temporal Decoupling → Alternative Code → White Mirror'}
+          </p>
+        </div>
+
+        {/* Rule 5 — Default CTA: non-start pages nudge first-timers to the
+            recommended start, without blocking this page's own purchase. */}
+        {!path.isStart && (
+          <div className="rounded-2xl border border-[#1F6F78]/25 bg-[#1F6F78]/5 px-4 py-3 mb-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+            <p className="text-xs sm:text-sm text-[#0F1C2E]/70 leading-relaxed flex-1">
+              {isAr
+                ? 'إن كانت هذه أول تجربة علاجية لك، ننصح بالبدء من التفكيك الزمني — المسار مصمم ليُمارَس بالتدريج.'
+                : 'If this is your first therapeutic experience, we recommend starting with Temporal Decoupling — the path is designed to be practiced progressively.'}
+            </p>
+            <Link
+              href="/apps/therapeutic-protocols/temporal-decoupling"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#1F6F78] border border-[#1F6F78]/40 bg-white hover:bg-[#1F6F78]/10 transition-colors flex-shrink-0 whitespace-nowrap"
+            >
+              {isAr ? 'البداية الموصى بها' : 'Recommended start'}
+              {isAr ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+            </Link>
+          </div>
+        )}
 
         {/* Title */}
         <div className="text-center mb-8">
@@ -115,6 +260,31 @@ export function ProtocolLanding({
               <Clock className="w-4 h-4" />
               {isAr ? config.durationLabel.ar : config.durationLabel.en}
             </span>
+          </div>
+
+          {/* Rule 2 + 3 — Two-stage decision, buyer-identity framing.
+              Stage 1: "is this my feeling?" — before any purchase decision. */}
+          <div
+            className="rounded-xl px-4 py-3 mb-5"
+            style={{ backgroundColor: `${config.accentColor}0D` }}
+          >
+            <p className="text-sm font-semibold text-[#0F1C2E] mb-1">
+              {isAr ? 'هل هذا شعورك؟' : 'Does this sound like you?'}
+            </p>
+            <p className="text-sm text-[#0F1C2E]/80 mb-1">
+              {isAr ? path.chip.ar : path.chip.en}
+            </p>
+            <p className="text-xs text-[#0F1C2E]/60 leading-relaxed">
+              {isAr ? path.forLine.ar : path.forLine.en}
+            </p>
+            <Link
+              href="/apps/therapeutic-protocols"
+              className="inline-flex items-center gap-1 text-xs font-medium mt-2 hover:underline"
+              style={{ color: config.accentColor }}
+            >
+              {isAr ? 'ليس شعورك؟ طابِق شعورك مع التمرين المناسب' : 'Not your feeling? Match it with the right protocol'}
+              {isAr ? <ArrowLeft className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />}
+            </Link>
           </div>
 
           {/* Intro */}
@@ -211,6 +381,34 @@ export function ProtocolLanding({
             {t('landing.paymentMethod')}
           </p>
         </div>
+
+        {/* Rule 5 — Guided journey: the path continues after this protocol */}
+        {nextProto && (
+          <Link
+            href={`/apps/therapeutic-protocols/${nextProto.slug}`}
+            className="block rounded-2xl bg-white border border-slate-100 shadow-sm px-4 py-3 mb-6 hover:border-[#3DD4B0]/50 transition-colors"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[11px] text-[#0F1C2E]/50 mb-0.5">
+                  {isAr ? 'بعد إتمام هذا التمرين' : 'After completing this protocol'}
+                </p>
+                <p className="text-sm font-semibold text-[#0F1C2E] truncate">
+                  {isAr
+                    ? `الخطوة التالية: ${nextProto.title.ar}`
+                    : `Next step: ${nextProto.title.en}`}
+                </p>
+              </div>
+              <span
+                className="flex items-center gap-1 text-xs font-semibold flex-shrink-0"
+                style={{ color: config.accentColor }}
+              >
+                {isAr ? 'استعرض' : 'View'}
+                {isAr ? <ArrowLeft className="w-3.5 h-3.5" /> : <ArrowRight className="w-3.5 h-3.5" />}
+              </span>
+            </div>
+          </Link>
+        )}
 
         {/* Medical Disclaimer */}
         <MedicalDisclaimer />

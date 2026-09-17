@@ -960,6 +960,27 @@ function EmailCaptureSection({ results, locale, getText }: {
   const [name, setName] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [dismissed, setDismissed] = useState(false);
+
+  // Respect the user's choice: once skipped, stay hidden for the session
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem('quizEmailCaptureDismissed') === '1') setDismissed(true);
+    } catch {
+      /* private mode — ignore */
+    }
+  }, []);
+
+  const handleDismiss = () => {
+    setDismissed(true);
+    try {
+      sessionStorage.setItem('quizEmailCaptureDismissed', '1');
+    } catch {
+      /* private mode — ignore */
+    }
+  };
+
+  if (dismissed) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -1038,16 +1059,19 @@ function EmailCaptureSection({ results, locale, getText }: {
     <Card className="border-2 border-[#1F6F78]/30 bg-gradient-to-br from-[#1F6F78]/5 to-white mt-8">
       <CardContent className="p-6">
         <div className="text-center mb-4">
+          <span className="inline-block text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500 mb-3">
+            {getText('Optional — only if you want', 'اختياري — فقط إن أردت')}
+          </span>
           <div className="w-12 h-12 rounded-full bg-[#1F6F78]/10 flex items-center justify-center mx-auto mb-3">
             <Mail className="w-6 h-6 text-[#1F6F78]" />
           </div>
           <h3 className="font-bold text-lg text-[#0F1C2E] mb-1">
-            {getText('Get your full results by email', 'احصل على نتائجك الكاملة بالبريد')}
+            {getText('Want your results in your inbox too?', 'أتريد وصول النتائج إلى بريدك أيضاً؟')}
           </h3>
           <p className="text-slate-600 text-sm">
             {getText(
-              'Save your Identity Gap Score and receive a personalized transformation roadmap. Free, no spam, unsubscribe anytime.',
-              'احفظ درجة فجوة هويتك واحصل على خارطة تحول شخصية. مجاناً، بدون رسائل مزعجة، إلغاء الاشتراك في أي وقت.'
+              'Your results are already on this page — nothing is locked. Leave your email only if you want to save your score and receive a personalized transformation roadmap. Free, no spam, unsubscribe anytime.',
+              'نتائجك معروضة بالكامل في هذه الصفحة — لا شيء مقفل. اترك بريدك فقط إن أردت حفظ درجتك واستلام خارطة تحول شخصية. مجاناً، بدون رسائل مزعجة، إلغاء الاشتراك في أي وقت.'
             )}
           </p>
         </div>
@@ -1094,6 +1118,13 @@ function EmailCaptureSection({ results, locale, getText }: {
               '🔒 نحترم خصوصيتك. لا رسائل مزعجة، أبداً.'
             )}
           </p>
+          <button
+            type="button"
+            onClick={handleDismiss}
+            className="w-full text-center text-xs text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors py-1"
+          >
+            {getText('No thanks — the results here are enough', 'لا شكراً — النتائج هنا تكفيني')}
+          </button>
         </form>
       </CardContent>
     </Card>
