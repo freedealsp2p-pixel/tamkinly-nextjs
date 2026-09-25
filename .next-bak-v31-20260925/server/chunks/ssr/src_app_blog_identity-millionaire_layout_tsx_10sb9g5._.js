@@ -1,0 +1,3 @@
+module.exports=[671799,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("identity-millionaire",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"identity-millionaire"}),a]})},"generateMetadata",0,f])},241199,a=>{a.n(a.i(671799))}];
+
+//# sourceMappingURL=src_app_blog_identity-millionaire_layout_tsx_10sb9g5._.js.map

@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رسم خريطة المحفزات | Tamkinly - TRC</title>
+
+  <style>
+    :root {
+      --primary: #1F6F78;
+      --accent: #3DD4B0;
+      --dark: #0F1C2E;
+      --bg: #F8FAFC;
+      --page: #FFFFFF;
+      --line: #CBD5E1;
+
+      --alert-bg: #FFFBEB;
+      --alert-border: #D97706;
+      --alert-text: #92400E;
+
+      --safety-bg: #FEF3C7;
+      --safety-border: #B45309;
+      --safety-text: #78350F;
+
+      --teal-bg: #E6F4F5;
+      --teal-text: #1F6F78;
+
+      --write-border: #9CA3AF;
+      --muted: #64748B;
+      --footer: #475569;
+
+      --font-ar: "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background: #E2E8F0;
+    }
+
+    body {
+      background: #E2E8F0;
+      color: var(--dark);
+      font-family: var(--font-ar);
+      font-size: 14px;
+      line-height: 1.65;
+      direction: rtl;
+      text-align: right;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =========================
+       SCREEN / PRINT STRUCTURE
+       ========================= */
+
+    .screen-toolbar {
+      width: 210mm;
+      margin: 16px auto 12px;
+      padding: 10px 14px;
+      background: var(--page);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(15, 28, 46, 0.06);
+    }
+
+    .toolbar-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .print-btn {
+      appearance: none;
+      border: none;
+      background: var(--primary);
+      color: #FFFFFF;
+      border-radius: 5px;
+      padding: 8px 16px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .print-btn:hover {
+      background: #16575F;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 15mm;
+      margin: 0 auto 20px;
+      background: var(--page);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .page-content {
+      flex: 1;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    /* =========================
+       HEADER
+       ========================= */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .document-title {
+      color: var(--dark);
+      font-size: 22px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+
+    .document-purpose {
+      max-width: 145mm;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.6;
+    }
+
+    .stage-badge {
+      flex-shrink: 0;
+      background: var(--teal-bg);
+      color: var(--teal-text);
+      border: 1px solid rgba(31, 111, 120, 0.18);
+      border-radius: 4px;
+      padding: 4px 9px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* =========================
+       BOXES
+       ========================= */
+
+    .safety-box {
+      background: var(--safety-bg);
+      border-right: 4px solid var(--safety-border);
+      color: var(--safety-text);
+      border-radius: 6px;
+      padding: 12px 15px;
+      margin-bottom: 16px;
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+
+    .safety-title {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .support-note {
+      background: #F1F5F9;
+      border: 1px solid var(--line);
+      border-right: 3px solid var(--primary);
+      border-radius: 6px;
+      padding: 9px 13px;
+      margin-bottom: 17px;
+      color: #475569;
+      font-size: 11.5px;
+      line-height: 1.65;
+    }
+
+    .alert-box {
+      background: var(--alert-bg);
+      border: 1px solid var(--alert-border);
+      border-right: 4px solid var(--alert-border);
+      color: var(--alert-text);
+      border-radius: 6px;
+      padding: 12px 15px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+
+    .alert-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .alert-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .alert-list li {
+      position: relative;
+      padding-right: 16px;
+      margin-bottom: 5px;
+      font-size: 11.5px;
+      line-height: 1.6;
+    }
+
+    .alert-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .alert-list li::before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      font-weight: 800;
+    }
+
+    /* =========================
+       SECTION HEADINGS
+       ========================= */
+
+    .section {
+      margin-top: 16px;
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 800;
+      border-right: 3px solid var(--accent);
+      padding-right: 8px;
+      margin-bottom: 6px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.65;
+      margin-bottom: 11px;
+    }
+
+    .instruction-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .instruction-list li {
+      position: relative;
+      padding-right: 17px;
+      margin-bottom: 7px;
+      font-size: 12.5px;
+      line-height: 1.65;
+    }
+
+    .instruction-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .instruction-list li::before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* =========================
+       STARTING POSITION
+       ========================= */
+
+    .start-box {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 11px 14px;
+      margin-top: 17px;
+    }
+
+    .start-title {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .start-text {
+      color: var(--dark);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    /* =========================
+       WRITING FIELDS
+       ========================= */
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field-label {
+      display: block;
+      color: var(--dark);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    .field-hint {
+      display: block;
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    .writing-box {
+      width: 100%;
+      min-height: 48px;
+      background: #FFFFFF;
+      border: 1.5px dotted var(--write-border);
+      border-radius: 5px;
+    }
+
+    .writing-box.small {
+      min-height: 40px;
+    }
+
+    .writing-box.medium {
+      min-height: 55px;
+    }
+
+    .writing-box.large {
+      min-height: 78px;
+    }
+
+    .writing-box.xlarge {
+      min-height: 92px;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    /* =========================
+       BODY / RESPONSE SECTIONS
+       ========================= */
+
+    .section-block {
+      margin-bottom: 15px;
+    }
+
+    .qualitative-note {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 8px 11px;
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       CONTACTS
+       ========================= */
+
+    .contacts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .contact-field {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 8px 10px;
+    }
+
+    .contact-label {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .contact-writing {
+      height: 28px;
+      border-bottom: 1.5px dotted var(--write-border);
+    }
+
+    /* =========================
+       DISCLAIMER
+       ========================= */
+
+    .disclaimer {
+      background: #F1F5F9;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 9px 11px;
+      color: var(--footer);
+      font-size: 9.5px;
+      line-height: 1.6;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--footer);
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    .footer-brand {
+      font-weight: 700;
+    }
+
+    .footer-id {
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    /* =========================
+       PRINT
+       ========================= */
+
+    @media print {
+      html,
+      body {
+        background: #FFFFFF !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .screen-toolbar {
+        display: none !important;
+      }
+
+      .page {
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 !important;
+        padding: 15mm !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      * {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+    }
+
+    /* =========================
+       SCREEN RESPONSIVENESS
+       ========================= */
+
+    @media screen and (max-width: 900px) {
+      .screen-toolbar,
+      .page {
+        width: calc(100% - 24px);
+      }
+
+      .page {
+        height: auto;
+        min-height: 297mm;
+        margin-bottom: 14px;
+      }
+
+      .two-columns,
+      .contacts {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Screen-only control -->
+  <div class="screen-toolbar no-print" aria-label="أدوات الطباعة">
+    <div class="toolbar-label">
+      Tamkinly | مركز تعافي الصدمات — ورقة عمل A4
+    </div>
+
+    <button
+      type="button"
+      class="print-btn"
+      onclick="window.print()"
+      aria-label="طباعة ورقة العمل أو حفظها كملف PDF"
+    >
+      طباعة / حفظ كـ PDF
+    </button>
+  </div>
+
+
+  <!-- =========================================================
+       PAGE 1 — CONTEXT
+       ========================================================= -->
+
+  <section class="page" id="page-1">
+
+    <div class="page-content">
+
+      <header class="header">
+        <div>
+          <div class="brand">Tamkinly | مركز تعافي الصدمات (TRC)</div>
+
+          <h1 class="document-title">
+            رسم خريطة المحفزات
+          </h1>
+
+          <p class="document-purpose">
+            تحديد المحفزات وفهم استجابات الجسد والعاطفة والسلوك تجاهها
+            لتمكين التنظيم المسبق.
+          </p>
+        </div>
+
+        <div class="stage-badge">
+          مرحلة التنظيم
+        </div>
+      </header>
+
+
+      <div class="safety-box">
+        <span class="safety-title">
+          تنبيه: الاستقرار أولًا
+        </span>
+
+        رسم خريطة المحفزات يتم بعد الاستقرار — وليس خلال الأزمة.
+        إذا كان التفكير في المحفز يزيد الضيق أو يجعل البقاء في الحاضر صعبًا،
+        أوقف التمرين وارجع إلى التأريض بالحواس الخارجية.
+      </div>
+
+
+      <div class="support-note">
+        لا تحتاج إلى إعادة سرد الحدث أو وصف تفاصيل الصدمة.
+        الهدف هنا هو ملاحظة ما سبق التحول وما ظهر بعده بالقدر الذي يكون
+        مناسبًا لك الآن. يمكنك ترك أي حقل فارغًا أو الانتقال إلى حقل آخر.
+      </div>
+
+
+      <section class="section">
+
+        <h2 class="section-title">
+          سياق المحفز
+        </h2>
+
+        <p class="section-description">
+          سجّل ما تتذكره عن اللحظات التي سبقت التحول، دون الحاجة إلى
+          الدخول في تفاصيل الحدث نفسه.
+        </p>
+
+
+        <div class="field">
+          <label class="field-label">
+            ماذا حدث قبل أن ألاحظ التحول؟
+          </label>
+
+          <div class="writing-box medium"></div>
+        </div>
+
+
+        <div class="two-columns">
+
+          <div class="field">
+            <label class="field-label">
+              أين كنت؟
+            </label>
+
+            <div class="writing-box small"></div>
+          </div>
+
+
+          <div class="field">
+            <label class="field-label">
+              ماذا كنت أفعل؟
+            </label>
+
+            <div class="writing-box small"></div>
+          </div>
+
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            ماذا كنت أفكر فيه؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            ما المدخل الحسي الذي لاحظته؟
+            <span class="field-hint">
+              مثل: بصر، سمع، شم، لمس، ذوق
+            </span>
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+      </section>
+
+
+      <div class="start-box">
+
+        <div class="start-title">
+          تذكير أثناء الكتابة
+        </div>
+
+        <div class="start-text">
+          لاحظ ما يمكنك ملاحظته دون البحث عن سبب أو معنى نهائي.
+          هذه الورقة أداة للملاحظة والتنظيم، وليست اختبارًا لمعرفة
+          «السبب الحقيقي» لما حدث.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <footer class="footer">
+      <span class="footer-brand">
+        Tamkinly | مركز تعافي الصدمات
+      </span>
+
+      <span class="footer-id">
+        Tool ID: TRC-TRIGGER_MAPPING
+      </span>
+
+      <span>
+        صفحة 1 من 3
+      </span>
+    </footer>
+
+  </section>
+
+
+  <!-- =========================================================
+       PAGE 2 — BODY / EMOTION / BEHAVIOR
+       ========================================================= -->
+
+  <section class="page" id="page-2">
+
+    <div class="page-content">
+
+      <header class="header">
+        <div>
+          <div class="brand">
+            Tamkinly | مركز تعافي الصدمات (TRC)
+          </div>
+
+          <h1 class="document-title">
+            استجابة الجسد والعاطفة والسلوك
+          </h1>
+
+          <p class="document-purpose">
+            ملاحظة التسلسل كما حدث، دون لوم أو محاولة الحكم على الاستجابة.
+          </p>
+        </div>
+
+        <div class="stage-badge">
+          مرحلة التنظيم
+        </div>
+      </header>
+
+
+      <div class="support-note">
+        لا توجد استجابة «صحيحة» أو «خاطئة» يجب الوصول إليها.
+        اكتب فقط ما يمكنك ملاحظته، ويمكنك ترك أي سؤال إذا لم يكن
+        التركيز عليه مناسبًا الآن.
+      </div>
+
+
+      <!-- BODY -->
+
+      <section class="section-block">
+
+        <h2 class="section-title">
+          استجابة الجسد
+        </h2>
+
+        <div class="field">
+          <label class="field-label">
+            أين في جسدي شعرت به أولًا؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            ماذا كان الإحساس يشبه؟
+          </label>
+
+          <span class="field-hint">
+            يمكنك وصفه كما لاحظته دون الحاجة إلى تفسير سببه.
+          </span>
+
+          <div class="writing-box medium"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            كيف كان مستوى الإحساس بالنسبة لي؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+      </section>
+
+
+      <!-- EMOTION -->
+
+      <section class="section-block">
+
+        <h2 class="section-title">
+          العاطفة
+        </h2>
+
+        <div class="field">
+          <label class="field-label">
+            ما العاطفة التي لاحظتها؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            هل كانت هناك عاطفة ثانوية تحتها؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+      </section>
+
+
+      <!-- IMPULSE / BEHAVIOR -->
+
+      <section class="section-block">
+
+        <h2 class="section-title">
+          الاندفاع / السلوك
+        </h2>
+
+        <div class="field">
+          <label class="field-label">
+            ماذا شعرت برغبة في فعله؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            ماذا حدث بعد ذلك؟
+          </label>
+
+          <span class="field-hint">
+            يمكنك وصف ما حدث دون لوم نفسك أو تقييم استجابتك.
+          </span>
+
+          <div class="writing-box medium"></div>
+        </div>
+
+      </section>
+
+
+      <div class="qualitative-note">
+        الملاحظة لا تعني الموافقة على الاستجابة أو الحكم عليها.
+        الهدف هو التعرف على التسلسل: ما الذي سبق التحول، ماذا ظهر في الجسد
+        والعاطفة، وما الذي حدث بعد ذلك.
+      </div>
+
+    </div>
+
+
+    <footer class="footer">
+      <span class="footer-brand">
+        Tamkinly | مركز تعافي الصدمات
+      </span>
+
+      <span class="footer-id">
+        Tool ID: TRC-TRIGGER_MAPPING
+      </span>
+
+      <span>
+        صفحة 2 من 3
+      </span>
+    </footer>
+
+  </section>
+
+
+  <!-- =========================================================
+       PAGE 3 — WHAT HELPED / PATTERNS / SAFETY
+       ========================================================= -->
+
+  <section class="page" id="page-3">
+
+    <div class="page-content">
+
+      <header class="header">
+        <div>
+          <div class="brand">
+            Tamkinly | مركز تعافي الصدمات (TRC)
+          </div>
+
+          <h1 class="document-title">
+            ما ساعدني وما الذي ألاحظه؟
+          </h1>
+
+          <p class="document-purpose">
+            استكشاف ما ساعد على التنظيم والتعرف على الأنماط المتكررة
+            دون تحويل التجربة إلى تقييم أو لوم.
+          </p>
+        </div>
+
+        <div class="stage-badge">
+          مرحلة التنظيم
+        </div>
+      </header>
+
+
+      <!-- WHAT HELPED -->
+
+      <section class="section">
+
+        <h2 class="section-title">
+          ما ساعد
+        </h2>
+
+
+        <div class="field">
+          <label class="field-label">
+            ماذا ساعدني على التنظيم؟
+          </label>
+
+          <div class="writing-box medium"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            ماذا سأجرب المرة القادمة؟
+          </label>
+
+          <div class="writing-box medium"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            كم استغرقت لأستقر؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+      </section>
+
+
+      <!-- PATTERNS -->
+
+      <section class="section">
+
+        <h2 class="section-title">
+          مراجعة / أنماط
+        </h2>
+
+
+        <div class="field">
+          <label class="field-label">
+            هل هذا محفز مألوف؟
+          </label>
+
+          <div class="writing-box small"></div>
+        </div>
+
+
+        <div class="field">
+          <label class="field-label">
+            ما النمط الذي ألاحظه؟
+          </label>
+
+          <div class="writing-box medium"></div>
+        </div>
+
+      </section>
+
+
+      <!-- STOP -->
+
+      <div class="alert-box">
+
+        <div class="alert-title">
+          متى أتوقف؟
+        </div>
+
+        <ul class="alert-list">
+
+          <li>
+            إذا عاد رسم الخريطة إلى إحداث ضيق أو تجربة صادمة جديدة.
+          </li>
+
+          <li>
+            إذا لم أستطع البقاء في الحاضر أثناء التفكير.
+          </li>
+
+          <li>
+            إذا أصبح الاستمرار في التركيز على المحفز غير آمن أو غير محتمل.
+          </li>
+
+        </ul>
+
+        <p style="font-size: 11.5px; margin-top: 8px; line-height: 1.65;">
+          لا تحتاج إلى إكمال الورقة. توقف وارجع إلى التأريض بالحواس الخارجية،
+          أو اطلب دعمًا مناسبًا إذا احتجت إليه.
+        </p>
+
+      </div>
+
+
+      <!-- CONTACTS -->
+
+      <section>
+
+        <h2 class="section-title">
+          جهات اتصال الطوارئ / الدعم
+        </h2>
+
+        <div class="contacts">
+
+          <div class="contact-field">
+            <div class="contact-label">
+              جهة اتصال 1
+            </div>
+
+            <div class="contact-writing"></div>
+          </div>
+
+
+          <div class="contact-field">
+            <div class="contact-label">
+              جهة اتصال 2
+            </div>
+
+            <div class="contact-writing"></div>
+          </div>
+
+
+          <div class="contact-field">
+            <div class="contact-label">
+              جهة اتصال 3
+            </div>
+
+            <div class="contact-writing"></div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="disclaimer">
+        هذا المحتوى تعليمي وداعم للتنظيم والوعي بالاستجابات المرتبطة بالمحفزات،
+        ولا يغني عن التقييم أو العلاج الطبي أو النفسي المتخصص لحالة الشخص الفردية.
+        إذا كنت في خطر فوري أو تمر بحالة طارئة، اطلب الدعم المناسب أو خدمات
+        الطوارئ المحلية.
+      </div>
+
+    </div>
+
+
+    <footer class="footer">
+      <span class="footer-brand">
+        Tamkinly | مركز تعافي الصدمات
+      </span>
+
+      <span class="footer-id">
+        Tool ID: TRC-TRIGGER_MAPPING
+      </span>
+
+      <span>
+        صفحة 3 من 3
+      </span>
+    </footer>
+
+  </section>
+
+</body>
+</html>

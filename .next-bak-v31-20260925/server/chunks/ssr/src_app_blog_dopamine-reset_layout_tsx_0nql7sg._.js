@@ -1,0 +1,3 @@
+module.exports=[588545,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("dopamine-reset",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"dopamine-reset"}),a]})},"generateMetadata",0,f])},626632,a=>{a.n(a.i(588545))}];
+
+//# sourceMappingURL=src_app_blog_dopamine-reset_layout_tsx_0nql7sg._.js.map

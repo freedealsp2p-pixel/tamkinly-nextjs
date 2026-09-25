@@ -156,16 +156,6 @@ function HeroSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F1C2E]/50 to-transparent" />
             </div>
-            {/* Floating badge */}
-            <div className={`absolute -bottom-4 ${direction === 'rtl' ? '-right-4' : '-left-4'} bg-white rounded-xl shadow-lg p-4 flex items-center gap-3`}>
-              <div className="w-12 h-12 rounded-full bg-[#3DD4B0]/10 flex items-center justify-center">
-                <TrendingUp className="h-6 w-6 text-[#3DD4B0]" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-[#0F1C2E]">94%</p>
-                <p className="text-xs text-slate-500">{t("hero.satisfaction")}</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطة السلامة | Tamkinly TRC | TRC-SAFETY_PLAN</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #1F6F78;
+            --accent: #3DD4B0;
+            --dark: #0F1C2E;
+            --bg: #F8FAFC;
+            --line: #CBD5E1;
+            --field: #9CA3AF;
+
+            --alert-bg: #FFFBEB;
+            --alert-border: #D97706;
+            --alert-text: #92400E;
+
+            --safety-bg: #FEF3C7;
+            --safety-border: #B45309;
+            --safety-text: #78350F;
+
+            --teal-bg: #E6F4F5;
+            --footer: #475569;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+            background: #E2E8F0;
+            color: var(--dark);
+            line-height: 1.5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ================= SCREEN TOOLBAR ================= */
+
+        .no-print {
+            display: block;
+        }
+
+        .toolbar {
+            width: 210mm;
+            max-width: calc(100% - 24px);
+            margin: 16px auto 0;
+            padding: 10px 14px;
+            background: #FFFFFF;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(15, 28, 46, 0.08);
+        }
+
+        .toolbar-title {
+            font-size: 12px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .toolbar-status {
+            display: inline-block;
+            margin-right: 8px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: var(--safety-bg);
+            border: 1px solid var(--safety-border);
+            color: var(--safety-text);
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .print-button {
+            border: 0;
+            border-radius: 6px;
+            background: var(--primary);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ================= DOCUMENT ================= */
+
+        .document {
+            width: 210mm;
+            margin: 18px auto 30px;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 15mm;
+            background: #FFFFFF;
+            margin-bottom: 18px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(15, 28, 46, 0.10);
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .page-content {
+            flex: 1;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 9px;
+            margin-bottom: 13px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .brand-sub {
+            color: var(--footer);
+            font-size: 9.5px;
+            font-weight: 600;
+        }
+
+        .title {
+            color: var(--dark);
+            font-size: 21px;
+            line-height: 1.3;
+            font-weight: 800;
+            margin-top: 5px;
+        }
+
+        .purpose {
+            color: var(--footer);
+            font-size: 10.5px;
+            line-height: 1.55;
+            margin-top: 4px;
+            max-width: 125mm;
+        }
+
+        .stage-badge {
+            flex-shrink: 0;
+            padding: 4px 9px;
+            border-radius: 20px;
+            background: var(--teal-bg);
+            border: 1px solid rgba(31, 111, 120, 0.18);
+            color: var(--primary);
+            font-size: 9.5px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* ================= SAFETY NOTICE ================= */
+
+        .safety-box {
+            background: var(--safety-bg);
+            border: 1.5px solid var(--safety-border);
+            border-right: 5px solid var(--safety-border);
+            border-radius: 7px;
+            padding: 10px 13px;
+            margin-bottom: 13px;
+            color: var(--safety-text);
+        }
+
+        .safety-title {
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .safety-text {
+            font-size: 10.5px;
+            line-height: 1.6;
+        }
+
+        .emergency-field {
+            margin-top: 8px;
+            padding: 7px 9px;
+            background: #FFFFFF;
+            border: 1px dashed var(--safety-border);
+            border-radius: 5px;
+        }
+
+        .emergency-label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        /* ================= PREPARATION NOTE ================= */
+
+        .info-box {
+            background: var(--teal-bg);
+            border-right: 4px solid var(--primary);
+            border-radius: 5px;
+            padding: 8px 11px;
+            color: var(--primary);
+            font-size: 10px;
+            line-height: 1.55;
+            margin-bottom: 13px;
+        }
+
+        /* ================= STEPS ================= */
+
+        .step {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 10px 11px;
+            margin-bottom: 11px;
+            background: #FFFFFF;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            min-width: 48px;
+            padding: 3px 7px;
+            border-radius: 4px;
+            background: var(--primary);
+            color: #FFFFFF;
+            font-size: 9.5px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .step-title {
+            color: var(--dark);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .step-description {
+            color: var(--footer);
+            font-size: 10px;
+            line-height: 1.55;
+            margin-bottom: 8px;
+        }
+
+        /* ================= FIELDS ================= */
+
+        .field {
+            margin-bottom: 8px;
+        }
+
+        .field:last-child {
+            margin-bottom: 0;
+        }
+
+        .label {
+            display: block;
+            color: var(--dark);
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .writing-line {
+            width: 100%;
+            min-height: 29px;
+            border: 1.5px dotted var(--field);
+            border-radius: 5px;
+            background: #FCFCFC;
+        }
+
+        .writing-line.compact {
+            min-height: 25px;
+        }
+
+        .writing-box {
+            width: 100%;
+            min-height: 57px;
+            border: 1.5px dotted var(--field);
+            border-radius: 5px;
+            background: #FCFCFC;
+        }
+
+        .writing-box.large {
+            min-height: 78px;
+        }
+
+        /* ================= CONTACTS ================= */
+
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 7px 8px;
+            margin-bottom: 7px;
+            background: var(--bg);
+            border: 1px solid #E2E8F0;
+            border-radius: 5px;
+        }
+
+        .contact:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ================= ALERT ================= */
+
+        .alert-box {
+            background: var(--alert-bg);
+            border: 1.5px solid var(--alert-border);
+            border-radius: 7px;
+            padding: 9px 12px;
+            margin-top: 10px;
+            color: var(--alert-text);
+        }
+
+        .alert-title {
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .alert-list {
+            margin-right: 17px;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .alert-note {
+            font-size: 9.5px;
+            margin-top: 5px;
+            line-height: 1.55;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            flex-shrink: 0;
+            border-top: 1px solid var(--line);
+            padding-top: 7px;
+            margin-top: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            color: var(--footer);
+            font-size: 9px;
+        }
+
+        .footer-brand {
+            font-weight: 700;
+        }
+
+        .footer-tool {
+            direction: ltr;
+            text-align: center;
+            font-family: "Segoe UI", sans-serif;
+            font-size: 8.5px;
+        }
+
+        .footer-page {
+            font-weight: 700;
+        }
+
+        /* ================= PRINT ================= */
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html,
+            body {
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0;
+                padding: 0;
+                background: #FFFFFF !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .document {
+                width: 210mm;
+                margin: 0;
+            }
+
+            .page {
+                width: 210mm !important;
+                height: 297mm !important;
+                min-height: 297mm !important;
+                margin: 0 !important;
+                padding: 15mm !important;
+                box-shadow: none !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            .safety-box,
+            .info-box,
+            .step-number,
+            .contact,
+            .alert-box,
+            .stage-badge {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= SCREEN ONLY ================= -->
+
+    <div class="toolbar no-print">
+        <div class="toolbar-title">
+            Tamkinly | مركز تعافي الصدمات (TRC)
+            <span class="toolbar-status">مسودة — تتطلب مراجعة سريرية</span>
+        </div>
+
+        <button
+            class="print-button"
+            type="button"
+            onclick="window.print()"
+        >
+            طباعة / حفظ PDF
+        </button>
+    </div>
+
+    <main class="document">
+
+        <!-- =========================================================
+             PAGE 1
+        ========================================================== -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <header class="header">
+                    <div>
+                        <div class="brand">Tamkinly | تمكينلي</div>
+                        <div class="brand-sub">مركز تعافي الصدمات (TRC)</div>
+
+                        <h1 class="title">خطة السلامة</h1>
+
+                        <p class="purpose">
+                            خطة منظمة خطوة بخطوة للتعامل مع الأوقات التي أشعر فيها بالخطر
+                            أو الرغبة في إيذاء نفسي.
+                        </p>
+                    </div>
+
+                    <div class="stage-badge">مرحلة السلامة</div>
+                </header>
+
+                <!-- Safety Notice -->
+
+                <div class="safety-box">
+                    <div class="safety-title">تنبيه السلامة — إذا كنت في خطر فوري</div>
+
+                    <div class="safety-text">
+                        إذا كنت في خطر فوري أو تفكر في إنهاء حياتك، لا تعتمد على هذه
+                        الورقة وحدها. تواصل فورًا مع خدمات الطوارئ المحلية أو اذهب إلى
+                        أقرب قسم طوارئ، واطلب من شخص موثوق أن يبقى معك ويساعدك في الوصول
+                        إلى الدعم.
+                    </div>
+
+                    <div class="emergency-field">
+                        <span class="emergency-label">
+                            رقم خدمات الطوارئ المحلية:
+                        </span>
+                        <div class="writing-line compact"></div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    تُحضّر هذه الخطة مسبقًا عندما أكون أكثر استقرارًا، حتى أستطيع الرجوع
+                    إليها عندما يصبح التفكير أصعب. يمكن ترك أي حقل فارغًا إذا لم يكن
+                    مناسبًا الآن.
+                </div>
+
+                <!-- STEP 1 -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-number">الخطوة 1</span>
+                        <span class="step-title">علامات التحذير</span>
+                    </div>
+
+                    <div class="step-description">
+                        ما الأفكار أو المشاعر أو المواقف التي تشير إلى أنني أغرق؟
+                    </div>
+
+                    <div class="field">
+                        <span class="label">علامة تحذير 1:</span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">علامة تحذير 2:</span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">علامة تحذير 3:</span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                </div>
+
+                <!-- STEP 2 -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-number">الخطوة 2</span>
+                        <span class="step-title">استراتيجيات التأقلم الداخلية</span>
+                    </div>
+
+                    <div class="step-description">
+                        ماذا يساعدني على الهدوء بدون التواصل مع أحد؟
+                    </div>
+
+                    <div class="field">
+                        <span class="label">استراتيجية 1:</span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">استراتيجية 2:</span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">استراتيجية 3:</span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">استراتيجية 4:</span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                <span class="footer-brand">Tamkinly | مركز تعافي الصدمات</span>
+                <span class="footer-tool">Tool ID: TRC-SAFETY_PLAN</span>
+                <span class="footer-page">صفحة 1 من 3</span>
+            </footer>
+
+        </section>
+
+
+        <!-- =========================================================
+             PAGE 2
+        ========================================================== -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <header class="header">
+                    <div>
+                        <div class="brand">Tamkinly | تمكينلي</div>
+                        <div class="brand-sub">مركز تعافي الصدمات (TRC)</div>
+
+                        <h1 class="title">التواصل مع الآخرين</h1>
+
+                        <p class="purpose">
+                            تحديد الأشخاص والأماكن التي يمكن الرجوع إليها عندما لا تكفي
+                            الاستراتيجيات الداخلية.
+                        </p>
+                    </div>
+
+                    <div class="stage-badge">مرحلة السلامة</div>
+                </header>
+
+                <!-- STEP 3 -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-number">الخطوة 3</span>
+                        <span class="step-title">
+                            أشخاص وأماكن اجتماعية للإلهاء
+                        </span>
+                    </div>
+
+                    <div class="step-description">
+                        أشخاص أو أماكن اجتماعية يمكنني أن أكون حول الناس فيها.
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">الاسم:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">الاسم:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">الاسم:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="field" style="margin-top: 9px;">
+                        <span class="label">
+                            أماكن اجتماعية يمكنني أن أكون حول الناس فيها:
+                        </span>
+                        <div class="writing-box"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 4 -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-number">الخطوة 4</span>
+                        <span class="step-title">
+                            أشخاص يمكنني طلب المساعدة منهم
+                        </span>
+                    </div>
+
+                    <div class="step-description">
+                        أشخاص يمكنني طلب المساعدة منهم عندما أحتاج إلى دعم مباشر.
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">الاسم:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">الاسم:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">الاسم:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                <span class="footer-brand">Tamkinly | مركز تعافي الصدمات</span>
+                <span class="footer-tool">Tool ID: TRC-SAFETY_PLAN</span>
+                <span class="footer-page">صفحة 2 من 3</span>
+            </footer>
+
+        </section>
+
+
+        <!-- =========================================================
+             PAGE 3
+        ========================================================== -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <header class="header">
+                    <div>
+                        <div class="brand">Tamkinly | تمكينلي</div>
+                        <div class="brand-sub">مركز تعافي الصدمات (TRC)</div>
+
+                        <h1 class="title">الدعم المهني وجعل البيئة آمنة</h1>
+
+                        <p class="purpose">
+                            تحديد الجهات المهنية وتقليل عوامل الخطر في البيئة المحيطة.
+                        </p>
+                    </div>
+
+                    <div class="stage-badge">مرحلة السلامة</div>
+                </header>
+
+
+                <!-- STEP 5 -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-number">الخطوة 5</span>
+                        <span class="step-title">
+                            مهنيون أو جهات يمكنني التواصل معها
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">
+                            معالج / مستشار — الاسم + الهاتف:
+                        </span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">
+                            خط الأزمة:
+                        </span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">
+                            خدمات الطوارئ:
+                        </span>
+                        <div class="writing-line"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- STEP 6 -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-number">الخطوة 6</span>
+                        <span class="step-title">
+                            جعل بيئتي آمنة
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">
+                            ماذا يمكنني أن أفعل لجعل محيطي أكثر أمانًا؟
+                        </span>
+                        <div class="writing-box"></div>
+                    </div>
+
+                    <div class="field">
+                        <span class="label">
+                            ماذا يمكنني إزالته أو تأمينه؟
+                        </span>
+                        <div class="writing-box"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- WHAT MATTERS -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-title" style="color: var(--primary);">
+                            سبب للعيش / ما يهم أكثر
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <div class="writing-box large"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- EMERGENCY CONTACTS -->
+
+                <div class="step">
+
+                    <div class="step-header">
+                        <span class="step-title">
+                            جهات اتصال الطوارئ
+                        </span>
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">جهة اتصال 1:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف / وسيلة التواصل:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">جهة اتصال 2:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف / وسيلة التواصل:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="contact">
+                        <div class="field">
+                            <span class="label">جهة اتصال 3:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+
+                        <div class="field">
+                            <span class="label">الهاتف / وسيلة التواصل:</span>
+                            <div class="writing-line compact"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- STOP / URGENT REMINDER -->
+
+                <div class="alert-box">
+
+                    <div class="alert-title">
+                        متى أحتاج إلى طلب مساعدة فورية؟
+                    </div>
+
+                    <ul class="alert-list">
+                        <li>إذا كنت في خطر فوري.</li>
+                        <li>إذا شعرت أنك قد تؤذي نفسك.</li>
+                    </ul>
+
+                    <div class="alert-note">
+                        لا تحتاج إلى إكمال الخطة في هذه اللحظة. استخدم جهات الدعم والطوارئ
+                        التي كتبتها أعلاه واطلب المساعدة الفورية المناسبة.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                <span class="footer-brand">Tamkinly | مركز تعافي الصدمات</span>
+                <span class="footer-tool">Tool ID: TRC-SAFETY_PLAN</span>
+                <span class="footer-page">صفحة 3 من 3</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

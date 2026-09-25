@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRC A52 Breathing - Tamkinly</title>
+  <style>
+    :root {
+      --primary: #1F6F78;
+      --accent: #3DD4B0;
+      --dark: #0F1C2E;
+      --bg: #F8FAFC;
+      --line-border: #CBD5E1;
+      --alert-bg: #FFFBEB;
+      --alert-border: #D97706;
+      --alert-text: #92400E;
+      --safety-bg: #FEF3C7;
+      --safety-border: #B45309;
+      --safety-text: #78350F;
+      --teal-bg: #E6F4F5;
+      --teal-text: #1F6F78;
+      --write-border: #9CA3AF;
+      --footer-text: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #E2E8F0;
+      color: var(--dark);
+      line-height: 1.4;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 15mm;
+      background: #FFFFFF;
+      margin: 20px auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      page-break-after: always;
+      overflow: hidden;
+    }
+
+    @media print {
+      body {
+        background: none;
+      }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 210mm;
+        height: 297mm;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+    }
+
+    /* Header styling */
+    .header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--primary);
+    }
+
+    .asset-id {
+      font-size: 10px;
+      font-family: monospace;
+      color: var(--footer-text);
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 11.5px;
+      color: #334155;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    /* Component Boxes */
+    .safety-alert-box {
+      background-color: var(--safety-bg);
+      border-left: 4px solid var(--safety-border);
+      color: var(--safety-text);
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+
+    .warning-box {
+      background-color: var(--alert-bg);
+      border-left: 4px solid var(--alert-border);
+      color: var(--alert-text);
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+
+    .teal-box {
+      background-color: var(--teal-bg);
+      border-left: 4px solid var(--primary);
+      color: var(--teal-text);
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    /* Step Cards Grid */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .step-card {
+      background-color: var(--bg);
+      border: 1px solid var(--line-border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .step-header {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .step-header span.count {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: 10.5px;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    /* Visual Timer CSS */
+    .timer-container {
+      background-color: var(--bg);
+      border: 1px solid var(--line-border);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 12px;
+    }
+
+    .timer-visual {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .timer-outer-ring {
+      position: absolute;
+      width: 86px;
+      height: 86px;
+      border: 2px dashed var(--line-border);
+      border-radius: 50%;
+    }
+
+    .timer-circle {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(31, 111, 120, 0.15);
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      animation: rhythmPulse 7s infinite ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes rhythmPulse {
+      0% {
+        transform: scale(0.9);
+        background-color: rgba(61, 212, 176, 0.2);
+      }
+      71.4% { /* 5 seconds Inhale */
+        transform: scale(1.4);
+        background-color: rgba(31, 111, 120, 0.35);
+      }
+      100% { /* 2 seconds Exhale */
+        transform: scale(0.9);
+        background-color: rgba(61, 212, 176, 0.2);
+      }
+    }
+
+    .timer-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .timer-info {
+      flex: 1;
+    }
+
+    .timer-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .timer-desc {
+      font-size: 10.5px;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    /* Form Fields */
+    .write-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .field-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748B;
+      min-width: 60px;
+    }
+
+    .write-field {
+      border: none;
+      border-bottom: 1px dotted var(--write-border);
+      min-height: 22px;
+      flex-grow: 1;
+      background: transparent;
+    }
+
+    .tracker-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .notes-box {
+      background-color: var(--bg);
+      border: 1px solid var(--line-border);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .notes-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    /* Lists & Page 2 Layout */
+    .guidance-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 4px 0;
+    }
+
+    .guidance-list li {
+      font-size: 11px;
+      color: var(--dark);
+      margin-bottom: 5px;
+      position: relative;
+      padding-left: 14px;
+      line-height: 1.4;
+    }
+
+    .guidance-list li::before {
+      content: "•";
+      color: var(--primary);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-field-group {
+      margin-bottom: 10px;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 3px;
+      display: block;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--line-border);
+      padding-top: 8px;
+      font-size: 9px;
+      color: var(--footer-text);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 10px;
+    }
+
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+
+    .mandatory-note {
+      font-size: 8.5px;
+      color: #64748B;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="page">
+    <div>
+      <!-- Header -->
+      <div class="header">
+        <div class="brand-title">Tamkinly — Trauma Recovery Center (TRC)</div>
+        <div class="asset-id">TRC-A52_BREATHING</div>
+      </div>
+
+      <!-- Title & Subtitle -->
+      <h1>A52 Breathing (5-2)</h1>
+      <p class="subtitle">A structured breathing technique to activate the parasympathetic nervous system and reduce threat response during acute stress.</p>
+
+      <!-- Safety Alert Box -->
+      <div class="safety-alert-box">
+        <strong>Safety Notice:</strong> This is a supportive/educational resource and does not replace individualized professional assessment, diagnosis, psychotherapy, medical care, or other professional support. If you feel dizzy, lightheaded, or uncomfortable during this exercise, stop immediately and return to your natural breathing.
+      </div>
+
+      <!-- How It Works Box -->
+      <div class="teal-box">
+        <div style="font-weight: 700; margin-bottom: 2px;">How It Works</div>
+        <div>Slow breathing activates the parasympathetic nervous system, signaling safety to the body.</div>
+      </div>
+
+      <!-- 4 Step Cards -->
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-header">
+            <span class="count">1</span>
+            <span>Inhale</span>
+          </div>
+          <div class="step-text">Inhale slowly for 5 seconds</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <span class="count">2</span>
+            <span>Hold</span>
+          </div>
+          <div class="step-text">Hold briefly (1-2 seconds)</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <span class="count">3</span>
+            <span>Exhale</span>
+          </div>
+          <div class="step-text">Exhale slowly for 2 seconds (or longer)</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <span class="count">4</span>
+            <span>Pause</span>
+          </div>
+          <div class="step-text">Pause naturally before next breath</div>
+        </div>
+      </div>
+
+      <!-- Animated Visual Timer -->
+      <div class="timer-container">
+        <div class="timer-visual">
+          <div class="timer-outer-ring"></div>
+          <div class="timer-circle">
+            <span class="timer-label">5s / 2s</span>
+          </div>
+        </div>
+        <div class="timer-info">
+          <div class="timer-title">5-2 Breathing Pace Visualizer</div>
+          <div class="timer-desc">Expand your breath slowly as the circle expands (5s Inhale), then gently release as it shrinks (2s Exhale). Maintain a steady, calm rhythm without straining.</div>
+        </div>
+      </div>
+
+      <!-- Practice Rounds Tracker -->
+      <div style="margin-bottom: 8px;">
+        <div class="section-title">Practice Rounds Tracker</div>
+        <div class="tracker-grid">
+          <div class="write-row"><span class="field-label">Round 1:</span><div class="write-field"></div></div>
+          <div class="write-row"><span class="field-label">Round 2:</span><div class="write-field"></div></div>
+          <div class="write-row"><span class="field-label">Round 3:</span><div class="write-field"></div></div>
+          <div class="write-row"><span class="field-label">Round 4:</span><div class="write-field"></div></div>
+          <div class="write-row"><span class="field-label">Round 5:</span><div class="write-field"></div></div>
+          <div class="write-row"><span class="field-label">Round 6:</span><div class="write-field"></div></div>
+        </div>
+      </div>
+
+      <!-- Practice Notes Field -->
+      <div class="notes-box">
+        <div class="section-title" style="margin-bottom: 4px;">Notes during practice</div>
+        <div class="notes-lines">
+          <div class="write-field"></div>
+          <div class="write-field"></div>
+          <div class="write-field"></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Footer Page 1 -->
+      <div class="footer">
+        <div class="footer-meta">
+          <span>Tamkinly</span>
+          <span>Tool ID: TRC-A52_BREATHING</span>
+          <span>Page 1 of 2</span>
+        </div>
+        <div class="mandatory-note">
+          This is a supportive/educational resource and does not replace individualized professional assessment, diagnosis, psychotherapy, medical care, or other professional support.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page">
+    <div>
+      <!-- Header -->
+      <div class="header">
+        <div class="brand-title">Tamkinly — Trauma Recovery Center (TRC)</div>
+        <div class="asset-id">TRC-A52_BREATHING</div>
+      </div>
+
+      <h1 style="font-size: 18px; margin-bottom: 12px;">Guidance & Safety Information</h1>
+
+      <!-- Hyperventilation Warning Box -->
+      <div class="warning-box">
+        <div class="section-title" style="color: var(--alert-text);">Comfort & Safety Guidelines</div>
+        <ul class="guidance-list">
+          <li style="color: var(--alert-text);">If you feel dizzy, lightheaded, or short of breath — stop immediately.</li>
+          <li style="color: var(--alert-text);">Return to your natural breathing rhythm or switch to 5-4-3-2-1 Sensory Grounding.</li>
+        </ul>
+      </div>
+
+      <!-- When to Use -->
+      <div class="teal-box">
+        <div class="section-title" style="color: var(--teal-text);">When to Use</div>
+        <div style="font-size: 11px;">During moments of heightened tension, feeling overwhelmed, or when looking to slow down your breath rhythm.</div>
+      </div>
+
+      <!-- When to Stop -->
+      <div style="background-color: var(--bg); border: 1px solid var(--line-border); border-radius: 6px; padding: 10px; margin-bottom: 10px;">
+        <div class="section-title">When to Stop</div>
+        <div style="font-size: 11px; color: var(--dark);">Dizziness, lightheadedness, feeling faint, or any physical discomfort.</div>
+      </div>
+
+      <!-- Next Steps -->
+      <div class="teal-box" style="margin-bottom: 14px;">
+        <div style="font-weight: 700;">→ Safe Place Visualization — If breathing helps, try creating your safe place next.</div>
+      </div>
+
+      <!-- Emergency Contacts -->
+      <div style="background-color: var(--bg); border: 1px solid var(--line-border); border-radius: 6px; padding: 12px; margin-bottom: 8px;">
+        <div class="section-title" style="margin-bottom: 10px;">Emergency / Personal Support Contacts</div>
+        
+        <div class="contact-field-group">
+          <span class="contact-label">My therapist / counselor:</span>
+          <div class="write-field"></div>
+        </div>
+
+        <div class="contact-field-group">
+          <span class="contact-label">Helpline number:</span>
+          <div class="write-field"></div>
+        </div>
+
+        <div class="contact-field-group" style="margin-bottom: 0;">
+          <span class="contact-label">Other trusted contact:</span>
+          <div class="write-field"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Page 2 -->
+    <div class="footer">
+      <div class="footer-meta">
+        <span>Tamkinly</span>
+        <span>Tool ID: TRC-A52_BREATHING</span>
+        <span>Page 2 of 2</span>
+      </div>
+      <div class="mandatory-note">
+        This is a supportive/educational resource and does not replace individualized professional assessment, diagnosis, psychotherapy, medical care, or other professional support.
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

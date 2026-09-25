@@ -187,18 +187,8 @@ export default function QuizPreviewWidget() {
             </CardContent>
           </Card>
 
-          {/* Stats */}
+          {/* Stats — factual only */}
           <div className="flex flex-wrap justify-center gap-8 mt-8">
-            <div className="flex items-center gap-2 text-slate-400">
-              <User className="h-5 w-5 text-[#3DD4B0]" />
-              <span className="font-semibold text-white">2,847+</span>
-              <span>{t("quiz.assessed")}</span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-400">
-              <TrendingUp className="h-5 w-5 text-[#3DD4B0]" />
-              <span className="font-semibold text-white">94%</span>
-              <span>{t("quiz.accuracy")}</span>
-            </div>
             <div className="flex items-center gap-2 text-slate-400">
               <Target className="h-5 w-5 text-[#3DD4B0]" />
               <span className="font-semibold text-white">5</span>

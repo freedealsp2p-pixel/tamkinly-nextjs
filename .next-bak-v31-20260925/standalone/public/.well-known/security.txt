@@ -1,0 +1,9 @@
+Contact: mailto:security@tamkinly.com
+Contact: https://tamkinly.com/contact
+Preferred-Languages: en, ar
+Canonical: https://tamkinly.com/.well-known/security.txt
+Policy: https://tamkinly.com/privacy
+
+This security policy is valid for all subdomains and services under tamkinly.com.
+We appreciate responsible disclosure of security vulnerabilities.
+Please allow up to 72 hours for initial response.

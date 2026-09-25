@@ -1,0 +1,3 @@
+module.exports=[723742,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("understanding-the-compulsion-cycle",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"understanding-the-compulsion-cycle"}),a]})},"generateMetadata",0,f])},800293,a=>{a.n(a.i(723742))}];
+
+//# sourceMappingURL=src_app_blog_understanding-the-compulsion-cycle_layout_tsx_01cewnx._.js.map

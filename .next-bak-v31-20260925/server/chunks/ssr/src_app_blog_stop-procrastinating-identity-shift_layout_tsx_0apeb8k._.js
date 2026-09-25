@@ -1,0 +1,3 @@
+module.exports=[145560,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("stop-procrastinating-identity-shift",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"stop-procrastinating-identity-shift"}),a]})},"generateMetadata",0,f])},498427,a=>{a.n(a.i(145560))}];
+
+//# sourceMappingURL=src_app_blog_stop-procrastinating-identity-shift_layout_tsx_0apeb8k._.js.map

@@ -1,0 +1,3 @@
+module.exports=[360626,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("and-the-bamboo-kept-growing",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"and-the-bamboo-kept-growing"}),a]})},"generateMetadata",0,f])},242093,a=>{a.n(a.i(360626))}];
+
+//# sourceMappingURL=src_app_blog_and-the-bamboo-kept-growing_layout_tsx_0otyihw._.js.map

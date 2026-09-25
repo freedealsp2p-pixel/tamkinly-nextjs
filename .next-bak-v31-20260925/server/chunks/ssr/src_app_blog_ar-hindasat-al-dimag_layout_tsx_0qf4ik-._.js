@@ -1,0 +1,3 @@
+module.exports=[842960,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("ar-hindasat-al-dimag",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"ar-hindasat-al-dimag"}),a]})},"generateMetadata",0,f])},619471,a=>{a.n(a.i(842960))}];
+
+//# sourceMappingURL=src_app_blog_ar-hindasat-al-dimag_layout_tsx_0qf4ik-._.js.map

@@ -1,0 +1,3 @@
+module.exports=[286125,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("how-to-build-habits-that-stick",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"how-to-build-habits-that-stick"}),a]})},"generateMetadata",0,f])},40240,a=>{a.n(a.i(286125))}];
+
+//# sourceMappingURL=src_app_blog_how-to-build-habits-that-stick_layout_tsx_05tbokv._.js.map

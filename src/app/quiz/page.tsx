@@ -373,16 +373,8 @@ export default function IdentityQuizPage() {
           )}
         </p>
 
-        {/* Stats */}
+        {/* Stats — factual only */}
         <div className="flex flex-wrap justify-center gap-8 mb-12">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-[#3DD4B0]">2,847+</div>
-            <div className="text-slate-400 text-sm">{getText('People Assessed', 'تم تقييمهم')}</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-[#3DD4B0]">94%</div>
-            <div className="text-slate-400 text-sm">{getText('Accuracy Rate', 'دقة')}</div>
-          </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-[#3DD4B0]">3 min</div>
             <div className="text-slate-400 text-sm">{getText('Average Time', 'الوقت المتوسط')}</div>

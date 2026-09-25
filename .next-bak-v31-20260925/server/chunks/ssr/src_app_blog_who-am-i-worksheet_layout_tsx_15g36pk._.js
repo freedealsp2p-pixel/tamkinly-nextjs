@@ -1,0 +1,3 @@
+module.exports=[25797,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("who-am-i-worksheet",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"who-am-i-worksheet"}),a]})},"generateMetadata",0,f])},115629,a=>{a.n(a.i(25797))}];
+
+//# sourceMappingURL=src_app_blog_who-am-i-worksheet_layout_tsx_15g36pk._.js.map

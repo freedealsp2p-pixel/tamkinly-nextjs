@@ -1,0 +1,11 @@
+var R=require("../../../../../chunks/[turbopack]_runtime.js")("server/app/api/protocols/temporal-decoupling/access/route.js")
+R.c("server/chunks/node_modules_bcryptjs_index_0k82xso.js")
+R.c("server/chunks/node_modules_next_1_14bcs._.js")
+R.c("server/chunks/[root-of-the-server]__0adwc2j._.js")
+R.c("server/chunks/node_modules_1ollbg3._.js")
+R.c("server/chunks/node_modules_next_1zdbrne._.js")
+R.c("server/chunks/[root-of-the-server]__02_2sm-._.js")
+R.c("server/chunks/node_modules_next_dist_1_lpwll._.js")
+R.c("server/chunks/1oeh_server_app_api_protocols_temporal-decoupling_access_route_actions_0qjjnfv.js")
+R.m(853371)
+module.exports=R.m(853371).exports

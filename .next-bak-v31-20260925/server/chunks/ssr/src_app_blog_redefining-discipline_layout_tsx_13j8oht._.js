@@ -1,0 +1,3 @@
+module.exports=[266292,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("redefining-discipline",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"redefining-discipline"}),a]})},"generateMetadata",0,f])},216930,a=>{a.n(a.i(266292))}];
+
+//# sourceMappingURL=src_app_blog_redefining-discipline_layout_tsx_13j8oht._.js.map

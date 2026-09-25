@@ -1,0 +1,3 @@
+module.exports=[730915,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("values-clarification-tool",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"values-clarification-tool"}),a]})},"generateMetadata",0,f])},205768,a=>{a.n(a.i(730915))}];
+
+//# sourceMappingURL=src_app_blog_values-clarification-tool_layout_tsx_1re9l4i._.js.map

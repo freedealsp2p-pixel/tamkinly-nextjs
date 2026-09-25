@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamkinly — Trauma Response Patterns</title>
+
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #F1F5F9;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: #334155;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 15mm;
+      margin: 20px auto;
+      background: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    @media print {
+      html,
+      body {
+        background: #FFFFFF;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+
+    /* =========================
+       TYPOGRAPHY
+       ========================= */
+
+    h1 {
+      margin: 0 0 1.5mm;
+      color: #0F1C2E;
+      font-size: 18.5pt;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    h2 {
+      margin: 4mm 0 2mm;
+      padding-bottom: 1mm;
+      border-bottom: 1px solid #E2E8F0;
+      color: #0F1C2E;
+      font-size: 11pt;
+      line-height: 1.2;
+      font-weight: 650;
+      letter-spacing: -0.005em;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    .subtitle {
+      margin: 0 0 3.5mm;
+      color: #1F6F78;
+      font-size: 9.5pt;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .intro {
+      margin: 0 0 3mm;
+      color: #334155;
+      font-size: 8.5pt;
+      line-height: 1.4;
+    }
+
+    .small-note {
+      margin: 0;
+      color: #64748B;
+      font-size: 7.5pt;
+      line-height: 1.35;
+    }
+
+    .muted {
+      color: #64748B;
+    }
+
+    strong {
+      color: #0F1C2E;
+    }
+
+    /* =========================
+       CALLOUTS
+       ========================= */
+
+    .box {
+      margin-bottom: 3.5mm;
+      padding: 3mm 3.5mm;
+      border: 1px solid #D9E2E7;
+      border-radius: 4px;
+    }
+
+    .box-title {
+      margin-bottom: 1mm;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    .box p {
+      margin: 0 0 1.5mm;
+      font-size: 8pt;
+      line-height: 1.38;
+    }
+
+    .box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .safety-box {
+      background: #E8F4F5;
+      border-color: #B2D8DC;
+    }
+
+    .safety-box .box-title {
+      color: #1F6F78;
+    }
+
+    .safety-box p {
+      color: #334155;
+    }
+
+    .caution-box {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      border-left: 4px solid #64748B;
+    }
+
+    .caution-box .box-title {
+      color: #0F1C2E;
+    }
+
+    .urgent-box {
+      background: #FEF2F2;
+      border-color: #FECACA;
+      border-left: 4px solid #B91C1C;
+    }
+
+    .urgent-box .box-title {
+      color: #991B1B;
+    }
+
+    .urgent-box p,
+    .urgent-box li {
+      color: #7F1D1D;
+    }
+
+    /* =========================
+       4F CARDS
+       ========================= */
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
+      margin-bottom: 2mm;
+    }
+
+    .response-card {
+      padding: 3mm;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 4px;
+    }
+
+    .response-card h3 {
+      padding-bottom: 1mm;
+      margin-bottom: 1.5mm;
+      border-bottom: 1px solid #CBD5E1;
+      color: #0F1C2E;
+      font-size: 9pt;
+      line-height: 1.2;
+      font-weight: 650;
+    }
+
+    .card-description {
+      margin-bottom: 1.5mm;
+      color: #475569;
+      font-size: 7.5pt;
+      line-height: 1.3;
+    }
+
+    .card-section {
+      margin-top: 1.5mm;
+      margin-bottom: .6mm;
+      color: #1F6F78;
+      font-size: 7.2pt;
+      line-height: 1.2;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .025em;
+    }
+
+    .response-card ul {
+      margin: 0;
+      padding-left: 3.8mm;
+    }
+
+    .response-card li {
+      margin-bottom: .55mm;
+      color: #334155;
+      font-size: 7.35pt;
+      line-height: 1.25;
+    }
+
+    /* =========================
+       QUICK REFERENCE TABLE
+       ========================= */
+
+    table {
+      width: 100%;
+      margin-bottom: 2.5mm;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 2mm 2.4mm;
+      border: 1px solid #E2E8F0;
+      text-align: left;
+      vertical-align: top;
+      font-size: 7.9pt;
+      line-height: 1.3;
+    }
+
+    th {
+      background: #F1F5F9;
+      color: #0F1C2E;
+      font-weight: 650;
+    }
+
+    td {
+      color: #334155;
+    }
+
+    .pattern-cell {
+      width: 18%;
+      color: #0F1C2E;
+      font-weight: 650;
+    }
+
+    .clues-cell {
+      width: 47%;
+    }
+
+    .support-cell {
+      width: 35%;
+    }
+
+    /* =========================
+       DECISION GUIDE
+       ========================= */
+
+    .decision-step {
+      margin-bottom: 2mm;
+      padding: 2.2mm 3mm;
+      border: 1px solid #E2E8F0;
+      border-left: 3px solid #1F6F78;
+      border-radius: 3px;
+      background: #F8FAFC;
+    }
+
+    .decision-step-title {
+      margin-bottom: .6mm;
+      color: #0F1C2E;
+      font-size: 8.5pt;
+      font-weight: 700;
+    }
+
+    .decision-step p {
+      margin: 0;
+      color: #334155;
+      font-size: 7.9pt;
+      line-height: 1.35;
+    }
+
+    .choice {
+      margin-top: 1mm;
+      padding: 1.7mm 2.5mm;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 3px;
+    }
+
+    .choice strong {
+      font-size: 7.8pt;
+    }
+
+    /* =========================
+       PATHWAY
+       ========================= */
+
+    .pathway {
+      margin-top: 2.5mm;
+      padding: 2.5mm 3mm;
+      border: 1px solid #E2E8F0;
+      border-radius: 4px;
+      background: #F8FAFC;
+    }
+
+    .pathway-title {
+      margin-bottom: 2mm;
+      color: #1F6F78;
+      text-align: center;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .025em;
+    }
+
+    .pathway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2mm;
+    }
+
+    .pathway-item {
+      min-height: 22mm;
+      padding: 2mm;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 3px;
+      color: #334155;
+      font-size: 7.35pt;
+      line-height: 1.3;
+    }
+
+    .pathway-item strong {
+      display: block;
+      margin-bottom: .6mm;
+      color: #0F1C2E;
+      font-size: 7.9pt;
+    }
+
+    /* =========================
+       LISTS
+       ========================= */
+
+    .standard-list {
+      margin: 0 0 3mm;
+      padding-left: 4.5mm;
+    }
+
+    .standard-list li {
+      margin-bottom: 1mm;
+      color: #334155;
+      font-size: 8pt;
+      line-height: 1.35;
+    }
+
+    .compact-list {
+      margin: 1mm 0 0;
+      padding-left: 4mm;
+    }
+
+    .compact-list li {
+      margin-bottom: .8mm;
+      font-size: 7.8pt;
+      line-height: 1.3;
+    }
+
+    /* =========================
+       CONTACTS
+       ========================= */
+
+    .contact-section {
+      margin-top: 3mm;
+    }
+
+    .contact-field {
+      margin-bottom: 3mm;
+    }
+
+    .contact-label {
+      margin-bottom: 1mm;
+      color: #0F1C2E;
+      font-size: 8pt;
+      font-weight: 650;
+    }
+
+    .dotted-line {
+      width: 100%;
+      height: 4mm;
+      border-bottom: 1px dotted #94A3B8;
+    }
+
+    /* =========================
+       DISCLAIMER
+       ========================= */
+
+    .disclaimer {
+      margin-top: 3mm;
+      padding: 2.5mm 3mm;
+      background: #F8FAFC;
+      border: 1px solid #D9E2E7;
+      border-radius: 4px;
+    }
+
+    .disclaimer-title {
+      margin-bottom: 1mm;
+      color: #0F1C2E;
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
+    .disclaimer p {
+      margin: 0;
+      color: #64748B;
+      font-size: 7pt;
+      line-height: 1.32;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .footer {
+      position: absolute;
+      left: 15mm;
+      right: 15mm;
+      bottom: 11mm;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 2mm;
+      border-top: 1px solid #E2E8F0;
+      color: #94A3B8;
+      font-size: 7.3pt;
+      line-height: 1.2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       PAGE 1 — UNDERSTANDING THE 4F PROTECTIVE PATTERNS
+       ========================================================= -->
+
+  <section class="page">
+
+    <h1>Trauma Response Patterns</h1>
+
+    <div class="subtitle">
+      Recognizing common protective response patterns in the body, emotions, and behavior.
+    </div>
+
+    <p class="intro">
+      When people experience threat, stress, or reminders of difficult experiences,
+      the nervous system can shift into different protective patterns. Fight, Flight,
+      Freeze, and Fawn are commonly used trauma-informed terms for describing some
+      of these patterns. They are <strong>not diagnoses</strong>, and a person may
+      experience more than one pattern or move between them.
+    </p>
+
+    <div class="box safety-box">
+      <div class="box-title">Safety Note</div>
+
+      <p>
+        These patterns are ways of describing what may happen under stress.
+        You do not need to identify a cause, revisit a difficult memory, or
+        analyze your past for this guide to be useful.
+      </p>
+
+      <p>
+        If reading this material increases your distress, pause and return
+        your attention to the present environment or another familiar
+        stabilization practice.
+      </p>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- FIGHT -->
+      <article class="response-card">
+        <h3>Fight — Protection through confrontation or resistance</h3>
+
+        <div class="card-description">
+          A threat response that may involve moving toward confrontation,
+          resistance, control, or boundary defense.
+        </div>
+
+        <div class="card-section">Possible body signals</div>
+        <ul>
+          <li>increased muscle tension</li>
+          <li>rapid heartbeat</li>
+          <li>heat or agitation</li>
+          <li>clenched jaw or fists</li>
+          <li>increased readiness to act</li>
+        </ul>
+
+        <div class="card-section">Possible experience</div>
+        <ul>
+          <li>anger or irritability</li>
+          <li>strong urge to confront</li>
+          <li>feeling challenged or cornered</li>
+          <li>difficulty stepping back</li>
+          <li>strong need to regain control</li>
+        </ul>
+
+        <div class="card-section">Present-focused options</div>
+        <ul>
+          <li>create physical space when possible</li>
+          <li>pause before responding</li>
+          <li>orient to the room</li>
+          <li>release unnecessary muscle tension</li>
+          <li>delay non-urgent confrontation until more settled</li>
+        </ul>
+      </article>
+
+      <!-- FLIGHT -->
+      <article class="response-card">
+        <h3>Flight — Protection through escape or avoidance</h3>
+
+        <div class="card-description">
+          A threat response that may involve moving away from a perceived
+          threat, demand, sensation, or situation.
+        </div>
+
+        <div class="card-section">Possible body signals</div>
+        <ul>
+          <li>restlessness</li>
+          <li>racing thoughts</li>
+          <li>increased heart rate</li>
+          <li>readiness for movement</li>
+          <li>difficulty staying still</li>
+        </ul>
+
+        <div class="card-section">Possible experience</div>
+        <ul>
+          <li>urgency to leave</li>
+          <li>worry or anticipatory fear</li>
+          <li>constant activity or overworking</li>
+          <li>avoidance</li>
+          <li>difficulty slowing down</li>
+        </ul>
+
+        <div class="card-section">Present-focused options</div>
+        <ul>
+          <li>pause before non-urgent decisions</li>
+          <li>notice where you are</li>
+          <li>reduce unnecessary demands</li>
+          <li>take one manageable step at a time</li>
+          <li>choose distance when it supports safety</li>
+        </ul>
+      </article>
+
+      <!-- FREEZE -->
+      <article class="response-card">
+        <h3>Freeze — Protection through stillness or reduced action</h3>
+
+        <div class="card-description">
+          A response that may involve becoming still, mentally blank,
+          slowed, detached, or unable to act easily.
+        </div>
+
+        <div class="card-section">Possible body signals</div>
+        <ul>
+          <li>heaviness or immobility</li>
+          <li>altered or shallow breathing</li>
+          <li>numbness</li>
+          <li>reduced movement</li>
+          <li>reduced connection with surroundings</li>
+        </ul>
+
+        <div class="card-section">Possible experience</div>
+        <ul>
+          <li>blank mind</li>
+          <li>difficulty deciding</li>
+          <li>feeling stuck</li>
+          <li>reduced speech or action</li>
+          <li>feeling distant from what is happening</li>
+        </ul>
+
+        <div class="card-section">Present-focused options</div>
+        <ul>
+          <li>orient gently to the room</li>
+          <li>notice the support of the chair or floor</li>
+          <li>make one small voluntary movement if comfortable</li>
+          <li>identify one immediate practical need</li>
+          <li>connect with trusted support if needed</li>
+        </ul>
+      </article>
+
+      <!-- FAWN -->
+      <article class="response-card">
+        <h3>Fawn — Protection through appeasing or adapting</h3>
+
+        <div class="card-description">
+          A commonly used trauma-informed term describing a pattern in which
+          a person may prioritize another person's needs, approval, or emotional
+          state in an attempt to reduce conflict or maintain safety.
+        </div>
+
+        <div class="card-section">Possible body signals</div>
+        <ul>
+          <li>tension while monitoring another person</li>
+          <li>difficulty relaxing</li>
+          <li>rapid adjustment to others</li>
+          <li>fatigue after social interaction</li>
+        </ul>
+
+        <div class="card-section">Possible experience</div>
+        <ul>
+          <li>difficulty saying no</li>
+          <li>excessive apologizing</li>
+          <li>people-pleasing</li>
+          <li>fear of disappointing others</li>
+          <li>losing track of personal needs</li>
+          <li>automatically agreeing</li>
+        </ul>
+
+        <div class="card-section">Present-focused options</div>
+        <ul>
+          <li>pause before agreeing</li>
+          <li>notice your own needs</li>
+          <li>use a simple boundary when safe</li>
+          <li>allow time before answering</li>
+          <li>seek support if setting boundaries feels unsafe</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <p class="small-note">
+      <strong>Important:</strong> “Fawn” is a widely used trauma-informed term,
+      but it is not a formal diagnostic category. None of these patterns,
+      by themselves, establish that a person has experienced trauma or has a
+      trauma-related condition.
+    </p>
+
+    <div class="footer">
+      <span>Tamkinly | Tool ID: TRC-TRAUMA_RESPONSES</span>
+      <span>Page 1 of 3</span>
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       PAGE 2 — RECOGNITION & DECISION SUPPORT
+       ========================================================= -->
+
+  <section class="page">
+
+    <h1>Recognize the Pattern, Then Choose the Next Step</h1>
+
+    <div class="subtitle">
+      You do not need to find one perfect category. Notice what is happening
+      and choose the safest manageable next step.
+    </div>
+
+    <h2>Quick Identification Guide</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="pattern-cell">Pattern</th>
+          <th class="clues-cell">Possible clues</th>
+          <th class="support-cell">First low-demand option</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="pattern-cell">Fight</td>
+          <td>confronting, tense, angry, controlling, strong urge to act</td>
+          <td>pause, create space, orient, delay non-urgent confrontation</td>
+        </tr>
+
+        <tr>
+          <td class="pattern-cell">Flight</td>
+          <td>urgent, restless, avoiding, overactive, difficulty slowing down</td>
+          <td>slow the task down, orient, reduce unnecessary demands</td>
+        </tr>
+
+        <tr>
+          <td class="pattern-cell">Freeze</td>
+          <td>blank, still, stuck, slowed, disconnected</td>
+          <td>orient gently, notice physical support, make one small movement</td>
+        </tr>
+
+        <tr>
+          <td class="pattern-cell">Fawn</td>
+          <td>automatically agreeing, apologizing, monitoring others, difficulty saying no</td>
+          <td>pause, notice your needs, delay non-urgent agreement</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="small-note" style="margin-bottom: 3mm;">
+      These clues are not diagnostic. They are prompts for noticing patterns.
+      You may recognize yourself in more than one.
+    </p>
+
+    <div class="box caution-box">
+      <div class="box-title">Responses Can Overlap</div>
+
+      <p>
+        Protective responses are not always separate or predictable.
+        You may move between patterns or experience several at once.
+        For example, you may feel an urge to escape while becoming mentally
+        stuck, or feel angry while also trying to keep another person satisfied.
+      </p>
+
+      <p>
+        The goal is not to label yourself perfectly. The goal is to notice
+        what is happening <strong>now</strong> and choose what supports safety
+        and present-moment orientation.
+      </p>
+    </div>
+
+    <h2>Decision Guide</h2>
+
+    <div class="decision-step">
+      <div class="decision-step-title">
+        STEP 1 — Am I oriented to the present?
+      </div>
+
+      <p>
+        <strong>If no or unsure:</strong> stop emotionally activating material.
+        Prioritize orientation, physical safety, and familiar stabilization.
+      </p>
+
+      <div class="choice">
+        <strong>Helpful direction:</strong>
+        Notice where you are, the surface supporting you, and simple details
+        of the current environment.
+      </div>
+    </div>
+
+    <div class="decision-step">
+      <div class="decision-step-title">
+        STEP 2 — Is there an immediate safety problem?
+      </div>
+
+      <p>
+        <strong>If yes:</strong> prioritize physical safety and appropriate
+        external support. Regulation techniques do not replace getting away
+        from danger.
+      </p>
+
+      <div class="choice">
+        <strong>Helpful direction:</strong>
+        Move toward safety, contact appropriate support, or use local emergency
+        or crisis services according to the situation.
+      </div>
+    </div>
+
+    <div class="decision-step">
+      <div class="decision-step-title">
+        STEP 3 — What is the lowest-demand helpful action?
+      </div>
+
+      <p>
+        Choose one manageable option rather than trying to do everything.
+      </p>
+
+      <div class="choice">
+        <strong>Options:</strong>
+        orient to the room • reduce stimulation • create space • pause a
+        difficult conversation • make one small movement • contact trusted
+        support • use a familiar grounding practice
+      </div>
+    </div>
+
+    <div class="pathway">
+
+      <div class="pathway-title">
+        Support Pathway
+      </div>
+
+      <div class="pathway-grid">
+
+        <div class="pathway-item">
+          <strong>1. Notice</strong>
+          Recognize what is happening without judging or diagnosing yourself.
+        </div>
+
+        <div class="pathway-item">
+          <strong>2. Orient</strong>
+          Reconnect with where you are and what is happening now.
+        </div>
+
+        <div class="pathway-item">
+          <strong>3. Stabilize</strong>
+          Choose one low-demand action that supports present-moment steadiness.
+        </div>
+
+        <div class="pathway-item">
+          <strong>4. Connect</strong>
+          Contact a trusted person or an existing support when useful.
+        </div>
+
+        <div class="pathway-item">
+          <strong>5. Professional Support</strong>
+          Consider qualified mental-health support when responses are frequent,
+          severe, persistent, or interfere with daily functioning.
+        </div>
+
+        <div class="pathway-item">
+          <strong>6. Urgent / Emergency Support</strong>
+          Seek appropriate local emergency or crisis support when immediate
+          safety is at risk or the situation cannot be managed safely alone.
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | Tool ID: TRC-TRAUMA_RESPONSES</span>
+      <span>Page 2 of 3</span>
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       PAGE 3 — SUPPORT & SAFETY
+       ========================================================= -->
+
+  <section class="page">
+
+    <h1>When Additional Support May Be Needed</h1>
+
+    <div class="subtitle">
+      Knowing when to involve another person is part of a safe recovery process.
+    </div>
+
+    <h2>Consider Professional Support</h2>
+
+    <p style="font-size: 8pt; margin-bottom: 1.5mm; font-weight: 650; color: #0F1C2E;">
+      Additional support may be useful when you notice:
+    </p>
+
+    <ul class="standard-list">
+      <li>recurring or increasingly intense distress</li>
+      <li>frequent intrusive memories or nightmares</li>
+      <li>persistent avoidance that limits daily life</li>
+      <li>significant or ongoing sleep disruption</li>
+      <li>difficulty functioning at work, study, home, or in relationships</li>
+      <li>repeated episodes of feeling disconnected or unable to stay oriented</li>
+      <li>increasing isolation or difficulty managing responses alone</li>
+      <li>persistent distress despite using supportive strategies</li>
+    </ul>
+
+    <p class="small-note" style="margin-bottom: 3.5mm;">
+      These signs do not establish a diagnosis. They are indicators that
+      additional assessment, support, or treatment may be worth considering.
+    </p>
+
+    <div class="box urgent-box">
+
+      <div class="box-title">
+        When Urgent or Emergency Support Is Needed
+      </div>
+
+      <p>
+        Self-regulation strategies are not sufficient when immediate safety
+        is at risk.
+      </p>
+
+      <ul class="compact-list">
+        <li>immediate danger from another person</li>
+        <li>inability to remain physically safe</li>
+        <li>severe disorientation or inability to reconnect with the present</li>
+        <li>a mental-health emergency requiring immediate intervention</li>
+        <li>thoughts, intentions, or actions creating an immediate risk of serious harm</li>
+      </ul>
+
+      <p>
+        In these situations, prioritize immediate safety and contact appropriate
+        local emergency services, crisis services, or qualified professional
+        support according to your circumstances.
+      </p>
+
+    </div>
+
+    <h2>Emergency & Support Contacts</h2>
+
+    <div class="contact-section">
+
+      <div class="contact-field">
+        <div class="contact-label">
+          Therapist / Mental Health Professional:
+        </div>
+        <div class="dotted-line"></div>
+      </div>
+
+      <div class="contact-field">
+        <div class="contact-label">
+          Trusted Support Person:
+        </div>
+        <div class="dotted-line"></div>
+      </div>
+
+      <div class="contact-field">
+        <div class="contact-label">
+          Crisis / Emergency Service:
+        </div>
+        <div class="dotted-line"></div>
+      </div>
+
+    </div>
+
+    <div class="disclaimer">
+
+      <div class="disclaimer-title">
+        Important Disclaimer
+      </div>
+
+      <p>
+        This reference is an educational and supportive resource. It does not
+        provide a diagnosis and does not replace psychotherapy, psychological
+        assessment, medical care, crisis intervention, or other professional
+        support. Fight, Flight, Freeze, and Fawn are commonly used
+        psychoeducational or trauma-informed concepts and are not, by themselves,
+        diagnostic categories. Not every person experiences these patterns,
+        and recognizing a pattern does not establish that trauma has occurred
+        or that a trauma-related condition is present. This resource is not
+        intended to guide trauma exposure, forced memory retrieval, or detailed
+        processing of traumatic events. If you are in immediate danger or
+        experiencing a mental-health emergency, prioritize immediate safety and
+        seek appropriate local emergency or professional support.
+      </p>
+
+    </div>
+
+    <div class="footer">
+      <span>Tamkinly | Tool ID: TRC-TRAUMA_RESPONSES</span>
+      <span>Page 3 of 3</span>
+    </div>
+
+  </section>
+
+</body>
+</html>

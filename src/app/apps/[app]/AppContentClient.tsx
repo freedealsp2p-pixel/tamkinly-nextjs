@@ -707,51 +707,7 @@ export function AppContentClient({ appData, serverAccessResult }: { appData: App
       {/* ============================================
           SOCIAL PROOF / TESTIMONIALS
           ============================================ */}
-      <section className="py-16 sm:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-          <div className="text-center mb-12">
-            <Badge className="bg-[#C97B7B]/10 text-[#C97B7B] border-[#C97B7B]/20 mb-4">
-              {getText('Real Results', 'نتائج حقيقية')}
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0F1C2E] mb-3">
-              {getText('What People Are Saying', 'ماذا يقول الناس')}
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <Card key={i} className="border-0 bg-white shadow-sm hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: t.stars }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-[#3DD4B0] text-[#3DD4B0]" />
-                    ))}
-                  </div>
-                  {/* Quote */}
-                  <p className="text-sm text-[#0F1C2E] leading-relaxed mb-6">
-                    &ldquo;{getText(t.textEn, t.textAr)}&rdquo;
-                  </p>
-                  {/* Author */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#1F6F78]/10 flex items-center justify-center">
-                      <User className="w-5 h-5 text-[#1F6F78]" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-[#0F1C2E]">
-                        {getText(t.nameEn, t.nameAr)}
-                      </p>
-                      <p className="text-xs text-[#8A94A6]">
-                        {getText(t.roleEn, t.roleAr)}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* testimonials section removed — no real review system yet (will return after launch) */}
 
       {/* ============================================
           ACCESS GATE / APP CONTENT (for paid apps)

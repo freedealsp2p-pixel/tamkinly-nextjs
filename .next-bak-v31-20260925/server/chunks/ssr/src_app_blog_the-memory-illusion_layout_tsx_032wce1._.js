@@ -1,0 +1,3 @@
+module.exports=[731670,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("the-memory-illusion",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"the-memory-illusion"}),a]})},"generateMetadata",0,f])},259722,a=>{a.n(a.i(731670))}];
+
+//# sourceMappingURL=src_app_blog_the-memory-illusion_layout_tsx_032wce1._.js.map

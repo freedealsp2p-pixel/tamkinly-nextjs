@@ -1,0 +1,3 @@
+module.exports=[792604,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(851336),e=a.i(615705);async function f(){let a=await (0,c.getLocale)();return(0,d.generateBlogArticleMetadata)("relapse-prevention-system",a)}a.s(["default",0,function({children:a}){return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(e.default,{slug:"relapse-prevention-system"}),a]})},"generateMetadata",0,f])},356775,a=>{a.n(a.i(792604))}];
+
+//# sourceMappingURL=src_app_blog_relapse-prevention-system_layout_tsx_060_01q._.js.map
