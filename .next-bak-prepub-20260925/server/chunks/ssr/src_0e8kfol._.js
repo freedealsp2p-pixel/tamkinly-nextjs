@@ -1,3 +1,0 @@
-module.exports=[528630,a=>{"use strict";var b=a.i(905246);async function c(){try{let a=await (0,b.headers)();if("ar"===a.get("x-locale"))return"ar"}catch{}try{let a=await (0,b.cookies)();if(a.get("NEXT_LOCALE")?.value==="ar")return"ar"}catch{}return"en"}a.s(["getLocale",0,c])},337064,a=>{"use strict";var b=a.i(528630),c=a.i(565399);async function d(){let a=await (0,b.getLocale)();return(0,c.generatePageMetadataFromConfig)("contact",a)}a.s(["default",0,function({children:a}){return a},"dynamic",0,"force-dynamic","generateMetadata",0,d])},570944,a=>{a.n(a.i(337064))}];
-
-//# sourceMappingURL=src_0e8kfol._.js.map

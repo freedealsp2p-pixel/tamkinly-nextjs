@@ -88,3 +88,23 @@ Registry image + BlogArticleJsonLd image + ArticleFigure داخل المحتوى
    Caption AR: بوتيرة صحيحة، تحفظ القصة نفسها كماضٍ — وتتوقف عن زيارتك كحاضر.
    Alt EN: Open journal with constellations of ordered light rising from its pages
    Alt AR: دفتر مفتوح تتصاعد منه كوكبات ضوء مرتّبة من صفحاته
+
+
+## 2026-09-26 — the-memory-illusion images (user-generated: 4 candidates → 2 selected)
+
+Primary: /uploads/articles/the-memory-illusion.webp (1376x768, ~60KB) — user's visual pick (candidate 1)
+- Image Title: The Memory Illusion
+- Caption EN: Memory can feel like a faithful recording of the past while actually being reconstructed each time we remember it.
+- Caption AR: قد تبدو الذاكرة كأنها تسجيل دقيق للماضي، بينما تُعاد صياغتها في كل مرة نتذكرها فيها.
+- Alt EN: A person observing a familiar scene with subtle inconsistencies, illustrating how memories can feel accurate while being reconstructed.
+- Alt AR: شخص يراقب مشهدًا مألوفًا تظهر فيه اختلافات دقيقة، في تصوير لكيف يمكن للذكريات أن تبدو دقيقة رغم إعادة بنائها.
+- Placement: hero figure after disclaimer box + og:image + JSON-LD image
+
+Secondary: /uploads/articles/the-memory-illusion-reconstruction.webp (1376x768, ~130KB) — assistant pick among remaining 3 (candidate 3: overlapping versions of the same room; matches user's stated aesthetic of direct scenes over dramatic metaphor; candidate 2 rejected as dramatic metaphor, candidate 4 redundant with candidate 1)
+- Image Title: Every Recall, a New Version
+- Caption EN: The same room, rebuilt slightly differently each time it is remembered — memory returns as versions, not recordings.
+- Caption AR: الغرفة نفسها تُعاد بناؤها بتغيّرات طفيفة في كل مرة تُستدعى — الذاكرة تعود نسخاً لا تسجيلات.
+- Alt EN: Overlapping translucent versions of the same living room with a duplicated jug and shifting walls, showing memory being rebuilt with subtle differences on every recall.
+- Alt AR: نسخ متداخلة شبه شفافة من الغرفة نفسها مع إبريق مكرر وجدران متحولة، توضح أن الذاكرة تُبنى باختلافات دقيقة في كل استدعاء.
+- Placement: after "How Reconstruction Works" section
+- NOTE: secondary image bilingual metadata authored by assistant; user approved the selection itself — revise wording on request

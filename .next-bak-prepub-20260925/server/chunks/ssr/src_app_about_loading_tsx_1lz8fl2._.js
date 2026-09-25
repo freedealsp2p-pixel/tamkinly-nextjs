@@ -1,3 +1,0 @@
-module.exports=[381661,a=>{"use strict";var b=a.i(907997);a.s(["default",0,function(){return(0,b.jsx)("div",{className:"flex items-center justify-center min-h-[60vh]",children:(0,b.jsx)("div",{className:"flex flex-col items-center gap-3",children:(0,b.jsx)("div",{className:"h-8 w-8 rounded-full border-2 border-[#1F6F78] border-t-transparent animate-spin"})})})}])},174592,a=>{a.n(a.i(381661))}];
-
-//# sourceMappingURL=src_app_about_loading_tsx_1lz8fl2._.js.map

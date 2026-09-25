@@ -1,3 +1,0 @@
-module.exports=[732929,a=>{"use strict";var b=a.i(528630),c=a.i(565399);async function d(){let a=await (0,b.getLocale)();return(0,c.generatePageMetadataFromConfig)("recovery-porn-recovery",a)}a.s(["default",0,function({children:a}){return a},"dynamic",0,"force-dynamic","generateMetadata",0,d])},674027,a=>{a.n(a.i(732929))}];
-
-//# sourceMappingURL=src_app_recovery_porn-recovery_layout_tsx_0h4du_9._.js.map

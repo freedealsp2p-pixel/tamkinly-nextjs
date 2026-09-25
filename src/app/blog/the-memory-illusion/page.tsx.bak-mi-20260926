@@ -12,7 +12,6 @@ import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
-import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 export default function TheMemoryIllusionArticle() {
   const { locale } = useLocale();
@@ -35,7 +34,6 @@ export default function TheMemoryIllusionArticle() {
         dateModified="2026-09-25"
         author="Tamkinly Team"
         keywords={["memory illusion", "reconstructive memory", "false memories", "self narrative", "identity change"]}
-        image="/uploads/articles/the-memory-illusion.webp"
       />
       <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         {/* Hero Section */}
@@ -80,24 +78,6 @@ export default function TheMemoryIllusionArticle() {
                 )}
               </div>
 
-              <ArticleFigure
-                src="/uploads/articles/the-memory-illusion.webp"
-                width={1376}
-                height={768}
-                alt={{
-                  en: "A person observing a familiar scene with subtle inconsistencies, illustrating how memories can feel accurate while being reconstructed.",
-                  ar: "شخص يراقب مشهدًا مألوفًا تظهر فيه اختلافات دقيقة، في تصوير لكيف يمكن للذكريات أن تبدو دقيقة رغم إعادة بنائها.",
-                }}
-                title={{
-                  en: "The Memory Illusion",
-                  ar: "وهم الذاكرة",
-                }}
-                caption={{
-                  en: "Memory can feel like a faithful recording of the past while actually being reconstructed each time we remember it.",
-                  ar: "قد تبدو الذاكرة كأنها تسجيل دقيق للماضي، بينما تُعاد صياغتها في كل مرة نتذكرها فيها.",
-                }}
-              />
-
               <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
                 {getText("How Reconstruction Works", "كيف تعمل إعادة البناء")}
               </h2>
@@ -107,24 +87,6 @@ export default function TheMemoryIllusionArticle() {
                   "تراكمت الأدلة قرناً كاملاً تقريباً. أظهر فريدريك بارتليت في الثلاثينيات أن الناس يعيدون سرد القصص بصياغتها نحو ما يليق بثقافتهم وتوقعاتهم. وبرهنت إليزابيث لوفتس أن الذكريات يمكن أن تتغير بالإيحاء — بتغيير صياغة، وتمارين تخيل، وحتى مشاهد طفولة مفبركة تبدو حقيقية بقدر الحقيقية. وعلم الأعصاب الحديث يملأ الآلية: استدعاء الذكرى يجعلها مؤقتاً قابلة للتشكل، وتُحفظ من جديد بتلوين عاطفي للحاضر. كل استدعاء إعادة كتابة صغيرة. لم تتذكر ماضيك كما كان ولا مرة واحدة؛ بل تذكرت دائماً آخر نسخة رويتها."
                 )}
               </p>
-
-              <ArticleFigure
-                src="/uploads/articles/the-memory-illusion-reconstruction.webp"
-                width={1376}
-                height={768}
-                alt={{
-                  en: "Overlapping translucent versions of the same living room with a duplicated jug and shifting walls, showing memory being rebuilt with subtle differences on every recall.",
-                  ar: "نسخ متداخلة شبه شفافة من الغرفة نفسها مع إبريق مكرر وجدران متحولة، توضح أن الذاكرة تُبنى باختلافات دقيقة في كل استدعاء.",
-                }}
-                title={{
-                  en: "Every Recall, a New Version",
-                  ar: "كل استدعاء، نسخة جديدة",
-                }}
-                caption={{
-                  en: "The same room, rebuilt slightly differently each time it is remembered — memory returns as versions, not recordings.",
-                  ar: "الغرفة نفسها تُعاد بناؤها بتغيّرات طفيفة في كل مرة تُستدعى — الذاكرة تعود نسخاً لا تسجيلات.",
-                }}
-              />
 
               <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
                 {getText("The Self-Story: Your Most Rehearsed Memory", "القصة الذاتية: أكثر ذكرياتك تكراراً")}
