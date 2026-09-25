@@ -99,6 +99,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'temporal-decoupling',
     'alternative-code',
     'white-mirror',
+      'truncated-sentence',
   ];
   const therapeuticProtocolPages = [
     { url: `${baseUrl}/apps/therapeutic-protocols`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },

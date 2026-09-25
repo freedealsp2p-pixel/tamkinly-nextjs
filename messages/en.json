@@ -4500,8 +4500,8 @@
   "therapeuticProtocols": {
     "hub": {
       "title": "Premium Therapeutic Protocols",
-      "subtitle": "Three independent therapeutic experiences designed for deep psychological work. Each protocol is purchased separately.",
-      "premiumBadge": "Premium Experiences — Each protocol is an independent one-time purchase",
+      "subtitle": "Independent therapeutic experiences designed for deep psychological work — three paid protocols and one completely free exercise.",
+      "premiumBadge": "Three paid premium experiences + a completely free exercise to start now",
       "disclaimer": "Tamkinly therapeutic protocols are designed for personal growth and psychological exploration. They do not replace professional mental health treatment."
     },
     "landing": {
@@ -4546,6 +4546,11 @@
         "title": "The White Mirror Protocol",
         "subtitle": "Pattern Interrupt and Recoding",
         "description": "A pattern interrupt protocol that combines identity abstraction, mental void, and alternative voice planting to break negative thought cycles and establish new cognitive patterns."
+      },
+      "truncated-sentence": {
+        "title": "The Truncated Sentence Technique",
+        "subtitle": "Reversing the negative thought through blanking and ritual",
+        "description": "A completely free exercise: write the negative sentence about yourself, blank out its middle with black tape, then live the paper-and-water ritual across three nights with a 9-day transformation journal."
       }
     },
     "temporalDecoupling": {

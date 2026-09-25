@@ -11,6 +11,7 @@ const PROTOCOLS = [
   {
     id: 'temporal-decoupling',
     color: '#1F6F78',
+    free: false,
     stepCount: 7,
     durationLabel: { ar: '\u0661\u0662 \u062f\u0642\u064a\u0642\u0629', en: '12 minutes' },
     titleKey: 'title',
@@ -36,6 +37,7 @@ const PROTOCOLS = [
   {
     id: 'alternative-code',
     color: '#2A8A94',
+    free: false,
     stepCount: 5,
     durationLabel: { ar: '\u0661\u0665 \u062f\u0642\u064a\u0642\u0629', en: '15 minutes' },
     titleKey: 'title',
@@ -61,6 +63,7 @@ const PROTOCOLS = [
   {
     id: 'white-mirror',
     color: '#0F1C2E',
+    free: false,
     stepCount: 4,
     durationLabel: { ar: '\u0669 \u062f\u0642\u0627\u0626\u0642', en: '9 minutes' },
     titleKey: 'title',
@@ -81,6 +84,32 @@ const PROTOCOLS = [
     chip: {
       ar: 'ناقد داخلي صاخب لا يصمت',
       en: 'A loud inner critic that never quiets',
+    },
+  },
+  {
+    id: 'truncated-sentence',
+    color: '#3DD4B0',
+    stepCount: 5,
+    durationLabel: { ar: '\u0661\u0665 \u062f\u0642\u064a\u0642\u0629 + \u0669 \u0623\u064a\u0627\u0645', en: '15 min + 9 days' },
+    titleKey: 'title',
+    subtitleKey: 'subtitle',
+    descriptionKey: 'description',
+    href: '/apps/therapeutic-protocols/truncated-sentence',
+    requiresSafety: false,
+    image: '/uploads/protocols/truncated-sentence-protocol.webp',
+    imageAlt: {
+      ar: 'تقنية الجملة المبتورة: تمرين تفاعلي مجاني من 5 شاشات مع مؤقت ثلاث ليالٍ ومفكرة تحول من 9 أيام',
+      en: 'The Truncated Sentence Technique: a free 5-screen interactive exercise with a three-night timer and a 9-day transformation journal',
+    },
+    recommended: false,
+    free: true,
+    forLine: {
+      ar: 'لمن: جملة سلبية عن نفسك تكررها حتى صارت تشبه الحقيقة',
+      en: 'For: a negative sentence about yourself you repeat until it feels like fact',
+    },
+    chip: {
+      ar: 'فكرة سلبية تريد عكسها',
+      en: 'A negative thought you want to reverse',
     },
   },
 ];
@@ -144,10 +173,10 @@ export default function TherapeuticProtocolsHub() {
           </h2>
           <p className="text-sm text-[#0F1C2E]/50 mb-4">
             {isAr
-              ? '\u0627\u062e\u062a\u0631 \u062c\u0645\u0644\u0629 \u0648\u0627\u062d\u062f\u0629 \u0641\u0642\u0637 \u2014 \u0633\u0646\u064f\u0628\u0631\u0632 \u0627\u0644\u0628\u0631\u0648\u062a\u0648\u0643\u0648\u0644 \u0627\u0644\u0623\u0646\u0633\u0628 \u0644\u0643. \u0648\u062a\u0628\u0642\u0649 \u062d\u0631\u064b\u0627 \u062f\u0627\u0626\u0645\u064b\u0627 \u0641\u064a \u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u062b\u0644\u0627\u062b\u0629.'
-              : 'Pick one sentence — we will highlight the protocol that fits. You can still read all three.'}
+              ? '\u0627\u062e\u062a\u0631 \u062c\u0645\u0644\u0629 \u0648\u0627\u062d\u062f\u0629 \u0641\u0642\u0637 \u2014 \u0633\u0646\u064f\u0628\u0631\u0632 \u0627\u0644\u0628\u0631\u0648\u062a\u0648\u0643\u0648\u0644 \u0627\u0644\u0623\u0646\u0633\u0628 \u0644\u0643. \u0648\u062a\u0628\u0642\u0649 \u062d\u0631\u064b\u0627 \u062f\u0627\u0626\u0645\u064b\u0627 \u0641\u064a \u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u062c\u0645\u064a\u0639.'
+              : 'Pick one sentence — we will highlight the protocol that fits. You can still read all four.'}
           </p>
-          <div className="grid sm:grid-cols-3 gap-2">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
             {PROTOCOLS.map((protocol) => {
               const selected = answer === protocol.id;
               return (
@@ -220,9 +249,15 @@ export default function TherapeuticProtocolsHub() {
                               {isAr ? '\u064a\u062a\u0637\u0644\u0628 \u062a\u062d\u0630\u064a\u0631\u0627\u064b' : 'Safety warning'}
                             </span>
                           )}
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-[#0F1C2E]/5 text-[#0F1C2E]/50 font-medium">
-                            ${isAr ? '\u0669\u0669' : '99'}
-                          </span>
+                          {protocol.free ? (
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-[#3DD4B0]/25 text-[#0F1C2E] font-semibold">
+                              {isAr ? 'مجاني' : 'Free'}
+                            </span>
+                          ) : (
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-[#0F1C2E]/5 text-[#0F1C2E]/50 font-medium">
+                              ${isAr ? '\u0669\u0669' : '99'}
+                            </span>
+                          )}
                         </div>
                         <p className="text-sm text-[#0F1C2E]/50 mb-2">
                           {t(`protocols.${protocol.id}.${protocol.subtitleKey}`)}
@@ -246,8 +281,10 @@ export default function TherapeuticProtocolsHub() {
                             {isAr ? protocol.durationLabel.ar : protocol.durationLabel.en}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Lock className="w-3 h-3" />
-                            {isAr ? '\u062f\u0641\u0639\u0629 \u0648\u0627\u062d\u062f\u0629' : 'One-time'}
+                            {!protocol.free && <Lock className="w-3 h-3" />}
+                            {protocol.free
+                              ? (isAr ? 'بدون تسجيل' : 'No sign-up')
+                              : (isAr ? '\u062f\u0641\u0639\u0629 \u0648\u0627\u062d\u062f\u0629' : 'One-time')}
                           </span>
                         </div>
                       </div>
