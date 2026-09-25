@@ -39,7 +39,7 @@ export default function VagusNerveBreathingArticle() {
               {getText("Mental Clarity", "الوضوح الذهني")}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              {getText("The Vagus Nerve Protocol: How 4-2-8-2 Breathing Rewires Your Stress Response", "بروتوكول العصب المبهم: كيف يعيد التنفس 4-2-8-2 تشكيل استجابتك للتوتر")}
+              {getText("The Vagus Nerve Protocol: How 4-2-8-2 Breathing Rewires Your Stress Response", "بروتوكول العصب المبهم (Vagus nerve): كيف يعيد التنفس 4-2-8-2 تشكيل استجابتك للتوتر")}
             </h1>
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
@@ -62,7 +62,7 @@ export default function VagusNerveBreathingArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText(
                 "The human nervous system is a masterpiece of biological engineering, and at its very core lies the Vagus Nerve — one of the most critical conduits linking the mind to the internal organs. Its function extends far beyond mere signal transmission. It acts as a master safety switch that governs the transition from a state of stress and survival — fight-or-flight — to a state of recovery and restoration — rest-and-digest. In the face of modern chronic stressors, the ability to consciously stimulate this nerve is not a luxury. It is a biological necessity for maintaining systemic equilibrium.",
-                "الجهاز العصبي البشري تحفة من الهندسة البيولوجية، وفي صميمه يكمن العصب المبهم — أحد أهم القنوات التي تربط العقل بالأعضاء الداخلية. وظيفته تمتد إلى أبعد من مجرد نقل الإشارات. يعمل كمفتاح أمان رئيسي يحكم الانتقال من حالة التوتر والبقاء — القتال أو الهرب — إلى حالة التعافي والاستعادة — الراحة والهضم. في مواجهة ضغوط الحياة الحديثة المزمنة، القدرة على تحفيز هذا العصب بوعي ليست ترفاً. إنها ضرورة بيولوجية للحفاظ على التوازن المنهجي."
+                "الجهاز العصبي البشري تحفة من الهندسة البيولوجية، وفي صميمه يكمن العصب المبهم (Vagus nerve) — أحد أهم القنوات التي تربط العقل بالأعضاء الداخلية. وظيفته تمتد إلى أبعد من مجرد نقل الإشارات. يعمل كمفتاح أمان رئيسي يحكم الانتقال من حالة التوتر والبقاء — القتال أو الهرب — إلى حالة التعافي والاستعادة — الراحة والهضم. في مواجهة ضغوط الحياة الحديثة المزمنة، القدرة على تحفيز هذا العصب بوعي ليست ترفاً. إنها ضرورة بيولوجية للحفاظ على التوازن المنهجي."
               )}
             </p>
 
@@ -76,7 +76,7 @@ export default function VagusNerveBreathingArticle() {
               }}
               title={{
                 en: "Vagus Nerve Protocol: Slow Breathing and Regulation",
-                ar: "بروتوكول العصب الحائر: التنفس البطيء والتنظيم",
+                ar: "بروتوكول العصب المبهم (Vagus nerve): التنفس البطيء والتنظيم",
               }}
               caption={{
                 en: "A conceptual representation of slow rhythmic breathing and its relationship to autonomic regulation.",
@@ -88,7 +88,7 @@ export default function VagusNerveBreathingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The Vagus Nerve is the tenth cranial nerve, recognized as the longest and most complex in the human body, stretching from the brainstem down to the heart, lungs, and digestive system. It serves as the primary component of the parasympathetic nervous system. When activated, it facilitates a cascade of physiological benefits: it lowers the heart rate, reduces blood pressure, stimulates digestive enzymes, and plays a fundamental role in suppressing systemic inflammation. Scientific research indicates that a weak Vagal Tone is closely linked to modern ailments such as chronic anxiety, depression, and gastrointestinal disorders. Strengthening this tone through targeted stimulation is a crucial therapeutic gateway for holistic health. The Vagus Nerve is not merely a part of your anatomy — it is a strategic ally in the quest for comprehensive well-being.",
-                "العصب المبهم هو العصب القحفي العاشر، أطول وأعقد عصب في جسم الإنسان، يمتد من جذع الدماغ إلى القلب والرئتين والجهاز الهضمي. يعمل كالمكون الأساسي للجهاز العصبي اللاودي. عند تنشيطه، يطلق سلسلة من الفوائد الفسيولوجية: يخفض معدل ضربات القلب، يقلل ضغط الدم، يحفز إنزيمات الهضم، ويلعب دوراً أساسياً في قمع الالتهاب المنهجي. الأبحاث العلمية تشير إلى أن نبرة العصب المبهم الضعيفة مرتبطة ارتباطاً وثيقاً بأمراض العصر كالقلق المزمن والاكتئاب واضطرابات الجهاز الهضمي. تعزيز هذه النبرة من خلال التحفيز الموجه هو بوابة علاجية حاسمة للصحة الشاملة. العصب المبهم ليس مجرد جزء من تشريحك — إنه حليف استراتيجي في سعيك للرفاهية الشاملة."
+                "العصب المبهم (Vagus nerve) هو العصب القحفي العاشر، أطول وأعقد عصب في جسم الإنسان، يمتد من جذع الدماغ إلى القلب والرئتين والجهاز الهضمي. يعمل كالمكون الأساسي للجهاز العصبي اللاودي. عند تنشيطه، يطلق سلسلة من الفوائد الفسيولوجية: يخفض معدل ضربات القلب، يقلل ضغط الدم، يحفز إنزيمات الهضم، ويلعب دوراً أساسياً في قمع الالتهاب المنهجي. الأبحاث العلمية تشير إلى أن نبرة العصب المبهم الضعيفة مرتبطة ارتباطاً وثيقاً بأمراض العصر كالقلق المزمن والاكتئاب واضطرابات الجهاز الهضمي. تعزيز هذه النبرة من خلال التحفيز الموجه هو بوابة علاجية حاسمة للصحة الشاملة. العصب المبهم ليس مجرد جزء من تشريحك — إنه حليف استراتيجي في سعيك للرفاهية الشاملة."
               )}
             </p>
 
@@ -104,7 +104,7 @@ export default function VagusNerveBreathingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The 4-2-8-2 technique is built upon a meticulously calculated temporal rhythm. The scientific brilliance lies in the extended exhalation. When the exhalation phase is significantly longer than the inhalation, the diaphragm exerts mechanical pressure that stimulates baroreceptors associated with the Vagus Nerve. This temporal divergence forces the heart to slow down through a process called respiratory sinus arrhythmia, shifting the body into an automatic state of balance. The four-second inhale fills the lungs with sufficient volume to oxygenate the blood. The two-second hold allows that oxygen to saturate the bloodstream. The eight-second exhale is where the magic happens — it activates the parasympathetic response, signaling to the brain that there is no threat, no emergency, no reason to remain on high alert. The two-second pause completes the cycle, allowing the system to reset before the next breath. This protocol can be applied during acute stress or used as a daily ritual to improve sleep quality and immune efficiency by drastically lowering cortisol levels.",
-                "تقنية 4-2-8-2 مبنية على إيقاع زمني محسوب بدقة. العبقرية العلمية تكمن في الزفير الممتد. عندما تكون مرحلة الزفير أطول بكثير من الشهيق، يمارس الحجاب الحاجز ضغطاً ميكانيكياً يحفز مستقبلات الضغط المرتبطة بالعصب المبهم. هذا التفاوت الزمني يجبر القلب على التباطؤ من خلال عملية تسمى اضطراب الجيوب الأنفية التنفسي، مما ينقل الجسم إلى حالة توازن تلقائية. الشهيق لأربع ثوانٍ يملأ الرئتين بحجم كافٍ لأكسجة الدم. الحبس لثانيتين يسمح لذلك الأكسجين بتشبع مجرى الدم. الزفير لثماني ثوانٍ هو حيث يحدث السحر — ينشط الاستجابة اللاودية، يشير للدماغ بأنه لا يوجد تهديد، لا طوارئ، لا سبب للبقاء في حالة إنذار قصوى. التوقف لثانيتين يكمل الدورة، سامحاً للنظام بإعادة التعيين قبل النفس التالي. هذا البروتوكول يمكن تطبيقه أثناء التوتر الحاد أو استخدامه كطقس يومي لتحسين جودة النوم وكفاءة المناعة بخفض مستويات الكورتيزول بشكل جذري."
+                "تقنية 4-2-8-2 مبنية على إيقاع زمني محسوب بدقة. العبقرية العلمية تكمن في الزفير الممتد. عندما تكون مرحلة الزفير أطول بكثير من الشهيق، يمارس الحجاب الحاجز ضغطاً ميكانيكياً يحفز مستقبلات الضغط المرتبطة بالعصب المبهم (Vagus nerve). هذا التفاوت الزمني يجبر القلب على التباطؤ من خلال عملية تسمى اضطراب الجيوب الأنفية التنفسي، مما ينقل الجسم إلى حالة توازن تلقائية. الشهيق لأربع ثوانٍ يملأ الرئتين بحجم كافٍ لأكسجة الدم. الحبس لثانيتين يسمح لذلك الأكسجين بتشبع مجرى الدم. الزفير لثماني ثوانٍ هو حيث يحدث السحر — ينشط الاستجابة اللاودية، يشير للدماغ بأنه لا يوجد تهديد، لا طوارئ، لا سبب للبقاء في حالة إنذار قصوى. التوقف لثانيتين يكمل الدورة، سامحاً للنظام بإعادة التعيين قبل النفس التالي. هذا البروتوكول يمكن تطبيقه أثناء التوتر الحاد أو استخدامه كطقس يومي لتحسين جودة النوم وكفاءة المناعة بخفض مستويات الكورتيزول بشكل جذري."
               )}
             </p>
 
@@ -133,7 +133,7 @@ export default function VagusNerveBreathingArticle() {
                     <Heart className="h-6 w-6 text-accent" />
                   </div>
                   <h3 className="font-semibold text-accent mb-1">{getText("8 sec", "٨ ثوانٍ")}</h3>
-                  <p className="text-sm text-slate-500">{getText("Exhale slowly through the mouth. This activates the Vagus Nerve.", "زفير بطيء من الفم. هذا ينشط العصب المبهم.")}</p>
+                  <p className="text-sm text-slate-500">{getText("Exhale slowly through the mouth. This activates the Vagus Nerve.", "زفير بطيء من الفم. هذا ينشط العصب المبهم (Vagus nerve).")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -150,7 +150,7 @@ export default function VagusNerveBreathingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Modern clinical studies on breathing techniques rely on Heart Rate Variability as the gold standard for measuring Vagal activity. Experiments monitor vital signs before, during, and after the application of the technique using portable ECG monitors, pulse oximeters, and salivary cortisol tests. This data-driven approach proves that conscious breathing can override the autonomic nervous system's default stress responses. You are not imagining the calm — you are engineering it. You are not hoping for relief — you are demanding it at the biological level. And the body has no choice but to comply, because you are speaking its language. The language of breath. The language of rhythm. The language of the Vagus Nerve.",
-                "الدراسات السريرية الحديثة حول تقنيات التنفس تعتمد على معدل تغير ضربات القلب كالمعيار الذهبي لقياس نشاط العصب المبهم. التجارب تراقب العلامات الحيوية قبل وأثناء وبعد تطبيق التقنية باستخدام أجهزة تخطيط القلب المحمولة وأجهزة قياس الأكسجين في النبض واختبارات الكورتيزول اللعابي. هذا النهج القائم على البيانات يثبت أن التنفس الواعي يمكنه تجاوز استجابات التوتر الافتراضية في الجهاز العصبي اللاإرادي. أنت لا تتخيل الهدوء — أنت تصممه. أنت لا تأمل في الراحة — أنت تطالب بها على المستوى البيولوجي. والجسد ليس أمامه خيار سوى الامتثال، لأنك تتحدث لغته. لغة التنفس. لغة الإيقاع. لغة العصب المبهم."
+                "الدراسات السريرية الحديثة حول تقنيات التنفس تعتمد على معدل تغير ضربات القلب كالمعيار الذهبي لقياس نشاط العصب المبهم (Vagus nerve). التجارب تراقب العلامات الحيوية قبل وأثناء وبعد تطبيق التقنية باستخدام أجهزة تخطيط القلب المحمولة وأجهزة قياس الأكسجين في النبض واختبارات الكورتيزول اللعابي. هذا النهج القائم على البيانات يثبت أن التنفس الواعي يمكنه تجاوز استجابات التوتر الافتراضية في الجهاز العصبي اللاإرادي. أنت لا تتخيل الهدوء — أنت تصممه. أنت لا تأمل في الراحة — أنت تطالب بها على المستوى البيولوجي. والجسد ليس أمامه خيار سوى الامتثال، لأنك تتحدث لغته. لغة التنفس. لغة الإيقاع. لغة العصب المبهم."
               )}
             </p>
 
@@ -203,7 +203,7 @@ export default function VagusNerveBreathingArticle() {
             <p className="text-slate-600 leading-relaxed">
               {getText(
                 "You cannot think your way out of a stress response. But you can breathe your way out of it. The Vagus Nerve does not respond to logic — it responds to rhythm. Master the rhythm, and you master the state. The breath is the remote control for your nervous system. Learn to use it.",
-                "لا يمكنك أن تفكر نفسك خارج استجابة التوتر. لكن يمكنك أن تتنفس نفسك خارجها. العصب المبهم لا يستجيب للمنطق — يستجيب للإيقاع. أتقن الإيقاع، وأتقن الحالة. التنفس هو جهاز التحكم عن بعد لجهازك العصبي. تعلم استخدامه."
+                "لا يمكنك أن تفكر نفسك خارج استجابة التوتر. لكن يمكنك أن تتنفس نفسك خارجها. العصب المبهم (Vagus nerve) لا يستجيب للمنطق — يستجيب للإيقاع. أتقن الإيقاع، وأتقن الحالة. التنفس هو جهاز التحكم عن بعد لجهازك العصبي. تعلم استخدامه."
               )}
             </p>
 

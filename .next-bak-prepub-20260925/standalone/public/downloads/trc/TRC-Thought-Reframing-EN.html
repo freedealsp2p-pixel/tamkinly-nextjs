@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Thought Reframing Worksheet — TRC-THOUGHT_REFRAMING</title>
+
+    <style>
+        /* ==================================================
+           TAMKINLY — TRC THOUGHT REFRAMING
+           PRINTABLE THERAPEUTIC WORKSHEET
+           FORMAT: A4 PORTRAIT / EXACTLY 4 PAGES
+           ================================================== */
+
+        :root {
+            --color-primary-teal: #1F6F78;
+            --color-deep-navy: #0F1C2E;
+            --color-soft-teal: #E8F4F5;
+            --color-warm-offwhite: #FAFBFC;
+            --color-slate-text: #334155;
+            --color-muted-text: #64748B;
+            --color-border: #D9E2E7;
+            --color-white: #FFFFFF;
+        }
+
+        /* ==================================================
+           GLOBAL RESET
+           ================================================== */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background: #CBD5E1;
+        }
+
+        body {
+            font-family:
+                Inter,
+                "Segoe UI",
+                -apple-system,
+                BlinkMacSystemFont,
+                Roboto,
+                Arial,
+                sans-serif;
+
+            color: var(--color-slate-text);
+            background-color: #CBD5E1;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            padding: 20px 0;
+
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ==================================================
+           EXACT A4 PAGE
+           ================================================== */
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            min-width: 210mm;
+            max-width: 210mm;
+            min-height: 297mm;
+            max-height: 297mm;
+
+            background: var(--color-white);
+
+            padding:
+                14mm
+                16mm
+                12mm
+                16mm;
+
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 20px rgba(15, 28, 46, 0.08);
+
+            margin-bottom: 25px;
+
+            break-after: page;
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            margin-bottom: 0;
+        }
+
+        @media print {
+            html,
+            body {
+                width: 210mm;
+                background: transparent;
+            }
+
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            .page {
+                width: 210mm;
+                height: 297mm;
+                min-width: 210mm;
+                max-width: 210mm;
+                min-height: 297mm;
+                max-height: 297mm;
+
+                margin: 0;
+
+                box-shadow: none;
+
+                break-after: page;
+                page-break-after: always;
+            }
+
+            .page:last-child {
+                break-after: auto;
+                page-break-after: auto;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+        }
+
+        /* ==================================================
+           HEADER
+           ================================================== */
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom:
+                1px solid var(--color-primary-teal);
+
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+
+            flex-shrink: 0;
+        }
+
+        .header-left {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--color-deep-navy);
+        }
+
+        .header-right {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--color-primary-teal);
+        }
+
+        /* ==================================================
+           FOOTER
+           ================================================== */
+
+        .page-footer {
+            border-top:
+                1px solid var(--color-border);
+
+            padding-top: 6px;
+            margin-top: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            font-size: 8.5px;
+            color: var(--color-muted-text);
+
+            flex-shrink: 0;
+        }
+
+        /* ==================================================
+           CONTENT
+           ================================================== */
+
+        .content-area {
+            flex: 1;
+
+            min-height: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        section {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .title-block {
+            margin-bottom: 2px;
+            flex-shrink: 0;
+        }
+
+        .doc-title {
+            font-size: 20px;
+            font-weight: 700;
+
+            color: var(--color-deep-navy);
+
+            line-height: 1.2;
+
+            margin-bottom: 4px;
+        }
+
+        .doc-subtitle {
+            font-size: 10.5px;
+
+            color: var(--color-muted-text);
+
+            line-height: 1.4;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+
+            color: var(--color-deep-navy);
+
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            margin-bottom: 4px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 600;
+
+            color: var(--color-deep-navy);
+
+            margin-bottom: 3px;
+
+            display: block;
+        }
+
+        .instruction-text {
+            font-size: 9px;
+
+            color: var(--color-muted-text);
+
+            margin-bottom: 6px;
+
+            line-height: 1.3;
+        }
+
+        /* ==================================================
+           SAFETY / SUPPORT BOX
+           ================================================== */
+
+        .safety-box {
+            background-color: var(--color-soft-teal);
+
+            border-left:
+                3.5px solid var(--color-primary-teal);
+
+            padding: 8px 12px;
+
+            border-radius:
+                0 4px 4px 0;
+
+            display: flex;
+            align-items: flex-start;
+
+            gap: 8px;
+
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .safety-box-content {
+            font-size: 9px;
+
+            color: var(--color-slate-text);
+
+            line-height: 1.4;
+        }
+
+        .safety-box-title {
+            font-weight: 700;
+
+            color: var(--color-deep-navy);
+
+            font-size: 9.5px;
+
+            margin-bottom: 2px;
+        }
+
+        /* ==================================================
+           WRITING AREAS
+           ================================================== */
+
+        .writing-box {
+            border:
+                1px solid var(--color-border);
+
+            border-radius: 4px;
+
+            background-color:
+                var(--color-warm-offwhite);
+
+            padding: 8px;
+
+            width: 100%;
+
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .ruled-lines {
+            background-image:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent,
+                    transparent 21px,
+                    var(--color-border) 21px,
+                    var(--color-border) 22px
+                );
+
+            line-height: 22px;
+
+            min-height: 88px;
+        }
+
+        .ruled-lines.compact {
+            min-height: 66px;
+        }
+
+        .ruled-lines.tall {
+            min-height: 132px;
+        }
+
+        .blank-field-line {
+            display: flex;
+            align-items: baseline;
+
+            gap: 8px;
+
+            font-size: 10px;
+
+            color: var(--color-slate-text);
+
+            margin-top: 4px;
+        }
+
+        .underline-fill {
+            flex: 1;
+
+            border-bottom:
+                1px solid var(--color-slate-text);
+
+            min-height: 16px;
+        }
+
+        .inline-box {
+            display: inline-block;
+
+            width: 50px;
+            height: 20px;
+
+            border:
+                1px solid var(--color-border);
+
+            border-radius: 3px;
+
+            background:
+                var(--color-white);
+
+            vertical-align: middle;
+
+            margin: 0 4px;
+        }
+
+        /* ==================================================
+           SCALE
+           ================================================== */
+
+        .scale-container {
+            border:
+                1px solid var(--color-border);
+
+            border-radius: 4px;
+
+            padding: 8px 12px;
+
+            background:
+                var(--color-warm-offwhite);
+        }
+
+        .scale-bar {
+            height: 6px;
+
+            background:
+                var(--color-border);
+
+            border-radius: 3px;
+
+            position: relative;
+
+            margin:
+                12px 0 6px 0;
+        }
+
+        .scale-ticks {
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 8.5px;
+
+            color:
+                var(--color-muted-text);
+
+            font-weight: 500;
+        }
+
+        /* ==================================================
+           GRID
+           ================================================== */
+
+        .grid-2col {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+        }
+
+        /* ==================================================
+           COGNITIVE DISTORTIONS
+           ================================================== */
+
+        .distortion-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 6px;
+
+            background:
+                var(--color-warm-offwhite);
+
+            border:
+                1px solid var(--color-border);
+
+            border-radius: 4px;
+
+            padding: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 6px;
+
+            font-size: 8.5px;
+
+            color:
+                var(--color-slate-text);
+
+            line-height: 1.2;
+        }
+
+        .checkbox-box {
+            width: 11px;
+            height: 11px;
+
+            border:
+                1px solid var(--color-primary-teal);
+
+            border-radius: 2px;
+
+            background:
+                var(--color-white);
+
+            flex-shrink: 0;
+
+            margin-top: 1px;
+        }
+
+        /* ==================================================
+           TABLE
+           ================================================== */
+
+        .custom-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            font-size: 9px;
+
+            margin-top: 4px;
+        }
+
+        .custom-table th {
+            background:
+                var(--color-soft-teal);
+
+            color:
+                var(--color-deep-navy);
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            font-size: 8px;
+
+            padding: 6px;
+
+            border:
+                1px solid var(--color-border);
+
+            text-align: left;
+        }
+
+        .custom-table td {
+            padding: 8px 6px;
+
+            border:
+                1px solid var(--color-border);
+
+            color:
+                var(--color-slate-text);
+
+            vertical-align: middle;
+        }
+
+        /* ==================================================
+           COMPARISON
+           ================================================== */
+
+        .comparison-strip {
+            display: flex;
+
+            gap: 12px;
+
+            background:
+                var(--color-soft-teal);
+
+            border:
+                1px solid var(--color-border);
+
+            border-radius: 4px;
+
+            padding: 8px 12px;
+        }
+
+        .comparison-box {
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 8px;
+
+            font-size: 9.5px;
+
+            font-weight: 600;
+
+            color:
+                var(--color-deep-navy);
+        }
+
+        /* ==================================================
+           ICONS
+           ================================================== */
+
+        .svg-icon {
+            width: 14px;
+            height: 14px;
+
+            fill: none;
+
+            stroke:
+                var(--color-primary-teal);
+
+            stroke-width: 2;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+            flex-shrink: 0;
+        }
+
+        /* ==================================================
+           DISCLAIMER
+           ================================================== */
+
+        .disclaimer-box {
+            background:
+                var(--color-warm-offwhite);
+
+            border:
+                1px solid var(--color-border);
+
+            border-radius: 4px;
+
+            padding: 6px 8px;
+        }
+
+        .disclaimer-title {
+            font-size: 8px;
+
+            font-weight: 700;
+
+            color:
+                var(--color-deep-navy);
+
+            margin-bottom: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .disclaimer-text {
+            font-size: 7.5px;
+
+            color:
+                var(--color-muted-text);
+
+            line-height: 1.3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================================================
+         PAGE 1
+         IDENTIFY TRIGGER & AUTOMATIC THOUGHT
+         ================================================== -->
+
+    <div class="page" id="page-1">
+
+        <header class="page-header">
+            <span class="header-left">
+                Tamkinly | Trauma Recovery Center
+            </span>
+
+            <span class="header-right">
+                TRC-THOUGHT_REFRAMING
+            </span>
+        </header>
+
+        <main class="content-area">
+
+            <div class="title-block">
+                <h1 class="doc-title">
+                    Thought Reframing Worksheet
+                </h1>
+
+                <p class="doc-subtitle">
+                    A structured way to examine an automatic thought and develop a more balanced perspective.
+                </p>
+            </div>
+
+            <!-- SAFETY -->
+
+            <div class="safety-box">
+
+                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+
+                <div class="safety-box-content">
+
+                    <div class="safety-box-title">
+                        Safety Alert
+                    </div>
+
+                    Pause if this exercise increases your distress. You do not need to continue, describe the event in detail, or force yourself to find a different interpretation. Return to grounding or stabilization if needed, or seek appropriate support.
+                </div>
+            </div>
+
+            <!-- 1 -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+
+                    1. Identify the Trigger
+
+                </div>
+
+                <label class="section-label">
+                    What happened or what situation triggered the reaction?
+                </label>
+
+                <p class="instruction-text">
+                    Keep this brief. You do not need to describe traumatic details.
+                </p>
+
+                <div class="writing-box ruled-lines compact"></div>
+
+            </section>
+
+            <!-- 2 -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+
+                    2. Automatic Thought
+
+                </div>
+
+                <label class="section-label">
+                    What automatic thought appeared in your mind?
+                </label>
+
+                <p class="instruction-text">
+                    Write the thought as it appeared, even if you are not sure it is accurate.
+                </p>
+
+                <div class="writing-box ruled-lines compact"></div>
+
+            </section>
+
+            <!-- 3 -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+
+                    3. Belief Level
+
+                </div>
+
+                <label class="section-label">
+                    How strongly do I believe this thought right now?
+                </label>
+
+                <div class="scale-container">
+
+                    <div class="scale-ticks">
+                        <span>0% (Not at all)</span>
+                        <span>50% (Moderately)</span>
+                        <span>100% (Completely)</span>
+                    </div>
+
+                    <div class="scale-bar"></div>
+
+                    <div style="
+                        margin-top:8px;
+                        font-size:9.5px;
+                        color:var(--color-slate-text);
+                        display:flex;
+                        align-items:center;
+                    ">
+
+                        <span>
+                            Current Belief Rating:
+                        </span>
+
+                        <span class="inline-box"></span>
+
+                        <span>%</span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- 4 -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+
+                    4. Emotion & Intensity
+
+                </div>
+
+                <div class="writing-box" style="padding:10px;">
+
+                    <div class="blank-field-line" style="margin-bottom:8px;">
+
+                        <span style="font-weight:600;">
+                            Emotion(s):
+                        </span>
+
+                        <span class="underline-fill"></span>
+
+                    </div>
+
+                    <div class="blank-field-line">
+
+                        <span style="font-weight:600;">
+                            Intensity Rating:
+                        </span>
+
+                        <span class="inline-box"></span>
+
+                        <span>/ 100</span>
+
+                    </div>
+
+                </div>
+
+                <p class="instruction-text"
+                   style="
+                       margin-top:6px;
+                       text-align:center;
+                       font-style:italic;
+                   ">
+
+                    Notice what is present without judging yourself for having the reaction.
+
+                </p>
+
+            </section>
+
+        </main>
+
+        <footer class="page-footer">
+
+            <span>
+                Tamkinly | Tool ID: TRC-THOUGHT_REFRAMING
+            </span>
+
+            <span>
+                Page 1 of 4
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ==================================================
+         PAGE 2
+         EVIDENCE & THINKING PATTERNS
+         ================================================== -->
+
+    <div class="page" id="page-2">
+
+        <header class="page-header">
+
+            <span class="header-left">
+                Tamkinly | Trauma Recovery Center
+            </span>
+
+            <span class="header-right">
+                TRC-THOUGHT_REFRAMING
+            </span>
+
+        </header>
+
+        <main class="content-area">
+
+            <div class="title-block">
+
+                <h1 class="doc-title">
+                    Examining the Evidence
+                </h1>
+
+                <p class="doc-subtitle">
+                    Look for information that supports the automatic thought and information that does not fully support it.
+                </p>
+
+            </div>
+
+            <div class="grid-2col">
+
+                <!-- FOR -->
+
+                <section style="
+                    display:flex;
+                    flex-direction:column;
+                ">
+
+                    <div class="section-title">
+
+                        <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+
+                        Evidence FOR
+
+                    </div>
+
+                    <p class="instruction-text">
+                        What facts, observations, or experiences seem to support the automatic thought?
+                    </p>
+
+                    <div class="writing-box ruled-lines tall"></div>
+
+                </section>
+
+                <!-- AGAINST -->
+
+                <section style="
+                    display:flex;
+                    flex-direction:column;
+                ">
+
+                    <div class="section-title">
+
+                        <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+
+                        Evidence AGAINST
+
+                    </div>
+
+                    <p class="instruction-text">
+                        What facts, observations, or experiences do not fully support the automatic thought?
+                    </p>
+
+                    <div class="writing-box ruled-lines tall"></div>
+
+                </section>
+
+            </div>
+
+            <!-- COGNITIVE DISTORTIONS -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+
+                    Cognitive Distortions Reference
+
+                </div>
+
+                <div style="
+                    background:var(--color-warm-offwhite);
+                    border:1px solid var(--color-border);
+                    border-radius:4px;
+                    padding:8px;
+                    font-size:8px;
+                    color:var(--color-slate-text);
+                    line-height:1.35;
+                    display:grid;
+                    grid-template-columns:1fr 1fr;
+                    gap:4px 10px;
+                ">
+
+                    <div>
+                        <strong>• All-or-Nothing Thinking:</strong>
+                        Seeing situations in extremes with little room for middle ground.
+                    </div>
+
+                    <div>
+                        <strong>• Emotional Reasoning:</strong>
+                        Treating an emotion as proof that a belief or interpretation is fact.
+                    </div>
+
+                    <div>
+                        <strong>• Overgeneralization:</strong>
+                        Drawing a broad conclusion from a limited event or pattern.
+                    </div>
+
+                    <div>
+                        <strong>• Should Statements:</strong>
+                        Using rigid expectations about what you or others "should" do.
+                    </div>
+
+                    <div>
+                        <strong>• Mind Reading:</strong>
+                        Assuming you know what another person is thinking without sufficient evidence.
+                    </div>
+
+                    <div>
+                        <strong>• Discounting the Positive:</strong>
+                        Minimizing information that does not fit the negative interpretation.
+                    </div>
+
+                    <div>
+                        <strong>• Catastrophizing:</strong>
+                        Focusing on the most threatening possible outcome as if it is certain.
+                    </div>
+
+                    <div>
+                        <strong>• Fortune Telling:</strong>
+                        Predicting a negative future outcome without enough evidence.
+                    </div>
+
+                    <div>
+                        <strong>• Personalization:</strong>
+                        Taking excessive responsibility for something not fully in your control.
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- SELECTION -->
+
+            <section>
+
+                <label class="section-label">
+                    Which thinking pattern(s), if any, seem relevant?
+                </label>
+
+                <div class="distortion-grid">
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>All-or-Nothing Thinking</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Emotional Reasoning</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Overgeneralization</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Should Statements</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Mind Reading</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Discounting the Positive</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Catastrophizing</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Fortune Telling</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Personalization</span>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>None / Not sure</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="page-footer">
+
+            <span>
+                Tamkinly | Tool ID: TRC-THOUGHT_REFRAMING
+            </span>
+
+            <span>
+                Page 2 of 4
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ==================================================
+         PAGE 3
+         BALANCED THOUGHT & COMPASSIONATE OBSERVER
+         ================================================== -->
+
+    <div class="page" id="page-3">
+
+        <header class="page-header">
+
+            <span class="header-left">
+                Tamkinly | Trauma Recovery Center
+            </span>
+
+            <span class="header-right">
+                TRC-THOUGHT_REFRAMING
+            </span>
+
+        </header>
+
+        <main class="content-area">
+
+            <div class="title-block">
+
+                <h1 class="doc-title">
+                    Developing a Balanced Thought
+                </h1>
+
+                <p class="doc-subtitle">
+                    Use what you noticed on the previous page to create a perspective that is realistic, evidence-informed, and compassionate.
+                </p>
+
+            </div>
+
+            <!-- BALANCED THOUGHT -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3v18M3 12h18"></path>
+                    </svg>
+
+                    1. Balanced Thought
+
+                </div>
+
+                <label class="section-label">
+                    What is a more balanced way to understand this situation?
+                </label>
+
+                <div class="safety-box"
+                     style="
+                         margin-bottom:6px;
+                         background-color:var(--color-warm-offwhite);
+                         border-left-color:var(--color-muted-text);
+                     ">
+
+                    <div class="safety-box-content">
+
+                        <strong>Guidance:</strong>
+
+                        A balanced thought does not have to be positive. It should acknowledge difficult information while also making room for other evidence, uncertainty, context, and personal agency. It should not deny real danger, abuse, or boundary violations.
+
+                    </div>
+
+                </div>
+
+                <div class="writing-box ruled-lines tall"></div>
+
+            </section>
+
+            <!-- AFTER RATING -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 8v4l3 3"></path>
+                    </svg>
+
+                    2. Belief Rating — After Reframing
+
+                </div>
+
+                <div class="writing-box" style="padding:8px 12px;">
+
+                    <div class="blank-field-line">
+
+                        <span style="font-weight:600;">
+                            How strongly do I believe the balanced thought?
+                        </span>
+
+                        <span class="inline-box"></span>
+
+                        <span>%</span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- COMPASSIONATE OBSERVER -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+
+                    3. Compassionate Observer Perspective
+
+                </div>
+
+                <label class="section-label">
+                    If someone you cared about were experiencing this same situation, what would you say to them that is honest, supportive, and realistic?
+                </label>
+
+                <div class="writing-box ruled-lines compact"></div>
+
+                <p class="instruction-text"
+                   style="
+                       margin-top:4px;
+                       text-align:center;
+                       font-style:italic;
+                   ">
+
+                    Compassion does not mean denying what happened. It means responding without unnecessary self-attack.
+
+                </p>
+
+            </section>
+
+            <!-- COMPARISON -->
+
+            <section style="margin-top:4px;">
+
+                <div class="section-title"
+                     style="
+                         font-size:10px;
+                         margin-bottom:4px;
+                     ">
+
+                    Reframing Comparison Summary
+
+                </div>
+
+                <div class="comparison-strip">
+
+                    <div class="comparison-box">
+
+                        <span>
+                            Before: Belief in automatic thought:
+                        </span>
+
+                        <div>
+                            <span class="inline-box"></span>%
+                        </div>
+
+                    </div>
+
+                    <div style="
+                        width:1px;
+                        background:var(--color-border);
+                    "></div>
+
+                    <div class="comparison-box">
+
+                        <span>
+                            After: Belief in balanced thought:
+                        </span>
+
+                        <div>
+                            <span class="inline-box"></span>%
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="page-footer">
+
+            <span>
+                Tamkinly | Tool ID: TRC-THOUGHT_REFRAMING
+            </span>
+
+            <span>
+                Page 3 of 4
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ==================================================
+         PAGE 4
+         ACTION, PROGRESS & SAFETY
+         ================================================== -->
+
+    <div class="page" id="page-4">
+
+        <header class="page-header">
+
+            <span class="header-left">
+                Tamkinly | Trauma Recovery Center
+            </span>
+
+            <span class="header-right">
+                TRC-THOUGHT_REFRAMING
+            </span>
+
+        </header>
+
+        <main class="content-area">
+
+            <div class="title-block">
+
+                <h1 class="doc-title">
+                    Action, Progress & Safety
+                </h1>
+
+            </div>
+
+            <!-- ACTION PLAN -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+
+                    1. Action Plan
+
+                </div>
+
+                <label class="section-label">
+                    Based on what I understand now, what is one safe and realistic next step?
+                </label>
+
+                <div class="writing-box" style="padding:8px;">
+
+                    <div class="blank-field-line" style="margin-bottom:6px;">
+
+                        <span style="
+                            font-weight:600;
+                            width:110px;
+                        ">
+                            Next step:
+                        </span>
+
+                        <span class="underline-fill"></span>
+
+                    </div>
+
+                    <div class="blank-field-line" style="margin-bottom:6px;">
+
+                        <span style="
+                            font-weight:600;
+                            width:110px;
+                        ">
+                            When / where:
+                        </span>
+
+                        <span class="underline-fill"></span>
+
+                    </div>
+
+                    <div class="blank-field-line">
+
+                        <span style="
+                            font-weight:600;
+                            width:110px;
+                        ">
+                            Support I may need:
+                        </span>
+
+                        <span class="underline-fill"></span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- PROGRESS -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+
+                    2. Progress Comparison
+
+                </div>
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th style="width:34%;">
+                                Metric / Area
+                            </th>
+
+                            <th style="width:33%;">
+                                Before Reframing
+                            </th>
+
+                            <th style="width:33%;">
+                                After Reframing
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Automatic / Balanced Thought
+                                </strong>
+                            </td>
+
+                            <td></td>
+
+                            <td></td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Belief Level
+                                </strong>
+                            </td>
+
+                            <td>
+                                <span class="inline-box"></span> %
+                            </td>
+
+                            <td>
+                                <span class="inline-box"></span> %
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Emotion Intensity
+                                </strong>
+                            </td>
+
+                            <td>
+                                <span class="inline-box"></span> / 100
+                            </td>
+
+                            <td>
+                                <span class="inline-box"></span> / 100
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    Sense of Choice
+                                </strong>
+                            </td>
+
+                            <td></td>
+
+                            <td></td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+            <!-- WHEN TO STOP -->
+
+            <section>
+
+                <div class="safety-box"
+                     style="
+                         padding:10px 12px;
+                         background-color:var(--color-soft-teal);
+                         border-left-width:4px;
+                     ">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+
+                    <div class="safety-box-content">
+
+                        <div class="safety-box-title">
+                            When to Stop
+                        </div>
+
+                        Stop the exercise if you notice that your distress is increasing, you feel overwhelmed, disconnected, unsafe, or unable to remain oriented to the present. You do not need to complete every section. Return to a grounding or stabilization practice that feels appropriate, contact a trusted support person, or seek professional help when needed.
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- RESOURCES -->
+
+            <section>
+
+                <div class="section-title">
+
+                    <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+
+                    Local Crisis & Emergency Resources
+
+                </div>
+
+                <div class="writing-box" style="padding:8px;">
+
+                    <div class="blank-field-line" style="margin-bottom:5px;">
+
+                        <span style="
+                            font-weight:600;
+                            width:200px;
+                        ">
+                            Local Emergency Services:
+                        </span>
+
+                        <span class="underline-fill"></span>
+
+                    </div>
+
+                    <div class="blank-field-line" style="margin-bottom:5px;">
+
+                        <span style="
+                            font-weight:600;
+                            width:200px;
+                        ">
+                            Local Crisis / Support Line:
+                        </span>
+
+                        <span class="underline-fill"></span>
+
+                    </div>
+
+                    <div class="blank-field-line">
+
+                        <span style="
+                            font-weight:600;
+                            width:200px;
+                        ">
+                            Trusted Support / Professional:
+                        </span>
+
+                        <span class="underline-fill"></span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- DISCLAIMER -->
+
+            <section style="margin-top:2px;">
+
+                <div class="disclaimer-box">
+
+                    <div class="disclaimer-title">
+                        Educational Disclaimer
+                    </div>
+
+                    <p class="disclaimer-text">
+
+                        This worksheet is for educational and supportive purposes. It does not provide a diagnosis and does not replace individualized psychological assessment, psychotherapy, medical care, or other professional support. Thought reframing is not intended to deny, minimize, or reinterpret away real danger, abuse, or boundary violations. If a situation is currently unsafe, prioritize safety and appropriate professional or emergency support.
+
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="page-footer">
+
+            <span>
+                Tamkinly | Tool ID: TRC-THOUGHT_REFRAMING
+            </span>
+
+            <span>
+                Page 4 of 4
+            </span>
+
+        </footer>
+
+    </div>
+
+</body>
+</html>

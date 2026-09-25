@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Outer circle border - Dark Blue -->
+  <circle cx="256" cy="256" r="250" fill="none" stroke="#1a1a2e" stroke-width="8"/>
+  
+  <!-- Inner white circle background -->
+  <circle cx="256" cy="256" r="242" fill="white"/>
+  
+  <!-- Bold T letter - Dark Blue -->
+  <text x="180" y="320" 
+        font-family="Georgia, 'Times New Roman', serif" 
+        font-size="200" 
+        font-weight="bold" 
+        fill="#1a1a2e">T</text>
+  
+  <!-- Green curved leaf shapes -->
+  <path d="M 300 180 
+           Q 350 200, 360 260 
+           Q 370 320, 340 350 
+           Q 320 300, 310 250 
+           Q 300 200, 300 180" 
+        fill="#3DD4B0"/>
+  
+  <path d="M 330 200 
+           Q 380 230, 380 290 
+           Q 380 350, 350 380 
+           Q 340 330, 335 280 
+           Q 330 230, 330 200" 
+        fill="#2AB89A" opacity="0.8"/>
+</svg>

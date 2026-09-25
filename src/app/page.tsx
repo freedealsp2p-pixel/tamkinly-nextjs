@@ -94,31 +94,13 @@ function HeroSection() {
               {t("hero.subtitle")}&nbsp;<span className="text-white font-semibold">{t("hero.subtitleHighlight")}</span>
             </p>
             
-            {/* Social Proof Bar */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 mb-10">
-              <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm">
-                <div className="flex -space-x-2">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-[#3DD4B0] to-[#1F6F78] flex items-center justify-center text-xs font-bold text-[#0F1C2E] border-2 border-[#0F1C2E]">
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
+            {/* Trust Bar — factual claims only (no fabricated metrics) */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-10">
+              {([t("hero.trustPrivate"), t("hero.trustNoEmail"), t("hero.trustInstant")] as string[]).map((item, i) => (
+                <div key={i} className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full backdrop-blur-sm">
+                  <span className="text-white text-sm">{item}</span>
                 </div>
-                <span className="text-white text-sm ml-2">
-                  <span className="font-bold">2,847+</span> {t("hero.peopleAssessed")}
-                </span>
-              </div>
-              <div className="flex items-center gap-1">
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} className="h-5 w-5 fill-[#3DD4B0] text-[#3DD4B0]" />
-                ))}
-                <span className="text-white text-sm ml-2">
-                  <span className="font-bold" title={t("hero.accuracyTooltip")}>94%</span> {t("hero.accuracy")}
-                </span>
-              </div>
-              <p className="text-slate-400/80 text-[11px] text-center lg:text-left max-w-md mt-2">
-                {t("hero.accuracyNote")}
-              </p>
+              ))}
             </div>
             
             {/* Primary CTA - Two side-by-side buttons */}
@@ -410,19 +392,6 @@ function VideoSection() {
             </div>
           </div>
           
-          {/* Video Stats */}
-          <div className="flex flex-wrap justify-center gap-8 mt-8">
-            <div className="flex items-center gap-2 text-slate-600">
-              <Users className="h-5 w-5 text-[#3DD4B0]" />
-              <span className="font-semibold">15,000+</span>
-              <span>{t("video.views")}</span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-600">
-              <Heart className="h-5 w-5 text-[#3DD4B0]" />
-              <span className="font-semibold">2,400+</span>
-              <span>{t("video.likes")}</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -607,21 +576,6 @@ function CTASection() {
             {t("cta.subtitle")}
           </p>
           
-          {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-8 mb-10">
-            <div className="text-center px-6 py-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
-              <div className="text-3xl font-bold text-[#3DD4B0]">2,847+</div>
-              <div className="text-slate-400 text-sm">{t("cta.peopleAssessed")}</div>
-            </div>
-            <div className="text-center px-6 py-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
-              <div className="text-3xl font-bold text-[#3DD4B0]">94%</div>
-              <div className="text-slate-400 text-sm">{t("cta.accuracyRate")}</div>
-            </div>
-            <div className="text-center px-6 py-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10">
-              <div className="text-3xl font-bold text-[#3DD4B0]">3 {t("cta.averageTime")}</div>
-              <div className="text-slate-400 text-sm">{tHome("min")}</div>
-            </div>
-          </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/products">
@@ -906,7 +860,6 @@ export default function Home() {
       <HowItWorksSectionLazy />
       <DailyReflectionPreview />
       <VideoSectionLazy />
-      <TestimonialsSectionLazy />
       <CTASectionLazy />
 
       {/* Promo Banner with Lazy Loading */}

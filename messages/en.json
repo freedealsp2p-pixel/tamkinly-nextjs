@@ -87,8 +87,8 @@
     "satisfaction": "User Satisfaction",
     "ctaProducts": "Explore Products",
     "ctaAssessment": "Start Free Assessment",
-    "accuracyTooltip": "Based on self-assessment by 2,847+ users after 30 days of using Tamkinly tools",
-    "accuracyNote": "Based on self-assessment by 2,847+ users after 30 days",
+    "accuracyTooltip": "Based on your own self-assessment across the 12 identity dimensions",
+    "accuracyNote": "Your results are based on your own self-assessment",
     "subheadline": "Your first step toward real change starts with knowledge"
   },
   "discover": {
@@ -211,7 +211,7 @@
   "cta": {
     "title": "Ready to Discover What's ",
     "titleHighlight": "Holding You Back?",
-    "subtitle": "Join 2,847+ people who have already discovered their Identity Gap. Your transformation starts with awareness.",
+    "subtitle": "Start discovering what is holding you back. Your transformation begins with awareness.",
     "peopleAssessed": "People Assessed",
     "accuracyRate": "Accuracy Rate",
     "averageTime": "Average Time",

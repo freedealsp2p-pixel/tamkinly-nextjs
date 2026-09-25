@@ -339,10 +339,6 @@ interface AppSchemaData {
     price: number;
     currency?: string;
   };
-  aggregateRating?: {
-    ratingValue: number;
-    reviewCount: number;
-  };
   features?: string[];
 }
 
@@ -354,7 +350,6 @@ export function generateSoftwareAppSchema({
   category,
   operatingSystem = 'Web Browser',
   offers,
-  aggregateRating,
   features,
 }: AppSchemaData) {
   const schema: Record<string, unknown> = {
@@ -374,16 +369,6 @@ export function generateSoftwareAppSchema({
     },
     featureList: features?.join(', '),
   };
-
-  if (aggregateRating) {
-    schema.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: aggregateRating.ratingValue,
-      reviewCount: aggregateRating.reviewCount,
-      bestRating: 5,
-      worstRating: 1,
-    };
-  }
 
   return schema;
 }

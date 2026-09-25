@@ -741,4 +741,208 @@ export const ARTICLE_REFERENCES: Record<string, ArticleRef[]> = {
       url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3108032/',
     },
   ],
+  'understanding-the-compulsion-cycle': [
+    {
+      title: 'Marlatt, G. A., & Gordon, J. R. (1985). Relapse Prevention: Maintenance Strategies in the Treatment of Addictive Behaviors.',
+      source: 'Guilford Press',
+      url: 'https://psycnet.apa.org/record/1985-98254-000',
+    },
+    {
+      title: 'Volkow, N. D., Koob, G. F., & McLellan, A. T. (2016). Neurobiologic advances from the brain disease model of addiction.',
+      source: 'New England Journal of Medicine',
+      url: 'https://www.nejm.org/doi/full/10.1056/NEJMra1511480',
+    },
+    {
+      title: 'Graybiel, A. M. (2008). Habits, rituals, and the evaluative brain.',
+      source: 'Annual Review of Neuroscience',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC2504869/',
+    },
+  ],
+  'relapse-prevention-system': [
+    {
+      title: 'Hendershot, C. S., et al. (2011). Relapse prevention for addictive behaviors.',
+      source: 'Substance Abuse Treatment, Prevention, and Policy — PMC',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3234387/',
+    },
+    {
+      title: 'Gollwitzer, P. M., & Sheeran, P. (2006). Implementation intentions and goal achievement: A meta-analysis.',
+      source: 'Advances in Experimental Social Psychology — ScienceDirect',
+      url: 'https://www.sciencedirect.com/science/article/abs/pii/S0065260106620021',
+    },
+    {
+      title: 'Bowen, S., Witkiewitz, K., et al. (2014). Mindfulness-based relapse prevention for substance use disorders.',
+      source: 'JAMA Psychiatry',
+      url: 'https://jamanetwork.com/journals/jamapsychiatry/fullarticle/1872209',
+    },
+  ],
+  'urge-surfing-10-minute-window': [
+    {
+      title: 'Bowen, S., & Marlatt, A. (2009). Surfing the urge: Brief mindfulness-based intervention for college student smokers.',
+      source: 'Psychology of Addictive Behaviors — APA',
+      url: 'https://psycnet.apa.org/record/2009-10514-008',
+    },
+    {
+      title: 'Marlatt, G. A., & Donovan, D. M. (2005). Relapse Prevention (2nd ed.): Maintenance Strategies in the Treatment of Addictive Behaviors.',
+      source: 'Guilford Press',
+      url: 'https://psycnet.apa.org/record/2005-06952-000',
+    },
+    {
+      title: 'Kober, H., et al. (2010). Prefrontal-striatal pathway underlies cognitive regulation of craving.',
+      source: 'PNAS',
+      url: 'https://www.pnas.org/doi/10.1073/pnas.1007719107',
+    },
+  ],
+  'what-trauma-does-to-the-body': [
+    {
+      title: 'van der Kolk, B. A. (2014). The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma.',
+      source: 'Viking / Penguin Random House',
+      url: 'https://www.penguinrandomhouse.com/books/314183/the-body-keeps-the-score-by-bessel-van-der-kolk-md/',
+    },
+    {
+      title: 'Bremner, J. D. (2006). Traumatic stress: Effects on the brain.',
+      source: 'Dialogues in Clinical Neuroscience — PMC',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3181836/',
+    },
+    {
+      title: 'Yehuda, R., et al. (2015). Post-traumatic stress disorder.',
+      source: 'Nature Reviews Disease Primers',
+      url: 'https://www.nature.com/articles/nrdp201557',
+    },
+  ],
+  'grounding-for-flashbacks': [
+    {
+      title: 'U.S. Department of Veterans Affairs — National Center for PTSD: Grounding techniques.',
+      source: 'PTSD: National Center for PTSD (VA)',
+      url: 'https://www.ptsd.va.gov/gethelp/selfhelpptsd/index.asp',
+    },
+    {
+      title: 'van der Kolk, B. A. (2014). The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma.',
+      source: 'Viking / Penguin Random House',
+      url: 'https://www.penguinrandomhouse.com/books/314183/the-body-keeps-the-score-by-bessel-van-der-kolk-md/',
+    },
+    {
+      title: 'Briere, J., & Scott, C. (2015). Principles of Trauma Therapy: A Guide to Symptoms, Evaluation, and Treatment (2nd ed.).',
+      source: 'SAGE Publications',
+      url: 'https://us.sagepub.com/en-us/nam/principles-of-trauma-therapy/book240560',
+    },
+  ],
+  'paced-breathing-for-regulation': [
+    {
+      title: 'Zaccaro, A., et al. (2018). How breath-control can change your life: A systematic review on psycho-physiological correlates of slow breathing.',
+      source: 'Frontiers in Human Neuroscience',
+      url: 'https://www.frontiersin.org/articles/10.3389/fnhum.2018.00353/full',
+    },
+    {
+      title: 'Lehrer, P. M., & Gevirtz, R. (2014). Heart rate variability biofeedback: How and why does it work?',
+      source: 'Frontiers in Psychology',
+      url: 'https://www.frontiersin.org/articles/10.3389/fpsyg.2014.00756/full',
+    },
+    {
+      title: 'Jerath, R., et al. (2015). Self-regulation of breathing as a primary treatment for anxiety.',
+      source: 'Applied Psychophysiology and Biofeedback — Springer',
+      url: 'https://link.springer.com/article/10.1007/s10484-015-9279-8',
+    },
+  ],
+  'separating-self-from-shame': [
+    {
+      title: 'Tangney, J. P., & Dearing, R. L. (2002). Shame and Guilt.',
+      source: 'Guilford Press',
+      url: 'https://psycnet.apa.org/record/2002-16042-000',
+    },
+    {
+      title: 'Gilbert, P. (2009). The Compassionate Mind: A New Approach to Life\u2019s Challenges.',
+      source: 'New Harbinger / Constable & Robinson',
+      url: 'https://psycnet.apa.org/record/2010-00981-000',
+    },
+    {
+      title: 'Luoma, J. B., et al. (2012). Substance use and shame: A systematic review and meta-analysis.',
+      source: 'Substance Use & Misuse — Taylor & Francis',
+      url: 'https://www.tandfonline.com/doi/abs/10.3109/10826084.2012.705124',
+    },
+  ],
+  'relapse-is-data': [
+    {
+      title: 'Marlatt, G. A., & Gordon, J. R. (1985). Relapse Prevention: Maintenance Strategies in the Treatment of Addictive Behaviors.',
+      source: 'Guilford Press',
+      url: 'https://psycnet.apa.org/record/1985-98254-000',
+    },
+    {
+      title: 'Witkiewitz, K., & Marlatt, G. A. (2004). Relapse prevention for alcohol and drug problems: That was then, this is now.',
+      source: 'Psychology of Addictive Behaviors — APA',
+      url: 'https://psycnet.apa.org/record/2004-17815-003',
+    },
+    {
+      title: 'Brooks, M., Kay-Lambkin, F., et al. (2012). Self-compassion amongst clients with problematic alcohol use.',
+      source: 'Mindfulness — Springer',
+      url: 'https://link.springer.com/article/10.1007/s12671-012-0106-5',
+    },
+  ],
+  'rebuild-identity-after-addiction': [
+    {
+      title: 'Lally, P., van Jaarsveld, C. H. M., et al. (2010). How are habits formed: Modelling habit formation in the real world.',
+      source: 'European Journal of Social Psychology — Wiley',
+      url: 'https://onlinelibrary.wiley.com/doi/abs/10.1002/ejsp.674',
+    },
+    {
+      title: 'Oyserman, D., et al. (2015). Identity-based motivation: Implications for health and health disparities.',
+      source: 'Journal of Social and Personal Relationships — PMC',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4739649/',
+    },
+    {
+      title: 'Clear, J. (2018). Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones.',
+      source: 'Avery / Penguin Random House',
+      url: 'https://jamesclear.com/atomic-habits',
+    },
+  ],
+  'window-of-tolerance': [
+    {
+      title: 'Siegel, D. J. (1999). The Developing Mind: How Relationships and the Brain Interact to Shape Who We Are.',
+      source: 'Guilford Press',
+      url: 'https://psycnet.apa.org/record/1999-02721-000',
+    },
+    {
+      title: 'Ogden, P., & Minton, K. (2000). One small step: Moving beyond trauma and therapy to the window of tolerance.',
+      source: 'Pedagogy, Rural Systemic Education and the Brain ( sensoRi press archives )',
+      url: 'https://psycnet.apa.org/record/2000-00512-014',
+    },
+    {
+      title: 'Porges, S. W. (2009). The polyvagal theory: New insights into adaptive reactions of the autonomic nervous system.',
+      source: 'Cleveland Clinic Journal of Medicine — PMC',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3108032/',
+    },
+  ],
+  'trauma-journaling-integration': [
+    {
+      title: 'Pennebaker, J. W., & Beall, S. K. (1986). Confronting a traumatic event: Toward an understanding of inhibition and disease.',
+      source: 'Journal of Abnormal Psychology — APA',
+      url: 'https://psycnet.apa.org/record/1987-00381-001',
+    },
+    {
+      title: 'Smyth, J. M. (1998). Written emotional expression: Effect sizes, experimental studies, and clinical implications.',
+      source: 'Journal of Consulting and Clinical Psychology — APA',
+      url: 'https://psycnet.apa.org/record/1998-02270-006',
+    },
+    {
+      title: 'Sloan, D. M., et al. (2018). Written exposure therapy for PTSD: A randomized controlled trial.',
+      source: 'JAMA Psychiatry / PMC',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6121601/',
+    },
+  ],
+  'the-memory-illusion': [
+    {
+      title: 'Bartlett, F. C. (1932). Remembering: A Study in Experimental and Social Psychology.',
+      source: 'Cambridge University Press',
+      url: 'https://www.cambridge.org/core/books/remembering/2DF62A19DF3975C1FA3E02C277B3F1B3',
+    },
+    {
+      title: 'Loftus, E. F., & Pickrell, J. E. (1995). The formation of false memories.',
+      source: 'Psychiatric Annals',
+      url: 'https://www.tandfonline.com/doi/abs/10.1080/09658219508258966',
+    },
+    {
+      title: 'Conway, M. A., & Pleydell-Pearce, C. W. (2000). The construction of autobiographical memories in the self-memory system.',
+      source: 'Psychological Review — APA',
+      url: 'https://psycnet.apa.org/record/2000-00443-004',
+    },
+  ],
 }

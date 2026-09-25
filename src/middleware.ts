@@ -40,6 +40,13 @@ const VALID_BLOG_SLUGS = new Set([
   'productivity-growth',
   // Recovery pillar (2026-09-16)
   'porn-recovery-roadmap', 'trauma-recovery-three-stages', 'recovery',
+  // Recovery pillar + identity (2026-09-25)
+  'understanding-the-compulsion-cycle', 'relapse-prevention-system',
+  'urge-surfing-10-minute-window', 'what-trauma-does-to-the-body',
+  'grounding-for-flashbacks', 'paced-breathing-for-regulation',
+  'separating-self-from-shame', 'relapse-is-data',
+  'rebuild-identity-after-addiction', 'window-of-tolerance',
+  'trauma-journaling-integration', 'the-memory-illusion',
 ]);
 
 const VALID_BLOG_CATEGORY_SLUGS = new Set([

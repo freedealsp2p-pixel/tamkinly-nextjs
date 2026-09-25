@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Trauma Can Do — TRC Educational Guide</title>
+<style>
+        :root {
+            --primary-teal: #1F6F78;
+            --deep-navy: #0F1C2E;
+            --soft-teal: #E8F4F5;
+            --warm-white: #FAFBFC;
+            --slate-text: #334155;
+            --muted-text: #64748B;
+            --border-color: #D9E2E7;
+
+            --alert-amber-bg: #FFFBEB;
+            --alert-amber-border: #F59E0B;
+            --alert-amber-text: #92400E;
+
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+            --page-width: 210mm;
+            --page-height: 297mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--slate-text);
+            background-color: #E2E8F0;
+            line-height: 1.5;
+            font-size: 9.5pt;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            gap: 20px;
+        }
+
+        .page {
+            width: var(--page-width);
+            height: var(--page-height);
+            background-color: var(--warm-white);
+            box-shadow: 0 10px 25px -5px rgba(15, 28, 46, 0.15),
+                        0 8px 10px -6px rgba(15, 28, 46, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 16mm 18mm 16mm 18mm;
+            page-break-after: always;
+            break-after: page;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff;
+            }
+
+            .page-container {
+                padding: 0;
+                gap: 0;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
+                break-after: page;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8pt;
+            font-weight: 500;
+            color: var(--muted-text);
+            letter-spacing: 0.03em;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--primary-teal);
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        .page-header span.brand {
+            color: var(--deep-navy);
+            font-weight: 600;
+        }
+
+        .page-footer {
+            position: absolute;
+            bottom: 12mm;
+            left: 18mm;
+            right: 18mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 7.5pt;
+            color: var(--muted-text);
+            border-top: 1px solid var(--border-color);
+            padding-top: 8px;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        h1 {
+            font-size: 22pt;
+            font-weight: 700;
+            color: var(--deep-navy);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 15pt;
+            font-weight: 600;
+            color: var(--deep-navy);
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            border-bottom: 2px solid var(--soft-teal);
+            padding-bottom: 4px;
+            margin-bottom: 2px;
+        }
+
+        h3 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--primary-teal);
+            line-height: 1.3;
+        }
+
+        p {
+            margin-bottom: 4px;
+            font-size: 9.5pt;
+            color: var(--slate-text);
+        }
+
+        .subtitle {
+            font-size: 11pt;
+            color: var(--primary-teal);
+            font-weight: 500;
+            margin-top: -6px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .safety-box {
+            background-color: var(--soft-teal);
+            border-left: 4px solid var(--primary-teal);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 6px 0;
+        }
+
+        .safety-box p {
+            color: var(--deep-navy);
+            font-weight: 500;
+            font-size: 9pt;
+            line-height: 1.45;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: var(--deep-navy);
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .card-subtitle {
+            font-size: 8.5pt;
+            color: var(--primary-teal);
+            font-weight: 600;
+        }
+
+        .insight-box {
+            background-color: var(--soft-teal);
+            border: 1px solid rgba(31, 111, 120, 0.2);
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+
+        .insight-box .title {
+            font-weight: 600;
+            color: var(--primary-teal);
+            font-size: 9.5pt;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .caution-box {
+            background-color: var(--alert-amber-bg);
+            border: 1px solid var(--alert-amber-border);
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+
+        .caution-box .title {
+            font-weight: 600;
+            color: var(--alert-amber-text);
+            font-size: 9pt;
+            margin-bottom: 3px;
+        }
+
+        .caution-box p {
+            color: var(--alert-amber-text);
+            font-size: 8.5pt;
+            line-height: 1.4;
+        }
+
+        ul.styled-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 6px 0;
+        }
+
+        ul.styled-list li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 5px;
+            font-size: 9pt;
+        }
+
+        ul.styled-list li::before {
+            content: "•";
+            color: var(--primary-teal);
+            font-weight: bold;
+            font-size: 12pt;
+            position: absolute;
+            left: 2px;
+            top: -2px;
+        }
+
+        .svg-caption {
+            font-size: 7.5pt;
+            color: var(--muted-text);
+            text-align: center;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .fill-space {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- PAGE 1 -->
+    <div class="page" id="page-1">
+
+        <header class="page-header">
+            <span>
+                <span class="brand">Tamkinly</span> | Trauma Recovery Center
+            </span>
+            <span>TRC-WHAT_TRAUMA_DOES</span>
+        </header>
+
+        <main class="content-area">
+
+            <div style="margin-top: 10px; margin-bottom: 8px;">
+                <h1>What Trauma Can Do</h1>
+                <p class="subtitle">
+                    Understanding how trauma can affect the brain, nervous system, body, emotions, and behavior.
+                </p>
+            </div>
+
+            <div class="safety-box">
+                <p>
+                    <strong>Safety Note:</strong>
+                    Go at your own pace. If reading about trauma increases distress, pause and return to something that helps you feel present and oriented to the current moment. You do not need to continue reading.
+                </p>
+            </div>
+
+            <div class="card" style="margin-top: 4px;">
+
+                <h3 style="margin-bottom: 6px;">
+                    Understanding Trauma Responses
+                </h3>
+
+                <p>
+                    Trauma is not simply an event that happened in the past. It can also involve the ways the brain and nervous system continue responding after an overwhelming or threatening experience.
+                </p>
+
+                <p>
+                    When threat mechanisms remain engaged, physiological and psychological adaptations can persist long after the external environment has become safe. These ongoing responses may affect multiple domains of functioning:
+                </p>
+
+                <ul class="styled-list" style="margin-top: 8px;">
+
+                    <li>
+                        <strong>Attention & Concentration:</strong>
+                        Difficulty sustaining focus, heightened distractibility, or intrusive focus on potential risks.
+                    </li>
+
+                    <li>
+                        <strong>Memory & Integration:</strong>
+                        Fragmented recall, vivid sensory intrusions, or difficulty contextualizing events in time.
+                    </li>
+
+                    <li>
+                        <strong>Emotional Regulation:</strong>
+                        Rapid shifts in intensity, emotional numbing, persistent fear, sadness, or irritability.
+                    </li>
+
+                    <li>
+                        <strong>Body Sensations:</strong>
+                        Unexplained muscle tightness, altered heart rate, digestive shifts, or physical restlessness.
+                    </li>
+
+                    <li>
+                        <strong>Behavior & Relationships:</strong>
+                        Hyper-vigilance, social withdrawal, difficulty establishing trust, or conflict avoidance.
+                    </li>
+
+                    <li>
+                        <strong>Sense of Safety:</strong>
+                        Persistent internal sense of danger, unpredictability, or vulnerability.
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="card">
+
+                <h3 style="margin-bottom: 4px;">
+                    Individual Variability
+                </h3>
+
+                <p>
+                    No two human nervous systems respond to stress in identical ways. The impact of trauma is shaped by factors including age, duration of stress, relational support, biological predisposition, and environmental safety.
+                </p>
+
+                <div class="insight-box" style="margin-top: 8px;">
+
+                    <div class="title">
+                        Core Clinical Principle
+                    </div>
+
+                    <p style="font-size: 9pt; color: var(--deep-navy);">
+                        Trauma responses are not signs of weakness, personal failure, or lack of willpower. They can represent adaptive protective responses to perceived threat.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="card">
+
+                <h3 style="margin-bottom: 4px;">
+                    How to Use This Guide
+                </h3>
+
+                <p>
+                    This document is an educational resource designed to support understanding, self-compassion, and informed conversations about trauma responses. Read it gradually and pause whenever you need to. You may skip sections or return to specific pages later. If the material brings up significant distress, consider seeking support from a qualified professional.
+                </p>
+
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+            <span>Page 1 of 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- PAGE 2 -->
+    <div class="page" id="page-2">
+
+        <header class="page-header">
+            <span>
+                <span class="brand">Tamkinly</span> | Trauma Recovery Center
+            </span>
+            <span>TRC-WHAT_TRAUMA_DOES</span>
+        </header>
+
+        <main class="content-area">
+
+            <div>
+
+                <h2>How Trauma Can Affect the Brain</h2>
+
+                <p style="margin-top: 4px;">
+                    The brain continuously evaluates information from the environment and the body to keep us safe. Under intense stress or perceived threat, neural systems can shift toward rapid survival responses and away from slower reflective processing.
+                </p>
+
+            </div>
+
+            <!-- ANATOMICAL BRAIN SVG VISUAL -->
+            <div style="text-align: center; margin: 4px 0;">
+
+                <div style="text-align: center; margin: 12px 0;">
+    <img src="data:image/jpeg;base64,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" alt="What Trauma Does to Your Body — Body Systems Illustration" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #D9E2E7;">
+    <p style="font-size: 8pt; color: #64748B; margin-top: 4px; font-style: italic;">Illustration: How trauma affects body systems</p>
+</div>
+
+                <div class="svg-caption">
+                    Simplified educational brain illustration — anatomical structures and boundaries are approximate.
+                </div>
+
+            </div>
+
+            <div class="grid-3" style="margin-top: 4px;">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <span class="card-title">AMYGDALA</span>
+                    </div>
+
+                    <div class="card-subtitle" style="margin-bottom: 4px;">
+                        Threat Detection
+                    </div>
+
+                    <p style="font-size: 8.5pt;">
+                        Evaluates incoming sensory data for potential danger. Under stress, it can trigger rapid physiological alarm responses before conscious reflection occurs.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <span class="card-title">HIPPOCAMPUS</span>
+                    </div>
+
+                    <div class="card-subtitle" style="margin-bottom: 4px;">
+                        Memory & Context
+                    </div>
+
+                    <p style="font-size: 8.5pt;">
+                        Organizes experiences into time and place. High stress and arousal can affect memory processing and contextualization, which may contribute to memories feeling unusually vivid, immediate, or difficult to place in context.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <span class="card-title">PREFRONTAL</span>
+                    </div>
+
+                    <div class="card-subtitle" style="margin-bottom: 4px;">
+                        Regulation & Planning
+                    </div>
+
+                    <p style="font-size: 8.5pt;">
+                        Supports logical reasoning, impulse control, and emotional modulation. High levels of stress and arousal can interfere with some prefrontal functions involved in reflection, planning, and regulation.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <p style="font-size: 9pt; margin-top: 2px;">
+                These systems work together. Trauma does not simply "turn off" one part of the brain; stress can alter the balance and timing of their activity.
+            </p>
+
+            <div class="insight-box" style="margin-top: 2px;">
+
+                <div class="title">
+                    Adaptive Brain Plasticity
+                </div>
+
+                <p style="font-size: 8.8pt;">
+                    Neural pathways strengthen through repetition and experience. Just as the nervous system can adapt to protect against perceived threat, supportive experiences, safety, and evidence-informed therapy can facilitate neural reorganization and recovery over time.
+                </p>
+
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+            <span>Page 2 of 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- PAGE 3 -->
+    <div class="page" id="page-3">
+
+        <header class="page-header">
+            <span>
+                <span class="brand">Tamkinly</span> | Trauma Recovery Center
+            </span>
+            <span>TRC-WHAT_TRAUMA_DOES</span>
+        </header>
+
+        <main class="content-area">
+
+            <div>
+
+                <h2>The Autonomic Nervous System</h2>
+
+                <p style="margin-top: 4px;">
+                    The autonomic nervous system (ANS) automatically regulates bodily functions necessary for survival without conscious effort, continuously balancing energy expenditure and restorative processes.
+                </p>
+
+            </div>
+
+            <div class="grid-3" style="margin-top: 2px;">
+
+                <div class="card">
+
+                    <div class="card-title" style="color: #B45309;">
+                        SYMPATHETIC
+                    </div>
+
+                    <div class="card-subtitle" style="color: #B45309; margin-bottom: 6px;">
+                        Mobilization
+                    </div>
+
+                    <p style="font-size: 8.5pt;">
+                        Prepares the body for action, defense, or escape. Increases heart rate, dilates airways, and mobilizes glucose reserves.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-title" style="color: var(--primary-teal);">
+                        PARASYMPATHETIC
+                    </div>
+
+                    <div class="card-subtitle" style="margin-bottom: 6px;">
+                        Recovery & Regulation
+                    </div>
+
+                    <p style="font-size: 8.5pt;">
+                        Promotes energy conservation, digestion, resting heart rate, cellular repair, and physiological equilibrium.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-title" style="color: var(--deep-navy);">
+                        VAGUS NERVE
+                    </div>
+
+                    <div class="card-subtitle" style="color: var(--slate-text); margin-bottom: 6px;">
+                        Major Regulatory Pathway
+                    </div>
+
+                    <p style="font-size: 8.5pt;">
+                        A major cranial nerve with pathways connecting the brainstem with organs including the heart, lungs, and digestive tract, contributing to communication between the brain and body.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- ACTIVATION CURVE SVG VISUAL -->
+            <div style="text-align: center; margin: 8px 0 2px 0;">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 600 230"
+                    style="width: 96%; max-height: 220px; font-family: var(--font-main);"
+                >
+
+                    <!-- Background Zones -->
+
+                    <rect
+                        x="50"
+                        y="20"
+                        width="520"
+                        height="55"
+                        rx="4"
+                        fill="#FEF2F2"
+                        stroke="#FCA5A5"
+                        stroke-width="1"
+                        stroke-dasharray="3 3"
+                    />
+
+                    <rect
+                        x="50"
+                        y="82"
+                        width="520"
+                        height="65"
+                        rx="4"
+                        fill="#E8F4F5"
+                        stroke="#1F6F78"
+                        stroke-width="1.5"
+                    />
+
+                    <rect
+                        x="50"
+                        y="154"
+                        width="520"
+                        height="55"
+                        rx="4"
+                        fill="#F1F5F9"
+                        stroke="#94A3B8"
+                        stroke-width="1"
+                        stroke-dasharray="3 3"
+                    />
+
+                    <!-- Zone Titles -->
+
+                    <text
+                        x="62"
+                        y="42"
+                        font-size="9"
+                        font-weight="700"
+                        fill="#991B1B"
+                    >
+                        HYPERAROUSAL ZONE
+                    </text>
+
+                    <text
+                        x="210"
+                        y="42"
+                        font-size="8"
+                        fill="#7F1D1D"
+                    >
+                        (High Activation • Anxiety • Hypervigilance • Panic)
+                    </text>
+
+                    <text
+                        x="62"
+                        y="106"
+                        font-size="9"
+                        font-weight="700"
+                        fill="#1F6F78"
+                    >
+                        WINDOW OF TOLERANCE
+                    </text>
+
+                    <text
+                        x="240"
+                        y="106"
+                        font-size="8"
+                        fill="#0F1C2E"
+                    >
+                        (Regulated Activation • Grounded • Reflective Capacity)
+                    </text>
+
+                    <text
+                        x="62"
+                        y="176"
+                        font-size="9"
+                        font-weight="700"
+                        fill="#334155"
+                    >
+                        HYPOAROUSAL ZONE
+                    </text>
+
+                    <text
+                        x="205"
+                        y="176"
+                        font-size="8"
+                        fill="#475569"
+                    >
+                        (Low Activation • Numbness • Shutdown • Disconnection)
+                    </text>
+
+                    <!-- Activation Curve -->
+
+                    <path
+                        d="M 60,115
+                           C 110,115 130,38 170,38
+                           C 210,38 230,115 280,115
+                           C 330,115 350,185 390,185
+                           C 430,185 460,115 510,115
+                           C 540,115 550,115 560,115"
+                        fill="none"
+                        stroke="#0F1C2E"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                    />
+
+                    <circle cx="170" cy="38" r="4.5" fill="#DC2626"/>
+                    <circle cx="280" cy="115" r="4.5" fill="#1F6F78"/>
+                    <circle cx="390" cy="185" r="4.5" fill="#475569"/>
+
+                    <line
+                        x1="35"
+                        y1="200"
+                        x2="35"
+                        y2="25"
+                        stroke="#64748B"
+                        stroke-width="1.5"
+                    />
+
+                    <polygon
+                        points="35,18 31,26 39,26"
+                        fill="#64748B"
+                    />
+
+                    <text
+                        x="-125"
+                        y="24"
+                        transform="rotate(-90)"
+                        font-size="8"
+                        font-weight="600"
+                        fill="#64748B"
+                    >
+                        PHYSIOLOGICAL AROUSAL
+                    </text>
+
+                </svg>
+
+                <div class="svg-caption">
+                    Simplified educational model of nervous-system activation.
+                </div>
+
+            </div>
+
+            <div class="insight-box" style="margin-top: 4px;">
+
+                <div class="title">
+                    Nervous System Flexibility
+                </div>
+
+                <p style="font-size: 8.8pt;">
+                    In a resilient nervous system, arousal rises in response to demands and naturally settles when safety is restored. Trauma-related patterns may involve becoming activated too easily, remaining activated for extended periods, or shifting rapidly into shutdown when overwhelmed.
+                </p>
+
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+            <span>Page 3 of 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- PAGE 4 -->
+    <div class="page" id="page-4">
+
+        <header class="page-header">
+            <span>
+                <span class="brand">Tamkinly</span> | Trauma Recovery Center
+            </span>
+            <span>TRC-WHAT_TRAUMA_DOES</span>
+        </header>
+
+        <main class="content-area">
+
+            <div>
+
+                <h2>Common Trauma-Related Response Patterns</h2>
+
+                <p style="margin-top: 4px;">
+                    "Fight, Flight, Freeze, and Fawn" are commonly used terms in trauma education to describe patterns of behavioral and physiological responding that may occur when a person perceives threat.
+                </p>
+
+            </div>
+
+            <div class="grid-2" style="margin-top: 2px;">
+
+                <!-- FIGHT -->
+
+                <div class="card" style="border-left: 4px solid #DC2626;">
+
+                    <div class="card-header">
+
+                        <span class="card-title" style="color: #991B1B;">
+                            FIGHT
+                        </span>
+
+                        <span class="card-subtitle">
+                            Mobilization Against Threat
+                        </span>
+
+                    </div>
+
+                    <p style="font-size: 8.8pt; margin-bottom: 6px;">
+                        An active survival pattern aimed at confronting or overpowering a perceived threat.
+                    </p>
+
+                    <p style="font-size: 8pt; font-weight: 600; color: var(--deep-navy);">
+                        Possible Expressions:
+                    </p>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Irritability, sudden anger, or defensive posture
+                        </li>
+
+                        <li>
+                            Urge to control surroundings or relationships
+                        </li>
+
+                        <li>
+                            Strict boundary enforcement or confrontation
+                        </li>
+
+                        <li>
+                            Internal sense of needing to resist harm
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- FLIGHT -->
+
+                <div class="card" style="border-left: 4px solid #D97706;">
+
+                    <div class="card-header">
+
+                        <span class="card-title" style="color: #B45309;">
+                            FLIGHT
+                        </span>
+
+                        <span class="card-subtitle">
+                            Mobilization to Escape
+                        </span>
+
+                    </div>
+
+                    <p style="font-size: 8.8pt; margin-bottom: 6px;">
+                        An active survival pattern aimed at escaping or distancing oneself from danger.
+                    </p>
+
+                    <p style="font-size: 8pt; font-weight: 600; color: var(--deep-navy);">
+                        Possible Expressions:
+                    </p>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Chronic restlessness or difficulty slowing down
+                        </li>
+
+                        <li>
+                            Avoidance of distressing topics, places, or people
+                        </li>
+
+                        <li>
+                            Overworking, perfectionism, or constant busy-ness
+                        </li>
+
+                        <li>
+                            Persistent urgency or panic-like drive
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- FREEZE -->
+
+                <div class="card" style="border-left: 4px solid #475569;">
+
+                    <div class="card-header">
+
+                        <span class="card-title" style="color: #334155;">
+                            FREEZE
+                        </span>
+
+                        <span class="card-subtitle">
+                            Inhibition & Immobility
+                        </span>
+
+                    </div>
+
+                    <p style="font-size: 8.8pt; margin-bottom: 6px;">
+                        A passive survival pattern triggered when active escape or defense feels impossible.
+                    </p>
+
+                    <p style="font-size: 8pt; font-weight: 600; color: var(--deep-navy);">
+                        Possible Expressions:
+                    </p>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Feeling physically heavy, stuck, or ungrounded
+                        </li>
+
+                        <li>
+                            Mental fog, difficulty making decisions
+                        </li>
+
+                        <li>
+                            Emotional numbness or detachment
+                        </li>
+
+                        <li>
+                            Procrastination linked to sensory overload
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- FAWN -->
+
+                <div class="card" style="border-left: 4px solid var(--primary-teal);">
+
+                    <div class="card-header">
+
+                        <span class="card-title" style="color: var(--primary-teal);">
+                            FAWN
+                        </span>
+
+                        <span class="card-subtitle">
+                            Relational Appeasement
+                        </span>
+
+                    </div>
+
+                    <p style="font-size: 8.8pt; margin-bottom: 6px;">
+                        A commonly described protective pattern involving attempts to reduce perceived threat through appeasement, compliance, or conflict avoidance.
+                    </p>
+
+                    <p style="font-size: 8pt; font-weight: 600; color: var(--deep-navy);">
+                        Possible Expressions:
+                    </p>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Automatic compliance or conflict avoidance
+                        </li>
+
+                        <li>
+                            Difficulty expressing genuine needs or saying "no"
+                        </li>
+
+                        <li>
+                            Hyper-attunement to others' emotional states
+                        </li>
+
+                        <li>
+                            Prioritizing others' safety over one's own
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="card" style="background-color: var(--warm-white);">
+
+                <p style="font-size: 8.5pt; color: var(--muted-text); font-style: italic;">
+
+                    <strong>Educational Distinction:</strong>
+                    Fight, Flight, and Freeze have established roots in physiological research on animal and human defensive responses. "Fawn" is a widely used trauma-education concept rather than a standalone psychiatric diagnosis.
+
+                </p>
+
+            </div>
+
+
+            <div class="insight-box" style="margin-top: 2px;">
+
+                <div class="title" style="font-size: 10pt;">
+                    Adaptive Survival Responses
+                </div>
+
+                <p style="font-size: 9pt; color: var(--deep-navy);">
+                    These responses developed in the service of protection. A strategy that was useful in an unsafe environment may remain easily activated after the original danger has passed. Recovery begins with understanding the protective function rather than judging the response.
+                </p>
+
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+            <span>Page 4 of 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- PAGE 5 -->
+    <div class="page" id="page-5">
+
+        <header class="page-header">
+            <span>
+                <span class="brand">Tamkinly</span> | Trauma Recovery Center
+            </span>
+            <span>TRC-WHAT_TRAUMA_DOES</span>
+        </header>
+
+        <main class="content-area">
+
+            <div>
+
+                <h2>Somatic Responses & Body-Based Experiences</h2>
+
+                <p style="margin-top: 4px;">
+
+                    <strong>"The Body Keeps the Score"</strong> —
+                    The phrase "the body keeps the score" is often used to describe how past stress can continue to influence bodily sensations, physiological arousal, muscle tension, and automatic responses. It is a useful metaphor, not a claim that memories are literally stored in isolated body parts.
+
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3 style="margin-bottom: 4px;">
+                    How Somatic Responses Occur
+                </h3>
+
+                <p style="font-size: 8.8pt;">
+                    The brain and body continuously exchange signals. When sensory cues resemble aspects of a prior stressful experience, brain and autonomic systems may contribute to bodily responses before a person has consciously interpreted the cue.
+                </p>
+
+            </div>
+
+
+            <!-- SOMATIC PATHWAY HORIZONTAL SVG -->
+
+            <div style="text-align: center; margin: 4px 0;">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 600 90"
+                    style="width: 100%; max-height: 90px; font-family: var(--font-main);"
+                >
+
+                    <defs>
+
+                        <marker
+                            id="arrow"
+                            viewBox="0 0 10 10"
+                            refX="6"
+                            refY="5"
+                            markerWidth="6"
+                            markerHeight="6"
+                            orient="auto-start-reverse"
+                        >
+                            <path
+                                d="M 0 0 L 10 5 L 0 10 z"
+                                fill="#1F6F78"
+                            />
+                        </marker>
+
+                    </defs>
+
+
+                    <!-- Node 1 -->
+
+                    <rect
+                        x="10"
+                        y="15"
+                        width="115"
+                        height="55"
+                        rx="5"
+                        fill="#FAFBFC"
+                        stroke="#0F1C2E"
+                        stroke-width="1.5"
+                    />
+
+                    <text
+                        x="67"
+                        y="38"
+                        font-size="8.5"
+                        font-weight="700"
+                        text-anchor="middle"
+                        fill="#0F1C2E"
+                    >
+                        PERCEIVED CUE
+                    </text>
+
+                    <text
+                        x="67"
+                        y="52"
+                        font-size="7.5"
+                        text-anchor="middle"
+                        fill="#64748B"
+                    >
+                        Sound, Sight, Sensation
+                    </text>
+
+
+                    <!-- Arrow 1-2 -->
+
+                    <line
+                        x1="125"
+                        y1="42.5"
+                        x2="153"
+                        y2="42.5"
+                        stroke="#1F6F78"
+                        stroke-width="2"
+                        marker-end="url(#arrow)"
+                    />
+
+
+                    <!-- Node 2 -->
+
+                    <rect
+                        x="160"
+                        y="15"
+                        width="135"
+                        height="55"
+                        rx="5"
+                        fill="#E8F4F5"
+                        stroke="#1F6F78"
+                        stroke-width="1.5"
+                    />
+
+                    <text
+                        x="227"
+                        y="36"
+                        font-size="8.5"
+                        font-weight="700"
+                        text-anchor="middle"
+                        fill="#1F6F78"
+                    >
+                        BRAIN & NERVOUS
+                    </text>
+
+                    <text
+                        x="227"
+                        y="48"
+                        font-size="8.5"
+                        font-weight="700"
+                        text-anchor="middle"
+                        fill="#1F6F78"
+                    >
+                        SYSTEM EVALUATION
+                    </text>
+
+
+                    <!-- Arrow 2-3 -->
+
+                    <line
+                        x1="295"
+                        y1="42.5"
+                        x2="323"
+                        y2="42.5"
+                        stroke="#1F6F78"
+                        stroke-width="2"
+                        marker-end="url(#arrow)"
+                    />
+
+
+                    <!-- Node 3 -->
+
+                    <rect
+                        x="330"
+                        y="15"
+                        width="125"
+                        height="55"
+                        rx="5"
+                        fill="#FAFBFC"
+                        stroke="#0F1C2E"
+                        stroke-width="1.5"
+                    />
+
+                    <text
+                        x="392"
+                        y="38"
+                        font-size="8.5"
+                        font-weight="700"
+                        text-anchor="middle"
+                        fill="#0F1C2E"
+                    >
+                        PHYSIOLOGICAL
+                    </text>
+
+                    <text
+                        x="392"
+                        y="52"
+                        font-size="8.5"
+                        font-weight="700"
+                        text-anchor="middle"
+                        fill="#0F1C2E"
+                    >
+                        RESPONSE
+                    </text>
+
+
+                    <!-- Arrow 3-4 -->
+
+                    <line
+                        x1="455"
+                        y1="42.5"
+                        x2="483"
+                        y2="42.5"
+                        stroke="#1F6F78"
+                        stroke-width="2"
+                        marker-end="url(#arrow)"
+                    />
+
+
+                    <!-- Node 4 -->
+
+                    <rect
+                        x="490"
+                        y="15"
+                        width="100"
+                        height="55"
+                        rx="5"
+                        fill="#FAFBFC"
+                        stroke="#0F1C2E"
+                        stroke-width="1.5"
+                    />
+
+                    <text
+                        x="540"
+                        y="38"
+                        font-size="8.5"
+                        font-weight="700"
+                        text-anchor="middle"
+                        fill="#0F1C2E"
+                    >
+                        BEHAVIOR /
+                    </text>
+
+                    <text
+                        x="540"
+                        y="52"
+                        font-size="8.5"
+                        font-weight="700"
+                        text-anchor="middle"
+                        fill="#0F1C2E"
+                    >
+                        REGULATION
+                    </text>
+
+                </svg>
+
+            </div>
+
+
+            <div class="grid-2">
+
+                <div class="card">
+
+                    <div
+                        class="card-title"
+                        style="color: var(--primary-teal); margin-bottom: 4px;"
+                    >
+                        AUTONOMIC AROUSAL
+                    </div>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Rapid or shallow breathing
+                        </li>
+
+                        <li>
+                            Elevated heart rate & blood pressure
+                        </li>
+
+                        <li>
+                            Sudden changes in body temperature or sweating
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div
+                        class="card-title"
+                        style="color: var(--primary-teal); margin-bottom: 4px;"
+                    >
+                        MUSCULAR TENSION
+                    </div>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Chronic jaw clenching or neck tightness
+                        </li>
+
+                        <li>
+                            Bracing in shoulders, back, or abdomen
+                        </li>
+
+                        <li>
+                            Unconscious muscle preparation for action
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div
+                        class="card-title"
+                        style="color: var(--primary-teal); margin-bottom: 4px;"
+                    >
+                        GASTROINTESTINAL EFFECTS
+                    </div>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Altered digestion or stomach discomfort
+                        </li>
+
+                        <li>
+                            Nausea or feeling "knots" in the gut
+                        </li>
+
+                        <li>
+                            Shift in autonomic tone affecting gut motility
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div
+                        class="card-title"
+                        style="color: var(--primary-teal); margin-bottom: 4px;"
+                    >
+                        SENSORY SENSITIVITY
+                    </div>
+
+                    <ul class="styled-list">
+
+                        <li>
+                            Heightened sensitivity to sudden sounds or light
+                        </li>
+
+                        <li>
+                            Discomfort in crowded or noisy spaces
+                        </li>
+
+                        <li>
+                            Exaggerated startle response to unexpected input
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="caution-box" style="margin-top: 4px;">
+
+                <div class="title">
+                    Clinical Caution & Medical Disclaimer
+                </div>
+
+                <p>
+                    Bodily sensations do not prove that a specific event occurred, and not every physical symptom is trauma-related. Persistent, severe, or unexplained physical symptoms should always be evaluated by an appropriate medical professional to rule out organic medical conditions.
+                </p>
+
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+            <span>Page 5 of 6</span>
+        </footer>
+
+    </div>
+
+
+    <!-- PAGE 6 -->
+    <div class="page" id="page-6">
+
+        <header class="page-header">
+            <span>
+                <span class="brand">Tamkinly</span> | Trauma Recovery Center
+            </span>
+            <span>TRC-WHAT_TRAUMA_DOES</span>
+        </header>
+
+        <main class="content-area">
+
+            <div>
+                <h2>The Window of Tolerance & Healing Pathways</h2>
+            </div>
+
+
+            <!-- WINDOW OF TOLERANCE DETAILED MODEL -->
+
+            <div style="margin: 2px 0;">
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 600 165"
+                    style="width: 100%; max-height: 165px; font-family: var(--font-main);"
+                >
+
+                    <!-- Hyperarousal Zone -->
+
+                    <rect
+                        x="10"
+                        y="5"
+                        width="580"
+                        height="42"
+                        rx="4"
+                        fill="#FEF2F2"
+                        stroke="#FCA5A5"
+                        stroke-width="1"
+                    />
+
+                    <text
+                        x="25"
+                        y="24"
+                        font-size="9"
+                        font-weight="700"
+                        fill="#991B1B"
+                    >
+                        HYPERAROUSAL
+                    </text>
+
+                    <text
+                        x="125"
+                        y="24"
+                        font-size="8"
+                        fill="#7F1D1D"
+                    >
+                        — High Activation
+                    </text>
+
+                    <text
+                        x="25"
+                        y="38"
+                        font-size="7.5"
+                        fill="#334155"
+                    >
+                        Anxiety • Panic • Racing thoughts • Hypervigilance • Emotional overwhelm
+                    </text>
+
+
+                    <!-- Window of Tolerance Zone -->
+
+                    <rect
+                        x="10"
+                        y="52"
+                        width="580"
+                        height="60"
+                        rx="5"
+                        fill="#E8F4F5"
+                        stroke="#1F6F78"
+                        stroke-width="2"
+                    />
+
+                    <text
+                        x="25"
+                        y="74"
+                        font-size="10"
+                        font-weight="700"
+                        fill="#1F6F78"
+                    >
+                        WINDOW OF TOLERANCE
+                    </text>
+
+                    <text
+                        x="180"
+                        y="74"
+                        font-size="8.5"
+                        font-weight="600"
+                        fill="#0F1C2E"
+                    >
+                        — Regulated Activation Zone
+                    </text>
+
+                    <text
+                        x="25"
+                        y="90"
+                        font-size="8"
+                        fill="#0F1C2E"
+                    >
+                        Clear thinking • Emotional balance • Felt presence • Flexible coping • Capacity for connection
+                    </text>
+
+                    <text
+                        x="25"
+                        y="103"
+                        font-size="7.5"
+                        fill="#1F6F78"
+                        font-style="italic"
+                    >
+                        Recovery may involve recognizing activation states and developing greater flexibility in responding to them.
+                    </text>
+
+
+                    <!-- Hypoarousal Zone -->
+
+                    <rect
+                        x="10"
+                        y="117"
+                        width="580"
+                        height="42"
+                        rx="4"
+                        fill="#F1F5F9"
+                        stroke="#CBD5E1"
+                        stroke-width="1"
+                    />
+
+                    <text
+                        x="25"
+                        y="136"
+                        font-size="9"
+                        font-weight="700"
+                        fill="#334155"
+                    >
+                        HYPOAROUSAL
+                    </text>
+
+                    <text
+                        x="120"
+                        y="136"
+                        font-size="8"
+                        fill="#475569"
+                    >
+                        — Low Activation
+                    </text>
+
+                    <text
+                        x="25"
+                        y="150"
+                        font-size="7.5"
+                        fill="#334155"
+                    >
+                        Numbness • Shutdown • Disconnection • Brain fog • Reduced engagement
+                    </text>
+
+                </svg>
+
+            </div>
+
+
+            <!-- PATHWAYS TO HEALING -->
+
+            <div class="card" style="padding: 10px 14px;">
+
+                <h3 style="margin-bottom: 6px; color: var(--deep-navy);">
+                    Pathways to Healing & Recovery
+                </h3>
+
+                <div class="grid-2">
+
+                    <div>
+
+                        <p style="font-size: 8.5pt;">
+
+                            <strong>1. Safety & Stabilization:</strong>
+                            Establishing physical, relational, and emotional safety in the present environment before addressing traumatic memories or deeper processing.
+
+                        </p>
+
+                        <p style="font-size: 8.5pt; margin-top: 4px;">
+
+                            <strong>2. Somatic Grounding:</strong>
+                            Using sensory orientation, grounding, and other appropriate regulation strategies to support present-moment awareness and state modulation.
+
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <p style="font-size: 8.5pt;">
+
+                            <strong>3. Supportive Connection:</strong>
+                            Building safe, respectful relationships that can provide support, validation, and appropriate co-regulation.
+
+                        </p>
+
+                        <p style="font-size: 8.5pt; margin-top: 4px;">
+
+                            <strong>4. Professional Support:</strong>
+                            When appropriate, working with qualified mental-health or medical professionals using evidence-informed approaches matched to the person's needs.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="insight-box" style="padding: 8px 12px;">
+
+                <div class="title" style="font-size: 9pt;">
+                    Understanding Comes Before Judgment
+                </div>
+
+                <p style="font-size: 8.5pt; color: var(--deep-navy);">
+                    Recognizing protective survival strategies as intelligent human responses creates a compassionate starting point for meaningful recovery and change.
+                </p>
+
+            </div>
+
+
+            <div
+                style="font-size: 7.2pt; color: var(--muted-text); line-height: 1.35; margin-top: 2px;"
+            >
+
+                <strong>Disclaimer:</strong>
+                This guide is supportive and educational. It does not replace individualized clinical assessment, diagnosis, psychotherapy, medical care, or emergency support. If you are in immediate danger or believe you may act on thoughts of harming yourself or ending your life, seek immediate in-person assistance or contact your local emergency services.
+
+            </div>
+
+        </main>
+
+        <footer class="page-footer">
+            <span>Tamkinly | Tool ID: TRC-WHAT_TRAUMA_DOES</span>
+            <span>Page 6 of 6</span>
+        </footer>
+
+    </div>
+
+</div>
+
+</body>
+</html>

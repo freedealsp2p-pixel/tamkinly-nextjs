@@ -359,9 +359,9 @@ const philosophyArticles = [
   {
     slug: "vagus-nerve-breathing",
     title: "The Vagus Nerve Protocol: How 4-2-8-2 Breathing Rewires Your Stress Response",
-    titleAr: "بروتوكول العصب المبهم: كيف يعيد التنفس 4-2-8-2 تشكيل استجابتك للتوتر",
+    titleAr: "بروتوكول العصب المبهم (Vagus nerve): كيف يعيد التنفس 4-2-8-2 تشكيل استجابتك للتوتر",
     excerpt: "The Vagus Nerve is the master safety switch. The 4-2-8-2 breathing technique leverages biomechanics to demand systemic calm.",
-    excerptAr: "العصب المبهم هو مفتاح الأمان الرئيسي. تقنية التنفس 4-2-8-2 تستخدم البيوميكانيكا للمطالبة بالهدوء المنهجي.",
+    excerptAr: "العصب المبهم (Vagus nerve) هو مفتاح الأمان الرئيسي. تقنية التنفس 4-2-8-2 تستخدم البيوميكانيكا للمطالبة بالهدوء المنهجي.",
     category: "Mental Clarity",
     categoryAr: "الوضوح الذهني",
     readTime: "10 min read",

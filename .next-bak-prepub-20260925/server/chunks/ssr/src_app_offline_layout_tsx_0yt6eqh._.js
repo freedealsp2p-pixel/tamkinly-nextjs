@@ -1,0 +1,3 @@
+module.exports=[224433,a=>{"use strict";a.s(["default",0,function({children:a}){return a},"metadata",0,{title:"Offline | Tamkinly",robots:{index:!1,follow:!1,googleBot:{index:!1,follow:!1}},alternates:{canonical:"https://tamkinly.com/offline"},other:{"DC.description":"Tamkinly offline page. You are currently offline."}}])},850001,a=>{a.n(a.i(224433))}];
+
+//# sourceMappingURL=src_app_offline_layout_tsx_0yt6eqh._.js.map

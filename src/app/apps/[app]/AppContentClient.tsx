@@ -83,7 +83,8 @@ const tierPrices: Record<string, { price: number; productSlug: string; nameEn: s
 // TESTIMONIALS
 // ============================================
 
-const testimonials = [
+const testimonials: { nameEn: string; nameAr: string; roleEn: string; roleAr: string; textEn: string; textAr: string; stars: number }[] = []; /* testimonials disabled: no real review system yet */
+const testimonialsLegacyData = [
   {
     nameEn: 'Sarah M.',
     nameAr: 'سارة م.',

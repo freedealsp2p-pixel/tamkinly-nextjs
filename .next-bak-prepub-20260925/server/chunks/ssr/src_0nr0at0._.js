@@ -1,0 +1,3 @@
+module.exports=[528630,a=>{"use strict";var b=a.i(905246);async function c(){try{let a=await (0,b.headers)();if("ar"===a.get("x-locale"))return"ar"}catch{}try{let a=await (0,b.cookies)();if(a.get("NEXT_LOCALE")?.value==="ar")return"ar"}catch{}return"en"}a.s(["getLocale",0,c])},442627,a=>{"use strict";var b=a.i(565399),c=a.i(528630);async function d(){let a=await (0,c.getLocale)();return(0,b.generatePageMetadataFromConfig)("terms",a)}a.s(["default",0,function({children:a}){return a},"generateMetadata",0,d])},83751,a=>{a.n(a.i(442627))}];
+
+//# sourceMappingURL=src_0nr0at0._.js.map

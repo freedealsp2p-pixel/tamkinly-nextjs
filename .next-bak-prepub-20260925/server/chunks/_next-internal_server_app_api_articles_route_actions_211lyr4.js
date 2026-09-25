@@ -1,0 +1,3 @@
+module.exports=[649759,(e,o,d)=>{}];
+
+//# sourceMappingURL=_next-internal_server_app_api_articles_route_actions_211lyr4.js.map

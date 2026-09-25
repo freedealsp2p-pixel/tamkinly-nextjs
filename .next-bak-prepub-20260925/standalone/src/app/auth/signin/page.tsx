@@ -1,0 +1,221 @@
+'use client';
+
+import { Suspense, useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { AlertCircle, Mail, Lock, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useTranslations } from "@/components/providers/LocaleProvider";
+
+function SignInForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const justRegistered = searchParams.get('registered') === 'true';
+  const t = useTranslations("auth.signin");
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(justRegistered ? (t('registrationSuccess') || 'Account created successfully! Please sign in.') : '');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    setIsLoading(true);
+
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+        callbackUrl,
+      });
+
+      if (result?.error) {
+        // NextAuth returns error for invalid credentials
+        setError(t('invalidCredentials') || 'Invalid email or password');
+      } else if (result?.ok) {
+        // Successful login - redirect
+        setSuccess(t('loginSuccess') || 'Login successful! Redirecting...');
+        // Small delay to show success message
+        setTimeout(() => {
+          router.push(callbackUrl);
+          router.refresh();
+        }, 500);
+      } else {
+        // Unexpected result - try redirect approach as fallback
+        setError(t('errorOccurred') || 'An error occurred. Please try again.');
+      }
+    } catch (err) {
+      console.error('Sign in error:', err);
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        setError('Network error. Please check your connection and try again.');
+      } else {
+        setError(t('errorOccurred') || 'An error occurred. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Card className="w-full max-w-md border-0 shadow-2xl">
+      <CardContent className="p-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <Link href="/" className="text-2xl font-bold text-[#3DD4B0]">
+            Tamkinly
+          </Link>
+          <h1 className="text-2xl font-bold text-[#0F1C2E] mt-4">{t('welcomeBack')}</h1>
+          <p className="text-slate-600 mt-2">{t('subtitle')}</p>
+        </div>
+
+        {/* Success Message */}
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4" />
+            {success}
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-[#F8EEEF] border border-[#D4A8AE] text-[#A86565] px-4 py-3 rounded-lg mb-6 flex items-center gap-2">
+            <AlertCircle className="h-4 w-4" />
+            {error}
+          </div>
+        )}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <label htmlFor="email" className="text-sm font-medium text-slate-700">
+              {t('email')}
+            </label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t('emailPlaceholder')}
+                required
+                disabled={isLoading}
+                className="pl-10"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="password" className="text-sm font-medium text-slate-700">
+              {t('password')}
+            </label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                disabled={isLoading}
+                className="pl-10"
+              />
+            </div>
+          </div>
+
+          <Button
+            type="submit"
+            disabled={isLoading || !email || !password}
+            className="w-full h-12 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {t('signingIn')}
+              </>
+            ) : (
+              <>
+                {t('signIn')}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </>
+            )}
+          </Button>
+        </form>
+
+        {/* Divider */}
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-slate-200" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-white px-2 text-slate-500">{t('or')}</span>
+          </div>
+        </div>
+
+        {/* Continue without account */}
+        <Button 
+          variant="outline" 
+          className="w-full h-12"
+          onClick={() => router.push('/apps/values-clarification')}
+        >
+          {t('continueFree') || 'Continue with Free Assessment'}
+        </Button>
+
+        {/* Forgot Password Link */}
+        <div className="text-center mt-4">
+          <Link href="/auth/forgot-password" className="text-sm text-[#1F6F78] hover:text-[#0F1C2E] hover:underline">
+            {t('forgotPassword')}
+          </Link>
+        </div>
+
+        {/* Sign Up Link */}
+        <p className="text-center text-slate-600 mt-4">
+          {t('noAccount')}{' '}
+          <Link href="/auth/signup" className="text-[#3DD4B0] hover:underline font-medium">
+            {t('signUp')}
+          </Link>
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function SignInFallback() {
+  return (
+    <Card className="w-full max-w-md border-0 shadow-2xl">
+      <CardContent className="p-8">
+        <div className="text-center mb-8">
+          <div className="text-2xl font-bold text-[#3DD4B0]">Tamkinly</div>
+          <div className="h-6 w-40 bg-slate-200 rounded mx-auto mt-4 animate-pulse" />
+          <div className="h-4 w-48 bg-slate-100 rounded mx-auto mt-2 animate-pulse" />
+        </div>
+        <div className="space-y-4">
+          <div className="h-12 bg-slate-100 rounded animate-pulse" />
+          <div className="h-12 bg-slate-100 rounded animate-pulse" />
+          <div className="h-12 bg-slate-200 rounded animate-pulse" />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] flex items-center justify-center p-4">
+      <Suspense fallback={<SignInFallback />}>
+        <SignInForm />
+      </Suspense>
+    </div>
+  );
+}
+
+

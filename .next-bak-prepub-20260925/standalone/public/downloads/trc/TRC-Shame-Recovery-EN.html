@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shame Recovery Worksheet - Tamkinly Trauma Recovery Center</title>
+
+  <style>
+    /* RESET & BASE STYLES */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+      color: #334155;
+      background-color: #f1f5f9;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      line-height: 1.4;
+      font-size: 9.5pt;
+    }
+
+    /* A4 CONTAINER (PRINT READY) */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto 20px auto;
+      background: #FFFFFF;
+      padding: 10mm 14mm 8mm 14mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      page-break-after: always;
+      break-after: page;
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+
+      .page {
+        box-shadow: none;
+        margin: 0;
+        width: 210mm;
+        height: 297mm;
+        page-break-after: always;
+        break-after: page;
+      }
+    }
+
+    /* COMMON HEADER & FOOTER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #1F6F78;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .header-left {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #0F1C2E;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      font-size: 8pt;
+      font-weight: 600;
+      color: #1F6F78;
+      letter-spacing: 0.5px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #D9E2E7;
+      padding-top: 6px;
+      margin-top: auto;
+      flex-shrink: 0;
+      font-size: 8pt;
+      color: #64748B;
+    }
+
+    .footer-left {
+      font-weight: 500;
+    }
+
+    .footer-right {
+      font-weight: 600;
+      color: #0F1C2E;
+    }
+
+    /* TYPOGRAPHY */
+    .doc-title {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0F1C2E;
+      margin-bottom: 2px;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+    }
+
+    .doc-subtitle {
+      font-size: 9.5pt;
+      color: #64748B;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .section-title {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #0F1C2E;
+      margin-top: 8px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-label {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #1F6F78;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .prompt-text {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #0F1C2E;
+      margin-bottom: 2px;
+    }
+
+    .instruction-text {
+      font-size: 8.5pt;
+      color: #64748B;
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    /* BOXES & CARDS */
+    .safety-box {
+      background-color: #E8F4F5;
+      border: 1px solid #1F6F78;
+      border-left: 4px solid #1F6F78;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .safety-box-title {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #1F6F78;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .safety-box-main {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #0F1C2E;
+      margin-bottom: 4px;
+    }
+
+    .safety-box-text {
+      font-size: 8.5pt;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    .guidance-box {
+      background-color: #FAFBFC;
+      border: 1px solid #D9E2E7;
+      border-left: 3px solid #64748B;
+      border-radius: 4px;
+      padding: 8px 10px;
+      font-size: 8.5pt;
+      color: #334155;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .info-note {
+      background-color: #FAFBFC;
+      border: 1px solid #D9E2E7;
+      border-radius: 4px;
+      padding: 8px 10px;
+      font-size: 8.5pt;
+      color: #334155;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .info-note strong {
+      color: #1F6F78;
+    }
+
+    /* TABLE DESIGN */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      margin-bottom: 8px;
+      font-size: 8.5pt;
+    }
+
+    .custom-table th {
+      background-color: #1F6F78;
+      color: #FFFFFF;
+      text-align: left;
+      padding: 6px 10px;
+      font-weight: 700;
+      font-size: 9pt;
+      border: 1px solid #1F6F78;
+    }
+
+    .custom-table td {
+      padding: 6px 10px;
+      border: 1px solid #D9E2E7;
+      vertical-align: top;
+      background-color: #FFFFFF;
+    }
+
+    .custom-table tr:nth-child(even) td {
+      background-color: #FAFBFC;
+    }
+
+    /* WRITING AREAS */
+    .writing-box {
+      background-color: #FAFBFC;
+      border: 1px solid #D9E2E7;
+      border-radius: 4px;
+      padding: 8px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .ruled-lines {
+      background-color: #FAFBFC;
+      border: 1px solid #D9E2E7;
+      border-radius: 4px;
+      background-image: linear-gradient(to bottom, transparent 21px, #E2E8F0 22px);
+      background-size: 100% 22px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .ruled-lines.compact {
+      min-height: 44px;
+    }
+
+    .ruled-lines.medium {
+      min-height: 66px;
+    }
+
+    .ruled-lines.tall {
+      min-height: 110px;
+    }
+
+    .ruled-lines.xlarge {
+      min-height: 154px;
+    }
+
+    /* FORM & LINE FIELDS */
+    .field-group {
+      margin-bottom: 8px;
+    }
+
+    .field-label {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #0F1C2E;
+      margin-bottom: 2px;
+    }
+
+    .blank-field-line {
+      border-bottom: 1px solid #94A3B8;
+      min-height: 20px;
+      width: 100%;
+      margin-top: 2px;
+      margin-bottom: 8px;
+    }
+
+    .inline-field {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+
+    .inline-field .label {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #0F1C2E;
+      white-space: nowrap;
+    }
+
+    .inline-field .line {
+      border-bottom: 1px solid #94A3B8;
+      flex-grow: 1;
+      height: 18px;
+    }
+
+    /* BODY AWARENESS BOX */
+    .body-awareness-container {
+      display: flex;
+      gap: 12px;
+      background: #FAFBFC;
+      border: 1px solid #D9E2E7;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .body-icon-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-right: 8px;
+      border-right: 1px solid #E2E8F0;
+    }
+
+    .body-checklist {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px 12px;
+      flex-grow: 1;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8.5pt;
+      color: #334155;
+    }
+
+    .checkbox-box {
+      width: 12px;
+      height: 12px;
+      border: 1px solid #94A3B8;
+      border-radius: 2px;
+      background: #FFFFFF;
+    }
+
+    /* SVG ICONS */
+    .icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: middle;
+    }
+
+    .icon-primary {
+      stroke: #1F6F78;
+    }
+
+    .content-area {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= PAGE 1 ================= -->
+  <div class="page" id="page-1">
+
+    <div class="header">
+      <div class="header-left">Tamkinly | Trauma Recovery Center</div>
+      <div class="header-right">TRC-SHAME_RECOVERY</div>
+    </div>
+
+    <div class="content-area">
+
+      <h1 class="doc-title">Shame Recovery Worksheet</h1>
+
+      <p class="doc-subtitle">
+        A structured worksheet for understanding shame, separating identity from behavior,
+        and responding to yourself with greater clarity and compassion.
+      </p>
+
+      <!-- SAFETY ALERT BOX -->
+      <div class="safety-box">
+
+        <div class="safety-box-title">
+          <svg class="icon icon-primary" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Safety Alert
+        </div>
+
+        <div class="safety-box-main">
+          Shame can distort the way you see yourself. You deserve support.
+        </div>
+
+        <div class="safety-box-text">
+          Shame can make a painful experience feel like a statement about who you are.
+          A shame-based conclusion about yourself is not necessarily an accurate reflection
+          of your identity, worth, or responsibility. You do not need to accept shame as a
+          complete definition of yourself. Pause if this exercise increases your distress.
+          You do not need to describe traumatic details or force yourself to continue.
+          Return to grounding or seek appropriate support if needed.
+        </div>
+
+      </div>
+
+      <!-- SECTION 1: SHAME VS GUILT -->
+      <div class="section-title">
+        <svg class="icon icon-primary" viewBox="0 0 24 24">
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+        </svg>
+        1. Shame vs. Guilt
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 50%;">SHAME ("I AM bad")</th>
+            <th style="width: 50%;">GUILT ("I DID something bad")</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><strong>Identity-focused</strong></td>
+            <td><strong>Behavior-focused</strong></td>
+          </tr>
+
+          <tr>
+            <td>"I am bad."</td>
+            <td>"I did something bad."</td>
+          </tr>
+
+          <tr>
+            <td>Can create global self-judgment</td>
+            <td>Can focus attention on a specific behavior</td>
+          </tr>
+
+          <tr>
+            <td>Often encourages hiding or withdrawal</td>
+            <td>Can support accountability and repair</td>
+          </tr>
+
+          <tr>
+            <td>"Something is wrong with me."</td>
+            <td>"Something I did may need attention."</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-note">
+        <strong>Important:</strong>
+        Feeling shame does not automatically mean that the shame-based conclusion about
+        yourself is true. A person can take responsibility for a behavior, mistake, or
+        choice without defining their entire identity by it.
+      </div>
+
+      <!-- REFLECTION QUESTION -->
+      <div style="margin-top: 8px;">
+
+        <div class="prompt-text">
+          What difference do I notice between judging myself as a person and evaluating something I did?
+        </div>
+
+        <div class="instruction-text">
+          Reflect on how this shift in perspective feels in your mind and body.
+        </div>
+
+        <div class="ruled-lines tall"></div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Tamkinly | Tool ID: TRC-SHAME_RECOVERY</div>
+      <div class="footer-right">Page 1 of 4</div>
+    </div>
+
+  </div>
+
+
+  <!-- ================= PAGE 2 ================= -->
+  <div class="page" id="page-2">
+
+    <div class="header">
+      <div class="header-left">Tamkinly | Trauma Recovery Center</div>
+      <div class="header-right">TRC-SHAME_RECOVERY</div>
+    </div>
+
+    <div class="content-area">
+
+      <h1 class="doc-title">Understanding the Shame Response</h1>
+
+      <p class="doc-subtitle">
+        Slow down enough to notice what activates shame without forcing yourself into unnecessary detail.
+      </p>
+
+      <!-- SECTION 1: SHAME TRIGGER -->
+      <div class="section-title">
+        <svg class="icon icon-primary" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        1. Identify the Shame Trigger
+      </div>
+
+      <div class="prompt-text">
+        What situation, thought, interaction, memory, or experience seems to have activated the shame response?
+      </div>
+
+      <div class="instruction-text">
+        Keep this brief. You do not need to describe traumatic details.
+      </div>
+
+      <div class="ruled-lines medium"></div>
+
+
+      <!-- SECTION 2: THE STORY BEHIND THE SHAME -->
+      <div class="section-title">
+        <svg class="icon icon-primary" viewBox="0 0 24 24">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        2. The Story Behind the Shame
+      </div>
+
+      <div class="prompt-text">
+        What does the shame seem to tell you about yourself?
+      </div>
+
+      <div class="instruction-text">
+        Write the message as it appears in your mind. You do not have to agree with it.
+      </div>
+
+      <div class="ruled-lines tall"></div>
+
+
+      <!-- SECTION 3: PHYSICAL SENSATION -->
+      <div class="section-title">
+        <svg class="icon icon-primary" viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        3. Physical Sensation
+      </div>
+
+      <div class="prompt-text">
+        Where do you notice the shame response in your body?
+      </div>
+
+      <div class="instruction-text">
+        Notice physical sensations without judging them. You may describe location,
+        pressure, tension, heat, heaviness, numbness, or other sensations.
+      </div>
+
+      <div class="body-awareness-container">
+
+        <div class="body-icon-col">
+
+          <svg class="icon icon-primary" style="width:24px; height:24px;" viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+
+          <span style="font-size: 7.5pt; color: #64748B; margin-top: 4px;">
+            Body Scan
+          </span>
+
+        </div>
+
+        <div class="body-checklist">
+
+          <div class="checkbox-item">
+            <div class="checkbox-box"></div>
+            Tightness in chest
+          </div>
+
+          <div class="checkbox-item">
+            <div class="checkbox-box"></div>
+            Lump in throat
+          </div>
+
+          <div class="checkbox-item">
+            <div class="checkbox-box"></div>
+            Stomach sinking
+          </div>
+
+          <div class="checkbox-item">
+            <div class="checkbox-box"></div>
+            Heat / Flushing
+          </div>
+
+          <div class="checkbox-item">
+            <div class="checkbox-box"></div>
+            Heavy shoulders
+          </div>
+
+          <div class="checkbox-item">
+            <div class="checkbox-box"></div>
+            Numbness / Empty
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="ruled-lines compact"></div>
+
+
+      <!-- SECTION 4: EARLIEST MEMORY CONNECTION -->
+      <div class="section-title">
+        <svg class="icon icon-primary" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        4. Earliest Memory Connection
+      </div>
+
+      <div class="prompt-text">
+        Does this feeling remind you of an earlier experience, message, or period of your life?
+      </div>
+
+      <div class="instruction-text">
+        Only explore this if it feels safe enough. You do not need to identify or describe a traumatic event.
+      </div>
+
+      <div class="ruled-lines medium"></div>
+
+      <div class="guidance-box" style="margin-top: 4px;">
+        <strong>Safety Note:</strong>
+        You are allowed to stop here. You do not need to recover every memory for this exercise to be useful.
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Tamkinly | Tool ID: TRC-SHAME_RECOVERY</div>
+      <div class="footer-right">Page 2 of 4</div>
+    </div>
+
+  </div>
+
+
+  <!-- ================= PAGE 3 ================= -->
+  <div class="page" id="page-3">
+
+    <div class="header">
+      <div class="header-left">Tamkinly | Trauma Recovery Center</div>
+      <div class="header-right">TRC-SHAME_RECOVERY</div>
+    </div>
+
+    <div class="content-area">
+
+      <h1 class="doc-title">Responding to Shame</h1>
+
+      <p class="doc-subtitle">
+        The goal is not to deny what happened. The goal is to respond to yourself without unnecessary self-attack.
+      </p>
+
+      <!-- 3-STEP SELF-COMPASSION EXERCISE -->
+      <div class="section-title">
+        <svg class="icon icon-primary" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+          2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+          C13.09 3.81 14.76 3 16.5 3
+          19.58 3 22 5.42 22 8.5
+          c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+        </svg>
+        3-Step Self-Compassion Exercise
+      </div>
+
+
+      <!-- STEP 1 -->
+      <div style="margin-bottom: 6px;">
+
+        <div class="section-label">
+          STEP 1: ACKNOWLEDGE
+        </div>
+
+        <div class="prompt-text">
+          What am I noticing right now?
+        </div>
+
+        <div class="instruction-text">
+          Name the experience without exaggerating it or pushing it away.
+        </div>
+
+        <div class="ruled-lines compact"></div>
+
+      </div>
+
+
+      <!-- STEP 2 -->
+      <div style="margin-bottom: 6px;">
+
+        <div class="section-label">
+          STEP 2: NORMALIZE
+        </div>
+
+        <div class="prompt-text">
+          What is understandable about having this reaction?
+        </div>
+
+        <div class="instruction-text">
+          Consider the human context. Difficult reactions can happen when people experience
+          stress, rejection, fear, humiliation, violation, loss, or other painful experiences.
+        </div>
+
+        <div class="ruled-lines compact"></div>
+
+      </div>
+
+
+      <!-- STEP 3 -->
+      <div style="margin-bottom: 10px;">
+
+        <div class="section-label">
+          STEP 3: SELF-KINDNESS
+        </div>
+
+        <div class="prompt-text">
+          What would a kind, honest, and supportive response to myself sound like?
+        </div>
+
+        <div class="instruction-text">
+          Self-kindness does not mean excusing harmful behavior or denying reality.
+          It means responding without unnecessary cruelty toward yourself.
+        </div>
+
+        <div class="ruled-lines compact"></div>
+
+      </div>
+
+
+      <!-- SPEAKING SHAME -->
+      <div class="section-title">
+
+        <svg class="icon icon-primary" viewBox="0 0 24 24">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8
+          8.5 8.5 0 0 1-7.6 4.7
+          8.38 8.38 0 0 1-3.8-.9
+          L3 21l1.9-5.7
+          a8.38 8.38 0 0 1-.9-3.8
+          8.5 8.5 0 0 1 4.7-7.6
+          8.38 8.38 0 0 1 3.8-.9h.5
+          a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+
+        Speaking Shame
+
+      </div>
+
+
+      <div style="margin-bottom: 6px;">
+
+        <div class="prompt-text">
+          If your shame could speak, what would it say?
+        </div>
+
+        <div class="ruled-lines compact"></div>
+
+      </div>
+
+
+      <div style="margin-bottom: 6px;">
+
+        <div class="prompt-text">
+          What would you say back to the shame that is honest, grounded,
+          and protective of your dignity?
+        </div>
+
+        <div class="ruled-lines medium"></div>
+
+      </div>
+
+
+      <div class="guidance-box">
+
+        <strong>Guidance:</strong>
+        You do not need to argue with every thought. You can notice the message,
+        question whether it is fair or complete, and choose a response that does
+        not attack your identity.
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Tamkinly | Tool ID: TRC-SHAME_RECOVERY</div>
+      <div class="footer-right">Page 3 of 4</div>
+    </div>
+
+  </div>
+
+
+  <!-- ================= PAGE 4 ================= -->
+  <div class="page" id="page-4">
+
+    <div class="header">
+      <div class="header-left">Tamkinly | Trauma Recovery Center</div>
+      <div class="header-right">TRC-SHAME_RECOVERY</div>
+    </div>
+
+    <div class="content-area">
+
+      <h1 class="doc-title">Integration & Next Steps</h1>
+
+      <p class="doc-subtitle">
+        Use what you noticed to identify one realistic way to respond differently.
+      </p>
+
+
+      <!-- SECTION 1 -->
+      <div style="margin-bottom: 6px;">
+
+        <div class="section-title">
+
+          <svg class="icon icon-primary" viewBox="0 0 24 24">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+
+          1. What I Understand Now
+
+        </div>
+
+        <div class="prompt-text">
+          What is one important thing I understand about my shame response after completing this worksheet?
+        </div>
+
+        <div class="ruled-lines compact"></div>
+
+      </div>
+
+
+      <!-- SECTION 2 -->
+      <div style="margin-bottom: 6px;">
+
+        <div class="section-title">
+
+          <svg class="icon icon-primary" viewBox="0 0 24 24">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+            <polyline points="17 11 19 13 23 9"></polyline>
+          </svg>
+
+          2. Separating Identity From Behavior
+
+        </div>
+
+        <div class="prompt-text">
+          What can I take responsibility for without defining my entire identity by it?
+        </div>
+
+        <div class="ruled-lines compact"></div>
+
+      </div>
+
+
+      <!-- SECTION 3 -->
+      <div style="margin-bottom: 6px;">
+
+        <div class="section-title">
+
+          <svg class="icon icon-primary" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 8 12 12 14 14"></polyline>
+          </svg>
+
+          3. One Safe Next Step
+
+        </div>
+
+        <div class="prompt-text">
+          What is one safe and realistic next step I can take?
+        </div>
+
+        <div style="margin-top: 4px; padding: 4px 0;">
+
+          <div class="inline-field">
+            <span class="label">Next step:</span>
+            <span class="line"></span>
+          </div>
+
+          <div class="inline-field">
+            <span class="label">When / where:</span>
+            <span class="line"></span>
+          </div>
+
+          <div class="inline-field">
+            <span class="label">Support I may need:</span>
+            <span class="line"></span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SECTION 4 -->
+      <div style="margin-bottom: 8px;">
+
+        <div class="section-title">
+
+          <svg class="icon icon-primary" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27
+            17 14.14 18.18 21.02
+            12 17.77 5.82 21.02
+            7 14.14 2 9.27
+            8.91 8.26 12 2"></polygon>
+          </svg>
+
+          4. What I Want to Remember
+
+        </div>
+
+        <div class="prompt-text">
+          What is one statement I want to remember when shame returns?
+        </div>
+
+        <div class="ruled-lines compact"></div>
+
+      </div>
+
+
+      <!-- WHEN TO STOP WARNING -->
+      <div class="safety-box" style="margin-bottom: 8px; padding: 8px 10px;">
+
+        <div class="safety-box-title" style="color: #0F1C2E; font-size: 9.5pt;">
+
+          <svg class="icon icon-primary" viewBox="0 0 24 24">
+            <path d="M10.29 3.86L1.82 18
+            a2 2 0 0 0 1.71 3h16.94
+            a2 2 0 0 0 1.71-3L13.71 3.86
+            a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+
+          When to Stop
+
+        </div>
+
+        <div class="safety-box-text" style="font-size: 8pt; line-height: 1.3;">
+
+          Stop the exercise if you notice that your distress is increasing,
+          you feel overwhelmed, disconnected, unsafe, or unable to remain oriented
+          to the present. You do not need to complete every section.
+          Return to a grounding or stabilization practice that feels appropriate,
+          contact a trusted support person, or seek professional help when needed.
+
+        </div>
+
+      </div>
+
+
+      <!-- EMERGENCY CONTACTS -->
+      <div style="margin-bottom: 8px;">
+
+        <div class="section-title" style="font-size: 9.5pt; margin-top: 4px; margin-bottom: 4px;">
+
+          <svg class="icon icon-primary" viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+            19.79 19.79 0 0 1-8.63-3.07
+            19.5 19.5 0 0 1-6-6
+            19.79 19.79 0 0 1-3.07-8.67
+            A2 2 0 0 1 4.11 2h3
+            a2 2 0 0 1 2 1.72
+            12.84 12.84 0 0 0 .7 2.81
+            2 2 0 0 1-.45 2.11
+            L8.09 9.91a16 16 0 0 0 6 6
+            l1.27-1.27a2 2 0 0 1 2.11-.45
+            12.84 12.84 0 0 0 2.81.7
+            A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+
+          Local Crisis & Emergency Resources
+
+        </div>
+
+        <div class="inline-field" style="margin-bottom: 4px;">
+          <span class="label">Local Emergency Services:</span>
+          <span class="line"></span>
+        </div>
+
+        <div class="inline-field" style="margin-bottom: 4px;">
+          <span class="label">Local Crisis / Support Line:</span>
+          <span class="line"></span>
+        </div>
+
+        <div class="inline-field" style="margin-bottom: 4px;">
+          <span class="label">Trusted Support / Professional:</span>
+          <span class="line"></span>
+        </div>
+
+      </div>
+
+
+      <!-- EDUCATIONAL DISCLAIMER -->
+      <div class="info-note"
+           style="margin-top: 4px; margin-bottom: 4px; padding: 6px 8px; font-size: 7.5pt;">
+
+        <strong style="color: #0F1C2E;">
+          Educational Disclaimer:
+        </strong>
+
+        This worksheet is for educational and supportive purposes.
+        It does not provide a diagnosis and does not replace individualized
+        psychological assessment, psychotherapy, medical care, or other professional support.
+        Shame recovery is not intended to deny, minimize, or reinterpret away real danger,
+        abuse, harassment, coercion, or boundary violations.
+        If a situation is currently unsafe, prioritize safety and appropriate professional
+        or emergency support.
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">Tamkinly | Tool ID: TRC-SHAME_RECOVERY</div>
+      <div class="footer-right">Page 4 of 4</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

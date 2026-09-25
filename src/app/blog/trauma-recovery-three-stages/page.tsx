@@ -13,13 +13,14 @@ import { BlogArticleCTA } from '@/components/blog/BlogArticleCTA';
 import { BlogConversionSection } from '@/components/blog/BlogConversionSection';
 import { MidArticleUpgrade } from '@/components/blog/MidArticleUpgrade';
 import { BlogArticleJsonLd } from "@/components/seo/JsonLd";
+import { ArticleFigure } from '@/components/blog/ArticleFigure';
 
 export default function TraumaRecoveryThreeStagesArticle() {
   const { locale } = useLocale();
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب الحائر: علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "٩ دقائق قراءة") },
+    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب المبهم (Vagus nerve): علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "٩ دقائق قراءة") },
     { slug: "erq-emotional-regulation-worksheet", title: getText("Emotional Regulation Worksheet: Master Your ERQ Skills", "ورقة عمل التنظيم العاطفي: أتقن مهاراتك في تنظيم المشاعر"), readTime: getText("8 min read", "٨ دقائق قراءة") },
     { slug: "dopamine-reset", title: getText("Dopamine Reset: Reclaiming Your Attention in a Hyperstimulating World", "إعادة ضبط الدوبامين: استعد انتباهك في عالم مفرط التحفيز"), readTime: getText("9 min read", "٩ دقائق قراءة") }
   ];
@@ -35,6 +36,7 @@ export default function TraumaRecoveryThreeStagesArticle() {
       dateModified="2026-09-16"
       author="Tamkinly Team"
       keywords={ ["trauma recovery stages", "trauma recovery", "nervous system regulation", "grounding techniques", "window of tolerance", "polyvagal theory", "stabilization"] }
+        image="/uploads/articles/trauma-recovery-three-stages.webp"
     />
     <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
@@ -78,6 +80,24 @@ export default function TraumaRecoveryThreeStagesArticle() {
                 "هذا الدليل تثقيفي ومجاني. معالجة الصدمة — خصوصاً إن كانت شديدة أو من الطفولة — عملٌ عميق يستحق معالجاً مدرّباً بجانبك. الأدوات هنا رفيقة مجانية للتثبيت والممارسة اليومية، وليست بديلاً عن العلاج الموجّه للصدمات."
               )}
             </div>
+            <ArticleFigure
+              src="/uploads/articles/trauma-recovery-three-stages.webp"
+              width={1376}
+              height={768}
+              alt={{
+                en: "Three ascending illuminated plateaus under a dawn gradient with a figure on the first",
+                ar: "ثلاثة هضاب مضيئة متصاعدة تحت تدرّج فجر وشخصية على الأول",
+              }}
+              title={{
+                en: "The Three Stages of Trauma Recovery",
+                ar: "مراحل التعافي من الصدمات الثلاث",
+              }}
+              caption={{
+                en: "Safety, then regulation, then integration — the order is the map.",
+                ar: "الأمان ثم التنظيم ثم التكامل — الترتيب هو الخريطة.",
+              }}
+            />
+
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
               {getText("What Trauma Does to the Brain and Body", "ماذا تفعل الصدمة بالدماغ والجسد")}
@@ -133,7 +153,7 @@ export default function TraumaRecoveryThreeStagesArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The fastest lever is breath. Paced breathing — slowing the exhale until it is longer than the inhale — directly stimulates the vagus nerve, shifting the body out of its alarm state and back toward what Porges calls the social engagement system. Thought reframing, drawn from cognitive behavioral therapy, adds the mental layer: learning to catch catastrophic predictions ('I am in danger', 'this will never end') and answer them with grounded evidence. Neither tool requires you to feel calm first; both are designed to be used exactly when you are not. That is the quiet revolution of stage two — skills that work in the storm, not only after it.",
-                "أسرع رافعة هي النفس. التنفس المُنظَّم — إبطاء الزفير حتى يصبح أطول من الشهيق — يحفّز العصب الحائر مباشرة، فينقل الجسد من حالة الإنذار إلى ما يسميه بورجز نظام الاندماج الاجتماعي. وإعادة صياغة الأفكار، المستمدة من العلاج المعرفي السلوكي، تضيف الطبقة الذهنية: أن تتعلم اقتناص التوقعات الكارثية («أنا في خطر»، «هذا لن ينتهي أبداً») وأن تجيبها بالأدلة الواقعة. لا تطلب أيٌّ من الأداتين أن تشعر بالهدوء أولاً؛ فكلتاهما مصمّمتان للاستخدام تماماً حين لست هادئاً. هذه هي الثورة الهادئة في المرحلة الثانية — مهارات تعمل في العاصفة، لا بعدها فقط."
+                "أسرع رافعة هي النفس. التنفس المُنظَّم — إبطاء الزفير حتى يصبح أطول من الشهيق — يحفّز العصب المبهم مباشرة، فينقل الجسد من حالة الإنذار إلى ما يسميه بورجز نظام الاندماج الاجتماعي. وإعادة صياغة الأفكار، المستمدة من العلاج المعرفي السلوكي، تضيف الطبقة الذهنية: أن تتعلم اقتناص التوقعات الكارثية («أنا في خطر»، «هذا لن ينتهي أبداً») وأن تجيبها بالأدلة الواقعة. لا تطلب أيٌّ من الأداتين أن تشعر بالهدوء أولاً؛ فكلتاهما مصمّمتان للاستخدام تماماً حين لست هادئاً. هذه هي الثورة الهادئة في المرحلة الثانية — مهارات تعمل في العاصفة، لا بعدها فقط."
               )}
             </p>
 

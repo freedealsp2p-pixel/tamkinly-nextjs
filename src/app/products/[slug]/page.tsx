@@ -369,7 +369,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const includes = getIncludes();
   const specifications = getSpecifications();
   const faqs = getFAQs();
-  const testimonials = getTestimonials();
+  const testimonials: { name: string; role: string; content: string }[] = []; /* testimonials disabled: no real review system yet */
   
   return (
     <div className="min-h-screen bg-[#F6F8FA]">

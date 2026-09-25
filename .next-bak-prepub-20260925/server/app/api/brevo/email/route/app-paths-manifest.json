@@ -1,0 +1,3 @@
+{
+  "/api/brevo/email/route": "app/api/brevo/email/route.js"
+}

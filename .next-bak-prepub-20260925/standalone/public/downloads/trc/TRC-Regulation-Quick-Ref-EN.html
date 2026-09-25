@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamkinly — Regulation Quick Reference</title>
+
+  <style>
+    /* =========================================================
+       TAMKINLY — TRC REGULATION QUICK REFERENCE
+       Asset ID: regulation-quick-reference
+       Tool ID: TRC-REGULATION_QUICK_REF
+       Companion Type: REFERENCE_CARD
+       Language: English
+       Format: A4 Portrait / 2 Pages
+       ========================================================= */
+
+    /* -------------------------
+       Global Reset
+       ------------------------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: #1E293B;
+      background: #F1F5F9;
+      font-size: 10.5px;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* -------------------------
+       A4 Page
+       ------------------------- */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 15mm;
+      margin: 20px auto;
+      background: #FFFFFF;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF;
+        margin: 0;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 15mm;
+        box-shadow: none;
+        border: none;
+      }
+    }
+
+    @media screen {
+      .page {
+        box-shadow: 0 4px 14px rgba(15, 41, 66, 0.08);
+        border: 1px solid #E2E8F0;
+      }
+    }
+
+    /* -------------------------
+       Design Tokens
+       ------------------------- */
+    :root {
+      --navy: #0F2942;
+      --navy-dark: #0A1C2E;
+
+      --teal: #0F766E;
+      --teal-dark: #134E4A;
+      --teal-bg: #F0FDFA;
+      --teal-border: #99F6E4;
+
+      --slate-900: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+
+      --slate-100: #F1F5F9;
+      --slate-50: #F8FAFC;
+      --border: #E2E8F0;
+
+      --amber-bg: #FFFBEB;
+      --amber-border: #FDE68A;
+      --amber-text: #92400E;
+
+      --red-bg: #FEF2F2;
+      --red-border: #FECACA;
+      --red-text: #991B1B;
+    }
+
+    /* -------------------------
+       Header
+       ------------------------- */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .brand-title {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--teal);
+    }
+
+    .tool-id {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--slate-500);
+      letter-spacing: 0.4px;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    /* -------------------------
+       Typography
+       ------------------------- */
+    .title-block {
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 20px;
+      line-height: 1.15;
+      color: var(--navy);
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 10.5px;
+      color: var(--slate-600);
+      font-weight: 500;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .intro-note {
+      font-size: 9.5px;
+      color: var(--slate-700);
+      background: var(--slate-50);
+      border-left: 3px solid var(--slate-400);
+      padding: 7px 10px;
+      border-radius: 0 4px 4px 0;
+      line-height: 1.35;
+    }
+
+    /* -------------------------
+       Safety Notice
+       ------------------------- */
+    .safety-box {
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-border);
+      border-left: 4px solid var(--teal);
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .safety-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+      margin-bottom: 4px;
+    }
+
+    .safety-body {
+      font-size: 10px;
+      color: var(--teal-dark);
+      line-height: 1.38;
+      margin-bottom: 4px;
+    }
+
+    .safety-secondary {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--teal);
+      line-height: 1.3;
+    }
+
+    /* -------------------------
+       Quick Tool Selector
+       ------------------------- */
+    .selector-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      flex-grow: 1;
+    }
+
+    .tool-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 11px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .card-options {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--teal);
+      background: var(--teal-bg);
+      border: 1px solid #CCFBF1;
+      padding: 2px 6px;
+      border-radius: 3px;
+      line-height: 1.25;
+    }
+
+    .card-body {
+      font-size: 9.5px;
+      color: var(--slate-700);
+      line-height: 1.38;
+      margin-bottom: 8px;
+    }
+
+    .card-body strong {
+      color: var(--navy);
+    }
+
+    .card-stop-cue {
+      font-size: 8.8px;
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      color: var(--amber-text);
+      padding: 5px 7px;
+      border-radius: 4px;
+      line-height: 1.3;
+    }
+
+    .card-stop-cue strong {
+      font-weight: 700;
+    }
+
+    .bottom-note {
+      font-size: 9px;
+      color: var(--slate-500);
+      text-align: center;
+      font-style: italic;
+      padding-top: 7px;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    /* -------------------------
+       Page Footer
+       ------------------------- */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8.5px;
+      color: var(--slate-500);
+    }
+
+    /* -------------------------
+       Page 2 — Protocols
+       ------------------------- */
+    .protocol-intro {
+      font-size: 9.5px;
+      color: var(--slate-600);
+      background: var(--slate-50);
+      border-left: 3px solid var(--navy);
+      padding: 7px 10px;
+      margin-bottom: 11px;
+      line-height: 1.35;
+    }
+
+    .protocol-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .protocol-card {
+      background: var(--slate-50);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--navy);
+      border-radius: 4px;
+      padding: 9px;
+    }
+
+    .protocol-num {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 6px;
+    }
+
+    .protocol-bullets {
+      list-style: none;
+    }
+
+    .protocol-bullets li {
+      position: relative;
+      padding-left: 10px;
+      font-size: 9px;
+      color: var(--slate-700);
+      line-height: 1.34;
+      margin-bottom: 5px;
+    }
+
+    .protocol-bullets li:last-child {
+      margin-bottom: 0;
+    }
+
+    .protocol-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* -------------------------
+       Red Flags
+       ------------------------- */
+    .red-flag-box {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-left: 4px solid var(--red-text);
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .red-flag-header {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--red-text);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 4px;
+    }
+
+    .red-flag-intro {
+      font-size: 9.3px;
+      color: var(--slate-700);
+      margin-bottom: 7px;
+      line-height: 1.34;
+    }
+
+    .indicators-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 14px;
+      margin-bottom: 6px;
+    }
+
+    .indicator-item {
+      font-size: 9px;
+      color: var(--slate-700);
+      line-height: 1.3;
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .indicator-item::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--red-text);
+      font-weight: 800;
+    }
+
+    .red-flag-note {
+      font-size: 8.8px;
+      font-weight: 600;
+      color: var(--red-text);
+      border-top: 1px dashed var(--red-border);
+      padding-top: 5px;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    /* -------------------------
+       Contacts
+       ------------------------- */
+    .contacts-section {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 9px 11px;
+      margin-bottom: 10px;
+    }
+
+    .contacts-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
+    }
+
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px 16px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-end;
+      min-width: 0;
+    }
+
+    .contact-label {
+      font-size: 8.8px;
+      font-weight: 600;
+      color: var(--slate-600);
+      white-space: nowrap;
+      margin-right: 6px;
+    }
+
+    .contact-line {
+      flex: 1;
+      min-width: 20px;
+      border-bottom: 1.5px dotted var(--slate-400);
+      height: 12px;
+    }
+
+    /* -------------------------
+       Disclaimer
+       ------------------------- */
+    .disclaimer-box {
+      font-size: 8.4px;
+      color: var(--slate-600);
+      line-height: 1.36;
+      background: var(--slate-50);
+      padding: 8px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .disclaimer-box strong {
+      color: var(--navy);
+    }
+
+    /* -------------------------
+       Small Print Utility
+       ------------------------- */
+    .micro-note {
+      font-size: 8.5px;
+      color: var(--slate-500);
+      line-height: 1.3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       PAGE 1
+       ========================================================= -->
+  <section class="page">
+
+    <div>
+
+      <header class="top-header">
+        <span class="brand-title">Tamkinly | Trauma Recovery Center</span>
+        <span class="tool-id">TRC-REGULATION_QUICK_REF</span>
+      </header>
+
+      <div class="title-block">
+        <h1>Regulation Quick Reference</h1>
+
+        <div class="subtitle">
+          Present-focused grounding and nervous system stabilization options for moments of acute distress.
+        </div>
+
+        <div class="intro-note">
+          This card is for <strong>stabilization, not exposure or trauma processing</strong>.
+          Choose what feels manageable. You do not need to make the distress disappear,
+          identify its cause, or complete an exercise.
+        </div>
+      </div>
+
+      <!-- Safety Notice -->
+      <div class="safety-box">
+
+        <div class="safety-title">Safety Notice</div>
+
+        <div class="safety-body">
+          When distress is intense, keep the task simple. Choose <strong>ONE</strong>
+          present-focused option and stay with it only while it feels tolerable.
+          Keep your attention connected to your surroundings.
+          <strong>Stop</strong> if an exercise increases distress, dizziness,
+          panic, dissociation, pain, or disorientation.
+        </div>
+
+        <div class="safety-secondary">
+          You are not required to push through discomfort. A simpler grounding or supportive contact is a valid next step.
+        </div>
+
+      </div>
+
+      <!-- Tool Selector -->
+      <div class="selector-label">
+        Quick Tool Selector — choose the option that best matches what you notice
+      </div>
+
+      <div class="tool-grid">
+
+        <!-- Tool 1 -->
+        <article class="tool-card">
+
+          <div>
+            <div class="card-header">
+              <div class="card-title">
+                High Anxiety / Activation
+              </div>
+
+              <div class="card-options">
+                A52 Breathing &amp; Mild Cooling
+              </div>
+            </div>
+
+            <div class="card-body">
+              Use only if breathing-based regulation feels comfortable and familiar.
+              Keep breathing <strong>natural and unforced</strong>.
+              If using cooling, choose a mild and physically safe sensation rather than extreme cold.
+            </div>
+          </div>
+
+          <div class="card-stop-cue">
+            <strong>Stop:</strong>
+            If breathing becomes uncomfortable, dizziness appears, distress increases,
+            or you feel less oriented.
+          </div>
+
+        </article>
+
+        <!-- Tool 2 -->
+        <article class="tool-card">
+
+          <div>
+            <div class="card-header">
+              <div class="card-title">
+                Dissociation / Feeling Disconnected
+              </div>
+
+              <div class="card-options">
+                5-4-3-2-1 Grounding &amp; Gentle Movement
+              </div>
+            </div>
+
+            <div class="card-body">
+              Start with <strong>external orientation</strong>:
+              notice concrete details you can see, hear, and physically feel.
+              Gentle movement may be added if it helps you reconnect with the present environment.
+            </div>
+          </div>
+
+          <div class="card-stop-cue">
+            <strong>Stop:</strong>
+            If focusing inward, movement, or sensory attention increases disconnection or distress.
+          </div>
+
+        </article>
+
+        <!-- Tool 3 -->
+        <article class="tool-card">
+
+          <div>
+            <div class="card-header">
+              <div class="card-title">
+                Emotional Overwhelm
+              </div>
+
+              <div class="card-options">
+                Safe Place / Supportive Imagery
+              </div>
+            </div>
+
+            <div class="card-body">
+              If imagery feels comfortable, use a <strong>familiar, neutral, or supportive</strong>
+              setting. Keep attention on the present.
+              You may skip imagery entirely if it feels unfamiliar or uncomfortable.
+            </div>
+          </div>
+
+          <div class="card-stop-cue">
+            <strong>Stop:</strong>
+            If imagery becomes intrusive, emotionally activating, or pulls you away from the present.
+          </div>
+
+        </article>
+
+        <!-- Tool 4 -->
+        <article class="tool-card">
+
+          <div>
+            <div class="card-header">
+              <div class="card-title">
+                Somatic Tension
+              </div>
+
+              <div class="card-options">
+                Body Awareness &amp; Gentle Movement
+              </div>
+            </div>
+
+            <div class="card-body">
+              Notice areas of tension without forcing relaxation.
+              If physically comfortable, try a small posture change,
+              gentle stretch, walking, or other familiar movement.
+            </div>
+          </div>
+
+          <div class="card-stop-cue">
+            <strong>Stop:</strong>
+            If body-focused attention increases distress, pain, dissociation,
+            dizziness, or disorientation.
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="bottom-note">
+        These are optional self-regulation supports. They are not diagnostic tests,
+        trauma-processing techniques, or substitutes for professional care.
+      </div>
+
+      <footer class="page-footer">
+        <span>Tamkinly | Tool ID: TRC-REGULATION_QUICK_REF</span>
+        <span>Page 1 of 2</span>
+      </footer>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       PAGE 2
+       ========================================================= -->
+  <section class="page">
+
+    <div>
+
+      <header class="top-header">
+        <span class="brand-title">Tamkinly | Trauma Recovery Center</span>
+        <span class="tool-id">TRC-REGULATION_QUICK_REF</span>
+      </header>
+
+      <div class="title-block">
+        <h1>Stabilization Protocols</h1>
+
+        <div class="subtitle">
+          A simple sequence for returning attention to the present and deciding when additional support is needed.
+        </div>
+
+        <div class="protocol-intro">
+          <strong>Use the sequence flexibly.</strong>
+          The purpose is to increase present-moment orientation and safety,
+          not to force symptoms to stop. If self-regulation is not helping,
+          moving toward support is part of stabilization.
+        </div>
+      </div>
+
+      <!-- Protocols -->
+      <div class="protocol-grid">
+
+        <!-- Protocol 1 -->
+        <article class="protocol-card">
+
+          <div class="protocol-num">
+            01 — Pause &amp; Orient
+          </div>
+
+          <ul class="protocol-bullets">
+
+            <li>
+              <strong>Pause:</strong>
+              If it is safe to do so, stop or slow the activity you are doing.
+            </li>
+
+            <li>
+              <strong>Look outward:</strong>
+              Place attention on the room or environment around you.
+            </li>
+
+            <li>
+              Notice a few concrete details you can
+              <strong>see, hear, or physically feel</strong>.
+            </li>
+
+            <li>
+              Remind yourself:
+              <em>"I am here, in the present moment."</em>
+            </li>
+
+            <li>
+              You do not need to explain, analyze, or revisit what happened.
+            </li>
+
+          </ul>
+
+        </article>
+
+
+        <!-- Protocol 2 -->
+        <article class="protocol-card">
+
+          <div class="protocol-num">
+            02 — Choose One
+          </div>
+
+          <ul class="protocol-bullets">
+
+            <li>
+              <strong>Choose one</strong>
+              option from Page 1 that feels manageable.
+            </li>
+
+            <li>
+              Keep the approach
+              <strong>gentle and present-focused</strong>.
+            </li>
+
+            <li>
+              Do not force breathing, sensations, emotions,
+              memories, or relaxation.
+            </li>
+
+            <li>
+              You may <strong>stop at any point</strong>.
+            </li>
+
+            <li>
+              If the strategy makes things worse,
+              stop rather than pushing through.
+            </li>
+
+          </ul>
+
+        </article>
+
+
+        <!-- Protocol 3 -->
+        <article class="protocol-card">
+
+          <div class="protocol-num">
+            03 — Reconnect &amp; Support
+          </div>
+
+          <ul class="protocol-bullets">
+
+            <li>
+              <strong>Reconnect:</strong>
+              Move toward a familiar, safer environment when possible.
+            </li>
+
+            <li>
+              Consider contacting a
+              <strong>trusted support person</strong>.
+            </li>
+
+            <li>
+              If you already have a professional stabilization plan,
+              follow that plan.
+            </li>
+
+            <li>
+              If self-regulation is not enough,
+              <strong>seek appropriate support</strong>.
+            </li>
+
+          </ul>
+
+        </article>
+
+      </div>
+
+
+      <!-- Red Flags -->
+      <div class="red-flag-box">
+
+        <div class="red-flag-header">
+          When Self-Regulation Is Not Enough
+        </div>
+
+        <div class="red-flag-intro">
+          Self-regulation tools are not crisis care.
+          <strong>Move toward professional, crisis, or emergency support</strong>
+          when the situation is severe, unsafe, or cannot be managed adequately with available support.
+        </div>
+
+        <div class="indicators-grid">
+
+          <div class="indicator-item">
+            Immediate danger or inability to maintain personal safety.
+          </div>
+
+          <div class="indicator-item">
+            Severe or rapidly increasing disorientation or dissociation.
+          </div>
+
+          <div class="indicator-item">
+            Inability to regain basic orientation to the present environment.
+          </div>
+
+          <div class="indicator-item">
+            Severe panic or distress that remains difficult to manage.
+          </div>
+
+          <div class="indicator-item">
+            Immediate risk of harm to yourself or another person.
+          </div>
+
+          <div class="indicator-item">
+            A situation requiring urgent medical or mental-health assessment.
+          </div>
+
+        </div>
+
+        <div class="red-flag-note">
+          If you are in immediate danger or facing a mental-health emergency,
+          do not rely on this card. Prioritize immediate safety and contact appropriate local emergency or crisis support.
+        </div>
+
+      </div>
+
+
+      <!-- Contacts -->
+      <div class="contacts-section">
+
+        <div class="contacts-title">
+          Emergency &amp; Support Contacts
+        </div>
+
+        <div class="contacts-grid">
+
+          <div class="contact-row">
+            <span class="contact-label">
+              Therapist / Mental Health Professional:
+            </span>
+            <div class="contact-line"></div>
+          </div>
+
+          <div class="contact-row">
+            <span class="contact-label">
+              Trusted Support Person:
+            </span>
+            <div class="contact-line"></div>
+          </div>
+
+          <div class="contact-row">
+            <span class="contact-label">
+              Crisis / Support Service:
+            </span>
+            <div class="contact-line"></div>
+          </div>
+
+          <div class="contact-row">
+            <span class="contact-label">
+              Local Emergency Service:
+            </span>
+            <div class="contact-line"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Disclaimer -->
+      <div class="disclaimer-box">
+
+        <strong>Important Disclaimer:</strong>
+        This reference card is an educational and supportive resource for
+        present-focused stabilization. It does not diagnose, treat, or assess
+        trauma or other mental-health conditions, and it does not replace
+        psychotherapy, psychological assessment, medical care, crisis
+        intervention, or emergency services. The strategies presented here
+        may not be appropriate for everyone. Stop any strategy that increases
+        distress, pain, dizziness, dissociation, or disorientation.
+        This card is not intended to guide trauma exposure, forced memory
+        retrieval, or detailed recollection of traumatic events.
+        If you are in immediate danger or experiencing a mental-health emergency,
+        prioritize immediate safety and seek appropriate local professional
+        or emergency support.
+
+      </div>
+
+    </div>
+
+
+    <footer class="page-footer">
+      <span>Tamkinly | Tool ID: TRC-REGULATION_QUICK_REF</span>
+      <span>Page 2 of 2</span>
+    </footer>
+
+  </section>
+
+</body>
+</html>

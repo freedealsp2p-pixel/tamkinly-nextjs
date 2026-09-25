@@ -19,7 +19,7 @@ const sections = [
     icon: Footprints,
     titleAr: 'كيف يعمل في جسدك؟',
     titleEn: 'How Does It Work in Your Body?',
-    bodyAr: 'التأريض يفعّل العصب الحائر (Vagus Nerve) — الجزء المسؤول عن "الراحة والهضم". هذا يبطئ ضربات القلب، يعمّق التنفس، ويخفض الكورتيزول. تقنية 5-4-3-2-1 تستخدم الحواس الخمس لإعادة توجيه الانتباه من الداخل (الذكريات) إلى الخارج (الحاضر). الأبحاث على العلاج الجسدي تظهر أن الاتصال بالأرض والجسد يقلل التوتر المزمن ويحسن تنظيم المشاعر.',
+    bodyAr: 'التأريض يفعّل العصب المبهم (Vagus nerve) — الجزء المسؤول عن "الراحة والهضم". هذا يبطئ ضربات القلب، يعمّق التنفس، ويخفض الكورتيزول. تقنية 5-4-3-2-1 تستخدم الحواس الخمس لإعادة توجيه الانتباه من الداخل (الذكريات) إلى الخارج (الحاضر). الأبحاث على العلاج الجسدي تظهر أن الاتصال بالأرض والجسد يقلل التوتر المزمن ويحسن تنظيم المشاعر.',
     bodyEn: 'Grounding activates the Vagus Nerve — the part responsible for "rest and digest." This slows heart rate, deepens breathing, and lowers cortisol. The 5-4-3-2-1 technique uses the five senses to redirect attention from inside (memories) to outside (the present). Somatic therapy research shows that body-earth connection reduces chronic tension and improves emotion regulation.',
   },
   {

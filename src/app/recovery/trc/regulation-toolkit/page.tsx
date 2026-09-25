@@ -54,7 +54,7 @@ const tools: ToolInfo[] = [
     id: 'a52-breathing',
     nameAr: 'تنفس A52 (5-5-2)',
     nameEn: 'A52 Breathing (5-5-2)',
-    descAr: 'تنفس بطيء ومنظم: شهيق 5 ثوانٍ − احباس 2 ثانية. يفعّل العصب الحائر لتهدئة الجهاز العصبي.',
+    descAr: 'تنفس بطيء ومنظم: شهيق 5 ثوانٍ − احباس 2 ثانية. يفعّل العصب المبهم (Vagus nerve) لتهدئة الجهاز العصبي.',
     descEn: 'Slow regulated breathing: inhale 5s − hold 2s. Activates the vagus nerve to calm the nervous system.',
     useWhenAr: 'عندما تكون منشطاً لكن يمكنك التركيز على التنفس',
     useWhenEn: 'When you are activated but can focus on breathing',

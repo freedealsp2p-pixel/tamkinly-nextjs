@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرجع التنظيم السريع — Tamkinly TRC</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+
+  :root{
+    --primary:#1F6F78;
+    --accent:#3DD4B0;
+    --dark:#0F1C2E;
+    --bg:#F8FAFC;
+    --line:#CBD5E1;
+    --alert-bg:#FFFBEB;
+    --alert-border:#D97706;
+    --alert-text:#92400E;
+    --safety-bg:#FEF3C7;
+    --safety-border:#B45309;
+    --safety-text:#78350F;
+    --teal-bg:#E6F4F5;
+    --teal-text:#1F6F78;
+    --field:#9CA3AF;
+  }
+
+  * { box-sizing:border-box; }
+
+  html, body {
+    margin:0;
+    padding:0;
+    background:#e5e7eb;
+    color:var(--dark);
+    font-family:'Noto Sans Arabic', sans-serif;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  body { line-height:1.55; }
+
+  .document {
+    width:210mm;
+    margin:12mm auto;
+  }
+
+  .page {
+    width:210mm;
+    min-height:297mm;
+    padding:15mm;
+    background:var(--bg);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+
+  .page + .page { margin-top:12mm; }
+
+  .header {
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    border-bottom:2px solid var(--primary);
+    padding-bottom:9px;
+    margin-bottom:12px;
+  }
+
+  .brand {
+    color:var(--primary);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.2px;
+  }
+
+  h1 {
+    margin:3px 0 0;
+    font-size:25px;
+    line-height:1.25;
+    color:var(--dark);
+  }
+
+  h2 {
+    margin:0 0 6px;
+    font-size:16px;
+    color:var(--primary);
+  }
+
+  h3 {
+    margin:0;
+    font-size:12.5px;
+    color:var(--dark);
+  }
+
+  p { margin:0; font-size:10.5px; }
+
+  .meta {
+    text-align:left;
+    direction:ltr;
+    font-size:8px;
+    color:#475569;
+    line-height:1.45;
+    white-space:nowrap;
+  }
+
+  .purpose {
+    background:white;
+    border:1px solid var(--line);
+    border-right:4px solid var(--primary);
+    padding:10px 12px;
+    margin-bottom:10px;
+  }
+
+  .purpose p { color:#334155; }
+
+  .safety {
+    background:var(--safety-bg);
+    border:1.5px solid var(--safety-border);
+    color:var(--safety-text);
+    padding:9px 11px;
+    border-radius:5px;
+    margin-bottom:11px;
+    font-size:10px;
+    font-weight:700;
+  }
+
+  .safety strong {
+    display:block;
+    margin-bottom:2px;
+    font-size:11px;
+  }
+
+  .table-wrap {
+    background:white;
+    border:1px solid var(--line);
+    border-radius:5px;
+    overflow:hidden;
+    margin-bottom:11px;
+  }
+
+  table {
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    font-size:8.7px;
+  }
+
+  th {
+    background:var(--primary);
+    color:white;
+    padding:6px 5px;
+    text-align:right;
+    font-weight:800;
+  }
+
+  td {
+    border-top:1px solid var(--line);
+    padding:5.5px 5px;
+    vertical-align:top;
+    color:#334155;
+  }
+
+  th:nth-child(1), td:nth-child(1){ width:18%; font-weight:800; color:var(--dark); }
+  th:nth-child(2), td:nth-child(2){ width:29%; }
+  th:nth-child(3), td:nth-child(3){ width:10%; text-align:center; }
+  th:nth-child(4), td:nth-child(4){ width:43%; }
+
+  tr:nth-child(even) td { background:#F8FAFC; }
+
+  .section {
+    background:white;
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:9px 11px;
+    margin-bottom:10px;
+  }
+
+  .section-title {
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:7px;
+  }
+
+  .section-title .num {
+    width:21px;
+    height:21px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--teal-bg);
+    color:var(--teal-text);
+    border:1px solid #b9e1e4;
+    border-radius:50%;
+    font-size:9px;
+    font-weight:800;
+  }
+
+  .choice-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+  }
+
+  .choice {
+    border:1px solid var(--line);
+    border-right:3px solid var(--primary);
+    padding:7px 8px;
+    background:#fff;
+  }
+
+  .choice strong {
+    display:block;
+    font-size:9.8px;
+    color:var(--dark);
+    margin-bottom:2px;
+  }
+
+  .choice span {
+    display:block;
+    font-size:8.8px;
+    color:#475569;
+  }
+
+  .decision {
+    border:1px solid var(--line);
+    background:white;
+    padding:9px;
+    margin-bottom:8px;
+  }
+
+  .decision-start {
+    background:var(--teal-bg);
+    border:1.5px solid #8bcfd2;
+    color:var(--teal-text);
+    font-weight:800;
+    text-align:center;
+    padding:7px;
+    margin-bottom:7px;
+    border-radius:4px;
+  }
+
+  .decision-row {
+    display:grid;
+    grid-template-columns:20% 1fr;
+    gap:7px;
+    border-top:1px solid var(--line);
+    padding:6px 0;
+    font-size:9.2px;
+  }
+
+  .decision-row:first-of-type { border-top:0; }
+
+  .level {
+    font-weight:800;
+    color:var(--primary);
+  }
+
+  .escalation {
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:7px;
+    margin-bottom:10px;
+  }
+
+  .escalation-card {
+    border:1px solid var(--line);
+    border-top:4px solid var(--primary);
+    background:white;
+    padding:8px;
+    min-height:73px;
+  }
+
+  .escalation-card:nth-child(2) { border-top-color:#D97706; }
+  .escalation-card:nth-child(3) {
+    border-top-color:#B91C1C;
+    background:#FEF2F2;
+  }
+
+  .escalation-card strong {
+    display:block;
+    font-size:9.4px;
+    margin-bottom:3px;
+  }
+
+  .escalation-card p { font-size:8.7px; color:#475569; }
+
+  .contacts {
+    border:1px solid var(--line);
+    background:white;
+    padding:9px 11px;
+    margin-top:auto;
+  }
+
+  .contacts-intro {
+    font-size:8.8px;
+    color:#475569;
+    margin-bottom:8px;
+  }
+
+  .contact {
+    display:grid;
+    grid-template-columns:31% 1fr;
+    gap:8px;
+    align-items:end;
+    margin-bottom:8px;
+  }
+
+  .contact label {
+    font-size:9px;
+    font-weight:800;
+    color:#334155;
+  }
+
+  .write-field {
+    min-height:25px;
+    border-bottom:2px dotted var(--field);
+  }
+
+  .footer {
+    margin-top:8px;
+    padding-top:6px;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    color:#475569;
+    font-size:8px;
+  }
+
+  .footer .ltr {
+    direction:ltr;
+    text-align:left;
+  }
+
+  .page-break { page-break-after:always; }
+
+  .no-print { display:block; }
+
+  @media print {
+    html, body { background:white; }
+    .document { width:auto; margin:0; }
+    .page {
+      width:210mm;
+      min-height:297mm;
+      height:297mm;
+      margin:0 !important;
+      page-break-after:always;
+      break-after:page;
+    }
+    .page:last-child {
+      page-break-after:auto;
+      break-after:auto;
+    }
+    .no-print { display:none !important; }
+  }
+
+  @media screen {
+    .print-note {
+      width:210mm;
+      margin:0 auto 8px;
+      font:12px/1.5 Arial,sans-serif;
+      direction:rtl;
+      color:#334155;
+      background:#fff;
+      border:1px solid #cbd5e1;
+      padding:8px 10px;
+      border-radius:5px;
+    }
+  }
+</style>
+</head>
+
+<body>
+<div class="print-note no-print">
+  هذا الأصل Draft للمراجعة السريرية — Clinical Review: REQUIRED. افتح الملف في المتصفح ثم اختر طباعة → حفظ كـ PDF.
+</div>
+
+<div class="document">
+
+  <!-- PAGE 1 -->
+  <section class="page page-break">
+    <header class="header">
+      <div>
+        <div class="brand">Tamkinly — مركز التعافي من الصدمات (TRC)</div>
+        <h1>مرجع التنظيم السريع</h1>
+      </div>
+      <div class="meta">
+        Asset ID: regulation-quick-reference<br>
+        Tool ID: TRC-REGULATION_QUICK_REFERENCE<br>
+        Companion: REFERENCE<br>
+        Status: planned / clinical-review
+      </div>
+    </header>
+
+    <div class="purpose">
+      <h2>غرض المرجع</h2>
+      <p>مرجع سريع يجمع كل أدوات التنظيم مع متى وكيف تستخدم كل أداة لاتخاذ قرار سريع عند الحاجة.</p>
+    </div>
+
+    <div class="safety">
+      <strong>تنبيه السلامة</strong>
+      هذا مرجع سريع فقط. إذا لم تنفع أي أداة وشعرت بعدم الأمان، لا تدير الأمر وحدك. اطلب المساعدة الآن.
+    </div>
+
+    <section>
+      <div class="section-title">
+        <span class="num">01</span>
+        <h2>جدول المرجع السريع</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>الأداة</th>
+              <th>متى تستخدمها</th>
+              <th>الوقت</th>
+              <th>التعليمة المفتاح</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>تأريض 5-4-3-2-1</td>
+              <td>تفارق، بداية ذكريات، فيضان</td>
+              <td>2-5 د</td>
+              <td>سمِّ 5 تري، 4 تلمس، 3 تسمع، 2 تشم، 1 تتذوق</td>
+            </tr>
+            <tr>
+              <td>تنفس A52</td>
+              <td>قلق، يقظة مفرطة، نبض سريع</td>
+              <td>3-5 د</td>
+              <td>شهيق 5ث، زفير 2ث، كرر 4-6 جولات</td>
+            </tr>
+            <tr>
+              <td>المكان الآمن</td>
+              <td>حاجة لمورد داخلي، قبل مهمة صعبة</td>
+              <td>5-10 د</td>
+              <td>تخيل مكانك الآمن بالحواس الخمس</td>
+            </tr>
+            <tr>
+              <td>مسح الجسد</td>
+              <td>توتر، انفصال عن الجسد</td>
+              <td>5-15 د</td>
+              <td>امسح من الرأس للقدمين، لاحظ بدون حكم</td>
+            </tr>
+            <tr>
+              <td>النقر EFT</td>
+              <td>شدة محددة مسماة، عاطفة عالقة</td>
+              <td>10-20 د</td>
+              <td>قاعدة إعداد، انقر 8 نقاط، أعد تقييم SUDS</td>
+            </tr>
+            <tr>
+              <td>إعادة صياغة الأفكار</td>
+              <td>عالق في حلقة فكر سلبي</td>
+              <td>10-15 د</td>
+              <td>حدد الفكرة، افحص الدليل، أعد الصياغة</td>
+            </tr>
+            <tr>
+              <td>خريطة المحفزات</td>
+              <td>بعد حادثة، فهم نمط</td>
+              <td>10-15 د</td>
+              <td>ارسم: محفز ← جسد ← عاطفة ← سلوك ← استجابة</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="num">02</span>
+        <h2>دليل الاختيار السريع حسب حالة الاستثارة</h2>
+      </div>
+
+      <div class="choice-grid">
+        <div class="choice">
+          <strong>استثارة عالية (فرط)</strong>
+          <span>تأريض ← تنفس ← مسح الجسد</span>
+        </div>
+        <div class="choice">
+          <strong>استثارة منخفضة (نقص)</strong>
+          <span>حركة ← تحفيز حسي ← مكان آمن</span>
+        </div>
+        <div class="choice">
+          <strong>عالق (اجترار)</strong>
+          <span>إعادة صياغة أفكار ← نقر EFT</span>
+        </div>
+        <div class="choice">
+          <strong>دوامة عار</strong>
+          <span>تعافي من العار ← تعاطف مع الذات ← التحدث عن العار</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span>مرجع سريع فقط — لا معالجة عاطفية في قراءته.</span>
+      <span class="ltr">TRC-REGULATION_QUICK_REF</span>
+      <span>صفحة 1 من 2</span>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="page">
+    <header class="header">
+      <div>
+        <div class="brand">Tamkinly — مركز التعافي من الصدمات (TRC)</div>
+        <h1>القرار السريع ومسار الأمان</h1>
+      </div>
+      <div class="meta">
+        regulation-quick-reference<br>
+        Clinical Review: REQUIRED
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="num">03</span>
+        <h2>مخطط القرار</h2>
+      </div>
+
+      <div class="decision">
+        <div class="decision-start">ابدأ: «ما مستوى ضيقي الآن؟»</div>
+
+        <div class="decision-row">
+          <div class="level">SUDS 0-3</div>
+          <div>قد لا تحتاج أداة الآن.</div>
+        </div>
+        <div class="decision-row">
+          <div class="level">SUDS 4-6</div>
+          <div>جرب التأريض أو التنفس.</div>
+        </div>
+        <div class="decision-row">
+          <div class="level">SUDS 7-8</div>
+          <div>استخدم التأريض أولًا، ثم التنفس أو مسح الجسد.</div>
+        </div>
+        <div class="decision-row">
+          <div class="level">SUDS 9-10</div>
+          <div>تأريض فورًا. إذا لم يساعد، اطلب الدعم.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <span class="num">04</span>
+        <h2>مسار التصعيد</h2>
+      </div>
+
+      <div class="escalation">
+        <div class="escalation-card">
+          <strong>التنظيم الذاتي لا يجدي بعد 10 دقائق</strong>
+          <p>تواصل مع شخص موثوق.</p>
+        </div>
+        <div class="escalation-card">
+          <strong>شعور بعدم الأمان للبقاء وحدك</strong>
+          <p>اتصل بخط الأزمة.</p>
+        </div>
+        <div class="escalation-card">
+          <strong>أفكار انتحارية نشطة</strong>
+          <p>اتصل بخدمات الطوارئ.</p>
+        </div>
+      </div>
+
+      <div class="safety" style="margin-bottom:0;">
+        <strong>قاعدة السلامة</strong>
+        هذا مرجع فقط — لا معالجة عاطفية في قراءته. إذا لم تنفع أي أداة أو شعرت بعدم الأمان، انتقل إلى الدعم المباشر.
+      </div>
+    </section>
+
+    <section class="contacts">
+      <div class="section-title">
+        <span class="num">05</span>
+        <h2>جهات اتصال الطوارئ</h2>
+      </div>
+      <p class="contacts-intro">املأ هذه الحقول بنفسك لتكون معلومات الدعم متاحة عند الحاجة. لا توجد بيانات مملوءة مسبقًا.</p>
+
+      <div class="contact">
+        <label>جهة اتصال / دعم 1</label>
+        <div class="write-field"></div>
+      </div>
+
+      <div class="contact">
+        <label>جهة اتصال / دعم 2</label>
+        <div class="write-field"></div>
+      </div>
+
+      <div class="contact" style="margin-bottom:0;">
+        <label>جهة اتصال / طوارئ 3</label>
+        <div class="write-field"></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span>علامة Tamkinly التجارية</span>
+      <span class="ltr">Tool ID: TRC-REGULATION_QUICK_REF</span>
+      <span>صفحة 2 من 2</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
