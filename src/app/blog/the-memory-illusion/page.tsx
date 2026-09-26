@@ -35,7 +35,7 @@ export default function TheMemoryIllusionArticle() {
         dateModified="2026-09-25"
         author="Tamkinly Team"
         keywords={["memory illusion", "reconstructive memory", "false memories", "self narrative", "identity change"]}
-        image="/uploads/articles/the-memory-illusion.webp"
+        image="/uploads/articles/the-memory-illusion-reconstruction.webp"
       />
       <article className="min-h-screen" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         {/* Hero Section */}
@@ -81,20 +81,20 @@ export default function TheMemoryIllusionArticle() {
               </div>
 
               <ArticleFigure
-                src="/uploads/articles/the-memory-illusion.webp"
+                src="/uploads/articles/the-memory-illusion-reconstruction.webp"
                 width={1376}
                 height={768}
                 alt={{
-                  en: "A person observing a familiar scene with subtle inconsistencies, illustrating how memories can feel accurate while being reconstructed.",
-                  ar: "شخص يراقب مشهدًا مألوفًا تظهر فيه اختلافات دقيقة، في تصوير لكيف يمكن للذكريات أن تبدو دقيقة رغم إعادة بنائها.",
+                  en: "Overlapping translucent versions of the same living room with a duplicated jug and shifting walls, showing memory being rebuilt with subtle differences on every recall.",
+                  ar: "نسخ متداخلة شبه شفافة من الغرفة نفسها مع إبريق مكرر وجدران متحولة، توضح أن الذاكرة تُبنى باختلافات دقيقة في كل استدعاء.",
                 }}
                 title={{
                   en: "The Memory Illusion",
                   ar: "وهم الذاكرة",
                 }}
                 caption={{
-                  en: "Memory can feel like a faithful recording of the past while actually being reconstructed each time we remember it.",
-                  ar: "قد تبدو الذاكرة كأنها تسجيل دقيق للماضي، بينما تُعاد صياغتها في كل مرة نتذكرها فيها.",
+                  en: "The same room, rebuilt slightly differently each time it is remembered — memory returns as versions, not recordings.",
+                  ar: "الغرفة نفسها تُعاد بناؤها بتغيّرات طفيفة في كل مرة تُستدعى — الذاكرة تعود نسخاً لا تسجيلات.",
                 }}
               />
 
@@ -109,20 +109,20 @@ export default function TheMemoryIllusionArticle() {
               </p>
 
               <ArticleFigure
-                src="/uploads/articles/the-memory-illusion-reconstruction.webp"
+                src="/uploads/articles/the-memory-illusion.webp"
                 width={1376}
                 height={768}
                 alt={{
-                  en: "Overlapping translucent versions of the same living room with a duplicated jug and shifting walls, showing memory being rebuilt with subtle differences on every recall.",
-                  ar: "نسخ متداخلة شبه شفافة من الغرفة نفسها مع إبريق مكرر وجدران متحولة، توضح أن الذاكرة تُبنى باختلافات دقيقة في كل استدعاء.",
+                  en: "A person observing a familiar scene with subtle inconsistencies, illustrating how memories can feel accurate while being reconstructed.",
+                  ar: "شخص يراقب مشهدًا مألوفًا تظهر فيه اختلافات دقيقة، في تصوير لكيف يمكن للذكريات أن تبدو دقيقة رغم إعادة بنائها.",
                 }}
                 title={{
                   en: "Every Recall, a New Version",
                   ar: "كل استدعاء، نسخة جديدة",
                 }}
                 caption={{
-                  en: "The same room, rebuilt slightly differently each time it is remembered — memory returns as versions, not recordings.",
-                  ar: "الغرفة نفسها تُعاد بناؤها بتغيّرات طفيفة في كل مرة تُستدعى — الذاكرة تعود نسخاً لا تسجيلات.",
+                  en: "Memory can feel like a faithful recording of the past while actually being reconstructed each time we remember it.",
+                  ar: "قد تبدو الذاكرة كأنها تسجيل دقيق للماضي، بينما تُعاد صياغتها في كل مرة نتذكرها فيها.",
                 }}
               />
 

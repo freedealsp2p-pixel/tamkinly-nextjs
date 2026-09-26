@@ -15,6 +15,10 @@ export async function generateMetadata(): Promise<Metadata> {
     ? 'تمرين مجاني كامل: اكتب الجملة السلبية عن نفسك، اطمس وسطها بشريط أسود، ثم عِش طقس الورقة والماء عبر ثلاث ليالٍ مع مؤقت ٧٢ ساعة وتذكير بالبريد ومفكرة تحول من ٩ أيام.'
     : 'A completely free exercise: write the negative sentence about yourself, blank out its middle with black tape, then live the paper-and-water ritual across three nights with a 72-hour timer, email reminder and a 9-day transformation journal.';
 
+  const ogAlt = isAr
+    ? 'تقنية الجملة المبتورة: تمرين تفاعلي مجاني'
+    : 'The Truncated Sentence Technique: free interactive exercise';
+
   return {
     title,
     description,
@@ -35,7 +39,13 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Tamkinly',
       type: 'website',
       locale: isAr ? 'ar_AR' : 'en_US',
-      images: [{ url: 'https://tamkinly.com/og-image.webp', width: 1200, height: 630, alt: title }],
+      images: [{ url: 'https://tamkinly.com/uploads/protocols/truncated-sentence-protocol.webp', width: 1408, height: 768, alt: ogAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://tamkinly.com/uploads/protocols/truncated-sentence-protocol.webp'],
     },
   };
 }

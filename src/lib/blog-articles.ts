@@ -1025,7 +1025,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     slug: 'the-memory-illusion',
-    image: '/uploads/articles/the-memory-illusion.webp',
+    image: '/uploads/articles/the-memory-illusion-reconstruction.webp',
     title: 'The Memory Illusion: Why You Are Not Who You Remember Being',
     titleAr: 'وهم الذاكرة: لست من تتذكّر أنك',
     description: 'Memory is not a recording — it is a reconstruction edited every time you recall it. Discover the neuroscience of the memory illusion and why your self-story is editable, then start editing it on purpose.',

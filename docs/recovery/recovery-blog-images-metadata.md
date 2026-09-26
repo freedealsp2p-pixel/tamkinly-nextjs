@@ -108,3 +108,33 @@ Secondary: /uploads/articles/the-memory-illusion-reconstruction.webp (1376x768, 
 - Alt AR: نسخ متداخلة شبه شفافة من الغرفة نفسها مع إبريق مكرر وجدران متحولة، توضح أن الذاكرة تُبنى باختلافات دقيقة في كل استدعاء.
 - Placement: after "How Reconstruction Works" section
 - NOTE: secondary image bilingual metadata authored by assistant; user approved the selection itself — revise wording on request
+
+
+## 2026-09-26 (b) — the-memory-illusion COVER SWAP (user directive)
+
+User directive: «اجعلها صورة الغلاف واحتفظ بالصورة التي وضعناها مع اخر بوست للتلغرام» —
+make the reconstruction image the article cover; keep the image used with the last Telegram post.
+
+COVER / hero figure + og:image + twitter:image + JSON-LD image: /uploads/articles/the-memory-illusion-reconstruction.webp (1376x768, ~130KB) (candidate 3)
+- Image Title: The Memory Illusion / وهم الذاكرة (position title, unchanged)
+- Caption EN: The same room, rebuilt slightly differently each time it is remembered — memory returns as versions, not recordings.
+- Caption AR: الغرفة نفسها تُعاد بناؤها بتغيّرات طفيفة في كل مرة تُستدعى — الذاكرة تعود نسخاً لا تسجيلات.
+- Alt EN: Overlapping translucent versions of the same living room with a duplicated jug and shifting walls, showing memory being rebuilt with subtle differences on every recall.
+- Alt AR: نسخ متداخلة شبه شفافة من الغرفة نفسها مع إبريق مكرر وجدران متحولة، توضح أن الذاكرة تُبنى باختلافات دقيقة في كل استدعاء.
+- Placement: hero figure after disclaimer box + og:image + twitter + JSON-LD image + registry image (listing card)
+
+Second figure (after "How Reconstruction Works"): /uploads/articles/the-memory-illusion.webp (1376x768, ~60KB) (candidate 1 — the image published with the last Telegram post; KEPT)
+- Image Title: Every Recall, a New Version / كل استدعاء، نسخة جديدة (position title, unchanged)
+- Caption EN: Memory can feel like a faithful recording of the past while actually being reconstructed each time we remember it.
+- Caption AR: قد تبدو الذاكرة كأنها تسجيل دقيق للماضي، بينما تُعاد صياغتها في كل مرة نتذكرها فيها.
+- Alt EN: A person observing a familiar scene with subtle inconsistencies, illustrating how memories can feel accurate while being reconstructed.
+- Alt AR: شخص يراقب مشهدًا مألوفًا تظهر فيه اختلافات دقيقة، في تصوير لكيف يمكن للذكريات أن تبدو دقيقة رغم إعادة بنائها.
+- Placement: unchanged (after "How Reconstruction Works")
+
+Telegram post packages (AR + EN) untouched — their image stays as published.
+
+## 2026-09-26 (c) — truncated-sentence exercise SEO pass (user directive)
+
+og:image + twitter card now use the exercise's own product image: /uploads/protocols/truncated-sentence-protocol.webp (1408x768, ~87KB)
+- Fixes: TSQ page previously fell back to generic /og-image.webp and inherited the parent hub's twitter:title («Therapeutic Protocols | Tamkinly») on social shares.
+- twitter card: summary_large_image with the exercise's own bilingual title/description.
