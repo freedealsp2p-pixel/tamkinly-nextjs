@@ -1,6 +1,7 @@
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
+import { useLocale } from '@/components/providers/LocaleProvider';
 import { Badge } from '@/components/ui/badge';
 import { Brain, Compass, Heart, TrendingUp, User, Target } from 'lucide-react';
 
@@ -94,8 +95,9 @@ const quizDimensionsAr = [
   },
 ];
 
-export function QuizFaqSection({ locale = 'en' }: { locale?: string }) {
-  const isAr = locale === 'ar';
+export function QuizFaqSection({ locale: localeProp }: { locale?: string }) {
+  const { locale } = useLocale();
+  const isAr = (localeProp || locale) === 'ar';
   const dimensions = isAr ? quizDimensionsAr : quizDimensionsEn;
 
   return (

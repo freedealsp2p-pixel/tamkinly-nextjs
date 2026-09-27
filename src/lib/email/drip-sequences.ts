@@ -41,6 +41,8 @@ export interface DripStep {
   primaryUrl: string;
   /** Tags for tracking */
   tags: string[];
+  /** Rendered HTML content (optional override used by the queue) */
+  content?: string;
 }
 
 export interface DripSequence {
@@ -688,7 +690,87 @@ const QUIZ_COMPLETED_SEQUENCE: DripSequence = {
 // EXPORT ALL SEQUENCES
 // ============================================
 
+
+// ============================================
+// WELCOME BILINGUAL HTML (2026-09-27)
+// Single source for the NEW_SUBSCRIBER welcome email. Bilingual (AR + EN),
+// brand-styled, self-contained. {{name}} / {{email}} get replaced by
+// replaceVariables before queueing.
+// ============================================
+function welcomeBilingualHtml(name: string): string {
+  const codeBox = (txt: string) =>
+    '<div style="font-size:15px;font-weight:bold;background:#F5F9F8;border:1px solid #D8E6E4;border-radius:10px;padding:10px 14px;text-align:center;margin:8px 0;color:#0F1C2E;">' + txt + '</div>';
+  const arSection =
+    '<div dir="rtl" style="text-align:right;">' +
+    '<h2 style="color:#0F1C2E;font-size:20px;margin:0 0 10px;">مرحباً ' + name + '،</h2>' +
+    '<p style="color:#475569;line-height:1.8;margin:0 0 14px;">أهلاً بك في تمكينلي — مساحة لإعادة بناء الإنسان من الداخل، بلا ضغط وبلا حكم على الذات. لقد اتخذت الخطوة الأولى، وهذه هداياك المجانية للبداية:</p>' +
+    codeBox('1) اختبار فجوة الهوية — تقييم مجاني في 3 دقائق يرسم خريطتك الشخصية عبر 6 أبعاد') +
+    codeBox('2) تقنية الجملة المبتورة — بروتوكول علاجي كامل مجاناً (5 شاشات + متابعة 9 أيام)') +
+    '<p style="text-align:center;margin:18px 0 6px;">' +
+    '<a href="https://tamkinly.com/quiz" style="display:inline-block;background:#1F6F78;color:#ffffff;text-decoration:none;padding:12px 26px;border-radius:10px;font-weight:bold;margin:4px 3px;">ابدأ الاختبار المجاني</a>' +
+    '<a href="https://tamkinly.com/apps/therapeutic-protocols/truncated-sentence" style="display:inline-block;background:#3DD4B0;color:#0F1C2E;text-decoration:none;padding:12px 26px;border-radius:10px;font-weight:bold;margin:4px 3px;">احصل على التقنية المجانية</a>' +
+    '</p>' +
+    '<p style="color:#64748B;font-size:13px;line-height:1.7;">ستصلك رسالة مدروسة أسبوعياً عن الهوية والعادات والتعافي. منتجاتنا الكاملة: الاشتراكات (أساسي 7$ / مميز 17$ / إتقان 27$ شهرياً) والبروتوكولات العلاجية الثلاثة — <a href="https://tamkinly.com/products" style="color:#1F6F78;">تصفح المنتجات</a>.</p>' +
+    '</div>';
+  const enSection =
+    '<div dir="ltr" style="text-align:left;border-top:1px solid #E2E8F0;margin-top:22px;padding-top:22px;">' +
+    '<h2 style="color:#0F1C2E;font-size:20px;margin:0 0 10px;">Welcome, ' + name + ',</h2>' +
+    '<p style="color:#475569;line-height:1.8;margin:0 0 14px;">You have joined Tamkinly — a space to rebuild the human from the inside, without pressure and without self-judgment. Here are your free starting gifts:</p>' +
+    codeBox('1) Identity Gap Quiz — a free 3-minute assessment that maps your identity across 6 dimensions') +
+    codeBox('2) The Truncated Sentence Technique — a complete therapeutic protocol, free (5 screens + 9-day follow-up)') +
+    '<p style="text-align:center;margin:18px 0 6px;">' +
+    '<a href="https://tamkinly.com/quiz" style="display:inline-block;background:#1F6F78;color:#ffffff;text-decoration:none;padding:12px 26px;border-radius:10px;font-weight:bold;margin:4px 3px;">Take the free quiz</a>' +
+    '<a href="https://tamkinly.com/apps/therapeutic-protocols/truncated-sentence" style="display:inline-block;background:#3DD4B0;color:#0F1C2E;text-decoration:none;padding:12px 26px;border-radius:10px;font-weight:bold;margin:4px 3px;">Claim the free technique</a>' +
+    '</p>' +
+    '<p style="color:#64748B;font-size:13px;line-height:1.7;">One thoughtful email a week on identity, habits, and recovery. Full catalog: subscriptions (Basic $7 / Premium $17 / Mastery $27 monthly) and three therapeutic protocols — <a href="https://tamkinly.com/products" style="color:#1F6F78;">browse products</a>.</p>' +
+    '</div>';
+  return (
+    '<!DOCTYPE html><html><head><meta charset="UTF-8"></head>' +
+    '<body style="margin:0;padding:0;background-color:#F6F8FA;font-family:Segoe UI,Tahoma,Arial,sans-serif;">' +
+    '<div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #E2E8F0;">' +
+    '<div style="background:linear-gradient(135deg,#0F1C2E 0%,#1F6F78 100%);padding:36px 30px;text-align:center;">' +
+    '<h1 style="color:#3DD4B0;margin:0;font-size:26px;">تمكينلي · Tamkinly</h1>' +
+    '<p style="color:#ffffff;margin:8px 0 0;font-size:14px;">عُد إلى مركزك · Return to Your Center</p>' +
+    '</div>' +
+    '<div style="padding:30px;">' + arSection + enSection + '</div>' +
+    '<div style="background:#0F1C2E;padding:18px 30px;text-align:center;">' +
+    '<p style="color:#8A94A6;font-size:12px;margin:0;">© 2026 Tamkinly — <a href="https://tamkinly.com/privacy" style="color:#3DD4B0;text-decoration:none;">Privacy</a></p>' +
+    '</div></div></body></html>'
+  );
+}
+
+// ============================================
+// SEQUENCE 0: WELCOME (NEW_SUBSCRIBER) — added 2026-09-27
+// Fires for newsletter subscribers (quiz results / resources / footer /
+// homepage) and for new account registrations. One bilingual step, immediate.
+// templateName intentionally empty so the queued row sends its own content.
+// ============================================
+const WELCOME_NEW_SUBSCRIBER_SEQUENCE: DripSequence = {
+  id: 'welcome_new_subscriber',
+  name: 'Welcome — New Subscriber',
+  description: 'Immediate bilingual welcome email with free gifts (Identity Gap Quiz + Truncated Sentence Technique).',
+  tier: 'free',
+  trigger: 'NEW_SUBSCRIBER',
+  isActive: true,
+  steps: [
+    {
+      stepNumber: 1,
+      delayHours: 0,
+      subject: 'Welcome to Tamkinly · مرحباً بك في تمكينلي',
+      subjectAr: 'مرحباً بك في تمكينلي · Welcome to Tamkinly',
+      preheader: 'Your free identity tools are inside',
+      preheaderAr: 'أدواتك الهوياتية المجانية في الداخل',
+      templateName: '',
+      primaryCta: 'Take the free quiz',
+      primaryUrl: '/quiz',
+      tags: ['welcome', 'new_subscriber'],
+      content: welcomeBilingualHtml('{{name}}'),
+    },
+  ],
+};
+
 export const DRIP_SEQUENCES: DripSequence[] = [
+  WELCOME_NEW_SUBSCRIBER_SEQUENCE,
   LEAD_NURTURE_SEQUENCE,
   BASIC_ONBOARDING_SEQUENCE,
   PREMIUM_ONBOARDING_SEQUENCE,

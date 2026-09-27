@@ -382,7 +382,8 @@
     "protocolsHub": "البروتوكولات العلاجية",
     "temporalDecoupling": "التفكيك الزمني — $99",
     "whiteMirror": "المرآة البيضاء — $99",
-    "alternativeCode": "الشفرة البديلة — $99"
+    "alternativeCode": "الشفرة البديلة — $99",
+    "orderStatus": "حالة الطلب"
   },
   "search": {
     "identityQuiz": "اختبار فجوة الهوية",

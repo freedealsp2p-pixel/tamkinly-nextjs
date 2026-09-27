@@ -116,8 +116,28 @@ export function LocaleCore({ messages, children, initialLocale = 'en', urlBased 
     document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
 
     if (urlBased) {
-      // For URL-based mode, use simple page reload instead of path navigation
-      // This avoids the 'Something Went Wrong' error from invalid /ar routes
+      // FIX (2026-09-26): you cannot leave a locale-prefixed path (/ar/*, /en/*)
+      // with a same-URL reload - middleware force-stamps NEXT_LOCALE back to 'ar'
+      // on every /ar/* request, overwriting the cookie before render. Navigate to
+      // the bare path instead (cookie is already set above this block).
+      const curPath = window.location.pathname;
+      const arPrefix = curPath === '/ar' || curPath.startsWith('/ar/');
+      const enPrefix = curPath === '/en' || curPath.startsWith('/en/');
+      if (arPrefix || enPrefix) {
+        const pathLocale: Locale = arPrefix ? 'ar' : 'en';
+        if (newLocale !== pathLocale) {
+          const barePath = arPrefix ? (curPath.slice(3) || '/') : (curPath.slice(4) || '/');
+          setTimeout(() => {
+            window.location.href = barePath + window.location.search + window.location.hash;
+          }, 50);
+          return;
+        }
+        // Target equals the URL prefix locale: plain reload of the same URL
+        setLocaleState(newLocale);
+        setTimeout(() => window.location.reload(), 50);
+        return;
+      }
+      // Bare path: same-URL reload is sufficient (cookie drives the locale)
       setLocaleState(newLocale);
       // Small delay to ensure cookie is set before reload
       setTimeout(() => window.location.reload(), 50);

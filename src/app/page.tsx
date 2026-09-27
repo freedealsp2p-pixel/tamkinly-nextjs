@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { DefaultJsonLd } from "@/components/seo/JsonLd";
 import { useLocale, useTranslations } from "@/components/providers/LocaleProvider";
+import NewsletterSection from "@/components/home/NewsletterSection";
 
 // Dynamic imports for heavy interactive components (code-split for performance)
 const DailyReflectionPreview = dynamic(
@@ -850,6 +851,7 @@ export default function Home() {
       <HowItWorksSectionLazy />
       <DailyReflectionPreview />
       <VideoSectionLazy />
+      <NewsletterSection />
       <CTASectionLazy />
 
       {/* Promo Banner with Lazy Loading */}

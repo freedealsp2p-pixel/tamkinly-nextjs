@@ -132,6 +132,43 @@ export async function PUT(request: NextRequest) {
       }
     }
 
+    // Unified code delivery (2026-09-27): auto-email on payment confirmation
+    if (status === 'COMPLETED') {
+      try {
+        const fresh = await db.order.findUnique({ where: { id: orderId }, include: { items: true } });
+        if (fresh) {
+          const codes = await db.appAccess.findMany({
+            where: { orderId: { in: [fresh.orderNumber, fresh.id] }, isActive: true },
+            select: { code: true },
+          });
+          const tag = codes.length > 0 ? `access-code-${fresh.orderNumber}` : `payment-confirmed-${fresh.orderNumber}`;
+          const already = await db.emailQueue.findFirst({
+            where: { email: fresh.customerEmail, sequenceId: tag, status: 'PENDING' },
+          });
+          if (!already) {
+            const { queueEmail, accessCodeDeliveryHtml } = await import('@/lib/email/service');
+            await queueEmail({
+              email: fresh.customerEmail,
+              name: fresh.customerName || undefined,
+              subject: codes.length > 0
+                ? 'Your Tamkinly access code · رمز الوصول الخاص بك من تمكينلي'
+                : 'Payment confirmed · تم تأكيد الدفع — تمكينلي',
+              content: accessCodeDeliveryHtml(
+                fresh.customerName || 'Friend',
+                codes.map((c) => c.code),
+                fresh.orderNumber,
+                codes.length > 0
+              ),
+              sequenceId: tag,
+              scheduledAt: new Date(),
+            });
+          }
+        }
+      } catch (deliveryErr) {
+        console.error('Order delivery email failed:', deliveryErr);
+      }
+    }
+
     return NextResponse.json({ success: true, order });
   } catch (error) {
     console.error('Update order error:', error);

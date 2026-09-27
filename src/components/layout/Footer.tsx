@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Mail, Instagram, Linkedin, Youtube, Send } from "lucide-react";
 import { useTranslations } from "@/components/providers/LocaleProvider";
+import NewsletterForm from "@/components/NewsletterForm";
 
 const socialLinkData = [
   { href: "https://t.me/tamkinly", icon: Send, labelKey: "socialTelegram" as const },
@@ -52,6 +53,7 @@ export function Footer() {
 
   const supportLinks = [
     { href: "/faq", label: t("faq") },
+    { href: "/order-status", label: t("orderStatus") },
     { href: "/search", label: t("search") },
     { href: "/privacy", label: t("privacyPolicy") },
     { href: "/terms", label: t("termsOfService") },
@@ -66,6 +68,7 @@ export function Footer() {
   return (
     <footer className="bg-primary text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <NewsletterForm variant="bar" source="footer" />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-2">

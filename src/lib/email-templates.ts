@@ -121,13 +121,13 @@ export function getWelcomeEmailHtml(name: string, locale: 'en' | 'ar' = 'en'): s
         <li>${isAr ? 'تقييم مجاني للهوية' : 'Free identity assessment tools'}</li>
       </ul>
       <p style="text-align: center;">
-        <a href="${BASE_URL}/shop/" class="button">${isAr ? 'استكشف منتجاتنا' : 'Explore Our Products'}</a>
+        <a href="${BASE_URL}/products" class="button">${isAr ? 'استكشف منتجاتنا' : 'Explore Our Products'}</a>
       </p>
       <div class="tip-box">
         <strong>${isAr ? '💡 نصيحة:' : '💡 Pro Tip:'}</strong>
         ${isAr
-          ? 'ابدأ بتقييم فجوة الهوية المجاني لمعرفة نقطة بدايتك.'
-          : 'Start with the free Identity Gap Assessment to discover your starting point.'
+          ? 'ابدأ بتقييم فجوة الهوية المجاني لمعرفة نقطة بدايتك، ثم احصل على بروتوكول «تقنية الجملة المبتورة» مجاناً.'
+          : 'Start with the free Identity Gap Assessment to find your starting point, then claim the free Truncated Sentence Technique protocol.'
         }
       </div>
       <p>${isAr ? 'هل أنت مستعد لبدء رحلة التحول؟' : 'Ready to start your transformation journey?'}</p>
@@ -152,20 +152,20 @@ export function getPurchaseConfirmationHtml(
 
   const appsByTier: Record<string, { en: string[]; ar: string[] }> = {
     trial: {
-      en: ['7-Day Guided Discipline Journey', 'Daily identity prompts', 'Evidence tracking basics', 'Progress dashboard', '7 Days System PDF (downloadable)'],
-      ar: ['رحلة انضباط موجهة لمدة 7 أيام', 'مطالبات الهوية اليومية', 'أساسيات تتبع الأدلة', 'لوحة تتبع التقدم', 'PDF نظام 7 أيام (قابل للتحميل)', 'PDF عرض خاص (خصم الترقية)'],
+      en: ['Identity Gap Quiz (free)', 'Values Clarification', 'Daily Reflection', 'Habit Tracker', 'Progress Dashboard'],
+      ar: ['اختبار فجوة الهوية (مجاني)', 'أداة توضيح القيم', 'التأمل اليومي', 'متتبع العادات', 'لوحة التقدم'],
     },
     basic: {
-      en: ['Identity Gap Assessment', 'Values Clarification Tool', '30-Day Transformation Journey', 'Daily Planner & Tracker'],
-      ar: ['تقييم فجوة الهوية', 'أداة توضيح القيم', 'رحلة تحول 30 يوماً', 'المخطط والمتابع اليومي'],
+      en: ['All free apps', 'Identity Recode System (30-day)', 'Goal System', 'Journal System', 'Worksheets library'],
+      ar: ['جميع التطبيقات المجانية', 'نظام إعادة ترميز الهوية (30 يوماً)', 'نظام الأهداف', 'نظام اليوميات', 'مكتبة أوراق العمل'],
     },
     premium: {
-      en: ['Identity Gap Assessment', 'Values Clarification Tool', '30-Day Transformation Journey', 'Daily Planner & Tracker', 'Decision Pattern Analysis', 'Evidence Tracking System', 'Progress Dashboard'],
-      ar: ['تقييم فجوة الهوية', 'أداة توضيح القيم', 'رحلة تحول 30 يوماً', 'المخطط والمتابع اليومي', 'تحليل أنماط القرارات', 'نظام تتبع الأدلة', 'لوحة التقدم'],
+      en: ['All free apps', 'All Premium apps', 'Identity Recode System (30-day)', 'Goal System', 'Journal System', 'Worksheets library', 'Priority email support'],
+      ar: ['جميع التطبيقات المجانية', 'جميع تطبيقات مميز', 'نظام إعادة ترميز الهوية (30 يوماً)', 'نظام الأهداف', 'نظام اليوميات', 'مكتبة أوراق العمل', 'دعم بريد ذو أولوية'],
     },
     bundle: {
-      en: ['Identity Gap Assessment', 'Values Clarification Tool', '30-Day Transformation Journey', 'Daily Planner & Tracker', 'Decision Pattern Analysis', 'Evidence Tracking System', 'Progress Dashboard', 'AI Identity Coach', 'Transformation Community'],
-      ar: ['تقييم فجوة الهوية', 'أداة توضيح القيم', 'رحلة تحول 30 يوماً', 'المخطط والمتابع اليومي', 'تحليل أنماط القرارات', 'نظام تتبع الأدلة', 'لوحة التقدم', 'مدرب الهوية بالذكاء الاصطناعي', 'مجتمع التحول'],
+      en: ['Everything in Premium', 'AI Identity Coach', 'Community access', 'Priority support', 'Therapeutic protocols (3, lifetime)'],
+      ar: ['كل ما في خطة مميز', 'المدرب الذكي للهوية', 'الوصول للمجتمع', 'دعم ذو أولوية', 'البروتوكولات العلاجية الثلاثة (مدى الحياة)'],
     },
   };
 
@@ -209,7 +209,7 @@ export function getPurchaseConfirmationHtml(
         <h3 style="color: ${BRAND.dark}; margin: 0 0 12px 0; font-size: 16px;">${isAr ? '📥 ملفاتك القابلة للتحميل:' : '📥 Your Downloadable Files:'}</h3>
         <div style="background: white; border-radius: 8px; padding: 12px; margin: 8px 0;">
           <p style="margin: 0; color: ${BRAND.dark}; font-weight: 600;">${isAr ? '📘 نظام 7 أيام (PDF)' : '📘 7 Days System (PDF)'}</p>
-          <a href="${BASE_URL}/7-Days-System.pdf" download style="display: inline-block; background: ${BRAND.teal}; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; margin-top: 6px;">${isAr ? 'تحميل' : 'Download'}</a>
+          <a href="${BASE_URL}/downloads" style="display: inline-block; background: ${BRAND.teal}; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; margin-top: 6px;">${isAr ? 'مكتبة التحميلات' : 'Downloads library'}</a>
         </div>
 
       </div>
@@ -238,21 +238,21 @@ export function getPurchaseConfirmationHtml(
 // BASIC PURCHASE EMAIL (7-Day System) - kept for backward compat
 // ============================================
 export function getTrialPurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, '7-Day Identity System', 'trial', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Basic (Monthly) · أساسي', 'trial', locale);
 }
 
 // ============================================
 // PLANNER PURCHASE EMAIL (Main Product) - kept for backward compat
 // ============================================
 export function getPlannerPurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, 'Identity Recode Planner', 'basic', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Premium (Monthly) · مميز', 'basic', locale);
 }
 
 // ============================================
 // PREMIUM PURCHASE EMAIL - kept for backward compat
 // ============================================
 export function getPremiumPurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, 'Premium Transformation Package', 'premium', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Premium (Monthly) · مميز', 'premium', locale);
 }
 
 // ============================================
@@ -417,7 +417,7 @@ export function getDay14FollowUpHtml(name: string, currentTier: string = 'basic'
       </div>
 
       <p style="text-align: center;">
-        <a href="${BASE_URL}/shop/" class="button">${isAr ? `ارتقِ الآن - ${upgrade.price}` : `Upgrade Now - ${upgrade.price}`}</a>
+        <a href="${BASE_URL}/products" class="button">${isAr ? `ارتقِ الآن - ${upgrade.price}` : `Upgrade Now - ${upgrade.price}`}</a>
       </p>
 
       <p>${isAr
@@ -598,7 +598,7 @@ export function getQuizResultsHtml(
         : 'Want more detailed results? Upgrade for in-depth analysis and personalized recommendations.'
       }</p>
       <p style="text-align: center;">
-        <a href="${BASE_URL}/shop/" class="button button-dark">${isAr ? 'شاهد خيارات الارتقاء' : 'See Upgrade Options'}</a>
+        <a href="${BASE_URL}/products" class="button button-dark">${isAr ? 'شاهد خيارات الارتقاء' : 'See Upgrade Options'}</a>
       </p>
     </div>
     ${footerHtml()}`;

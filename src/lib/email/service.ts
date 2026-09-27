@@ -194,6 +194,45 @@ export async function getEmailSequence(trigger: string) {
 }
 
 // Queue an email for sending
+
+// ============================================
+// ACCESS CODE DELIVERY EMAIL (2026-09-27)
+// Unified code-delivery promise: email is the single channel. Bilingual.
+// hasCodes=false -> payment confirmed, code being prepared (<=24h).
+// ============================================
+export function accessCodeDeliveryHtml(name: string, codes: string[], orderNumber: string, hasCodes: boolean): string {
+  const codesHtml = codes.map(
+    (c) => '<div style="font-size:26px;font-weight:bold;letter-spacing:3px;background:#F5F9F8;border:1px solid #D8E6E4;border-radius:12px;padding:14px;text-align:center;margin:10px 0;font-family:Courier New,monospace;color:#0F1C2E;">' + c + '</div>'
+  ).join('');
+  const arBody = hasCodes
+    ? '<p style="color:#475569;line-height:1.8;margin:0 0 12px;">تم تأكيد دفعك بنجاح — شكراً لك. هذا رمز وصولك، ويفتح منتجك فوراً:</p>' + codesHtml +
+      '<p style="color:#475569;line-height:1.8;">طريقة الاستخدام: افتح <a href="https://tamkinly.com/apps" style="color:#1F6F78;">صفحة التطبيقات</a>، أدخل الرمز عند مطالبة الوصول، وسيُفعَّل منتجك فوراً. احتفظ بالرمز في مكان آمن.</p>'
+    : '<p style="color:#475569;line-height:1.8;margin:0 0 12px;">تم تأكيد دفعك بنجاح — فريقنا يجهّز رمز وصولك الآن وسيصلك على هذا البريد خلال 24 ساعة كحد أقصى.</p>' +
+      '<p style="color:#475569;line-height:1.8;">رقم طلبك: <strong>' + orderNumber + '</strong> — تابع حالته في أي وقت من صفحة <a href="https://tamkinly.com/order-status?order=' + orderNumber + '" style="color:#1F6F78;">حالة الطلب</a>.</p>';
+  const enBody = hasCodes
+    ? '<p style="color:#475569;line-height:1.8;margin:0 0 12px;">Your payment has been confirmed — thank you! Here is your access code; it unlocks your product instantly:</p>' + codesHtml +
+      '<p style="color:#475569;line-height:1.8;">How to use: open the <a href="https://tamkinly.com/apps" style="color:#1F6F78;">Apps page</a>, enter the code when asked for access, and your product activates immediately. Keep this code somewhere safe.</p>'
+    : '<p style="color:#475569;line-height:1.8;margin:0 0 12px;">Your payment has been confirmed — we are preparing your access code now and will email it within 24 hours at the latest.</p>' +
+      '<p style="color:#475569;line-height:1.8;">Your order number: <strong>' + orderNumber + '</strong> — track its status anytime on the <a href="https://tamkinly.com/order-status?order=' + orderNumber + '" style="color:#1F6F78;">Order Status</a> page.</p>';
+  const arSection = '<div dir="rtl" style="text-align:right;"><h2 style="color:#0F1C2E;font-size:20px;margin:0 0 12px;">مرحباً ' + name + '،</h2>' + arBody + '</div>';
+  const enSection = '<div dir="ltr" style="text-align:left;border-top:1px solid #E2E8F0;margin-top:22px;padding-top:22px;"><h2 style="color:#0F1C2E;font-size:20px;margin:0 0 12px;">Hello ' + name + ',</h2>' + enBody + '</div>';
+  return (
+    '<!DOCTYPE html><html><head><meta charset="UTF-8"></head>' +
+    '<body style="margin:0;padding:0;background-color:#F6F8FA;font-family:Segoe UI,Tahoma,Arial,sans-serif;">' +
+    '<div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #E2E8F0;">' +
+    '<div style="background:linear-gradient(135deg,#0F1C2E 0%,#1F6F78 100%);padding:32px 30px;text-align:center;">' +
+    '<h1 style="color:#3DD4B0;margin:0;font-size:24px;">تمكينلي · Tamkinly</h1>' +
+    (hasCodes
+      ? '<p style="color:#ffffff;margin:8px 0 0;font-size:14px;">رمز الوصول الخاص بك · Your Access Code</p>'
+      : '<p style="color:#ffffff;margin:8px 0 0;font-size:14px;">تم تأكيد الدفع · Payment Confirmed</p>') +
+    '</div>' +
+    '<div style="padding:30px;">' + arSection + enSection + '</div>' +
+    '<div style="background:#0F1C2E;padding:18px 30px;text-align:center;">' +
+    '<p style="color:#8A94A6;font-size:12px;margin:0;">© 2026 Tamkinly — <a href="https://tamkinly.com/privacy" style="color:#3DD4B0;text-decoration:none;">Privacy</a> · <a href="https://tamkinly.com/contact" style="color:#3DD4B0;text-decoration:none;">Support</a></p>' +
+    '</div></div></body></html>'
+  );
+}
+
 export async function queueEmail(params: {
   email: string;
   name?: string;

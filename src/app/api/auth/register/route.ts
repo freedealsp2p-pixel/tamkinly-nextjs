@@ -109,6 +109,17 @@ export async function POST(request: NextRequest) {
       console.error('Failed to create transformation journey:', journeyErr);
     }
 
+    // Welcome email (best-effort): queued -> cron -> Brevo (bilingual)
+    try {
+      const { triggerEmailSequence } = await import('@/lib/email/service');
+      await triggerEmailSequence('NEW_SUBSCRIBER', {
+        email: user.email,
+        name: user.name || 'Friend',
+      });
+    } catch (welcomeErr) {
+      console.error('Welcome email trigger failed:', welcomeErr);
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Account created successfully',

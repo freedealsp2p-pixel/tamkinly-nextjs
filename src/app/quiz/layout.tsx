@@ -36,16 +36,37 @@ const quizFAQEn = [
   },
 ];
 
-export default function QuizLayout({
+const quizFAQAr = [
+  {
+    question: 'ما هو اختبار فجوة الهوية؟',
+    answer: 'تقييم مجاني في 3 دقائق يقيس وضوح هويتك عبر 6 أبعاد: الهوية، البيئة، الانفعالات، القرارات، زخم التقدم، والتوافق الحياتي.',
+  },
+  {
+    question: 'كم يستغرق الاختبار؟',
+    answer: 'يستغرق الاختبار حوالي 3 دقائق ويتضمن 12 سؤالاً مصمماً بعناية.',
+  },
+  {
+    question: 'هل الاختبار مجاني؟',
+    answer: 'نعم، اختبار فجوة الهوية مجاني تماماً وبدون بريد إلكتروني، وتظهر النتائج فوراً.',
+  },
+  {
+    question: 'ماذا أحصل عليه من النتائج؟',
+    answer: 'درجة شخصية لفجوة الهوية عبر 6 أبعاد، ومجالات تحسين محددة، وخطوة تالية موصى بها.',
+  },
+];
+
+export default async function QuizLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const faq = locale === 'ar' ? quizFAQAr : quizFAQEn;
   return (
     <>
       {children}
-      <QuizFaqSection />
-      <FAQPageJsonLd questions={quizFAQEn} />
+      <QuizFaqSection locale={locale} />
+      <FAQPageJsonLd questions={faq} />
     </>
   );
 }

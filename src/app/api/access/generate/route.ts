@@ -52,6 +52,27 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Best-effort: queue the access-code delivery email (unified promise)
+    try {
+      const tag = `access-code-${orderId || access.code}`;
+      const already = await db.emailQueue.findFirst({
+        where: { email: access.email, sequenceId: tag, status: 'PENDING' },
+      });
+      if (!already) {
+        const { queueEmail, accessCodeDeliveryHtml } = await import('@/lib/email/service');
+        await queueEmail({
+          email: access.email,
+          name: customerName || undefined,
+          subject: 'Your Tamkinly access code · رمز الوصول الخاص بك من تمكينلي',
+          content: accessCodeDeliveryHtml(customerName || 'Friend', [access.code], orderId || '', true),
+          sequenceId: tag,
+          scheduledAt: new Date(),
+        });
+      }
+    } catch (deliveryErr) {
+      console.error('Access code email failed:', deliveryErr);
+    }
+
     return NextResponse.json({
       success: true,
       code: access.code,

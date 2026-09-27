@@ -765,6 +765,7 @@ export async function sendOrderReceivedEmail(
       <div class="warning-box">
         <p><strong>${isAr ? 'مهم:' : 'Important:'}</strong> ${isAr ? 'سيتم إرسال رمز الوصول فقط بعد التحقق من الدفع. عادةً ما يستغرق ذلك بضع دقائق للبطاقات، أو حتى 24 ساعة للتحويلات البنكية.' : 'Your access code will ONLY be sent after payment verification. This typically takes a few minutes for card payments, or up to 24 hours for bank transfers.'}</p>
       </div>
+      <p>${isAr ? 'تتبع حالة طلبك في أي وقت:' : 'Track your order status anytime:'} <a href="https://tamkinly.com/order-status?order=${options.orderNumber}" style="color: #1F6F78;">${isAr ? 'حالة الطلب' : 'Order Status'}</a></p>
       <p>${isAr ? 'إذا كان لديك أي أسئلة، لا تتردد في' : 'If you have any questions, feel free to'} <a href="https://tamkinly.com/contact" style="color: #1F6F78;">${isAr ? 'التواصل معنا' : 'contact us'}</a>.</p>
     </div>
     <div class="footer">
