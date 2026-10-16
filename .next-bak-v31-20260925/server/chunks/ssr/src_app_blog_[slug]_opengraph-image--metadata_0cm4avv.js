@@ -1,3 +1,0 @@
-module.exports=[122082,a=>{"use strict";a.i(851336),a.i(827316);var b=a.i(352425);let c={alt:"Tamkinly Blog",contentType:"image/png",runtime:"edge",size:{width:1200,height:630}};async function d(a){let{__metadata_id__:d,...e}=await a.params,f=(0,b.fillMetadataSegment)("/blog/[slug]",e,"opengraph-image",!1);return[function(a){let b={alt:a.alt,type:a.contentType||"image/png",url:f+"?ad5bac25c1b709c3"},{size:c}=a;return c&&(b.width=c.width,b.height=c.height),b}(c)]}a.s(["default",0,d],122082)},324527,a=>{a.n(a.i(122082))}];
-
-//# sourceMappingURL=src_app_blog_%5Bslug%5D_opengraph-image--metadata_0cm4avv.js.map

@@ -1,3 +1,0 @@
-module.exports=[317943,a=>{"use strict";var b=a.i(907997),c=a.i(528630),d=a.i(266892),e=a.i(847387);async function f(){let a=await (0,c.getLocale)();return(0,d.generateAppPageMetadata)("progress-dashboard",a)}a.s(["default",0,function({children:a}){let c=(0,d.getAppPageBySlug)("progress-dashboard");return(0,b.jsxs)(b.Fragment,{children:[c&&(0,b.jsx)(e.AppPageJsonLd,{name:c.title,description:c.description,slug:c.slug,category:c.category,tier:c.tier}),a]})},"generateMetadata",0,f])},561194,a=>{a.n(a.i(317943))}];
-
-//# sourceMappingURL=src_app_apps_progress-dashboard_layout_tsx_0o5a7-0._.js.map
