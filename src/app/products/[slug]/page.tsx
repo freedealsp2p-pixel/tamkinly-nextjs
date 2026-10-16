@@ -28,14 +28,15 @@ import { useTranslations, useLocale } from "@/components/providers/LocaleProvide
 import { addToCart } from "@/lib/cart-client";
 
 // Product configuration with prices and icons only (translatable content comes from translations)
-// Slug alias mapping: new slugs -> old translation keys
+// Slug alias mapping: page slugs -> translation keys that exist in messages/{en,ar}.json
+// JSON products: trial ($7 7-day), planner ($17 Identity Recode Planner), premium ($27 Premium Transformation)
 const slugToTranslationKey: Record<string, string> = {
-  'basic': 'basic',
-  'premium': 'premium',
-  'mastery': 'mastery',
-  // Legacy slugs redirect to new translation keys
-  'trial': 'basic',
-  'planner': 'premium',
+  'basic': 'trial',
+  'premium': 'planner',
+  'mastery': 'premium',
+  // Legacy slugs map to their own existing keys
+  'trial': 'trial',
+  'planner': 'planner',
 };
 
 const productsConfig: Record<string, {
@@ -139,13 +140,13 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         t(`${productKey}.highlights.sevenDays`),
         t(`${productKey}.highlights.lowRisk`)
       ];
-    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
+    } else if (slug === 'planner' || slug === 'premium') {
       return [
         t(`${productKey}.highlights.mostPopular`),
         t(`${productKey}.highlights.printIncluded`),
         t(`${productKey}.highlights.thirtyDays`)
       ];
-    } else if ((slug === 'premium' || slug === 'mastery')) {
+    } else if (slug === 'mastery') {
       return [
         t(`${productKey}.highlights.bestValue`),
         t(`${productKey}.highlights.save`),
@@ -163,13 +164,13 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { title: t(`${productKey}.benefits.seeResults.title`), description: t(`${productKey}.benefits.seeResults.description`) },
         { title: t(`${productKey}.benefits.fullSystem.title`), description: t(`${productKey}.benefits.fullSystem.description`) }
       ];
-    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
+    } else if (slug === 'planner' || slug === 'premium') {
       return [
         { title: t(`${productKey}.benefits.structured.title`), description: t(`${productKey}.benefits.structured.description`) },
         { title: t(`${productKey}.benefits.evidence.title`), description: t(`${productKey}.benefits.evidence.description`) },
         { title: t(`${productKey}.benefits.printDigital.title`), description: t(`${productKey}.benefits.printDigital.description`) }
       ];
-    } else if ((slug === 'premium' || slug === 'mastery')) {
+    } else if (slug === 'mastery') {
       return [
         { title: t(`${productKey}.benefits.dataDriven.title`), description: t(`${productKey}.benefits.dataDriven.description`) },
         { title: t(`${productKey}.benefits.patterns.title`), description: t(`${productKey}.benefits.patterns.description`) },
@@ -206,14 +207,14 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.apps.values.name`), description: t(`${productKey}.apps.values.description`) },
         { name: t(`${productKey}.apps.reflection.name`), description: t(`${productKey}.apps.reflection.description`) }
       ];
-    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
+    } else if (slug === 'planner' || slug === 'premium') {
       return [
         { name: t(`${productKey}.apps.manual.name`), description: t(`${productKey}.apps.manual.description`) },
         { name: t(`${productKey}.apps.dailyPlanner.name`), description: t(`${productKey}.apps.dailyPlanner.description`) },
         { name: t(`${productKey}.apps.baseline.name`), description: t(`${productKey}.apps.baseline.description`) },
         { name: t(`${productKey}.apps.audit.name`), description: t(`${productKey}.apps.audit.description`) }
       ];
-    } else if ((slug === 'premium' || slug === 'mastery')) {
+    } else if (slug === 'mastery') {
       return [
         { name: t(`${productKey}.apps.allPlanner.name`), description: t(`${productKey}.apps.allPlanner.description`) },
         { name: t(`${productKey}.apps.decision.name`), description: t(`${productKey}.apps.decision.description`) },
@@ -234,7 +235,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.email`) },
         { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.durationValue`) }
       ];
-    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
+    } else if (slug === 'planner' || slug === 'premium') {
       return [
         { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
         { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
@@ -242,7 +243,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.includes.support`), value: t(`${productKey}.includes.email`) },
         { name: t(`${productKey}.includes.updates`), value: t(`${productKey}.includes.freeForever`) }
       ];
-    } else if ((slug === 'premium' || slug === 'mastery')) {
+    } else if (slug === 'mastery') {
       return [
         { name: t(`${productKey}.includes.duration`), value: t(`${productKey}.includes.durationValue`) },
         { name: t(`${productKey}.includes.appsAccess`), value: t(`${productKey}.includes.appsValue`) },
@@ -264,14 +265,14 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         { name: t(`${productKey}.specs.languages`), value: t(`${productKey}.specs.languagesValue`) },
         { name: t(`${productKey}.specs.access`), value: t(`${productKey}.specs.accessValue`) }
       ];
-    } else if ((slug === 'planner' || (slug === 'premium' || slug === 'mastery'))) {
+    } else if (slug === 'planner' || slug === 'premium') {
       return [
         { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
         { name: t(`${productKey}.specs.pages`), value: t(`${productKey}.specs.pagesValue`) },
         { name: t(`${productKey}.specs.device`), value: t(`${productKey}.specs.deviceValue`) },
         { name: t(`${productKey}.specs.languages`), value: t(`${productKey}.specs.languagesValue`) }
       ];
-    } else if ((slug === 'premium' || slug === 'mastery')) {
+    } else if (slug === 'mastery') {
       return [
         { name: t(`${productKey}.specs.format`), value: t(`${productKey}.specs.formatValue`) },
         { name: t(`${productKey}.specs.analytics`), value: t(`${productKey}.specs.analyticsValue`) },

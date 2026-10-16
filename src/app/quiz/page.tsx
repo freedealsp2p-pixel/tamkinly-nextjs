@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -226,10 +226,11 @@ export default function IdentityQuizPage() {
   const [answers, setAnswers] = useState<number[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [analyzingProgress, setAnalyzingProgress] = useState(0);
+  const analyzingRef = useRef(false);
   const { locale, direction } = useLocale();
 
   // Calculate user profile and navigate to results
-  const calculateAndNavigate = () => {
+  const calculateAndNavigate = (finalAnswers: number[]) => {
     const categories = {
       identity: 0,
       environment: 0,
@@ -241,19 +242,21 @@ export default function IdentityQuizPage() {
 
     let categoryCounts = { ...categories };
 
-    answers.forEach((answer, index) => {
+    finalAnswers.forEach((answer, index) => {
       const question = quizQuestions[index];
+      if (!question || !(question.category in categories)) return;
       categories[question.category] += answer;
       categoryCounts[question.category]++;
     });
 
-    // Calculate percentages
-    const identityClarity = Math.round((categories.identity / (categoryCounts.identity * 5)) * 100);
-    const environmentalAlignment = Math.round((categories.environment / (categoryCounts.environment * 5)) * 100);
-    const emotionalRegulation = Math.round((categories.emotion / (categoryCounts.emotion * 5)) * 100);
-    const decisionQuality = Math.round((categories.decision / (categoryCounts.decision * 5)) * 100);
-    const progressMomentum = Math.round((categories.progress / (categoryCounts.progress * 5)) * 100);
-    const alignmentScore = categoryCounts.alignment > 0 ? Math.round((categories.alignment / (categoryCounts.alignment * 5)) * 100) : 0;
+    // Calculate percentages (zero-safe: a category with no answers scores 0, never NaN)
+    const pct = (sum: number, count: number) => count > 0 ? Math.round((sum / (count * 5)) * 100) : 0;
+    const identityClarity = pct(categories.identity, categoryCounts.identity);
+    const environmentalAlignment = pct(categories.environment, categoryCounts.environment);
+    const emotionalRegulation = pct(categories.emotion, categoryCounts.emotion);
+    const decisionQuality = pct(categories.decision, categoryCounts.decision);
+    const progressMomentum = pct(categories.progress, categoryCounts.progress);
+    const alignmentScore = pct(categories.alignment, categoryCounts.alignment);
 
     // Calculate overall score (Identity Gap Score) - average of all dimensions
     const activeDimensions = [identityClarity, environmentalAlignment, emotionalRegulation, decisionQuality, progressMomentum];
@@ -318,21 +321,25 @@ export default function IdentityQuizPage() {
     router.push('/quiz/results');
   };
 
-  // Handle answer selection
+  // Handle answer selection — records the choice only; committed on Next (re-clicking an option replaces it)
   const handleAnswer = (value: number) => {
     setSelectedAnswer(value);
-    const newAnswers = [...answers, value];
-    setAnswers(newAnswers);
   };
 
   const handleNext = () => {
-    if (selectedAnswer === null) return;
-    
+    if (selectedAnswer === null || phase === 'analyzing' || analyzingRef.current) return;
+
+    // Commit the selected value AT the current question index (replace, never append)
+    const finalAnswers = [...answers];
+    finalAnswers[currentQuestion] = selectedAnswer;
+    setAnswers(finalAnswers);
+
     if (currentQuestion < quizQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
     } else {
       // Start analyzing phase
+      analyzingRef.current = true;
       setPhase('analyzing');
       let progress = 0;
       const interval = setInterval(() => {
@@ -340,7 +347,7 @@ export default function IdentityQuizPage() {
         setAnalyzingProgress(progress);
         if (progress >= 100) {
           clearInterval(interval);
-          calculateAndNavigate();
+          calculateAndNavigate(finalAnswers);
         }
       }, 100);
     }
