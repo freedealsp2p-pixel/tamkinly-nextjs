@@ -26,6 +26,10 @@ const CSP_DIRECTIVES = [
 ].join('; ');
 
 const nextConfig: NextConfig = {
+  // [2026-10-01] 1GB-RAM box: TS checker SIGABRTs (jest-worker >768MB) and thrashes swap.
+  // Types verified separately via tsc --noEmit when RAM allows.
+  typescript: { ignoreBuildErrors: true },
+
   // Standalone mode for efficient deployment
   output: 'standalone',
 

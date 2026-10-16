@@ -64,6 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     ...generatePageMetadataFromConfig('home', locale),
     metadataBase: new URL(SEO_SITE_CONFIG.url),
+    verification: { other: { "p:domain_verify": "2adfc13b49949edc654b22e10f4020ae" } },
 
     icons: [
       { url: "/favicon.ico?v=12", sizes: "any" },

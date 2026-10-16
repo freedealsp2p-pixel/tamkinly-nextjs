@@ -337,9 +337,9 @@ export const APP_PAGES: AppPage[] = [
   },
   {
     slug: 'ai-identity-coach',
-    title: 'AI Identity Coach | Coming Soon',
+    title: 'AI Identity Coach | Your Personal Transformation Guide',
     titleAr: 'مدرب الهوية بالذكاء الاصطناعي | دليل تحول شخصي على مدار الساعة',
-    description: 'The Tamkinly AI Identity Coach is coming Q3 2026. Built on neuroplasticity and self-authorship. Join the waitlist for early access.',
+    description: 'Your 24/7 personal transformation guide. Built on neuroplasticity and self-authorship - replies in Arabic and English with full knowledge of Tamkinly products, prices, and therapeutic protocols.',
     descriptionAr: 'تدريب مدعوم بالذكاء الاصطناعي لتحويل الهوية. إرشاد شخصي للاكتشاف والعادات والتنظيم العاطفي.',
     tier: 'MASTERY',
     category: 'AI Coaching',

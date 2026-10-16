@@ -121,11 +121,19 @@ export async function PUT(request: NextRequest) {
         for (const item of orderWithItems.items) {
           const code = generateAccessCode();
           const tier = getTierFromProductId(item.productId);
+          // Monthly subscription validity (2026-09-28): subscription-tier codes
+          // run in 30-day cycles, extended automatically on each renewal.
+          let expiresAt: Date | null = null;
+          if (['BASIC', 'PREMIUM', 'MASTERY'].includes(tier)) {
+            expiresAt = new Date();
+            expiresAt.setDate(expiresAt.getDate() + 30);
+          }
           await db.appAccess.create({
             data: {
               code, email: orderWithItems.customerEmail.toLowerCase(),
               customerName: orderWithItems.customerName || '', productId: item.productId,
               tier, orderId: orderWithItems.orderNumber, isUsed: false, isActive: true,
+              expiresAt,
             },
           });
         }

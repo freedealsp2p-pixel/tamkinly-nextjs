@@ -1,7 +1,13 @@
 // ============================================
-// BREVO (Sendinblue) API CLIENT
-// Email Marketing & Automation Integration
+// BREVO (Sendinblue) API CLIENT — v2 (rewired 2026-09-28)
+// Bilingual templates (AR/EN) + per-topic senders
 // Tamkinly Identity Transformation Platform
+// ============================================
+// TEMPLATE MAP — live Brevo IDs verified via API:
+//   AR pack TK-01..TK-23 -> IDs 34-56
+//   EN pack TK-EN-01..23 -> IDs 57-79
+//   Legacy functional kept: 12 (password reset), 14 (email verification),
+//   15 (support received), 16 (support resolved) — until redesigned.
 // ============================================
 
 // ============================================
@@ -15,7 +21,8 @@ export interface BrevoContact {
     LASTNAME?: string;
     NAME?: string;
     PHONE?: string;
-    CUSTOMER_TYPE?: 'trial' | 'planner' | 'premium' | 'bundle' | 'basic' | 'mastery';
+    // NEW lineup only (legacy trial/planner/bundle removed 2026-09-28)
+    CUSTOMER_TYPE?: 'free' | 'basic' | 'premium' | 'mastery' | 'protocol' | 'recovery' | 'app';
     PURCHASE_DATE?: string;
     ACCESS_KEY?: string;
     PRODUCT_NAME?: string;
@@ -80,95 +87,181 @@ const DEFAULT_SENDER_NAME = process.env.BREVO_SENDER_NAME || 'Tamkinly';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://tamkinly.com';
 
 // ============================================
-// TEMPLATE IDs - From your Brevo Account
+// SENDERS — one sender per email topic
+// (must each be verified in Brevo dashboard -> Senders)
 // ============================================
 
-export const BREVO_TEMPLATES = {
-  // Welcome & Onboarding
-  WELCOME: 1,                    // "Welcome To Tamkinly" #1
-  
-  // Product Purchases
-  TRIAL_PURCHASE: 2,             // "7 Days Identity System Trial" #2
-  PLANNER_PURCHASE: 3,           // "Planner Purchase" #3
-  PREMIUM_PURCHASE: 4,           // "Premium Purchase" #4
-  BUNDLE_PURCHASE: 5,            // "Bundle Purchase (VIP)" #5
-  
-  // General Follow-ups
-  FOLLOWUP_DAY_3: 6,             // "Follow-up Day 3" #6
-  FOLLOWUP_DAY_7: 7,             // "Follow-up Day 7" #7
-  FOLLOWUP_DAY_14: 8,            // "Follow-up Day 14 - Upgrade Offer" #8
-  
-  // Abandoned Cart
-  ABANDONED_CART_1H: 9,          // "Abandoned Cart 1 Hour" #9
-  ABANDONED_CART_24H: 10,        // "Abandoned Cart 24" #10
-  
-  // Account Management
-  ACCOUNT_CREATED: 11,           // "Account Created" #11
-  PASSWORD_RESET: 12,            // "Password Reset" #12
-  EMAIL_VERIFICATION: 14,        // "Email Verification" #14
-  
-  // Support
-  SUPPORT_RECEIVED: 15,          // "Support Ticket Received" #15
-  SUPPORT_RESOLVED: 16,          // "Support Resolved" #16
-  
-  // Special Offers
-  SPECIAL_OFFER: 17,             // "Special Offer" #17
-  BIRTHDAY_OFFER: 18,            // "Birthday Offer" #18
-  
-  // Trial Follow-ups
-  TRIAL_FOLLOWUP_DAY_3: 19,      // "Trial Follow-up Day 3" #19
-  TRIAL_FOLLOWUP_DAY_7: 20,      // "Trial Follow-up Day 7" #20
-  
-  // Planner Follow-ups
-  PLANNER_FOLLOWUP_DAY_3: 22,    // "Planner Follow-up Day 3" #22
-  PLANNER_FOLLOWUP_DAY_7: 23,    // "Planner Follow-up Day 7" #23
-  PLANNER_FOLLOWUP_DAY_14: 24,   // "Planner Follow-up Day 14" #24
-  
-  // Premium Follow-ups
-  PREMIUM_FOLLOWUP_DAY_3: 25,    // "Premium Follow-up Day 3" #25
-  PREMIUM_FOLLOWUP_DAY_7: 26,    // "Premium Follow-up Day 7" #26
-  
-  // Bundle Follow-ups
-  BUNDLE_FOLLOWUP_DAY_3: 28,     // "Bundle Follow-up Day 3" #28
-  BUNDLE_FOLLOWUP_DAY_7: 29,     // "Bundle Follow-up Day 7" #29
-  BUNDLE_FOLLOWUP_DAY_14: 30,    // "Bundle Follow-up Day 14" #30
-
-  // ============================================
-  // NEW TEMPLATE IDs (Drip Sequence Templates)
-  // ============================================
-
-  // Quiz Results
-  QUIZ_RESULTS: 31,              // "Quiz Results" #31
-
-  // Identity Milestones
-  MILESTONE_DAY_7: 32,           // "Milestone Day 7" #32
-  MILESTONE_DAY_14: 33,          // "Milestone Day 14" #33
-  MILESTONE_DAY_21: 34,          // "Milestone Day 21" #34
-  MILESTONE_DAY_30: 35,          // "Milestone Day 30" #35
-
-  // Re-engagement
-  RE_ENGAGEMENT: 36,             // "Re-Engagement" #36
-  RE_ENGAGEMENT_FOLLOWUP: 37,    // "Re-Engagement Follow-up" #37
-  RE_ENGAGEMENT_OFFER: 38,       // "Re-Engagement Final Offer" #38
-
-  // Purchase Confirmation (unified)
-  PURCHASE_CONFIRMATION: 39,     // "Purchase Confirmation" #39
-
-  // Abandoned Cart (branded versions)
-  ABANDONED_CART_1H_BRANDED: 40, // "Abandoned Cart 1H Branded" #40
-  ABANDONED_CART_24H_BRANDED: 41,// "Abandoned Cart 24H Branded" #41
+export const BREVO_SENDERS = {
+  TECH:      { name: 'Tamkinly Tech',    email: 'noreply@tamkinly.com' }, // codes, security, billing
+  MARKETING: { name: 'Tamkinly Team',    email: 'team@tamkinly.com' },    // welcome, nurture, offers
+  SUPPORT:   { name: 'Tamkinly Support', email: 'support@tamkinly.com' }, // tickets
 } as const;
 
-// List IDs
+export type SenderKey = keyof typeof BREVO_SENDERS;
+
+// ============================================
+// TEMPLATE IDs — bilingual { ar, en }
+// ============================================
+
+export type BilangTemplate = { ar: number; en: number };
+
+/** Pick template ID by user locale (users.locale column: 'ar' | 'en', default 'ar') */
+export const templateFor = (t: BilangTemplate, locale?: string): number =>
+  locale === 'en' ? t.en : t.ar;
+
+export const BREVO_TEMPLATES = {
+  // Welcome & Nurture (marketing)
+  WELCOME:                { ar: 34, en: 57 }, // TK-01
+  FREE_GIFT_TSQ:          { ar: 43, en: 66 }, // TK-10
+  NURTURE_1:              { ar: 46, en: 69 }, // TK-13 Day 0 story
+  NURTURE_2:              { ar: 47, en: 70 }, // TK-14 Day 2 identity clarity
+  NURTURE_3:              { ar: 48, en: 71 }, // TK-15 Day 4 protocols
+  NURTURE_4:              { ar: 49, en: 72 }, // TK-16 Day 6 objections
+  NURTURE_5:              { ar: 50, en: 73 }, // TK-17 Day 8 closing invitation
+  WINBACK:                { ar: 54, en: 77 }, // TK-21
+
+  // Quiz (marketing)
+  QUIZ_RESULTS:           { ar: 35, en: 58 }, // TK-02
+
+  // Access codes / purchase delivery (tech)
+  CODE_BASIC:             { ar: 36, en: 59 }, // TK-03 $7/mo
+  CODE_PREMIUM:           { ar: 37, en: 60 }, // TK-04 $17/mo
+  CODE_MASTERY:           { ar: 38, en: 61 }, // TK-05 $27/mo
+  CODE_PROTOCOL:          { ar: 39, en: 62 }, // TK-06 $99 one-time
+  RENEWAL_CONFIRMED:      { ar: 40, en: 63 }, // TK-07
+  ORDER_PENDING:          { ar: 41, en: 64 }, // TK-08
+  ACCOUNT_CREATED:        { ar: 42, en: 65 }, // TK-09
+
+  // Upsells / cross-sells (marketing)
+  UPSELL_BASIC_PREMIUM:   { ar: 51, en: 74 }, // TK-18
+  UPSELL_PREMIUM_MASTERY: { ar: 52, en: 75 }, // TK-19
+  PROTOCOL_TO_SUB:        { ar: 53, en: 76 }, // TK-20
+
+  // Recovery centers (marketing)
+  RECOVERY_PORN:          { ar: 55, en: 78 }, // TK-22
+  RECOVERY_TRAUMA:        { ar: 56, en: 79 }, // TK-23
+
+  // Abandoned cart (marketing)
+  CART_1H:                { ar: 44, en: 67 }, // TK-11
+  CART_24H:               { ar: 45, en: 68 }, // TK-12
+
+  // ===== Legacy functional templates (single-language, kept until redesigned) =====
+  PASSWORD_RESET: 12,        // old #12 — params: NAME, RESET_LINK
+  EMAIL_VERIFICATION: 14,    // old #14 — params: NAME, VERIFY_LINK
+  SUPPORT_RECEIVED: 15,      // old #15 — params: NAME, SUPPORT_TICKET_ID, SUPPORT_SUBJECT
+  SUPPORT_RESOLVED: 16,      // old #16 — params: NAME, SUPPORT_TICKET_ID
+} as const;
+
+/** Sender per template event (see BREVO_SENDERS) */
+export const EVENT_SENDERS: Record<string, SenderKey> = {
+  WELCOME: 'MARKETING', QUIZ_RESULTS: 'MARKETING', FREE_GIFT_TSQ: 'MARKETING',
+  NURTURE_1: 'MARKETING', NURTURE_2: 'MARKETING', NURTURE_3: 'MARKETING',
+  NURTURE_4: 'MARKETING', NURTURE_5: 'MARKETING', WINBACK: 'MARKETING',
+  UPSELL_BASIC_PREMIUM: 'MARKETING', UPSELL_PREMIUM_MASTERY: 'MARKETING',
+  PROTOCOL_TO_SUB: 'MARKETING', RECOVERY_PORN: 'MARKETING', RECOVERY_TRAUMA: 'MARKETING',
+  CART_1H: 'MARKETING', CART_24H: 'MARKETING',
+  CODE_BASIC: 'TECH', CODE_PREMIUM: 'TECH', CODE_MASTERY: 'TECH', CODE_PROTOCOL: 'TECH',
+  RENEWAL_CONFIRMED: 'TECH', ORDER_PENDING: 'TECH', ACCOUNT_CREATED: 'TECH',
+  PASSWORD_RESET: 'TECH', EMAIL_VERIFICATION: 'TECH',
+  SUPPORT_RECEIVED: 'SUPPORT', SUPPORT_RESOLVED: 'SUPPORT',
+};
+
+export const senderFor = (event: string): { name: string; email: string } =>
+  BREVO_SENDERS[EVENT_SENDERS[event] || 'TECH'];
+
+// ============================================
+// V3 SEQUENCE TEMPLATES (deployed 2026-09-30) — created via Brevo API, ids verified
+// AR ids 80-137, EN ids 138-195. 58 messages x 2 languages.
+// TRC files, REC files, protocol welcomes + 9-day companions, 20 app activations, 3 nudges.
+// ============================================
+
+export const BREVO_SEQ_SENDER = { name: 'Tamkinly Team', email: 'team@tamkinly.com' } as const;
+
+export const SEQ_TEMPLATES = {
+  RECOVERY_TRC_01: { ar: 80, en: 138 },
+  RECOVERY_TRC_02: { ar: 81, en: 139 },
+  RECOVERY_TRC_03: { ar: 82, en: 140 },
+  RECOVERY_TRC_04: { ar: 83, en: 141 },
+  RECOVERY_TRC_05: { ar: 84, en: 142 },
+  RECOVERY_TRC_06: { ar: 85, en: 143 },
+  RECOVERY_TRC_07: { ar: 86, en: 144 },
+  RECOVERY_TRC_08: { ar: 87, en: 145 },
+  RECOVERY_TRC_09: { ar: 88, en: 146 },
+  RECOVERY_TRC_10: { ar: 89, en: 147 },
+  RECOVERY_TRC_11: { ar: 90, en: 148 },
+  RECOVERY_TRC_12: { ar: 91, en: 149 },
+  RECOVERY_REC_01: { ar: 92, en: 150 },
+  RECOVERY_REC_02: { ar: 93, en: 151 },
+  RECOVERY_REC_03: { ar: 94, en: 152 },
+  RECOVERY_REC_04: { ar: 95, en: 153 },
+  RECOVERY_REC_05: { ar: 96, en: 154 },
+  RECOVERY_REC_06: { ar: 97, en: 155 },
+  RECOVERY_REC_07: { ar: 98, en: 156 },
+  RECOVERY_REC_08: { ar: 99, en: 157 },
+  RECOVERY_REC_09: { ar: 100, en: 158 },
+  RECOVERY_REC_10: { ar: 101, en: 159 },
+  RECOVERY_REC_11: { ar: 102, en: 160 },
+  PROTO_TD: { ar: 103, en: 161 },
+  PROTO_AC: { ar: 104, en: 162 },
+  PROTO_WM: { ar: 105, en: 163 },
+  PROTO_DAY_1: { ar: 106, en: 164 },
+  PROTO_DAY_2: { ar: 107, en: 165 },
+  PROTO_DAY_3: { ar: 108, en: 166 },
+  PROTO_DAY_4: { ar: 109, en: 167 },
+  PROTO_DAY_5: { ar: 110, en: 168 },
+  PROTO_DAY_6: { ar: 111, en: 169 },
+  PROTO_DAY_7: { ar: 112, en: 170 },
+  PROTO_DAY_8: { ar: 113, en: 171 },
+  PROTO_DAY_9: { ar: 114, en: 172 },
+  APP_IDENTITY_BASELINE: { ar: 115, en: 173 },
+  APP_EXECUTIVE_MANUAL: { ar: 116, en: 174 },
+  APP_DAILY_PLANNER: { ar: 117, en: 175 },
+  APP_JOURNAL_SYSTEM: { ar: 118, en: 176 },
+  APP_GOAL_SYSTEM: { ar: 119, en: 177 },
+  APP_HABIT_TRACKER: { ar: 120, en: 178 },
+  APP_DAILY_REFLECTION: { ar: 121, en: 179 },
+  APP_ENVIRONMENTAL_AUDIT: { ar: 122, en: 180 },
+  APP_DECISION_ANALYSIS: { ar: 123, en: 181 },
+  APP_EVIDENCE_TRACKING: { ar: 124, en: 182 },
+  APP_PROGRESS_DASHBOARD: { ar: 125, en: 183 },
+  APP_IDENTITY_RECODE: { ar: 126, en: 184 },
+  APP_WORKSHEETS: { ar: 127, en: 185 },
+  APP_EMOTION_REGULATION: { ar: 128, en: 186 },
+  APP_COMMUNITY: { ar: 129, en: 187 },
+  APP_PRIORITY_SUPPORT: { ar: 130, en: 188 },
+  APP_AI_COACH: { ar: 131, en: 189 },
+  APP_VALUES: { ar: 132, en: 190 },
+  APP_TRIAL_PLANNER: { ar: 133, en: 191 },
+  APP_QUIZ: { ar: 134, en: 192 },
+  NUDGE_1: { ar: 135, en: 193 },
+  NUDGE_3: { ar: 136, en: 194 },
+  NUDGE_7: { ar: 137, en: 195 },
+} as const;
+
+export type SeqTemplateKey = keyof typeof SEQ_TEMPLATES;
+
+export const seqTemplateId = (k: SeqTemplateKey, locale?: string): number =>
+  (locale === 'en' ? SEQ_TEMPLATES[k].en : SEQ_TEMPLATES[k].ar);
+
+// ============================================
+// LIST IDs — matched to live Brevo lists (verified via API 2026-09-28)
+// ============================================
+
 export const BREVO_LISTS = {
-  ALL_CONTACTS: parseInt(process.env.BREVO_LIST_ALL || '1'),
-  CUSTOMERS: parseInt(process.env.BREVO_LIST_CUSTOMERS || '2'),
-  TRIAL_USERS: parseInt(process.env.BREVO_LIST_TRIAL || '3'),
-  QUIZ_TAKERS: parseInt(process.env.BREVO_LIST_QUIZ || '4'),
-  NEWSLETTER: parseInt(process.env.BREVO_LIST_NEWSLETTER || '5'),
-  PREMIUM_CUSTOMERS: parseInt(process.env.BREVO_LIST_PREMIUM || '6'),
-  BUNDLE_VIP: parseInt(process.env.BREVO_LIST_BUNDLE || '7'),
-  INACTIVE_USERS: parseInt(process.env.BREVO_LIST_INACTIVE || '8'),
+  ALL_CONTACTS:    parseInt(process.env.BREVO_LIST_ALL || '7'),
+  CUSTOMERS:       parseInt(process.env.BREVO_LIST_CUSTOMERS || '6'),
+  NEWSLETTER:      parseInt(process.env.BREVO_LIST_NEWSLETTER || '5'),
+  FREE_USERS:      parseInt(process.env.BREVO_LIST_FREE || '8'),
+  BASIC:           parseInt(process.env.BREVO_LIST_BASIC || '9'),
+  PREMIUM:         parseInt(process.env.BREVO_LIST_PREMIUM || '10'),
+  MASTERY:         parseInt(process.env.BREVO_LIST_MASTERY || '11'),
+  QUIZ_TAKERS:     parseInt(process.env.BREVO_LIST_QUIZ || '12'),
+  ABANDONED_CART:  parseInt(process.env.BREVO_LIST_CART || '13'),
+  INACTIVE_USERS:  parseInt(process.env.BREVO_LIST_INACTIVE || '14'),
+  // Legacy aliases (kept for compile compatibility with old callers)
+  TRIAL_USERS:       8,
+  PREMIUM_CUSTOMERS: 10,
+  BUNDLE_VIP:        11,
 };
 
 // ============================================
@@ -194,14 +287,12 @@ async function brevoFetch<T>(
       },
     });
 
-    // Handle empty responses (204 No Content, etc.)
     const text = await response.text();
     let data: T | undefined;
     if (text && text.trim()) {
       try {
         data = JSON.parse(text);
       } catch {
-        // Non-JSON response, treat as success if status is ok
         data = undefined;
       }
     }
@@ -304,11 +395,11 @@ export const BrevoEmails = {
     templateId: number,
     to: string,
     params: Record<string, string | number | undefined>,
-    options?: { name?: string; replyTo?: string }
+    options?: { name?: string; replyTo?: string; sender?: { name: string; email: string } }
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     return this.send({
       to: [{ email: to, name: options?.name }],
-      sender: { name: DEFAULT_SENDER_NAME, email: DEFAULT_SENDER_EMAIL },
+      sender: options?.sender || { name: DEFAULT_SENDER_NAME, email: DEFAULT_SENDER_EMAIL },
       subject: '',
       htmlContent: '',
       templateId,
@@ -320,220 +411,154 @@ export const BrevoEmails = {
   },
 
   // ============================================
-  // WELCOME EMAIL (Template #1)
+  // EVENT WRAPPERS — bilingual + per-topic sender
+  // (legacy function names kept: external callers exist)
   // ============================================
+
   async sendWelcome(
     email: string,
     name: string,
-    accessKey?: string
+    accessKey?: string,
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.WELCOME, email, {
-      NAME: name,
-      ACCESS_KEY: accessKey || '',
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.WELCOME, locale), email,
+      { NAME: name, ...(accessKey ? { CODE: accessKey } : {}) },
+      { name, sender: senderFor('WELCOME') }
+    );
   },
 
-  // ============================================
-  // BASIC PURCHASE EMAIL (Template #2)
-  // ============================================
-  async sendTrialPurchase(
-    email: string,
-    name: string,
-    accessKey: string
+  // Legacy aliases -> new lineup templates
+  async sendTrialPurchase( // old trial product retired -> Basic delivery
+    email: string, name: string, accessKey: string, locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.TRIAL_PURCHASE, email, {
-      NAME: name,
-      ACCESS_KEY: accessKey,
-      PRODUCT_NAME: '7-Day Identity System',
-      DOWNLOAD_LINK: `${BASE_URL}/my-account/downloads/`,
-      APPS_LINK: `${BASE_URL}/apps/?code=${accessKey}`,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.CODE_BASIC, locale), email,
+      { NAME: name, CODE: accessKey, PRODUCT: 'Basic Plan' },
+      { name, sender: senderFor('CODE_BASIC') }
+    );
   },
 
-  // ============================================
-  // PLANNER PURCHASE EMAIL (Template #3)
-  // ============================================
-  async sendPlannerPurchase(
-    email: string,
-    name: string,
-    accessKey: string
+  async sendPlannerPurchase( // old planner retired -> protocol (one-time) delivery
+    email: string, name: string, accessKey: string, locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.PLANNER_PURCHASE, email, {
-      NAME: name,
-      ACCESS_KEY: accessKey,
-      PRODUCT_NAME: 'Identity Recode Planner',
-      DOWNLOAD_LINK: `${BASE_URL}/my-account/downloads/`,
-      APPS_LINK: `${BASE_URL}/apps/?code=${accessKey}`,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.CODE_PROTOCOL, locale), email,
+      { NAME: name, CODE: accessKey, PRODUCT: 'Therapeutic Protocol' },
+      { name, sender: senderFor('CODE_PROTOCOL') }
+    );
   },
 
-  // ============================================
-  // PREMIUM PURCHASE EMAIL (Template #4)
-  // ============================================
   async sendPremiumPurchase(
-    email: string,
-    name: string,
-    accessKey: string
+    email: string, name: string, accessKey: string, locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.PREMIUM_PURCHASE, email, {
-      NAME: name,
-      ACCESS_KEY: accessKey,
-      PRODUCT_NAME: 'Premium Transformation Package',
-      DOWNLOAD_LINK: `${BASE_URL}/my-account/downloads/`,
-      APPS_LINK: `${BASE_URL}/apps/?code=${accessKey}`,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.CODE_PREMIUM, locale), email,
+      { NAME: name, CODE: accessKey, PRODUCT: 'Premium Plan' },
+      { name, sender: senderFor('CODE_PREMIUM') }
+    );
   },
 
-  // ============================================
-  // MASTERY PURCHASE EMAIL (Template #5)
-  // ============================================
-  async sendBundlePurchase(
-    email: string,
-    name: string,
-    accessKey: string
+  async sendBundlePurchase( // old bundle -> Mastery
+    email: string, name: string, accessKey: string, locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.BUNDLE_PURCHASE, email, {
-      NAME: name,
-      ACCESS_KEY: accessKey,
-      PRODUCT_NAME: 'Mastery (Monthly)',
-      DOWNLOAD_LINK: `${BASE_URL}/my-account/downloads/`,
-      APPS_LINK: `${BASE_URL}/apps/?code=${accessKey}`,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.CODE_MASTERY, locale), email,
+      { NAME: name, CODE: accessKey, PRODUCT: 'Mastery Plan' },
+      { name, sender: senderFor('CODE_MASTERY') }
+    );
   },
 
-  // ============================================
-  // FOLLOW-UP EMAILS
-  // ============================================
   async sendFollowUp(
     email: string,
     name: string,
     day: 3 | 7 | 14,
-    productType: string
+    _productType?: string,
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    let templateId: number;
-    
-    switch (productType) {
-      case 'trial':
-        templateId = day === 3 ? BREVO_TEMPLATES.TRIAL_FOLLOWUP_DAY_3 : BREVO_TEMPLATES.TRIAL_FOLLOWUP_DAY_7;
-        break;
-      case 'planner':
-        templateId = day === 3 
-          ? BREVO_TEMPLATES.PLANNER_FOLLOWUP_DAY_3 
-          : day === 7 
-            ? BREVO_TEMPLATES.PLANNER_FOLLOWUP_DAY_7 
-            : BREVO_TEMPLATES.PLANNER_FOLLOWUP_DAY_14;
-        break;
-      case 'premium':
-        templateId = day === 3 ? BREVO_TEMPLATES.PREMIUM_FOLLOWUP_DAY_3 : BREVO_TEMPLATES.PREMIUM_FOLLOWUP_DAY_7;
-        break;
-      case 'bundle':
-        templateId = day === 3 
-          ? BREVO_TEMPLATES.BUNDLE_FOLLOWUP_DAY_3 
-          : day === 7 
-            ? BREVO_TEMPLATES.BUNDLE_FOLLOWUP_DAY_7 
-            : BREVO_TEMPLATES.BUNDLE_FOLLOWUP_DAY_14;
-        break;
-      default:
-        templateId = day === 3 
-          ? BREVO_TEMPLATES.FOLLOWUP_DAY_3 
-          : day === 7 
-            ? BREVO_TEMPLATES.FOLLOWUP_DAY_7 
-            : BREVO_TEMPLATES.FOLLOWUP_DAY_14;
-    }
-
-    return this.sendTemplate(templateId, email, {
-      NAME: name,
-      DAYS_SINCE_PURCHASE: day,
-      APPS_LINK: `${BASE_URL}/apps/`,
-    }, { name });
+    const tpl = day === 14
+      ? BREVO_TEMPLATES.UPSELL_BASIC_PREMIUM
+      : day === 7
+        ? BREVO_TEMPLATES.NURTURE_2
+        : BREVO_TEMPLATES.NURTURE_1;
+    return this.sendTemplate(
+      templateFor(tpl, locale), email,
+      { NAME: name, APPS_LINK: `${BASE_URL}/apps` },
+      { name, sender: senderFor(day === 14 ? 'UPSELL_BASIC_PREMIUM' : 'NURTURE_1') }
+    );
   },
 
-  // ============================================
-  // ABANDONED CART
-  // ============================================
   async sendAbandonedCart(
     email: string,
     name: string,
-    hoursAgo: 1 | 24 = 1
+    hoursAgo: 1 | 24 = 1,
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    const templateId = hoursAgo === 1 
-      ? BREVO_TEMPLATES.ABANDONED_CART_1H 
-      : BREVO_TEMPLATES.ABANDONED_CART_24H;
-
-    return this.sendTemplate(templateId, email, {
-      NAME: name,
-    }, { name });
+    const event = hoursAgo === 1 ? 'CART_1H' : 'CART_24H';
+    return this.sendTemplate(
+      templateFor(hoursAgo === 1 ? BREVO_TEMPLATES.CART_1H : BREVO_TEMPLATES.CART_24H, locale),
+      email, { NAME: name }, { name, sender: senderFor(event) }
+    );
   },
 
-  // ============================================
-  // QUIZ RESULTS (Template #31)
-  // ============================================
   async sendQuizResults(
     email: string,
     name: string,
     quizType: string,
     score: number,
-    insights?: string[]
+    insights?: string[],
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.QUIZ_RESULTS, email, {
-      NAME: name,
-      QUIZ_TYPE: quizType,
-      QUIZ_SCORE: score,
-      INSIGHTS: insights ? insights.join('; ') : '',
-      APPS_LINK: `${BASE_URL}/apps/`,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.QUIZ_RESULTS, locale), email,
+      { NAME: name, QUIZ_TYPE: quizType, QUIZ_SCORE: score, INSIGHTS: insights ? insights.join('; ') : '' },
+      { name, sender: senderFor('QUIZ_RESULTS') }
+    );
   },
 
-  // ============================================
-  // IDENTITY MILESTONE (Templates #32-35)
-  // ============================================
+  // Temporary mapping until dedicated milestone templates are designed:
+  // day 7 -> NURTURE_2, 14 -> NURTURE_3, 21 -> NURTURE_4, 30 -> NURTURE_5
   async sendIdentityMilestone(
     email: string,
     name: string,
-    day: 7 | 14 | 21 | 30
+    day: 7 | 14 | 21 | 30,
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    const milestoneTemplates: Record<number, number> = {
-      7: BREVO_TEMPLATES.MILESTONE_DAY_7,
-      14: BREVO_TEMPLATES.MILESTONE_DAY_14,
-      21: BREVO_TEMPLATES.MILESTONE_DAY_21,
-      30: BREVO_TEMPLATES.MILESTONE_DAY_30,
+    const map: Record<number, BilangTemplate> = {
+      7: BREVO_TEMPLATES.NURTURE_2, 14: BREVO_TEMPLATES.NURTURE_3,
+      21: BREVO_TEMPLATES.NURTURE_4, 30: BREVO_TEMPLATES.NURTURE_5,
     };
-
-    const templateId = milestoneTemplates[day] || BREVO_TEMPLATES.MILESTONE_DAY_7;
-
-    return this.sendTemplate(templateId, email, {
-      NAME: name,
-      MILESTONE_DAY: day,
-      APPS_LINK: `${BASE_URL}/apps/`,
-    }, { name });
+    const tpl = map[day] || BREVO_TEMPLATES.NURTURE_2;
+    return this.sendTemplate(
+      templateFor(tpl, locale), email,
+      { NAME: name, MILESTONE_DAY: day, APPS_LINK: `${BASE_URL}/apps` },
+      { name, sender: senderFor('NURTURE_2') }
+    );
   },
 
-  // ============================================
-  // RE-ENGAGEMENT (Template #36)
-  // ============================================
   async sendReEngagement(
     email: string,
     name: string,
-    inactiveDays: number = 7
+    inactiveDays: number = 7,
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.RE_ENGAGEMENT, email, {
-      NAME: name,
-      INACTIVE_DAYS: inactiveDays,
-      APPS_LINK: `${BASE_URL}/apps/`,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.WINBACK, locale), email,
+      { NAME: name, INACTIVE_DAYS: inactiveDays, APPS_LINK: `${BASE_URL}/apps` },
+      { name, sender: senderFor('WINBACK') }
+    );
   },
 
-  // ============================================
-  // ACCOUNT MANAGEMENT
-  // ============================================
   async sendAccountCreated(
     email: string,
-    name: string
+    name: string,
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.ACCOUNT_CREATED, email, {
-      NAME: name,
-      LOGIN_LINK: `${BASE_URL}/login/`,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.ACCOUNT_CREATED, locale), email,
+      { NAME: name, LOGIN_LINK: `${BASE_URL}/account` },
+      { name, sender: senderFor('ACCOUNT_CREATED') }
+    );
   },
 
   async sendPasswordReset(
@@ -541,10 +566,11 @@ export const BrevoEmails = {
     name: string,
     resetLink: string
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.PASSWORD_RESET, email, {
-      NAME: name,
-      RESET_LINK: resetLink,
-    }, { name });
+    return this.sendTemplate(
+      BREVO_TEMPLATES.PASSWORD_RESET, email,
+      { NAME: name, RESET_LINK: resetLink },
+      { name, sender: senderFor('PASSWORD_RESET') }
+    );
   },
 
   async sendEmailVerification(
@@ -552,26 +578,24 @@ export const BrevoEmails = {
     name: string,
     verifyLink: string
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.EMAIL_VERIFICATION, email, {
-      NAME: name,
-      VERIFY_LINK: verifyLink,
-    }, { name });
+    return this.sendTemplate(
+      BREVO_TEMPLATES.EMAIL_VERIFICATION, email,
+      { NAME: name, VERIFY_LINK: verifyLink },
+      { name, sender: senderFor('EMAIL_VERIFICATION') }
+    );
   },
 
-  // ============================================
-  // SUPPORT EMAILS
-  // ============================================
   async sendSupportReceived(
     email: string,
     name: string,
     ticketId: string,
     subject: string
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.SUPPORT_RECEIVED, email, {
-      NAME: name,
-      SUPPORT_TICKET_ID: ticketId,
-      SUPPORT_SUBJECT: subject,
-    }, { name });
+    return this.sendTemplate(
+      BREVO_TEMPLATES.SUPPORT_RECEIVED, email,
+      { NAME: name, SUPPORT_TICKET_ID: ticketId, SUPPORT_SUBJECT: subject },
+      { name, sender: senderFor('SUPPORT_RECEIVED') }
+    );
   },
 
   async sendSupportResolved(
@@ -579,58 +603,83 @@ export const BrevoEmails = {
     name: string,
     ticketId: string
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.SUPPORT_RESOLVED, email, {
-      NAME: name,
-      SUPPORT_TICKET_ID: ticketId,
-    }, { name });
+    return this.sendTemplate(
+      BREVO_TEMPLATES.SUPPORT_RESOLVED, email,
+      { NAME: name, SUPPORT_TICKET_ID: ticketId },
+      { name, sender: senderFor('SUPPORT_RESOLVED') }
+    );
   },
 
-  // ============================================
-  // SPECIAL OFFERS
-  // ============================================
+  // Placeholders (old dedicated templates deleted) — mapped to closest live templates
   async sendSpecialOffer(
-    email: string,
-    name: string
+    email: string, name: string, locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.SPECIAL_OFFER, email, {
-      NAME: name,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.NURTURE_5, locale), email,
+      { NAME: name }, { name, sender: senderFor('NURTURE_5') }
+    );
   },
 
   async sendBirthdayOffer(
-    email: string,
-    name: string
+    email: string, name: string, locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    return this.sendTemplate(BREVO_TEMPLATES.BIRTHDAY_OFFER, email, {
-      NAME: name,
-    }, { name });
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.FREE_GIFT_TSQ, locale), email,
+      { NAME: name }, { name, sender: senderFor('FREE_GIFT_TSQ') }
+    );
   },
 
-  // ============================================
-  // GENERIC PURCHASE (auto-selects template)
-  // ============================================
+  // Generic purchase routing by NEW lineup keywords
   async sendPurchaseConfirmation(
     email: string,
     name: string,
     productName: string,
-    accessKey: string
+    accessKey: string,
+    locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
-    const productLower = productName.toLowerCase();
-    
-    if (productLower.includes('trial') || productLower.includes('7 day')) {
-      return this.sendTrialPurchase(email, name, accessKey);
+    const p = productName.toLowerCase();
+
+    if (/(protocol|decoupling|white mirror|alternative code|بروتوكول|تفكيك|مرآة|شفرة)/.test(p)) {
+      return this.sendTemplate(
+        templateFor(BREVO_TEMPLATES.CODE_PROTOCOL, locale), email,
+        { NAME: name, CODE: accessKey, PRODUCT: productName },
+        { name, sender: senderFor('CODE_PROTOCOL') }
+      );
     }
-    if (productLower.includes('planner')) {
-      return this.sendPlannerPurchase(email, name, accessKey);
+    if (/(mastery|إتقان)/.test(p)) {
+      return this.sendTemplate(
+        templateFor(BREVO_TEMPLATES.CODE_MASTERY, locale), email,
+        { NAME: name, CODE: accessKey, PRODUCT: productName },
+        { name, sender: senderFor('CODE_MASTERY') }
+      );
     }
-    if (productLower.includes('premium')) {
-      return this.sendPremiumPurchase(email, name, accessKey);
+    if (/(premium|مميز)/.test(p)) {
+      return this.sendTemplate(
+        templateFor(BREVO_TEMPLATES.CODE_PREMIUM, locale), email,
+        { NAME: name, CODE: accessKey, PRODUCT: productName },
+        { name, sender: senderFor('CODE_PREMIUM') }
+      );
     }
-    if (productLower.includes('bundle') || productLower.includes('vip')) {
-      return this.sendBundlePurchase(email, name, accessKey);
+    if (/(trauma|صدم)/.test(p)) {
+      return this.sendTemplate(
+        templateFor(BREVO_TEMPLATES.RECOVERY_TRAUMA, locale), email,
+        { NAME: name, PRODUCT: productName },
+        { name, sender: senderFor('RECOVERY_TRAUMA') }
+      );
     }
-    
-    return this.sendWelcome(email, name, accessKey);
+    if (/(porn|إباحية|recovery|تعافي)/.test(p)) {
+      return this.sendTemplate(
+        templateFor(BREVO_TEMPLATES.RECOVERY_PORN, locale), email,
+        { NAME: name, PRODUCT: productName },
+        { name, sender: senderFor('RECOVERY_PORN') }
+      );
+    }
+    // default: Basic plan
+    return this.sendTemplate(
+      templateFor(BREVO_TEMPLATES.CODE_BASIC, locale), email,
+      { NAME: name, CODE: accessKey, PRODUCT: productName },
+      { name, sender: senderFor('CODE_BASIC') }
+    );
   },
 };
 
@@ -673,6 +722,7 @@ const BrevoClient = {
   account: BrevoAccount,
   LISTS: BREVO_LISTS,
   TEMPLATES: BREVO_TEMPLATES,
+  SENDERS: BREVO_SENDERS,
 };
 
 export default BrevoClient;

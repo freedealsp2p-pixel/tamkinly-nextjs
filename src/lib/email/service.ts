@@ -4,6 +4,9 @@
 import { db } from '@/lib/db';
 import { getSequenceByTrigger, resolveTrigger, type DripSequence } from './drip-sequences';
 import EmailTemplates from '../email-templates';
+import { BrevoEmails, SEQ_TEMPLATES, seqTemplateId, BREVO_SEQ_SENDER, type SeqTemplateKey } from '@/lib/brevo';
+
+const BREVO_SEQ_SENDER_REF = BREVO_SEQ_SENDER;
 
 // Email template variables
 export interface EmailVariables {
@@ -194,7 +197,6 @@ export async function getEmailSequence(trigger: string) {
 }
 
 // Queue an email for sending
-
 // ============================================
 // ACCESS CODE DELIVERY EMAIL (2026-09-27)
 // Unified code-delivery promise: email is the single channel. Bilingual.
@@ -322,6 +324,122 @@ export async function triggerEmailSequence(
   }
 }
 
+
+// ============================================
+// V3: SCHEDULE BREVO-TEMPLATE SEQUENCES (2026-09-30)
+// Enqueues email_queue rows whose templateName = "brevo:<templateId>".
+// The processor (sendQueuedEmails) detects the brevo: prefix and sends via
+// the Brevo template API with the marketing sender (team@tamkinly.com).
+// Idempotent: (email, sequenceId, stepNumber) existing rows are skipped.
+// ============================================
+
+export interface BrevoSeqStep {
+  key: SeqTemplateKey;
+  delayHours: number;
+  subject?: string;
+}
+
+export async function scheduleBrevoSequence(params: {
+  email: string;
+  name?: string;
+  sequenceId: string;
+  locale?: string;
+  createdAt?: Date;
+  steps: BrevoSeqStep[];
+}): Promise<number> {
+  const email = params.email.toLowerCase();
+  const base = params.createdAt || new Date();
+  const locale = params.locale === 'en' ? 'en' : 'ar';
+  let enqueued = 0;
+  let idx = 0;
+  for (const step of params.steps) {
+    idx += 1;
+    let tplId: number | null = null;
+    try { tplId = seqTemplateId(step.key, locale); } catch { tplId = null; }
+    if (!tplId) continue;
+    const dupe = await db.emailQueue.findFirst({
+      where: { email, sequenceId: params.sequenceId, stepNumber: idx }
+    });
+    if (dupe) continue;
+    await db.emailQueue.create({
+      data: {
+        email,
+        name: params.name || email.split('@')[0],
+        sequenceId: params.sequenceId,
+        stepNumber: idx,
+        subject: step.subject || `Brevo template ${tplId}`,
+        content: '',
+        templateName: `brevo:${tplId}`,
+        scheduledAt: new Date(base.getTime() + step.delayHours * 3600 * 1000),
+        status: 'PENDING'
+      }
+    });
+    enqueued += 1;
+  }
+  return enqueued;
+}
+
+export const SEQ_TEMPLATE_SUBJECTS: Record<string, string> = {
+  'RECOVERY_TRC_01': 'حين ينعقلك الماضي، حواسُّك الخمس هي المخارج',
+  'RECOVERY_TRC_02': 'زفيرٌ أطول من شهيقك: أقدم مفتاح إطفاء في جسدك',
+  'RECOVERY_TRC_03': 'مكانٌ آمن لا يحتاج مفاتيح ولا أبواباً — تبنيه من داخلك',
+  'RECOVERY_TRC_04': 'جسدك يتكلم طوال اليوم — هذه عشر دقائق لتسمعه',
+  'RECOVERY_TRC_05': 'المحفزات لا تفاجئ من يعرف خريطتها',
+  'RECOVERY_TRC_06': 'اكتب خطة أمانك في يوم صافٍ — ليقودك سطرٌ مكتوب في يوم عاصف',
+  'RECOVERY_TRC_07': 'أي أداة لأي حالة؟ ورقة واحدة تربط حالتك بالأداة الصحيحة',
+  'RECOVERY_TRC_08': 'قتال، هروب، تجمّد، ملاينة: لا شيء منها خطأ — كلها كانت إنقاذاً',
+  'RECOVERY_TRC_09': 'غيّر سطراً واحداً في المثلث المعرفي — يتبعُه الباقي',
+  'RECOVERY_TRC_10': 'العار يقول: أنت الخطأ — والورقة تسأله: من علمك هذا؟',
+  'RECOVERY_TRC_11': 'اكتب حين تكون مستقراً — لا حين تكون غارقاً',
+  'RECOVERY_TRC_12': 'أطراف أصابعك على خريطة الانزعاج: تقنية النقر بخمس خطوات',
+  'RECOVERY_REC_01': 'الرغبة لا تصلك من السماء — تصلك من الجوع، والتعب، والوحدة',
+  'RECOVERY_REC_02': 'حين تشعر بالرغبة، تكون معظم الحلقة قد دارت بالفعل',
+  'RECOVERY_REC_03': 'لا تعتمد على أفضل نسخة منك — اعتمد على خطة كُتبت في يوم هادئ',
+  'RECOVERY_REC_04': 'توقف أسبوعياً لقراءة الطريق — التعافي بلا مراجعة يُدار بالذاكرة الانتقائية',
+  'RECOVERY_REC_05': 'نوباتك لها مواعيد وأنماط — والنمط المكتشف نصف المعركة',
+  'RECOVERY_REC_06': 'الحلقة الدوارة تنكسر عند الحلقة الأضعف — هذه الورقة تريك أيها',
+  'RECOVERY_REC_07': 'بعد الزلة يتكلم صوتان: ذنبٌ نافع وَعارٌ مدمر — تعلّم التفريق',
+  'RECOVERY_REC_08': 'ما هو أصل مرحلتك في التعافي؟ الأداة الصحيحة تُختار بعد الجواب',
+  'RECOVERY_REC_09': 'اقرأ الانتكاسة كما يقرأ المهندس جسراً انهار — تقريراً لا حكماً',
+  'RECOVERY_REC_10': 'التعافي الحقيقي لا يبدأ بالتوقف عن سلوك — بل ببناء هوية لا تحتاجه',
+  'RECOVERY_REC_11': 'مكتوبة الآن، وتصل بعد تسعين يوماً: رسالتك من نسختك المتعافية',
+  'PROTO_TD': 'ذاكرتك تُعيد كتابة يومك كل يوم — هذا البروتوكول يمنحك القلم',
+  'PROTO_AC': 'الاسم الذي يفتح فيك الباب القديم — يمكن أن يصبح مفتاحاً باباً جديداً',
+  'PROTO_WM': 'كسر النمط في اللحظة نفسها التي يبدأ فيها — 4 خطوات في 9 دقائق',
+  'PROTO_DAY_1': 'اليوم الأول: ابدأ صغيراً — عشر دقائق تفعل أكثر من ساعة',
+  'PROTO_DAY_2': 'اليوم الثاني: التكرار يرسم الطريق العصبي — لا يرسمه الكمال',
+  'PROTO_DAY_3': 'اليوم الثالث: المقاومة ستظهر اليوم — وهذا بالضبط ما يعني أنك تتحرك',
+  'PROTO_DAY_4': 'اليوم الرابع: لا تقِس التقدم في منتصف الطريق',
+  'PROTO_DAY_5': 'المنتصف: نظرة أولى على الأثر — وماذا لو لم تر شيئاً بعد',
+  'PROTO_DAY_6': 'اليوم السادس: الاستمرارية أجمل من الكمال — والنقصان مقبول',
+  'PROTO_DAY_7': 'أسبوع كامل: ما الذي تغيّر فعلاً؟ — أول قوس واضح في بياناتك',
+  'PROTO_DAY_8': 'اليوم الثامن: همهمة «الأداء ممل» — وأنت على باب النتيجة',
+  'PROTO_DAY_9': 'اليوم التاسع: أغلق القوس — ثم ابنِ أسبوعك المستقبلي',
+  'APP_IDENTITY_BASELINE': 'قبل أي تحول: لقطة صادقة عن موقعك الحالي — 8 أبعاد في تقرير واحد',
+  'APP_EXECUTIVE_MANUAL': 'دليلك التنفيذي وصل: خطة 30 يوماً من رد الفعل إلى الفعل المتعمد',
+  'APP_DAILY_PLANNER': 'ابدأ يومك بسؤال أقوى من قائمة المهام: من أريد أن أكون اليوم؟',
+  'APP_JOURNAL_SYSTEM': 'العقل يكرر ما لم يُكتب — والصفحة تفكّ الحلقة',
+  'APP_GOAL_SYSTEM': 'معظم الأهداف تفشل في فحص واحد: لا تنتمي لمن تحاول أن تصبح',
+  'APP_HABIT_TRACKER': 'كل عادة تصويت لهوية: شاهد أصواتك تتراكم على خريطة واحدة',
+  'APP_DAILY_REFLECTION': 'خمس دقائق مسائية تكفي ليتحول يومك من خبر يمر إلى معلومة تُبنى',
+  'APP_ENVIRONMENTAL_AUDIT': 'بيئتك تختار قبلك: مسح من ثلاث بيئات يكشف من يدفع فاتورة سلوكك',
+  'APP_DECISION_ANALYSIS': 'قراراتك ليست صدفة متكررة — إنها نمط موقّع باسمك ويمكن قراءته',
+  'APP_EVIDENCE_TRACKING': 'هويتك الجديدة لا تُناقَش — تُوثَّق: دليل واحد يومياً يغلق الجدل',
+  'APP_PROGRESS_DASHBOARD': 'رقم واحد يجمع تحولك كله: لوحتك الموحدة جاهزة',
+  'APP_IDENTITY_RECODE': 'النظام الكامل في مسار واحد: 30 يوماً تفكيك وتشييد بترتيب هندسي',
+  'APP_WORKSHEETS': 'مكتبة أدوات التحول كاملة: املأ رقمياً أو اطبع — وعملك محفوظ تلقائياً',
+  'APP_EMOTION_REGULATION': 'أي استراتيجية تستخدم مع مشاعرك: إعادة تقييم أم كبت؟ النتيجة تشرح كثيراً',
+  'APP_COMMUNITY': 'التحول وحيداً ممكن — والتحول مع شركاء طريق أسرع وأدوم',
+  'APP_PRIORITY_SUPPORT': 'حين تعلق في طريقك، هناك إجابة خلال 24 ساعة — بضمان',
+  'APP_AI_COACH': 'مدرب يعرف أنماطك ويعمل 24 ساعة: احجز مكانك المبكر',
+  'APP_VALUES': 'قبل أن تسأل: كيف أنجز؟ اسأل: لماذا أنجز أصلاً؟ — 30 قيمة وترتيب واحد',
+  'APP_TRIAL_PLANNER': 'بداية تحول مجانية للأبد: بدون بطاقة، وبدون حد زمني',
+  'APP_QUIZ': 'أنت لا تعرف فجوتك الحقيقية إلا بالأرقام: ثلاث دقائق تكشفها',
+  'NUDGE_1': 'مفتاحك وصل — والباب يبقى باباً حتى يُفتح: 5 دقائق الآن؟',
+  'NUDGE_3': 'ورقة مكتوبة تتفوق على نية لم تُكتب — أين ملفك الآن؟',
+  'NUDGE_7': 'أسبوع انتهى: هل ملفك ما زال «في المخطط»؟ الإجابة الصادقة تفيد',
+};
+
 // Send queued emails (for cron job or background process)
 export async function sendQueuedEmails(): Promise<{ sent: number; failed: number }> {
   const now = new Date();
@@ -344,6 +462,49 @@ export async function sendQueuedEmails(): Promise<{ sent: number; failed: number
         where: { id: email.id },
         data: { status: 'SENDING' }
       });
+      
+      // V3: Brevo-hosted template delivery (templateName format: "brevo:<id>")
+      if (email.templateName && email.templateName.startsWith('brevo:')) {
+        const tplId = parseInt(email.templateName.slice(6), 10);
+        if (Number.isFinite(tplId) && tplId > 0) {
+          try {
+            const res = await BrevoEmails.sendTemplate(
+              tplId,
+              email.email,
+              { NAME: email.name || 'Friend' },
+              { name: email.name || undefined, sender: { ...BREVO_SEQ_SENDER_REF } }
+            );
+            if (res.success) {
+              await db.emailQueue.update({
+                where: { id: email.id },
+                data: { status: 'SENT', sentAt: new Date() }
+              });
+              await db.emailLog.create({
+                data: {
+                  email: email.email,
+                  type: getEmailType(email.sequenceId || '') as any,
+                  subject: email.subject,
+                  status: 'SENT'
+                }
+              });
+              sent++;
+            } else {
+              throw new Error(res.error || 'Brevo sendTemplate failed');
+            }
+          } catch (brevoErr) {
+            console.error(`Brevo template send failed for ${email.email}:`, brevoErr);
+            await db.emailQueue.update({
+              where: { id: email.id },
+              data: {
+                status: 'FAILED',
+                error: brevoErr instanceof Error ? brevoErr.message : 'Brevo error'
+              }
+            });
+            failed++;
+          }
+          continue;
+        }
+      }
       
       // Generate HTML from template name if available
       let htmlContent = email.content;

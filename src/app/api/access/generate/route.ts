@@ -32,11 +32,13 @@ export async function POST(request: NextRequest) {
       accessTier = getTierFromProductId(productId);
     }
 
-    // Set expiration for trial
+    // Monthly subscription validity (2026-09-28): BASIC is the $7/month plan —
+    // each code is valid for a 30-day cycle and is extended automatically on
+    // every successful renewal (Tribute webhook extends expiresAt).
     let expiresAt: Date | undefined;
     if (accessTier === 'BASIC') {
       expiresAt = new Date();
-      expiresAt.setDate(expiresAt.getDate() + 7); // 7-day trial
+      expiresAt.setDate(expiresAt.getDate() + 30); // 30-day monthly cycle
     }
 
     // Create access record

@@ -67,3 +67,9 @@ logs/
 .next-safe*
 build_selfauth_*.log
 build_2*.log
+
+# local backups / build logs (housekeeping 2026-10-16)
+*.bak-*
+build.log*
+trace*
+turbopack

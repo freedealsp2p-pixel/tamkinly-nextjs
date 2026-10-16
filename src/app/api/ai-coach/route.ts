@@ -36,6 +36,14 @@ async function getSystemPrompt(): Promise<string> {
       .join('\n')
       .trim();
     cachedSystemPrompt = promptLines;
+    try {
+      const knowledgePath = join(process.cwd(), 'config', 'coach-knowledge.md');
+      const knowledgeRaw = await readFile(knowledgePath, 'utf-8');
+      const knowledgeLines = knowledgeRaw.split('\n').filter(line => !line.startsWith('#')).join('\n').trim();
+      if (knowledgeLines) cachedSystemPrompt = cachedSystemPrompt + '\n\n' + knowledgeLines;
+    } catch (knowledgeError) {
+      console.error('[AI Coach] Knowledge pack not loaded:', knowledgeError);
+    }
     systemPromptLoadTime = now;
     console.log('[AI Coach] System prompt loaded from config file (' + promptLines.length + ' chars)');
     return cachedSystemPrompt;
@@ -221,9 +229,9 @@ export async function POST(request: NextRequest) {
 
     const completion = await groq.chat.completions.create({
       messages: messagesForAI,
-      model: 'llama-3.3-70b-versatile',
+      model: 'qwen/qwen3.8-27b',
       temperature: 0.7,
-      max_tokens: 1024,
+      max_tokens: 8192,
       top_p: 0.9,
     });
 

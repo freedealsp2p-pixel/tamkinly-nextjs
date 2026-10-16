@@ -114,7 +114,7 @@ function ArticleGrid({ isAr, articles }: { isAr: boolean; articles: BlogArticle[
             {articles.map((a) => (
               <Link
                 key={a.slug}
-                href={isAr ? `/ar/blog/${a.slug}` : `/blog/${a.slug}`}
+                href={a.slug.startsWith('ar-') || isAr ? `/ar/blog/${a.slug}` : `/blog/${a.slug}`}
                 className="group block"
                 dir={isAr ? 'rtl' : 'ltr'}
               >

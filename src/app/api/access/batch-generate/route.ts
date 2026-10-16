@@ -32,11 +32,12 @@ export async function POST(request: NextRequest) {
     for (let i = 0; i < numCodes; i++) {
       const code = generateAccessCode();
       
-      // Set expiration for trial
+      // Monthly subscription validity (2026-09-28): BASIC is the $7/month
+      // plan — 30-day cycle, extended automatically on each renewal.
       let expiresAt: Date | undefined;
       if (tier === 'BASIC') {
         expiresAt = new Date();
-        expiresAt.setDate(expiresAt.getDate() + 7);
+        expiresAt.setDate(expiresAt.getDate() + 30);
       }
 
       await db.appAccess.create({
