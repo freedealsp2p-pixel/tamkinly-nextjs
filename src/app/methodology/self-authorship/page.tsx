@@ -16,6 +16,14 @@ import {
   Hammer,
   CheckCircle2,
   BookOpen,
+  Quote,
+  Compass,
+  Scale,
+  PenLine,
+  ShieldCheck,
+  Users,
+  GraduationCap,
+  ListChecks,
 } from "lucide-react";
 import { useLocale } from "@/components/providers/LocaleProvider";
 
@@ -28,6 +36,101 @@ const OFFICIAL = {"en":{"heroBadge":"The Framework","concepts":[{"title":"Identi
 const PHASE_ICONS = [Search, Layers, Hammer, CheckCircle2];
 const PILLAR_ICONS = [Target, RefreshCw, Brain, Feather];
 
+// ═══════════════════════════════════════════════════════════════
+// Published research (Hermes reference sweep — Self-Authorship):
+// Baxter Magolda 20+ yr longitudinal phases, 3 dimensions, LPM,
+// Future Authoring documented outcomes. Publicly published material —
+// safe to cite. Tamkinly mapping uses ONLY officially live content.
+// ═══════════════════════════════════════════════════════════════
+const SCIENCE = {
+  en: {
+    badge: "The research",
+    title: "What self-authorship means",
+    quote: "The internal capacity to define one's own beliefs, identity, and social relationships — instead of borrowing them from an external authority (Baxter Magolda, 2001).",
+    dimsTitle: "Three dimensions",
+    dims: [
+      ["Cognitive", "How do I know? — from absolute certainty to contextual judgment."],
+      ["Intrapersonal", "Who am I? — identity and capability, from within."],
+      ["Interpersonal", "How do I relate? — built from one's own identity, not others' expectations."],
+    ],
+    phasesTitle: "Four phases of becoming the author of your life",
+    phasesBy: "Marcia Baxter Magolda — a 20-year longitudinal study (1986–2006, 39 participants)",
+    phases: [
+      ["Following formulas", "Reliance on external opinions for values and beliefs."],
+      ["Crossroads", "Experiences that shake the old balance and force a review of beliefs."],
+      ["Authoring your life", "Building an independent personal identity — and acting on it."],
+      ["Internal foundations", "A settled inner authority that organizes thinking and relationships."],
+    ],
+    phasesGoal: "The end goal: contextual knowing — seeing knowledge in its context and evaluating claims with informed judgment.",
+    lpmTitle: "Learning Partnerships Model",
+    lpmBy: "Six dynamics distilled into three principles",
+    lpm: [
+      "Learners are trusted to build knowledge, not just receive it.",
+      "Learning is situated in the learner's own experience.",
+      "Meaning is built mutually — exchanging perspectives, constructing together.",
+    ],
+    faTitle: "Future Authoring — documented outcomes",
+    faVisionTitle: "Step 1 — Vision",
+    faVision: "A positive future vision (3–5 years) + a negative one (what if bad habits take over).",
+    faPlanTitle: "Step 2 — Plan",
+    faPlan: "Analyze the vision, set and justify goals, anticipate obstacles, track progress.",
+    faBody: "Documented results (HEQCO + Erasmus): dropout reduced by 3.3–4.3 percentage points; study abandonment fell from 14.8% (control) to ~11% (participants).",
+    faBy: "Jordan B. Peterson — Future Authoring program",
+    mapTitle: "From the research to our 30-day protocol",
+    mapIntro: "The same arc, mapped onto the Identity Recode phases.",
+    map: [
+      ["Following formulas", "Behavior-only change stays fragile without a deeper self-concept."],
+      ["Crossroads", "Deconstruct — days 8–14: name borrowed identities and challenge inherited “shoulds”."],
+      ["Authoring your life", "Reconstruct — days 15–21: build the identity you choose to move toward."],
+      ["Internal foundations", "Integrate — days 22–30: daily embodiment and environment optimization."],
+    ],
+  },
+  ar: {
+    badge: "البحث العلمي",
+    title: "ماذا يعني تأليف الذات؟",
+    quote: "القدرة الداخلية على تعريف معتقدات الشخص وهويته وعلاقاته الاجتماعية — بدل استعارتها من سلطة خارجية (أب، معلم، مجتمع) — باكستر ماغولدا، 2001.",
+    dimsTitle: "ثلاثة أبعاد",
+    dims: [
+      ["المعرفي", "كيف أعرف؟ — من اليقين المطلق إلى الحكم السياقي."],
+      ["الشخصي", "من أنا؟ — الهوية والقدرة، من الداخل."],
+      ["البين-شخصي", "كيف أرتبط؟ — علاقات تُبنى من هوية الشخص لا من توقعات الآخرين."],
+    ],
+    phasesTitle: "أربع مراحل لتصبح مؤلّف حياتك",
+    phasesBy: "مارشيا باكستر ماغولدا — دراسة طولية استغرقت 20 عاماً (1986–2006، 39 مشاركاً من 18 إلى 40 سنة)",
+    phases: [
+      ["اتباع الوصفات", "الاعتماد على الآراء الخارجية في القيم والمعتقدات."],
+      ["التقاطع", "تجارب تهز التوازن وتجبر الشخص على مراجعة معتقداته."],
+      ["كتابة الحياة", "بناء هوية شخصية مستقلة — والتصرف وفقها."],
+      ["الأسس الداخلية", "سلطة داخلية راسخة تنظم التفكير والعلاقات."],
+    ],
+    phasesGoal: "الهدف النهائي: المعرفة السياقية — رؤية المعرفة في سياقها النسبي وتقييم الادعاءات بالحكم المستنير.",
+    lpmTitle: "نموذج شراكات التعلم",
+    lpmBy: "ستة ديناميكيات تجمع في ثلاثة مبادئ",
+    lpm: [
+      "المتعلم مبني للمعرفة — تصديق قدرته على بناء المعرفة لا تلقّيها.",
+      "التعلم في الخبرة — المعرفة توضع في سياق خبرة المتعلم الشخصية.",
+      "بناء معنى متبادل — تبادل وجهات النظر وبناء المعنى اجتماعياً.",
+    ],
+    faTitle: "برنامج تأليف المستقبل — نتائج موثقة",
+    faVisionTitle: "المرحلة الأولى — الرؤية",
+    faVision: "رؤية إيجابية للمستقبل (3–5 سنوات) + رؤية سلبية (ماذا لو سيطرت العادات السيئة).",
+    faPlanTitle: "المرحلة الثانية — الخطة",
+    faPlan: "تحليل الرؤية، تحديد الأهداف وترتيبها وتبريرها، توقع العقبات، مراقبة التقدم.",
+    faBody: "النتائج الموثقة (HEQCO + Erasmus): انخفاض التسرب 3.3–4.3 نقطة مئوية؛ ترك الدراسة هبط من 14.8% (ضابط) إلى ~11% (مشاركون).",
+    faBy: "جوردان ب. بيترسن — برنامج Future Authoring",
+    mapTitle: "من البحث إلى بروتوكول الـ 30 يوماً",
+    mapIntro: "القوس نفسه، مرسوماً على مراحل إعادة ترميز الهوية.",
+    map: [
+      ["اتباع الوصفات", "التغيير السلوكي وحده يبقى هشاً دون مفهوم أعمق للذات."],
+      ["التقاطع", "فكّك — الأيام 8-14: تحديد الهويات المستعارة وتحدي روايات الـ«يجب»."],
+      ["كتابة الحياة", "أعد البناء — الأيام 15-21: بناء الهوية التي تختار التقدم نحوها."],
+      ["الأسس الداخلية", "دمج — الأيام 22-30: التجسيد اليومي وتحسين البيئة."],
+    ],
+  },
+} as const;
+
+const SCI_PHASE_ICONS = [Compass, Scale, PenLine, ShieldCheck];
+
 export default function SelfAuthorshipPage() {
   const { locale } = useLocale();
   const isAr = locale === "ar";
@@ -36,6 +139,7 @@ export default function SelfAuthorshipPage() {
 
   const selfAuthEn = OFFICIAL.en.concepts[3];
   const selfAuthAr = OFFICIAL.ar.concepts[3];
+  const s = isAr ? SCIENCE.ar : SCIENCE.en;
 
   return (
     <div className="min-h-screen bg-white">
@@ -156,6 +260,147 @@ export default function SelfAuthorshipPage() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* THE SCIENCE — definition + three dimensions */}
+      <section className="py-20 lg:py-28 bg-slate-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <Badge className="mb-6 bg-[#3DD4B0]/10 text-[#3DD4B0] border-0 px-4 py-2">
+              {s.badge}
+            </Badge>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-8">
+              {s.title}
+            </h2>
+            <div className="relative bg-white border border-slate-200 rounded-xl p-8 sm:p-10 shadow-sm">
+              <Quote className="h-8 w-8 text-[#3DD4B0] mb-4 mx-auto" aria-hidden="true" />
+              <p className="font-serif text-xl sm:text-2xl text-slate-800 leading-relaxed">
+                {s.quote}
+              </p>
+            </div>
+            <div className="mt-8 grid sm:grid-cols-3 gap-4 text-start">
+              {s.dims.map((d) => (
+                <div key={d[0]} className="bg-white border border-slate-200 rounded-xl p-5">
+                  <p className="font-semibold text-slate-900 mb-2">{d[0]}</p>
+                  <p className="text-sm text-[#8A94A6] leading-relaxed">{d[1]}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-[#8A94A6]">{s.dimsTitle}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* BAXTER MAGOLDA — FOUR PHASES */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
+                {s.phasesTitle}
+              </h2>
+              <p className="text-sm text-[#8A94A6]">{s.phasesBy}</p>
+            </div>
+            <div className="space-y-6">
+              {s.phases.map((phase, idx) => {
+                const Icon = SCI_PHASE_ICONS[idx] ?? Feather;
+                return (
+                  <Card key={phase[0]} className="border-slate-200 bg-white">
+                    <CardContent className="p-6 sm:p-8">
+                      <div className="flex items-start gap-5">
+                        <div className="h-12 w-12 shrink-0 rounded-lg bg-[#0F1C2E] flex items-center justify-center">
+                          <Icon className="h-6 w-6 text-[#3DD4B0]" aria-hidden="true" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-[#3DD4B0] font-serif mb-1">0{idx + 1}</p>
+                          <h3 className="font-semibold text-slate-900 mb-2">{phase[0]}</h3>
+                          <p className="text-slate-600 leading-relaxed">{phase[1]}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+            <p className="mt-8 text-center text-sm text-[#8A94A6] max-w-2xl mx-auto">{s.phasesGoal}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* EVIDENCE — LPM + Future Authoring */}
+      <section className="py-20 lg:py-28 bg-slate-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+            <Card className="border-slate-200 bg-white">
+              <CardContent className="p-8">
+                <div className="h-12 w-12 rounded-lg bg-[#3DD4B0]/15 flex items-center justify-center mb-5">
+                  <Users className="h-6 w-6 text-[#3DD4B0]" aria-hidden="true" />
+                </div>
+                <h3 className="font-serif text-xl font-bold text-slate-900 mb-1">{s.lpmTitle}</h3>
+                <p className="text-sm text-[#8A94A6] mb-5">{s.lpmBy}</p>
+                <ul className="space-y-3">
+                  {s.lpm.map((p) => (
+                    <li key={p} className="flex items-start gap-3 text-slate-600 leading-relaxed">
+                      <ListChecks className="h-5 w-5 shrink-0 text-[#3DD4B0] mt-0.5" aria-hidden="true" />
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+            <Card className="border-[#3DD4B0]/40 bg-white">
+              <CardContent className="p-8">
+                <div className="h-12 w-12 rounded-lg bg-[#3DD4B0]/15 flex items-center justify-center mb-5">
+                  <GraduationCap className="h-6 w-6 text-[#3DD4B0]" aria-hidden="true" />
+                </div>
+                <h3 className="font-serif text-xl font-bold text-slate-900 mb-1">{s.faTitle}</h3>
+                <p className="text-sm text-[#8A94A6] mb-5">{s.faBy}</p>
+                <p className="text-sm font-semibold text-slate-900 mb-1">{s.faVisionTitle}</p>
+                <p className="text-slate-600 leading-relaxed mb-4">{s.faVision}</p>
+                <p className="text-sm font-semibold text-slate-900 mb-1">{s.faPlanTitle}</p>
+                <p className="text-slate-600 leading-relaxed mb-5">{s.faPlan}</p>
+                <div className="rounded-lg bg-[#3DD4B0]/5 border border-[#3DD4B0]/30 p-4">
+                  <p className="text-slate-800 text-sm leading-relaxed font-medium">{s.faBody}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* MAPPING — research arc onto official protocol phases */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
+                {s.mapTitle}
+              </h2>
+              <p className="text-[#8A94A6]">{s.mapIntro}</p>
+            </div>
+            <div className="space-y-6">
+              {s.map.map((row, idx) => {
+                const Icon = SCI_PHASE_ICONS[idx] ?? Feather;
+                return (
+                  <div key={row[0]} className="grid sm:grid-cols-[1fr_auto_1fr] gap-4 items-center">
+                    <Card className="border-slate-200">
+                      <CardContent className="p-5 flex items-center gap-3">
+                        <Icon className="h-5 w-5 shrink-0 text-[#8A94A6]" aria-hidden="true" />
+                        <p className="font-semibold text-slate-700 text-sm">{row[0]}</p>
+                      </CardContent>
+                    </Card>
+                    <Arrow className="h-5 w-5 text-[#3DD4B0] justify-self-center" aria-hidden="true" />
+                    <Card className="border-[#3DD4B0]/40 bg-[#3DD4B0]/5">
+                      <CardContent className="p-5">
+                        <p className="text-slate-800 text-sm leading-relaxed">{row[1]}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
