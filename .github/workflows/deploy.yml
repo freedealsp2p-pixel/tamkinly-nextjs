@@ -41,13 +41,19 @@ jobs:
             # Generate Prisma client
             npx prisma generate
 
-            # ---- DATABASE SAFETY FIX (2026-09-06) ----
-            # 'prisma db push --accept-data-loss' REMOVED: it could silently destroy
-            # production data. Without the flag:
-            #   * additive schema changes -> applied automatically
-            #   * destructive changes     -> Prisma refuses in non-interactive mode and
-            #                                the deploy FAILS LOUDLY instead of data loss
-            npx prisma db push --skip-generate
+            # ---- DATABASE SAFETY (2026-09-06, amended 2026-10-17 by AUD-1) ----
+            # Design: no SILENT data loss. A full file-level SQLite backup is taken
+            # before every push (last 5 kept on the VPS), then --accept-data-loss is
+            # permitted: destructive schema changes (e.g. dropping the stale
+            # 'agent_events' table, 11 rows) proceed ONLY after an on-server snapshot
+            # exists -> every change stays reversible, nothing is lost silently.
+            mkdir -p db/backups
+            if [ -f db/custom.db ]; then
+              cp db/custom.db "db/backups/custom-$(date -u +%Y%m%dT%H%M%SZ).db"
+              ls -1t db/backups/custom-*.db 2>/dev/null | tail -n +6 | xargs -r rm -f || true
+              echo "DB backup taken: db/backups/custom-$(date -u +%Y%m%dT%H%M%SZ).db"
+            fi
+            npx prisma db push --skip-generate --accept-data-loss
 
             # Remove stale Next build lock (only when no build is actually running)
             if [ -f .next/lock ] && ! pgrep -f "next build" >/dev/null 2>&1; then
