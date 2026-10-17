@@ -10,9 +10,18 @@ import { getCurrentUser } from '@/lib/auth-helpers';
 // Version: 6.0 — 2 free questions + PREMIUM/MASTERY access
 // ============================================
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+// Lazy client init: keeps `next build` independent of GROQ_API_KEY presence
+// (module-level instantiation throws when the key is missing and fails page-data
+// collection; missing key at request time is handled by the 503 branch below).
+let _groq: Groq | null = null;
+function getGroq(): Groq {
+  if (!_groq) {
+    _groq = new Groq({
+      apiKey: process.env.GROQ_API_KEY,
+    });
+  }
+  return _groq;
+}
 
 // Cache the system prompt in memory
 let cachedSystemPrompt: string | null = null;
@@ -227,7 +236,7 @@ export async function POST(request: NextRequest) {
       })),
     ];
 
-    const completion = await groq.chat.completions.create({
+    const completion = await getGroq().chat.completions.create({
       messages: messagesForAI,
       model: 'qwen/qwen3.8-27b',
       temperature: 0.7,
