@@ -300,12 +300,13 @@ jobs:
           BREVO_KEY="$KEY" BREVO_ACTION="$ACTION" python3 /tmp/brevo_repair.py 2>&1
           rm -f /tmp/brevo_repair.py
           EOS
-          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' "$BREVO_ACTION" < /tmp/remote_repair.sh > brevo_repair.txt
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' "$BREVO_ACTION" < /tmp/remote_repair.sh > brevo_repair.txt 2>&1 || BREVO_EXIT=$?
           rm -f ~/.ssh/vps_key
           echo "--- repair report (backups in artifact) ---"
-          grep -E '^(INVENTORY_TOTAL|MATCH|SCAN_AFFECTED_TOTAL|SCAN_ONLY|===BACKUP_[0-9]+===$|FIXED|DEFAULT|DELETED|ABORT|FINAL_|REPAIR_DONE)' brevo_repair.txt | head -60
-          echo "--- repair output tail ---"
-          tail -8 brevo_repair.txt
+          grep -E '^(INVENTORY_TOTAL|MATCH|SCAN_AFFECTED_TOTAL|SCAN_ONLY|===BACKUP_[0-9]+===$|FIXED|DEFAULT|DELETED|ABORT|FINAL_|REPAIR_DONE)' brevo_repair.txt | head -60 || true
+          echo "--- repair output tail (always visible, even on failure) ---"
+          tail -40 brevo_repair.txt || true
+          exit ${BREVO_EXIT:-0}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
