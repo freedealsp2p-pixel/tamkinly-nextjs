@@ -31,7 +31,7 @@ jobs:
           QH() { sqlite3 -readonly -header -separator '|' "$DB" "$1"; }
           echo "===RUN_AT==="; date -u +%FT%TZ
           echo "===USERS_LOCALE_DIST==="
-          Q "SELECT COALESCE(locale,'__NULL__') || ' => ' || COUNT(*) FROM users GROUP BY 1;"
+          QH "SELECT COALESCE(locale,'__NULL__') AS loc, COUNT(*) AS n FROM users GROUP BY loc;"
           echo "===EXPIRING_7D==="
           QH "SELECT email,customerName,tier,expiresAt,productName FROM app_access WHERE isActive=1 AND expiresAt IS NOT NULL AND expiresAt <= datetime('now','+7 days') ORDER BY expiresAt ASC LIMIT 50;"
           echo "===EXPIRING_COUNT==="
@@ -43,11 +43,11 @@ jobs:
           echo "===OPEN_TICKETS==="
           QH "SELECT ticketNumber,email,name,subject,category,priority,status,createdAt,updatedAt FROM support_tickets WHERE status NOT IN ('RESOLVED','CLOSED') ORDER BY createdAt DESC LIMIT 50;"
           echo "===OPEN_TICKETS_COUNT==="
-          Q "SELECT status || ' => ' || COUNT(*) FROM support_tickets GROUP BY 1;"
+          QH "SELECT status, COUNT(*) AS n FROM support_tickets GROUP BY status;"
           echo "===QUEUE_LAST100==="
           QH "SELECT email,subject,templateName,status,COALESCE(sentAt,createdAt) FROM email_queue ORDER BY createdAt DESC LIMIT 100;"
           echo "===QUEUE_STATUS_DIST==="
-          Q "SELECT status || ' => ' || COUNT(*) FROM email_queue GROUP BY 1;"
+          QH "SELECT status, COUNT(*) AS n FROM email_queue GROUP BY status;"
           echo "===QUEUE_FAIL_LAST10==="
           QH "SELECT email,subject,status,error FROM email_queue WHERE status='FAILED' ORDER BY createdAt DESC LIMIT 10;"
           echo "===SNAPSHOT_END==="
