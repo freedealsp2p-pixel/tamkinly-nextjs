@@ -7,6 +7,15 @@ name: Ops Read-Only Snapshot (AUD-1)
 
 on:
   workflow_dispatch:
+    inputs:
+      brevo_action:
+        description: 'scan = read-only audit | fix = repair corrupt AR word + delete unused French defaults 196-199 (founder-authorized 2026-10-18)'
+        required: false
+        default: 'scan'
+        type: choice
+        options:
+          - scan
+          - fix
 
 jobs:
   snapshot:
@@ -179,6 +188,122 @@ jobs:
           echo "--- inventory summary (full raw HTML kept in artifact) ---"
           grep -E '^(===|TOTAL|[0-9]+ \|)' brevo_inventory.txt | head -80
 
+      - name: Brevo repair — stray-diacritic AR fix + unused defaults cleanup (founder-authorized 2026-10-18, gated)
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USERNAME }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          BREVO_ACTION: ${{ github.event.inputs.brevo_action || 'scan' }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          cat > /tmp/remote_repair.sh << 'EOS'
+          set -e
+          cd /var/www/tamkinly
+          KEY=$(grep -E '^BREVO_API_KEY=' .env | cut -d= -f2- | tr -d '"' | tr -d "'")
+          [ -n "$KEY" ] || { echo "NO_BREVO_KEY"; exit 0; }
+          cat > /tmp/brevo_repair.py << 'PYEOF'
+          import json, os, sys, time, urllib.request, urllib.error
+          KEY = os.environ.get('BREVO_KEY', '')
+          ACTION = os.environ.get('BREVO_ACTION', 'scan')
+          BASE = 'https://api.brevo.com/v3/smtp/templates'
+          CORRUPT = '\u0633\u0646\u062a\u0627\u064f\u0631\u0627\u0641\u0642\u0643'   # سنتاُرافقك (corrupted)
+          FIXED   = '\u0633\u0646\u064f\u0631\u0627\u0641\u0642\u0643'                     # سنُرافقك (correct)
+          DEFAULTS = (196, 197, 198, 199)  # Brevo French system defaults, unused (verified no code refs)
+          def call(url, method='GET', payload=None):
+              data = json.dumps(payload).encode() if payload is not None else None
+              for attempt in range(4):
+                  req = urllib.request.Request(url, data=data, method=method)
+                  req.add_header('api-key', KEY)
+                  req.add_header('accept', 'application/json')
+                  if data: req.add_header('content-type', 'application/json')
+                  try:
+                      with urllib.request.urlopen(req, timeout=30) as r:
+                          body = r.read().decode()
+                          return json.loads(body) if body.strip() else {}
+                  except urllib.error.HTTPError as e:
+                      if e.code == 429 and attempt < 3:
+                          time.sleep(5 * (attempt + 1)); continue
+                      if e.code == 404: return None
+                      raise
+                  except Exception:
+                      if attempt < 3: time.sleep(3); continue
+                      raise
+              return None
+          # 1) inventory
+          tpl = []
+          for page in range(4):
+              lst = call(BASE + f'?limit=100&offset={page*100}') or {}
+              batch = lst.get('templates', [])
+              tpl.extend(batch)
+              if len(batch) < 100: break
+          print('INVENTORY_TOTAL:', len(tpl))
+          # 2) full scan of every template for the corrupt word
+          affected = []
+          for t in tpl:
+              tid = t.get('id')
+              d = call(BASE + '/' + str(tid))
+              if not d: continue
+              html = d.get('htmlContent') or ''
+              n = html.count(CORRUPT)
+              if n:
+                  affected.append((tid, d.get('name',''), n, d))
+                  print(f'MATCH id={tid} name={d.get("name","")!r} occurrences={n}')
+              time.sleep(0.12)
+          print('SCAN_AFFECTED_TOTAL:', len(affected))
+          if ACTION != 'fix':
+              print('SCAN_ONLY — no writes performed')
+              sys.exit(0)
+          # 3) fix (backup-first: print full before-HTML, then PUT minimal correction)
+          for tid, name, n, d in affected:
+              print(f'===BACKUP_{tid}===')
+              print('NAME:', d.get('name','')); print('SUBJECT:', d.get('subject',''))
+              print(d.get('htmlContent') or '')
+              print(f'===BACKUP_END_{tid}===')
+              fixed = d['htmlContent'].replace(CORRUPT, FIXED)
+              payload = {'templateName': d.get('name',''), 'subject': d.get('subject',''),
+                         'isActive': bool(d.get('isActive', True)), 'htmlContent': fixed}
+              r = call(BASE + '/' + str(tid), method='PUT', payload=payload)
+              v = call(BASE + '/' + str(tid)) or {}
+              vh = v.get('htmlContent') or ''
+              ok = (CORRUPT not in vh) and (FIXED in vh)
+              print(f'FIXED id={tid} verified={ok} name_preserved={v.get("name","")==d.get("name","")} subject_preserved={v.get("subject","")==d.get("subject","")}')
+              time.sleep(0.3)
+          # 4) delete unused French defaults (safety: name must contain the French default marker)
+          for tid in DEFAULTS:
+              d = call(BASE + '/' + str(tid))
+              if not d:
+                  print(f'DEFAULT {tid}: already absent'); continue
+              name = d.get('name','') or ''
+              print(f'===BACKUP_{tid}==='); print('NAME:', name); print('SUBJECT:', d.get('subject',''))
+              print(d.get('htmlContent') or ''); print(f'===BACKUP_END_{tid}===')
+              if ('d\u00e9faut' not in name) and ('par d\u00e9faut' not in name):
+                  print(f'ABORT delete id={tid}: name mismatch safety guard'); continue
+              call(BASE + '/' + str(tid), method='DELETE')
+              still = call(BASE + '/' + str(tid))
+              print(f'DELETED id={tid} verified_gone={still is None} name_was={name!r}')
+              time.sleep(0.3)
+          # 5) final inventory
+          tpl2 = []
+          for page in range(4):
+              lst = call(BASE + f'?limit=100&offset={page*100}') or {}
+              batch = lst.get('templates', [])
+              tpl2.extend(batch)
+              if len(batch) < 100: break
+          print('FINAL_TOTAL:', len(tpl2))
+          print('FINAL_HAS_196_199:', any(t.get('id') in DEFAULTS for t in tpl2))
+          print('REPAIR_DONE')
+          PYEOF
+          BREVO_KEY="$KEY" BREVO_ACTION="$BREVO_ACTION" python3 /tmp/brevo_repair.py 2>&1
+          rm -f /tmp/brevo_repair.py
+          EOS
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/remote_repair.sh > brevo_repair.txt
+          rm -f ~/.ssh/vps_key
+          echo "--- repair report (backups in artifact) ---"
+          rg '^(INVENTORY_TOTAL|MATCH|SCAN_AFFECTED_TOTAL|SCAN_ONLY|===BACKUP_[0-9]+===$|FIXED|DEFAULT|DELETED|ABORT|FINAL_|REPAIR_DONE)' brevo_repair.txt | head -60
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -187,4 +312,5 @@ jobs:
             ops_snapshot.txt
             brevo_dump.txt
             brevo_inventory.txt
+            brevo_repair.txt
           retention-days: 7
