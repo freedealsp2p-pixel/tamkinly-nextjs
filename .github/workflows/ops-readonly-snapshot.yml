@@ -56,9 +56,59 @@ jobs:
           rm -f ~/.ssh/vps_key
           wc -l ops_snapshot.txt
 
-      - name: Upload artifact
+      - name: Brevo EN template sample dump (read-only, AUD-1 copy review)
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USERNAME }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          cat > /tmp/remote_dump.sh << 'EOS'
+          set -e
+          cd /var/www/tamkinly
+          KEY=$(grep -E '^BREVO_API_KEY=' .env | cut -d= -f2- | tr -d '"' | tr -d "'")
+          [ -n "$KEY" ] || { echo "NO_BREVO_KEY"; exit 0; }
+          echo "===BREVO_EN_LIST_138_195==="
+          curl -s "https://api.brevo.com/api/v3/email%20templates?limit=100&offset=0" \
+            -H "api-key: $KEY" -H "accept: application/json" \
+            | python3 -c "
+import json,sys
+d=json.load(sys.stdin)
+for t in d.get('templates',[]):
+    i=t.get('id')
+    if isinstance(i,int) and 138<=i<=195:
+        print(i,'|',(t.get('name') or '')[:60],'|',(t.get('subject') or '')[:90])
+" || echo "(brevo list failed)"
+          for TID in 161 178 192 193; do
+            echo "===BREVO_SAMPLE_${TID}==="
+            curl -s "https://api.brevo.com/api/v3/email%20templates/${TID}" -H "api-key: $KEY" -H "accept: application/json" \
+              | python3 -c "
+import json,sys,re,html
+try:
+    d=json.load(sys.stdin)
+except Exception:
+    print('(parse fail)'); raise SystemExit
+h=d.get('htmlContent') or ''
+h=re.sub(r'<style[\s\S]*?</style>','',h)
+h=re.sub(r'<[^>]+>',' ',h)
+h=html.unescape(re.sub(r'\s+',' ',h)).strip()
+print('SUBJECT:', d.get('subject',''))
+print(h[:1100])
+" || echo "(sample $TID failed)"
+          done
+          echo "===BREVO_DUMP_END==="
+          EOS
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/remote_dump.sh > brevo_dump.txt
+          rm -f ~/.ssh/vps_key
+          cat brevo_dump.txt
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ops-ro-snapshot-${{ github.run_id }}
-          path: ops_snapshot.txt
+          path: |
+            ops_snapshot.txt
+            brevo_dump.txt
           retention-days: 7
