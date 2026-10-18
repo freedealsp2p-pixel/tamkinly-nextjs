@@ -331,6 +331,27 @@ jobs:
           tail -40 brevo_repair.txt || true
           exit ${BREVO_EXIT:-0}
 
+      - name: VPS diagnostics (read-only, AUD-1)
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USERNAME }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" '
+            echo "===DF==="; df -h / 2>/dev/null | head -3
+            echo "===MEM==="; free -m | head -3
+            echo "===LOAD==="; uptime
+            echo "===PM2==="; pm2 jlist 2>/dev/null | python3 -c "import json,sys;[print(p[\"name\"],p[\"pm2_env\"][\"status\"],\"restarts:\",p[\"pm2_env\"][\"restart_time\"],\"mem:\",round(p[\"monit\"][\"memory\"]/1048576),\"MB\") for p in json.load(sys.stdin)]" 2>/dev/null || pm2 list 2>/dev/null | head -8
+            echo "===BUILD_LOG_TAIL==="; tail -25 /root/tamkinly-autodeploy-build.log 2>/dev/null || sudo tail -25 /root/tamkinly-autodeploy-build.log 2>/dev/null || echo "(build log not readable for this user)"
+            echo "===DIAG_END==="
+          ' > vps_diagnostics.txt 2>&1
+          rm -f ~/.ssh/vps_key
+          cat vps_diagnostics.txt
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -340,4 +361,5 @@ jobs:
             brevo_dump.txt
             brevo_inventory.txt
             brevo_repair.txt
+            vps_diagnostics.txt
           retention-days: 7
