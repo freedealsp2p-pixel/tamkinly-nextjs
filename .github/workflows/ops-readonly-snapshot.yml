@@ -225,9 +225,13 @@ jobs:
                           body = r.read().decode()
                           return json.loads(body) if body.strip() else {}
                   except urllib.error.HTTPError as e:
+                      body = ''
+                      try: body = e.read().decode('utf-8', 'replace')[:400]
+                      except Exception: pass
                       if e.code == 429 and attempt < 3:
                           time.sleep(5 * (attempt + 1)); continue
                       if e.code == 404: return None
+                      print(f'HTTP_{e.code} {method} {url} body={body}')
                       raise
                   except Exception:
                       if attempt < 3: time.sleep(3); continue
@@ -282,11 +286,14 @@ jobs:
               print(d.get('htmlContent') or ''); print(f'===BACKUP_END_{tid}===')
               if ('d\u00e9faut' not in name) and ('par d\u00e9faut' not in name):
                   print(f'ABORT delete id={tid}: name mismatch safety guard'); continue
-              call(BASE + '/' + str(tid), method='DELETE')
-              still = call(BASE + '/' + str(tid))
-              print(f'DELETED id={tid} verified_gone={still is None} name_was={name!r}')
+              try:
+                  call(BASE + '/' + str(tid), method='DELETE')
+                  still = call(BASE + '/' + str(tid))
+                  print(f'DELETED id={tid} verified_gone={still is None} name_was={name!r}')
+              except Exception as e:
+                  print(f'DELETE_FAILED id={tid} err={type(e).__name__}: {e}')
               time.sleep(0.3)
-          # 5) final inventory
+          # 5) final inventory + 106 verification
           tpl2 = []
           for page in range(4):
               lst = call(BASE + f'?limit=100&offset={page*100}') or {}
@@ -295,6 +302,9 @@ jobs:
               if len(batch) < 100: break
           print('FINAL_TOTAL:', len(tpl2))
           print('FINAL_HAS_196_199:', any(t.get('id') in DEFAULTS for t in tpl2))
+          d106 = call(BASE + '/106') or {}
+          vh = d106.get('htmlContent') or ''
+          print(f'VERIFY_106: corrupt_absent={CORRUPT not in vh} fixed_present={FIXED in vh} name={d106.get("name","")!r} subject={d106.get("subject","")!r}')
           print('REPAIR_DONE')
           PYEOF
           BREVO_KEY="$KEY" BREVO_ACTION="$ACTION" python3 /tmp/brevo_repair.py 2>&1
