@@ -65,6 +65,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
           cat > /tmp/remote_dump.sh << 'EOS'
           set -e
           cd /var/www/tamkinly
