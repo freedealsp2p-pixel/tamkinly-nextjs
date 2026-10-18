@@ -118,6 +118,66 @@ jobs:
           echo "--- brevo_dump.txt (first 250 lines) ---"
           head -250 brevo_dump.txt
 
+      - name: Brevo full template inventory + raw HTML for 106/164/196-199 (read-only, AUD-1)
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USERNAME }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          cat > /tmp/remote_inv.sh << 'EOS'
+          set -e
+          cd /var/www/tamkinly
+          KEY=$(grep -E '^BREVO_API_KEY=' .env | cut -d= -f2- | tr -d '"' | tr -d "'")
+          [ -n "$KEY" ] || { echo "NO_BREVO_KEY"; exit 0; }
+          cat > /tmp/brevo_inv.py << 'PYEOF'
+          import json, os, urllib.request
+          KEY = os.environ.get('BREVO_KEY', '')
+          BASE = 'https://api.brevo.com/v3/smtp/templates'
+          def get(url):
+              req = urllib.request.Request(url)
+              req.add_header('api-key', KEY)
+              req.add_header('accept', 'application/json')
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  return json.loads(r.read().decode())
+          # 1) full inventory, all pages
+          print('===BREVO_FULL_INVENTORY===')
+          all_templates = []
+          for page in range(4):
+              lst = get(BASE + f'?limit=100&offset={page*100}')
+              batch = lst.get('templates', [])
+              all_templates.extend(batch)
+              if len(batch) < 100:
+                  break
+          for t in sorted(all_templates, key=lambda x: x.get('id') or 0):
+              print(t.get('id'), '|', (t.get('name') or '')[:70], '|', (t.get('subject') or '')[:90], '|', 'active' if t.get('isActive') else 'inactive')
+          print('TOTAL:', len(all_templates))
+          # 2) raw HTML backups (106 + EN pair 164 + defaults 196-199)
+          for tid in (106, 164, 196, 197, 198, 199):
+              print(f'===RAW_TEMPLATE_{tid}===')
+              try:
+                  d = get(BASE + '/' + str(tid))
+                  print('NAME:', d.get('name', ''))
+                  print('SUBJECT:', d.get('subject', ''))
+                  print('HTML_START')
+                  print(d.get('htmlContent') or '(empty)')
+                  print('HTML_END')
+              except Exception as e:
+                  print('(fetch failed)', e)
+          print('===INV_END===')
+          PYEOF
+          BREVO_KEY="$KEY" python3 /tmp/brevo_inv.py > brevo_inventory.txt 2>&1 || echo "(inventory script failed)"
+          rm -f /tmp/brevo_inv.py
+          grep -E '^(===|TOTAL|[0-9]+ \|)' brevo_inventory.txt | head -80
+          EOS
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/remote_inv.sh > brevo_inventory.txt
+          rm -f ~/.ssh/vps_key
+          echo "--- inventory summary (raw HTML in artifact) ---"
+          grep -E '^(===|TOTAL|[0-9]+ \|)' brevo_inventory.txt | head -80
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -125,4 +185,5 @@ jobs:
           path: |
             ops_snapshot.txt
             brevo_dump.txt
+            brevo_inventory.txt
           retention-days: 7
