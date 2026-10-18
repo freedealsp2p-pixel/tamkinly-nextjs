@@ -74,7 +74,7 @@ jobs:
           cat > /tmp/brevo_pairs.py << 'PYEOF'
           import json, os, re, html, urllib.request
           KEY = os.environ.get('BREVO_KEY', '')
-          BASE = 'https://api.brevo.com/v3/email%20templates'
+          BASE = 'https://api.brevo.com/v3/smtp/templates'
           def get(url):
               req = urllib.request.Request(url)
               req.add_header('api-key', KEY)
