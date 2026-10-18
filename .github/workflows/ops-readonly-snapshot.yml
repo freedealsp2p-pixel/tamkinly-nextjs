@@ -345,6 +345,7 @@ jobs:
             echo "===DF==="; df -h / 2>/dev/null | head -3
             echo "===MEM==="; free -m | head -3
             echo "===LOAD==="; uptime
+            echo "===OOM_EVIDENCE==="; dmesg -T 2>/dev/null | grep -iE "out of memory|oom|killed process" | tail -6 || journalctl -k --since "2 hours ago" 2>/dev/null | grep -iE "out of memory|oom|killed process" | tail -6 || echo "(no oom evidence readable)"
             echo "===PM2==="; pm2 jlist 2>/dev/null | python3 -c "import json,sys;[print(p[\"name\"],p[\"pm2_env\"][\"status\"],\"restarts:\",p[\"pm2_env\"][\"restart_time\"],\"mem:\",round(p[\"monit\"][\"memory\"]/1048576),\"MB\") for p in json.load(sys.stdin)]" 2>/dev/null || pm2 list 2>/dev/null | head -8
             echo "===BUILD_LOG_TAIL==="; tail -25 /root/tamkinly-autodeploy-build.log 2>/dev/null || sudo tail -25 /root/tamkinly-autodeploy-build.log 2>/dev/null || echo "(build log not readable for this user)"
             echo "===DIAG_END==="
