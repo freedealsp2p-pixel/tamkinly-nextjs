@@ -1,0 +1,99 @@
+name: Brevo EN Template Dump (AUD-1, read-only)
+
+# AUD-1 (Super Z) — read-only dump of ENGLISH Brevo sequence templates (IDs 138-195)
+# for copy-quality review (founder order 2026-10-18: EN copy must match AR quality).
+# Safety: GET calls only against Brevo API; no template is modified. Key read from
+# server env, never printed. Artifact is private to this repo.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump EN templates metadata + 4 samples
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USERNAME }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          cat > /tmp/remote_dump.sh << 'EOS'
+          set -e
+          cd /var/www/tamkinly
+          KEY=$(grep -E '^BREVO_API_KEY=' .env | cut -d= -f2- | tr -d '"' | tr -d "'")
+          [ -n "$KEY" ] || { echo "NO_BREVO_KEY"; exit 1; }
+          echo "===TEMPLATE_LIST_EN_138_195==="
+          curl -s "https://api.brevo.com/api/v3/email%20templates?limit=100&offset=0" \
+            -H "api-key: $KEY" -H "accept: application/json" \
+            | python3 -c "
+import json,sys
+d=json.load(sys.stdin)
+for t in d.get('templates',[]):
+    i=t.get('id')
+    if isinstance(i,int) and 138<=i<=195:
+        print(i,'|',t.get('name','')[:60],'|',(t.get('subject') or '')[:90])
+"
+          echo "===SAMPLE_161_BODY_TEXT==="
+          curl -s "https://api.brevo.com/api/v3/email%20templates/161" -H "api-key: $KEY" -H "accept: application/json" \
+            | python3 -c "
+import json,sys,re,html
+d=json.load(sys.stdin)
+h=d.get('htmlContent') or ''
+h=re.sub(r'<style[\s\S]*?</style>','',h)
+h=re.sub(r'<[^>]+>',' ',h)
+h=html.unescape(re.sub(r'\s+',' ',h)).strip()
+print(d.get('subject',''))
+print(h[:1200])
+"
+          echo "===SAMPLE_178_BODY_TEXT==="
+          curl -s "https://api.brevo.com/api/v3/email%20templates/178" -H "api-key: $KEY" -H "accept: application/json" \
+            | python3 -c "
+import json,sys,re,html
+d=json.load(sys.stdin)
+h=d.get('htmlContent') or ''
+h=re.sub(r'<style[\s\S]*?</style>','',h)
+h=re.sub(r'<[^>]+>',' ',h)
+h=html.unescape(re.sub(r'\s+',' ',h)).strip()
+print(d.get('subject',''))
+print(h[:1200])
+"
+          echo "===SAMPLE_192_BODY_TEXT==="
+          curl -s "https://api.brevo.com/api/v3/email%20templates/192" -H "api-key: $KEY" -H "accept: application/json" \
+            | python3 -c "
+import json,sys,re,html
+d=json.load(sys.stdin)
+h=d.get('htmlContent') or ''
+h=re.sub(r'<style[\s\S]*?</style>','',h)
+h=re.sub(r'<[^>]+>',' ',h)
+h=html.unescape(re.sub(r'\s+',' ',h)).strip()
+print(d.get('subject',''))
+print(h[:1200])
+"
+          echo "===SAMPLE_193_BODY_TEXT==="
+          curl -s "https://api.brevo.com/api/v3/email%20templates/193" -H "api-key: $KEY" -H "accept: application/json" \
+            | python3 -c "
+import json,sys,re,html
+d=json.load(sys.stdin)
+h=d.get('htmlContent') or ''
+h=re.sub(r'<style[\s\S]*?</style>','',h)
+h=re.sub(r'<[^>]+>',' ',h)
+h=html.unescape(re.sub(r'\s+',' ',h)).strip()
+print(d.get('subject',''))
+print(h[:1200])
+"
+          echo "===DUMP_END==="
+          EOS
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/remote_dump.sh > brevo_dump.txt
+          rm -f ~/.ssh/vps_key
+          wc -l brevo_dump.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: brevo-en-dump-${{ github.run_id }}
+          path: brevo_dump.txt
+          retention-days: 3
