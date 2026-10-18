@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
         if (acc.tier === 'PROTOCOL') {
           const wkey: SeqTemplateKey = acc.protocolSlug === 'temporal-decoupling' ? 'PROTO_TD'
             : acc.protocolSlug === 'alternative-code' ? 'PROTO_AC' : 'PROTO_WM';
-          steps = [{ key: wkey, dh: 2 }]
+          steps = ([{ key: wkey, dh: 2 }] as { key: SeqTemplateKey; dh: number }[])
             .concat(Array.from({ length: 9 }, (_, i) => ({ key: `PROTO_DAY_${i + 1}` as SeqTemplateKey, dh: 24 * (i + 1) + 2 })));
         } else if (['BASIC', 'PREMIUM', 'MASTERY'].includes(acc.tier)) {
           steps = PLAN_STEPS;

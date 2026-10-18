@@ -571,6 +571,12 @@ model EmailSubscription {
   status        EmailSubscriptionStatus @default(ACTIVE)
   source        String?  // Where they subscribed from
   
+  // AUD-1 (2026-10-18, founder order): language the subscriber actually uses
+  // on the site when subscribing (no account -> no users.locale). Emails to
+  // this subscriber must follow this language. Fallback 'ar' only when the
+  // interface language could not be captured (e.g. API-only subscribe).
+  locale        String   @default("ar")
+  
   // Progress tracking
   currentSequenceId  String?
   currentStepNumber  Int?

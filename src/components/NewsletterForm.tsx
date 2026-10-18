@@ -38,7 +38,7 @@ export default function NewsletterForm({
       const res = await fetch('/api/email/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email, source, locale: isAr ? 'ar' : 'en' }),
       });
       if (!res.ok) throw new Error('failed');
       setState('success');

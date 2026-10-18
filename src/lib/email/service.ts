@@ -691,18 +691,24 @@ async function sendEmailViaProvider(
 }
 
 // Subscribe user to email list
-export async function subscribeEmail(email: string, name?: string, source?: string) {
+// locale (AUD-1, 2026-10-18 founder order): the site language the subscriber
+// actually used ('ar' | 'en') — governs the language of every email to them.
+export async function subscribeEmail(email: string, name?: string, source?: string, locale?: string) {
+  const safeLocale = locale === 'en' || locale === 'ar' ? locale : 'ar';
   return db.emailSubscription.upsert({
     where: { email: email.toLowerCase() },
     create: {
       email: email.toLowerCase(),
       name,
       status: 'ACTIVE',
-      source
+      source,
+      locale: safeLocale
     },
     update: {
       status: 'ACTIVE',
-      name
+      name,
+      // keep the latest language they used on the site
+      locale: safeLocale
     }
   });
 }

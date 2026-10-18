@@ -9,7 +9,10 @@ export async function POST(request: NextRequest) {
   const securityBlocked = await applySecurity(request, API_RATE_LIMIT);
   if (securityBlocked) return securityBlocked;
 
-    const { email, name, source } = await request.json();
+    const body = await request.json().catch(() => ({} as Record<string, unknown>));
+    const email = (body as Record<string, unknown>).email as string;
+    const name = (body as Record<string, unknown>).name as string | undefined;
+    const source = (body as Record<string, unknown>).source as string | undefined;
 
     if (!email) {
       return NextResponse.json(
@@ -27,8 +30,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // AUD-1 (2026-10-18, founder order): the language this visitor uses on the
+    // site governs every email we send them. Subscriber has no account, so we
+    // capture the interface language at subscribe time and persist it.
+    const rawLocale = (body as Record<string, unknown>).locale;
+    const locale = rawLocale === 'en' || rawLocale === 'ar' ? rawLocale : 'ar';
+
     // Subscribe the email
-    const subscription = await subscribeEmail(email, name, source);
+    const subscription = await subscribeEmail(email, name, source, locale);
 
     // Trigger welcome sequence
     await triggerEmailSequence('NEW_SUBSCRIBER', {

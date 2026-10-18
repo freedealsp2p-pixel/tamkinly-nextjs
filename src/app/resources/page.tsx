@@ -314,6 +314,7 @@ function NewsletterSection() {
   const [subscribed, setSubscribed] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
   const t = useTranslations('resourcesPage');
+  const { locale } = useLocale();
 
   return (
     <section className="py-16 lg:py-24 bg-white">
@@ -349,7 +350,7 @@ function NewsletterSection() {
                     const res = await fetch('/api/email/subscribe', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ email, source: 'resources-page' })
+                      body: JSON.stringify({ email, source: 'resources-page', locale: locale === 'ar' ? 'ar' : 'en' })
                     });
                     if (res.ok) {
                       setSubscribed(true);
