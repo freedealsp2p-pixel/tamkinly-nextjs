@@ -287,6 +287,10 @@ jobs:
               if ('d\u00e9faut' not in name) and ('par d\u00e9faut' not in name):
                   print(f'ABORT delete id={tid}: name mismatch safety guard'); continue
               try:
+                  # Brevo requires templates to be inactive before deletion (HTTP 405 otherwise)
+                  call(BASE + '/' + str(tid), method='PUT', payload={
+                      'templateName': d.get('name', ''), 'subject': d.get('subject', ''),
+                      'isActive': False, 'htmlContent': d.get('htmlContent') or ''})
                   call(BASE + '/' + str(tid), method='DELETE')
                   still = call(BASE + '/' + str(tid))
                   print(f'DELETED id={tid} verified_gone={still is None} name_was={name!r}')
