@@ -7,10 +7,12 @@ import { sendEmail } from '@/lib/email-service';
 // v1.0 — 2026-09-30 (Task: SWARM-OPS-20260930)
 //
 // One secure surface for the external agent swarm (Hermes):
-//  GET  ?view=summary     full business heartbeat
-//  GET  ?view=customers   recent registrations + access status
-//  GET  ?view=expiring    access codes expiring soon (renewal outreach)
-//  GET  ?view=emails      email queue failures / pending
+//  GET  ?view=summary     full business heartbeat (incl. audience locale counts)
+//  GET  ?view=customers   recent registrations + access status (incl. locale)
+//  GET  ?view=expiring    access codes expiring soon (renewal outreach, incl. locale)
+//  GET  ?view=emails      email queue failures / pending (incl. recipient locale)
+//  GET  ?view=audience    AR/EN segmented mailing lists (?locale=ar|en, founder order 2026-10-18)
+//                         -> { counts:{ar,en}, accounts[], newsletter[] } ready-to-filter lists
 //  GET  ?view=coach       recent AI Identity Coach conversations
 //  GET  ?view=support     unread contact messages + open support tickets
 //  GET  ?view=events      swarm event log (findings, drafts, heartbeats, errors)
@@ -86,6 +88,68 @@ function authorize(request: NextRequest): { agent: boolean; cron: boolean } {
 
 const num = (v: number | bigint | undefined | null): number => Number(v || 0);
 
+// ---------- locale helpers (founder language policy 2026-10-18) ----------
+// Every outreach list the swarm touches carries the recipient's actual site
+// language so AR users get Arabic and EN users get English — automatically.
+
+/** Basic sanity filter: skips placeholder rows (e.g. Telegram buyers without a real mailbox). */
+const EMAIL_LIKE = "%_@_%._%";
+
+async function localeMapFor(emails: string[]): Promise<Map<string, string>> {
+  const uniq = Array.from(new Set(emails.filter(Boolean).map((e) => e.toLowerCase())));
+  if (!uniq.length) return new Map();
+  const rows = await db.$queryRawUnsafe<Array<{ email: string; locale: string | null }>>(
+    `SELECT email, locale FROM users WHERE email IN (${uniq.map(() => '?').join(',')})`,
+    ...uniq
+  );
+  return new Map(rows.map((r) => [String(r.email).toLowerCase(), String(r.locale || '')]));
+}
+
+/** AR/EN segmented mailing lists: registered accounts + no-account newsletter subscribers. */
+async function getAudience(localeFilter: string | null, limit: number) {
+  const cap = Math.min(Math.max(limit, 1), 500);
+  const want = localeFilter === 'ar' || localeFilter === 'en' ? localeFilter : null;
+
+  const countRows = await db.$queryRawUnsafe<Array<{ locale: string; c: number | bigint }>>(
+    `SELECT locale, COUNT(*) as c FROM users WHERE locale IN ('ar','en') AND email LIKE ? GROUP BY locale`,
+    EMAIL_LIKE
+  );
+  const subCountRows = await db.$queryRawUnsafe<Array<{ locale: string; c: number | bigint }>>(
+    `SELECT locale, COUNT(*) as c FROM email_subscriptions WHERE status='ACTIVE' AND locale IN ('ar','en') AND email LIKE ? GROUP BY locale`,
+    EMAIL_LIKE
+  );
+  const toMap = (rows: Array<{ locale: string; c: number | bigint }>) => {
+    const m: Record<string, number> = { ar: 0, en: 0 };
+    for (const r of rows) m[String(r.locale)] = num(r.c);
+    return m;
+  };
+
+  const accounts = await db.$queryRawUnsafe<Array<{ email: string; name: string | null; locale: string; tier: string | null }>>(
+    `SELECT u.email, u.name, u.locale,
+       (SELECT a.tier FROM app_access a WHERE a.email = u.email AND a.isActive = 1 ORDER BY a.createdAt DESC LIMIT 1) AS tier
+     FROM users u
+     WHERE u.email LIKE ? AND u.locale IN ('ar','en')${want ? ' AND u.locale = ?' : ''}
+     ORDER BY u.createdAt DESC LIMIT ?`,
+    ...(want ? [EMAIL_LIKE, want, cap] : [EMAIL_LIKE, cap])
+  );
+  const newsletter = await db.$queryRawUnsafe<Array<{ email: string; name: string | null; locale: string; source: string | null }>>(
+    `SELECT email, name, locale, source FROM email_subscriptions
+     WHERE status='ACTIVE' AND email LIKE ? AND locale IN ('ar','en')${want ? ' AND locale = ?' : ''}
+     ORDER BY subscribedAt DESC LIMIT ?`,
+    ...(want ? [EMAIL_LIKE, want, cap] : [EMAIL_LIKE, cap])
+  );
+
+  const accountEmails = new Set(accounts.map((a) => String(a.email).toLowerCase()));
+  const newsletterOnly = newsletter.filter((n) => !accountEmails.has(String(n.email).toLowerCase()));
+
+  return {
+    locale: want || 'all',
+    counts: { accounts: toMap(countRows), newsletter: toMap(subCountRows) },
+    accounts: accounts.map((a) => ({ email: a.email, name: a.name, locale: a.locale, tier: a.tier || 'FREE' })),
+    newsletter: newsletterOnly.map((n) => ({ email: n.email, name: n.name, locale: n.locale, source: n.source })),
+  };
+}
+
 // ---------- views ----------
 async function getSummary() {
   const t0 = Date.now();
@@ -133,6 +197,11 @@ async function getSummary() {
   const [coachTotal, coach24h] = await Promise.all([
     db.aICoachConversation.count(),
     db.aICoachConversation.count({ where: { lastMessageAt: { gte: new Date(now.getTime() - DAY) } } }),
+  ]);
+
+  const [arUsers, enUsers] = await Promise.all([
+    db.user.count({ where: { locale: 'ar' } }),
+    db.user.count({ where: { locale: 'en' } }),
   ]);
 
   const ticketRows = await db.$queryRawUnsafe<Array<{ status: string; c: number | bigint }>>(
@@ -187,6 +256,7 @@ async function getSummary() {
       expiredLast7d: expired7d,
     },
     emailEngine: { pending: pc, oldestPendingMin, failed7d: num(failedRows[0]?.c), sent24h },
+    audience: { usersAr: arUsers, usersEn: enUsers },
     coach: { conversationsTotal: coachTotal, activeLast24h: coach24h },
     support: { openTickets, unreadContactMessages: num(contactRows[0]?.c) },
     swarm: { openFindings, serverErrors24h: errors24h },
@@ -217,24 +287,28 @@ async function getCustomers(limit: number) {
 }
 
 async function getExpiring(days: number) {
-  return db.appAccess.findMany({
+  const rows = await db.appAccess.findMany({
     where: { isActive: true, expiresAt: { not: null, lte: new Date(Date.now() + Math.min(Math.max(days, 1), 60) * DAY) } },
     select: { email: true, customerName: true, tier: true, expiresAt: true, productName: true },
     orderBy: { expiresAt: 'asc' },
     take: 50,
   });
+  const lmap = await localeMapFor(rows.map((r) => r.email));
+  return rows.map((r) => ({ ...r, locale: lmap.get(r.email.toLowerCase()) ?? null }));
 }
 
 async function getEmails(status: string | null, limit: number) {
   const where = status
     ? { status: status as 'PENDING' | 'QUEUED' | 'SENDING' | 'SENT' | 'FAILED' | 'CANCELLED' }
     : { status: 'FAILED' as const };
-  return db.emailQueue.findMany({
+  const rows = await db.emailQueue.findMany({
     where,
     orderBy: { scheduledAt: 'desc' },
     take: Math.min(Math.max(limit, 1), 100),
     select: { email: true, subject: true, templateName: true, status: true, error: true, scheduledAt: true, sentAt: true },
   });
+  const lmap = await localeMapFor(rows.map((r) => r.email));
+  return rows.map((r) => ({ ...r, locale: lmap.get(r.email.toLowerCase()) ?? null }));
 }
 
 async function getCoach(limit: number) {
@@ -415,6 +489,8 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ success: true, summary: await getSummary() });
       case 'customers':
         return NextResponse.json({ success: true, customers: await getCustomers(limit) });
+      case 'audience':
+        return NextResponse.json({ success: true, audience: await getAudience(searchParams.get('locale'), limit) });
       case 'expiring': {
         const days = parseInt(searchParams.get('days') || '7', 10) || 7;
         return NextResponse.json({ success: true, expiring: await getExpiring(days) });
