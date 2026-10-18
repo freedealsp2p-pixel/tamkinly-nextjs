@@ -289,7 +289,13 @@ jobs:
               try:
                   # Brevo requires templates to be inactive before deletion (HTTP 405 otherwise);
                   # PUT on some defaults additionally requires a valid sender (HTTP 403 otherwise)
-                  sender = d.get('sender') or {'name': 'Tamkinly Tech', 'email': 'noreply@tamkinly.com'}
+                  sender_obj = d.get('sender') or {}
+                  if isinstance(sender_obj, dict) and sender_obj.get('id') is not None:
+                      sender = {'id': sender_obj['id']}  # brevo: pass id OR email, never both
+                  elif isinstance(sender_obj, dict) and sender_obj.get('email'):
+                      sender = {'name': sender_obj.get('name', ''), 'email': sender_obj['email']}
+                  else:
+                      sender = {'name': 'Tamkinly Tech', 'email': 'noreply@tamkinly.com'}
                   call(BASE + '/' + str(tid), method='PUT', payload={
                       'templateName': d.get('name', ''), 'subject': d.get('subject', ''),
                       'isActive': False, 'htmlContent': d.get('htmlContent') or '',
