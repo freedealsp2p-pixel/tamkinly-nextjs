@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { scheduleBrevoSequence, SEQ_TEMPLATE_SUBJECTS } from '@/lib/email/service';
+import { scheduleBrevoSequence } from '@/lib/email/service';
 import { type SeqTemplateKey } from '@/lib/brevo';
 
 // ============================================
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
           locale,
           createdAt,
           sequenceId: `v3_${String(acc.tier).toLowerCase()}_${String(acc.id).slice(-8)}`,
-          steps: steps.map(s => ({ key: s.key, delayHours: s.dh, subject: SEQ_TEMPLATE_SUBJECTS[s.key] })),
+          steps: steps.map(s => ({ key: s.key, delayHours: s.dh })),
         });
         if (n > 0) { enqueued += n; touched.push(`${acc.tier}:${acc.email}:+${n}`); }
       } catch (rowErr) {
@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
           locale,
           createdAt: new Date(u.createdAt),
           sequenceId: `v3_free_${String(u.id).slice(-8)}`,
-          steps: FREE_KEYS.map((k, i) => ({ key: k, delayHours: 24 * (i + 1), subject: SEQ_TEMPLATE_SUBJECTS[k] })),
+          steps: FREE_KEYS.map((k, i) => ({ key: k, delayHours: 24 * (i + 1) })),
         });
         if (n > 0) { enqueued += n; touched.push(`free:${u.email}:+${n}`); }
       }

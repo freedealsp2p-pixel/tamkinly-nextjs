@@ -116,7 +116,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: page.priority * 0.9,
   }));
 
-  return [
+  // AUD-1 (2026-10-18, founder SEO order): hreflang alternates via sitemap.
+  // Every English page declares its Arabic counterpart and vice versa, so search
+  // engines serve the right language to the right visitor. Arabic-only blog
+  // articles (ar-* slugs) declare the English blog index as their counterpart
+  // (their /blog/ar-* path is a 308 redirect, not a real page).
+  const allEntries: MetadataRoute.Sitemap = [
     ...staticPagesEn,
     ...recoveryTrcPages,
     ...arPages,
@@ -126,4 +131,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...therapeuticProtocolPages,
     ...therapeuticProtocolPagesAr,
   ];
+
+  return allEntries.map((entry) => {
+    const isAr = entry.url.startsWith(`${baseUrl}/ar/`) || entry.url === `${baseUrl}/ar`;
+    const arabicOnlyBlog = entry.url.includes('/ar/blog/ar-');
+    const counterpart = arabicOnlyBlog
+      ? `${baseUrl}/blog`
+      : isAr
+        ? entry.url.replace(`${baseUrl}/ar`, baseUrl)
+        : `${baseUrl}/ar${entry.url.slice(baseUrl.length)}`;
+    return {
+      ...entry,
+      alternates: {
+        languages: {
+          en: isAr ? counterpart : entry.url,
+          ar: isAr ? entry.url : counterpart,
+        },
+      },
+    };
+  });
 }

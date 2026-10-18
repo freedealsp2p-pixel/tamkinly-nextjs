@@ -27,6 +27,12 @@ export async function POST(request: NextRequest) {
     
     const { email, password, name } = body;
 
+    // AUD-1 (2026-10-18, founder order): capture the UI language the user
+    // registered on, so all emails match the language they actually use.
+    // Client (signup page) sends locale explicitly; validated whitelist, default 'en'.
+    const requestedLocale = (body as Record<string, unknown>).locale;
+    const locale = requestedLocale === 'ar' ? 'ar' : 'en';
+
     // Validation
     if (!email || !password) {
       return NextResponse.json(
@@ -79,6 +85,7 @@ export async function POST(request: NextRequest) {
         name: (typeof name === 'string' ? name : '') || email.split('@')[0],
         password: hashedPassword,
         role: 'CUSTOMER',
+        locale,
       },
     });
 

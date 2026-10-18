@@ -61,3 +61,28 @@ export async function GET() {
     );
   }
 }
+
+// AUD-1 (2026-10-18, founder order): language-preference sync.
+// Called by LocaleCore whenever a signed-in user switches the site language,
+// so emails (sequences + transactional) always match the language they use.
+export async function POST(request: Request) {
+  try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const body = await request.json().catch(() => ({}));
+    const locale = (body as Record<string, unknown>).locale === 'ar' ? 'ar' : 'en';
+    await db.user.update({
+      where: { id: user.id },
+      data: { locale },
+    });
+    return NextResponse.json({ success: true, locale });
+  } catch (error) {
+    console.error('Locale sync error:', error);
+    return NextResponse.json(
+      { error: 'Failed to sync locale' },
+      { status: 500 }
+    );
+  }
+}

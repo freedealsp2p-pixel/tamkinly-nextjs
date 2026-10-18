@@ -8,10 +8,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { AlertCircle, Mail, Lock, User, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useTranslations } from "@/components/providers/LocaleProvider";
+import { useLocale } from '@/components/providers/LocaleCore';
 
 export default function SignUpPage() {
   const router = useRouter();
   const t = useTranslations("auth.signup");
+  const { locale } = useLocale();
   
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -46,7 +48,7 @@ export default function SignUpPage() {
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, name }),
+        body: JSON.stringify({ email, password, name, locale }),
       });
 
       const data = await response.json();

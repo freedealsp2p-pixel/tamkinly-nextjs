@@ -1,0 +1,75 @@
+name: Ops Hygiene Approved (AUD-1, 2026-10-18)
+
+# Founder-approved data hygiene (chat approval 2026-10-18, all 4 items):
+#   1. Delete 6 test/spam contact messages (IDs recorded in evidence file G59).
+#   2. Close 2 test support tickets (TKT-SL699I, TKT-K_EW79).
+#   3. Deactivate 7 stale test app_access rows (placeholder telegram emails, expired 2025).
+#   4. Delete 4 stuck PENDING QA emails (agent-qa@tamkinly.com).
+# Safety: full SQLite file backup BEFORE any write (same dir deploy uses).
+# Also: read-only recent-run health check (build log, pm2, npm audit).
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approved hygiene + health check
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USERNAME }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          cat > /tmp/remote_hygiene.sh << 'EOS'
+          set -e
+          cd /var/www/tamkinly
+          command -v sqlite3 >/dev/null 2>&1 || { apt-get update -qq >/dev/null 2>&1; apt-get install -y -qq sqlite3 >/dev/null 2>&1; }
+          DB="db/custom.db"
+          TS=$(date -u +%Y%m%dT%H%M%SZ)
+          echo "===BACKUP==="
+          mkdir -p db/backups
+          cp "$DB" "db/backups/hygiene-pre-${TS}.db"
+          ls -la "db/backups/hygiene-pre-${TS}.db"
+          echo "===BEFORE==="
+          sqlite3 "$DB" "SELECT 'unread_contacts=' || COUNT(*) FROM contact_messages WHERE isRead=0;"
+          sqlite3 "$DB" "SELECT 'open_tickets=' || COUNT(*) FROM support_tickets WHERE status NOT IN ('RESOLVED','CLOSED');"
+          sqlite3 "$DB" "SELECT 'pending_qa_emails=' || COUNT(*) FROM email_queue WHERE email='agent-qa@tamkinly.com' AND status='PENDING';"
+          echo "===OP1_DELETE_TEST_CONTACTS==="
+          sqlite3 "$DB" "DELETE FROM contact_messages WHERE id IN ('cmvasd9bw0001zq2byv5m530s','cmus41xbu0000zqwoyd7tyhrr','cmt6eki9c0000zqz0n0eeug8e','cmt677d7x0002zqzxzsfc8d5j','cmox62lo70006zqbz5vhjv3hh','cmox5wk0x0000zqbzz8d0gcq1'); SELECT 'deleted_rows=' || changes();"
+          echo "===OP2_CLOSE_TEST_TICKETS==="
+          sqlite3 "$DB" "UPDATE support_tickets SET status='CLOSED', updatedAt=CURRENT_TIMESTAMP WHERE ticketNumber IN ('TKT-SL699I','TKT-K_EW79'); SELECT 'closed_tickets=' || changes();"
+          echo "===OP3_DEACTIVATE_STALE_TEST_ACCESS==="
+          sqlite3 "$DB" "UPDATE app_access SET isActive=0 WHERE email IN ('telegram_67890@tribute.tg','telegram_100046@tribute.tg','telegram_100014@tribute.tg','telegram_99998@tribute.tg','telegram_11111@tribute.tg','telegram_88888@tribute.tg') AND expiresAt IN (1754308800000, 1754395200000); SELECT 'deactivated_rows=' || changes();"
+          echo "===OP4_DELETE_STUCK_QA_EMAILS==="
+          sqlite3 "$DB" "DELETE FROM email_queue WHERE email='agent-qa@tamkinly.com' AND status='PENDING'; SELECT 'deleted_queue_rows=' || changes();"
+          echo "===AFTER_VERIFY==="
+          sqlite3 "$DB" "SELECT 'unread_contacts_now=' || COUNT(*) FROM contact_messages WHERE isRead=0;"
+          sqlite3 "$DB" "SELECT 'open_tickets_now=' || COUNT(*) FROM support_tickets WHERE status NOT IN ('RESOLVED','CLOSED');"
+          sqlite3 "$DB" "SELECT 'expiring_7d_now=' || COUNT(*) FROM app_access WHERE isActive=1 AND expiresAt IS NOT NULL AND expiresAt <= datetime('now','+7 days');"
+          sqlite3 "$DB" "SELECT 'pending_emails_now=' || COUNT(*) FROM email_queue WHERE status='PENDING';"
+          echo "===RUN_HEALTH_CHECK==="
+          echo "--- last build log lines:"
+          tail -n 5 /root/tamkinly-autodeploy-build.log 2>/dev/null || echo "(no build log)"
+          echo "--- pm2 status:"
+          pm2 jlist 2>/dev/null | python3 -c "import json,sys; [print(p['name'], p['pm2_env']['status'], 'restarts=', p['pm2_env']['restart_time']) for p in json.load(sys.stdin)]" 2>/dev/null || pm2 status 2>/dev/null | head -8 || echo "(pm2 not readable)"
+          echo "--- recent pm2 error lines (last 10):"
+          tail -n 10 /root/.pm2/logs/tamkinly-prod-error.log 2>/dev/null | tail -c 1200 || echo "(no error log)"
+          echo "--- npm audit (prod deps, report only):"
+          npm audit --omit=dev 2>&1 | tail -n 6 || true
+          echo "===HYGIENE_END==="
+          EOS
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/remote_hygiene.sh > hygiene_result.txt
+          rm -f ~/.ssh/vps_key
+          cat hygiene_result.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ops-hygiene-${{ github.run_id }}
+          path: hygiene_result.txt
+          retention-days: 7

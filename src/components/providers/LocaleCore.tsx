@@ -111,6 +111,17 @@ export function LocaleCore({ messages, children, initialLocale = 'en', urlBased 
     localStorage.setItem('locale', newLocale);
     document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=${365 * 24 * 60 * 60};samesite=lax`;
 
+    // AUD-1 (2026-10-18, founder order): sync language preference to the user's
+    // account so every email (sequences + transactional) matches the language the
+    // user actually uses on the site. Fires only for signed-in users; guests skip.
+    if (typeof document !== 'undefined' && document.cookie.includes('session-token')) {
+      fetch('/api/auth/me', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ locale: newLocale }),
+      }).catch(() => {});
+    }
+
     // Update document attributes immediately
     document.documentElement.lang = newLocale;
     document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr';
