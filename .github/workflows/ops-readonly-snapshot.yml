@@ -363,20 +363,30 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
           chmod 600 ~/.ssh/vps_key
-          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" '
-            cd /var/www/tamkinly
-            TOKEN=$(grep -E "^AGENT_OPS_TOKEN=" .env | cut -d= -f2- | tr -d "\"" | tr -d "'"'"'")
-            [ -n "$TOKEN" ] || { echo "NO_OPS_TOKEN"; exit 0; }
-            echo "===AUDIENCE_VIEW==="
-            curl -s -m 20 -H "Authorization: Bearer $TOKEN" "http://localhost:3001/api/agent/ops?view=audience&limit=500" > /tmp/aud.json
-            python3 -c "import json; d=json.load(open('/tmp/aud.json')); a=d.get('audience') or {}; print('success:', d.get('success')); print('locale:', a.get('locale')); print('counts:', a.get('counts')); print('accounts:', len(a.get('accounts', [])), 'newsletter:', len(a.get('newsletter', [])))" 2>&1
-            echo "===SUMMARY_AUDIENCE==="
-            curl -s -m 20 -H "Authorization: Bearer $TOKEN" "http://localhost:3001/api/agent/ops?view=summary" > /tmp/sum.json
-            python3 -c "import json; d=json.load(open('/tmp/sum.json')); s=d.get('summary') or {}; print('success:', d.get('success'), 'audience:', s.get('audience'))" 2>&1
-            rm -f /tmp/aud.json /tmp/sum.json
-            echo "===AUDIENCE_END==="
-          ' > ops_audience_check.txt 2>&1
-          rm -f ~/.ssh/vps_key
+          cat > /tmp/remote_aud.sh << 'EOS'
+          set -e
+          cd /var/www/tamkinly
+          TOKEN=$(grep -E '^AGENT_OPS_TOKEN=' .env | cut -d= -f2- | tr -d '"' | tr -d "'")
+          [ -n "$TOKEN" ] || { echo "NO_OPS_TOKEN"; exit 0; }
+          curl -s -m 20 -H "Authorization: Bearer $TOKEN" "http://localhost:3001/api/agent/ops?view=audience&limit=500" > /tmp/aud.json
+          curl -s -m 20 -H "Authorization: Bearer $TOKEN" "http://localhost:3001/api/agent/ops?view=summary" > /tmp/sum.json
+          cat > /tmp/aud_parse.py << 'PYEOF'
+          import json
+          d = json.load(open('/tmp/aud.json'))
+          a = d.get('audience') or {}
+          print('AUDIENCE success:', d.get('success'), '| locale:', a.get('locale'))
+          print('AUDIENCE counts:', a.get('counts'))
+          print('AUDIENCE returned: accounts', len(a.get('accounts', [])), '| newsletter', len(a.get('newsletter', [])))
+          s = json.load(open('/tmp/sum.json'))
+          sm = s.get('summary') or {}
+          print('SUMMARY success:', s.get('success'), '| audience:', sm.get('audience'))
+          PYEOF
+          python3 /tmp/aud_parse.py 2>&1
+          rm -f /tmp/aud.json /tmp/sum.json /tmp/aud_parse.py
+          echo "===AUDIENCE_END==="
+          EOS
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/remote_aud.sh > ops_audience_check.txt 2>&1
+          rm -f ~/.ssh/vps_key /tmp/remote_aud.sh
           cat ops_audience_check.txt
 
       - name: Upload artifacts
@@ -389,4 +399,5 @@ jobs:
             brevo_inventory.txt
             brevo_repair.txt
             vps_diagnostics.txt
+            ops_audience_check.txt
           retention-days: 7
