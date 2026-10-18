@@ -45,6 +45,23 @@ interface LocaleCoreProps {
   urlBased?: boolean;
 }
 
+// AUD-1 (2026-10-18, founder order): sync the language the user is actually
+// using on the site to their account, so emails follow the used language.
+// Signed-in users only; guests are skipped. force=true for explicit switches.
+function syncLocaleToAccount(l: Locale, force = false) {
+  if (typeof document === 'undefined' || typeof window === 'undefined') return;
+  if (!document.cookie.includes('session-token')) return;
+  try {
+    if (!force && sessionStorage.getItem('tamkinly-locale-synced') === l) return;
+    sessionStorage.setItem('tamkinly-locale-synced', l);
+  } catch { /* sessionStorage unavailable — still sync */ }
+  fetch('/api/auth/me', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ locale: l }),
+  }).catch(() => {});
+}
+
 export function LocaleCore({ messages, children, initialLocale = 'en', urlBased = false }: LocaleCoreProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -70,6 +87,8 @@ export function LocaleCore({ messages, children, initialLocale = 'en', urlBased 
 
       if (urlBased) {
         // For URL-based mode, just mark as hydrated
+        // AUD-1: sync the language actually in use (URL path) to the account.
+        syncLocaleToAccount(initialLocale);
         setIsHydrated(true);
         return;
       }
@@ -84,6 +103,9 @@ export function LocaleCore({ messages, children, initialLocale = 'en', urlBased 
       // Update document attributes
       document.documentElement.lang = storedLocale;
       document.documentElement.dir = storedLocale === 'ar' ? 'rtl' : 'ltr';
+
+      // AUD-1: sync the language actually in use (stored preference) to the account.
+      syncLocaleToAccount(storedLocale);
     }, 0);
 
     return () => clearTimeout(timeoutId);
@@ -114,13 +136,7 @@ export function LocaleCore({ messages, children, initialLocale = 'en', urlBased 
     // AUD-1 (2026-10-18, founder order): sync language preference to the user's
     // account so every email (sequences + transactional) matches the language the
     // user actually uses on the site. Fires only for signed-in users; guests skip.
-    if (typeof document !== 'undefined' && document.cookie.includes('session-token')) {
-      fetch('/api/auth/me', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ locale: newLocale }),
-      }).catch(() => {});
-    }
+    syncLocaleToAccount(newLocale, true);
 
     // Update document attributes immediately
     document.documentElement.lang = newLocale;

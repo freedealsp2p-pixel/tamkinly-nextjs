@@ -11,7 +11,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -64,9 +64,18 @@ export const authOptions: NextAuthOptions = {
           : 'FREE';
 
         // Update last login
+        // AUD-1 (2026-10-18, founder order): also capture the language the user
+        // is actually using on the site at login time (NEXT_LOCALE cookie set by
+        // the interface). Emails always follow the language the user uses.
+        let loginLocale: string | undefined;
+        try {
+          const cookieHeader = (req as { headers?: { cookie?: string } } | undefined)?.headers?.cookie || '';
+          const m = cookieHeader.match(/(?:^|;\s*)NEXT_LOCALE=(ar|en)(?:;|$)/);
+          if (m) loginLocale = m[1];
+        } catch { /* locale capture is best-effort */ }
         await db.user.update({
           where: { id: user.id },
-          data: { lastLoginAt: new Date() },
+          data: { lastLoginAt: new Date(), ...(loginLocale ? { locale: loginLocale } : {}) },
         });
 
         return {
