@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/products/mastery`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
     { url: `${baseUrl}/apps`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
     { url: `${baseUrl}/quiz`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.9 },
+    { url: `${baseUrl}/free-tool`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.8 },
     { url: `${baseUrl}/methodology`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.7 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },

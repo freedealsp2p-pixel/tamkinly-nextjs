@@ -4659,5 +4659,37 @@
         "backToProtocols": "Back to Therapeutic Protocols"
       }
     }
+  },
+  "freeToolPage": {
+    "heroBadge": "100% Free",
+    "heroTitle": "The Free Tool",
+    "heroTitleHighlight": "to Discover Your Identity Gap",
+    "heroSubtitle": "In 3 minutes you get a personalized map of the gap between who you are today and who you know you can be. No credit card required.",
+    "quizBadge": "Flagship Free Tool",
+    "quizTitle": "Identity Gap Assessment",
+    "quizDesc": "A free 3-minute assessment that shows what is holding you back from becoming the person you know you can be — with instant personalized results.",
+    "point1": "Only 3 minutes",
+    "point2": "Completely free — no credit card",
+    "point3": "Instant personalized results",
+    "point4": "Research-based approach",
+    "quizCta": "Start the Free Assessment",
+    "quizNote": "Part of Tamkinly's free layer — no credit card required.",
+    "moreTitle": "More free tools",
+    "moreSubtitle": "Keep exploring — every one of these is free.",
+    "recoveryTitle": "Recovery Hub",
+    "recoveryDesc": "Evidence-based recovery tools and programs. Choose your path — Trauma Recovery Center (TRC) or behavioral recovery journey. Free, private, and judgment-free.",
+    "recoveryCta": "Open the Recovery Hub",
+    "guidesTitle": "Transformation Guides",
+    "guidesDesc": "Step-by-step frameworks for identity transformation, habit formation, and personal development — research-backed and free.",
+    "guidesCta": "Read the Guides",
+    "resourcesTitle": "Free Resources",
+    "resourcesDesc": "Assessments, guides, and research-backed articles to start your journey without any cost.",
+    "resourcesCta": "Browse Resources",
+    "trust1": "Evidence-based",
+    "trust2": "Private & judgment-free",
+    "trust3": "Arabic & English",
+    "ctaTitle": "The first step is free",
+    "ctaSubtitle": "Start with the assessment. When you want the full structured system, the products are waiting.",
+    "ctaButton": "Explore Products"
   }
 }

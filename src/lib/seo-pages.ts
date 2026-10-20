@@ -106,6 +106,23 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
       'اختبار الشخصية',
     ],
   },
+  'free-tool': {
+    title: 'Free Tool | Identity Gap Assessment - Tamkinly',
+    titleAr: 'الأداة المجانية | اكتشف فجوة هويتك - تمكينلي',
+    description: 'Our free 3-minute identity gap assessment. No credit card required — instant personalized results that show what is holding you back. Plus more free tools.',
+    descriptionAr: 'تقييم فجوة الهوية المجاني في 3 دقائق. بدون بطاقة ائتمان — نتائج شخصية فورية تكشف ما يعيقك، مع المزيد من الأدوات المجانية.',
+    path: '/free-tool',
+    keywords: [
+      'free identity tool',
+      'free assessment',
+      'identity gap quiz free',
+      'free self-discovery tool',
+      'أداة مجانية',
+      'اختبار مجاني',
+      'فجوة الهوية مجاناً',
+      'أدوات التطوير المجانية',
+    ],
+  },
   about: {
     title: 'About Tamkinly | Our Mission & Philosophy',
     titleAr: 'عن تمكينلي | مهمتنا وفلسفتنا - تمكينلي',
