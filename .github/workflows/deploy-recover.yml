@@ -1,12 +1,12 @@
-name: Deploy Tree Recovery (AUD-1, 2026-10-21)
+name: Deploy Tree Recovery (AUD-1, 2026-10-21) — v2 reset-to-origin
 
-# One-time recovery: deploys 183-186 all failed because the VPS working tree has a
-# stuck unresolved merge conflict in src/components/layout/Footer.tsx (local edit +
-# pull conflict -> unmerged index -> every subsequent pull aborts with status 128).
-# This workflow: abort the stuck merge (pre-merge state restored, nothing lost),
-# stash the stray Footer.tsx local edit (recoverable on the VPS via git stash list),
-# and report. Code build/deploy is NOT done here — dispatch deploy.yml afterwards.
-# Prevention: deploy.yml WORKING-TREE GUARD now covers Footer.tsx as well.
+# v2: deploys 183-187 still conflicted. Root cause: the VPS HEAD holds LOCAL COMMITTED
+# changes (merge commit 8d86679 incl. a diverged src/components/layout/Footer.tsx) that
+# conflict with origin/master on every pull. Stash-guard cannot fix committed divergence.
+# Resolution: record local-only commits + diffstat in the run log, keep a backup branch
+# on the VPS (nothing is lost), stash the two known dirty files, then hard-reset the
+# tree to origin/master (source of truth per founder directives). Deploy is dispatched
+# separately afterwards.
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
   recover:
     runs-on: ubuntu-latest
     steps:
-      - name: Clean stuck merge + stash stray Footer edit
+      - name: Backup local commits, reset tree to origin/master
         env:
           SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
           VPS_HOST: ${{ secrets.VPS_HOST }}
@@ -28,20 +28,21 @@ jobs:
           cat > /tmp/recover.sh << 'EOS'
           set -e
           cd /var/www/tamkinly
-          echo "===BEFORE==="
-          git status --short | head -20 || true
-          echo "===ABORT_STUCK_MERGE==="
-          if git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
-            git merge --abort && echo "stuck merge aborted (tree restored to pre-merge state)"
-          else
-            git reset --merge 2>/dev/null && echo "index reset (no MERGE_HEAD)" || echo "(index already clean)"
-          fi
-          echo "===STASH_STRAY_FOOTER==="
-          git stash push -m "deploy-recover Footer.tsx $(date -u +%FT%TZ)" -- src/components/layout/Footer.tsx || true
+          git merge --abort 2>/dev/null || git reset --merge 2>/dev/null || echo "(index already clean)"
+          git fetch origin
+          echo "===LOCAL_ONLY_COMMITS (origin/master..HEAD)==="
+          git log --oneline origin/master..HEAD | head -20 || true
+          echo "===LOCAL_DIFF_STAT vs origin==="
+          git diff --stat origin/master...HEAD | tail -25 || true
+          BR="backup/vps-local-$(date -u +%Y%m%dT%H%M%SZ)"
+          git branch -f "$BR" HEAD && echo "backup branch created: $BR"
+          git -c user.email=autodeploy@tamkinly.local -c user.name=tamkinly-autodeploy \
+            stash push -m "recovery guard $(date -u +%FT%TZ)" \
+            -- src/app/methodology/self-authorship/page.tsx src/components/layout/Footer.tsx || true
+          git reset --hard origin/master
           echo "===AFTER==="
-          git status --short | head -20 || true
-          git stash list | head -5
-          git log --oneline -1
+          git status --short | head -10 || true
+          git log --oneline -3
           echo "===RECOVER_END==="
           EOS
           ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/recover.sh
