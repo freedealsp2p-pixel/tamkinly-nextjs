@@ -27,10 +27,12 @@ const TIER_HIERARCHY: Record<string, number> = {
   MASTERY: 3,
 };
 
+// PRICING MODEL V2 (founder directive 2026-10-21): TWO packages only.
+// BASIC + PREMIUM gates → The Planner ($9.99 one-time); MASTERY → Mastery ($27 one-time).
 const TIER_PRODUCTS: Record<string, { slug: string; price: number; nameEn: string; nameAr: string }> = {
-  BASIC: { slug: 'basic', price: 7, nameEn: 'Basic (Monthly)', nameAr: 'أساسي (شهري)' },
-  PREMIUM: { slug: 'premium', price: 17, nameEn: 'Premium (Monthly)', nameAr: 'مميز (شهري)' },
-  MASTERY: { slug: 'mastery', price: 27, nameEn: 'Mastery (Monthly)', nameAr: 'إتقان (شهري)' },
+  BASIC: { slug: 'premium', price: 9.99, nameEn: 'The Planner (One-time)', nameAr: 'المخطط (دفعة واحدة)' },
+  PREMIUM: { slug: 'premium', price: 9.99, nameEn: 'The Planner (One-time)', nameAr: 'المخطط (دفعة واحدة)' },
+  MASTERY: { slug: 'mastery', price: 27, nameEn: 'Mastery (One-time)', nameAr: 'الإتقان (دفعة واحدة)' },
 };
 
 // ─── Localized Strings ───────────────────────────────────────────────────────
@@ -57,8 +59,8 @@ const STRINGS = {
     requiredTier: 'Required Tier',
     features: 'What you get',
     unlockFull: 'Unlock the full experience',
-    fromPrice: 'from',
-    perMonth: '/month',
+    fromPrice: 'Pay once —',
+    perMonth: '',
   },
   ar: {
     accessRequired: 'يتطلب الوصول',
@@ -81,8 +83,8 @@ const STRINGS = {
     requiredTier: 'المستوى المطلوب',
     features: 'ما ستحصل عليه',
     unlockFull: 'افتح التجربة الكاملة',
-    fromPrice: 'ابدأ من',
-    perMonth: '/شهر',
+    fromPrice: 'دفعة واحدة —',
+    perMonth: '',
   },
 } as const;
 
@@ -229,7 +231,7 @@ export function AppAccessWrapper({
 
         <div className="text-center">
           <p className="text-sm text-[#8A94A6] mb-3">{s.orGetAccess}</p>
-          <Link href={`/products/${product?.slug || 'basic'}`}>
+          <Link href={`/products/${product?.slug || 'premium'}`}>
             <Button variant="outline" className="border-[#3DD4B0] text-[#1F6F78] hover:bg-[#3DD4B0]/10">
               {s.getAccessNow}
               <ArrowRight className={`w-4 h-4 ${isArabic ? 'me-2 rotate-180' : 'ms-2'}`} />
@@ -240,10 +242,15 @@ export function AppAccessWrapper({
         {product && (
           <div className="mt-6 p-4 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0]">
             <p className="text-sm font-semibold text-[#0F1C2E] mb-1">
-              {s.requiredTier}: <Badge variant="secondary">{requiredTier}</Badge>
+              {s.requiredTier}:{' '}
+              <Badge variant="secondary">
+                {isArabic
+                  ? (requiredTier === 'MASTERY' ? 'الإتقان' : 'المخطط')
+                  : (requiredTier === 'MASTERY' ? 'Mastery' : 'The Planner')}
+              </Badge>
             </p>
             <p className="text-xs text-[#8A94A6]">
-              {s.fromPrice} ${product.price}{s.perMonth} — {product.nameEn}
+              {s.fromPrice} ${product.price}{s.perMonth} — {isArabic ? product.nameAr : product.nameEn}
             </p>
           </div>
         )}

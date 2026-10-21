@@ -47,9 +47,7 @@ export async function POST(request: NextRequest) {
           customerName: prefix ? `${prefix} Customer ${i + 1}` : null,
           productId: tierToProductId[tier] || tier.toLowerCase(),
           productName: tier === 'FREE' ? 'Free Access' : 
-            tier === 'BASIC' ? 'Basic (Monthly)' : 
-            tier === 'BASIC' ? 'Identity Recode Planner' : 
-            tier === 'PREMIUM' ? 'Premium (Monthly)' : 'Mastery (Monthly)',
+            tier === 'MASTERY' ? 'Mastery' : 'Identity Recode Planner',
           tier: tier as AccessTier,
           isActive: true,
           isUsed: false,

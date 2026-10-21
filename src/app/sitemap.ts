@@ -10,7 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPagesEn = [
     { url: baseUrl, lastModified: now, changeFrequency: 'weekly' as const, priority: 1.0 },
     { url: `${baseUrl}/products`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },
-    { url: `${baseUrl}/products/basic`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    // /products/premium = Identity Recode Planner ($9.99 one-time); /products/mastery = Mastery ($27 one-time).
+    // /products/basic removed from sitemap (legacy alias of the Planner page — no duplicate content).
     { url: `${baseUrl}/products/premium`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
     { url: `${baseUrl}/products/mastery`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
     { url: `${baseUrl}/apps`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 },

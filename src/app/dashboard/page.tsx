@@ -940,8 +940,8 @@ export default function DashboardPage() {
                         <div className="flex justify-between text-xs mb-1">
                           <span className="text-slate-500">{t('currentTier')}</span>
                           <span className="text-[#1F6F78]">
-                            {referralInfo.currentTier === 'PREMIUM_BUNDLE' ? 'Premium' :
-                             referralInfo.currentTier === 'BASIC_ACCESS' ? 'Basic' : 'Trial+'}
+                            {referralInfo.currentTier === 'PREMIUM_BUNDLE' ? 'Full Planner' :
+                             referralInfo.currentTier === 'BASIC_ACCESS' ? 'Planner' : 'Free'}
                           </span>
                         </div>
                         <Progress value={Math.min(100, (referralInfo.totalReferrals / referralInfo.nextTierAt) * 100)} className="h-1.5" />

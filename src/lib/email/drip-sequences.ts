@@ -596,7 +596,7 @@ const UPSELL_BASIC_TO_PREMIUM_SEQUENCE: DripSequence = {
       stepNumber: 2,
       delayHours: 48, // Day 2
       subject: 'Planner vs MASTERY: What\'s the difference? 📊',
-      subjectAr: 'الأساسي vs المميز: ما الفرق؟ 📊',
+      subjectAr: 'المخطط vs الإتقان: ما الفرق؟ 📊',
       preheader: 'Side-by-side comparison of 1 app vs 11 apps',
       preheaderAr: 'مقارنة جنباً إلى جنب لتطبيق vs 11 تطبيقاً',
       templateName: 'day14FollowUp',
@@ -608,7 +608,7 @@ const UPSELL_BASIC_TO_PREMIUM_SEQUENCE: DripSequence = {
       stepNumber: 3,
       delayHours: 96, // Day 4 (2 days after step 2)
       subject: 'Limited: the full Planner at $9.99 (was $17) 🎁',
-      subjectAr: 'محدود: أول شهر مميز بـ $12 (وفر $5) 🎁',
+      subjectAr: 'محدود: المخطط الكامل بـ 9.99$ (كان 17$) 🎁',
       preheader: 'Exclusive offer for Basic subscribers',
       preheaderAr: 'عرض حصري لمشتركي الأساسي',
       templateName: 'day14FollowUp',

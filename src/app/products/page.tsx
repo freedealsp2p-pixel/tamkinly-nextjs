@@ -763,11 +763,11 @@ function CTASection({ t }: { t: ReturnType<typeof useTranslations> }) {
 export default function ProductsPage() {
   const t = useTranslations("productsPage");
 
-  // Generate product schemas for SEO
+  // Generate product schemas for SEO — PRICING MODEL V2: TWO paid packages only
+  // (Planner $9.99 one-time + Mastery $27 one-time; Free $0 lead magnet).
   const productData = [
     { nameKey: "free", price: 0 },
-    { nameKey: "basic", price: 7 },
-    { nameKey: "premium", price: 17 },
+    { nameKey: "premium", price: 9.99 },
     { nameKey: "mastery", price: 27 },
   ];
 

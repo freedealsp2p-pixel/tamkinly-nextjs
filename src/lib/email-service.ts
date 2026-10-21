@@ -138,11 +138,11 @@ export async function sendPurchaseConfirmationEmail(
       break;
     case 'premium':
       htmlContent = EmailTemplates.premiumPurchase(options.name, options.accessKey, locale);
-      subject = locale === 'ar' ? 'باقة التحول المتقدمة جاهزة! 🌟' : 'Your Premium Transformation Package is Ready! 🌟';
+      subject = locale === 'ar' ? 'مخطط إعادة صياغة الهوية جاهز! 🌟' : 'Your Identity Recode Planner is Ready! 🌟';
       break;
     case 'bundle':
       htmlContent = EmailTemplates.bundlePurchase(options.name, options.accessKey, locale);
-      subject = locale === 'ar' ? 'مرحباً بك في VIP! باقة الإتقان جاهزة! 👑' : 'Welcome to VIP! Your Mastery Subscription is Ready! 👑';
+      subject = locale === 'ar' ? 'مرحباً بك في VIP! حزمة الإتقان جاهزة! 👑' : 'Welcome to VIP! Your Mastery Package is Ready! 👑';
       break;
     case 'basic':
       htmlContent = EmailTemplates.plannerPurchase(options.name, options.accessKey, locale);

@@ -40,10 +40,20 @@ const APP_TIERS: Record<string, string> = {
 
 const SELF_GATED_APPS = new Set(['ai-identity-coach', 'therapeutic-protocols']);
 
+// PRICING MODEL V2 (founder directive 2026-10-21): TWO packages only.
+// BASIC + PREMIUM app gates are both unlocked by The Planner ($9.99 one-time);
+// MASTERY gates are unlocked by Mastery ($27 one-time). No monthly labels anywhere.
 const TIER_PRODUCTS: Record<string, { slug: string; price: number; nameEn: string; nameAr: string }> = {
-  BASIC: { slug: 'basic', price: 7, nameEn: 'Basic (Monthly)', nameAr: 'أساسي (شهري)' },
-  PREMIUM: { slug: 'premium', price: 17, nameEn: 'Premium (Monthly)', nameAr: 'مميز (شهري)' },
-  MASTERY: { slug: 'mastery', price: 27, nameEn: 'Mastery (Monthly)', nameAr: 'إتقان (شهري)' },
+  BASIC: { slug: 'premium', price: 9.99, nameEn: 'The Planner (One-time)', nameAr: 'المخطط (دفعة واحدة)' },
+  PREMIUM: { slug: 'premium', price: 9.99, nameEn: 'The Planner (One-time)', nameAr: 'المخطط (دفعة واحدة)' },
+  MASTERY: { slug: 'mastery', price: 27, nameEn: 'Mastery (One-time)', nameAr: 'الإتقان (دفعة واحدة)' },
+};
+
+// Package display name for the lock overlay (two-package model)
+const TIER_PACKAGE_LABEL: Record<string, { en: string; ar: string }> = {
+  BASIC: { en: 'The Planner', ar: 'المخطط' },
+  PREMIUM: { en: 'The Planner', ar: 'المخطط' },
+  MASTERY: { en: 'Mastery', ar: 'الإتقان' },
 };
 
 export function AppAccessGuard({ children }: { children: React.ReactNode }) {
@@ -193,7 +203,10 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
               <div className="flex items-center gap-2">
                 <Lock className="w-4 h-4 text-[#B88A8E]" />
                 <span className="text-sm font-medium text-[#B88A8E]">
-                  {getText('Requires ' + requiredTier + ' package or higher', 'Requires ' + requiredTier + ' package or higher')}
+                  {getText(
+                    'Included in ' + (TIER_PACKAGE_LABEL[requiredTier]?.en || 'The Planner') + ' — pay once, keep it forever',
+                    'مضمّن في ' + (TIER_PACKAGE_LABEL[requiredTier]?.ar || 'المخطط') + ' — دفعة واحدة ووصول دائم'
+                  )}
                 </span>
               </div>
             </div>
@@ -251,7 +264,10 @@ export function AppAccessGuard({ children }: { children: React.ReactNode }) {
                 {tierProduct && (
                   <Link href={'/products/' + tierProduct.slug}>
                     <Button className="w-full h-12 bg-[#0F1C2E] text-white hover:bg-[#1a2d47] font-semibold text-base">
-                      {getText('Get ' + tierProduct.nameEn + ' - $' + tierProduct.price, 'Get ' + tierProduct.nameEn + ' - $' + tierProduct.price)}
+                      {getText(
+                        'Get ' + tierProduct.nameEn + ' — $' + tierProduct.price,
+                        'احصل على ' + tierProduct.nameAr + ' — ' + tierProduct.price + '$'
+                      )}
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>

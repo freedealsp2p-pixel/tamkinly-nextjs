@@ -439,19 +439,19 @@
     "perfectMatch": "Your Perfect Transformation Match",
     "products": {
       "trial": {
-        "name": "7-Day Identity Reset",
-        "description": "A quick-start mini-guide to experience the Tamkinly methodology",
-        "bestFor": "Curious explorers ready to test the waters"
+        "name": "The Planner",
+        "description": "The complete identity recode — $9.99 one-time",
+        "bestFor": "Those ready to run the full identity recode with structure"
       },
       "planner": {
-        "name": "Identity Recode Planner",
-        "description": "The complete 30-day identity transformation system",
+        "name": "The Planner — Identity Recode Planner",
+        "description": "Identity discovery, role replacement, goal reverse-engineering and identity simulation — $9.99 one-time",
         "bestFor": "Those ready for deep transformation"
       },
       "premium": {
-        "name": "Premium Transformation",
-        "description": "Comprehensive transformation with advanced tools",
-        "bestFor": "Committed individuals seeking complete transformation"
+        "name": "Mastery",
+        "description": "Everything in the Identity Recode Planner plus AI Identity Coach, community and priority support — $27 one-time",
+        "bestFor": "Those who want guided identity work with the AI Coach"
       }
     },
     "whatsIncluded": "What's Included:",
@@ -507,9 +507,9 @@
     "preparingPurchase": "Preparing {name} for purchase",
     "products": {
       "trial": {
-        "name": "7-Day Trial",
-        "tier": "TRIAL",
-        "description": "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
+        "name": "Legacy Trial (no longer sold)",
+        "tier": "Legacy",
+        "description": "The old 7-day trial is gone — the full Identity Recode Planner is now $9.99 one-time with lifetime access.",
         "longDescription": "Not sure if the Identity Recode system is right for you? Try our 7-day trial to experience the full power of transformation before committing. You'll get access to the core methodology and see real results in just one week.",
         "cta": "Start 7-Day Trial",
         "highlights": {
@@ -541,8 +541,8 @@
         ],
         "apps": {
           "trialPlanner": {
-            "name": "7-Day Trial Planner",
-            "description": "A condensed version of our 30-day system"
+            "name": "7-Day Discipline Journey",
+            "description": "The 7-day discipline reset — stage one of the Identity Recode Planner"
           },
           "identityGap": {
             "name": "Identity Gap Assessment",
@@ -580,23 +580,23 @@
         },
         "faqs": [
           {
-            "q": "What happens after 7 days?",
-            "a": "Your access will expire, but you can upgrade to any paid plan to continue your journey."
+            "q": "What happens after the 7 days?",
+            "a": "The journey stays yours. The 7-day reset is stage one of the Identity Recode Planner — your access is lifelong because the Planner is a one-time purchase."
           },
           {
-            "q": "Can I extend the trial?",
-            "a": "The trial is a one-time offer per customer. We recommend upgrading to continue your progress."
+            "q": "Can I extend my access?",
+            "a": "No need — your access never expires. One payment, lifetime access, no renewals."
           },
           {
             "q": "Is my progress saved?",
-            "a": "Yes! If you upgrade within 30 days, all your trial data will be preserved."
+            "a": "Yes! Your progress is saved to your account automatically — and with lifetime access it stays yours forever."
           }
         ],
         "testimonials": [
           {
             "name": "Ahmed M.",
             "role": "Engineer",
-            "content": "The 7-day trial convinced me. I upgraded to the full planner on day 4 because I was already seeing results."
+            "content": "The first 7 days convinced me — I was already seeing results, so I got the full Planner."
           },
           {
             "name": "Sarah K.",
@@ -607,14 +607,14 @@
       },
       "planner": {
         "name": "Identity Recode Planner",
-        "tier": "BASIC",
-        "description": "The complete 30-day transformation system with interactive apps and PDF downloads.",
-        "longDescription": "The Identity Recode Planner is our flagship 30-day transformation system. Based on evidence-based psychology and identity science, this planner guides you through a structured journey of self-discovery and lasting change. Includes both digital interactive apps and printable PDF versions.",
+        "tier": "The Planner",
+        "description": "Discover the identity you currently perform and the roles life forced on you — then replace them with the identity you choose. Practical apps, goal reverse-engineering, identity simulation and downloadable worksheets — $9.99 one-time.",
+        "longDescription": "The Identity Recode Planner is the complete identity-recoding system. Discover the identity you are currently impersonating, the identities you think you represent, and the roles life forced you to play — then adjust and replace them with the identities you want, the identities that achieve your goals, and the identity you aspire to become. Reverse-engineer your goals, simulate the identity that already possesses what you want, and get there faster. Includes practical interactive apps and printable PDF worksheets.",
         "cta": "Get The Planner",
         "highlights": {
           "mostPopular": "Most popular",
           "printIncluded": "Print included",
-          "thirtyDays": "30-day journey"
+          "thirtyDays": "$9.99 once — lifetime access"
         },
         "benefits": {
           "structured": {
@@ -637,7 +637,7 @@
           "Environmental Audit Template",
           "Digital + Print PDFs",
           "Instant access",
-          "All updates included while subscribed"
+          "All future updates included — yours forever"
         ],
         "apps": {
           "manual": {
@@ -661,7 +661,7 @@
           "duration": "Duration",
           "durationValue": "Lifetime access",
           "appsAccess": "Apps Access",
-          "appsValue": "4 Core Apps",
+          "appsValue": "All 12 Planner apps",
           "pdfDownloads": "PDF Downloads",
           "all": "Yes - All",
           "support": "Support",
@@ -712,62 +712,62 @@
         ]
       },
       "premium": {
-        "name": "Premium Transformation",
-        "tier": "PREMIUM",
-        "description": "Everything in Planner plus advanced analytics and decision tracking tools.",
-        "longDescription": "The Premium package includes everything in the Planner, plus powerful analytics tools to track your transformation journey. Understand your decision patterns, track evidence of your growth, and visualize your progress over time. Perfect for those who want data-driven insights into their transformation.",
-        "cta": "Get Premium",
+        "name": "Mastery",
+        "tier": "Mastery",
+        "description": "Everything in the Identity Recode Planner plus the Mastery apps: AI Identity Coach, Emotion Regulation Toolkit, Transformation Community and Priority Support — $27 one-time.",
+        "longDescription": "Mastery is the complete package: everything in the Identity Recode Planner (identity discovery, role replacement, goal reverse-engineering and identity simulation) plus the Mastery-only apps — your AI Identity Coach for guided identity work, the Emotion Regulation Toolkit, the Transformation Community and Priority Support. One payment, lifetime access.",
+        "cta": "Get Mastery",
         "highlights": {
           "bestValue": "Best value",
-          "save": "Save $7",
-          "analytics": "Analytics included"
+          "save": "Pay once — $27",
+          "analytics": "Everything unlocked"
         },
         "benefits": {
           "dataDriven": {
-            "title": "Data-Driven Growth",
-            "description": "See your transformation with clear metrics and trends"
+            "title": "Complete System",
+            "description": "Every app, coach and community in one package"
           },
           "patterns": {
-            "title": "Pattern Recognition",
-            "description": "Identify decision patterns that help or hinder you"
+            "title": "AI Identity Coach",
+            "description": "Your personal agent for identity work — guidance whenever you need it"
           },
           "evidence": {
-            "title": "Evidence Collection",
-            "description": "Build proof of your growth over time"
+            "title": "You Are Not Alone",
+            "description": "Transformation community plus priority support"
           }
         },
         "features": [
-          "Everything in Planner ($9.99 value)",
-          "Decision Pattern Analysis",
-          "Evidence Tracking System",
-          "Progress Dashboard",
-          "Advanced analytics",
-          "Priority support",
-          "Export your data"
+          "Everything in The Planner ($9.99 value)",
+          "All 16 apps unlocked",
+          "AI Identity Coach",
+          "Emotion Regulation Toolkit",
+          "Transformation Community",
+          "Priority Support",
+          "Lifetime access — pay once"
         ],
         "apps": {
           "allPlanner": {
-            "name": "Everything in Planner",
-            "description": "All 4 core apps included"
+            "name": "Everything in The Planner",
+            "description": "All 12 Planner apps included"
           },
           "decision": {
-            "name": "Decision Pattern Analysis",
-            "description": "Understand how you make choices"
+            "name": "AI Identity Coach",
+            "description": "Your personal AI agent for identity work"
           },
           "evidence": {
-            "name": "Evidence Tracking System",
-            "description": "Document your transformation proof"
+            "name": "Emotion Regulation Toolkit",
+            "description": "Assess and regulate your emotional patterns"
           },
           "dashboard": {
-            "name": "Progress Dashboard",
-            "description": "Visualize your growth journey"
+            "name": "Community + Priority Support",
+            "description": "Structured support around your transformation"
           }
         },
         "includes": {
           "duration": "Duration",
           "durationValue": "Lifetime access",
           "appsAccess": "Apps Access",
-          "appsValue": "7 Apps",
+          "appsValue": "All 16 apps",
           "pdfDownloads": "PDF Downloads",
           "all": "Yes - All",
           "support": "Support",
@@ -790,27 +790,27 @@
         "faqs": [
           {
             "q": "What's different from the Planner?",
-            "a": "Premium includes 3 additional apps: Decision Analysis, Evidence Tracking, and Progress Dashboard—perfect for data-driven transformation."
+            "a": "Mastery adds the 4 Mastery-only apps on top of every Planner app: AI Identity Coach, Emotion Regulation Toolkit, Community Access, and Priority Support."
           },
           {
             "q": "Can I upgrade from Planner?",
             "a": "Yes! Contact us and we'll apply your $9.99 Planner purchase toward Mastery ($27 one-time)."
           },
           {
-            "q": "Is the analytics worth it?",
-            "a": "Users with Premium are 2.5x more likely to complete the 30-day program based on our data."
+            "q": "Is Mastery worth it?",
+            "a": "If you want guided identity work with the AI Identity Coach plus community and priority support, Mastery is the complete experience — one payment, everything unlocked."
           }
         ],
         "testimonials": [
           {
             "name": "David L.",
             "role": "Professor",
-            "content": "As someone who studies behavioral psychology, I'm impressed by the scientific grounding. The analytics are powerful."
+            "content": "As someone who studies behavioral psychology, I'm impressed by the scientific grounding. The AI coach asks the right questions."
           },
           {
             "name": "Amira H.",
             "role": "Therapist",
-            "content": "I recommend this to clients. The decision pattern analysis alone is worth the upgrade."
+            "content": "I recommend this to clients. The structured identity work is what makes the difference."
           }
         ]
       }
@@ -985,93 +985,85 @@
         "cta": "Start Free"
       },
       "trial": {
-        "name": "7-Day Trial",
-        "shortName": "Trial",
-        "description": "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
+        "name": "Legacy Trial (no longer sold)",
+        "shortName": "Legacy",
+        "description": "The old 7-day trial is gone — the full Identity Recode Planner is now $9.99 one-time.",
         "features": [
-          "7-Day Guided Journey",
-          "Daily identity prompts",
-          "Evidence tracking",
-          "Progress dashboard",
-          "Email support"
+          "Replaced by the Identity Recode Planner ($9.99 one-time)",
+          "Lifetime access"
         ],
         "highlights": [
-          "Full system access",
-          "7 days",
-          "Low risk"
+          "Legacy",
+          "Not sold anymore"
         ]
       },
       "planner": {
         "name": "Identity Recode Planner",
         "shortName": "The Planner",
-        "description": "The complete 30-day transformation system with interactive apps and PDF downloads.",
+        "description": "Discover the identity you currently perform and the roles life forced on you — then replace them with the identity you choose. Practical apps, goal reverse-engineering, identity simulation and downloadable worksheets — $9.99 one-time.",
         "features": [
-          "30-Day Identity Planner",
-          "Executive Manual",
-          "Identity Baseline Worksheet",
-          "Environmental Audit",
+          "Identity discovery + role replacement",
+          "Goal reverse-engineering + identity simulation",
+          "All 12 Planner apps",
+          "Executive Manual + Identity Baseline Worksheet",
           "Digital + Print PDFs",
-          "Instant access"
+          "Instant access — one payment, lifetime"
         ],
         "highlights": [
           "Most popular",
           "Print included",
-          "30-day journey"
+          "$9.99 once — lifetime"
         ]
       },
       "premium": {
-        "name": "Premium Transformation",
-        "shortName": "Premium",
-        "description": "Everything in Planner plus advanced analytics and decision tracking tools.",
+        "name": "The Planner — Identity Recode Planner",
+        "shortName": "The Planner",
+        "description": "Discover the identity you currently perform and the roles life forced on you — then replace them with the identity you choose. Practical apps, goal reverse-engineering, identity simulation and downloadable worksheets — $9.99 one-time.",
         "features": [
-          "Everything in Planner ($9.99 value)",
-          "Decision Pattern Analysis",
-          "Evidence Tracking System",
-          "Progress Dashboard",
-          "Advanced analytics",
-          "Priority support"
+          "Identity discovery: the identity you perform, the roles life forced on you",
+          "Identity replacement with the identity you choose",
+          "Goal reverse-engineering + identity simulation",
+          "All 12 Planner apps + downloadable worksheets",
+          "Digital + Print PDFs",
+          "Lifetime access — pay once"
         ],
         "highlights": [
-          "Best value",
-          "Save $7",
-          "Analytics included"
+          "Most popular",
+          "$9.99 once",
+          "Lifetime access"
         ],
-        "bestFor": "Best for: the complete 30-day identity transformation — our default recommendation"
+        "bestFor": "Best for: running the full identity recode with structure — our default recommendation"
       },
       "basic": {
-        "name": "Basic (Legacy — replaced by the Planner)",
-        "shortName": "Basic",
-        "description": "Experience the full Identity Recode system for 7 days. Perfect for testing the methodology.",
+        "name": "Legacy Basic (replaced by the Planner)",
+        "shortName": "Legacy",
+        "description": "The former Basic monthly plan is no longer sold — existing subscribers keep access; new users get the Identity Recode Planner ($9.99 one-time).",
         "features": [
-          "7-Day Guided Journey",
-          "Daily identity prompts",
-          "Evidence tracking",
-          "Progress dashboard",
-          "Email support"
+          "Existing subscribers keep access",
+          "New users: the Identity Recode Planner includes everything Basic had"
         ],
         "highlights": [
-          "Full system access",
-          "7 days",
-          "Low risk"
+          "Legacy",
+          "Not sold anymore"
         ],
-        "bestFor": "Best for: testing the methodology with one focused week"
+        "bestFor": "Existing legacy subscribers only"
       },
       "mastery": {
-        "name": "Mastery Bundle",
+        "name": "Mastery",
         "shortName": "Mastery",
-        "description": "The ultimate package: All apps + AI coaching + community access + priority support.",
+        "description": "Everything in The Planner plus the Mastery apps: AI Identity Coach, Emotion Regulation Toolkit, Transformation Community and Priority Support — $27 one-time.",
         "features": [
-          "All PDF products ($27 value)",
-          "All Interactive Apps",
+          "Everything in The Planner ($9.99 value)",
+          "All 16 apps unlocked",
           "AI Identity Coach",
+          "Emotion Regulation Toolkit",
           "Transformation Community",
-          "Priority Support",
-          "Advanced Analytics"
+          "Priority Support"
         ],
         "highlights": [
           "Mastery — $27",
           "AI coaching",
-          "VIP access"
+          "Everything unlocked"
         ],
         "cta": "Get Mastery",
         "bestFor": "Best for: total commitment — AI Coach, community, and every tool"
@@ -1122,7 +1114,7 @@
       "Identity Gap Assessment",
       "Values Clarification",
       "Daily Reflection",
-      "7-Day Trial Planner",
+      "7-Day Discipline Journey",
       "Executive Manual",
       "30-Day Identity Planner",
       "Identity Baseline Worksheet",
@@ -1182,10 +1174,11 @@
     "tierLabels": {
       "FREE": "Free",
       "TRIAL": "Trial",
-      "BASIC": "Basic",
-      "PREMIUM": "Premium",
+      "BASIC": "The Planner",
+      "PREMIUM": "The Planner",
       "BUNDLE": "Mastery",
-      "MASTERY": "Mastery"
+      "MASTERY": "Mastery",
+      "PLANNER": "The Planner"
     },
     "apps": {
       "identityGapQuiz": {
@@ -1204,8 +1197,8 @@
         "category": "Tracking"
       },
       "trialPlanner": {
-        "name": "7-Day Trial Planner",
-        "description": "Experience the full Identity Recode system for 7 days with guided daily prompts and evidence tracking.",
+        "name": "7-Day Discipline Journey",
+        "description": "The 7-day discipline reset — stage one of the Identity Recode Planner, included with your one-time purchase.",
         "category": "Planning"
       },
       "executiveManual": {
@@ -1368,7 +1361,7 @@
       },
       {
         "title": "Continuous Updates",
-        "description": "Get all product updates while your subscription is active"
+        "description": "Get all product updates free — your purchase never expires"
       }
     ],
     "categories": [
@@ -1462,7 +1455,7 @@
           },
           {
             "q": "Do you offer any guarantees on results?",
-            "a": "While individual results vary based on commitment and engagement, we guarantee access to all purchased content and tools for the duration of your subscription. Our methodology is evidence-based and we provide ongoing support to help you succeed."
+            "a": "While individual results vary based on commitment and engagement, we guarantee lifetime access to all purchased content and tools — one-time purchases never expire. Our methodology is evidence-based and we provide ongoing support to help you succeed."
           },
           {
             "q": "How do I request a refund?",
@@ -1836,7 +1829,7 @@
     "total": "Total",
     "comingSoonBadge": "Coming Soon",
     "product": "Product",
-    "monthlyAccess": "Monthly Access"
+    "monthlyAccess": "One-time payment"
   },
   "searchPage": {
     "badge": "Search",
@@ -2247,7 +2240,7 @@
     "youMay": "You May",
     "youMay1": "Use products for personal use",
     "youMay2": "Print for personal use",
-    "youMay3": "Access updates while your subscription is active",
+    "youMay3": "Get product updates for life — one-time purchases never expire",
     "youMayNot": "You May Not",
     "youMayNot1": "Share access codes",
     "youMayNot2": "Resell or redistribute",
@@ -2654,12 +2647,12 @@
     "moderateGapRange": "Score 41–70",
     "moderateGapText": "You have real strengths already working for you. The gap exists in specific dimensions — your results show exactly where.",
     "moderateGapRecommendation": "The 7-Day Trial lets you experience the full system before committing.",
-    "moderateGapCta": "Try the complete system for 7 days",
+    "moderateGapCta": "Get the Identity Recode Planner — $9.99 once",
     "narrowGapTitle": "Identity Gap: Narrow",
     "narrowGapRange": "Score 71–100",
     "narrowGapText": "Your foundation is solid. The work now is deepening — not rebuilding.",
-    "narrowGapRecommendation": "Premium Transformation gives you the analytics layer to measure and refine what's already working.",
-    "narrowGapCta": "Go deeper with Premium",
+    "narrowGapRecommendation": "The Planner gives you the analytics layer to measure and refine what's already working.",
+    "narrowGapCta": "Go deeper with the Planner",
     "universalClosing": "Not ready to invest yet? Start with the free Values Clarification Tool — the natural next step after any identity assessment.",
     "universalCta": "Explore free tools",
     "saveResults": "Save your results",
@@ -2716,14 +2709,14 @@
     "statusPending": "Pending",
     "statusRegistered": "Registered",
     "statusCompleted": "Completed",
-    "rewardTrialExtension": "Trial Extension",
-    "rewardBasicAccess": "Basic App Access",
-    "rewardPremiumBundle": "Premium Access",
+    "rewardTrialExtension": "Extended Free Access",
+    "rewardBasicAccess": "Planner App Access",
+    "rewardPremiumBundle": "Full Planner App Access",
     "claimed": "Claimed",
     "claimReward": "Claim Reward",
-    "tier1Name": "Trial Extension",
-    "tier2Name": "Basic Access",
-    "tier3Name": "Premium Access"
+    "tier1Name": "Extended Free Access",
+    "tier2Name": "Planner App Access",
+    "tier3Name": "Full Planner App Access"
   },
   "recoveryPage": {
     "downloads": {

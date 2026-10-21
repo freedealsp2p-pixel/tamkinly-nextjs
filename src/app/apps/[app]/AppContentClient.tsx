@@ -74,9 +74,10 @@ const tierColors: Record<string, { bg: string; text: string; border: string }> =
 
 const tierPrices: Record<string, { price: number; productSlug: string; nameEn: string; nameAr: string }> = {
   FREE: { price: 0, productSlug: '', nameEn: 'Free Forever', nameAr: 'مجاني للأبد' },
-  BASIC: { price: 7, productSlug: 'basic', nameEn: 'Basic (Monthly)', nameAr: 'أساسي (شهري)' },
-  PREMIUM: { price: 17, productSlug: 'premium', nameEn: 'Premium (Monthly)', nameAr: 'مميز (شهري)' },
-  MASTERY: { price: 27, productSlug: 'mastery', nameEn: 'Mastery (Monthly)', nameAr: 'إتقان (شهري)' },
+  // V2: BASIC + PREMIUM gates are both unlocked by The Planner ($9.99 one-time)
+  BASIC: { price: 9.99, productSlug: 'premium', nameEn: 'The Planner (One-time)', nameAr: 'المخطط (دفعة واحدة)' },
+  PREMIUM: { price: 9.99, productSlug: 'premium', nameEn: 'The Planner (One-time)', nameAr: 'المخطط (دفعة واحدة)' },
+  MASTERY: { price: 27, productSlug: 'mastery', nameEn: 'Mastery (One-time)', nameAr: 'الإتقان (دفعة واحدة)' },
 };
 
 // ============================================
@@ -523,7 +524,7 @@ export function AppContentClient({ appData, serverAccessResult }: { appData: App
                     </div>
                     <div className="text-right">
                       <p className="text-2xl font-bold text-[#3DD4B0]">${tierInfo.price}</p>
-                      <p className="text-slate-400 text-xs">{getText('monthly', 'شهري')}</p>
+                      <p className="text-slate-400 text-xs">{getText('one-time payment', 'دفعة واحدة')}</p>
                     </div>
                   </div>
                 )}

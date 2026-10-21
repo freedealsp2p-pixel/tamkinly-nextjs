@@ -100,9 +100,11 @@ export default function AppsPage() {
   const t = useTranslations("appsPage");
   const { locale } = useLocale();
 
-  // Filter apps based on selected tier
+  // Filter apps based on selected tier — PLANNER = BASIC + PREMIUM tiers merged
   const filteredApps = selectedTier === 'ALL' 
     ? appsData 
+    : selectedTier === 'PLANNER'
+    ? appsData.filter(app => app.tier === 'BASIC' || app.tier === 'PREMIUM')
     : appsData.filter(app => app.tier === selectedTier);
 
   // Group apps by tier
@@ -113,13 +115,18 @@ export default function AppsPage() {
     MASTERY: appsData.filter(app => app.tier === 'MASTERY'),
   };
 
-  // Get tier stats — PRICING MODEL V2: one-time payments (BASIC is legacy-only)
-  const tierStats = {
-    FREE: { count: appsByTier.FREE.length, label: t('tierLabels.FREE'), price: '$0' },
-    BASIC: { count: appsByTier.BASIC.length, label: t('tierLabels.BASIC'), price: '$9.99' },
-    PREMIUM: { count: appsByTier.PREMIUM.length, label: t('tierLabels.PREMIUM'), price: '$9.99' },
-    MASTERY: { count: appsByTier.MASTERY.length, label: t('tierLabels.MASTERY'), price: '$27' },
-  };
+  // Paid display groups (two-package model)
+  const paidDisplayGroups = [
+    { key: 'PLANNER', labelKey: 'PLANNER' as const, apps: [...appsByTier.BASIC, ...appsByTier.PREMIUM] },
+    { key: 'MASTERY', labelKey: 'MASTERY' as const, apps: appsByTier.MASTERY },
+  ];
+
+  // Get tier stats — PRICING MODEL V2: 3 chips only (Free / The Planner / Mastery)
+  const tierStats = [
+    { key: 'FREE', label: t('tierLabels.FREE'), count: appsByTier.FREE.length },
+    { key: 'PLANNER', label: t('tierLabels.PLANNER'), count: appsByTier.BASIC.length + appsByTier.PREMIUM.length },
+    { key: 'MASTERY', label: t('tierLabels.MASTERY'), count: appsByTier.MASTERY.length },
+  ];
 
   // Generate SoftwareApplication schemas for SEO
   const appSchemas = appsData.map((app) =>
@@ -129,7 +136,7 @@ export default function AppsPage() {
       url: `/apps/${app.slug}`,
       category: t(`apps.${app.appKey}.category`),
       offers: {
-        price: app.tier === 'FREE' ? 0 : app.tier === 'BASIC' ? 7 : app.tier === 'PREMIUM' ? 17 : 27,
+        price: app.tier === 'FREE' ? 0 : app.tier === 'MASTERY' ? 27 : 9.99,
       },
   
     })
@@ -178,12 +185,12 @@ export default function AppsPage() {
             >
               {t('allApps').replace('{count}', String(appsData.length))}
             </Button>
-            {Object.entries(tierStats).map(([tier, stats]) => (
+            {tierStats.map((stats) => (
               <Button
-                key={tier}
-                onClick={() => setSelectedTier(tier)}
+                key={stats.key}
+                onClick={() => setSelectedTier(stats.key)}
                 className={`rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap transition-all ${
-                  selectedTier === tier 
+                  selectedTier === stats.key 
                     ? 'bg-[#0F1C2E] text-white shadow-md' 
                     : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
@@ -298,14 +305,14 @@ export default function AppsPage() {
           </div>
         )}
 
-        {/* Other Tiers */}
-        {Object.entries(appsByTier)
-          .filter(([tier]) => tier !== 'FREE' && (selectedTier === 'ALL' || selectedTier === tier))
-          .map(([tier, apps]) => (
-            <div key={tier} className="mb-12">
+        {/* Paid Groups — two-package model: The Planner / Mastery */}
+        {paidDisplayGroups
+          .filter((group) => selectedTier === 'ALL' || selectedTier === group.key)
+          .map((group) => (
+            <div key={group.key} className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <Badge className={`bg-[#0F1C2E] text-[#3DD4B0] border border-[#3DD4B0]/50`}>
-                  {tierStats[tier as keyof typeof tierStats].label}
+                  {t(`tierLabels.${group.labelKey}`)}
                 </Badge>
                 <Link href="/products">
                   <Button variant="link" className="text-[#3DD4B0]">
@@ -314,7 +321,7 @@ export default function AppsPage() {
                 </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {apps.map((app) => (
+                {group.apps.map((app) => (
                   <AppCard key={app.slug} app={app} isLocked={true} t={t} locale={locale} />
                 ))}
               </div>
@@ -392,9 +399,9 @@ function AppCard({ app, isLocked, t, locale }: {
           <Icon className="w-6 h-6" style={{ color: app.color }} />
         </div>
         
-        {/* Badge */}
+        {/* Badge — two-package model: BASIC/PREMIUM apps display as The Planner */}
         <Badge className={`${tierStyle.bg} ${tierStyle.text} mb-3`}>
-          {t(`tierLabels.${app.tier}`)}
+          {t(`tierLabels.${app.tier === 'BASIC' || app.tier === 'PREMIUM' ? 'PLANNER' : app.tier}`)}
         </Badge>
         
         {/* Title */}

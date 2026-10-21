@@ -47,11 +47,9 @@ const searchableContent = [
   { title: 'Identity Baseline', titleAr: 'خط الأساس للهوية', path: '/apps/identity-baseline', type: 'app', description: 'Establish your identity starting point', descriptionAr: 'حدد نقطة بداية هويتك', keywords: ['baseline', 'identity', 'starting', 'foundation'] },
   { title: 'Executive Manual', titleAr: 'الدليل التنفيذي', path: '/apps/executive-manual', type: 'app', description: 'Comprehensive transformation guide', descriptionAr: 'دليل تحول شامل', keywords: ['manual', 'guide', 'executive'] },
   
-  // Products
-  { title: 'Basic (Monthly)', titleAr: 'أساسي (شهري)', path: '/products/basic', type: 'product', description: '7-day discipline journey starter', descriptionAr: 'بداية رحلة الانضباط لـ 7 أيام', keywords: ['basic', '7-day', 'starter'] },
-  { title: 'Premium (Monthly)', titleAr: 'مميز (شهري)', path: '/products/premium', type: 'product', description: 'Complete 30-day transformation system', descriptionAr: 'نظام تحول كامل لمدة 30 يوم', keywords: ['premium', '30-day', 'recode'] },
-  { title: 'Premium Transformation', titleAr: 'التحول المتميز', path: '/products/premium', type: 'product', description: 'Advanced tools and analytics', descriptionAr: 'أدوات وتحليلات متقدمة', keywords: ['premium', 'advanced', 'analytics'] },
-  { title: 'Mastery (Monthly)', titleAr: 'إتقان (شهري)', path: '/products/mastery', type: 'product', description: 'All apps + AI Coach + Community', descriptionAr: 'كل التطبيقات + مدرب AI + المجتمع', keywords: ['mastery', 'complete', 'all'] },
+  // Products — PRICING MODEL V2 (founder directive 2026-10-21): TWO paid packages only
+  { title: 'The Planner (Identity Recode Planner)', titleAr: 'المخطط (مخطط إعادة صياغة الهوية)', path: '/products/premium', type: 'product', description: 'Identity discovery & recode: $9.99 one-time — all Planner apps + downloadable worksheets', descriptionAr: 'اكتشاف الهوية وإعادة صياغتها: 9.99$ دفعة واحدة — جميع تطبيقات المخطط وأوراق العمل', keywords: ['planner', 'identity recode', '9.99', 'one-time', 'المخطط'] },
+  { title: 'Mastery', titleAr: 'الإتقان', path: '/products/mastery', type: 'product', description: 'Everything in The Planner + Mastery apps (AI Identity Coach, community) — $27 one-time', descriptionAr: 'كل ما في المخطط + تطبيقات الإتقان (مدرب الهوية AI، المجتمع) — 27$ دفعة واحدة', keywords: ['mastery', 'الإتقان', 'complete', 'all', '27'] },
   
   // Recovery - TRC (Trauma Recovery Center)
   { title: 'Trauma Recovery Center', titleAr: 'مركز التعافي من الصدمات', path: '/recovery/trc', type: 'app', description: 'Evidence-based trauma recovery tools and resources', descriptionAr: 'أدوات وموارد للتعافي من الصدمات مبنية على الأدلة', keywords: ['trauma', 'recovery', 'trc', 'صدمة', 'تعافي'] },

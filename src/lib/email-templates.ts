@@ -160,12 +160,12 @@ export function getPurchaseConfirmationHtml(
       ar: ['جميع التطبيقات المجانية', 'نظام إعادة ترميز الهوية (30 يوماً)', 'نظام الأهداف', 'نظام اليوميات', 'مكتبة أوراق العمل'],
     },
     premium: {
-      en: ['All free apps', 'All Premium apps', 'Identity Recode System (30-day)', 'Goal System', 'Journal System', 'Worksheets library', 'Priority email support'],
-      ar: ['جميع التطبيقات المجانية', 'جميع تطبيقات مميز', 'نظام إعادة ترميز الهوية (30 يوماً)', 'نظام الأهداف', 'نظام اليوميات', 'مكتبة أوراق العمل', 'دعم بريد ذو أولوية'],
+      en: ['All free apps', 'All 12 Planner apps', 'Identity Recode System (30-day)', 'Goal System', 'Journal System', 'Worksheets library', 'All downloadable PDF worksheets'],
+      ar: ['جميع التطبيقات المجانية', 'جميع تطبيقات المخطط الـ 12', 'نظام إعادة ترميز الهوية (30 يوماً)', 'نظام الأهداف', 'نظام اليوميات', 'مكتبة أوراق العمل', 'جميع مخططات PDF القابلة للتنزيل'],
     },
     bundle: {
-      en: ['Everything in Premium', 'AI Identity Coach', 'Community access', 'Priority support', 'Therapeutic protocols (3, lifetime)'],
-      ar: ['كل ما في خطة مميز', 'المدرب الذكي للهوية', 'الوصول للمجتمع', 'دعم ذو أولوية', 'البروتوكولات العلاجية الثلاثة (مدى الحياة)'],
+      en: ['Everything in The Planner', 'All 16 apps unlocked', 'AI Identity Coach', 'Emotion Regulation Toolkit', 'Community access', 'Priority support'],
+      ar: ['كل ما في المخطط', 'جميع التطبيقات الـ 16 مفتوحة', 'مدرب الهوية AI', 'أدوات تنظيم المشاعر', 'الوصول للمجتمع', 'دعم ذو أولوية'],
     },
   };
 

@@ -19,45 +19,48 @@ const productMetadata: Record<string, {
   price: number;
   keywords: string[];
 }> = {
+  // PRICING MODEL V2 (founder directive 2026-10-21): TWO paid packages only.
+  // 'premium' = Identity Recode Planner ($9.99 one-time); 'mastery' = Mastery ($27 one-time).
+  // 'basic'/'trial'/'planner' are legacy slugs that render the Planner page (old links keep converting).
   'basic': {
-    name: 'Basic (Monthly)',
-    nameAr: 'أساسي (شهري)',
-    description: 'Start your identity transformation journey with the core planning tool. Perfect for testing the methodology.',
-    descriptionAr: 'ابدأ رحلة تحول هويتك بأداة التخطيط الأساسية. مثالي لتجربة المنهجية.',
-    price: 7,
-    keywords: ['basic plan', 'identity transformation', 'monthly subscription', 'self-development', 'tamkinly basic']
-  },
-  'trial': {
-    name: '7-Day Identity Reset Trial',
-    nameAr: 'تجربة إعادة ضبط الهوية لمدة 7 أيام',
-    description: 'Experience the full Identity Recode system for 7 days. Test daily identity prompts, evidence tracking, and the progress dashboard before upgrading.',
-    descriptionAr: 'جرب نظام إعادة صياغة الهوية الكامل لمدة 7 أيام. اختبر المنهجية مع المطالبات اليومية وتتبع الأدلة ولوحة التقدم.',
-    price: 7,
-    keywords: ['identity reset', '7-day trial', 'identity transformation', 'self-development', 'personal growth', 'transformation trial']
-  },
-  'planner': {
     name: 'Identity Recode Planner',
     nameAr: 'مخطط إعادة صياغة الهوية',
-    description: 'The complete 30-day identity transformation system with interactive apps, daily prompts, and PDF downloads. Rebuild your identity from the ground up.',
-    descriptionAr: 'نظام تحول الهوية الكامل لمدة 30 يوم مع تطبيقات تفاعلية ومطالبات يومية وتحميلات PDF.',
-    price: 17,
-    keywords: ['identity planner', '30-day transformation', 'identity recode', 'personal development planner', 'habit transformation', 'identity journal']
+    description: 'The former Basic monthly plan is no longer sold — this page now shows the Identity Recode Planner: $9.99 one-time, lifetime access.',
+    descriptionAr: 'لم تعد باقة الأساسية الشهرية متاحة — هذه الصفحة تعرض الآن مخطط إعادة صياغة الهوية: 9.99$ دفعة واحدة بوصول دائم.',
+    price: 9.99,
+    keywords: ['identity recode planner', 'identity transformation', 'one-time payment', 'self-development', 'tamkinly planner']
+  },
+  'trial': {
+    name: 'Identity Recode Planner',
+    nameAr: 'مخطط إعادة صياغة الهوية',
+    description: 'The old 7-day trial is gone — the full Identity Recode Planner is now $9.99 one-time: daily identity prompts, evidence tracking, progress dashboard and every Planner app included.',
+    descriptionAr: 'انتهت تجربة 7 أيام القديمة — مخطط إعادة صياغة الهوية الكامل الآن بـ 9.99$ دفعة واحدة: مطالبات هوية يومية وتتبع الأدلة ولوحة التقدم وكل تطبيقات المخطط.',
+    price: 9.99,
+    keywords: ['identity recode planner', 'identity reset', 'identity transformation', 'self-development', 'personal growth']
+  },
+  'planner': {
+    name: 'The Planner — Identity Recode Planner',
+    nameAr: 'المخطط — مخطط إعادة صياغة الهوية',
+    description: 'Discover the identity you currently perform and the roles life forced on you, replace them with the identity you choose, reverse-engineer your goals and simulate the identity that already has them — practical apps and downloadable worksheets. $9.99 one-time.',
+    descriptionAr: 'اكتشف الهوية التي تتقمصها اليوم والأدوار التي فرضتها عليك الحياة، واستبدلها بهوية الاختيار، وهندس أهدافك عكسياً، ومثّل الهوية التي تمتلك هدفك — تطبيقات عملية ومخططات قابلة للتنزيل. 9.99$ دفعة واحدة.',
+    price: 9.99,
+    keywords: ['identity planner', 'identity discovery', 'goal reverse engineering', 'identity recode', 'personal development planner', 'identity journal']
   },
   'premium': {
-    name: 'Premium (Monthly)',
-    nameAr: 'مميز (شهري)',
-    description: 'Comprehensive transformation with advanced analytics, decision tracking, and evidence tools. Data-driven transformation for committed individuals.',
-    descriptionAr: 'تحول شامل مع تحليلات متقدمة وتتبع القرارات وأدوات جمع الأدلة.',
-    price: 17,
-    keywords: ['premium plan', 'advanced analytics', 'decision tracking', 'identity analytics', 'data-driven growth', 'transformation dashboard']
+    name: 'The Planner — Identity Recode Planner',
+    nameAr: 'المخطط — مخطط إعادة صياغة الهوية',
+    description: 'Discover the identity you currently perform and the roles life forced on you, replace them with the identity you choose, reverse-engineer your goals and simulate the identity that already has them — practical apps and downloadable worksheets. $9.99 one-time, lifetime access.',
+    descriptionAr: 'اكتشف الهوية التي تتقمصها اليوم والأدوار التي فرضتها عليك الحياة، واستبدلها بهوية الاختيار، وهندس أهدافك عكسياً، ومثّل الهوية التي تمتلك هدفك — تطبيقات عملية ومخططات قابلة للتنزيل. 9.99$ دفعة واحدة بوصول دائم.',
+    price: 9.99,
+    keywords: ['identity recode planner', 'identity discovery', 'identity transformation', 'one-time payment', 'worksheets', 'tamkinly planner']
   },
   'mastery': {
-    name: 'Mastery (Monthly)',
-    nameAr: 'إتقان (شهري)',
-    description: 'The ultimate identity transformation experience: All apps + AI coaching + community access + priority support.',
-    descriptionAr: 'تجربة تحول الهوية المثالية: جميع التطبيقات + تدريب AI + وصول المجتمع + دعم ذو أولوية.',
+    name: 'Mastery',
+    nameAr: 'الإتقان',
+    description: 'Everything in The Planner plus the Mastery apps: AI Identity Coach, emotion regulation toolkit, transformation community and priority support. $27 one-time, lifetime access.',
+    descriptionAr: 'كل ما في المخطط بالإضافة إلى تطبيقات الإتقان: مدرب الهوية AI، أدوات تنظيم المشاعر، مجتمع التحول ودعم ذو أولوية. 27$ دفعة واحدة بوصول دائم.',
     price: 27,
-    keywords: ['mastery plan', 'complete transformation', 'AI coaching', 'identity mastery', 'full access', 'VIP support']
+    keywords: ['mastery package', 'complete transformation', 'AI identity coach', 'identity mastery', 'full access', 'one-time payment']
   }
 };
 

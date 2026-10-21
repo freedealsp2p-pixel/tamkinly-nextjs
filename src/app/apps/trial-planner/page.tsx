@@ -51,12 +51,12 @@ export default function TrialPlannerPage() {
             <CardContent className="p-8 text-center">
               <Lock className="w-16 h-16 text-[#4aabb0] mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-white mb-4">
-                {getText('Unlock Your Basic Journey', 'افتح رحلتك الأساسية')}
+                {getText('Start Your 7-Day Journey', 'ابدأ رحلتك ذات 7 أيام')}
               </h2>
               <p className="text-slate-300 mb-6 max-w-xl mx-auto">
                 {getText(
-                  'Experience the full Identity Recode system for 7 days. Test the methodology before committing to the full program.',
-                  'اختبر نظام إعادة برمجة الهوية بالكامل لمدة 7 أيام. جرّب المنهجية قبل الالتزام بالبرنامج الكامل.'
+                  'The 7-day discipline reset is the first stage of the Identity Recode Planner. Get the Planner once and this journey unlocks with everything else — no trial, no subscription.',
+                  'إعادة ضبط الانضباط ذات 7 أيام هي المرحلة الأولى من مخطط إعادة صياغة الهوية. احصل على المخطط مرة واحدة وتُفتح هذه الرحلة مع كل شيء آخر — بلا تجربة وبلا اشتراك.'
                 )}
               </p>
 

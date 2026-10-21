@@ -15,15 +15,15 @@ const productTierMap: Record<string, 'BASIC' | 'PREMIUM' | 'MASTERY'> = {
   'bundle': 'MASTERY',
 };
 
-// Product names map (NEW MODEL)
+// Product names map (PRICING MODEL V2 — two packages, one-time)
 const productNames: Record<string, string> = {
-  'basic': 'Basic (Monthly)',
-  'premium': 'Premium (Monthly)',
-  'mastery': 'Mastery (Monthly)',
+  'basic': 'Identity Recode Planner', // legacy id — renders the Planner
+  'premium': 'Identity Recode Planner',
+  'mastery': 'Mastery',
   // Legacy aliases (for backward compat with old orders)
-  'trial': 'Basic (Monthly)',
-  'planner': 'Premium (Monthly)',
-  'bundle': 'Mastery (Monthly)',
+  'trial': 'Identity Recode Planner',
+  'planner': 'Identity Recode Planner',
+  'bundle': 'Mastery',
 };
 
 // POST - Process checkout (ONLY creates a PENDING order)

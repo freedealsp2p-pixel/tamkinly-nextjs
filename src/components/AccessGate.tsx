@@ -41,10 +41,11 @@ const APP_TIERS: Record<string, string> = {
   'identity-recode-system': 'BASIC',
 };
 
-// Products that grant each tier
+// Products that grant each tier — PRICING MODEL V2: TWO packages only.
+// BASIC + PREMIUM gates → The Planner ($9.99 one-time); MASTERY → Mastery ($27 one-time).
 const TIER_PRODUCTS: Record<string, { slug: string; price: number }> = {
-  BASIC: { slug: 'basic', price: 7 },
-  PREMIUM: { slug: 'premium', price: 17 },
+  BASIC: { slug: 'premium', price: 9.99 },
+  PREMIUM: { slug: 'premium', price: 9.99 },
   MASTERY: { slug: 'mastery', price: 27 },
 };
 
@@ -179,7 +180,10 @@ export function AccessGate({ appSlug, children }: AccessGateProps) {
               {tierProduct && (
                 <Link href={`/products/${tierProduct.slug}`}>
                   <Button className="w-full h-14 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold text-lg">
-                    {getText(`Get ${requiredTier} Access - $${tierProduct.price}`, `احصل على وصول ${requiredTier} - $${tierProduct.price}`)}
+                    {getText(
+                      `Get ${requiredTier === 'MASTERY' ? 'Mastery' : 'The Planner'} — $${tierProduct.price} one-time`,
+                      `احصل على ${requiredTier === 'MASTERY' ? 'الإتقان' : 'المخطط'} — ${tierProduct.price}$ دفعة واحدة`
+                    )}
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>
