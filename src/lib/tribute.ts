@@ -46,6 +46,10 @@ export interface TributeWebhookPayload {
     
     // Common
     cancel_reason?: string;
+
+    // Digital product refund (digital_product_refunded)
+    refund_reason?: string;
+    refunded_at?: string;
   };
 }
 
@@ -75,10 +79,20 @@ export const TRIBUTE_LIVE_LINKS = {
 // The numeric product IDs (webhook matching) are configured via env vars on
 // the server. Web payment links now DEFAULT to TRIBUTE_LIVE_LINKS (founder
 // 2026-10-22); env (TRIBUTE_LINK_*_WEB) overrides when present.
-// defaultTributeName = the approved product title used at creation (Task 34
-// cards) — used by resolveOneTimeProduct() as the bootstrap name matcher until
-// the numeric IDs land in env; override via TRIBUTE_PRODUCT_*_NAME.
+// defaultTributeName = the EXACT product title as it exists on Tribute — read
+// verbatim from the live API (GET /api/v1/products with the founder's API key,
+// 2026-10-22) — used by resolveOneTimeProduct() as the bootstrap name matcher
+// until the numeric IDs land in env; override via TRIBUTE_PRODUCT_*_NAME.
+// NOTE: these differ from the Task-34 card titles — the founder typed different
+// names at creation ("Identity Recode System _ The PLanner", "Mastery—Complete
+// Identity Recode System · Tamkinly"). Matching uses REALITY, not intentions.
 // Access granted is PERMANENT (no expiresAt) — one payment, lifetime access.
+//
+// API-verified facts (2026-10-22, GET /api/v1/products):
+//   Planner product_id = 168394  webLink https://web.tribute.tg/p/HO2  amount 999 usd
+//   Mastery product_id = 168401  webLink https://web.tribute.tg/p/HO9  amount 2700 usd
+//   Telegram links: https://t.me/tribute/app?startapp=pHO2 / pHO9
+//   Status at read time: "new" (not yet "approved") — flagged to founder.
 
 export const ONE_TIME_PRODUCTS: Record<'planner' | 'mastery', {
   productIdEnv: string;
@@ -102,7 +116,7 @@ export const ONE_TIME_PRODUCTS: Record<'planner' | 'mastery', {
     nameAr: 'مخطط إعادة صياغة الهوية (دفعة واحدة)',
     tier: 'PREMIUM',
     defaultWebLink: TRIBUTE_LIVE_LINKS.plannerWeb,
-    defaultTributeName: 'The Planner — Identity Recode · Tamkinly',
+    defaultTributeName: 'Identity Recode System _ The PLanner',
   },
   mastery: {
     productIdEnv: 'TRIBUTE_PRODUCT_MASTERY',
@@ -114,7 +128,7 @@ export const ONE_TIME_PRODUCTS: Record<'planner' | 'mastery', {
     nameAr: 'تمكنلي إتقان (دفعة واحدة)',
     tier: 'MASTERY',
     defaultWebLink: TRIBUTE_LIVE_LINKS.masteryWeb,
-    defaultTributeName: 'Mastery — Complete Identity System · Tamkinly',
+    defaultTributeName: 'Mastery—Complete Identity Recode System · Tamkinly',
   },
 };
 
@@ -305,6 +319,8 @@ export interface TributeWebhookResult {
   transactionId?: number;
   trbUserId?: string;
   protocolSlug?: string | null;
+  refundReason?: string;
+  refundedAt?: string;
 }
 
 /**
@@ -373,6 +389,8 @@ export function processTributeWebhook(payload: TributeWebhookPayload): TributeWe
     transactionId: data.transaction_id,
     trbUserId: data.trb_user_id,
     protocolSlug,
+    refundReason: data.refund_reason,
+    refundedAt: data.refunded_at,
   };
 }
 

@@ -72,6 +72,9 @@ export async function POST(request: NextRequest) {
       case 'new_digital_product':
         return await handleDigitalProductEvent(result);
       
+      case 'digital_product_refunded':
+        return await handleDigitalProductRefundEvent(result);
+      
       default:
         console.log('ℹ️ Tribute webhook: Unhandled event type:', result.eventType);
         return NextResponse.json({ success: true, message: 'Event received but not handled' });
@@ -439,6 +442,92 @@ async function handleDigitalProductEvent(result: any) {
 // ============================================
 // HELPERS
 // ============================================
+
+/**
+ * digital_product_refunded (official Tribute wiki payload): purchase_id,
+ * product_id, product_name, amount, currency, refund_reason, refunded_at.
+ * Official guidance: use purchase_id to match the original purchase and
+ * REVOKE access. We mark the order REFUNDED and deactivate the permanent
+ * access code(s) that purchase granted. Fail-safe: no matching order →
+ * logged + 200 (Tribute retries ~24h otherwise).
+ */
+async function handleDigitalProductRefundEvent(result: any) {
+  const startTime = Date.now();
+  const purchaseId = result.purchaseId;
+
+  if (!purchaseId) {
+    console.warn('⚠️ Tribute refund event missing purchase_id — ignored', {
+      productId: result.productId,
+      refundReason: result.refundReason,
+    });
+    return NextResponse.json({ success: true, message: 'Refund received but missing purchase_id' });
+  }
+
+  const paymentKey = `tribute_prod_${purchaseId}`;
+  const order = await db.order.findFirst({ where: { paymentId: paymentKey } });
+
+  if (!order) {
+    console.warn('⚠️ Tribute refund: no order matches purchase_id — nothing to revoke', {
+      purchaseId,
+      productId: result.productId,
+      refundReason: result.refundReason,
+      refundedAt: result.refundedAt,
+    });
+    return NextResponse.json({ success: true, message: 'Refund received — no matching order' });
+  }
+
+  // Identify which one-time tier product this purchase granted (from order notes)
+  let notesObj: Record<string, unknown> = {};
+  try { notesObj = order.notes ? JSON.parse(order.notes) : {}; } catch { notesObj = {}; }
+  const productKey = typeof notesObj.productKey === 'string' ? notesObj.productKey : null;
+
+  let revokedCount = 0;
+  if (productKey === 'planner' || productKey === 'mastery') {
+    const cfg = ONE_TIME_PRODUCTS[productKey];
+    const res = await db.appAccess.updateMany({
+      where: {
+        OR: [{ email: order.customerEmail }, { email: order.customerEmail.toLowerCase() }],
+        tier: cfg.tier as any,
+        isActive: true,
+      },
+      data: { isActive: false },
+    });
+    revokedCount = res.count;
+  }
+
+  notesObj.refund = {
+    reason: result.refundReason || null,
+    refundedAt: result.refundedAt || null,
+    processedAt: new Date().toISOString(),
+    accessRevoked: revokedCount,
+  };
+
+  await db.order.update({
+    where: { id: order.id },
+    data: {
+      status: 'REFUNDED',
+      paymentStatus: 'REFUNDED',
+      notes: JSON.stringify(notesObj),
+    },
+  });
+
+  console.log('Tribute digital product REFUND processed — access revoked:', {
+    purchaseId,
+    productId: result.productId,
+    productKey,
+    orderNumber: order.orderNumber,
+    customerEmail: order.customerEmail,
+    revokedCodes: revokedCount,
+    refundReason: result.refundReason,
+  });
+
+  return NextResponse.json({
+    success: true,
+    message: 'Refund processed — access revoked',
+    revokedCodes: revokedCount,
+    processingTime: `${Date.now() - startTime}ms`,
+  });
+}
 
 /**
  * PRICING MODEL V2: handle a one-time tier product purchase (planner/mastery).
