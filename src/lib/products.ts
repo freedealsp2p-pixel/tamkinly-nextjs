@@ -54,7 +54,7 @@ export const LOCAL_PRODUCTS: Product[] = [
     type: 'ONE_TIME',
     accessTier: 'PREMIUM',
     image: null,
-    features: ['7-Day Guided Discipline Journey', '30-Day Identity Planner', 'Daily identity prompts', 'Executive Manual', 'Identity Baseline Worksheet', 'All core interactive apps', 'Digital + Print PDFs', 'Decision Pattern Analysis', 'Evidence tracking', 'Progress dashboard', 'Lifetime access — pay once, keep it forever'],
+    features: ['7-Day Guided Discipline Journey', '30-Day Identity Planner', 'Daily identity prompts', 'Executive Manual', 'Identity Baseline Worksheet', 'Identity Reset Checklist — weekly cycle tool with Failure Recovery Protocol (printable, reuse indefinitely)', 'All core interactive apps', 'Digital + Print PDFs', 'Decision Pattern Analysis', 'Evidence tracking', 'Progress dashboard', 'Lifetime access — pay once, keep it forever'],
     isActive: true,
     isFeatured: true,
     billingPeriod: 'one-time',

@@ -17,13 +17,14 @@ const productKeys = [
   { key: "decisionPattern", bilingualKey: "DECISION-PATTERN", pages: 7, size: "58 KB" },
   { key: "evidenceTracking", bilingualKey: "EVIDENCE-TRACKING", pages: 8, size: "60 KB" },
   { key: "progressDashboard", bilingualKey: "PROGRESS-DASHBOARD", pages: 7, size: "58 KB" },
+  { key: "identityResetChecklist", bilingualKey: "IDENTITY-RESET-CHECKLIST", pages: 3, size: "1.7 MB" },
 ];
 
 export default function DownloadsPage() {
   const t = useTranslations('downloadsPage');
   const { locale } = useLocale();
-  const totalSize = "5.0 MB";
-  const totalPages = 66;
+  const totalSize = "6.9 MB";
+  const totalPages = 81;
   const isAr = locale === 'ar';
 
   return (

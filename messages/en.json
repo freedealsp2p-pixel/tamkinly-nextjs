@@ -2602,6 +2602,10 @@
       "sevenDaysSystem": {
         "name": "7-Day System",
         "description": "Complete 7-day identity transformation system with daily prompts and tracking."
+      },
+      "identityResetChecklist": {
+        "name": "Identity Reset Checklist",
+        "description": "Weekly-cycle tool: define one specific identity, grow into it for a focused week, and analyze any setback with the Failure Recovery Protocol. Print it and rerun the cycle as many times as you want."
       }
     },
     "pagesLabel": "pages"

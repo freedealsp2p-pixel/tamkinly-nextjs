@@ -155,6 +155,18 @@ export const BILINGUAL_FILES: Record<string, BilingualFile> = {
     en: { href: '/Progress-Dashboard-Guide.pdf', available: true, size: '58 KB' },
     category: 'PREMIUM Product',
   },
+  // Identity Reset Checklist — founder directive 2026-10-22: part of the Planner
+  // package ($9.99 one-time, PREMIUM tier). Weekly-cycle tool: define one specific
+  // identity, grow into it for a focused week, Failure Recovery Protocol page for
+  // setbacks; printable file the owner can reprint and rerun indefinitely.
+  // English-only file (source: brand Drive asset, verified 3 pages).
+  'IDENTITY-RESET-CHECKLIST': {
+    resourceId: 'IDENTITY-RESET-CHECKLIST',
+    titleFallback: { ar: 'قائمة إعادة ضبط الهوية', en: 'Identity Reset Checklist' },
+    ar: { href: '/Identity-Reset-Checklist.pdf', available: false },
+    en: { href: '/Identity-Reset-Checklist.pdf', available: true, size: '1.7 MB' },
+    category: 'PREMIUM Product',
+  },
 };
 
 /**
