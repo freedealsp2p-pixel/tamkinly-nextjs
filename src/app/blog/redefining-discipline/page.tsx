@@ -44,7 +44,7 @@ export default function RedefiningDisciplineArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />

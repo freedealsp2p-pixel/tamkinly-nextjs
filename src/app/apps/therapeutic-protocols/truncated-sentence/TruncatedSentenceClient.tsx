@@ -982,7 +982,7 @@ export default function TruncatedSentenceClient() {
                                   : 'bg-[#0F1C2E]/[0.04] text-[#0F1C2E]/30'
                             } ${isActive ? 'ring-2 ring-[#3DD4B0] ring-offset-2' : ''}`}
                           >
-                            {isAr ? ['١','٢','٣','٤','٥','٦','٧','٨','٩'][d - 1] : d}
+                            {isAr ? ['1','2','3','4','5','6','7','8','9'][d - 1] : d}
                           </button>
                         );
                       })}
@@ -1001,7 +1001,7 @@ export default function TruncatedSentenceClient() {
                         return (
                           <div className="rounded-xl bg-[#0F1C2E]/[0.03] px-4 py-5 text-center">
                             <p className="text-sm text-[#0F1C2E]/55">
-                              {pick(JOURNAL_COPY.dayLabel, isAr)} {isAr ? ['١','٢','٣','٤','٥','٦','٧','٨','٩'][d-1] : d} — {pick(JOURNAL_COPY.opensIn, isAr)} {formatMsShort(opensAt - now, isAr)}
+                              {pick(JOURNAL_COPY.dayLabel, isAr)} {isAr ? ['1','2','3','4','5','6','7','8','9'][d-1] : d} — {pick(JOURNAL_COPY.opensIn, isAr)} {formatMsShort(opensAt - now, isAr)}
                             </p>
                           </div>
                         );
@@ -1013,7 +1013,7 @@ export default function TruncatedSentenceClient() {
                               {pick(JOURNAL_COPY.phaseLabel, isAr)} {activePhase.id}: {pick(activePhase.name, isAr)}
                             </span>
                             <span className="text-xs px-2.5 py-1 rounded-full bg-[#0F1C2E]/5 text-[#0F1C2E]/50 font-medium">
-                              {pick(JOURNAL_COPY.dayLabel, isAr)} {isAr ? ['١','٢','٣','٤','٥','٦','٧','٨','٩'][d-1] : d}
+                              {pick(JOURNAL_COPY.dayLabel, isAr)} {isAr ? ['1','2','3','4','5','6','7','8','9'][d-1] : d}
                             </span>
                           </div>
 

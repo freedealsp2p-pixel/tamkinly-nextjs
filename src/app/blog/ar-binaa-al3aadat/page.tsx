@@ -46,7 +46,7 @@ function BinaaAl3aadatArticleAR() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                ١٣ دقيقة قراءة
+                13 دقيقة قراءة
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -85,7 +85,7 @@ function BinaaAl3aadatArticleAR() {
 
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              الأبحاث تُظهر أن ٩٢٪ من الناس يفشلون في الحفاظ على أهدافهم وعاداتهم الجديدة. لكن هذا لا يعني أن بناء العادات مستحيل — بل يعني أن معظم الناس يستخدمون الطريقة الخاطئة. يحاولون إضافة عادات جديدة إلى هوية قديمة، مثل أن تحاول تشغيل تطبيق حديث على هاتف قديم — النظام لا يتوافق. الحل ليس إضافة تطبيقات أكثر، بل تحديث النظام نفسه.
+              الأبحاث تُظهر أن 92٪ من الناس يفشلون في الحفاظ على أهدافهم وعاداتهم الجديدة. لكن هذا لا يعني أن بناء العادات مستحيل — بل يعني أن معظم الناس يستخدمون الطريقة الخاطئة. يحاولون إضافة عادات جديدة إلى هوية قديمة، مثل أن تحاول تشغيل تطبيق حديث على هاتف قديم — النظام لا يتوافق. الحل ليس إضافة تطبيقات أكثر، بل تحديث النظام نفسه.
             </p>
 
             <div className="bg-accent/5 border-r-4 border-accent p-6 my-8 rounded-l-lg">
@@ -119,7 +119,7 @@ function BinaaAl3aadatArticleAR() {
                     <li>• يعتمد على الإرادة والحماس</li>
                     <li>• العادة غريبة عن الهوية</li>
                     <li>• المقاومة تزداد مع الوقت</li>
-                    <li>• نسبة النجاح: أقل من ٨٪</li>
+                    <li>• نسبة النجاح: أقل من 8٪</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -131,7 +131,7 @@ function BinaaAl3aadatArticleAR() {
                     <li>• يعتمد على إعادة برمجة الدماغ</li>
                     <li>• العادة تعبير طبيعي عن الهوية</li>
                     <li>• المقاومة تقل مع الوقت</li>
-                    <li>• نسبة النجاح: فوق ٦٠٪</li>
+                    <li>• نسبة النجاح: فوق 60٪</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -151,7 +151,7 @@ function BinaaAl3aadatArticleAR() {
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <Brain className="h-5 w-5 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2 text-sm">١. سؤال الهوية</h3>
+                  <h3 className="font-semibold text-primary mb-2 text-sm">1. سؤال الهوية</h3>
                   <p className="text-xs text-slate-600">ماذا يفعل الشخص الذي أريد أن أصبحه؟</p>
                 </CardContent>
               </Card>
@@ -160,7 +160,7 @@ function BinaaAl3aadatArticleAR() {
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <Zap className="h-5 w-5 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2 text-sm">٢. الفعل المصغّر</h3>
+                  <h3 className="font-semibold text-primary mb-2 text-sm">2. الفعل المصغّر</h3>
                   <p className="text-xs text-slate-600">أصغر نسخة من الفعل تتناسب مع هويتي الجديدة</p>
                 </CardContent>
               </Card>
@@ -169,7 +169,7 @@ function BinaaAl3aadatArticleAR() {
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <RefreshCw className="h-5 w-5 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2 text-sm">٣. التصويت والتكرار</h3>
+                  <h3 className="font-semibold text-primary mb-2 text-sm">3. التصويت والتكرار</h3>
                   <p className="text-xs text-slate-600">كل مرة أفعلها أصوّت لهويتي الجديدة</p>
                 </CardContent>
               </Card>
@@ -178,14 +178,14 @@ function BinaaAl3aadatArticleAR() {
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <Sparkles className="h-5 w-5 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2 text-sm">٤. التلقائية</h3>
+                  <h3 className="font-semibold text-primary mb-2 text-sm">4. التلقائية</h3>
                   <p className="text-xs text-slate-600">الفعل يصبح تعبيراً طبيعياً عن هويتي</p>
                 </CardContent>
               </Card>
             </div>
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
-              بروتوكول بناء العادات: ٣٠ يوماً من الهوية إلى التلقائية
+              بروتوكول بناء العادات: 30 يوماً من الهوية إلى التلقائية
             </h2>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
@@ -197,15 +197,15 @@ function BinaaAl3aadatArticleAR() {
                   <h4 className="font-semibold text-accent mb-2">الأسبوع الأول: تحديد الهوية</h4>
                   <ol className="space-y-2 text-slate-600">
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">١</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
                       <span>اكتب: "أنا شخص [يصف نفسه بالعادة التي تريدها]" — مثلاً: "أنا شخص رياضي" أو "أنا شخص يقرأ"</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٢</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
                       <span>حدد أصغر فعل يُثبت هذه الهوية — لا تبحث عن الفعل المثالي، بل عن الأصغر الذي يمكنك فعله اليوم</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٣</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
                       <span>ابدأ اليوم — ليست هناك حاجة لانتظار "الوقت المناسب"</span>
                     </li>
                   </ol>
@@ -214,15 +214,15 @@ function BinaaAl3aadatArticleAR() {
                   <h4 className="font-semibold text-accent mb-2">الأسبوعان الثاني والثالث: بناء المسار العصبي</h4>
                   <ol className="space-y-2 text-slate-600">
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٤</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
                       <span>اربط العادة بحدث موجود بالفعل (مثلاً: بعد صلاة الفجر مباشرة أقرأ صفحة واحدة)</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٥</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">5</span>
                       <span>سجّل كل إنجاز — استخدم <Link href="/apps/habit-tracker" className="text-accent hover:underline">متتبع العادات</Link> لتوثيق التصويتات لهويتك الجديدة</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٦</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">6</span>
                       <span>لا تزد حجم الفعل — الثبات أهم من الكثافة</span>
                     </li>
                   </ol>
@@ -231,15 +231,15 @@ function BinaaAl3aadatArticleAR() {
                   <h4 className="font-semibold text-accent mb-2">الأسبوع الرابع: الانتقال إلى التلقائية</h4>
                   <ol className="space-y-2 text-slate-600">
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٧</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">7</span>
                       <span>ابدأ بزيادة تدريجية — فقط إذا شعرت أن الفعل المصغّر أصبح سهلاً</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٨</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">8</span>
                       <span>لاحظ متى يبدأ الانزعاج عند عدم القيام بالعادة — هذا دليل على أن الهوية تتغير</span>
                     </li>
                     <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٩</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">9</span>
                       <span>احتفل بالتحول — أنت لم تعد تحاول، أنت أصبحت</span>
                     </li>
                   </ol>

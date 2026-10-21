@@ -20,9 +20,9 @@ export default function PornRecoveryRoadmapArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "dopamine-reset", title: getText("Dopamine Reset: Reclaiming Your Attention in a Hyperstimulating World", "إعادة ضبط الدوبامين: استعد انتباهك في عالم مفرط التحفيز"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "physics-of-momentum", title: getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغيّر ١٨ دقيقة كل شيء"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "how-to-build-habits-that-stick", title: getText("How to Build Habits That Stick: The Science of Lasting Change", "كيف تبني عادات تدوم: علم التغيير المستدام"), readTime: getText("10 min read", "١٠ دقائق قراءة") }
+    { slug: "dopamine-reset", title: getText("Dopamine Reset: Reclaiming Your Attention in a Hyperstimulating World", "إعادة ضبط الدوبامين: استعد انتباهك في عالم مفرط التحفيز"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغيّر 18 دقيقة كل شيء"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "how-to-build-habits-that-stick", title: getText("How to Build Habits That Stick: The Science of Lasting Change", "كيف تبني عادات تدوم: علم التغيير المستدام"), readTime: getText("10 min read", "10 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function PornRecoveryRoadmapArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("12 min read", "١٢ دقيقة قراءة")}
+                {getText("12 min read", "12 دقيقة قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -208,7 +208,7 @@ export default function PornRecoveryRoadmapArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The honest answer: longer than two weeks and shorter than despair. Habit research by Phillippa Lally and colleagues found new habits take anywhere from 18 to 254 days to become automatic, averaging around 66 — and rewiring a behavior that served emotional regulation takes patience with that variance. Expect a curve, not a line: early weeks feel raw, momentum builds quietly, slips cluster around stress, and the gaps between them stretch until the old behavior feels foreign rather than magnetic. The roadmap above is designed for that curve — each stage you complete makes the next one easier, and no single bad day reverses the stages you have already earned.",
-                "الجواب الصادق: أطول من أسبوعين وأقصر من اليأس. وجدت أبحاث العادات لبفيليبا لالي وزملائها أن العادات الجديدة تحتاج من ١٨ إلى ٢٥٤ يوماً لتصبح تلقائية، بمتوسط ٦٦ يوماً تقريباً — وإعادة توصيف سلوك كان يخدم تنظيم المشاعر تحتاج صبراً على هذا التباين. توقَّع منحنى لا خطاً مستقيماً: الأسابيع الأولى خام، والزخم يتكوّن بهدوء، والزلات تتجمع حول الضغوط، وتتوارت الفواصل بينها حتى يصبح السلوك القديم غريباً بدل أن يكون مغناطيسياً. خارطة الطريق أعلاه مصمّمة لهذا المنحنى — كل مرحلة تُتمّها تجعل التي بعدها أسهل، ولا يوم سيئ واحد يُلغي المراحل التي اكتسبتها بالفعل."
+                "الجواب الصادق: أطول من أسبوعين وأقصر من اليأس. وجدت أبحاث العادات لبفيليبا لالي وزملائها أن العادات الجديدة تحتاج من 18 إلى 254 يوماً لتصبح تلقائية، بمتوسط 66 يوماً تقريباً — وإعادة توصيف سلوك كان يخدم تنظيم المشاعر تحتاج صبراً على هذا التباين. توقَّع منحنى لا خطاً مستقيماً: الأسابيع الأولى خام، والزخم يتكوّن بهدوء، والزلات تتجمع حول الضغوط، وتتوارت الفواصل بينها حتى يصبح السلوك القديم غريباً بدل أن يكون مغناطيسياً. خارطة الطريق أعلاه مصمّمة لهذا المنحنى — كل مرحلة تُتمّها تجعل التي بعدها أسهل، ولا يوم سيئ واحد يُلغي المراحل التي اكتسبتها بالفعل."
               )}
             </p>
 
@@ -228,7 +228,7 @@ export default function PornRecoveryRoadmapArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Do not start with a perfect life; start with one honest week. Day 1: observe and log — no promises to be perfect, just data. Day 2: install device boundaries and move the phone out of the bedroom. Day 3: map your cycle — the trigger, the ritual, the moment of choice. Day 4: rehearse urge surfing once, deliberately, even with a mild urge. Day 5: fix the energy layer — a real bedtime and one walk. Day 6: tell one trusted human about the plan. Day 7: write the future-self letter and read it. Seven small votes. By the end of the week you will not be a finished person — you will be someone with a system, which is exactly what this roadmap promises.",
-                "لا تبدأ بحياة مثالية؛ ابدأ بأسبوع صادق واحد. اليوم ١: ملاحظة وتدوين — لا وعود بالكمال، بيانات فقط. اليوم ٢: ثبّت حدود الأجهزة وانقل الهاتف خارج غرفة النوم. اليوم ٣: ارسم حلقتك — المحفّز، الطقس، لحظة الاختيار. اليوم ٤: تدرّب على ركوب الموجة مرة واحدة، عمداً، حتى برغبة خفيفة. اليوم ٥: أصلح طبقة الطاقة — موعد نوم حقيقي ومشية واحدة. اليوم ٦: أخبر إنساناً واحداً تثق به بالخطة. اليوم ٧: اكتب رسالة نفسك المستقبلية واقرأها. سبعة أصوات صغيرة. بنهاية الأسبوع لن تكون إنساناً مكتمل النجاة — لكنك ستكون إنساناً يملك نظاماً، وهذا بالضبط ما تعده به هذه الخارطة."
+                "لا تبدأ بحياة مثالية؛ ابدأ بأسبوع صادق واحد. اليوم 1: ملاحظة وتدوين — لا وعود بالكمال، بيانات فقط. اليوم 2: ثبّت حدود الأجهزة وانقل الهاتف خارج غرفة النوم. اليوم 3: ارسم حلقتك — المحفّز، الطقس، لحظة الاختيار. اليوم 4: تدرّب على ركوب الموجة مرة واحدة، عمداً، حتى برغبة خفيفة. اليوم 5: أصلح طبقة الطاقة — موعد نوم حقيقي ومشية واحدة. اليوم 6: أخبر إنساناً واحداً تثق به بالخطة. اليوم 7: اكتب رسالة نفسك المستقبلية واقرأها. سبعة أصوات صغيرة. بنهاية الأسبوع لن تكون إنساناً مكتمل النجاة — لكنك ستكون إنساناً يملك نظاماً، وهذا بالضبط ما تعده به هذه الخارطة."
               )}
             </p>
 
@@ -240,7 +240,7 @@ export default function PornRecoveryRoadmapArticle() {
               <p className="text-slate-600 mb-4">
                 {getText(
                   "Tamkinly's Porn Recovery journey walks you through all five stages with interactive tools: the cycle mapper, urge surfing, the relapse reader, and the identity rebuild. 100% free, no account needed, progress stays private on your device.",
-                  "رحلة التعافي من الإباحية في تمكينلي تمشي معك المراحل الخمس بأدوات تفاعلية: محدد الحلقة، ركوب الموجة، قارئ الانتكاس، وإعادة بناء الهوية. مجانية ١٠٠٪، بلا حساب، وتقدّمك يبقى خاصاً على جهازك."
+                  "رحلة التعافي من الإباحية في تمكينلي تمشي معك المراحل الخمس بأدوات تفاعلية: محدد الحلقة، ركوب الموجة، قارئ الانتكاس، وإعادة بناء الهوية. مجانية 100٪، بلا حساب، وتقدّمك يبقى خاصاً على جهازك."
                 )}
               </p>
               <Link href="/recovery/porn-recovery">

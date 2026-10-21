@@ -43,7 +43,7 @@ export default function MorningRoutineIdentityArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -141,7 +141,7 @@ export default function MorningRoutineIdentityArticle() {
                     <li>{getText("Requires willpower every morning", "يتطلب إرادة كل صباح")}</li>
                     <li>{getText("Collapses under stress or disruption", "ينهار تحت الضغط أو الاضطراب")}</li>
                     <li>{getText("Feels like an obligation", "يشعر كالتزام")}</li>
-                    <li>{getText("Success rate: ~8%", "معدل النجاح: ~٨٪")}</li>
+                    <li>{getText("Success rate: ~8%", "معدل النجاح: ~8٪")}</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -175,7 +175,7 @@ export default function MorningRoutineIdentityArticle() {
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <h3 className="font-semibold text-primary mb-4">
-                {getText("Phase 1: The Identity Anchor", "المرحلة ١: مرساة الهوية")}
+                {getText("Phase 1: The Identity Anchor", "المرحلة 1: مرساة الهوية")}
               </h3>
               <p className="text-slate-600 mb-4">
                 {getText(
@@ -187,7 +187,7 @@ export default function MorningRoutineIdentityArticle() {
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <h3 className="font-semibold text-primary mb-4">
-                {getText("Phase 2: The Minimum Viable Morning", "المرحلة ٢: الصباح الأدنى الممكن")}
+                {getText("Phase 2: The Minimum Viable Morning", "المرحلة 2: الصباح الأدنى الممكن")}
               </h3>
               <p className="text-slate-600 mb-4">
                 {getText(
@@ -199,7 +199,7 @@ export default function MorningRoutineIdentityArticle() {
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <h3 className="font-semibold text-primary mb-4">
-                {getText("Phase 3: Organic Expansion", "المرحلة ٣: التوسع العضوي")}
+                {getText("Phase 3: Organic Expansion", "المرحلة 3: التوسع العضوي")}
               </h3>
               <p className="text-slate-600 mb-4">
                 {getText(

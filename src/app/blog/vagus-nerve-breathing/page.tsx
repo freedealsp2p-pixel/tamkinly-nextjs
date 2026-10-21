@@ -44,7 +44,7 @@ export default function VagusNerveBreathingArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -114,7 +114,7 @@ export default function VagusNerveBreathingArticle() {
                   <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mx-auto mb-3">
                     <Wind className="h-6 w-6 text-blue-500" />
                   </div>
-                  <h3 className="font-semibold text-blue-600 mb-1">{getText("4 sec", "٤ ثوانٍ")}</h3>
+                  <h3 className="font-semibold text-blue-600 mb-1">{getText("4 sec", "4 ثوانٍ")}</h3>
                   <p className="text-sm text-slate-500">{getText("Inhale deeply through the nose. Fill the lungs completely.", "شهيق عميق من الأنف. املأ الرئتين بالكامل.")}</p>
                 </CardContent>
               </Card>
@@ -123,7 +123,7 @@ export default function VagusNerveBreathingArticle() {
                   <div className="w-12 h-12 rounded-full bg-[#e6f3f4] flex items-center justify-center mx-auto mb-3">
                     <Activity className="h-6 w-6 text-[#2A8A94]" />
                   </div>
-                  <h3 className="font-semibold text-[#2A8A94] mb-1">{getText("2 sec", "٢ ثانية")}</h3>
+                  <h3 className="font-semibold text-[#2A8A94] mb-1">{getText("2 sec", "2 ثانية")}</h3>
                   <p className="text-sm text-slate-500">{getText("Hold. Let oxygen saturate the bloodstream.", "احبس. دع الأكسجين يتشبع في الدم.")}</p>
                 </CardContent>
               </Card>
@@ -132,7 +132,7 @@ export default function VagusNerveBreathingArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <Heart className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-accent mb-1">{getText("8 sec", "٨ ثوانٍ")}</h3>
+                  <h3 className="font-semibold text-accent mb-1">{getText("8 sec", "8 ثوانٍ")}</h3>
                   <p className="text-sm text-slate-500">{getText("Exhale slowly through the mouth. This activates the Vagus Nerve.", "زفير بطيء من الفم. هذا ينشط العصب المبهم (Vagus nerve).")}</p>
                 </CardContent>
               </Card>
@@ -141,7 +141,7 @@ export default function VagusNerveBreathingArticle() {
                   <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mx-auto mb-3">
                     <Brain className="h-6 w-6 text-slate-400" />
                   </div>
-                  <h3 className="font-semibold text-slate-500 mb-1">{getText("2 sec", "٢ ثانية")}</h3>
+                  <h3 className="font-semibold text-slate-500 mb-1">{getText("2 sec", "2 ثانية")}</h3>
                   <p className="text-sm text-slate-500">{getText("Pause. Let the system reset before the next cycle.", "توقف. دع النظام يعيد التعيين قبل الدورة التالية.")}</p>
                 </CardContent>
               </Card>
@@ -175,15 +175,15 @@ export default function VagusNerveBreathingArticle() {
               <ol className="space-y-3 text-slate-600">
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
-                  <span>{getText("Morning: 5 cycles before getting out of bed to set the parasympathetic baseline for the day.", "صباحاً: ٥ دورات قبل النهوض من السرير لضبط خط الأساس اللاودي لليوم.")}</span>
+                  <span>{getText("Morning: 5 cycles before getting out of bed to set the parasympathetic baseline for the day.", "صباحاً: 5 دورات قبل النهوض من السرير لضبط خط الأساس اللاودي لليوم.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
-                  <span>{getText("Acute stress: 3 cycles the moment you feel the tension rising. Do not wait for it to peak.", "توتر حاد: ٣ دورات في اللحظة التي تشعر فيها بالتوتر يتصاعد. لا تنتظر حتى يبلغ ذروته.")}</span>
+                  <span>{getText("Acute stress: 3 cycles the moment you feel the tension rising. Do not wait for it to peak.", "توتر حاد: 3 دورات في اللحظة التي تشعر فيها بالتوتر يتصاعد. لا تنتظر حتى يبلغ ذروته.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
-                  <span>{getText("Night: 8 cycles in bed to deactivate the stress response and prime the body for deep sleep.", "ليلاً: ٨ دورات في السرير لإلغاء تنشيط استجابة التوتر وتهيئة الجسم لنوم عميق.")}</span>
+                  <span>{getText("Night: 8 cycles in bed to deactivate the stress response and prime the body for deep sleep.", "ليلاً: 8 دورات في السرير لإلغاء تنشيط استجابة التوتر وتهيئة الجسم لنوم عميق.")}</span>
                 </li>
               </ol>
             </div>

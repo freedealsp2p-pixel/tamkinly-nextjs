@@ -19,9 +19,9 @@ export default function RebuildIdentityArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "relapse-is-data", title: getText("Relapse Is Data: What the Slip Was Trying to Tell You", "الانتكاس معلومات: ماذا أرادت الزلة أن تقول لك"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "separating-self-from-shame", title: getText("Separating Yourself from Shame: You Are Not Your Shadow", "فصل الذات عن الخجل: أنت لست ظلّك"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "the-memory-illusion", title: getText("The Memory Illusion: Why You Are Not Who You Remember Being", "وهم الذاكرة: لست من تتذكّر أنك"), readTime: getText("9 min read", "٩ دقائق قراءة") }
+    { slug: "relapse-is-data", title: getText("Relapse Is Data: What the Slip Was Trying to Tell You", "الانتكاس معلومات: ماذا أرادت الزلة أن تقول لك"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "separating-self-from-shame", title: getText("Separating Yourself from Shame: You Are Not Your Shadow", "فصل الذات عن الخجل: أنت لست ظلّك"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "the-memory-illusion", title: getText("The Memory Illusion: Why You Are Not Who You Remember Being", "وهم الذاكرة: لست من تتذكّر أنك"), readTime: getText("9 min read", "9 دقائق قراءة") }
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function RebuildIdentityArticle() {
               <div className="flex items-center gap-6 text-slate-400 text-sm">
                 <span className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  {getText("9 min read", "٩ دقائق قراءة")}
+                  {getText("9 min read", "9 دقائق قراءة")}
                 </span>
                 <span className="flex items-center gap-2">
                   <User className="h-4 w-4" />

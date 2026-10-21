@@ -20,9 +20,9 @@ export default function IdentityBaseline8DWorksheetArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات القائمة على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "environmental-audit-worksheet", title: getText("Environmental Audit: Designing Your Surroundings for Change", "التدقيق البيئي: تصميم محيطك للتغيير"), readTime: getText("9 min read", "٩ دقائق قراءة") }
+    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات القائمة على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "environmental-audit-worksheet", title: getText("Environmental Audit: Designing Your Surroundings for Change", "التدقيق البيئي: تصميم محيطك للتغيير"), readTime: getText("9 min read", "9 دقائق قراءة") }
   ];
 
   const eightDimensions = [
@@ -63,7 +63,7 @@ export default function IdentityBaseline8DWorksheetArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("8 min read", "٨ دقائق قراءة")}
+                {getText("8 min read", "8 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -230,7 +230,7 @@ export default function IdentityBaseline8DWorksheetArticle() {
               <ol className="space-y-3 text-slate-600">
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
-                  <span>{getText("<strong>Rate current satisfaction</strong> on a 1-10 scale for each dimension", "<strong>قيّم رضاك الحالي</strong> على مقياس ١-١٠ لكل بُعد")}</span>
+                  <span>{getText("<strong>Rate current satisfaction</strong> on a 1-10 scale for each dimension", "<strong>قيّم رضاك الحالي</strong> على مقياس 1-10 لكل بُعد")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>

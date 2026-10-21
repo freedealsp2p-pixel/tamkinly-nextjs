@@ -46,7 +46,7 @@ function TatweerAlthatArticleAR() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                ١٢ دقيقة قراءة
+                12 دقيقة قراءة
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -158,23 +158,23 @@ function TatweerAlthatArticleAR() {
               </h3>
               <ol className="space-y-3 text-slate-600">
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">١</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
                   <span><strong>اكتشف هويتك الحالية:</strong> اكتب خمس جمل تبدأ بـ "أنا شخص..." — هذا يكشف البرنامج الذي يشغّل حياتك الآن.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٢</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
                   <span><strong>حدد هويتك المستهدفة:</strong> اكتب خمس جمل تصف الشخص الذي تريد أن تصبحه — ليس ما تريد أن تفعله، بل من تريد أن تكون.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٣</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
                   <span><strong>قِس الفجوة:</strong> استخدم <Link href="/apps/identity-baseline" className="text-accent hover:underline">أداة خط الأساس</Link> لقياس المسافة بين الهويتين بدقة.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٤</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
                   <span><strong>ابدأ بأفعال مصغّرة:</strong> اختر أصغر فعل يمكن أن يقوّي هويتك الجديدة وابدأ اليوم — ليس غداً.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٥</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">5</span>
                   <span><strong>سجّل وكرّر:</strong> كل فعل صغير هو تصويت لهويتك الجديدة. سجّله وكرّره حتى يتبنّاه الدماغ كوضع الأمان الجديد.</span>
                 </li>
               </ol>
@@ -213,7 +213,7 @@ function TatweerAlthatArticleAR() {
             <div className="bg-red-50 border-r-4 border-red-400 p-6 my-8 rounded-l-lg">
               <h3 className="font-semibold text-red-800 mb-3">❌ الخطأ الثاني: تغيير كل شيء مرة واحدة</h3>
               <p className="text-slate-700 mb-3">
-                "من غد سأستيقظ السادسة وأتمرن وأقرأ وأتناول طعاماً صحياً وأتوقف عن التصفح" — هذه ثورة على دماغك، وهو سيثور عليك بالمقابل. الدراسات تُظهر أن محاولة تغيير أكثر من عادة واحدة في كل مرة تنخفض نسبة نجاحها إلى أقل من ١٠٪.
+                "من غد سأستيقظ السادسة وأتمرن وأقرأ وأتناول طعاماً صحياً وأتوقف عن التصفح" — هذه ثورة على دماغك، وهو سيثور عليك بالمقابل. الدراسات تُظهر أن محاولة تغيير أكثر من عادة واحدة في كل مرة تنخفض نسبة نجاحها إلى أقل من 10٪.
               </p>
               <p className="text-green-700 font-medium">
                 ✅ البديل: اختر عادة واحدة — أصغر عادة ممكنة — وركز عليها حتى تصبح جزءاً من هويتك. ثم انتقل للتالية. كما قال النبي ﷺ: "أحب الأعمال إلى الله أدومها وإن قلّ".

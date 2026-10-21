@@ -41,12 +41,12 @@ export default function PhysicsOfMomentumArticle() {
               {getText("Identity Shift", "تحول الهوية")}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              {getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغيّر ١٨ دقيقة كل شيء")}
+              {getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغيّر 18 دقيقة كل شيء")}
             </h1>
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("8 min read", "٨ دقائق قراءة")}
+                {getText("8 min read", "8 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -64,7 +64,7 @@ export default function PhysicsOfMomentumArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText(
                 "If you want to become an expert in anything, it takes three months of 18 minutes each day. If you want to become a master, it takes 18 minutes a day for a year.",
-                "إذا أردت أن تصبح خبيراً في أي شيء، يلزمك ثلاثة أشهر بمعدل ١٨ دقيقة يومياً. وإذا أردت أن تصبح ماهراً، يلزمك ١٨ دقيقة يومياً لمدة عام."
+                "إذا أردت أن تصبح خبيراً في أي شيء، يلزمك ثلاثة أشهر بمعدل 18 دقيقة يومياً. وإذا أردت أن تصبح ماهراً، يلزمك 18 دقيقة يومياً لمدة عام."
               )}
             </p>
 
@@ -108,7 +108,7 @@ export default function PhysicsOfMomentumArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Science tells us that habit formation takes approximately 21 days. After three weeks of consistent practice, your new behavior becomes \"carved in stone.\" It becomes something you simply do—without negotiation, without motivation, without the internal debate that kills most transformations before they begin.",
-                "العلم يخبرنا أن تكوين العادات يستغرق حوالي ٢١ يوماً. بعد ثلاثة أسابيع من الممارسة المتسقة، يصبح سلوكك الجديد \"محفوراً في الحجر\". يصبح شيئاً تفعله ببساطة — بدون تفاوض، بدون تحفيز، بدون الجدال الداخلي الذي يقتل معظم التحولات قبل أن تبدأ."
+                "العلم يخبرنا أن تكوين العادات يستغرق حوالي 21 يوماً. بعد ثلاثة أسابيع من الممارسة المتسقة، يصبح سلوكك الجديد \"محفوراً في الحجر\". يصبح شيئاً تفعله ببساطة — بدون تفاوض، بدون تحفيز، بدون الجدال الداخلي الذي يقتل معظم التحولات قبل أن تبدأ."
               )}
             </p>
 
@@ -116,26 +116,26 @@ export default function PhysicsOfMomentumArticle() {
               <p className="text-slate-700 italic">
                 {getText(
                   "\"After 21 days, you're already in motion. You won't stop unless something catastrophic happens—a tragedy or trauma that pulls you off course. After 21 days, you have so much momentum that motivation becomes irrelevant. You simply do it without a second thought.\"",
-                  "\"بعد ٢١ يوماً، أنت بالفعل في حركة. لن تتوقف ما لم يحدث شيء كارثي — مأساة أو صدمة تخرجك عن مسارك. بعد ٢١ يوماً، يكون لديك زخم كبير لدرجة أن التحفيز يصبح غير ذي صلة. أنت ببساطة تفعله دون تفكير.\""
+                  "\"بعد 21 يوماً، أنت بالفعل في حركة. لن تتوقف ما لم يحدث شيء كارثي — مأساة أو صدمة تخرجك عن مسارك. بعد 21 يوماً، يكون لديك زخم كبير لدرجة أن التحفيز يصبح غير ذي صلة. أنت ببساطة تفعله دون تفكير.\""
                 )}
               </p>
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Why 18 Minutes?", "لماذا ١٨ دقيقة؟")}
+              {getText("Why 18 Minutes?", "لماذا 18 دقيقة؟")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Eighteen minutes isn't arbitrary. It's long enough to create meaningful engagement with your new identity, yet short enough to eliminate excuses. Anyone can find 18 minutes. The busy executive, the overwhelmed parent, the skeptical beginner—everyone has 18 minutes.",
-                "ثماني عشرة دقيقة ليست عشوائية. إنها طويلة بما يكفي لخلق تفاعل حقيقي مع هويتك الجديدة، وقصيرة بما يكفي للقضاء على الأعذار. أي شخص يمكنه أن يجد ١٨ دقيقة. المدير المشغول، الوالد المنهك، المبتدئ المتشكك — الجميع لديه ١٨ دقيقة."
+                "ثماني عشرة دقيقة ليست عشوائية. إنها طويلة بما يكفي لخلق تفاعل حقيقي مع هويتك الجديدة، وقصيرة بما يكفي للقضاء على الأعذار. أي شخص يمكنه أن يجد 18 دقيقة. المدير المشغول، الوالد المنهك، المبتدئ المتشكك — الجميع لديه 18 دقيقة."
               )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "But here's what makes this timeframe powerful: it bypasses your brain's resistance system. Your mind can't mount a serious objection to 18 minutes. It can't generate the fear and overwhelm that stops most transformation efforts before they start.",
-                "لكن هذا ما يجعل هذا الإطار الزمني قوياً: إنه يتجاوز نظام المقاومة في دماغك. عقلك لا يستطيع أن يبدي اعتراضاً جاداً على ١٨ دقيقة. لا يمكنه توليد الخوف والإرهاق الذي يوقف معظم جهود التحول قبل أن تبدأ."
+                "لكن هذا ما يجعل هذا الإطار الزمني قوياً: إنه يتجاوز نظام المقاومة في دماغك. عقلك لا يستطيع أن يبدي اعتراضاً جاداً على 18 دقيقة. لا يمكنه توليد الخوف والإرهاق الذي يوقف معظم جهود التحول قبل أن تبدأ."
               )}
             </p>
 
@@ -145,7 +145,7 @@ export default function PhysicsOfMomentumArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Zap className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("21 Days", "٢١ يوماً")}</h3>
+                  <h3 className="font-semibold text-primary mb-2">{getText("21 Days", "21 يوماً")}</h3>
                   <p className="text-sm text-slate-600">{getText("Habit formation, momentum takes over", "تكوين العادات، الزخم يتولى الأمر")}</p>
                 </CardContent>
               </Card>
@@ -154,7 +154,7 @@ export default function PhysicsOfMomentumArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Sparkles className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("3 Months", "٣ أشهر")}</h3>
+                  <h3 className="font-semibold text-primary mb-2">{getText("3 Months", "3 أشهر")}</h3>
                   <p className="text-sm text-slate-600">{getText("Expert level proficiency in any skill", "مستوى الخبرة في أي مهارة")}</p>
                 </CardContent>
               </Card>
@@ -176,21 +176,21 @@ export default function PhysicsOfMomentumArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "This principle extends far beyond skill acquisition. It's the foundation of identity transformation. Every day you show up for those 18 minutes, you're not just practicing a skill—you're practicing a new version of yourself.",
-                "هذا المبدأ يمتد إلى أبعد من اكتساب المهارات. إنه أساس تحول الهوية. كل يوم تحضر فيه ل تلك الـ ١٨ دقيقة، لست تتدرب فقط على مهارة — بل تتدرب على نسخة جديدة من نفسك."
+                "هذا المبدأ يمتد إلى أبعد من اكتساب المهارات. إنه أساس تحول الهوية. كل يوم تحضر فيه ل تلك الـ 18 دقيقة، لست تتدرب فقط على مهارة — بل تتدرب على نسخة جديدة من نفسك."
               )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "When you write for 18 minutes, you're not \"trying to write.\" You're a writer. When you meditate for 18 minutes, you're not \"attempting meditation.\" You're a meditator. When you exercise for 18 minutes, you're not \"trying to get fit.\" You're an athlete.",
-                "عندما تكتب لمدة ١٨ دقيقة، لست \"تحاول الكتابة.\" أنت كاتب. عندما تتأمل لمدة ١٨ دقيقة، لست \"تحاول التأمل.\" أنت متأمل. عندما تمارس الرياضة لمدة ١٨ دقيقة، لست \"تحاول أن تصبح لائقاً.\" أنت رياضي."
+                "عندما تكتب لمدة 18 دقيقة، لست \"تحاول الكتابة.\" أنت كاتب. عندما تتأمل لمدة 18 دقيقة، لست \"تحاول التأمل.\" أنت متأمل. عندما تمارس الرياضة لمدة 18 دقيقة، لست \"تحاول أن تصبح لائقاً.\" أنت رياضي."
               )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The behavior comes first. The identity follows. And after 21 days, the behavior is automatic—meaning the identity becomes automatic too.",
-                "السلوك يأتي أولاً. الهوية تتبعه. وبعد ٢١ يوماً، يصبح السلوك تلقائياً — مما يعني أن الهوية تصبح تلقائية أيضاً."
+                "السلوك يأتي أولاً. الهوية تتبعه. وبعد 21 يوماً، يصبح السلوك تلقائياً — مما يعني أن الهوية تصبح تلقائية أيضاً."
               )}
             </p>
 
@@ -225,7 +225,7 @@ export default function PhysicsOfMomentumArticle() {
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
-                  <span>{getText("Commit to 18 minutes. No more, no less.", "التزم بـ ١٨ دقيقة. لا أكثر ولا أقل.")}</span>
+                  <span>{getText("Commit to 18 minutes. No more, no less.", "التزم بـ 18 دقيقة. لا أكثر ولا أقل.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
@@ -233,7 +233,7 @@ export default function PhysicsOfMomentumArticle() {
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">5</span>
-                  <span>{getText("After 21 days, notice that the resistance has disappeared.", "بعد ٢١ يوماً، لاحظ أن المقاومة قد اختفت.")}</span>
+                  <span>{getText("After 21 days, notice that the resistance has disappeared.", "بعد 21 يوماً، لاحظ أن المقاومة قد اختفت.")}</span>
                 </li>
               </ol>
             </div>
@@ -245,7 +245,7 @@ export default function PhysicsOfMomentumArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Three months of 18-minute days equals 27 hours of focused practice. That's enough to become an expert in almost anything. A year equals 109 hours—enough for mastery.",
-                "ثلاثة أشهر من أيام الـ ١٨ دقيقة تساوي ٢٧ ساعة من الممارسة المركزة. هذا يكفي لتصبح خبيراً في أي شيء تقريباً. سنة تساوي ١٠٩ ساعات — تكفي للإتقان."
+                "ثلاثة أشهر من أيام الـ 18 دقيقة تساوي 27 ساعة من الممارسة المركزة. هذا يكفي لتصبح خبيراً في أي شيء تقريباً. سنة تساوي 109 ساعات — تكفي للإتقان."
               )}
             </p>
 
@@ -271,7 +271,7 @@ export default function PhysicsOfMomentumArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The transformation you're seeking isn't hiding in a dramatic life overhaul. It's hiding in 18 minutes. The question isn't whether you have time. The question is whether you're willing to start small enough to actually start.",
-                "التحول الذي تبحث عنه ليس مخبأً في إصلاح جذري للحياة. إنه مخبأٌ في ١٨ دقيقة. السؤال ليس ما إذا كان لديك وقت. السؤال هو هل أنت مستعد أن تبدأ بصغر يكفي لتبدأ فعلاً."
+                "التحول الذي تبحث عنه ليس مخبأً في إصلاح جذري للحياة. إنه مخبأٌ في 18 دقيقة. السؤال ليس ما إذا كان لديك وقت. السؤال هو هل أنت مستعد أن تبدأ بصغر يكفي لتبدأ فعلاً."
               )}
             </p>
 

@@ -20,9 +20,9 @@ export default function MagicInWorkYouAvoidArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل العشر دقائق"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "all-in-or-nothing", title: getText("All In or Nothing", "كل شيء أو لا شيء"), readTime: getText("7 min read", "٧ دقائق قراءة") },
-    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "٨ دقائق قراءة") }
+    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل العشر دقائق"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "all-in-or-nothing", title: getText("All In or Nothing", "كل شيء أو لا شيء"), readTime: getText("7 min read", "7 دقائق قراءة") },
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "8 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function MagicInWorkYouAvoidArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("6 min read", "٦ دقائق قراءة")}
+                {getText("6 min read", "6 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />

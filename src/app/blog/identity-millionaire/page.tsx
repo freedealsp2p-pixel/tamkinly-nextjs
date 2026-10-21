@@ -20,9 +20,9 @@ export default function IdentityMillionaireArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "work-on-yourself", title: getText("Work on Yourself: Psycho-Cybernetics", "اعمل على نفسك: السيبرانية النفسية للهوية"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "becoming-exceptional", title: getText("Becoming Exceptional", "أن تصبح استثنائياً"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "inversion-thinking", title: getText("Inversion Thinking", "التفكير العكسي"), readTime: getText("8 min read", "٨ دقائق قراءة") }
+    { slug: "work-on-yourself", title: getText("Work on Yourself: Psycho-Cybernetics", "اعمل على نفسك: السيبرانية النفسية للهوية"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "becoming-exceptional", title: getText("Becoming Exceptional", "أن تصبح استثنائياً"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "inversion-thinking", title: getText("Inversion Thinking", "التفكير العكسي"), readTime: getText("8 min read", "8 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function IdentityMillionaireArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("9 min read", "٩ دقائق قراءة")}
+                {getText("9 min read", "9 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -113,7 +113,7 @@ export default function IdentityMillionaireArticle() {
                       <Badge variant="secondary" className="mb-2">{getText("Stage One", "المرحلة الأولى")}</Badge>
                       <h3 className="font-semibold text-primary text-lg mb-2">{getText("Cash Flow Millionaire", "مليونير التدفق النقدي")}</h3>
                       <p className="text-slate-600">
-                        {getText("This is the first threshold—generating consistent monthly income that exceeds your needs. For many, this begins at $5,000/month. The identity shift here is profound: you stop being someone who trades time for money and become someone who creates value that generates income.", "هذا هو الحد الأول — توليد دخل شهري ثابت يتجاوز احتياجاتك. بالنسبة للكثيرين، يبدأ هذا عند ٥,٠٠٠ دولار شهرياً. التحول في الهوية هنا عميق: تتوقف عن كونك شخصاً يبادل الوقت بالمال وتصبح شخصاً يخلق قيمة تولد الدخل.")}
+                        {getText("This is the first threshold—generating consistent monthly income that exceeds your needs. For many, this begins at $5,000/month. The identity shift here is profound: you stop being someone who trades time for money and become someone who creates value that generates income.", "هذا هو الحد الأول — توليد دخل شهري ثابت يتجاوز احتياجاتك. بالنسبة للكثيرين، يبدأ هذا عند 5,000 دولار شهرياً. التحول في الهوية هنا عميق: تتوقف عن كونك شخصاً يبادل الوقت بالمال وتصبح شخصاً يخلق قيمة تولد الدخل.")}
                       </p>
                       <p className="text-slate-600 mt-2">
                         <strong>{getText("Identity Question:", "سؤال الهوية:")}</strong> {getText("Do you see yourself as someone who can create independent income streams?", "هل ترى نفسك شخصاً قادراً على خلق مصادر دخل مستقلة؟")}
@@ -173,7 +173,7 @@ export default function IdentityMillionaireArticle() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("It's like trying to run a marathon without ever learning to walk. Each stage builds the identity muscles needed for the next. The person who can't generate $5,000/month independently isn't ready to manage millions—they haven't developed the identity to hold it.", "الأمر مثل محاولة ركض ماراثون دون تعلم المشي أبداً. كل مرحلة تبني عضلات الهوية المطلوبة للمرحلة التالية. الشخص الذي لا يستطيع توليد ٥,٠٠٠ دولار شهرياً بشكل مستقل ليس مستعداً لإدارة الملايين — لم يطور الهوية القادرة على الاحتفاظ بها.")}
+              {getText("It's like trying to run a marathon without ever learning to walk. Each stage builds the identity muscles needed for the next. The person who can't generate $5,000/month independently isn't ready to manage millions—they haven't developed the identity to hold it.", "الأمر مثل محاولة ركض ماراثون دون تعلم المشي أبداً. كل مرحلة تبني عضلات الهوية المطلوبة للمرحلة التالية. الشخص الذي لا يستطيع توليد 5,000 دولار شهرياً بشكل مستقل ليس مستعداً لإدارة الملايين — لم يطور الهوية القادرة على الاحتفاظ بها.")}
             </p>
 
             <div className="bg-accent/5 border-l-4 border-accent p-6 my-8 rounded-r-lg">
@@ -219,7 +219,7 @@ export default function IdentityMillionaireArticle() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("Can you create $500/month independently? That's the beginning. Each dollar generated outside of employment is evidence of a new identity. Each small success builds the neural pathways for larger ones.", "هل يمكنك خلق ٥٠٠ دولار شهرياً بشكل مستقل؟ هذا هو البداية. كل دولار يُولد خارج الوظيفة هو دليل على هوية جديدة. كل نجاح صغير يبني المسارات العصبية لنجاحات أكبر.")}
+              {getText("Can you create $500/month independently? That's the beginning. Each dollar generated outside of employment is evidence of a new identity. Each small success builds the neural pathways for larger ones.", "هل يمكنك خلق 500 دولار شهرياً بشكل مستقل؟ هذا هو البداية. كل دولار يُولد خارج الوظيفة هو دليل على هوية جديدة. كل نجاح صغير يبني المسارات العصبية لنجاحات أكبر.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">

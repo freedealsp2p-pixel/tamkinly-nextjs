@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     ? 'المرآة البيضاء | تمكينلي'
     : 'The White Mirror | Tamkinly';
   const description = isAr
-    ? 'أوقف عجلة الأفكار السلبية بقوة في لحظة الفراغ التام. بروتوكول كسر النمط الآمن — ٤ خطوات في ٩ دقائق.'
+    ? 'أوقف عجلة الأفكار السلبية بقوة في لحظة الفراغ التام. بروتوكول كسر النمط الآمن — 4 خطوات في 9 دقائق.'
     : 'Forcefully halt the cycle of negative thoughts in a moment of complete void. Safe pattern interrupt protocol — 4 steps in 9 minutes.';
 
   return {

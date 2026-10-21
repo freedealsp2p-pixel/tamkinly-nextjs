@@ -20,9 +20,9 @@ export default function SelfAuthorshipWorksheetArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات القائمة على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "erq-emotional-regulation-worksheet", title: getText("ERQ Emotional Regulation: Master Your Emotions", "تنظيم المشاعر ERQ: أتقن عواطفك"), readTime: getText("9 min read", "٩ دقائق قراءة") }
+    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات القائمة على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "erq-emotional-regulation-worksheet", title: getText("ERQ Emotional Regulation: Master Your Emotions", "تنظيم المشاعر ERQ: أتقن عواطفك"), readTime: getText("9 min read", "9 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function SelfAuthorshipWorksheetArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("9 min read", "٩ دقائق قراءة")}
+                {getText("9 min read", "9 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -200,14 +200,14 @@ export default function SelfAuthorshipWorksheetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Baxter Magolda's research followed participants from age 18 to 34, conducting annual interviews to track their development. Her findings challenged prevailing assumptions about adult development, revealing that chronological age doesn't automatically produce self-authorship.",
-                "أبحاث ماغولدا تابعت المشاركين من عمر ١٨ إلى ٣٤ عاماً، تجري مقابلات سنوية لتتبع تطورهم. تحدت نتائجها الافتراضات السائدة حول نمو البالغين، كاشفة أن العمر الزمني لا ينتج تلقائياً تأليف الذات."
+                "أبحاث ماغولدا تابعت المشاركين من عمر 18 إلى 34 عاماً، تجري مقابلات سنوية لتتبع تطورهم. تحدت نتائجها الافتراضات السائدة حول نمو البالغين، كاشفة أن العمر الزمني لا ينتج تلقائياً تأليف الذات."
               )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The study, published in her influential book \"Making Their Own Way\" (2001), demonstrated that most young adults remain in the formulaic phases throughout their college years. Self-authorship typically emerges in the late twenties or thirties—if it emerges at all.",
-                "أظهرت الدراسة، المنشورة في كتابها المؤثر \"صنع طريقهم الخاص\" (٢٠٠١)، أن معظم الشباب البالغين يبقون في المراحل الصيغية طوال سنوات دراستهم الجامعية. يظهر تأليف الذات عادةً في أواخر العشرينيات أو الثلاثينيات—إذا ظهر على الإطلاق."
+                "أظهرت الدراسة، المنشورة في كتابها المؤثر \"صنع طريقهم الخاص\" (2001)، أن معظم الشباب البالغين يبقون في المراحل الصيغية طوال سنوات دراستهم الجامعية. يظهر تأليف الذات عادةً في أواخر العشرينيات أو الثلاثينيات—إذا ظهر على الإطلاق."
               )}
             </p>
 

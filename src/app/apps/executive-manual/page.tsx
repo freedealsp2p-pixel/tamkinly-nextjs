@@ -32,26 +32,26 @@ export default function ExecutiveManualPage() {
 
   const phases = [
     {
-      name: getText('Phase 1: Observe', 'المرحلة ١: المراقبة'),
-      days: getText('Days 1-7', 'الأيام ١-٧'),
+      name: getText('Phase 1: Observe', 'المرحلة 1: المراقبة'),
+      days: getText('Days 1-7', 'الأيام 1-7'),
       description: getText('Capture baseline, values, habits, triggers, and environment.', 'تسجيل خط الأساس والقيم والعادات والمحفزات والبيئة.'),
       color: '#3DD4B0'
     },
     {
-      name: getText('Phase 2: Intervene', 'المرحلة ٢: التدخل'),
-      days: getText('Days 8-14', 'الأيام ٨-١٤'),
+      name: getText('Phase 2: Intervene', 'المرحلة 2: التدخل'),
+      days: getText('Days 8-14', 'الأيام 8-14'),
       description: getText('Adjust cues, reduce friction, and improve decision structure.', 'تعديل المحفزات وتقليل العوائق وتحسين بنية القرار.'),
       color: '#1F6F78'
     },
     {
-      name: getText('Phase 3: Evidence', 'المرحلة ٣: الأدلة'),
-      days: getText('Days 15-21', 'الأيام ١٥-٢١'),
+      name: getText('Phase 3: Evidence', 'المرحلة 3: الأدلة'),
+      days: getText('Days 15-21', 'الأيام 15-21'),
       description: getText('Track repeated actions and emerging identity proof.', 'تتبع الإجراءات المتكررة وأدلة الهوية الناشئة.'),
       color: '#2A8A94'
     },
     {
-      name: getText('Phase 4: Stabilize', 'المرحلة ٤: الاستقرار'),
-      days: getText('Days 22-30', 'الأيام ٢٢-٣٠'),
+      name: getText('Phase 4: Stabilize', 'المرحلة 4: الاستقرار'),
+      days: getText('Days 22-30', 'الأيام 22-30'),
       description: getText('Review results, reinforce wins, and refine the next cycle.', 'مراجعة النتائج وتعزيز الإنجازات وتحسين الدورة التالية.'),
       color: '#2A8A94'
     }
@@ -112,7 +112,7 @@ export default function ExecutiveManualPage() {
         getText('Audits the environment for support and friction.', 'يدقق البيئة بحثًا عن الدعم والعوائق.'),
         getText('Analyzes decision patterns.', 'يحلل أنماط القرار.'),
         getText('Tracks evidence of change daily.', 'يتتبع أدلة التغيير يوميًا.'),
-        getText('Measures progress over 30 days.', 'يقيس التقدم على مدار ٣٠ يومًا.')
+        getText('Measures progress over 30 days.', 'يقيس التقدم على مدار 30 يومًا.')
       ]
     },
     {
@@ -136,11 +136,11 @@ export default function ExecutiveManualPage() {
       id: 'rhythm',
       title: getText('Recommended Rhythm', 'الإيقاع الموصى به'),
       list: [
-        getText('Day 1: Complete baseline assessments.', 'اليوم ١: إكمال تقييمات خط الأساس.'),
-        getText('Days 2-7: Observe patterns and environment.', 'الأيام ٢-٧: مراقبة الأنماط والبيئة.'),
-        getText('Days 8-14: Modify cues, routines, and decisions.', 'الأيام ٨-١٤: تعديل المحفزات والروتين والقرارات.'),
-        getText('Days 15-21: Track evidence and consistency.', 'الأيام ١٥-٢١: تتبع الأدلة والاتساق.'),
-        getText('Days 22-30: Review progress, refine identity, and lock in maintenance.', 'الأيام ٢٢-٣٠: مراجعة التقدم وتحسين الهوية وتثبيت الصيانة.')
+        getText('Day 1: Complete baseline assessments.', 'اليوم 1: إكمال تقييمات خط الأساس.'),
+        getText('Days 2-7: Observe patterns and environment.', 'الأيام 2-7: مراقبة الأنماط والبيئة.'),
+        getText('Days 8-14: Modify cues, routines, and decisions.', 'الأيام 8-14: تعديل المحفزات والروتين والقرارات.'),
+        getText('Days 15-21: Track evidence and consistency.', 'الأيام 15-21: تتبع الأدلة والاتساق.'),
+        getText('Days 22-30: Review progress, refine identity, and lock in maintenance.', 'الأيام 22-30: مراجعة التقدم وتحسين الهوية وتثبيت الصيانة.')
       ]
     },
     {
@@ -257,7 +257,7 @@ export default function ExecutiveManualPage() {
             <div>
               <Badge className="bg-[#1F6F78]/20 text-[#1F6F78] border border-[#1F6F78]/50 mb-2">{getText('BASIC', 'أساسي')}</Badge>
               <h1 className="text-2xl font-bold">{getText('Executive Manual', 'الدليل التنفيذي')}</h1>
-              <p className="text-slate-400">{getText('Identity Recode Planner - 30-Day Guided Journey', 'مخطط إعادة برمجة الهوية - رحلة موجهة لمدة ٣٠ يومًا')}</p>
+              <p className="text-slate-400">{getText('Identity Recode Planner - 30-Day Guided Journey', 'مخطط إعادة برمجة الهوية - رحلة موجهة لمدة 30 يومًا')}</p>
             </div>
           </div>
         </div>
@@ -270,7 +270,7 @@ export default function ExecutiveManualPage() {
           <Card className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] border-0 mb-8">
             <CardContent className="p-8 text-center">
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                {getText('A 30-Day Guided Journey for Identity Alignment', 'رحلة موجهة لمدة ٣٠ يومًا لمحاذاة الهوية')}
+                {getText('A 30-Day Guided Journey for Identity Alignment', 'رحلة موجهة لمدة 30 يومًا لمحاذاة الهوية')}
               </h2>
               <p className="text-[#8A94A6] text-lg mb-6">
                 {getText('Behavioral Recalibration, and Self-Authored Change', 'إعادة المعايرة السلوكية والتغيير الذاتي')}
@@ -336,7 +336,7 @@ export default function ExecutiveManualPage() {
             <CardHeader>
               <CardTitle className="text-[#0F1C2E] flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-[#3DD4B0]" />
-                {getText('The 30-Day Path', 'مسار الـ ٣٠ يومًا')}
+                {getText('The 30-Day Path', 'مسار الـ 30 يومًا')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -441,7 +441,7 @@ export default function ExecutiveManualPage() {
           <div className="mt-8 text-center">
             <Link href="/apps/identity-recode-system">
               <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 py-6 text-lg font-semibold">
-                {getText('Start the 30-Day Journey', 'ابدأ رحلة الـ ٣٠ يومًا')}
+                {getText('Start the 30-Day Journey', 'ابدأ رحلة الـ 30 يومًا')}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>

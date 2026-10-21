@@ -19,9 +19,9 @@ export default function WindowOfToleranceArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "what-trauma-does-to-the-body", title: getText("What Trauma Does to the Body: Where the Past Lives in You", "ماذا تفعل الصدمة بالجسد: أين يسكن الماضي فيك"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "grounding-for-flashbacks", title: getText("Grounding for Flashbacks: Evidence That You Are Here Now", "التأريض للذكريات الومضية: دليل على أنك هنا الآن"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "paced-breathing-for-regulation", title: getText("Paced Breathing for Regulation: Inhale Four, Exhale Six", "التنفس المنظّم للتوازن العصبي: شهيق أربعة وزفير ستة"), readTime: getText("8 min read", "٨ دقائق قراءة") }
+    { slug: "what-trauma-does-to-the-body", title: getText("What Trauma Does to the Body: Where the Past Lives in You", "ماذا تفعل الصدمة بالجسد: أين يسكن الماضي فيك"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "grounding-for-flashbacks", title: getText("Grounding for Flashbacks: Evidence That You Are Here Now", "التأريض للذكريات الومضية: دليل على أنك هنا الآن"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "paced-breathing-for-regulation", title: getText("Paced Breathing for Regulation: Inhale Four, Exhale Six", "التنفس المنظّم للتوازن العصبي: شهيق أربعة وزفير ستة"), readTime: getText("8 min read", "8 دقائق قراءة") }
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function WindowOfToleranceArticle() {
               <div className="flex items-center gap-6 text-slate-400 text-sm">
                 <span className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  {getText("9 min read", "٩ دقائق قراءة")}
+                  {getText("9 min read", "9 دقائق قراءة")}
                 </span>
                 <span className="flex items-center gap-2">
                   <User className="h-4 w-4" />

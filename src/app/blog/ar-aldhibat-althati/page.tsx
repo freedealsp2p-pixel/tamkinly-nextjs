@@ -46,7 +46,7 @@ function AldhibatAlthatiArticleAR() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                ١٣ دقيقة قراءة
+                13 دقيقة قراءة
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -117,7 +117,7 @@ function AldhibatAlthatiArticleAR() {
                     <Shield className="h-6 w-6 text-red-500" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">المستوى الأول: الكفاح</h3>
-                  <p className="text-sm text-slate-600">تحارب نفسك يومياً. تحتاج إرادة لكل فعل. الإرهاق مستمر. نسبة النجاح: ٥٪</p>
+                  <p className="text-sm text-slate-600">تحارب نفسك يومياً. تحتاج إرادة لكل فعل. الإرهاق مستمر. نسبة النجاح: 5٪</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -126,7 +126,7 @@ function AldhibatAlthatiArticleAR() {
                     <Target className="h-6 w-6 text-yellow-600" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">المستوى الثاني: النظام</h3>
-                  <p className="text-sm text-slate-600">تبني روتيناً وعادات. تحتاج إرادة أقل لكن ما زلت تحتاج بعضاً منها. نسبة النجاح: ٣٠٪</p>
+                  <p className="text-sm text-slate-600">تبني روتيناً وعادات. تحتاج إرادة أقل لكن ما زلت تحتاج بعضاً منها. نسبة النجاح: 30٪</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -135,7 +135,7 @@ function AldhibatAlthatiArticleAR() {
                     <Heart className="h-6 w-6 text-accent" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">المستوى الثالث: الهوية</h3>
-                  <p className="text-sm text-slate-600">الأفعال المنضبطة تعبير طبيعي عنك. لا تحتاج إرادة على الإطلاق. نسبة النجاح: فوق ٨٠٪</p>
+                  <p className="text-sm text-slate-600">الأفعال المنضبطة تعبير طبيعي عنك. لا تحتاج إرادة على الإطلاق. نسبة النجاح: فوق 80٪</p>
                 </CardContent>
               </Card>
             </div>
@@ -163,27 +163,27 @@ function AldhibatAlthatiArticleAR() {
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <ol className="space-y-4 text-slate-600">
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">١</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
                   <span><strong>الوضوح الهويّاتي:</strong> اعرف من أنت ومن تريد أن تصبح. بدون وضوح، كل انضباط هو ضرب من العشوائية. استخدم <Link href="/apps/habit-tracker" className="text-accent hover:underline">متتبع العادات</Link> لقياس هذا الوضوح.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٢</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
                   <span><strong>المحاذاة:</strong> تأكد أن أفعالك تتوافق مع هويتك المستهدفة. كل فعل يتناقض مع هويتك يضعفها، وكل فعل يتوافق معها يقوّيها.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٣</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
                   <span><strong>الخطوات المصغّرة:</strong> لا تبدأ بأفعال كبيرة تتطلب إرادة. ابدأ بخطوات صغيرة جداً لا يقاومها الدماغ. كل خطوة تصويت للهوية الجديدة.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٤</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
                   <span><strong>التسجيل:</strong> سجّل كل إنجاز. التسجيل ليس تتبعاً فحسب — إنه إثبات لهويتك الناشئة. الأدلة تغير القناعات أسرع من الإرادة.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٥</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">5</span>
                   <span><strong>البيئة:</strong> صمم بيئتك لتدعم هويتك الجديدة. البيئة أقوى من الإرادة — لذلك يجب أن تعمل لصالحك لا ضدك.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٦</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">6</span>
                   <span><strong>الصبر الهوياتي:</strong> أعطِ هويتك الجديدة وقتاً لتترسخ. التحول ليس حدثاً — بل عملية. وكما نؤكد في <Link href="/methodology" className="text-accent hover:underline">منهجية تمكنلي</Link>، النمو غير المرئي هو الأهم.</span>
                 </li>
               </ol>

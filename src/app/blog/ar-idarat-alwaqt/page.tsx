@@ -46,7 +46,7 @@ function IdaratAlwaqtArticleAR() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                ١٢ دقيقة قراءة
+                12 دقيقة قراءة
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -163,22 +163,22 @@ function IdaratAlwaqtArticleAR() {
               </h3>
               <ol className="space-y-4 text-slate-600">
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">١</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
                   <span><strong>حدد "الأهم" بناءً على هويتك:</strong> اسأل نفسك: "إذا كنت الشخص الذي أريد أن أصبحه، ما أهم شيء أفعله اليوم؟" هذه ليست قائمة مهام — إنها سؤال هوية. الإجابة تكشف ما يستحق وقتك فعلاً.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٢</span>
-                  <span><strong>ابدأ بالأهم باستخدام الكتل الزمنية:</strong> خصّص أول كتلة من يومك (أو أول ١٠ دقائق على الأقل) لأهم مهمة تتوافق مع هويتك. استخدم <Link href="/apps/daily-planner" className="text-accent hover:underline">المخطط اليومي</Link> لتصميم يومك حول ما يهم.</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
+                  <span><strong>ابدأ بالأهم باستخدام الكتل الزمنية:</strong> خصّص أول كتلة من يومك (أو أول 10 دقائق على الأقل) لأهم مهمة تتوافق مع هويتك. استخدم <Link href="/apps/daily-planner" className="text-accent hover:underline">المخطط اليومي</Link> لتصميم يومك حول ما يهم.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٣</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
                   <span><strong>قيّم يومك بهويتك لا بإنتاجيتك:</strong> في نهاية اليوم، لا تسأل "كم أنجزت؟" بل اسأل "هل تصرفت اليوم كالشخص الذي أريد أن أصبحه؟" هذا السؤال يغيّر معيار النجاح من الكمية إلى المحاذاة.</span>
                 </li>
               </ol>
             </div>
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
-              تنظيم الوقت اليومي: ٣ خطوات حقيقية
+              تنظيم الوقت اليومي: 3 خطوات حقيقية
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -189,7 +189,7 @@ function IdaratAlwaqtArticleAR() {
               <div className="bg-slate-50 p-6 rounded-xl">
                 <h3 className="font-semibold text-primary mb-2 flex items-center gap-2">
                   <Timer className="h-5 w-5 text-accent" />
-                  الصباح: كتلة الهوية (٣٠-٦٠ دقيقة)
+                  الصباح: كتلة الهوية (30-60 دقيقة)
                 </h3>
                 <p className="text-slate-600">أول ساعة من يومك مخصصة لأهم نشاط يعزز هويتك المستهدفة. لا إيميلات، لا تواصل اجتماعي، لا مهام شخص آخر. هذا الوقت لك ولهويتك. إذا كنت تريد أن تصبح كاتباً، اكتب. إذا كنت تريد أن تصبح رياضياً، تمرّن. البداية بالهوية تضمن أن بقية يومك يتوافق معها.</p>
               </div>
@@ -205,7 +205,7 @@ function IdaratAlwaqtArticleAR() {
                   <Brain className="h-5 w-5 text-accent" />
                   المساء: تقييم الهوية
                 </h3>
-                <p className="text-slate-600">قبل أن تنام، خصص ٥ دقائق لتقييم يومك: "هل تصرفت اليوم كالشخص الذي أريد أن أصبحه؟ ما الفعل الذي عزز هويتي أكثر؟ ما الذي يمكن تحسينه غداً؟" هذا التقييم يعمل كأداة لتعزيز الهوية وتصحيح المسار — وليس كأداة للوم الذاتي.</p>
+                <p className="text-slate-600">قبل أن تنام، خصص 5 دقائق لتقييم يومك: "هل تصرفت اليوم كالشخص الذي أريد أن أصبحه؟ ما الفعل الذي عزز هويتي أكثر؟ ما الذي يمكن تحسينه غداً؟" هذا التقييم يعمل كأداة لتعزيز الهوية وتصحيح المسار — وليس كأداة للوم الذاتي.</p>
               </div>
             </div>
 

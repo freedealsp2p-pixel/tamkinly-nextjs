@@ -242,7 +242,7 @@ export default function UnifiedProgressDashboard() {
                 <p className="text-5xl font-bold bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] bg-clip-text text-transparent">
                   {progress?.identityScore || 0}
                 </p>
-                <p className="text-sm text-slate-500">{getText('out of 100', 'من ١٠٠')}</p>
+                <p className="text-sm text-slate-500">{getText('out of 100', 'من 100')}</p>
               </div>
             </div>
             <Progress value={progress?.identityScore || 0} className="h-3" />

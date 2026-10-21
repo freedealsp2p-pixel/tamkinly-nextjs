@@ -23,7 +23,7 @@ export default function WhiteMirrorLanding() {
       intro2={WHITE_MIRROR_META.intro2}
       claim={WHITE_MIRROR_META.claim}
       includes={[
-        { ar: '٤ خطوات موجهة بالكامل', en: '4 fully guided steps' },
+        { ar: '4 خطوات موجهة بالكامل', en: '4 fully guided steps' },
         { ar: 'تقنية كسر النمط (Pattern Interrupt)', en: 'Pattern Interrupt technique' },
         { ar: 'تسلسل بصري: القناع ← الفراغ ← الصوت ← المرساة', en: 'Visual sequence: Mask → Void → Voice → Anchor' },
         { ar: 'تحذير أمان مدمج', en: 'Built-in safety warning' },

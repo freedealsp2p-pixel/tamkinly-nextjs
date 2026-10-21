@@ -43,7 +43,7 @@ export default function GoalSettingFrameworkArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("11 min read", "١١ دقيقة قراءة")}
+                {getText("11 min read", "11 دقيقة قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -178,7 +178,7 @@ export default function GoalSettingFrameworkArticle() {
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Layer 1: Identity — The Foundation", "الطبقة ١: الهوية — الأساس")}
+              {getText("Layer 1: Identity — The Foundation", "الطبقة 1: الهوية — الأساس")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -189,7 +189,7 @@ export default function GoalSettingFrameworkArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Layer 2: Values — The Compass", "الطبقة ٢: القيم — البوصلة")}
+              {getText("Layer 2: Values — The Compass", "الطبقة 2: القيم — البوصلة")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -207,7 +207,7 @@ export default function GoalSettingFrameworkArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Layer 3: Direction — The Path", "الطبقة ٣: الاتجاه — المسار")}
+              {getText("Layer 3: Direction — The Path", "الطبقة 3: الاتجاه — المسار")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -218,7 +218,7 @@ export default function GoalSettingFrameworkArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Layer 4: Milestones — The Markers", "الطبقة ٤: المعالم — العلامات")}
+              {getText("Layer 4: Milestones — The Markers", "الطبقة 4: المعالم — العلامات")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -229,7 +229,7 @@ export default function GoalSettingFrameworkArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Layer 5: Actions — The Daily Practice", "الطبقة ٥: الأفعال — الممارسة اليومية")}
+              {getText("Layer 5: Actions — The Daily Practice", "الطبقة 5: الأفعال — الممارسة اليومية")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">

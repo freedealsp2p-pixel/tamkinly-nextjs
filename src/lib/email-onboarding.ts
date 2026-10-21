@@ -40,13 +40,13 @@ Your 30-day journey starts now.`,
 
 إليك ما سيحدث تالياً:
 
-1. **ابدأ باختبار الهوية** — اكتشف فجوة هويتك في ٥ دقائق
+1. **ابدأ باختبار الهوية** — اكتشف فجوة هويتك في 5 دقائق
 2. **اختر أداتك الأولى** — نوصي بالبدء بأداة تناسب أكبر تحدٍ تواجهه
-3. **خصص ١٠ دقائق فقط يومياً** — الأفعال الصغيرة المتسقة تصنع تغييراً كبيراً
+3. **خصص 10 دقائق فقط يومياً** — الأفعال الصغيرة المتسقة تصنع تغييراً كبيراً
 
 تذكر: التحول ليس عن الكمال. بل عن الاتجاه.
 
-رحلتك لـ ٣٠ يوماً تبدأ الآن.`,
+رحلتك لـ 30 يوماً تبدأ الآن.`,
     ctaTextEn: 'Start Your First Tool',
     ctaTextAr: 'ابدأ أداتك الأولى',
     ctaLink: '/apps',
@@ -57,7 +57,7 @@ Your 30-day journey starts now.`,
     subjectEn: 'Make the most of your tools',
     subjectAr: 'استفد أقصى استفادة من أدواتك',
     previewEn: '3 tips that double your results',
-    previewAr: '٣ نصائح تضاعف نتائجك',
+    previewAr: '3 نصائح تضاعف نتائجك',
     bodyEn: `You've had your tools for 2 days now. Here are 3 tips that users say doubled their results:
 
 **Tip 1: Same time, same place**
@@ -70,18 +70,18 @@ Don't try to change everything at once. Pick ONE thing. Do it for 5 minutes. Tha
 When you can SEE your progress, you're 2x more likely to continue. That's why our tools have built-in tracking.
 
 Tomorrow, try the Daily Reflection — it takes just 3 minutes and sets up your entire day.`,
-    bodyAr: `مرت يومان منذ حصولك على أدواتك. إليك ٣ نصائح يقول المستخدمون أنها ضاعفت نتائجهم:
+    bodyAr: `مرت يومان منذ حصولك على أدواتك. إليك 3 نصائح يقول المستخدمون أنها ضاعفت نتائجهم:
 
-**نصيحة ١: نفس الوقت، نفس المكان**
-استخدم أداتك في نفس الوقت يومياً. الصباح هو الأفضل لـ ٨٧٪ من مستخدمينا.
+**نصيحة 1: نفس الوقت، نفس المكان**
+استخدم أداتك في نفس الوقت يومياً. الصباح هو الأفضل لـ 87٪ من مستخدمينا.
 
-**نصيحة ٢: ابدأ بشكل سخيف صغير**
-لا تحاول تغيير كل شيء دفعة واحدة. اختر شيئاً واحداً. افعله لمدة ٥ دقائق. فقط.
+**نصيحة 2: ابدأ بشكل سخيف صغير**
+لا تحاول تغيير كل شيء دفعة واحدة. اختر شيئاً واحداً. افعله لمدة 5 دقائق. فقط.
 
-**نصيحة ٣: تتبع بصرياً**
-عندما ترى تقدمك، فأنت أكثر احتمالاً بنسبة ٢x للاستمرار. لذلك أدواتنا تحتوي على تتبع مدمج.
+**نصيحة 3: تتبع بصرياً**
+عندما ترى تقدمك، فأنت أكثر احتمالاً بنسبة 2x للاستمرار. لذلك أدواتنا تحتوي على تتبع مدمج.
 
-غداً، جرّب التأمل اليومي — يستغرق ٣ دقائق فقط ويجهز يومك بالكامل.`,
+غداً، جرّب التأمل اليومي — يستغرق 3 دقائق فقط ويجهز يومك بالكامل.`,
     ctaTextEn: 'Open Daily Reflection',
     ctaTextAr: 'افتح التأمل اليومي',
     ctaLink: '/apps/daily-reflection',
@@ -90,7 +90,7 @@ Tomorrow, try the Daily Reflection — it takes just 3 minutes and sets up your 
     day: 5,
     id: 'quick-win',
     subjectEn: 'Complete this 5-minute challenge',
-    subjectAr: 'أكمل هذا التحدي في ٥ دقائق',
+    subjectAr: 'أكمل هذا التحدي في 5 دقائق',
     previewEn: 'Your first quick win is waiting',
     previewAr: 'أول إنجاز سريع بانتظارك',
     bodyEn: `It's Day 5. Time for your first quick win.
@@ -110,7 +110,7 @@ That's it. 5 minutes. But this simple practice is what separates people who tran
 94% of users who complete this exercise in their first week go on to complete the 30-day program.`,
     bodyAr: `اليوم الخامس. حان وقت أول إنجاز سريع.
 
-**فحص الهوية في ٥ دقائق:**
+**فحص الهوية في 5 دقائق:**
 
 خذ قلماً (أو افتح هاتفك) وأجب:
 
@@ -118,11 +118,11 @@ That's it. 5 minutes. But this simple practice is what separates people who tran
 2. ما الشيء الواحد الذي فعلته ولا يتوافق؟
 3. ماذا سأفعل بشكل مختلف غداً؟
 
-هذا كل شيء. ٥ دقائق. لكن هذه الممارسة البسيطة هي ما يفرق بين من يتحول ومن يتمنى فقط.
+هذا كل شيء. 5 دقائق. لكن هذه الممارسة البسيطة هي ما يفرق بين من يتحول ومن يتمنى فقط.
 
 **مكافأة:** سجّل تأملك في نظام اليوميات لتتبع نموك عبر الوقت.
 
-٩٤٪ من المستخدمين الذين يكملون هذا التمرين في أسبوعهم الأول يكملون برنامج الـ ٣٠ يوماً.`,
+94٪ من المستخدمين الذين يكملون هذا التمرين في أسبوعهم الأول يكملون برنامج الـ 30 يوماً.`,
     ctaTextEn: 'Open Journal System',
     ctaTextAr: 'افتح نظام اليوميات',
     ctaLink: '/apps/journal-system',
@@ -147,19 +147,19 @@ Here's what others have achieved:
 Your transformation is happening right now. Keep going.
 
 **Pro tip:** Share your 10-day progress with a friend. Accountability doubles commitment.`,
-    bodyAr: `أنت في اليوم ١٠. هذا يضعك في أعلى ٣٠٪ من المستخدمين الذين يستمرون.
+    bodyAr: `أنت في اليوم 10. هذا يضعك في أعلى 30٪ من المستخدمين الذين يستمرون.
 
 إليك ما حققه آخرون:
 
-**سارة، ٢٨** — "انتقلت من تأجيل المنبه ٥ مرات للاستيقاظ في السادسة طبيعياً. ساعدتني ورقة خط أساس الهوية على فهم أنني كنت أعيش هوية شخص آخر."
+**سارة، 28** — "انتقلت من تأجيل المنبه 5 مرات للاستيقاظ في السادسة طبيعياً. ساعدتني ورقة خط أساس الهوية على فهم أنني كنت أعيش هوية شخص آخر."
 
-**أحمد، ٣٤** — "بدا متتبع العادات بسيطاً جداً. لكن بعد ٣٠ يوماً، تأملت كل يوم بدون انقطاع. لأول مرة في حياتي."
+**أحمد، 34** — "بدا متتبع العادات بسيطاً جداً. لكن بعد 30 يوماً، تأملت كل يوم بدون انقطاع. لأول مرة في حياتي."
 
-**ماريا، ٤١** — "ساعدني نظام الأهداف على إدراك أنني أتابع أهدافاً لم تكن لي. الآن أبني شيئاً يهمني حقاً."
+**ماريا، 41** — "ساعدني نظام الأهداف على إدراك أنني أتابع أهدافاً لم تكن لي. الآن أبني شيئاً يهمني حقاً."
 
 تحولك يحدث الآن. استمر.
 
-**نصيحة محترف:** شارك تقدمك لـ ١٠ أيام مع صديق. المساءلة تضاعف الالتزام.`,
+**نصيحة محترف:** شارك تقدمك لـ 10 أيام مع صديق. المساءلة تضاعف الالتزام.`,
     ctaTextEn: 'View Your Progress',
     ctaTextAr: 'شاهد تقدمك',
     ctaLink: '/dashboard',
@@ -170,7 +170,7 @@ Your transformation is happening right now. Keep going.
     subjectEn: 'Ready for the next level?',
     subjectAr: 'مستعد للمستوى التالي؟',
     previewEn: 'You\'ve completed 14 days. Here\'s what\'s next.',
-    previewAr: 'أكملت ١٤ يوماً. إليك ما يلي.',
+    previewAr: 'أكملت 14 يوماً. إليك ما يلي.',
     bodyEn: `14 days in. You're not the same person who started.
 
 You've built awareness. You've taken action. You've proven you can change.
@@ -188,7 +188,7 @@ Users who upgrade after 14 days have a 92% completion rate vs 64% for free users
 The difference? Skin in the game.
 
 Use code **TRANSFORM14** for 20% off — our way of rewarding your commitment.`,
-    bodyAr: `١٤ يوماً. لست نفس الشخص الذي بدأ.
+    bodyAr: `14 يوماً. لست نفس الشخص الذي بدأ.
 
 لقد بنيت وعياً. لقد اتخذت إجراءً. لقد أثبتّ أنك قادر على التغيير.
 
@@ -198,15 +198,15 @@ Use code **TRANSFORM14** for 20% off — our way of rewarding your commitment.`,
 - جميع أدوات التحول الثمانية
 - مدرب الهوية بالذكاء الاصطناعي (إرشاد شخصي)
 - أولوية الوصول للميزات الجديدة
-- ضمان استرداد خلال ٣٠ يوماً
+- ضمان استرداد خلال 30 يوماً
 
-المستخدمون الذين يرقون بعد ١٤ يوماً لديهم نسبة إكمال ٩٢٪ مقابل ٦٤٪ للمستخدمين المجانيين.
+المستخدمون الذين يرقون بعد 14 يوماً لديهم نسبة إكمال 92٪ مقابل 64٪ للمستخدمين المجانيين.
 
 الفرق؟ الالتزام.
 
-استخدم كود **TRANSFORM14** للحصول على خصم ٢٠٪ — طريقتنا لمكافأة التزامك.`,
+استخدم كود **TRANSFORM14** للحصول على خصم 20٪ — طريقتنا لمكافأة التزامك.`,
     ctaTextEn: 'Upgrade Now — 20% Off',
-    ctaTextAr: 'رقّ الآن — خصم ٢٠٪',
+    ctaTextAr: 'رقّ الآن — خصم 20٪',
     ctaLink: '/products',
   },
 ];

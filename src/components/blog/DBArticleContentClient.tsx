@@ -44,7 +44,7 @@ export function DBArticleContentClient({ article, relationships }: { article: DB
 
   const readTime = article.readTimeMinutes
     ? (isAr ? `${article.readTimeMinutes} دقائق` : `${article.readTimeMinutes} min`)
-    : (isAr ? '٥ دقائق' : '5 min');
+    : (isAr ? '5 دقائق' : '5 min');
 
   return (
     <>

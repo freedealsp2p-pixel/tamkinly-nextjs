@@ -198,7 +198,7 @@ export default function ReferralDashboard({ referralCode = "TMLY-XXXX-XXXX" }: {
             <div className="space-y-2">
               {[
                 { step: "1", textEn: "Share your link with friends", textAr: "شارك رابطك مع أصدقائك" },
-                { step: "2", textEn: "They get 10% off their purchase", textAr: "يحصلون على خصم ١٠٪" },
+                { step: "2", textEn: "They get 10% off their purchase", textAr: "يحصلون على خصم 10٪" },
                 { step: "3", textEn: "You earn rewards for each referral", textAr: "تكسب مكافآت لكل إحالة" },
               ].map(item => (
                 <div key={item.step} className="flex items-center gap-3 text-sm text-slate-400">
@@ -231,7 +231,7 @@ export default function ReferralDashboard({ referralCode = "TMLY-XXXX-XXXX" }: {
                     {direction === "rtl" ? config.labelAr : config.labelEn}
                   </span>
                   <span className="text-xs text-slate-500">
-                    {config.min === 0 ? (direction === "rtl" ? "١-٢ إحالات" : "1-2 referrals") : config.max === Infinity ? (direction === "rtl" ? "٦+ إحالات" : "6+ referrals") : `${config.min}-${config.max}`}
+                    {config.min === 0 ? (direction === "rtl" ? "1-2 إحالات" : "1-2 referrals") : config.max === Infinity ? (direction === "rtl" ? "6+ إحالات" : "6+ referrals") : `${config.min}-${config.max}`}
                   </span>
                 </div>
                 <Badge style={{ background: `${config.color}20`, color: config.color }}>

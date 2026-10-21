@@ -20,9 +20,9 @@ export default function TenMinuteBlockSystemArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "dopamine-reset", title: getText("The 24-Hour Dopamine Reset", "إعادة ضبط الدوبامين في ٢٤ ساعة"), readTime: getText("12 min read", "١٢ دقيقة قراءة") },
-    { slug: "speed-as-strategy", title: getText("Speed as Strategy", "السرعة كاستراتيجية"), readTime: getText("7 min read", "٧ دقائق قراءة") }
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "dopamine-reset", title: getText("The 24-Hour Dopamine Reset", "إعادة ضبط الدوبامين في 24 ساعة"), readTime: getText("12 min read", "12 دقيقة قراءة") },
+    { slug: "speed-as-strategy", title: getText("Speed as Strategy", "السرعة كاستراتيجية"), readTime: getText("7 min read", "7 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function TenMinuteBlockSystemArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("9 min read", "٩ دقائق قراءة")}
+                {getText("9 min read", "9 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -70,7 +70,7 @@ export default function TenMinuteBlockSystemArticle() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
               {getText(
                 "What if the one thing you need to overcome obstacles and make faster progress than 99% of people is a simple 10-minute daily system?",
-                "ماذا لو كان الشيء الوحيد الذي تحتاجه لتجاوز العقبات والتقدم أسرع من ٩٩٪ من الناس هو نظام يومي بسيط من ١٠ دقائق؟"
+                "ماذا لو كان الشيء الوحيد الذي تحتاجه لتجاوز العقبات والتقدم أسرع من 99٪ من الناس هو نظام يومي بسيط من 10 دقائق؟"
               )}
             </p>
 
@@ -149,7 +149,7 @@ export default function TenMinuteBlockSystemArticle() {
                       <p className="text-slate-600 mb-2">
                         {getText(
                           "Focus on one small win. Jerry Seinfeld wrote just one joke a day. After 10-20 years, his net worth exceeded $1.1 billion.",
-                          "ركز على فوز صغير واحد. جيري سينفيلد كان يكتب نكتة واحدة فقط يومياً. بعد ١٠-٢٠ سنة، تجاوزت ثروته ١.١ مليار دولار."
+                          "ركز على فوز صغير واحد. جيري سينفيلد كان يكتب نكتة واحدة فقط يومياً. بعد 10-20 سنة، تجاوزت ثروته 1.1 مليار دولار."
                         )}
                       </p>
                       <p className="text-sm text-slate-500">
@@ -178,7 +178,7 @@ export default function TenMinuteBlockSystemArticle() {
                       <p className="text-slate-600 mb-2">
                         {getText(
                           "Use the 5-second rule. When you think of something you need to do, count down: 5, 4, 3, 2, 1—then take the smallest possible action.",
-                          "استخدم قاعدة الـ ٥ ثوانٍ. عندما تفكر في شيء تحتاج لفعله، عدّ تنازلياً: ٥، ٤، ٣، ٢، ١ — ثم اتخذ أصغر فعل ممكن."
+                          "استخدم قاعدة الـ 5 ثوانٍ. عندما تفكر في شيء تحتاج لفعله، عدّ تنازلياً: 5، 4، 3، 2، 1 — ثم اتخذ أصغر فعل ممكن."
                         )}
                       </p>
                       <p className="text-sm text-slate-500">
@@ -207,13 +207,13 @@ export default function TenMinuteBlockSystemArticle() {
                       <p className="text-slate-600 mb-2">
                         {getText(
                           "Launch at 70% ready. If you're not embarrassed by your first version, you probably launched too late.",
-                          "أطلق عند ٧٠٪ جاهزية. إذا لم تشعر بالحرج من نسختك الأولى، فمن المحتمل أنك أطلقت متأخراً جداً."
+                          "أطلق عند 70٪ جاهزية. إذا لم تشعر بالحرج من نسختك الأولى، فمن المحتمل أنك أطلقت متأخراً جداً."
                         )}
                       </p>
                       <p className="text-sm text-slate-500">
                         {getText(
                           "The Founder OS was written at 70%. It had six modules and a community. 47 sales in one day. Then iterate based on feedback. Speed is your advantage.",
-                          "نظام المؤسس كُتب عند ٧٠٪. كان يحتوي على ست وحدات ومجتمع. ٤٧ مبيعة في يوم واحد. ثم كرّر بناءً على الملاحظات. السرعة هي ميزتك."
+                          "نظام المؤسس كُتب عند 70٪. كان يحتوي على ست وحدات ومجتمع. 47 مبيعة في يوم واحد. ثم كرّر بناءً على الملاحظات. السرعة هي ميزتك."
                         )}
                       </p>
                     </div>
@@ -230,7 +230,7 @@ export default function TenMinuteBlockSystemArticle() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant="secondary">{getText("3 Minutes", "٣ دقائق")}</Badge>
+                        <Badge variant="secondary">{getText("3 Minutes", "3 دقائق")}</Badge>
                         <h3 className="font-semibold text-primary">{getText("Single Domino Decision", "قرار الدومينو الواحد")}</h3>
                       </div>
                       <p className="text-slate-600 mb-2">
@@ -321,14 +321,14 @@ export default function TenMinuteBlockSystemArticle() {
             </div>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
-              <h3 className="font-semibold text-primary mb-4">{getText("Your 10-Minute Practice", "ممارستك لـ ١٠ دقائق")}</h3>
+              <h3 className="font-semibold text-primary mb-4">{getText("Your 10-Minute Practice", "ممارستك لـ 10 دقائق")}</h3>
               <p className="text-slate-600 mb-4">{getText("Tomorrow morning, try this:", "غداً صباحاً، جرّب هذا:")}</p>
               <ol className="space-y-2 text-slate-600">
-                <li>{getText("<strong>2 min:</strong> Write down every thought causing noise", "<strong>٢ دقيقة:</strong> اكتب كل فكرة تسبب الضوضاء")}</li>
-                <li>{getText("<strong>2 min:</strong> Pick one small win and complete it", "<strong>٢ دقيقة:</strong> اختر فوزاً صغيراً وأكمله")}</li>
-                <li>{getText("<strong>1 min:</strong> Use the 5-4-3-2-1 countdown for a hard task", "<strong>١ دقيقة:</strong> استخدم العد التنازلي ٥-٤-٣-٢-١ لمهمة صعبة")}</li>
-                <li>{getText("<strong>2 min:</strong> Launch something at 70%", "<strong>٢ دقيقة:</strong> أطلق شيئاً عند ٧٠٪")}</li>
-                <li>{getText("<strong>3 min:</strong> Identify your single most important domino", "<strong>٣ دقائق:</strong> حدد قطعة الدومينو الواحدة الأهم")}</li>
+                <li>{getText("<strong>2 min:</strong> Write down every thought causing noise", "<strong>2 دقيقة:</strong> اكتب كل فكرة تسبب الضوضاء")}</li>
+                <li>{getText("<strong>2 min:</strong> Pick one small win and complete it", "<strong>2 دقيقة:</strong> اختر فوزاً صغيراً وأكمله")}</li>
+                <li>{getText("<strong>1 min:</strong> Use the 5-4-3-2-1 countdown for a hard task", "<strong>1 دقيقة:</strong> استخدم العد التنازلي 5-4-3-2-1 لمهمة صعبة")}</li>
+                <li>{getText("<strong>2 min:</strong> Launch something at 70%", "<strong>2 دقيقة:</strong> أطلق شيئاً عند 70٪")}</li>
+                <li>{getText("<strong>3 min:</strong> Identify your single most important domino", "<strong>3 دقائق:</strong> حدد قطعة الدومينو الواحدة الأهم")}</li>
               </ol>
             </div>
 
@@ -340,7 +340,7 @@ export default function TenMinuteBlockSystemArticle() {
             <p className="text-slate-600 leading-relaxed">
               {getText(
                 "Ten minutes a day won't change your life overnight. But it will change who you are—day by day, action by action. The person who follows this system for a year isn't the same person who started. They're someone who's learned to overcome every obstacle, one 10-minute block at a time.",
-                "عشر دقائق يومياً لن تغير حياتك بين ليلة وضحاها. لكنها ستغير من أنت — يوماً بعد يوم، فعلاً بعد فعل. الشخص الذي يتبع هذا النظام لمدة عام ليس نفس الشخص الذي بدأ. إنه شخص تعلم كيف يتجاوز كل عقبة، كتلة من ١٠ دقائق في كل مرة."
+                "عشر دقائق يومياً لن تغير حياتك بين ليلة وضحاها. لكنها ستغير من أنت — يوماً بعد يوم، فعلاً بعد فعل. الشخص الذي يتبع هذا النظام لمدة عام ليس نفس الشخص الذي بدأ. إنه شخص تعلم كيف يتجاوز كل عقبة، كتلة من 10 دقائق في كل مرة."
               )}
             </p>
           </div>

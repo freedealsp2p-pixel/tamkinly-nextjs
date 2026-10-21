@@ -46,7 +46,7 @@ export default function AndTheBambooKeptGrowingArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("9 min read", "٩ دقائق قراءة")}
+                {getText("9 min read", "9 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -106,7 +106,7 @@ export default function AndTheBambooKeptGrowingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "One day, in the fifth year, a small green shoot breaks through the dirt. In six weeks, it grows 90 feet into the sky.",
-                "في أحد الأيام، في العام الخامس، تخرج برعم أخضر صغير من التراب. في ستة أسابيع، ينمو ٩٠ قدماً في السماء."
+                "في أحد الأيام، في العام الخامس، تخرج برعم أخضر صغير من التراب. في ستة أسابيع، ينمو 90 قدماً في السماء."
               )}
             </p>
 
@@ -134,14 +134,14 @@ export default function AndTheBambooKeptGrowingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The bamboo wasn't doing nothing for five years. It was building a root system so vast and so deep that when the time came, it could sustain explosive growth that no other plant could match. Those 90 feet in six weeks weren't a miracle — they were the inevitable result of five years of underground preparation that nobody could see.",
-                "الخيزران لم يكن عاطلاً لخمس سنوات. كان يبني نظام جذور هائل وعميق لدرجة أنه عندما حان الوقت، استطاع أن يحقق نمواً انفجارياً لا يُضاهيه نبات آخر. تلك الـ ٩٠ قدماً في ستة أسابيع لم تكن معجزة — كانت النتيجة الحتمية لخمس سنوات من التحضير تحت الأرض لم يستطع أحد أن يراها."
+                "الخيزران لم يكن عاطلاً لخمس سنوات. كان يبني نظام جذور هائل وعميق لدرجة أنه عندما حان الوقت، استطاع أن يحقق نمواً انفجارياً لا يُضاهيه نبات آخر. تلك الـ 90 قدماً في ستة أسابيع لم تكن معجزة — كانت النتيجة الحتمية لخمس سنوات من التحضير تحت الأرض لم يستطع أحد أن يراها."
               )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Your identity works the same way. Every morning you choose the new behavior over the old pattern, you're not wasting time — you're building roots. Every journal entry, every 18-minute block, every moment you refuse to quit — these aren't empty repetitions. They're the underground architecture of a transformation that will one day break through the surface and stun everyone who watched you water the dirt.",
-                "هويتك تعمل بنفس الطريقة. كل صباح تختار فيه السلوك الجديد بدلاً من النمط القديم، لست تضيع الوقت — أنت تبني جذوراً. كل سطر تكتبه، كل كتلة ١٨ دقيقة، كل لحظة ترفض فيها الاستسلام — هذه ليست تكرارات فارغة. إنها البنية التحتية لتحول سيخرج يوماً إلى السطح ويبهر كل من شاهدك تسقي التراب."
+                "هويتك تعمل بنفس الطريقة. كل صباح تختار فيه السلوك الجديد بدلاً من النمط القديم، لست تضيع الوقت — أنت تبني جذوراً. كل سطر تكتبه، كل كتلة 18 دقيقة، كل لحظة ترفض فيها الاستسلام — هذه ليست تكرارات فارغة. إنها البنية التحتية لتحول سيخرج يوماً إلى السطح ويبهر كل من شاهدك تسقي التراب."
               )}
             </p>
 
@@ -178,7 +178,7 @@ export default function AndTheBambooKeptGrowingArticle() {
                   <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-3">
                     <Timer className="h-6 w-6 text-slate-400" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-1">{getText("Year 1-2", "العام ١-٢")}</h3>
+                  <h3 className="font-semibold text-primary mb-1">{getText("Year 1-2", "العام 1-2")}</h3>
                   <p className="text-sm text-slate-500">{getText("Doubt creeps in. Nothing visible. But roots are forming.", "يتسلل الشك. لا شيء مرئي. لكن الجذور تتشكل.")}</p>
                 </CardContent>
               </Card>
@@ -187,7 +187,7 @@ export default function AndTheBambooKeptGrowingArticle() {
                   <div className="w-12 h-12 rounded-full bg-[#F0F8F8] flex items-center justify-center mx-auto mb-3">
                     <Eye className="h-6 w-6 text-[#B88A8E]" />
                   </div>
-                  <h3 className="font-semibold text-[#1F6F78] mb-1">{getText("Year 3", "العام ٣")}</h3>
+                  <h3 className="font-semibold text-[#1F6F78] mb-1">{getText("Year 3", "العام 3")}</h3>
                   <p className="text-sm text-slate-500">{getText("The danger zone. Most people quit here.", "منطقة الخطر. معظم الناس يستسلمون هنا.")}</p>
                 </CardContent>
               </Card>
@@ -196,7 +196,7 @@ export default function AndTheBambooKeptGrowingArticle() {
                   <div className="w-12 h-12 rounded-full bg-[#e6f3f4] flex items-center justify-center mx-auto mb-3">
                     <Shield className="h-6 w-6 text-[#2A8A94]" />
                   </div>
-                  <h3 className="font-semibold text-[#2A8A94] mb-1">{getText("Year 4", "العام ٤")}</h3>
+                  <h3 className="font-semibold text-[#2A8A94] mb-1">{getText("Year 4", "العام 4")}</h3>
                   <p className="text-sm text-slate-500">{getText("Deepest roots. Maximum resilience. Almost there.", "أعمق الجذور. أقصى مرونة. على وشك.")}</p>
                 </CardContent>
               </Card>
@@ -205,8 +205,8 @@ export default function AndTheBambooKeptGrowingArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <TreePine className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-accent mb-1">{getText("Year 5", "العام ٥")}</h3>
-                  <p className="text-sm text-slate-500">{getText("Breakthrough. 90 feet. The world sees what you built.", "اختراق. ٩٠ قدماً. العالم يرى ما بنيت.")}</p>
+                  <h3 className="font-semibold text-accent mb-1">{getText("Year 5", "العام 5")}</h3>
+                  <p className="text-sm text-slate-500">{getText("Breakthrough. 90 feet. The world sees what you built.", "اختراق. 90 قدماً. العالم يرى ما بنيت.")}</p>
                 </CardContent>
               </Card>
             </div>
@@ -327,7 +327,7 @@ export default function AndTheBambooKeptGrowingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The people who quit in year three don't fail because the method doesn't work. They fail because they trusted their eyes instead of understanding the law. They demanded evidence from the surface when all the evidence was accumulating below. They walked away from 90 feet of growth because they couldn't see the six inches of roots that were about to change everything.",
-                "الأشخاص الذين يستسلمون في العام الثالث لا يفشلون لأن الطريقة لا تعمل. يفشلون لأنهم وثقوا بأعينهم بدلاً من فهم القانون. طالبوا بالأدلة من السطح بينما كل الأدلة كانت تتراكم في الأسفل. مشوا بعيداً عن ٩٠ قدماً من النمو لأنهم لم يستطيعوا رؤية الست بوصات من الجذور التي كانت على وشك تغيير كل شيء."
+                "الأشخاص الذين يستسلمون في العام الثالث لا يفشلون لأن الطريقة لا تعمل. يفشلون لأنهم وثقوا بأعينهم بدلاً من فهم القانون. طالبوا بالأدلة من السطح بينما كل الأدلة كانت تتراكم في الأسفل. مشوا بعيداً عن 90 قدماً من النمو لأنهم لم يستطيعوا رؤية الست بوصات من الجذور التي كانت على وشك تغيير كل شيء."
               )}
             </p>
 

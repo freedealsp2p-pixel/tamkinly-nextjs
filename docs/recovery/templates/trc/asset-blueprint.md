@@ -117,5 +117,5 @@ interface TRCAsset {
 
 ---
 
-*إصدار ۱.٠ — مشتق من trc-framework.md والمادة العلمية*
+*إصدار 1.0 — مشتق من trc-framework.md والمادة العلمية*
 *الحالة: Active Build Track*

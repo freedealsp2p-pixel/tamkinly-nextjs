@@ -33,7 +33,7 @@ export default function IdentityGapAssessmentArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -58,7 +58,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "A groundbreaking study published in Frontiers in Psychology (2020) found that \"identity gaps\"—the discrepancies between how we see ourselves and how we want to be seen—are significantly associated with depression symptoms. The larger the gap, the greater the psychological distress.",
-                "وجدت دراسة رائدة منشورة في مجلة Frontiers in Psychology (٢٠٢٠) أن \"فجوات الهوية\"—التناقضات بين كيفية رؤيتنا لأنفسنا وكيف نريد أن يرانا الآخرون—مرتبطة بشكل كبير بأعراض الاكتئاب. كلما كبرت الفجوة، زاد الضيق النفسي."
+                "وجدت دراسة رائدة منشورة في مجلة Frontiers in Psychology (2020) أن \"فجوات الهوية\"—التناقضات بين كيفية رؤيتنا لأنفسنا وكيف نريد أن يرانا الآخرون—مرتبطة بشكل كبير بأعراض الاكتئاب. كلما كبرت الفجوة، زاد الضيق النفسي."
               )}
             </p>
 
@@ -94,7 +94,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "According to identity theory developed by Burkitt (2008) and expanded by scholars like McLean and Syed, our identity isn't fixed—it's a dynamic construction that we continuously negotiate through our actions, relationships, and self-reflection. The identity gap exists because we're always in a state of becoming.",
-                "وفقاً لنظرية الهوية التي طورها بوركيت (٢٠٠٨) ووسعها باحثون مثل ماكلين وسيد، هويتنا ليست ثابتة—إنها بناء ديناميكي نتفاوض عليه باستمرار من خلال أفعالنا وعلاقاتنا وتأملنا الذاتي. فجوة الهوية موجودة لأننا دائماً في حالة صيرورة."
+                "وفقاً لنظرية الهوية التي طورها بوركيت (2008) ووسعها باحثون مثل ماكلين وسيد، هويتنا ليست ثابتة—إنها بناء ديناميكي نتفاوض عليه باستمرار من خلال أفعالنا وعلاقاتنا وتأملنا الذاتي. فجوة الهوية موجودة لأننا دائماً في حالة صيرورة."
               )}
             </p>
 
@@ -184,7 +184,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The Frontiers in Psychology study (2020) by Jiyoung Park and colleagues examined how identity gaps relate to depression. Their findings were striking: individuals with larger discrepancies between their actual and ideal selves reported significantly higher levels of depressive symptoms.",
-                "فحصت دراسة Frontiers in Psychology (٢٠٢٠) لجيونغ بارك وزملائها كيف ترتبط فجوات الهوية بالاكتئاب. كانت نتائجهم مذهلة: الأفراد ذوو التناقضات الأكبر بين ذواتهم الفعلية والمثالية أبلغوا عن مستويات أعلى بكثير من أعراض الاكتئاب."
+                "فحصت دراسة Frontiers in Psychology (2020) لجيونغ بارك وزملائها كيف ترتبط فجوات الهوية بالاكتئاب. كانت نتائجهم مذهلة: الأفراد ذوو التناقضات الأكبر بين ذواتهم الفعلية والمثالية أبلغوا عن مستويات أعلى بكثير من أعراض الاكتئاب."
               )}
             </p>
 
@@ -198,7 +198,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "This aligns with Self-Discrepancy Theory developed by Edward Higgins (1987), which proposes that different types of self-discrepancies create different emotional vulnerabilities. The gap between actual and ideal selves relates to dejection-related emotions (disappointment, sadness), while the gap between actual and ought selves relates to agitation-related emotions (fear, anxiety).",
-                "يتوافق هذا مع نظرية التناقض الذاتي التي طورها إدوارد هيغينز (١٩٨٧)، والتي تقترح أن أنواعاً مختلفة من التناقضات الذاتية تخلق نقاط ضعف عاطفية مختلفة. ترتبط الفجوة بين الذات الفعلية والمثالية بالمشاعر المتعلقة بالإحباط (خيبة الأمل، الحزن)، بينما ترتبط الفجوة بين الذات الفعلية والذات الواجبة بالمشاعر المتعلقة بالقلق (الخوف، القلق)."
+                "يتوافق هذا مع نظرية التناقض الذاتي التي طورها إدوارد هيغينز (1987)، والتي تقترح أن أنواعاً مختلفة من التناقضات الذاتية تخلق نقاط ضعف عاطفية مختلفة. ترتبط الفجوة بين الذات الفعلية والمثالية بالمشاعر المتعلقة بالإحباط (خيبة الأمل، الحزن)، بينما ترتبط الفجوة بين الذات الفعلية والذات الواجبة بالمشاعر المتعلقة بالقلق (الخوف، القلق)."
               )}
             </p>
 
@@ -245,7 +245,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Research on self-monitoring by psychologist Mark Snyder (1974) shows that individuals who regularly assess their behavior are better at aligning their actions with their goals. The Identity Gap Assessment makes this process systematic and measurable.",
-                "تُظهر أبحاث المراقبة الذاتية للعالم النفسي مارك سنايدر (١٩٧٤) أن الأفراد الذين يقيّمون سلوكهم بانتظام أفضل في محاذاة أفعالهم مع أهدافهم. يجعل تقييم فجوة الهوية هذه العملية منهجية وقابلة للقياس."
+                "تُظهر أبحاث المراقبة الذاتية للعالم النفسي مارك سنايدر (1974) أن الأفراد الذين يقيّمون سلوكهم بانتظام أفضل في محاذاة أفعالهم مع أهدافهم. يجعل تقييم فجوة الهوية هذه العملية منهجية وقابلة للقياس."
               )}
             </p>
 
@@ -257,7 +257,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The Identity Gap Assessment is available at no cost. In just 3 minutes, you'll receive a comprehensive analysis of where you are versus where you want to be—across all four critical dimensions of identity alignment.",
-                "يتوفر تقييم فجوة الهوية بدون تكلفة. في ٣ دقائق فقط، ستحصل على تحليل شامل لأين أنت مقابل أين تريد أن تكون—عبر جميع الأبعاد الأربعة الحرجة لمحاذاة الهوية."
+                "يتوفر تقييم فجوة الهوية بدون تكلفة. في 3 دقائق فقط، ستحصل على تحليل شامل لأين أنت مقابل أين تريد أن تكون—عبر جميع الأبعاد الأربعة الحرجة لمحاذاة الهوية."
               )}
             </p>
 
@@ -321,7 +321,7 @@ export default function IdentityGapAssessmentArticle() {
             <div className="bg-gradient-to-r from-[#0F1C2E] to-[#1F6F78] p-8 rounded-xl my-10 text-center">
               <h3 className="text-white text-xl font-bold mb-3">{getText("Take the FREE Assessment", "خذ التقييم المجاني")}</h3>
               <p className="text-slate-300 mb-6">
-                {getText("Discover your identity gap in just 3 minutes. No signup required.", "اكتشف فجوة هويتك في ٣ دقائق فقط. لا يتطلب تسجيلاً.")}
+                {getText("Discover your identity gap in just 3 minutes. No signup required.", "اكتشف فجوة هويتك في 3 دقائق فقط. لا يتطلب تسجيلاً.")}
               </p>
               <Link href="/quiz">
                 <Button size="lg" className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 font-semibold">

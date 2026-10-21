@@ -19,9 +19,9 @@ export default function PacedBreathingArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب المبهم (Vagus nerve): علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "grounding-for-flashbacks", title: getText("Grounding for Flashbacks: Evidence That You Are Here Now", "التأريض للذكريات الومضية: دليل على أنك هنا الآن"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "window-of-tolerance", title: getText("The Window of Tolerance: Living Inside Your Optimal Zone", "نافذة التحمّل: العيش داخل منطقتك المثلى"), readTime: getText("9 min read", "٩ دقائق قراءة") }
+    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب المبهم (Vagus nerve): علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "grounding-for-flashbacks", title: getText("Grounding for Flashbacks: Evidence That You Are Here Now", "التأريض للذكريات الومضية: دليل على أنك هنا الآن"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "window-of-tolerance", title: getText("The Window of Tolerance: Living Inside Your Optimal Zone", "نافذة التحمّل: العيش داخل منطقتك المثلى"), readTime: getText("9 min read", "9 دقائق قراءة") }
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function PacedBreathingArticle() {
               <div className="flex items-center gap-6 text-slate-400 text-sm">
                 <span className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  {getText("8 min read", "٨ دقائق قراءة")}
+                  {getText("8 min read", "8 دقائق قراءة")}
                 </span>
                 <span className="flex items-center gap-2">
                   <User className="h-4 w-4" />

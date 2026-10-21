@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     ? 'الشفرة البديلة | تمكينلي'
     : 'The Alternative Code | Tamkinly';
   const description = isAr
-    ? 'حوّل اسماً مؤلماً إلى شفرة لعالم جديد. بروتوكول إيحائي للاستبدال العصبي — ٥ خطوات في ١٥ دقيقة.'
+    ? 'حوّل اسماً مؤلماً إلى شفرة لعالم جديد. بروتوكول إيحائي للاستبدال العصبي — 5 خطوات في 15 دقيقة.'
     : 'Transform a painful name into a code for a new world. Hypnotic neural substitution protocol — 5 steps in 15 minutes.';
 
   return {

@@ -20,9 +20,9 @@ export default function WorkOnYourselfArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "identity-millionaire", title: getText("The Identity Millionaire", "المليونير بالهوية"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "five-steps-to-miracles", title: getText("Five Steps to Miracles", "خمس خطوات نحو المعجزات"), readTime: getText("10 min read", "١٠ دقائق قراءة") }
+    { slug: "identity-millionaire", title: getText("The Identity Millionaire", "المليونير بالهوية"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "five-steps-to-miracles", title: getText("Five Steps to Miracles", "خمس خطوات نحو المعجزات"), readTime: getText("10 min read", "10 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function WorkOnYourselfArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />

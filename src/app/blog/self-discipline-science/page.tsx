@@ -43,7 +43,7 @@ export default function SelfDisciplineScienceArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -147,7 +147,7 @@ export default function SelfDisciplineScienceArticle() {
                     <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                       <Heart className="h-4 w-4 text-accent" />
                     </div>
-                    <h3 className="font-semibold text-primary">{getText("1. Self-Love, Not Self-Punishment", "١. حب الذات، لا عقابها")}</h3>
+                    <h3 className="font-semibold text-primary">{getText("1. Self-Love, Not Self-Punishment", "1. حب الذات، لا عقابها")}</h3>
                   </div>
                   <p className="text-sm text-slate-600">{getText("Traditional discipline says: force yourself. Identity discipline says: honor yourself. You do not force yourself to eat well because you hate your body — you eat well because you love it. The energy is fundamentally different.", "الانضباط التقليدي يقول: أجبر نفسك. انضباط الهوية يقول: أكرم نفسك. أنت لا تجبر نفسك على الأكل الجيد لأنك تكره جسدك — أنت تأكل جيداً لأنك تحبه. الطاقة مختلفة جذرياً.")}</p>
                 </CardContent>
@@ -158,7 +158,7 @@ export default function SelfDisciplineScienceArticle() {
                     <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                       <Target className="h-4 w-4 text-accent" />
                     </div>
-                    <h3 className="font-semibold text-primary">{getText("2. Identity Before Behavior", "٢. الهوية قبل السلوك")}</h3>
+                    <h3 className="font-semibold text-primary">{getText("2. Identity Before Behavior", "2. الهوية قبل السلوك")}</h3>
                   </div>
                   <p className="text-sm text-slate-600">{getText("Do not start with what you want to do — start with who you want to be. The behavior will follow the identity naturally, the way a runner naturally runs and a writer naturally writes.", "لا تبدأ بما تريد أن تفعل — ابدأ بمن تريد أن تكون. السلوك سيتبع الهوية طبيعياً، كما يركض العداء طبيعياً ويكتب الكاتب طبيعياً.")}</p>
                 </CardContent>
@@ -169,7 +169,7 @@ export default function SelfDisciplineScienceArticle() {
                     <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                       <Scale className="h-4 w-4 text-accent" />
                     </div>
-                    <h3 className="font-semibold text-primary">{getText("3. Small Consistent Wins Over Grand Gestures", "٣. الانتصارات الصغيرة المستمرة على الإيماءات الكبرى")}</h3>
+                    <h3 className="font-semibold text-primary">{getText("3. Small Consistent Wins Over Grand Gestures", "3. الانتصارات الصغيرة المستمرة على الإيماءات الكبرى")}</h3>
                   </div>
                   <p className="text-sm text-slate-600">{getText("Ten minutes every day beats two hours once a week. Not because the total time is more, but because daily repetition rewires the brain while sporadic effort merely visits it.", "عشر دقائق كل يوم تتفوق على ساعتين مرة في الأسبوع. ليس لأن الوقت الإجمالي أكثر، بل لأن التكرار اليومي يعيد تشكيل الدماغ بينما الجهد المتقطع يزوره فقط.")}</p>
                 </CardContent>
@@ -180,7 +180,7 @@ export default function SelfDisciplineScienceArticle() {
                     <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                       <Lock className="h-4 w-4 text-accent" />
                     </div>
-                    <h3 className="font-semibold text-primary">{getText("4. Environment Design Over Willpower", "٤. تصميم البيئة على الإرادة")}</h3>
+                    <h3 className="font-semibold text-primary">{getText("4. Environment Design Over Willpower", "4. تصميم البيئة على الإرادة")}</h3>
                   </div>
                   <p className="text-sm text-slate-600">{getText("The most disciplined people do not have the most willpower — they have the best-designed environments. Make the right choice the easiest choice, and discipline becomes automatic.", "الأشخاص الأكثر انضباطاً ليس لديهم أكثر إرادة — لديهم أفضل البيئات المصممة. اجعل الخيار الصحيح أسهل خيار، والانضباط يصبح تلقائياً.")}</p>
                 </CardContent>
@@ -191,7 +191,7 @@ export default function SelfDisciplineScienceArticle() {
                     <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                       <Dumbbell className="h-4 w-4 text-accent" />
                     </div>
-                    <h3 className="font-semibold text-primary">{getText("5. Progressive Identity Loading", "٥. التحميل التدريجي للهوية")}</h3>
+                    <h3 className="font-semibold text-primary">{getText("5. Progressive Identity Loading", "5. التحميل التدريجي للهوية")}</h3>
                   </div>
                   <p className="text-sm text-slate-600">{getText("Like progressive overload in strength training, identity discipline starts light and increases gradually. You do not start with a four-hour deep work session — you start with twenty minutes and let the identity expand naturally.", "مثل التحميل التدريجي في تدريب القوة، انضباط الهوية يبدأ خفيفاً ويزداد تدريجياً. أنت لا تبدأ بجلسة عمل عميق لأربع ساعات — تبدأ بعشرين دقيقة وتدع الهوية تتوسع طبيعياً.")}</p>
                 </CardContent>
@@ -202,7 +202,7 @@ export default function SelfDisciplineScienceArticle() {
                     <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
                       <Sparkles className="h-4 w-4 text-accent" />
                     </div>
-                    <h3 className="font-semibold text-primary">{getText("6. Evidence-Based Self-Concept", "٦. المفهوم الذاتي المبني على الأدلة")}</h3>
+                    <h3 className="font-semibold text-primary">{getText("6. Evidence-Based Self-Concept", "6. المفهوم الذاتي المبني على الأدلة")}</h3>
                   </div>
                   <p className="text-sm text-slate-600">{getText("Your brain does not believe affirmations — it believes evidence. Track every act of discipline. Make the evidence undeniable. When the brain sees proof, it updates the identity automatically.", "دماغك لا يصدق التأكيدات — إنه يصدق الأدلة. تتبع كل فعل انضباط. اجعل الأدلة لا يمكن إنكارها. عندما يرى الدماغ الدليل، يحدّث الهوية تلقائياً.")}</p>
                 </CardContent>
@@ -238,19 +238,19 @@ export default function SelfDisciplineScienceArticle() {
               <ol className="space-y-4 text-slate-600">
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
-                  <span>{getText("Week 1: Define your disciplined identity. Write it down. 'I am someone who follows through on commitments to myself.' Say it aloud each morning. This is not an affirmation — it is an identity declaration that primes your neural circuits.", "الأسبوع ١: حدد هويتك المنضبطة. اكتبها. 'أنا شخص يتابع الالتزامات تجاه نفسه.' قلها بصوت عالٍ كل صباح. هذا ليس تأكيداً — إنه إعلان هوية يهيئ دوائرك العصبية.")}</span>
+                  <span>{getText("Week 1: Define your disciplined identity. Write it down. 'I am someone who follows through on commitments to myself.' Say it aloud each morning. This is not an affirmation — it is an identity declaration that primes your neural circuits.", "الأسبوع 1: حدد هويتك المنضبطة. اكتبها. 'أنا شخص يتابع الالتزامات تجاه نفسه.' قلها بصوت عالٍ كل صباح. هذا ليس تأكيداً — إنه إعلان هوية يهيئ دوائرك العصبية.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
-                  <span>{getText("Week 2: Cast one identity vote per day. Choose one small action that the disciplined version of you would take. Not a grand gesture — a tiny, undeniable vote. Five minutes of focused work. One healthy meal. One early wake-up. Record each vote.", "الأسبوع ٢: صوّت صوت هوية واحد يومياً. اختر فعلاً صغيراً واحداً سيتخذه الإصدار المنضبط منك. ليس إيماءة كبيرة — صوت ضئيل لا يمكن إنكاره. خمس دقائق عمل مركز. وجبة صحية واحدة. استيقاظ مبكر واحد. سجل كل صوت.")}</span>
+                  <span>{getText("Week 2: Cast one identity vote per day. Choose one small action that the disciplined version of you would take. Not a grand gesture — a tiny, undeniable vote. Five minutes of focused work. One healthy meal. One early wake-up. Record each vote.", "الأسبوع 2: صوّت صوت هوية واحد يومياً. اختر فعلاً صغيراً واحداً سيتخذه الإصدار المنضبط منك. ليس إيماءة كبيرة — صوت ضئيل لا يمكن إنكاره. خمس دقائق عمل مركز. وجبة صحية واحدة. استيقاظ مبكر واحد. سجل كل صوت.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
-                  <span>{getText("Week 3: Increase to two votes per day. Add a second disciplined action. Notice that the second vote feels slightly easier than the first — the identity is already starting to influence behavior. The brain is updating its self-model based on the evidence from week two.", "الأسبوع ٣: زد إلى صوتين يومياً. أضف فعلاً منضبطاً ثانياً. لاحظ أن الصوت الثاني يبدو أسهل قليلاً من الأول — الهوية بدأت بالفعل في التأثير على السلوك. الدماغ يحدّث نموذجه الذاتي بناءً على أدلة الأسبوع الثاني.")}</span>
+                  <span>{getText("Week 3: Increase to two votes per day. Add a second disciplined action. Notice that the second vote feels slightly easier than the first — the identity is already starting to influence behavior. The brain is updating its self-model based on the evidence from week two.", "الأسبوع 3: زد إلى صوتين يومياً. أضف فعلاً منضبطاً ثانياً. لاحظ أن الصوت الثاني يبدو أسهل قليلاً من الأول — الهوية بدأت بالفعل في التأثير على السلوك. الدماغ يحدّث نموذجه الذاتي بناءً على أدلة الأسبوع الثاني.")}</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
-                  <span>{getText("Week 4: Let the identity take over. By now, you should notice that some disciplined behaviors feel natural rather than forced. This is the identity running on autopilot. Expand your practice, but let the growth be organic — driven by who you are becoming, not by what you think you should do.", "الأسبوع ٤: دع الهوية تتولى. الآن، يجب أن تلاحظ أن بعض السلوكيات المنضبطة تبدو طبيعية بدلاً من مفروضة. هذا هوية تعمل على الطيار الآلي. وسّع ممارستك، لكن دع النمو يكون عضوياً — مدفوعاً بمن تصبح، لا بما تعتقد أنه يجب عليك فعله.")}</span>
+                  <span>{getText("Week 4: Let the identity take over. By now, you should notice that some disciplined behaviors feel natural rather than forced. This is the identity running on autopilot. Expand your practice, but let the growth be organic — driven by who you are becoming, not by what you think you should do.", "الأسبوع 4: دع الهوية تتولى. الآن، يجب أن تلاحظ أن بعض السلوكيات المنضبطة تبدو طبيعية بدلاً من مفروضة. هذا هوية تعمل على الطيار الآلي. وسّع ممارستك، لكن دع النمو يكون عضوياً — مدفوعاً بمن تصبح، لا بما تعتقد أنه يجب عليك فعله.")}</span>
                 </li>
               </ol>
             </div>

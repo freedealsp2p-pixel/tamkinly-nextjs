@@ -19,9 +19,9 @@ export default function TheMemoryIllusionArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "rebuild-identity-after-addiction", title: getText("Rebuild Identity After Addiction: Every Vote Builds the New Self", "إعادة بناء الهوية بعد الإدمان: كل صوت يبني الذات الجديدة"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب المبهم (Vagus nerve): علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "trauma-recovery-three-stages", title: getText("The Three Stages of Trauma Recovery: Safety, Regulation, Integration", "مراحل التعافي من الصدمات: الأمان ثم التنظيم ثم التكامل"), readTime: getText("12 min read", "١٢ دقيقة قراءة") }
+    { slug: "rebuild-identity-after-addiction", title: getText("Rebuild Identity After Addiction: Every Vote Builds the New Self", "إعادة بناء الهوية بعد الإدمان: كل صوت يبني الذات الجديدة"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب المبهم (Vagus nerve): علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "trauma-recovery-three-stages", title: getText("The Three Stages of Trauma Recovery: Safety, Regulation, Integration", "مراحل التعافي من الصدمات: الأمان ثم التنظيم ثم التكامل"), readTime: getText("12 min read", "12 دقيقة قراءة") }
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function TheMemoryIllusionArticle() {
               <div className="flex items-center gap-6 text-slate-400 text-sm">
                 <span className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  {getText("9 min read", "٩ دقائق قراءة")}
+                  {getText("9 min read", "9 دقائق قراءة")}
                 </span>
                 <span className="flex items-center gap-2">
                   <User className="h-4 w-4" />

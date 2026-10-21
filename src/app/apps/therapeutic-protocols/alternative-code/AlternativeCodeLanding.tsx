@@ -23,7 +23,7 @@ export default function AlternativeCodeLanding() {
       intro2={ALTERNATIVE_CODE_META.intro2}
       claim={ALTERNATIVE_CODE_META.claim}
       includes={[
-        { ar: '٥ خطوات موجهة بالكامل', en: '5 fully guided steps' },
+        { ar: '5 خطوات موجهة بالكامل', en: '5 fully guided steps' },
         { ar: 'تفاعل «مفكّك الاسم» (Name Decoder)', en: 'Name Decoder interaction' },
         { ar: 'تقنية إعادة توطيد الذاكرة وفك الارتباط الشرطي', en: 'Memory reconsolidation & conditioned association decoupling' },
         { ar: 'تأملات مخصصة لكل خطوة', en: 'Reflection prompts for each step' },

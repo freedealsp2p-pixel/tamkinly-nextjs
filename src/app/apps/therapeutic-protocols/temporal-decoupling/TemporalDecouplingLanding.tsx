@@ -23,7 +23,7 @@ export default function TemporalDecouplingLanding() {
       intro2={TEMPORAL_DECOUPLING_META.intro2}
       claim={TEMPORAL_DECOUPLING_META.claim}
       includes={[
-        { ar: '٧ خطوات موجهة بالكامل', en: '7 fully guided steps' },
+        { ar: '7 خطوات موجهة بالكامل', en: '7 fully guided steps' },
         { ar: 'تقنية إعادة توطيد الذاكرة', en: 'Memory Reconsolidation technique' },
         { ar: 'تجربة تفاعلية مع تقدم مرئي', en: 'Interactive experience with visual progress' },
         { ar: 'تأملات مخصصة لكل خطوة', en: 'Reflection prompts for each step' },

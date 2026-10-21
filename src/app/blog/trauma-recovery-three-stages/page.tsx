@@ -20,9 +20,9 @@ export default function TraumaRecoveryThreeStagesArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب المبهم (Vagus nerve): علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "erq-emotional-regulation-worksheet", title: getText("Emotional Regulation Worksheet: Master Your ERQ Skills", "ورقة عمل التنظيم العاطفي: أتقن مهاراتك في تنظيم المشاعر"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "dopamine-reset", title: getText("Dopamine Reset: Reclaiming Your Attention in a Hyperstimulating World", "إعادة ضبط الدوبامين: استعد انتباهك في عالم مفرط التحفيز"), readTime: getText("9 min read", "٩ دقائق قراءة") }
+    { slug: "vagus-nerve-breathing", title: getText("Vagus Nerve Breathing: The Science of Calming Your Body on Command", "تنفس العصب المبهم (Vagus nerve): علم تهدئة جسدك بقدرتك"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "erq-emotional-regulation-worksheet", title: getText("Emotional Regulation Worksheet: Master Your ERQ Skills", "ورقة عمل التنظيم العاطفي: أتقن مهاراتك في تنظيم المشاعر"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "dopamine-reset", title: getText("Dopamine Reset: Reclaiming Your Attention in a Hyperstimulating World", "إعادة ضبط الدوبامين: استعد انتباهك في عالم مفرط التحفيز"), readTime: getText("9 min read", "9 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function TraumaRecoveryThreeStagesArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("12 min read", "١٢ دقيقة قراءة")}
+                {getText("12 min read", "12 دقيقة قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -121,7 +121,7 @@ export default function TraumaRecoveryThreeStagesArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The most influential framework comes from psychiatrist Judith Herman, whose 1992 work established that trauma recovery unfolds in stages — safety first, remembrance and mourning second, reconnection third. Modern trauma care, from phased trauma-focused CBT to EMDR protocols, keeps the same architecture under slightly different names: safety and stabilization, then regulation and processing, then integration and reconnection. Tamkinly's Trauma Recovery Journey follows this same clinical sequence. The order is not a suggestion; it is the load-bearing wall of the whole model.",
-                "الإطار الأكثر تأثيراً يأتي من الطبيبة النفسية جوديث هيرمان، التي رسّخ عملها عام ١٩٩٢ أن التعافي من الصدمات يتكشّف على مراحل — الأمان أولاً، ثم الاستذكار والحداد، ثم إعادة الارتباط. وتحافظ الرعاية الحديثة للصدمات، من العلاج المعرفي السلوكي الموجّه للصدمات إلى بروتوكولات EMDR، على البنية نفسها بأسماء قريبة: الأمان والتثبيت، ثم التنظيم والمعالجة، ثم التكامل وإعادة الارتباط. ورحلة التعافي من الصدمات في تمكينلي تسير على هذا التسلسل السريري نفسه. والترتيب ليس اقتراحاً؛ إنه الجدار الحامل للنموذج كله."
+                "الإطار الأكثر تأثيراً يأتي من الطبيبة النفسية جوديث هيرمان، التي رسّخ عملها عام 1992 أن التعافي من الصدمات يتكشّف على مراحل — الأمان أولاً، ثم الاستذكار والحداد، ثم إعادة الارتباط. وتحافظ الرعاية الحديثة للصدمات، من العلاج المعرفي السلوكي الموجّه للصدمات إلى بروتوكولات EMDR، على البنية نفسها بأسماء قريبة: الأمان والتثبيت، ثم التنظيم والمعالجة، ثم التكامل وإعادة الارتباط. ورحلة التعافي من الصدمات في تمكينلي تسير على هذا التسلسل السريري نفسه. والترتيب ليس اقتراحاً؛ إنه الجدار الحامل للنموذج كله."
               )}
             </p>
 
@@ -131,7 +131,7 @@ export default function TraumaRecoveryThreeStagesArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Before any story is told, the body needs to know it is allowed to exhale. Stage one is practical and unglamorous: sleep restored to something regular, meals that actually happen, physical safety secured, and — most importantly — tools that can bring you back to the present when the past arrives uninvited. Grounding is the anchor skill here. The classic 5-4-3-2-1 exercise walks your five senses back into the room: five things you can see, four you can touch, three you can hear, two you can smell, one you can taste. It sounds almost too simple to work; it works precisely because it gives the alarm system hard evidence of now.",
-                "قبل أن تُروى أي قصة، يحتاج الجسد أن يعرف أنه مسموح له أن يتنفس. المرحلة الأولى عملية وغير لامعة: نومٌ يعود منتظماً، ووجبات تحدث فعلاً، وسلامة مادية مضمونة، والأهم — أدوات تعيدك إلى الحاضر حين يقتحم الماضي المكان بلا دعوة. التأريض هو مهارة المرساة هنا. تمرين ٥-٤-٣-٢-١ الكلاسيكي يعيد حواسك الخمس إلى الغرفة: خمسة أشياء تراها، وأربعة تلمسها، وثلاثة تسمعها، واثنان تشمّهما، وواحد تتذوقه. يبدو بسيطاً لدرجة الشك في فائدته؛ لكنه ينجح لأنه يقدّم لنظام الإنذار دليلاً مادياً قوياً على أننا في الآن."
+                "قبل أن تُروى أي قصة، يحتاج الجسد أن يعرف أنه مسموح له أن يتنفس. المرحلة الأولى عملية وغير لامعة: نومٌ يعود منتظماً، ووجبات تحدث فعلاً، وسلامة مادية مضمونة، والأهم — أدوات تعيدك إلى الحاضر حين يقتحم الماضي المكان بلا دعوة. التأريض هو مهارة المرساة هنا. تمرين 5-4-3-2-1 الكلاسيكي يعيد حواسك الخمس إلى الغرفة: خمسة أشياء تراها، وأربعة تلمسها، وثلاثة تسمعها، واثنان تشمّهما، وواحد تتذوقه. يبدو بسيطاً لدرجة الشك في فائدته؛ لكنه ينجح لأنه يقدّم لنظام الإنذار دليلاً مادياً قوياً على أننا في الآن."
               )}
             </p>
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -199,7 +199,7 @@ export default function TraumaRecoveryThreeStagesArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Stage one begins with small, repeatable acts. Day 1: choose one fixed wake-up time and protect it. Day 2: practice 5-4-3-2-1 grounding twice — once when calm, so the skill exists before you need it. Day 3: one paced-breathing session, five minutes, exhale longer than inhale. Day 4: a ten-minute body scan; just notice, do not fix. Day 5: build your safe-place image and visit it once. Day 6: write three sentences about today in a journal — no history, just today. Day 7: review the week and name one moment you came back to the present faster than you used to. That single data point is what recovery is made of.",
-                "تبدأ المرحلة الأولى بأفعال صغيرة قابلة للتكرار. اليوم ١: اختر موعد استيقاظ ثابتاً واحمِه. اليوم ٢: تدرّب على تأريض ٥-٤-٣-٢-١ مرتين — مرة وأنت هادئ، كي توجد المهارة قبل حاجتها. اليوم ٣: جلسة تنفس منظّم واحدة، خمس دقائق، زفير أطول من شهيق. اليوم ٤: مسح جسدي عشر دقائق؛ لاحظ فقط، لا تُصلح. اليوم ٥: ابنِ صورتك للمكان الآمن وزرها مرة. اليوم ٦: اكتب ثلاث جمل عن اليوم في دفتر — لا تاريخ، اليوم فقط. اليوم ٧: راجع الأسبوع وسمِّ لحظة واحدة عدت فيها إلى الحاضر أسرع من المعتاد. تلك النقطة الواحدة هي ما يصنع التعافي."
+                "تبدأ المرحلة الأولى بأفعال صغيرة قابلة للتكرار. اليوم 1: اختر موعد استيقاظ ثابتاً واحمِه. اليوم 2: تدرّب على تأريض 5-4-3-2-1 مرتين — مرة وأنت هادئ، كي توجد المهارة قبل حاجتها. اليوم 3: جلسة تنفس منظّم واحدة، خمس دقائق، زفير أطول من شهيق. اليوم 4: مسح جسدي عشر دقائق؛ لاحظ فقط، لا تُصلح. اليوم 5: ابنِ صورتك للمكان الآمن وزرها مرة. اليوم 6: اكتب ثلاث جمل عن اليوم في دفتر — لا تاريخ، اليوم فقط. اليوم 7: راجع الأسبوع وسمِّ لحظة واحدة عدت فيها إلى الحاضر أسرع من المعتاد. تلك النقطة الواحدة هي ما يصنع التعافي."
               )}
             </p>
 
@@ -211,7 +211,7 @@ export default function TraumaRecoveryThreeStagesArticle() {
               <p className="text-slate-600 mb-4">
                 {getText(
                   "Tamkinly's Trauma Recovery Journey walks the three clinical stages with guided tools: grounding, paced breathing, a safe-place exercise, a body scan, thought reframing, and a trauma journal. 100% free, no account needed, progress stays private on your device.",
-                  "رحلة التعافي من الصدمات في تمكينلي تسير بالمراحل السريرية الثلاث بأدوات موجّهة: التأريض، التنفس المنظّم، تمرين المكان الآمن، المسح الجسدي، إعادة صياغة الأفكار، ويوميات الصدمة. مجانية ١٠٠٪، بلا حساب، وتقدّمك يبقى خاصاً على جهازك."
+                  "رحلة التعافي من الصدمات في تمكينلي تسير بالمراحل السريرية الثلاث بأدوات موجّهة: التأريض، التنفس المنظّم، تمرين المكان الآمن، المسح الجسدي، إعادة صياغة الأفكار، ويوميات الصدمة. مجانية 100٪، بلا حساب، وتقدّمك يبقى خاصاً على جهازك."
                 )}
               </p>
               <Link href="/recovery/trc">

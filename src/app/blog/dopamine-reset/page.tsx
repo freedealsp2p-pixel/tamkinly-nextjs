@@ -20,16 +20,16 @@ export default function DopamineResetArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل العشر دقائق"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "work-on-yourself", title: getText("Work on Yourself: Psycho-Cybernetics", "اعمل على نفسك: سايبرانيكس النفسية"), readTime: getText("10 min read", "١٠ دقائق قراءة") }
+    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل العشر دقائق"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "work-on-yourself", title: getText("Work on Yourself: Psycho-Cybernetics", "اعمل على نفسك: سايبرانيكس النفسية"), readTime: getText("10 min read", "10 دقائق قراءة") }
   ];
 
   return (
     <>
       <BlogArticleJsonLd
         headline="The 24-Hour Dopamine Reset: Reclaiming Your Focus"
-        headlineAr="إعادة ضبط الدوبامين في ٢٤ ساعة: استعد تركيزك"
+        headlineAr="إعادة ضبط الدوبامين في 24 ساعة: استعد تركيزك"
         description="Reset your motivation system in just one day and rediscover natural drive."
         slug="dopamine-reset"
         datePublished="2026-07-28"
@@ -47,12 +47,12 @@ export default function DopamineResetArticle() {
               {getText("Mental Clarity", "الوضوح الذهني")}
             </Badge>
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-              {getText("The 24-Hour Dopamine Reset: Reclaiming Your Focus", "إعادة ضبط الدوبامين في ٢٤ ساعة: استعد تركيزك")}
+              {getText("The 24-Hour Dopamine Reset: Reclaiming Your Focus", "إعادة ضبط الدوبامين في 24 ساعة: استعد تركيزك")}
             </h1>
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("12 min read", "١٢ دقيقة قراءة")}
+                {getText("12 min read", "12 دقيقة قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -96,7 +96,7 @@ export default function DopamineResetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Here's the amazing part: you can reset your dopamine in just 24 hours. Not in 30 days. Not in 90 days. In one day.",
-                "إليك الجزء المذهل: يمكنك إعادة ضبط الدوبامين لديك في ٢٤ ساعة فقط. ليس في ٣٠ يوماً. ليس في ٩٠ يوماً. في يوم واحد."
+                "إليك الجزء المذهل: يمكنك إعادة ضبط الدوبامين لديك في 24 ساعة فقط. ليس في 30 يوماً. ليس في 90 يوماً. في يوم واحد."
               )}
             </p>
 
@@ -114,7 +114,7 @@ export default function DopamineResetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The problem? Your brain wasn't designed for infinite scrolling of 10-second videos. For fast food. For constant notifications. For endless stimulation.",
-                "المشكلة؟ دماغك لم يُصمم للتصفح اللانهائي لفيديوهات الـ ١٠ ثوانٍ. للوجبات السريعة. للإشعارات المستمرة. للتحفيز الذي لا ينتهي."
+                "المشكلة؟ دماغك لم يُصمم للتصفح اللانهائي لفيديوهات الـ 10 ثوانٍ. للوجبات السريعة. للإشعارات المستمرة. للتحفيز الذي لا ينتهي."
               )}
             </p>
 
@@ -129,7 +129,7 @@ export default function DopamineResetArticle() {
               <p className="text-slate-700 italic">
                 {getText(
                   "\"Imagine this: you wake up, check your phone, scroll, watch short videos, eat a sugar-filled breakfast, drink caffeine, open 12 tabs, switch between apps. This isn't natural stimulation—it's a dopamine explosion.\"",
-                  "\"تخيل هذا: تستيقظ، تتحقق من هاتفك، تتصفح، تشاهد فيديوهات قصيرة، تتناول فطوراً مليئاً بالسكر، تشرب الكافيين، تفتح ١٢ تبويباً، تتنقل بين التطبيقات. هذا ليس تحفيزاً طبيعياً — إنه انفجار دوبامين.\""
+                  "\"تخيل هذا: تستيقظ، تتحقق من هاتفك، تتصفح، تشاهد فيديوهات قصيرة، تتناول فطوراً مليئاً بالسكر، تشرب الكافيين، تفتح 12 تبويباً، تتنقل بين التطبيقات. هذا ليس تحفيزاً طبيعياً — إنه انفجار دوبامين.\""
                 )}
               </p>
             </div>
@@ -194,18 +194,18 @@ export default function DopamineResetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The remarkable thing about your brain is its neuroplasticity. It can rewire itself. The 24-hour reset leverages this adaptability to restore your natural motivation system.",
-                "الشيء الملفت في دماغك هو مرونته العصبية. يمكنه إعادة تشكيل نفسه. إعادة الضبط بـ ٢٤ ساعة تستغل هذه القدرة على التكيف لاستعادة نظام التحفيز الطبيعي لديك."
+                "الشيء الملفت في دماغك هو مرونته العصبية. يمكنه إعادة تشكيل نفسه. إعادة الضبط بـ 24 ساعة تستغل هذه القدرة على التكيف لاستعادة نظام التحفيز الطبيعي لديك."
               )}
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Step 1: Remove High-Dopamine Triggers (The Purge)", "الخطوة ١: أزل محفزات الدوبامين العالية (التطهير)")}
+              {getText("Step 1: Remove High-Dopamine Triggers (The Purge)", "الخطوة 1: أزل محفزات الدوبامين العالية (التطهير)")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "For the next 24 hours, give your brain true silence. Not just a quiet room—internal quiet. This means:",
-                "خلال الـ ٢٤ ساعة القادمة، امنح دماغك صمتاً حقيقياً. ليس مجرد غرفة هادئة — صمت داخلي. هذا يعني:"
+                "خلال الـ 24 ساعة القادمة، امنح دماغك صمتاً حقيقياً. ليس مجرد غرفة هادئة — صمت داخلي. هذا يعني:"
               )}
             </p>
 
@@ -249,7 +249,7 @@ export default function DopamineResetArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Step 2: Replace with Low-Dopamine Activities", "الخطوة ٢: استبدل بأنشطة الدوبامين المنخفضة")}
+              {getText("Step 2: Replace with Low-Dopamine Activities", "الخطوة 2: استبدل بأنشطة الدوبامين المنخفضة")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -301,7 +301,7 @@ export default function DopamineResetArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Step 3: Delay Gratification (The Reward)", "الخطوة ٣: أجّل الإشباع (المكافأة)")}
+              {getText("Step 3: Delay Gratification (The Reward)", "الخطوة 3: أجّل الإشباع (المكافأة)")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -355,7 +355,7 @@ export default function DopamineResetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "By the end of 24 hours, something shifts. You won't feel transformed overnight—but you'll notice:",
-                "بنهاية ٢٤ ساعة، شيء يتغير. لن تشعر بالتحول بين ليلة وضحاها — لكنك ستلاحظ:"
+                "بنهاية 24 ساعة، شيء يتغير. لن تشعر بالتحول بين ليلة وضحاها — لكنك ستلاحظ:"
               )}
             </p>
 

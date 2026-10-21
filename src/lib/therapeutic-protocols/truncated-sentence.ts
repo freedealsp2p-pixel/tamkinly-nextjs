@@ -38,7 +38,7 @@ export const TRUNCATED_SENTENCE_META = {
     ar: 'ما يُطمَس لا يستطيع إكمال جملته عليك.',
     en: 'What is blanked out cannot finish its sentence over you.',
   } as Bilingual,
-  durationLabel: { ar: '١٥ دقيقة + ٩ أيام', en: '15 minutes + 9 days' } as Bilingual,
+  durationLabel: { ar: '15 دقيقة + 9 أيام', en: '15 minutes + 9 days' } as Bilingual,
   freeLabel: { ar: 'مجاني', en: 'Free' } as Bilingual,
 };
 
@@ -47,7 +47,7 @@ export const AUDIO_TRACKS = {
   intro: {
     src: '/audio/truncated-sentence/intro-application.mp3',
     title: { ar: 'المقدمة والتطبيق', en: 'Introduction & Application' } as Bilingual,
-    durationLabel: { ar: '٢:٤٥ دقيقة', en: '2:45 min' } as Bilingual,
+    durationLabel: { ar: '2:45 دقيقة', en: '2:45 min' } as Bilingual,
     description: {
       ar: 'يوجهك للتحضير، وكتابة الجملة، وطمسها بالشريط اللاصق، وطي الورقة ووضعها في الماء.',
       en: 'Guides you through preparing, writing the sentence, blanking it with tape, folding the paper and placing it in the water.',
@@ -260,7 +260,7 @@ export const SCREENS_COPY = {
     { ar: 'خمس شاشات تفاعلية تنقلك من الجملة إلى الطقس.', en: 'Five interactive screens that carry you from the sentence to the ritual.' },
     { ar: 'مساران صوتيان: المقدمة والتطبيق، وليلة اليوم الثالث.', en: 'Two audio tracks: Introduction & Application, and Night of the Third Day.' },
     { ar: 'طقس مادي حقيقي: ورقة، شريط أسود، رمز، وكوب ماء.', en: 'A real physical ritual: paper, black tape, a symbol, and a cup of water.' },
-    { ar: 'مؤقت ٧٢ ساعة مع تذكير بالبريد الإلكتروني.', en: 'A 72-hour timer with an email reminder.' },
-    { ar: 'مفكرة تحول من ٩ أيام بثلاث مراحل.', en: 'A 9-day transformation journal in three phases.' },
+    { ar: 'مؤقت 72 ساعة مع تذكير بالبريد الإلكتروني.', en: 'A 72-hour timer with an email reminder.' },
+    { ar: 'مفكرة تحول من 9 أيام بثلاث مراحل.', en: 'A 9-day transformation journal in three phases.' },
   ] as { ar: string; en: string }[],
 } as const;

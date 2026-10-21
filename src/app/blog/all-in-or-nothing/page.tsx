@@ -20,9 +20,9 @@ export default function AllInOrNothingArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "magic-in-work-you-avoid", title: getText("The Magic in Work You Avoid", "السحر في العمل الذي تتجنبه"), readTime: getText("6 min read", "٦ دقائق قراءة") },
-    { slug: "five-steps-to-miracles", title: getText("Five Steps to Miracles", "خمس خطوات نحو المعجزات"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "becoming-exceptional", title: getText("Becoming Exceptional", "أن تصبح استثنائياً"), readTime: getText("8 min read", "٨ دقائق قراءة") }
+    { slug: "magic-in-work-you-avoid", title: getText("The Magic in Work You Avoid", "السحر في العمل الذي تتجنبه"), readTime: getText("6 min read", "6 دقائق قراءة") },
+    { slug: "five-steps-to-miracles", title: getText("Five Steps to Miracles", "خمس خطوات نحو المعجزات"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "becoming-exceptional", title: getText("Becoming Exceptional", "أن تصبح استثنائياً"), readTime: getText("8 min read", "8 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function AllInOrNothingArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("7 min read", "٧ دقائق قراءة")}
+                {getText("7 min read", "7 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />

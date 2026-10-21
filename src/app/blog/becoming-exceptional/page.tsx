@@ -20,9 +20,9 @@ export default function BecomingExceptionalArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "five-steps-to-miracles", title: getText("Five Steps to Miracles", "خمس خطوات نحو المعجزات"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "work-on-yourself", title: getText("Work on Yourself: Psycho-Cybernetics", "اعمل على نفسك: السيبرانية النفسية للهوية"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "all-in-or-nothing", title: getText("All In or Nothing", "إما الكل أو لا شيء"), readTime: getText("7 min read", "٧ دقائق قراءة") }
+    { slug: "five-steps-to-miracles", title: getText("Five Steps to Miracles", "خمس خطوات نحو المعجزات"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "work-on-yourself", title: getText("Work on Yourself: Psycho-Cybernetics", "اعمل على نفسك: السيبرانية النفسية للهوية"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "all-in-or-nothing", title: getText("All In or Nothing", "إما الكل أو لا شيء"), readTime: getText("7 min read", "7 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function BecomingExceptionalArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("8 min read", "٨ دقائق قراءة")}
+                {getText("8 min read", "8 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />

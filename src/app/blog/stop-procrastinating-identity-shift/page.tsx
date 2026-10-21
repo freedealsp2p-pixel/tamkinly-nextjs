@@ -43,7 +43,7 @@ export default function StopProcrastinatingIdentityShiftArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("12 min read", "١٢ دقيقة قراءة")}
+                {getText("12 min read", "12 دقيقة قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -160,7 +160,7 @@ export default function StopProcrastinatingIdentityShiftArticle() {
             </div>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Trap 1: The Fear Identity — I Might Fail", "الفخ ١: هوية الخوف — قد أفشل")}
+              {getText("Trap 1: The Fear Identity — I Might Fail", "الفخ 1: هوية الخوف — قد أفشل")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -178,7 +178,7 @@ export default function StopProcrastinatingIdentityShiftArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Trap 2: The Comfort Identity — I Avoid Discomfort", "الفخ ٢: هوية الراحة — أتجنب عدم الراحة")}
+              {getText("Trap 2: The Comfort Identity — I Avoid Discomfort", "الفخ 2: هوية الراحة — أتجنب عدم الراحة")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -196,7 +196,7 @@ export default function StopProcrastinatingIdentityShiftArticle() {
             </p>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("Trap 3: The Last-Minute Identity — I Work Best Under Pressure", "الفخ ٣: هوية اللحظة الأخيرة — أعمل أفضل تحت الضغط")}
+              {getText("Trap 3: The Last-Minute Identity — I Work Best Under Pressure", "الفخ 3: هوية اللحظة الأخيرة — أعمل أفضل تحت الضغط")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">

@@ -46,7 +46,7 @@ function TahqeeqAlahdafArticleAR() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                ١٤ دقيقة قراءة
+                14 دقيقة قراءة
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -85,7 +85,7 @@ function TahqeeqAlahdafArticleAR() {
 
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              الإحصائيات صادمة: ٩٢٪ من الناس لا يحققون أهدافهم. والسبب ليس في الأهداف نفسها — بل في النهج المتبع. معظم مناهج تحقيق الأهداف تفترض أن المشكلة في التنفيذ: "تحتاج إلى خطة أفضل"، "تحتاج إلى مزيد من الانضباط"، "تحتاج إلى تتبع تقدمك". لكن هذه النصائح تعالج الأعراض، لا المرض. المرض الحقيقي هو فجوة بين أهدافك وهويتك.
+              الإحصائيات صادمة: 92٪ من الناس لا يحققون أهدافهم. والسبب ليس في الأهداف نفسها — بل في النهج المتبع. معظم مناهج تحقيق الأهداف تفترض أن المشكلة في التنفيذ: "تحتاج إلى خطة أفضل"، "تحتاج إلى مزيد من الانضباط"، "تحتاج إلى تتبع تقدمك". لكن هذه النصائح تعالج الأعراض، لا المرض. المرض الحقيقي هو فجوة بين أهدافك وهويتك.
             </p>
 
             <div className="bg-accent/5 border-r-4 border-accent p-6 my-8 rounded-l-lg">
@@ -103,7 +103,7 @@ function TahqeeqAlahdafArticleAR() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              تخيّل شخصاً يحدد هدفاً: "سأخسر ١٠ كيلوغرامات في ٣ أشهر". هذا هدف SMART — محدد، قابل للقياس، قابل للتحقيق، ذو صلة، ومحدد بوقت. لكن إذا كانت هوية هذا الشخص تقول "أنا شخص يحب الأكل ولا يحب الحركة"، فإن الهدف يصبح معركة يومية بين ما يريد تحقيقه ومن يعتقد أنه عليه. وفي هذه المعركة، تفوز الهوية دائماً.
+              تخيّل شخصاً يحدد هدفاً: "سأخسر 10 كيلوغرامات في 3 أشهر". هذا هدف SMART — محدد، قابل للقياس، قابل للتحقيق، ذو صلة، ومحدد بوقت. لكن إذا كانت هوية هذا الشخص تقول "أنا شخص يحب الأكل ولا يحب الحركة"، فإن الهدف يصبح معركة يومية بين ما يريد تحقيقه ومن يعتقد أنه عليه. وفي هذه المعركة، تفوز الهوية دائماً.
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -118,7 +118,7 @@ function TahqeeqAlahdafArticleAR() {
                     <h3 className="font-semibold text-red-800">النهج التقليدي</h3>
                   </div>
                   <p className="text-sm text-slate-600 mb-3">الهدف ← الخطة ← التنفيذ ← النتيجة</p>
-                  <p className="text-sm text-slate-500">يتجاهل الهوية تماماً. يفترض أن أي شخص يمكنه تحقيق أي هدف بالتخطيط الكافي. نسبة الفشل: ٩٢٪</p>
+                  <p className="text-sm text-slate-500">يتجاهل الهوية تماماً. يفترض أن أي شخص يمكنه تحقيق أي هدف بالتخطيط الكافي. نسبة الفشل: 92٪</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">
@@ -128,7 +128,7 @@ function TahqeeqAlahdafArticleAR() {
                     <h3 className="font-semibold text-green-800">نهج الهوية المتوافقة</h3>
                   </div>
                   <p className="text-sm text-slate-600 mb-3">الهوية ← الأهداف المتوافقة ← الأفعال التلقائية ← النتيجة الطبيعية</p>
-                  <p className="text-sm text-slate-500">يبدأ بالهوية. الأهداف تصبح تعبيرات طبيعية عن من أنت. نسبة النجاح تفوق ٦٠٪</p>
+                  <p className="text-sm text-slate-500">يبدأ بالهوية. الأهداف تصبح تعبيرات طبيعية عن من أنت. نسبة النجاح تفوق 60٪</p>
                 </CardContent>
               </Card>
             </div>
@@ -147,19 +147,19 @@ function TahqeeqAlahdafArticleAR() {
               </h3>
               <ol className="space-y-4 text-slate-600">
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">١</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">1</span>
                   <span><strong>اكتشف هويتك الحالية:</strong> قبل أن تحدد أهدافاً، يجب أن تعرف من أنت الآن. استخدم <Link href="/apps/goal-system" className="text-accent hover:underline">نظام الأهداف</Link> لتقييم هويتك الحالية في مختلف مجالات حياتك.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٢</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">2</span>
                   <span><strong>صمم هويتك المستهدفة:</strong> اسأل نفسك: "من يجب أن أكون لأحقق هذا الهدف بشكل طبيعي؟" لا "ماذا يجب أن أفعل؟" بل "من يجب أن أكون؟"</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٣</span>
-                  <span><strong>حول الأهداف إلى أفعال هوية:</strong> كل هدف يجب أن يتحول إلى سؤال هوية. بدلاً من "سأخسر ١٠ كيلوغرامات"، اسأل "ماذا يفعل الشخص الصحي؟" ثم ابدأ بأصغر فعل يجيب على هذا السؤال.</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">3</span>
+                  <span><strong>حول الأهداف إلى أفعال هوية:</strong> كل هدف يجب أن يتحول إلى سؤال هوية. بدلاً من "سأخسر 10 كيلوغرامات"، اسأل "ماذا يفعل الشخص الصحي؟" ثم ابدأ بأصغر فعل يجيب على هذا السؤال.</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">٤</span>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">4</span>
                   <span><strong>سجّل وقيّم:</strong> سجّل كل فعل يعزز هويتك الجديدة. هذا ليس مجرد تتبع — إنه إثبات لهويتك الناشئة. الأدلة تغير القناعات أسرع من الإرادة.</span>
                 </li>
               </ol>
@@ -171,19 +171,19 @@ function TahqeeqAlahdafArticleAR() {
 
             <div className="space-y-6 my-8">
               <div className="bg-slate-50 p-6 rounded-xl">
-                <h3 className="font-semibold text-primary mb-2">🎯 الهدف: "سأقرأ ٥٠ كتاباً هذا العام"</h3>
-                <p className="text-red-600 text-sm mb-2">لماذا يفشل: لأنك حددت رقماً قبل أن تبني هوية القارئ. الدماغ يرى ٥٠ كتاباً كجبل — فيستسلم قبل أن يبدأ.</p>
-                <p className="text-green-700 text-sm">✅ كيف ينجح: ابدأ بهوية "أنا قارئ" ← اصغر فعل: اقرأ صفحة واحدة يومياً ← بعد شهر، القراءة ستكون تلقائية وستصل إلى ٥٠ كتاباً دون أن تحاول.</p>
+                <h3 className="font-semibold text-primary mb-2">🎯 الهدف: "سأقرأ 50 كتاباً هذا العام"</h3>
+                <p className="text-red-600 text-sm mb-2">لماذا يفشل: لأنك حددت رقماً قبل أن تبني هوية القارئ. الدماغ يرى 50 كتاباً كجبل — فيستسلم قبل أن يبدأ.</p>
+                <p className="text-green-700 text-sm">✅ كيف ينجح: ابدأ بهوية "أنا قارئ" ← اصغر فعل: اقرأ صفحة واحدة يومياً ← بعد شهر، القراءة ستكون تلقائية وستصل إلى 50 كتاباً دون أن تحاول.</p>
               </div>
               <div className="bg-slate-50 p-6 rounded-xl">
                 <h3 className="font-semibold text-primary mb-2">🎯 الهدف: "سأبدأ مشروعي الخاص"</h3>
                 <p className="text-red-600 text-sm mb-2">لماذا يفشل: لأنك تريد أن تصبح رائد أعمال بينما هويتك تقول "أنا موظف". الانتقال مفاجئ والدماغ يقاومه.</p>
-                <p className="text-green-700 text-sm">✅ كيف ينجح: ابدأ بهوية "أنا شخص يبني أشياء" ← اصغر فعل: خصص ١٠ دقائق يومياً لمشروع جانبي ← الهوية تتغير تدريجياً والمشروع ينمو معها.</p>
+                <p className="text-green-700 text-sm">✅ كيف ينجح: ابدأ بهوية "أنا شخص يبني أشياء" ← اصغر فعل: خصص 10 دقائق يومياً لمشروع جانبي ← الهوية تتغير تدريجياً والمشروع ينمو معها.</p>
               </div>
               <div className="bg-slate-50 p-6 rounded-xl">
                 <h3 className="font-semibold text-primary mb-2">🎯 الهدف: "سأتحسن في إدارة أموالي"</h3>
                 <p className="text-red-600 text-sm mb-2">لماذا يفشل: لأنك تحاول تغيير سلوكك المالي دون تغيير هويتك المالية. "شخص سيء في إدارة المال" لا يستطيع فجأة أن يصبح منظماً.</p>
-                <p className="text-green-700 text-sm">✅ كيف ينجح: ابدأ بهوية "أنا شخص مسؤول مالياً" ← اصغر فعل: وفّر ١٪ فقط من دخلك ← الهوية المالية الجديدة ستجعل الادخار تلقائياً.</p>
+                <p className="text-green-700 text-sm">✅ كيف ينجح: ابدأ بهوية "أنا شخص مسؤول مالياً" ← اصغر فعل: وفّر 1٪ فقط من دخلك ← الهوية المالية الجديدة ستجعل الادخار تلقائياً.</p>
               </div>
             </div>
 
@@ -204,11 +204,11 @@ function TahqeeqAlahdafArticleAR() {
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              دراسة نشرتها جامعة بنسلفانيا تُظهر أن الأشخاص الذين يحددون أهدافاً متوافقة مع قيمهم وهوياتهم يحققون نتائج أفضل بـ ٣.٥ مرة من أولئك الذين يستخدمون أهداف SMART وحدها. والسبب واضح: عندما يتوافق الهدف مع الهوية، يتحول من مهمة يجب إنجازها إلى تعبير طبيعي عن الذات.
+              دراسة نشرتها جامعة بنسلفانيا تُظهر أن الأشخاص الذين يحددون أهدافاً متوافقة مع قيمهم وهوياتهم يحققون نتائج أفضل بـ 3.5 مرة من أولئك الذين يستخدمون أهداف SMART وحدها. والسبب واضح: عندما يتوافق الهدف مع الهوية، يتحول من مهمة يجب إنجازها إلى تعبير طبيعي عن الذات.
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              وفي دراسة أخرى من جامعة ستانفورد، وُجد أن الأشخاص الذين يكتبون أهدافهم على شكل هويات ("أنا شخص يفعل كذا") بدلاً من أفعال ("سأفعل كذا") يستمرون لفترة أطول بـ ٢.٨ مرة. الفرق ليس في الهدف نفسه — بل في الطريقة التي يتعامل معها الدماغ. الهوية تُفعّل المسارات العصبية التلقائية، بينما الفعل يُفعّل المسارات الواعية التي تتطلب جهداً.
+              وفي دراسة أخرى من جامعة ستانفورد، وُجد أن الأشخاص الذين يكتبون أهدافهم على شكل هويات ("أنا شخص يفعل كذا") بدلاً من أفعال ("سأفعل كذا") يستمرون لفترة أطول بـ 2.8 مرة. الفرق ليس في الهدف نفسه — بل في الطريقة التي يتعامل معها الدماغ. الهوية تُفعّل المسارات العصبية التلقائية، بينما الفعل يُفعّل المسارات الواعية التي تتطلب جهداً.
             </p>
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">

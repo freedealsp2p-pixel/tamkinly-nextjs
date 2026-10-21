@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     ? 'تقنية الجملة المبتورة | تمرين مجاني — تمكينلي'
     : 'The Truncated Sentence Technique | Free Exercise — Tamkinly';
   const description = isAr
-    ? 'تمرين مجاني كامل: اكتب الجملة السلبية عن نفسك، اطمس وسطها بشريط أسود، ثم عِش طقس الورقة والماء عبر ثلاث ليالٍ مع مؤقت ٧٢ ساعة وتذكير بالبريد ومفكرة تحول من ٩ أيام.'
+    ? 'تمرين مجاني كامل: اكتب الجملة السلبية عن نفسك، اطمس وسطها بشريط أسود، ثم عِش طقس الورقة والماء عبر ثلاث ليالٍ مع مؤقت 72 ساعة وتذكير بالبريد ومفكرة تحول من 9 أيام.'
     : 'A completely free exercise: write the negative sentence about yourself, blank out its middle with black tape, then live the paper-and-water ritual across three nights with a 72-hour timer, email reminder and a 9-day transformation journal.';
 
   const ogAlt = isAr

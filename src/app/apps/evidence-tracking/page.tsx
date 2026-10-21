@@ -266,7 +266,7 @@ export default function EvidenceTrackingPage() {
                   onChange={(e) => setFormData(prev => ({ ...prev, evidence: e.target.value }))}
                   className="min-h-[80px]"
                 />
-                <p className="text-xs text-[#8A94A6] mt-1">{getText('Example: "I wrote my top 3 priorities before checking my phone"', 'مثال: "كتبت أهم ٣ أولويات قبل التحقق من هاتفي"')}</p>
+                <p className="text-xs text-[#8A94A6] mt-1">{getText('Example: "I wrote my top 3 priorities before checking my phone"', 'مثال: "كتبت أهم 3 أولويات قبل التحقق من هاتفي"')}</p>
               </div>
 
               <div>

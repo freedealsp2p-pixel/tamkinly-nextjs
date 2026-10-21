@@ -20,9 +20,9 @@ export default function EnvironmentalAuditWorksheetArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات القائمة على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "identity-baseline-8d-worksheet", title: getText("The Identity Baseline 8D Framework", "إطار خط أساس الهوية ثماني الأبعاد"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "١٠ دقائق قراءة") }
+    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات القائمة على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "identity-baseline-8d-worksheet", title: getText("The Identity Baseline 8D Framework", "إطار خط أساس الهوية ثماني الأبعاد"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "10 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function EnvironmentalAuditWorksheetArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("9 min read", "٩ دقائق قراءة")}
+                {getText("9 min read", "9 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -240,7 +240,7 @@ export default function EnvironmentalAuditWorksheetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "In the modern era, your digital environment may be the most influential context of all. Research shows that the average person checks their phone 96 times per day—once every 10 minutes of waking life. Each notification, app icon, and social media feed shapes your attention, mood, and behavior.",
-                "في العصر الحديث، قد تكون بيئتك الرقمية أكثر السياقات تأثيراً على الإطلاق. تُظهر الأبحاث أن الشخص العادي يتحقق من هاتفه ٩٦ مرة في اليوم—مرة كل ١٠ دقائق من وقت اليقظة. كل إشعار وأيقونة تطبيق وخلاصة وسائل التواصل الاجتماعي تشكّل انتباهك ومزاجك وسلوكك."
+                "في العصر الحديث، قد تكون بيئتك الرقمية أكثر السياقات تأثيراً على الإطلاق. تُظهر الأبحاث أن الشخص العادي يتحقق من هاتفه 96 مرة في اليوم—مرة كل 10 دقائق من وقت اليقظة. كل إشعار وأيقونة تطبيق وخلاصة وسائل التواصل الاجتماعي تشكّل انتباهك ومزاجك وسلوكك."
               )}
             </p>
 

@@ -20,9 +20,9 @@ export default function IdentityBasedHabitsWorksheetArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "physics-of-momentum", title: getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغيّر ١٨ دقيقة كل شيء"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "environmental-audit-worksheet", title: getText("Environmental Audit: Designing Your Surroundings for Change", "التدقيق البيئي: تصميم محيطك للتغيير"), readTime: getText("9 min read", "٩ دقائق قراءة") }
+    { slug: "who-am-i-worksheet", title: getText("The \"Who Am I?\" Self-Discovery Worksheet", "ورقة عمل \"من أنا؟\" لاكتشاف الذات"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum: Why 18 Minutes Changes Everything", "فيزياء الزخم: لماذا تغيّر 18 دقيقة كل شيء"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "environmental-audit-worksheet", title: getText("Environmental Audit: Designing Your Surroundings for Change", "التدقيق البيئي: تصميم محيطك للتغيير"), readTime: getText("9 min read", "9 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function IdentityBasedHabitsWorksheetArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -118,7 +118,7 @@ export default function IdentityBasedHabitsWorksheetArticle() {
                     <Target className="h-6 w-6 text-accent" />
                   </div>
                   <h3 className="font-semibold text-primary mb-2">{getText("Outcomes", "النتائج")}</h3>
-                  <p className="text-sm text-slate-600">{getText("What you want to achieve (lose 20 pounds, write a book)", "ما تريد تحقيقه (خسارة ٩ كيلو، كتابة كتاب)")}</p>
+                  <p className="text-sm text-slate-600">{getText("What you want to achieve (lose 20 pounds, write a book)", "ما تريد تحقيقه (خسارة 9 كيلو، كتابة كتاب)")}</p>
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-sm">

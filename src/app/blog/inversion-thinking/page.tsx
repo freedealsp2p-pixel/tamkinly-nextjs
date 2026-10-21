@@ -20,9 +20,9 @@ export default function InversionThinkingArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "identity-millionaire", title: getText("The Identity Millionaire", "المليونير بالهوية"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل ذات العشر دقائق"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "speed-as-strategy", title: getText("Speed as Strategy", "السرعة كاستراتيجية"), readTime: getText("7 min read", "٧ دقائق قراءة") }
+    { slug: "identity-millionaire", title: getText("The Identity Millionaire", "المليونير بالهوية"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل ذات العشر دقائق"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "speed-as-strategy", title: getText("Speed as Strategy", "السرعة كاستراتيجية"), readTime: getText("7 min read", "7 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function InversionThinkingArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("8 min read", "٨ دقائق قراءة")}
+                {getText("8 min read", "8 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -125,7 +125,7 @@ export default function InversionThinkingArticle() {
             </p>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
-              <h3 className="font-semibold text-primary mb-4">{getText("Step 1: Define Failure", "الخطوة ١: حدد الفشل")}</h3>
+              <h3 className="font-semibold text-primary mb-4">{getText("Step 1: Define Failure", "الخطوة 1: حدد الفشل")}</h3>
               <p className="text-slate-600 mb-4">
                 {getText("Instead of writing your goals, write exactly how you would fail:", "بدلاً من كتابة أهدافك، اكتب بالضبط كيف ستفشل:")}
               </p>
@@ -138,7 +138,7 @@ export default function InversionThinkingArticle() {
             </div>
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
-              <h3 className="font-semibold text-primary mb-4">{getText("Step 2: Invert the List", "الخطوة ٢: اعكس القائمة")}</h3>
+              <h3 className="font-semibold text-primary mb-4">{getText("Step 2: Invert the List", "الخطوة 2: اعكس القائمة")}</h3>
               <p className="text-slate-600 mb-4">
                 {getText("Take your failure list and avoid every item on it:", "خذ قائمة الفشل وتجنب كل بند فيها:")}
               </p>

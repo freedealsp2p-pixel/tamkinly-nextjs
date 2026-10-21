@@ -43,7 +43,7 @@ export default function HowToBuildHabitsThatStickArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("11 min read", "١١ دقيقة قراءة")}
+                {getText("11 min read", "11 دقيقة قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -141,7 +141,7 @@ export default function HowToBuildHabitsThatStickArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Layers className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("Layer 1: Outcomes", "الطبقة ١: النتائج")}</h3>
+                  <h3 className="font-semibold text-primary mb-2">{getText("Layer 1: Outcomes", "الطبقة 1: النتائج")}</h3>
                   <p className="text-sm text-slate-600">{getText("Change your results. What you get. Most people start and stop here.", "غيّر نتائجك. ما تحصل عليه. معظم الناس يبدأون ويتوقفون هنا.")}</p>
                 </CardContent>
               </Card>
@@ -150,7 +150,7 @@ export default function HowToBuildHabitsThatStickArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Zap className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("Layer 2: Process", "الطبقة ٢: العملية")}</h3>
+                  <h3 className="font-semibold text-primary mb-2">{getText("Layer 2: Process", "الطبقة 2: العملية")}</h3>
                   <p className="text-sm text-slate-600">{getText("Change your habits and systems. What you do. Better, but still fragile.", "غيّر عاداتك وأنظمتك. ما تفعله. أفضل، لكن لا يزال هشاً.")}</p>
                 </CardContent>
               </Card>
@@ -159,7 +159,7 @@ export default function HowToBuildHabitsThatStickArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Flame className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("Layer 3: Identity", "الطبقة ٣: الهوية")}</h3>
+                  <h3 className="font-semibold text-primary mb-2">{getText("Layer 3: Identity", "الطبقة 3: الهوية")}</h3>
                   <p className="text-sm text-slate-600">{getText("Change your beliefs and self-image. Who you are. This is where permanence lives.", "غيّر معتقداتك وصورتك الذاتية. من أنت. هنا تعيش الديمومة.")}</p>
                 </CardContent>
               </Card>
@@ -168,7 +168,7 @@ export default function HowToBuildHabitsThatStickArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "When you operate from Layer 3, habits are no longer something you have to do — they are something you get to do. The friction dissolves because the action is consistent with who you believe yourself to be. This is the fundamental shift that makes habits stick.",
-                "عندما تعمل من الطبقة ٣، العادات لم تعد شيئاً عليك فعله — إنها شيء تحصل على فعله. الاحتكاك يتلاشى لأن الفعل متسق مع من تعتقد أنك عليه. هذا هو التحول الجوهري الذي يجعل العادات تبقى."
+                "عندما تعمل من الطبقة 3، العادات لم تعد شيئاً عليك فعله — إنها شيء تحصل على فعله. الاحتكاك يتلاشى لأن الفعل متسق مع من تعتقد أنك عليه. هذا هو التحول الجوهري الذي يجعل العادات تبقى."
               )}
             </p>
 
@@ -185,7 +185,7 @@ export default function HowToBuildHabitsThatStickArticle() {
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <h3 className="font-semibold text-primary mb-4">
-                {getText("Law 1: Make It Obvious (Identity Cue)", "القانون ١: اجعله واضحاً (إشارة الهوية)")}
+                {getText("Law 1: Make It Obvious (Identity Cue)", "القانون 1: اجعله واضحاً (إشارة الهوية)")}
               </h3>
               <p className="text-slate-600 mb-4">
                 {getText(
@@ -197,7 +197,7 @@ export default function HowToBuildHabitsThatStickArticle() {
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <h3 className="font-semibold text-primary mb-4">
-                {getText("Law 2: Make It Attractive (Identity Craving)", "القانون ٢: اجعله جذاباً (شوق الهوية)")}
+                {getText("Law 2: Make It Attractive (Identity Craving)", "القانون 2: اجعله جذاباً (شوق الهوية)")}
               </h3>
               <p className="text-slate-600 mb-4">
                 {getText(
@@ -209,7 +209,7 @@ export default function HowToBuildHabitsThatStickArticle() {
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <h3 className="font-semibold text-primary mb-4">
-                {getText("Law 3: Make It Easy (Identity Action)", "القانون ٣: اجعله سهلاً (فعل الهوية)")}
+                {getText("Law 3: Make It Easy (Identity Action)", "القانون 3: اجعله سهلاً (فعل الهوية)")}
               </h3>
               <p className="text-slate-600 mb-4">
                 {getText(
@@ -221,7 +221,7 @@ export default function HowToBuildHabitsThatStickArticle() {
 
             <div className="bg-primary/5 p-8 rounded-xl my-10">
               <h3 className="font-semibold text-primary mb-4">
-                {getText("Law 4: Make It Satisfying (Identity Reward)", "القانون ٤: اجعله مرضياً (مكافأة الهوية)")}
+                {getText("Law 4: Make It Satisfying (Identity Reward)", "القانون 4: اجعله مرضياً (مكافأة الهوية)")}
               </h3>
               <p className="text-slate-600 mb-4">
                 {getText(
@@ -295,21 +295,21 @@ export default function HowToBuildHabitsThatStickArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Pitfall 1: The Identity Crisis. When you try to adopt a new identity that conflicts with a deeply held old one, the brain generates cognitive dissonance. You say 'I am a runner' but your internal voice says 'You have never been athletic.' Resolution: Do not fight the old identity directly. Instead, use bridging statements. Not 'I am a runner' — but 'I am becoming a runner' or 'I am the kind of person who is learning to run.' This creates less resistance while still moving in the right direction.",
-                "الفخ ١: أزمة الهوية. عندما تحاول تبني هوية جديدة تتعارض مع هوية قديمة راسخة، يولد الدماغ تنافراً معرفياً. تقول 'أنا عداء' لكن صوتك الداخلي يقول 'لم تكن رياضياً أبداً'. الحل: لا تحارب الهوية القديمة مباشرة. بدلاً من ذلك، استخدم عبارات الجسر. ليس 'أنا عداء' — بل 'أنا أصبح عداءً' أو 'أنا النوع من الأشخاص الذين يتعلمون الركض'. هذا يخلق مقاومة أقل مع الاستمرار في التحرك في الاتجاه الصحيح."
+                "الفخ 1: أزمة الهوية. عندما تحاول تبني هوية جديدة تتعارض مع هوية قديمة راسخة، يولد الدماغ تنافراً معرفياً. تقول 'أنا عداء' لكن صوتك الداخلي يقول 'لم تكن رياضياً أبداً'. الحل: لا تحارب الهوية القديمة مباشرة. بدلاً من ذلك، استخدم عبارات الجسر. ليس 'أنا عداء' — بل 'أنا أصبح عداءً' أو 'أنا النوع من الأشخاص الذين يتعلمون الركض'. هذا يخلق مقاومة أقل مع الاستمرار في التحرك في الاتجاه الصحيح."
               )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Pitfall 2: The Motivation Crash. There will be days when you simply do not feel like it. This is normal — motivation naturally fluctuates. The mistake is waiting for motivation to appear before acting. Resolution: Separate motivation from action. The identity-based approach does not require you to feel motivated — it requires you to cast a vote. You do not need to want to run. You need to run because that is what the person you are becoming would do. Action precedes motivation, not the other way around.",
-                "الفخ ٢: انهيار التحفيز. ستكون هناك أيام ببساطة لا تشعر بالرغبة. هذا طبيعي — التحفيز يتأرجح بشكل طبيعي. الخطأ هو انتظار ظهور التحفيز قبل التصرف. الحل: افصل التحفيز عن الفعل. نهج الهوية لا يتطلب منك أن تشعر بالتحفيز — يتطلب منك أن تصوّت. لا تحتاج أن تريد الركض. تحتاج أن تركض لأن هذا ما يفعله الشخص الذي تصبح عليه. الفعل يسبق التحفيز، وليس العكس."
+                "الفخ 2: انهيار التحفيز. ستكون هناك أيام ببساطة لا تشعر بالرغبة. هذا طبيعي — التحفيز يتأرجح بشكل طبيعي. الخطأ هو انتظار ظهور التحفيز قبل التصرف. الحل: افصل التحفيز عن الفعل. نهج الهوية لا يتطلب منك أن تشعر بالتحفيز — يتطلب منك أن تصوّت. لا تحتاج أن تريد الركض. تحتاج أن تركض لأن هذا ما يفعله الشخص الذي تصبح عليه. الفعل يسبق التحفيز، وليس العكس."
               )}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Pitfall 3: The Comparison Trap. Social media shows you people who seem to have perfected the habits you are just starting. This creates a sense of inadequacy that undermines your emerging identity. Resolution: Remember that identity formation is an internal process. You are not competing with anyone else's chapter ten — you are writing your own chapter one. The only comparison that matters is who you were yesterday versus who you are today.",
-                "الفخ ٣: فخ المقارنة. وسائل التواصل الاجتماعي تُظهر لك أشخاصاً يبدو أنهم أتقنوا العادات التي بدأتها للتو. هذا يخلق شعوراً بعدم الكفاية يقوض هويتك الناشئة. الحل: تذكر أن تشكيل الهوية عملية داخلية. أنت لا تنافس الفصل العاشر لأي شخص آخر — أنت تكتب فصلك الأول. المقارنة الوحيدة المهمة هي من كنت بالأمس مقابل من أنت اليوم."
+                "الفخ 3: فخ المقارنة. وسائل التواصل الاجتماعي تُظهر لك أشخاصاً يبدو أنهم أتقنوا العادات التي بدأتها للتو. هذا يخلق شعوراً بعدم الكفاية يقوض هويتك الناشئة. الحل: تذكر أن تشكيل الهوية عملية داخلية. أنت لا تنافس الفصل العاشر لأي شخص آخر — أنت تكتب فصلك الأول. المقارنة الوحيدة المهمة هي من كنت بالأمس مقابل من أنت اليوم."
               )}
             </p>
 

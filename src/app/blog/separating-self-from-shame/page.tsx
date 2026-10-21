@@ -19,9 +19,9 @@ export default function SeparatingSelfFromShameArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "rebuild-identity-after-addiction", title: getText("Rebuild Identity After Addiction: Every Vote Builds the New Self", "إعادة بناء الهوية بعد الإدمان: كل صوت يبني الذات الجديدة"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "relapse-is-data", title: getText("Relapse Is Data: What the Slip Was Trying to Tell You", "الانتكاس معلومات: ماذا أرادت الزلة أن تقول لك"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "porn-recovery-roadmap", title: getText("The Complete Porn Recovery Roadmap: 5 Stages That Actually Work", "خارطة التعافي من الإباحية: خمس مراحل فعّالة فعلاً"), readTime: getText("12 min read", "١٢ دقيقة قراءة") }
+    { slug: "rebuild-identity-after-addiction", title: getText("Rebuild Identity After Addiction: Every Vote Builds the New Self", "إعادة بناء الهوية بعد الإدمان: كل صوت يبني الذات الجديدة"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "relapse-is-data", title: getText("Relapse Is Data: What the Slip Was Trying to Tell You", "الانتكاس معلومات: ماذا أرادت الزلة أن تقول لك"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "porn-recovery-roadmap", title: getText("The Complete Porn Recovery Roadmap: 5 Stages That Actually Work", "خارطة التعافي من الإباحية: خمس مراحل فعّالة فعلاً"), readTime: getText("12 min read", "12 دقيقة قراءة") }
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function SeparatingSelfFromShameArticle() {
               <div className="flex items-center gap-6 text-slate-400 text-sm">
                 <span className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  {getText("9 min read", "٩ دقائق قراءة")}
+                  {getText("9 min read", "9 دقائق قراءة")}
                 </span>
                 <span className="flex items-center gap-2">
                   <User className="h-4 w-4" />

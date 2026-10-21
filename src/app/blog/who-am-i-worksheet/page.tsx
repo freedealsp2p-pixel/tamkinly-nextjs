@@ -20,9 +20,9 @@ export default function WhoAmIWorksheetArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات المبنية على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "١٠ دقائق قراءة") },
-    { slug: "self-authorship-worksheet", title: getText("Self-Authorship: Writing Your Own Story", "تأليف الذات: كتابة قصتك الخاصة"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "identity-baseline-8d-worksheet", title: getText("The Identity Baseline 8D Framework", "إطار خط أساس الهوية الثماني الأبعاد"), readTime: getText("8 min read", "٨ دقائق قراءة") }
+    { slug: "identity-based-habits-worksheet", title: getText("Identity-Based Habits: The James Clear Method", "العادات المبنية على الهوية: طريقة جيمس كلير"), readTime: getText("10 min read", "10 دقائق قراءة") },
+    { slug: "self-authorship-worksheet", title: getText("Self-Authorship: Writing Your Own Story", "تأليف الذات: كتابة قصتك الخاصة"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "identity-baseline-8d-worksheet", title: getText("The Identity Baseline 8D Framework", "إطار خط أساس الهوية الثماني الأبعاد"), readTime: getText("8 min read", "8 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function WhoAmIWorksheetArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("10 min read", "١٠ دقائق قراءة")}
+                {getText("10 min read", "10 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -95,7 +95,7 @@ export default function WhoAmIWorksheetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "A landmark study by Campbell and colleagues (1996) published in the Journal of Personality and Social Psychology found that people with low self-concept clarity were more prone to depression, anxiety, and chronic indecision. The researchers discovered that knowing who you are isn't just philosophical—it's foundational to psychological well-being.",
-                "وجدت دراسة بارزة لكامبل وزملائه (١٩٩٦) منشورة في مجلة الشخصية وعلم النفس الاجتماعي أن الأشخاص ذوي الوضوح المنخفض في المفهوم الذاتي كانوا أكثر عرضة للاكتئاب والقلق وعدم الحسم المزمن. اكتشف الباحثون أن معرفة من أنت ليست فلسفية فحسب — بل هي أساسية للرفاهية النفسية."
+                "وجدت دراسة بارزة لكامبل وزملائه (1996) منشورة في مجلة الشخصية وعلم النفس الاجتماعي أن الأشخاص ذوي الوضوح المنخفض في المفهوم الذاتي كانوا أكثر عرضة للاكتئاب والقلق وعدم الحسم المزمن. اكتشف الباحثون أن معرفة من أنت ليست فلسفية فحسب — بل هي أساسية للرفاهية النفسية."
               )}
             </p>
 
@@ -170,7 +170,7 @@ export default function WhoAmIWorksheetArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "Hazel Markus and Paula Nurius introduced the concept of \"possible selves\" in their influential 1986 research, showing that our visions of future identity significantly influence present behavior. When you can clearly articulate who you want to become, you're more likely to take actions aligned with that vision.",
-                "قدمت هايزل ماركوس وبولا نوريوس مفهوم \"الذوات الممكنة\" في بحثهما المؤثر عام ١٩٨٦، موضحين أن رؤيتنا لهوية المستقبل تؤثر بشكل كبير على السلوك الحالي. عندما يمكنك التعبير بوضوح عمن تريد أن تصبح، فمن المرجح أن تتخذ أفعالاً متوافقة مع تلك الرؤية."
+                "قدمت هايزل ماركوس وبولا نوريوس مفهوم \"الذوات الممكنة\" في بحثهما المؤثر عام 1986، موضحين أن رؤيتنا لهوية المستقبل تؤثر بشكل كبير على السلوك الحالي. عندما يمكنك التعبير بوضوح عمن تريد أن تصبح، فمن المرجح أن تتخذ أفعالاً متوافقة مع تلك الرؤية."
               )}
             </p>
 

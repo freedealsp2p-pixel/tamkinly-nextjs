@@ -19,9 +19,9 @@ export default function RelapseIsDataArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "relapse-prevention-system", title: getText("Relapse Prevention System: Structure That Chooses Before You Do", "نظام الوقاية من الانتكاس: بنية تختار قبل أن تفعل"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "understanding-the-compulsion-cycle", title: getText("Understanding the Compulsion Cycle: The Moment It Breaks", "فهم دورة الإدمان القهري: اللحظة التي تنكسر فيها"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "rebuild-identity-after-addiction", title: getText("Rebuild Identity After Addiction: Every Vote Builds the New Self", "إعادة بناء الهوية بعد الإدمان: كل صوت يبني الذات الجديدة"), readTime: getText("9 min read", "٩ دقائق قراءة") }
+    { slug: "relapse-prevention-system", title: getText("Relapse Prevention System: Structure That Chooses Before You Do", "نظام الوقاية من الانتكاس: بنية تختار قبل أن تفعل"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "understanding-the-compulsion-cycle", title: getText("Understanding the Compulsion Cycle: The Moment It Breaks", "فهم دورة الإدمان القهري: اللحظة التي تنكسر فيها"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "rebuild-identity-after-addiction", title: getText("Rebuild Identity After Addiction: Every Vote Builds the New Self", "إعادة بناء الهوية بعد الإدمان: كل صوت يبني الذات الجديدة"), readTime: getText("9 min read", "9 دقائق قراءة") }
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function RelapseIsDataArticle() {
               <div className="flex items-center gap-6 text-slate-400 text-sm">
                 <span className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  {getText("8 min read", "٨ دقائق قراءة")}
+                  {getText("8 min read", "8 دقائق قراءة")}
                 </span>
                 <span className="flex items-center gap-2">
                   <User className="h-4 w-4" />

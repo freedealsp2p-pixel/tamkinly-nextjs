@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     ? 'التفكيك الزمني | تمكينلي'
     : 'Temporal Decoupling | Tamkinly';
   const description = isAr
-    ? 'بروتوكول إيحائي لتفكيك الذكريات المؤلمة عبر سؤال بسيط: «كيف وصلت إلى هذه اللحظة؟» — ٧ خطوات في ١٢ دقيقة.'
+    ? 'بروتوكول إيحائي لتفكيك الذكريات المؤلمة عبر سؤال بسيط: «كيف وصلت إلى هذه اللحظة؟» — 7 خطوات في 12 دقيقة.'
     : 'A hypnotic protocol for decoupling painful memories through a single question: "How did I arrive at this moment?" — 7 steps in 12 minutes.';
 
   return {

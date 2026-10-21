@@ -20,9 +20,9 @@ export default function SpeedAsStrategyArticle() {
   const getText = (en: string, ar: string) => locale === 'ar' ? ar : en;
 
   const relatedArticles = [
-    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "٨ دقائق قراءة") },
-    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل ذات العشر دقائق"), readTime: getText("9 min read", "٩ دقائق قراءة") },
-    { slug: "inversion-thinking", title: getText("Inversion Thinking", "التفكير العكسي"), readTime: getText("8 min read", "٨ دقائق قراءة") }
+    { slug: "physics-of-momentum", title: getText("The Physics of Momentum", "فيزياء الزخم"), readTime: getText("8 min read", "8 دقائق قراءة") },
+    { slug: "ten-minute-block-system", title: getText("The 10-Minute Block System", "نظام الكتل ذات العشر دقائق"), readTime: getText("9 min read", "9 دقائق قراءة") },
+    { slug: "inversion-thinking", title: getText("Inversion Thinking", "التفكير العكسي"), readTime: getText("8 min read", "8 دقائق قراءة") }
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function SpeedAsStrategyArticle() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {getText("7 min read", "٧ دقائق قراءة")}
+                {getText("7 min read", "7 دقائق قراءة")}
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -68,7 +68,7 @@ export default function SpeedAsStrategyArticle() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="text-xl text-slate-600 leading-relaxed mb-8 font-medium">
-              {getText("Speed is the one trait that separates the top 1% from everyone else. Not intelligence. Not resources. Not talent. Just speed of execution after a decision is made.", "السرعة هي الصفة الوحيدة التي تفصل أعلى ١٪ عن الجميع. ليس الذكاء. ليس الموارد. ليس الموهبة. فقط سرعة التنفيذ بعد اتخاذ القرار.")}
+              {getText("Speed is the one trait that separates the top 1% from everyone else. Not intelligence. Not resources. Not talent. Just speed of execution after a decision is made.", "السرعة هي الصفة الوحيدة التي تفصل أعلى 1٪ عن الجميع. ليس الذكاء. ليس الموارد. ليس الموهبة. فقط سرعة التنفيذ بعد اتخاذ القرار.")}
             </p>
 
             <ArticleFigure
@@ -134,7 +134,7 @@ export default function SpeedAsStrategyArticle() {
                 {getText("When someone says something will take a week, ask: \"What's stopping us from doing this in a day?\" Often, the answer reveals that most of the \"time required\" is just padding and process.", "عندما يقول شخص إن شيئاً سيستغرق أسبوعاً، اسأل: \"ما الذي يمنعنا من فعل هذا في يوم واحد؟\" غالباً، الكشف يجلي أن معظم \"الوقت المطلوب\" هو مجرد حشو وإجراءات.")}
               </p>
               <p className="text-slate-600">
-                {getText("If you can accomplish by end of day what you planned for end of week, you've just accelerated your progress by 7x.", "إذا استطعت إنجاز بنهاية اليوم ما خططت له لنهاية الأسبوع، فقد سرّعت تقدمك بمعدل ٧ أضعاف.")}
+                {getText("If you can accomplish by end of day what you planned for end of week, you've just accelerated your progress by 7x.", "إذا استطعت إنجاز بنهاية اليوم ما خططت له لنهاية الأسبوع، فقد سرّعت تقدمك بمعدل 7 أضعاف.")}
               </p>
             </div>
 
@@ -160,7 +160,7 @@ export default function SpeedAsStrategyArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Zap className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("Day 1", "اليوم ١")}</h3>
+                  <h3 className="font-semibold text-primary mb-2">{getText("Day 1", "اليوم 1")}</h3>
                   <p className="text-sm text-slate-600">{getText("Ship the first version", "أطلق النسخة الأولى")}</p>
                 </CardContent>
               </Card>
@@ -169,7 +169,7 @@ export default function SpeedAsStrategyArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Target className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("Day 3", "اليوم ٣")}</h3>
+                  <h3 className="font-semibold text-primary mb-2">{getText("Day 3", "اليوم 3")}</h3>
                   <p className="text-sm text-slate-600">{getText("Iterate based on feedback", "راجع بناءً على التغذية الراجعة")}</p>
                 </CardContent>
               </Card>
@@ -178,8 +178,8 @@ export default function SpeedAsStrategyArticle() {
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <Rocket className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold text-primary mb-2">{getText("Day 7", "اليوم ٧")}</h3>
-                  <p className="text-sm text-slate-600">{getText("Version 4 is excellent", "النسخة ٤ ممتازة")}</p>
+                  <h3 className="font-semibold text-primary mb-2">{getText("Day 7", "اليوم 7")}</h3>
+                  <p className="text-sm text-slate-600">{getText("Version 4 is excellent", "النسخة 4 ممتازة")}</p>
                 </CardContent>
               </Card>
             </div>
@@ -212,15 +212,15 @@ export default function SpeedAsStrategyArticle() {
             </ul>
 
             <h2 className="font-serif text-2xl font-bold text-primary mt-12 mb-6">
-              {getText("The 7x Acceleration", "تسريع ٧ أضعاف")}
+              {getText("The 7x Acceleration", "تسريع 7 أضعاف")}
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("Here's the math that changes everything: If you can accomplish in one day what you planned for one week, you've just accelerated your trajectory by 7 times.", "إليك الحساب الذي يغير كل شيء: إذا استطعت إنجاز في يوم واحد ما خططت له لأسبوع، فقد سرّعت مسارك بمعدل ٧ أضعاف.")}
+              {getText("Here's the math that changes everything: If you can accomplish in one day what you planned for one week, you've just accelerated your trajectory by 7 times.", "إليك الحساب الذي يغير كل شيء: إذا استطعت إنجاز في يوم واحد ما خططت له لأسبوع، فقد سرّعت مسارك بمعدل 7 أضعاف.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              {getText("Over a year, that's not just progress—that's a different life entirely. The person executing at 7x speed isn't just ahead. They're in a completely different game.", "على مدار سنة، هذا ليس مجرد تقدم — إنها حياة مختلفة تماماً. الشخص الذي ينفذ بسرعة ٧ أضعاف ليس متقدماً فحسب. إنه في لعبة مختلفة كلياً.")}
+              {getText("Over a year, that's not just progress—that's a different life entirely. The person executing at 7x speed isn't just ahead. They're in a completely different game.", "على مدار سنة، هذا ليس مجرد تقدم — إنها حياة مختلفة تماماً. الشخص الذي ينفذ بسرعة 7 أضعاف ليس متقدماً فحسب. إنه في لعبة مختلفة كلياً.")}
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">

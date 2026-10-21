@@ -45,7 +45,7 @@ function CharismaArticleAR() {
             <div className="flex items-center gap-6 text-slate-400 text-sm">
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                ١٠ دقائق قراءة
+                10 دقائق قراءة
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -98,7 +98,7 @@ function CharismaArticleAR() {
             </p>
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
-              ١. الاهتمام الصادق والوفاء بالوعود
+              1. الاهتمام الصادق والوفاء بالوعود
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -110,7 +110,7 @@ function CharismaArticleAR() {
             </p>
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
-              ٢. مغادرة دور الضحية والتركيز على الحلول
+              2. مغادرة دور الضحية والتركيز على الحلول
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -147,7 +147,7 @@ function CharismaArticleAR() {
             <MidArticleUpgrade promoteTier="PREMIUM" variant="default" />
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
-              ٣. الحضور الكامل (أغلق هاتفك!)
+              3. الحضور الكامل (أغلق هاتفك!)
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">
@@ -155,7 +155,7 @@ function CharismaArticleAR() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              الحضور الكامل ليس مجرد ترك الهاتف، بل حالة ذهنية. يعني أن تصغي لتستمع، لا لترد. أن تلاحظ تعابير وجه الآخر ولغة جسده، لا فقط كلماته. أن تسأل أسئلة متابعة تُظهر أنك فهمت واهتممت. الأبحاث تُظهر أن متوسط الوقت الذي يصبر فيه الشخص قبل مقاطعة الآخر هو ١٧ ثانية فقط — تخيل أثر ذلك على علاقاتك. الشخص الذي يصغي فعلاً، لا يكتفي بالانتظار لدوره في الكلام، يكتسب هالة من العمق والحكمة في نظر الآخرين.
+              الحضور الكامل ليس مجرد ترك الهاتف، بل حالة ذهنية. يعني أن تصغي لتستمع، لا لترد. أن تلاحظ تعابير وجه الآخر ولغة جسده، لا فقط كلماته. أن تسأل أسئلة متابعة تُظهر أنك فهمت واهتممت. الأبحاث تُظهر أن متوسط الوقت الذي يصبر فيه الشخص قبل مقاطعة الآخر هو 17 ثانية فقط — تخيل أثر ذلك على علاقاتك. الشخص الذي يصغي فعلاً، لا يكتفي بالانتظار لدوره في الكلام، يكتسب هالة من العمق والحكمة في نظر الآخرين.
             </p>
 
             <div className="bg-accent/5 border-r-4 border-accent p-6 my-8 rounded-l-lg">
@@ -165,7 +165,7 @@ function CharismaArticleAR() {
             </div>
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">
-              ٤. الانفتاح العقلي والتحقق من مشاعر الآخرين
+              4. الانفتاح العقلي والتحقق من مشاعر الآخرين
             </h2>
 
             <p className="text-slate-600 leading-relaxed mb-6">

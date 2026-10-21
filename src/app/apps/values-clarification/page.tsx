@@ -157,7 +157,7 @@ export default function ValuesClarificationPage() {
               </div>
               <div>
                 <h1 className="text-xl font-bold">{getText('Values Clarification Tool', 'أداة توضيح القيم')}</h1>
-                <p className="text-slate-400 text-sm">{getText('FREE • 5 min', 'مجاني • ٥ دقائق')}</p>
+                <p className="text-slate-400 text-sm">{getText('FREE • 5 min', 'مجاني • 5 دقائق')}</p>
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function ValuesClarificationPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#3DD4B0]/10 text-[#3DD4B0] mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">{getText('Your Top 5 Core Values', 'أهم ٥ قيم أساسية لديك')}</h2>
+            <h2 className="text-3xl font-bold text-white mb-2">{getText('Your Top 5 Core Values', 'أهم 5 قيم أساسية لديك')}</h2>
             <p className="text-slate-400">{getText('The values that define who you are and guide your decisions', 'القيم التي تحدد هويتك وتوجه قراراتك')}</p>
           </div>
 
@@ -307,7 +307,7 @@ export default function ValuesClarificationPage() {
             </div>
             <div>
               <h1 className="text-xl font-bold">{getText('Values Clarification Tool', 'أداة توضيح القيم')}</h1>
-              <p className="text-slate-400 text-sm">{getText('FREE • 5 min', 'مجاني • ٥ دقائق')}</p>
+              <p className="text-slate-400 text-sm">{getText('FREE • 5 min', 'مجاني • 5 دقائق')}</p>
             </div>
           </div>
         </div>
@@ -318,9 +318,9 @@ export default function ValuesClarificationPage() {
         {step === 'select' && (
           <>
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-white mb-2">{getText('Step 1: Select Your Values', 'الخطوة ١: اختر قيمك')}</h2>
+              <h2 className="text-2xl font-bold text-white mb-2">{getText('Step 1: Select Your Values', 'الخطوة 1: اختر قيمك')}</h2>
               <p className="text-slate-400">
-                {getText("Choose 5-10 values that resonate most with you. You'll rank them in the next step.", 'اختر ٥-١٠ قيم تتوافق معك أكثر. سترتبها في الخطوة التالية.')}
+                {getText("Choose 5-10 values that resonate most with you. You'll rank them in the next step.", 'اختر 5-10 قيم تتوافق معك أكثر. سترتبها في الخطوة التالية.')}
               </p>
               <Badge className="mt-4 bg-[#3DD4B0]/10 text-[#3DD4B0]">
                 {getText('Selected:', 'مختار:')} {selectedValues.length}/10
@@ -384,7 +384,7 @@ export default function ValuesClarificationPage() {
         {step === 'rank' && (
           <>
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-white mb-2">{getText('Step 2: Rank Your Top 5', 'الخطوة ٢: رتّب أهم ٥ قيم')}</h2>
+              <h2 className="text-2xl font-bold text-white mb-2">{getText('Step 2: Rank Your Top 5', 'الخطوة 2: رتّب أهم 5 قيم')}</h2>
               <p className="text-slate-400">
                 {getText('Drag to reorder. Your top value should be at #1.', 'أعد الترتيب. يجب أن تكون أهم قيمة في المرتبة الأولى.')}
               </p>
