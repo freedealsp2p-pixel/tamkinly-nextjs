@@ -1,0 +1,48 @@
+name: Deploy Tree Recovery (AUD-1, 2026-10-21)
+
+# One-time recovery: deploys 183-186 all failed because the VPS working tree has a
+# stuck unresolved merge conflict in src/components/layout/Footer.tsx (local edit +
+# pull conflict -> unmerged index -> every subsequent pull aborts with status 128).
+# This workflow: abort the stuck merge (pre-merge state restored, nothing lost),
+# stash the stray Footer.tsx local edit (recoverable on the VPS via git stash list),
+# and report. Code build/deploy is NOT done here — dispatch deploy.yml afterwards.
+# Prevention: deploy.yml WORKING-TREE GUARD now covers Footer.tsx as well.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clean stuck merge + stash stray Footer edit
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USERNAME }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          cat > /tmp/recover.sh << 'EOS'
+          set -e
+          cd /var/www/tamkinly
+          echo "===BEFORE==="
+          git status --short | head -20 || true
+          echo "===ABORT_STUCK_MERGE==="
+          if git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
+            git merge --abort && echo "stuck merge aborted (tree restored to pre-merge state)"
+          else
+            git reset --merge 2>/dev/null && echo "index reset (no MERGE_HEAD)" || echo "(index already clean)"
+          fi
+          echo "===STASH_STRAY_FOOTER==="
+          git stash push -m "deploy-recover Footer.tsx $(date -u +%FT%TZ)" -- src/components/layout/Footer.tsx || true
+          echo "===AFTER==="
+          git status --short | head -20 || true
+          git stash list | head -5
+          git log --oneline -1
+          echo "===RECOVER_END==="
+          EOS
+          ssh -i ~/.ssh/vps_key -o StrictHostKeyChecking=no -o ConnectTimeout=20 -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" 'bash -s' < /tmp/recover.sh
+          rm -f ~/.ssh/vps_key

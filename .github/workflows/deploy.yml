@@ -22,15 +22,16 @@ jobs:
             set -e
             cd ${{ secrets.PROJECT_PATH }}
 
-            # ---- WORKING-TREE GUARD (2026-10-17, AUD-1) ----
-            # Deploys were blocked: VPS tree had an uncommitted local edit of
-            # src/app/methodology/self-authorship/page.tsx -> 'git pull' aborted
-            # (run 39070733976). Stash - never discard - that ONE file (explicit
+            # ---- WORKING-TREE GUARD (2026-10-17, AUD-1; extended 2026-10-21) ----
+            # Deploys were blocked: VPS tree had uncommitted local edits of
+            # src/app/methodology/self-authorship/page.tsx (run 39070733976) and
+            # src/components/layout/Footer.tsx (blocked runs 183-186 with a stuck
+            # merge conflict). Stash - never discard - those files (explicit
             # identity: server may lack git user config); anything else dirty
-            # still fails loudly. Stash remains recoverable on the VPS.
+            # still fails loudly. Stashes remain recoverable on the VPS.
             git -c user.email=autodeploy@tamkinly.local -c user.name=tamkinly-autodeploy \
               stash push -m "autodeploy guard $(date -u +%FT%TZ)" \
-              -- src/app/methodology/self-authorship/page.tsx || true
+              -- src/app/methodology/self-authorship/page.tsx src/components/layout/Footer.tsx || true
 
             # Pull latest changes
             git pull origin master
