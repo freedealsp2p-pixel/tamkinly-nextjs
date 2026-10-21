@@ -46,6 +46,24 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  // --------------------------------------------
+  // V2 BRIDGE (2026-10-22): the site's checkout buttons call
+  // ?tier=premium|mastery (LOCAL_PRODUCTS ids 'premium'/'mastery'). Under
+  // PRICING MODEL V2 those map to the ONE-TIME products (planner $9.99 /
+  // mastery $27) — legacy monthly plans are no longer sold. Serve the live
+  // Tribute product link FIRST (TRIBUTE_LIVE_LINKS defaults, env override);
+  // fall back to the legacy subscription link only if the product link is
+  // somehow unavailable.
+  // --------------------------------------------
+  if (tier === 'premium' || tier === 'mastery') {
+    const productKey = tier === 'premium' ? 'planner' : 'mastery';
+    const v2Link = getOneTimePaymentLink(productKey);
+    if (v2Link.configured && (v2Link.webLink || v2Link.telegramLink)) {
+      return NextResponse.redirect(v2Link.webLink || v2Link.telegramLink!, 302);
+    }
+    // fall through to legacy subscription handling below
+  }
+
   const link = getPaymentLink(tier);
 
   if (!link.configured) {

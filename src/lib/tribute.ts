@@ -50,42 +50,71 @@ export interface TributeWebhookPayload {
 }
 
 // ============================================
+// LIVE TRIBUTE LINKS (founder-provided 2026-10-22 — saved verbatim, AUD-1)
+// ============================================
+// Founder message 2026-10-22 (live URLs, copied as-is):
+//   LinkHub:     https://web.tribute.tg/l/1NU
+//   The Planner: https://web.tribute.tg/p/HO2
+//   Mastery:     https://web.tribute.tg/p/HO9
+// These are the canonical public purchase/hub URLs and are embedded as code
+// defaults below. Server env overrides (TRIBUTE_LINK_*_WEB) still win when set.
+
+export const TRIBUTE_LIVE_LINKS = {
+  linkhub: 'https://web.tribute.tg/l/1NU',
+  plannerWeb: 'https://web.tribute.tg/p/HO2',
+  masteryWeb: 'https://web.tribute.tg/p/HO9',
+} as const;
+
+// ============================================
 // ONE-TIME PRODUCTS (PRICING MODEL V2, 2026-10-21)
 // ============================================
 // Founder decision #4: the 3 legacy Tribute SUBSCRIPTIONS are stopped at V2
 // publish; new sales go through two one-time Tribute digital products:
 //   TRIBUTE_PRODUCT_PLANNER  → Identity Recode Planner $9.99 → PREMIUM tier
 //   TRIBUTE_PRODUCT_MASTERY  → Mastery $27 one-time          → MASTERY tier
-// The product IDs are configured via env vars on the server (founder sends
-// the IDs after creating the products in the Tribute dashboard).
+// The numeric product IDs (webhook matching) are configured via env vars on
+// the server. Web payment links now DEFAULT to TRIBUTE_LIVE_LINKS (founder
+// 2026-10-22); env (TRIBUTE_LINK_*_WEB) overrides when present.
+// defaultTributeName = the approved product title used at creation (Task 34
+// cards) — used by resolveOneTimeProduct() as the bootstrap name matcher until
+// the numeric IDs land in env; override via TRIBUTE_PRODUCT_*_NAME.
 // Access granted is PERMANENT (no expiresAt) — one payment, lifetime access.
 
 export const ONE_TIME_PRODUCTS: Record<'planner' | 'mastery', {
   productIdEnv: string;
+  nameEnv: string;
   linkEnv: string | null;
   webLinkEnv: string | null;
   priceCents: number;
   name: string;
   nameAr: string;
   tier: 'PREMIUM' | 'MASTERY';
+  defaultWebLink: string;
+  defaultTributeName: string;
 }> = {
   planner: {
     productIdEnv: 'TRIBUTE_PRODUCT_PLANNER',
+    nameEnv: 'TRIBUTE_PRODUCT_PLANNER_NAME',
     linkEnv: 'TRIBUTE_LINK_PLANNER',
     webLinkEnv: 'TRIBUTE_LINK_PLANNER_WEB',
     priceCents: 999,
     name: 'Identity Recode Planner (One-time)',
     nameAr: 'مخطط إعادة صياغة الهوية (دفعة واحدة)',
     tier: 'PREMIUM',
+    defaultWebLink: TRIBUTE_LIVE_LINKS.plannerWeb,
+    defaultTributeName: 'The Planner — Identity Recode · Tamkinly',
   },
   mastery: {
     productIdEnv: 'TRIBUTE_PRODUCT_MASTERY',
+    nameEnv: 'TRIBUTE_PRODUCT_MASTERY_NAME',
     linkEnv: 'TRIBUTE_LINK_MASTERY',
     webLinkEnv: 'TRIBUTE_LINK_MASTERY_WEB',
     priceCents: 2700,
     name: 'Tamkinly Mastery (One-time)',
     nameAr: 'تمكنلي إتقان (دفعة واحدة)',
     tier: 'MASTERY',
+    defaultWebLink: TRIBUTE_LIVE_LINKS.masteryWeb,
+    defaultTributeName: 'Mastery — Complete Identity System · Tamkinly',
   },
 };
 
@@ -101,6 +130,43 @@ export function getOneTimeProductForProductId(productId?: number): 'planner' | '
     if (raw && parseInt(raw, 10) === productId) return key;
   }
   return null;
+}
+
+export interface OneTimeProductResolution {
+  key: 'planner' | 'mastery' | null;
+  matchedBy: 'product_id' | 'product_name' | null;
+}
+
+/**
+ * Resolve an incoming Tribute digital-product webhook to a one-time tier product.
+ * 1. PRIMARY: numeric product_id match against TRIBUTE_PRODUCT_PLANNER / _MASTERY env.
+ * 2. BOOTSTRAP FALLBACK: exact product_name match against the approved Tribute
+ *    titles (env-overridable via TRIBUTE_PRODUCT_*_NAME) — bridges the gap until
+ *    the founder copies the numeric product IDs from the Tribute dashboard.
+ * FAILS SAFE: null → the webhook records the order with full notes and NO access
+ * code is issued; server logs expose the numeric product_id for env setup.
+ */
+export function resolveOneTimeProduct(productId?: number, productName?: string): OneTimeProductResolution {
+  if (productId) {
+    for (const key of ['planner', 'mastery'] as const) {
+      const raw = process.env[ONE_TIME_PRODUCTS[key].productIdEnv];
+      if (raw && parseInt(raw, 10) === productId) {
+        return { key, matchedBy: 'product_id' };
+      }
+    }
+  }
+  const name = (productName || '').trim();
+  if (name) {
+    for (const key of ['planner', 'mastery'] as const) {
+      const cfg = ONE_TIME_PRODUCTS[key];
+      const expected = (process.env[cfg.nameEnv] || cfg.defaultTributeName).trim();
+      if (name === expected) {
+        console.warn(`Tribute product matched by NAME fallback — set ${cfg.productIdEnv} with the numeric product ID from the Tribute dashboard`, { key, productName: name });
+        return { key, matchedBy: 'product_name' };
+      }
+    }
+  }
+  return { key: null, matchedBy: null };
 }
 
 // ============================================
@@ -396,14 +462,15 @@ export interface TributeOneTimeLink {
 
 /**
  * Get the payment link for a one-time product (planner / mastery).
- * Full links come from env (TRIBUTE_LINK_* / TRIBUTE_LINK_*_WEB) — copy them
- * from the Tribute dashboard when the founder creates the two products.
+ * Web link: env (TRIBUTE_LINK_*_WEB) wins, otherwise the live founder-provided
+ * default from TRIBUTE_LIVE_LINKS (2026-10-22) — so /api/tribute/redirect works
+ * out of the box now that the two products exist.
  */
 export function getOneTimePaymentLink(key: 'planner' | 'mastery'): TributeOneTimeLink {
   const cfg = ONE_TIME_PRODUCTS[key];
   const idRaw = process.env[cfg.productIdEnv];
   const telegramLink = cfg.linkEnv ? (process.env[cfg.linkEnv] || null) : null;
-  const webLink = cfg.webLinkEnv ? (process.env[cfg.webLinkEnv] || null) : null;
+  const webLink = cfg.webLinkEnv ? (process.env[cfg.webLinkEnv] || null) : cfg.defaultWebLink;
   const productId = idRaw && !isNaN(parseInt(idRaw, 10)) ? parseInt(idRaw, 10) : null;
   return {
     configured: !!(telegramLink || webLink),

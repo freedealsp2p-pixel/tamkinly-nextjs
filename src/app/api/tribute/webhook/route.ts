@@ -4,7 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyTributeWebhookSignature, processTributeWebhook, TIER_CONFIG, ONE_TIME_PRODUCTS } from '@/lib/tribute';
+import { verifyTributeWebhookSignature, processTributeWebhook, TIER_CONFIG, ONE_TIME_PRODUCTS, resolveOneTimeProduct } from '@/lib/tribute';
 
 // POST - Handle Tribute webhook
 export async function POST(request: NextRequest) {
@@ -337,9 +337,9 @@ async function handleDigitalProductEvent(result: any) {
   // TRIBUTE_PRODUCT_PLANNER → PREMIUM tier, TRIBUTE_PRODUCT_MASTERY → MASTERY tier
   // Grants PERMANENT access (no expiresAt) — one payment, lifetime access.
   // ============================================
-  const oneTimeKey = getOneTimeProductKey(productId);
-  if (oneTimeKey) {
-    return await handleOneTimeTierProductEvent(result, oneTimeKey);
+  const oneTime = resolveOneTimeProduct(productId, result.productName);
+  if (oneTime.key) {
+    return await handleOneTimeTierProductEvent(result, oneTime.key, oneTime.matchedBy);
   }
 
   // Idempotency: one order per Tribute purchase_id
@@ -422,8 +422,9 @@ async function handleDigitalProductEvent(result: any) {
   });
 
   if (!protocolSlug) {
-    console.warn('⚠️ Tribute product is NOT mapped to a protocol — set TRIBUTE_PRODUCT_* env var', {
+    console.warn('⚠️ Tribute product NOT mapped — set TRIBUTE_PRODUCT_PLANNER / TRIBUTE_PRODUCT_MASTERY (numeric ID from the Tribute dashboard) or TRIBUTE_PRODUCT_*_NAME (exact product title). The purchase is recorded below with full notes; NO access code was issued.', {
       productId,
+      productName: result.productName || null,
     });
   }
 
@@ -440,23 +441,12 @@ async function handleDigitalProductEvent(result: any) {
 // ============================================
 
 /**
- * Resolve a Tribute product ID to a one-time tier product key (planner/mastery)
- * using the env-configured product IDs. Returns null for unmapped products.
- */
-function getOneTimeProductKey(productId?: number): 'planner' | 'mastery' | null {
-  if (!productId) return null;
-  for (const key of ['planner', 'mastery'] as const) {
-    const raw = process.env[ONE_TIME_PRODUCTS[key].productIdEnv];
-    if (raw && parseInt(raw, 10) === productId) return key;
-  }
-  return null;
-}
-
-/**
  * PRICING MODEL V2: handle a one-time tier product purchase (planner/mastery).
  * Creates the order, issues a PERMANENT access code (no expiry) and emails it.
+ * matchedBy = how the purchase was mapped ('product_id' primary / 'product_name'
+ * bootstrap fallback) — recorded in order notes and server logs for audit.
  */
-async function handleOneTimeTierProductEvent(result: any, key: 'planner' | 'mastery') {
+async function handleOneTimeTierProductEvent(result: any, key: 'planner' | 'mastery', matchedBy: 'product_id' | 'product_name' | null = 'product_id') {
   const startTime = Date.now();
   const cfg = ONE_TIME_PRODUCTS[key];
   const purchaseId = result.purchaseId;
@@ -495,6 +485,7 @@ async function handleOneTimeTierProductEvent(result: any, key: 'planner' | 'mast
     notes: JSON.stringify({
       source: 'tribute_one_time_product',
       productKey: key,
+      matchedBy: matchedBy || null,
       productId: result.productId ?? null,
       productName: result.productName || cfg.name,
       purchaseId,
@@ -561,6 +552,7 @@ async function handleOneTimeTierProductEvent(result: any, key: 'planner' | 'mast
 
   console.log('Tribute ONE-TIME product processed — permanent access granted:', {
     productKey: key,
+    matchedBy,
     tier: cfg.tier,
     purchaseId,
     productId: result.productId,
