@@ -4,14 +4,17 @@ import Link from "next/link";
 import { Mail, Instagram, Linkedin, Youtube, Send } from "lucide-react";
 import { useTranslations } from "@/components/providers/LocaleProvider";
 import NewsletterForm from "@/components/NewsletterForm";
+import { SOCIAL_LINKS } from "@/lib/site-links";
+import type { SocialIconKey } from "@/lib/site-links";
 
-const socialLinkData = [
-  { href: "https://t.me/tamkinly", icon: Send, labelKey: "socialTelegram" as const },
-  { href: "https://instagram.com/tamkinly", icon: Instagram, labelKey: "socialInstagram" as const },
-  { href: "https://linkedin.com/company/tamkinly", icon: Linkedin, labelKey: "socialLinkedin" as const },
-  { href: "https://youtube.com/@tamkinly", icon: Youtube, labelKey: "socialYoutube" as const },
-  { href: "mailto:hello@tamkinly.com", icon: Mail, labelKey: "socialEmail" as const },
-];
+// Single source of truth lives in src/lib/site-links.ts (shared with /contact)
+const socialIcons: Record<SocialIconKey, typeof Mail> = {
+  telegram: Send,
+  instagram: Instagram,
+  linkedin: Linkedin,
+  youtube: Youtube,
+  email: Mail,
+};
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -59,8 +62,9 @@ export function Footer() {
     { href: "/refund", label: t("refundPolicy") },
   ];
 
-  const socialLinks = socialLinkData.map((s) => ({
+  const socialLinks = SOCIAL_LINKS.map((s) => ({
     ...s,
+    icon: socialIcons[s.icon],
     label: t(s.labelKey),
   }));
 

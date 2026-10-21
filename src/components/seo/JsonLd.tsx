@@ -56,7 +56,7 @@ export function DefaultJsonLd({ locale }: { locale?: string }) {
           sameAs: [
             'https://instagram.com/tamkinly',
             'https://linkedin.com/company/tamkinly',
-            'https://t.me/tamkinly',
+            'https://t.me/tamkinlyenglish',
           ],
           contactPoint: {
             '@type': 'ContactPoint',

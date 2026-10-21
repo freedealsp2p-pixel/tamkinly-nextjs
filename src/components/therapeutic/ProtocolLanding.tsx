@@ -544,7 +544,7 @@ function TributePurchaseModal({
 
         {/* Tribute checkout CTA — direct product link when configured */}
         <a
-          href={config.tributeTelegramLink || 'https://t.me/tamkinly'}
+          href={config.tributeTelegramLink || 'https://t.me/tamkinlyenglish'}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl text-white font-semibold transition-all duration-200 hover:shadow-lg active:scale-[0.98]"

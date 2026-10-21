@@ -481,9 +481,6 @@
     "save": "Save",
     "oneTimePayment": "One-time payment",
     "monthlySubscription": "One-time payment",
-    "oneTimePayment": "One-time payment",
-    "lifetimeAccessShort": "Lifetime access — no renewals",
-    "oneTimePayment": "One-time payment",
     "lifetimeAccessShort": "Lifetime access — no renewals",
     "aboutProduct": "About This Product",
     "keyBenefits": "Key Benefits",
@@ -1346,7 +1343,11 @@
     "emailCard": "Email",
     "responseTimeCard": "Response Time",
     "responseTimeDesc": "We typically respond within 24-48 hours during business days.",
-    "sendFailed": "Failed to send message"
+    "sendFailed": "Failed to send message",
+    "followTitle": "Follow us on social media",
+    "followSubtitle": "Daily identity-building insights, exercises and behind-the-scenes. Or send us a message using the form above — either way, we'd be happy to hear from you.",
+    "productsTitle": "Explore all our products",
+    "productsSubtitle": "Every program, app and therapeutic protocol in one place — one payment, lifetime access."
   },
   "faqPage": {
     "heroBadge": "Frequently Asked Questions",
@@ -1393,7 +1394,7 @@
         "questions": [
           {
             "q": "What payment methods do you accept?",
-            "a": "We accept payments via Tribute inside Telegram (t.me/tamkinly) with cards — as well as Crypto (USDC/USDT on the BEP20 network) or bank transfer via Wise for those unable to pay through Telegram. All methods are secure and encrypted, and your access details arrive as soon as payment is confirmed."
+            "a": "We accept payments via Tribute inside Telegram (t.me/tamkinlyenglish) with cards — as well as Crypto (USDC/USDT on the BEP20 network) or bank transfer via Wise for those unable to pay through Telegram. All methods are secure and encrypted, and your access details arrive as soon as payment is confirmed."
           },
           {
             "q": "Is there a subscription fee?",
@@ -1816,7 +1817,7 @@
     "youSave": "You Save",
     "instantAccessAfter": "Instant access after payment",
     "accessCodeSent": "Access code sent via email",
-    "lifetimeAccess": "Instant access",
+    "lifetimeAccess": "Lifetime Access",
     "loadingCheckout": "Loading checkout...",
     "backToProduct": "Back to Product",
     "backToCart": "Back to Cart",
@@ -1835,9 +1836,7 @@
     "total": "Total",
     "comingSoonBadge": "Coming Soon",
     "product": "Product",
-    "monthlyAccess": "Monthly Access",
-    "lifetimeAccess": "Lifetime Access",
-    "lifetimeAccess": "Lifetime Access"
+    "monthlyAccess": "Monthly Access"
   },
   "searchPage": {
     "badge": "Search",

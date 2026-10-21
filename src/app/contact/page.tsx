@@ -7,16 +7,26 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { 
-  Mail, 
-  MessageSquare, 
+  Mail,
   Send,
   CheckCircle2,
   AlertCircle,
   Loader2,
-  Shield
+  Shield,
+  Instagram,
+  Linkedin,
+  Youtube,
+  BookOpen,
+  CalendarCheck,
+  Crown,
+  HeartPulse,
+  Brain,
+  ArrowRight
 } from "lucide-react";
 import { Recaptcha } from "@/components/Recaptcha";
 import { useTranslations } from "@/components/providers/LocaleProvider";
+import { SOCIAL_LINKS, PRODUCT_LINKS } from "@/lib/site-links";
+import type { SocialIconKey, ProductIconKey } from "@/lib/site-links";
 
 interface FormState {
   name: string;
@@ -283,43 +293,100 @@ function ContactSection() {
   );
 }
 
-// Alternative Contact Methods
-function AlternativeSection() {
+// Follow Us + Our Products (mirrors footer logic — single source: site-links.ts)
+const socialIcons: Record<SocialIconKey, typeof Mail> = {
+  telegram: Send,
+  instagram: Instagram,
+  linkedin: Linkedin,
+  youtube: Youtube,
+  email: Mail,
+};
+
+const productIcons: Record<ProductIconKey, typeof Mail> = {
+  store: BookOpen,
+  planner: CalendarCheck,
+  mastery: Crown,
+  protocolsHub: HeartPulse,
+  protocol: Brain,
+};
+
+function FollowAndProductsSection() {
   const t = useTranslations("contactPage");
-  
+  const tf = useTranslations("footer");
+
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Social follow */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="font-serif text-2xl font-bold text-primary mb-4">
-            {t("otherWaysTitle")}
+            {t("followTitle")}
           </h2>
+          <p className="text-slate-600">
+            {t("followSubtitle")}
+          </p>
         </div>
-        
-        <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          <Card className="border-0 shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 text-accent mb-4">
-                <Mail className="h-6 w-6" />
-              </div>
-              <h3 className="font-semibold text-primary mb-2">{t("emailCard")}</h3>
-              <a href="mailto:hello@tamkinly.com" className="text-accent hover:underline">
-                hello@tamkinly.com
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto mb-20">
+          {SOCIAL_LINKS.map((social) => {
+            const Icon = socialIcons[social.icon];
+            return (
+              <a
+                key={social.href + social.labelKey}
+                href={social.href}
+                target={social.icon === 'email' ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                aria-label={tf(social.labelKey)}
+                title={tf(social.labelKey)}
+                className="group flex flex-col items-center gap-3 p-6 rounded-2xl border border-slate-200 bg-slate-50 hover:border-accent hover:shadow-md transition-all"
+              >
+                <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-colors">
+                  <Icon className="h-6 w-6" />
+                </span>
+                <span className="text-sm font-medium text-primary text-center">
+                  {tf(social.labelKey)}
+                </span>
               </a>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-0 shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 text-accent mb-4">
-                <MessageSquare className="h-6 w-6" />
-              </div>
-              <h3 className="font-semibold text-primary mb-2">{t("responseTimeCard")}</h3>
-              <p className="text-slate-600 text-sm">
-                {t("responseTimeDesc")}
-              </p>
-            </CardContent>
-          </Card>
+            );
+          })}
+        </div>
+
+        {/* All our products */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h2 className="font-serif text-2xl font-bold text-primary mb-4">
+            {t("productsTitle")}
+          </h2>
+          <p className="text-slate-600">
+            {t("productsSubtitle")}
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {PRODUCT_LINKS.map((product) => {
+            const Icon = productIcons[product.icon];
+            return (
+              <a
+                key={product.href}
+                href={product.href}
+                className="group flex items-center gap-4 p-5 rounded-2xl border border-slate-200 bg-white hover:border-accent hover:shadow-md transition-all"
+              >
+                <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-accent/10 text-accent flex-shrink-0 group-hover:bg-accent group-hover:text-white transition-colors">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="flex-1 min-w-0">
+                  <span className="block text-sm font-semibold text-primary truncate">
+                    {tf(product.labelKey)}
+                  </span>
+                  {product.price && (
+                    <span className="block text-xs text-accent font-medium mt-0.5">
+                      {product.price}
+                    </span>
+                  )}
+                </span>
+                <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-accent transition-colors rtl:rotate-180 flex-shrink-0" />
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -332,7 +399,7 @@ export default function ContactPage() {
     <>
       <HeroSection />
       <ContactSection />
-      <AlternativeSection />
+      <FollowAndProductsSection />
     </>
   );
 }

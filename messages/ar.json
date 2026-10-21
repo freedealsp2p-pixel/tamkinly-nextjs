@@ -479,9 +479,8 @@
     "backToProducts": "العودة إلى المنتجات",
     "mostPopular": "الأكثر شعبية",
     "save": "وفر",
-    "oneTimePayment": "دفعة واحدة",
-    "monthlySubscription": "دفعة واحدة",
     "oneTimePayment": "One-time payment",
+    "monthlySubscription": "دفعة واحدة",
     "lifetimeAccessShort": "Lifetime access — no renewals",
     "aboutProduct": "حول هذا المنتج",
     "keyBenefits": "الفوائد الرئيسية",
@@ -1344,7 +1343,11 @@
     "emailCard": "البريد الإلكتروني",
     "responseTimeCard": "وقت الاستجابة",
     "responseTimeDesc": "نرد عادةً خلال 24-48 ساعة في أيام العمل.",
-    "sendFailed": "فشل إرسال الرسالة"
+    "sendFailed": "فشل إرسال الرسالة",
+    "followTitle": "تابعنا على وسائل التواصل الاجتماعي",
+    "followSubtitle": "رؤى يومية لبناء الهوية وتمارين ومحتوى من خلف الكواليس. أو راسلنا عبر النموذج أعلاه — وفي الحالتين سنكون سعداء بسماع منك.",
+    "productsTitle": "استكشف جميع منتجاتنا",
+    "productsSubtitle": "كل البرامج والتطبيقات والبروتوكولات العلاجية في مكان واحد — دفعة واحدة، وصول دائم."
   },
   "faqPage": {
     "heroBadge": "الأسئلة الشائعة",
@@ -1391,7 +1394,7 @@
         "questions": [
           {
             "q": "ما طرق الدفع التي تقبلونها؟",
-            "a": "نقبل الدفع عبر منصة Tribute داخل تيليجرام (t.me/tamkinly) بالبطاقات — وكذلك العملات الرقمية (USDC/USDT عبر شبكة BEP20) أو الحوالة البنكية عبر Wise لمن لا يستطيع الدفع عبر تيليجرام. جميع الطرق آمنة ومشفرة، وستصلك تفاصيل الوصول فور تأكيد الدفع."
+            "a": "نقبل الدفع عبر منصة Tribute داخل تيليجرام (t.me/tamkinlyenglish) بالبطاقات — وكذلك العملات الرقمية (USDC/USDT عبر شبكة BEP20) أو الحوالة البنكية عبر Wise لمن لا يستطيع الدفع عبر تيليجرام. جميع الطرق آمنة ومشفرة، وستصلك تفاصيل الوصول فور تأكيد الدفع."
           },
           {
             "q": "هل هناك رسوم اشتراك؟",
@@ -1814,7 +1817,7 @@
     "youSave": "أنت توفر",
     "instantAccessAfter": "وصول فوري بعد الدفع",
     "accessCodeSent": "رمز الوصول مرسل عبر البريد الإلكتروني",
-    "lifetimeAccess": "وصول فوري",
+    "lifetimeAccess": "Lifetime Access",
     "loadingCheckout": "جارٍ تحميل الدفع...",
     "backToProduct": "العودة للمنتج",
     "backToCart": "العودة للسلة",
@@ -1833,8 +1836,7 @@
     "total": "المجموع",
     "comingSoonBadge": "قريباً",
     "product": "المنتج",
-    "monthlyAccess": "وصول شهري",
-    "lifetimeAccess": "Lifetime Access"
+    "monthlyAccess": "وصول شهري"
   },
   "searchPage": {
     "badge": "البحث",
