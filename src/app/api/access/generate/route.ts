@@ -32,8 +32,9 @@ export async function POST(request: NextRequest) {
       accessTier = getTierFromProductId(productId);
     }
 
-    // Monthly subscription validity (2026-09-28): BASIC is the $7/month plan —
-    // each code is valid for a 30-day cycle and is extended automatically on
+    // Monthly validity for LEGACY BASIC codes only (2026-09-28; V2 2026-10-21: Basic
+    // is no longer sold — new purchases are one-time with permanent access).
+    // Legacy Basic codes keep their 30-day cycle and are extended automatically on
     // every successful renewal (Tribute webhook extends expiresAt).
     let expiresAt: Date | undefined;
     if (accessTier === 'BASIC') {

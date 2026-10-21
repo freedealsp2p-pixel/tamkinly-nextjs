@@ -1,17 +1,22 @@
 // ============================================
-// DRIP SEQUENCES - Email Automation Definitions (NEW MODEL 2025)
+// DRIP SEQUENCES - Email Automation Definitions (PRICING MODEL V2, 2026-10-21)
 // Tamkinly Identity Transformation Platform
 // ============================================
-// 9 sequences for the new 3-tier monthly subscription model:
-//   1. LEAD_NURTURE — Quiz completers → BASIC conversion
-//   2. BASIC_ONBOARDING — BASIC purchase → activation + upsell to PREMIUM
-//   3. PREMIUM_ONBOARDING — PREMIUM purchase → 30-day journey + upsell to MASTERY
-//   4. MASTERY_ONBOARDING — MASTERY purchase → VIP activation + retention
+// PRICING MODEL V2: one-time payments. Identity Recode Planner = $9.99 (was
+// Basic $7 + Premium $17 monthly); Mastery = $27 one-time. The upsell
+// sequences (#8, #9) are DISABLED — with a single $9.99 entry product there
+// is no BASIC→PREMIUM upsell, and the Premium→Mastery flow moved to Brevo
+// (planned replacement sequence, not yet live).
+// Sequences:
+//   1. LEAD_NURTURE — Quiz completers → PLANNER conversion ($9.99)
+//   2. BASIC_ONBOARDING — LEGACY Basic purchase → activation
+//   3. PREMIUM_ONBOARDING — Planner purchase → 30-day journey
+//   4. MASTERY_ONBOARDING — Mastery purchase → VIP activation + retention
 //   5. ABANDONED_CART_1H — Cart abandoned (1 hour)
 //   6. ABANDONED_CART_24H — Cart abandoned (24 hours)
 //   7. RE_ENGAGEMENT — Inactive users (14 days)
-//   8. UPSELL_BASIC_TO_PREMIUM — Day 5 of BASIC journey
-//   9. UPSELL_PREMIUM_TO_MASTERY — Day 21 of PREMIUM journey
+//   8. UPSELL_BASIC_TO_PREMIUM — DISABLED (V2: Basic no longer sold)
+//   9. UPSELL_PREMIUM_TO_MASTERY — DISABLED (V2: monthly upsell obsolete)
 // ============================================
 
 // ============================================
@@ -75,8 +80,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://tamkinly.com';
 
 const LEAD_NURTURE_SEQUENCE: DripSequence = {
   id: 'lead_nurture_sequence',
-  name: 'Lead Nurture — Quiz to BASIC',
-  description: 'Nurture quiz completers from results to first BASIC subscription',
+  name: 'Lead Nurture — Quiz to PLANNER',
+  description: 'Nurture quiz completers from results to the Identity Recode Planner ($9.99 one-time)',
   tier: 'free',
   trigger: 'LEAD_NURTURE',
   isActive: true,
@@ -120,13 +125,13 @@ const LEAD_NURTURE_SEQUENCE: DripSequence = {
     {
       stepNumber: 4,
       delayHours: 72, // Day 7 (3 days after step 3)
-      subject: 'Ready to start your 7-day transformation? ($7/mo) ⬆️',
-      subjectAr: 'مستعد لبدء تحولك لـ 7 أيام؟ ($7/شهر) ⬆️',
-      preheader: 'Your Basic subscription unlocks the 7-Day System',
+      subject: 'Ready to start your transformation? ($9.99 once) ⬆️',
+      subjectAr: 'مستعد لبدء تحولك؟ (9.99$ دفعة واحدة) ⬆️',
+      preheader: 'One payment unlocks the 7-Day System + the full 30-day journey',
       preheaderAr: 'اشتراكك الأساسي يفتح نظام 7 أيام',
       templateName: 'day14FollowUp',
-      primaryCta: 'Start Basic — $7/mo',
-      primaryUrl: `${BASE_URL}/products/basic`,
+      primaryCta: 'Get the Planner — $9.99',
+      primaryUrl: `${BASE_URL}/products/premium`,
       tags: ['lead', 'day7', 'offer', 'basic', 'upsell'],
     },
     {
@@ -137,36 +142,36 @@ const LEAD_NURTURE_SEQUENCE: DripSequence = {
       preheader: 'Real story + why Basic is the perfect start',
       preheaderAr: 'قصة حقيقية + لماذا الأساسي بداية مثالية',
       templateName: 'day14FollowUp',
-      primaryCta: 'Start Your Journey — $7/mo',
-      primaryUrl: `${BASE_URL}/products/basic`,
+      primaryCta: 'Start Your Journey — $9.99',
+      primaryUrl: `${BASE_URL}/products/premium`,
       tags: ['lead', 'day14', 'testimonial', 'basic', 'upsell'],
     },
     {
       stepNumber: 6,
       delayHours: 168, // Day 21 (7 days after step 5)
-      subject: 'Last chance: 7-Day System at $7/mo 🕐',
-      subjectAr: 'فرصة أخيرة: نظام 7 أيام بـ $7/شهر 🕐',
+      subject: 'Last chance: the Identity Recode Planner at $9.99 🕐',
+      subjectAr: 'فرصة أخيرة: مخطط إعادة صياغة الهوية بـ 9.99$ 🕐',
       preheader: 'Your quiz results expire soon. Take action.',
       preheaderAr: 'نتائج اختبارك تنتهي قريباً. اتخذ إجراءً.',
       templateName: 'reEngagement',
-      primaryCta: 'Unlock Basic Now',
-      primaryUrl: `${BASE_URL}/products/basic`,
+      primaryCta: 'Get the Planner Now — $9.99',
+      primaryUrl: `${BASE_URL}/products/premium`,
       tags: ['lead', 'day21', 'urgency', 'basic', 'upsell'],
     },
   ],
 };
 
 // ============================================
-// SEQUENCE 2: BASIC_ONBOARDING (BASIC purchase → activation + upsell)
+// SEQUENCE 2: BASIC_ONBOARDING (LEGACY Basic purchase → activation)
 // ============================================
-// Trigger: Webhook confirms $7 payment
-// Goal: Activate user in 7 days + upsell to PREMIUM
+// Trigger: Webhook confirms $7 payment (LEGACY subscribers only)
+// Goal: Activate legacy Basic subscriber in 7 days
 // ============================================
 
 const BASIC_ONBOARDING_SEQUENCE: DripSequence = {
   id: 'basic_onboarding_sequence',
-  name: 'BASIC Onboarding — 7-Day Journey + Upsell',
-  description: 'Guide BASIC subscribers through 7-day journey and convert to PREMIUM',
+  name: 'BASIC Onboarding — 7-Day Journey (Legacy)',
+  description: 'Guide legacy Basic subscribers through the 7-day journey (upsells point to the $9.99 Planner / $27 Mastery)',
   tier: 'basic',
   trigger: 'BASIC_ONBOARDING',
   isActive: true,
@@ -227,7 +232,7 @@ const BASIC_ONBOARDING_SEQUENCE: DripSequence = {
       preheader: 'You completed 7 days! Ready for the 30-day journey?',
       preheaderAr: 'أكملت 7 أيام! مستعد لرحلة 30 يوماً؟',
       templateName: 'day14FollowUp',
-      primaryCta: 'Upgrade to Premium — $17/mo',
+      primaryCta: 'Upgrade — Identity Recode Planner $9.99',
       primaryUrl: `${BASE_URL}/products/premium`,
       tags: ['basic', 'day7', 'milestone', 'upsell', 'premium'],
     },
@@ -246,8 +251,8 @@ const BASIC_ONBOARDING_SEQUENCE: DripSequence = {
     {
       stepNumber: 7,
       delayHours: 96, // Day 14 (4 days after step 6)
-      subject: 'Special: First month Premium at $12 (save $5) 🎁',
-      subjectAr: 'عرض خاص: أول شهر مميز بـ $12 (وفر $5) 🎁',
+      subject: 'Everything in one payment: the Planner at $9.99 🎁',
+      subjectAr: 'كل شيء بدفعة واحدة: المخطط بـ 9.99$ 🎁',
       preheader: 'Exclusive upgrade offer for Basic subscribers',
       preheaderAr: 'عرض ترقية حصري لمشتركي الأساسي',
       templateName: 'day14FollowUp',
@@ -261,7 +266,7 @@ const BASIC_ONBOARDING_SEQUENCE: DripSequence = {
 // ============================================
 // SEQUENCE 3: PREMIUM_ONBOARDING (PREMIUM purchase → 30-day journey + upsell)
 // ============================================
-// Trigger: Webhook confirms $17 payment
+// Trigger: Webhook confirms $9.99 payment (Planner purchase — V2)
 // Goal: Complete 30-day journey + upsell to MASTERY
 // ============================================
 
@@ -353,7 +358,7 @@ const PREMIUM_ONBOARDING_SEQUENCE: DripSequence = {
       preheader: 'AI Coach + Community + Emotion Regulation + Priority Support',
       preheaderAr: 'مدرب ذكي + مجتمع + تنظيم المشاعر + دعم أولوية',
       templateName: 'day14FollowUp',
-      primaryCta: 'Upgrade to MASTERY — $27/mo',
+      primaryCta: 'Upgrade to MASTERY — $27 once',
       primaryUrl: `${BASE_URL}/products/mastery`,
       tags: ['premium', 'day30', 'milestone', 'upsell', 'mastery'],
     },
@@ -570,10 +575,10 @@ const RE_ENGAGEMENT_SEQUENCE: DripSequence = {
 const UPSELL_BASIC_TO_PREMIUM_SEQUENCE: DripSequence = {
   id: 'upsell_basic_to_premium_sequence',
   name: 'Upsell — BASIC to PREMIUM',
-  description: 'Convert BASIC subscribers to PREMIUM after 5 days',
+  description: 'DISABLED (PRICING MODEL V2): Basic is no longer sold — one-time $9.99 Planner replaced the Basic+Premium pair',
   tier: 'basic',
   trigger: 'UPSELL_BASIC_TO_PREMIUM',
-  isActive: true,
+  isActive: false, // PRICING MODEL V2 (2026-10-21): disabled — no more Basic->Premium monthly upsell
   steps: [
     {
       stepNumber: 1,
@@ -590,7 +595,7 @@ const UPSELL_BASIC_TO_PREMIUM_SEQUENCE: DripSequence = {
     {
       stepNumber: 2,
       delayHours: 48, // Day 2
-      subject: 'BASIC vs PREMIUM: What\'s the difference? 📊',
+      subject: 'Planner vs MASTERY: What\'s the difference? 📊',
       subjectAr: 'الأساسي vs المميز: ما الفرق؟ 📊',
       preheader: 'Side-by-side comparison of 1 app vs 11 apps',
       preheaderAr: 'مقارنة جنباً إلى جنب لتطبيق vs 11 تطبيقاً',
@@ -602,7 +607,7 @@ const UPSELL_BASIC_TO_PREMIUM_SEQUENCE: DripSequence = {
     {
       stepNumber: 3,
       delayHours: 96, // Day 4 (2 days after step 2)
-      subject: 'Limited: First month Premium at $12 (save $5) 🎁',
+      subject: 'Limited: the full Planner at $9.99 (was $17) 🎁',
       subjectAr: 'محدود: أول شهر مميز بـ $12 (وفر $5) 🎁',
       preheader: 'Exclusive offer for Basic subscribers',
       preheaderAr: 'عرض حصري لمشتركي الأساسي',
@@ -620,10 +625,10 @@ const UPSELL_BASIC_TO_PREMIUM_SEQUENCE: DripSequence = {
 const UPSELL_PREMIUM_TO_MASTERY_SEQUENCE: DripSequence = {
   id: 'upsell_premium_to_mastery_sequence',
   name: 'Upsell — PREMIUM to MASTERY',
-  description: 'Convert PREMIUM subscribers to MASTERY after 21 days',
+  description: 'DISABLED (PRICING MODEL V2): monthly upsell flow retired; Planner buyers get the Mastery offer on the site',
   tier: 'premium',
   trigger: 'UPSELL_PREMIUM_TO_MASTERY',
-  isActive: true,
+  isActive: false, // PRICING MODEL V2 (2026-10-21): disabled — monthly upsell obsolete
   steps: [
     {
       stepNumber: 1,
@@ -657,7 +662,7 @@ const UPSELL_PREMIUM_TO_MASTERY_SEQUENCE: DripSequence = {
       preheader: 'AI Coach + Community + Emotion Regulation + Priority Support',
       preheaderAr: 'مدرب ذكي + مجتمع + تنظيم مشاعر + دعم أولوية',
       templateName: 'day14FollowUp',
-      primaryCta: 'Upgrade to MASTERY — $27/mo',
+      primaryCta: 'Upgrade to MASTERY — $27 once',
       primaryUrl: `${BASE_URL}/products/mastery`,
       tags: ['upsell', 'premium-to-mastery', 'offer', 'day4', 'urgency'],
     },

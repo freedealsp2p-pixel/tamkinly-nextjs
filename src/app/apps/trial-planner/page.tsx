@@ -40,10 +40,10 @@ export default function TrialPlannerPage() {
             </div>
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Badge className="bg-[#e6f3f4] text-[#2A8A94]">{getText('BASIC', 'تجربة')}</Badge>
-                <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0]">$7</Badge>
+                <Badge className="bg-[#e6f3f4] text-[#2A8A94]">{getText('PLANNER', 'المخطط')}</Badge>
+                <Badge className="bg-[#3DD4B0]/10 text-[#3DD4B0]">$9.99</Badge>
               </div>
-              <h1 className="text-3xl font-bold text-white">{getText('Basic Planner — 7-Day Journey', 'مخطط أساسي — رحلة 7 أيام')}</h1>
+              <h1 className="text-3xl font-bold text-white">{getText('7-Day Journey — Included in the Identity Recode Planner', 'رحلة 7 أيام — مشمولة في مخطط إعادة صياغة الهوية')}</h1>
             </div>
           </div>
 
@@ -70,10 +70,10 @@ export default function TrialPlannerPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/checkout?product=trial">
+                <Link href="/checkout?product=premium">
                   <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] px-8 h-14 text-lg font-semibold">
                     <Sparkles className="w-5 h-5 mr-2" />
-                    {getText('Start Basic - $7/mo', 'ابدأ أساسي - $7/شهر')}
+                    {getText('Get the Planner — $9.99 once', 'احصل على المخطط — 9.99$ دفعة واحدة')}
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>

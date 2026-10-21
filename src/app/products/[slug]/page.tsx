@@ -29,13 +29,16 @@ import { addToCart } from "@/lib/cart-client";
 
 // Product configuration with prices and icons only (translatable content comes from translations)
 // Slug alias mapping: page slugs -> translation keys that exist in messages/{en,ar}.json
-// JSON products: trial ($7 7-day), planner ($17 Identity Recode Planner), premium ($27 Premium Transformation)
+// PRICING MODEL V2 (2026-10-21): /products/premium = Identity Recode Planner $9.99 one-time
+// (anchor $17 crossed out); /products/mastery = Mastery $27 one-time.
+// Legacy slugs 'basic'/'trial'/'planner' all render the Identity Recode Planner page
+// (the former Basic $7 plan is no longer sold — old links keep converting).
 const slugToTranslationKey: Record<string, string> = {
-  'basic': 'trial',
+  'basic': 'planner',
   'premium': 'planner',
   'mastery': 'premium',
-  // Legacy slugs map to their own existing keys
-  'trial': 'trial',
+  // Legacy slugs map to the same planner page
+  'trial': 'planner',
   'planner': 'planner',
 };
 
@@ -48,20 +51,11 @@ const productsConfig: Record<string, {
   icon: React.ElementType;
   color: string;
 }> = {
-  'basic': {
-    id: "basic",
-    slug: "basic",
-    price: 7,
-    comparePrice: 0,
-    popular: false,
-    icon: Clock,
-    color: "#1F6F78"
-  },
   'premium': {
     id: "premium",
     slug: "premium",
-    price: 17,
-    comparePrice: 0,
+    price: 9.99,
+    comparePrice: 17,
     popular: true,
     icon: Calendar,
     color: "#3DD4B0"
@@ -75,21 +69,30 @@ const productsConfig: Record<string, {
     icon: Award,
     color: "#0F1C2E"
   },
-  // Legacy slugs - redirect to new ones
+  // Legacy slugs - render the Identity Recode Planner ($9.99 one-time)
+  'basic': {
+    id: "premium",
+    slug: "premium",
+    price: 9.99,
+    comparePrice: 17,
+    popular: true,
+    icon: Calendar,
+    color: "#3DD4B0"
+  },
   'trial': {
-    id: "basic",
-    slug: "basic",
-    price: 7,
-    comparePrice: 0,
-    popular: false,
-    icon: Clock,
-    color: "#1F6F78"
+    id: "premium",
+    slug: "premium",
+    price: 9.99,
+    comparePrice: 17,
+    popular: true,
+    icon: Calendar,
+    color: "#3DD4B0"
   },
   'planner': {
     id: "premium",
     slug: "premium",
-    price: 17,
-    comparePrice: 0,
+    price: 9.99,
+    comparePrice: 17,
     popular: true,
     icon: Calendar,
     color: "#3DD4B0"
@@ -98,7 +101,9 @@ const productsConfig: Record<string, {
 
 // Product page component
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+  const { slug: rawSlug } = use(params);
+  // PRICING MODEL V2: legacy slugs all render the Identity Recode Planner page
+  const slug = (rawSlug === 'basic' || rawSlug === 'trial' || rawSlug === 'planner') ? 'premium' : rawSlug;
   const t = useTranslations();
   const { direction, locale } = useLocale();
   const { toast } = useToast();
@@ -417,7 +422,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                   )}
                   {config.comparePrice > config.price && (
                     <Badge className="bg-green-500/20 text-green-400 border border-green-500/30">
-                      {t('productDetail.save')} ${config.comparePrice - config.price}
+                      {t('productDetail.save')} ${Math.round((config.comparePrice - config.price) * 100) / 100}
                     </Badge>
                   )}
                 </div>
@@ -437,7 +442,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                     <span className="text-xl text-slate-400 line-through">${config.comparePrice}</span>
                   )}
                   <Badge variant="outline" className="text-slate-300 border-slate-600">
-                    {t('productDetail.monthlySubscription')}
+                    {t('productDetail.oneTimePayment')}
                   </Badge>
                 </div>
                 
@@ -643,7 +648,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                             <span className="text-lg text-slate-400 line-through">${config.comparePrice}</span>
                           )}
                         </div>
-                        <p className="text-sm text-slate-500">{t('productDetail.monthlySubscription')} • {t('productDetail.cancelAnytime')}</p>
+                        <p className="text-sm text-slate-500">{t('productDetail.oneTimePayment')} • {t('productDetail.lifetimeAccessShort')}</p>
                       </div>
                       
                       <Button 

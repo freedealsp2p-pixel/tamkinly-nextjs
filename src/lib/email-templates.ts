@@ -238,28 +238,28 @@ export function getPurchaseConfirmationHtml(
 // BASIC PURCHASE EMAIL (7-Day System) - kept for backward compat
 // ============================================
 export function getTrialPurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, 'Basic (Monthly) · أساسي', 'trial', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Identity Recode Planner · مخطط إعادة صياغة الهوية', 'trial', locale);
 }
 
 // ============================================
 // PLANNER PURCHASE EMAIL (Main Product) - kept for backward compat
 // ============================================
 export function getPlannerPurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, 'Premium (Monthly) · مميز', 'basic', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Identity Recode Planner · مخطط إعادة صياغة الهوية', 'basic', locale);
 }
 
 // ============================================
 // PREMIUM PURCHASE EMAIL - kept for backward compat
 // ============================================
 export function getPremiumPurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, 'Premium (Monthly) · مميز', 'premium', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Identity Recode Planner · مخطط إعادة صياغة الهوية', 'premium', locale);
 }
 
 // ============================================
 // MASTERY PURCHASE EMAIL (VIP) - kept for backward compat
 // ============================================
 export function getBundlePurchaseEmailHtml(name: string, accessKey: string, locale: 'en' | 'ar' = 'en'): string {
-  return getPurchaseConfirmationHtml(name, accessKey, 'Mastery (Monthly)', 'bundle', locale);
+  return getPurchaseConfirmationHtml(name, accessKey, 'Mastery · إتقان (One-time · دفعة واحدة)', 'bundle', locale);
 }
 
 // ============================================
@@ -376,9 +376,9 @@ export function getDay14FollowUpHtml(name: string, currentTier: string = 'basic'
   const isAr = locale === 'ar';
 
   const upgradeMap: Record<string, { en: string; ar: string; price: string }> = {
-    trial: { en: 'Basic (Monthly)', ar: 'أساسي (شهري)', price: '$7/mo' },
-    basic: { en: 'Premium (Monthly)', ar: 'مميز (شهري)', price: '$17/mo' },
-    premium: { en: 'Mastery (Monthly)', ar: 'إتقان (شهري)', price: '$27/mo' },
+    trial: { en: 'Identity Recode Planner', ar: 'مخطط إعادة صياغة الهوية', price: '$9.99 one-time' },
+    basic: { en: 'Identity Recode Planner', ar: 'مخطط إعادة صياغة الهوية', price: '$9.99 one-time' },
+    premium: { en: 'Mastery', ar: 'الإتقان', price: '$27 one-time' },
   };
 
   const upgrade = upgradeMap[currentTier] || upgradeMap.basic;

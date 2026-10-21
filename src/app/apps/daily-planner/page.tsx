@@ -16,7 +16,7 @@ export default function DailyPlannerPage() {
 <div className="min-h-screen bg-[#F6F8FA]" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <div className="bg-gradient-to-br from-[#0F1C2E] via-[#0F1C2E] to-[#1F6F78] text-white py-12 px-4">
         <div className="container mx-auto max-w-4xl">
-          <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#3DD4B0]/30 mb-4">{getText('BASIC - $7', 'الأساسية - $7')}</Badge>
+          <Badge className="bg-[#1F6F78]/20 text-[#3DD4B0] border border-[#3DD4B0]/30 mb-4">{getText('Included — Planner $9.99', 'مشمول — المخطط 9.99$')}</Badge>
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">{getText('30-Day Identity Planner', 'مخطط الهوية لـ 30 يوماً')}</h1>
           <p className="text-lg text-slate-300">{getText('Interactive 30-day planner with identity prompts, non-negotiable actions, and evidence tracking.', 'مخطط تفاعلي لـ 30 يوماً مع محفزات الهوية، والإجراءات غير القابلة للتفاوض، وتتبع الأدلة.')}</p>
         </div>
@@ -28,7 +28,7 @@ export default function DailyPlannerPage() {
               <Lock className="w-8 h-8 text-[#3DD4B0]" />
             </div>
             <CardTitle className="text-2xl">{getText('Access Required', 'الوصول مطلوب')}</CardTitle>
-            <CardDescription>{getText('This app is included in the BASIC package ($7)', 'هذا التطبيق مضمّن في الباقة الأساسية ($7)')}</CardDescription>
+            <CardDescription>{getText('This app is included in the Identity Recode Planner ($9.99 one-time)', 'هذا التطبيق مضمّن في مخطط إعادة صياغة الهوية (9.99$ دفعة واحدة)')}</CardDescription>
           </CardHeader>
           <CardContent className="text-center">
             <div className="space-y-4 mb-6">
@@ -44,9 +44,9 @@ export default function DailyPlannerPage() {
                 </div>
               ))}
             </div>
-            <Link href="/products/basic">
+            <Link href="/products/premium">
               <Button className="w-full h-12 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold">
-                {getText('Get Access - $7', 'احصل على الوصول - $7')} <ArrowRight className="w-4 h-4 ml-2" />
+                {getText('Get Access — $9.99 once', 'احصل على الوصول — 9.99$ دفعة واحدة')} <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </CardContent>

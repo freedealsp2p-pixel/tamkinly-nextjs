@@ -124,9 +124,9 @@ export const BREVO_TEMPLATES = {
   QUIZ_RESULTS:           { ar: 35, en: 58 }, // TK-02
 
   // Access codes / purchase delivery (tech)
-  CODE_BASIC:             { ar: 36, en: 59 }, // TK-03 $7/mo
-  CODE_PREMIUM:           { ar: 37, en: 60 }, // TK-04 $17/mo
-  CODE_MASTERY:           { ar: 38, en: 61 }, // TK-05 $27/mo
+  CODE_BASIC:             { ar: 36, en: 59 }, // TK-03 LEGACY Basic $7/mo (no longer sold — V2)
+  CODE_PREMIUM:           { ar: 37, en: 60 }, // TK-04 now Identity Recode Planner $9.99 one-time
+  CODE_MASTERY:           { ar: 38, en: 61 }, // TK-05 Mastery $27 one-time
   CODE_PROTOCOL:          { ar: 39, en: 62 }, // TK-06 $99 one-time
   RENEWAL_CONFIRMED:      { ar: 40, en: 63 }, // TK-07
   ORDER_PENDING:          { ar: 41, en: 64 }, // TK-08

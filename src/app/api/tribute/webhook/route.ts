@@ -4,7 +4,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { verifyTributeWebhookSignature, processTributeWebhook, TIER_CONFIG } from '@/lib/tribute';
+import { verifyTributeWebhookSignature, processTributeWebhook, TIER_CONFIG, ONE_TIME_PRODUCTS } from '@/lib/tribute';
 
 // POST - Handle Tribute webhook
 export async function POST(request: NextRequest) {
@@ -332,6 +332,16 @@ async function handleDigitalProductEvent(result: any) {
     return NextResponse.json({ success: true, message: 'Event received but missing purchase_id' });
   }
 
+  // ============================================
+  // PRICING MODEL V2 (2026-10-21): one-time tier products
+  // TRIBUTE_PRODUCT_PLANNER → PREMIUM tier, TRIBUTE_PRODUCT_MASTERY → MASTERY tier
+  // Grants PERMANENT access (no expiresAt) — one payment, lifetime access.
+  // ============================================
+  const oneTimeKey = getOneTimeProductKey(productId);
+  if (oneTimeKey) {
+    return await handleOneTimeTierProductEvent(result, oneTimeKey);
+  }
+
   // Idempotency: one order per Tribute purchase_id
   const paymentKey = `tribute_prod_${purchaseId}`;
   const existingOrder = await db.order.findFirst({
@@ -428,6 +438,146 @@ async function handleDigitalProductEvent(result: any) {
 // ============================================
 // HELPERS
 // ============================================
+
+/**
+ * Resolve a Tribute product ID to a one-time tier product key (planner/mastery)
+ * using the env-configured product IDs. Returns null for unmapped products.
+ */
+function getOneTimeProductKey(productId?: number): 'planner' | 'mastery' | null {
+  if (!productId) return null;
+  for (const key of ['planner', 'mastery'] as const) {
+    const raw = process.env[ONE_TIME_PRODUCTS[key].productIdEnv];
+    if (raw && parseInt(raw, 10) === productId) return key;
+  }
+  return null;
+}
+
+/**
+ * PRICING MODEL V2: handle a one-time tier product purchase (planner/mastery).
+ * Creates the order, issues a PERMANENT access code (no expiry) and emails it.
+ */
+async function handleOneTimeTierProductEvent(result: any, key: 'planner' | 'mastery') {
+  const startTime = Date.now();
+  const cfg = ONE_TIME_PRODUCTS[key];
+  const purchaseId = result.purchaseId;
+  const paymentKey = `tribute_prod_${purchaseId}`;
+
+  // Idempotency: one order per Tribute purchase_id
+  const existingOrder = await db.order.findFirst({ where: { paymentId: paymentKey } });
+  if (existingOrder && existingOrder.status === 'COMPLETED') {
+    // Already processed — but make sure the access code exists (belt & braces)
+    const existingAccess = await db.appAccess.findFirst({
+      where: { email: (result.email || `telegram_${result.telegramUserId || 0}@tribute.local`).toLowerCase(), tier: cfg.tier as any, isActive: true },
+      orderBy: { createdAt: 'desc' },
+    });
+    if (existingAccess) {
+      console.log('Tribute one-time product already processed:', existingOrder.orderNumber);
+      return NextResponse.json({ success: true, message: 'Already processed' });
+    }
+  }
+
+  const customerEmail = result.email || `telegram_${result.telegramUserId || 0}@tribute.local`;
+  const orderNumber = `TRB-P${purchaseId}-${Date.now()}`;
+
+  const orderData = {
+    orderNumber,
+    customerEmail,
+    status: 'COMPLETED' as const,
+    subtotal: result.amount / 100,
+    total: result.amount / 100,
+    currency: (result.currency || 'usd').toUpperCase(),
+    paymentId: paymentKey,
+    transactionId: result.transactionId ? String(result.transactionId) : undefined,
+    paymentMethod: 'tribute' as const,
+    paymentStatus: 'COMPLETED' as const,
+    paidAt: new Date(),
+    fulfilledAt: new Date(),
+    notes: JSON.stringify({
+      source: 'tribute_one_time_product',
+      productKey: key,
+      productId: result.productId ?? null,
+      productName: result.productName || cfg.name,
+      purchaseId,
+      transactionId: result.transactionId ?? null,
+      telegramUserId: result.telegramUserId || null,
+      telegramUsername: result.telegramUsername || null,
+      trbUserId: result.trbUserId || null,
+      grant: 'PERMANENT_ACCESS',
+    }),
+  };
+
+  if (existingOrder) {
+    await db.order.update({ where: { id: existingOrder.id }, data: orderData });
+  } else {
+    await db.order.create({
+      data: {
+        ...orderData,
+        items: {
+          create: {
+            productId: key,
+            productName: result.productName || cfg.name,
+            price: result.amount / 100,
+            quantity: 1,
+          },
+        },
+      },
+    });
+  }
+
+  // Issue PERMANENT access code (no expiresAt — one payment, lifetime access)
+  const accessCode = generateAccessCode();
+  await db.appAccess.create({
+    data: {
+      code: accessCode,
+      email: customerEmail,
+      productId: key,
+      tier: cfg.tier as any,
+      isUsed: false,
+      isActive: true,
+      // expiresAt intentionally omitted → NULL → permanent access
+    },
+  });
+
+  // Auto-email the access code (single delivery channel, no manual step)
+  try {
+    const { queueEmail, accessCodeDeliveryHtml } = await import('@/lib/email/service');
+    const tag = `access-code-tribute-onetime-${purchaseId}`;
+    const dup = await db.emailQueue.findFirst({
+      where: { email: customerEmail.toLowerCase(), sequenceId: tag, status: 'PENDING' },
+    });
+    if (!dup) {
+      await queueEmail({
+        email: customerEmail,
+        name: result.telegramUsername || undefined,
+        subject: 'Your Tamkinly access code · رمز الوصول الخاص بك من تمكينلي',
+        content: accessCodeDeliveryHtml(result.telegramUsername || 'صديقنا', [accessCode], orderNumber, true),
+        sequenceId: tag,
+        scheduledAt: new Date(),
+      });
+    }
+  } catch (emailErr) {
+    console.error('Tribute one-time access code email failed:', emailErr);
+  }
+
+  console.log('Tribute ONE-TIME product processed — permanent access granted:', {
+    productKey: key,
+    tier: cfg.tier,
+    purchaseId,
+    productId: result.productId,
+    accessCode,
+    customerEmail,
+    telegramUserId: result.telegramUserId,
+    amount: result.amount,
+  });
+
+  return NextResponse.json({
+    success: true,
+    message: 'One-time product processed — permanent access granted',
+    tier: cfg.tier,
+    productKey: key,
+    processingTime: `${Date.now() - startTime}ms`,
+  });
+}
 
 function generateAccessCode(): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

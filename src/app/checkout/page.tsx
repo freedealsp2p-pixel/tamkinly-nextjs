@@ -53,7 +53,9 @@ const BANK_CONFIG = {
   bankAddress: '89-16 Jamaica Ave, Woodhaven, NY, 11421, United States'
 };
 
-// Product data with bilingual support — NEW MODEL: 3 monthly subscription tiers
+// Product data with bilingual support — PRICING MODEL V2 (2026-10-21): one-time payments.
+// Rule of three: Planner $9.99 / Mastery $27 / Protocols $99 (protocols sold on their own pages).
+// Legacy 'basic'/'trial' links resolve to the Identity Recode Planner bundle.
 // (FREE is shown separately as "Get started free" lead magnet, not here)
 const productsData: Record<string, {
   id: string;
@@ -66,73 +68,73 @@ const productsData: Record<string, {
   tierAr: string;
   features: string[];
   featuresAr: string[];
-  billingPeriod: 'monthly';
+  billingPeriod: 'one-time' | 'monthly';
 }> = {
-  'basic': {
-    id: "basic",
-    name: "Basic (Monthly)",
-    nameAr: "أساسي (شهري)",
-    price: 7,
-    comparePrice: 0,
-    icon: Clock,
-    tier: "BASIC",
-    tierAr: "أساسي",
-    features: ["7-Day Guided Discipline Journey", "Daily identity prompts", "Evidence tracking basics", "Progress dashboard", "7 Days System PDF (downloadable)", "Cancel anytime"],
-    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مطالبات الهوية اليومية", "أساسيات تتبع الأدلة", "لوحة تتبع التقدم", "PDF نظام 7 أيام (قابل للتحميل)", "إلغاء في أي وقت"],
-    billingPeriod: "monthly"
-  },
   'premium': {
     id: "premium",
-    name: "Premium (Monthly)",
-    nameAr: "مميز (شهري)",
-    price: 17,
-    comparePrice: 0,
+    name: "Identity Recode Planner",
+    nameAr: "مخطط إعادة صياغة الهوية",
+    price: 9.99,
+    comparePrice: 17,
     icon: Calendar,
     tier: "PREMIUM",
     tierAr: "مميز",
-    features: ["Everything in Basic", "30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs", "Decision Pattern Analysis", "Cancel anytime"],
-    featuresAr: ["كل ما في الباقة الأساسية", "مخطط الهوية لمدة 30 يوم", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "PDF رقمي + للطباعة", "تحليل أنماط القرارات", "إلغاء في أي وقت"],
-    billingPeriod: "monthly"
+    features: ["7-Day Guided Discipline Journey", "30-Day Identity Planner", "Daily identity prompts", "Executive Manual", "Identity Baseline Worksheet", "All core interactive apps", "Digital + Print PDFs", "Decision Pattern Analysis", "Evidence tracking", "Progress dashboard", "Lifetime access — pay once"],
+    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مخطط الهوية لمدة 30 يوم", "مطالبات الهوية اليومية", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "جميع التطبيقات التفاعلية الأساسية", "PDF رقمي + للطباعة", "تحليل أنماط القرارات", "تتبع الأدلة", "لوحة تتبع التقدم", "وصول دائم — دفعة واحدة"],
+    billingPeriod: "one-time"
   },
   'mastery': {
     id: "mastery",
-    name: "Mastery (Monthly)",
-    nameAr: "إتقان (شهري)",
+    name: "Mastery",
+    nameAr: "إتقان",
     price: 27,
     comparePrice: 0,
     icon: Award,
     tier: "MASTERY",
     tierAr: "إتقان",
-    features: ["Everything in Premium", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support", "Emotion Regulation Toolkit", "Cancel anytime"],
-    featuresAr: ["كل ما في الباقة المميزة", "جميع التطبيقات التفاعلية", "مدرب الهوية بالذكاء الاصطناعي", "مجتمع التحول", "دعم ذو أولوية", "أدوات تنظيم المشاعر", "إلغاء في أي وقت"],
-    billingPeriod: "monthly"
+    features: ["Everything in the Identity Recode Planner", "All Interactive Apps", "AI Identity Coach", "Transformation Community", "Priority Support", "Emotion Regulation Toolkit", "Lifetime access — pay once"],
+    featuresAr: ["كل ما في مخطط إعادة صياغة الهوية", "جميع التطبيقات التفاعلية", "مدرب الهوية بالذكاء الاصطناعي", "مجتمع التحول", "دعم ذو أولوية", "أدوات تنظيم المشاعر", "وصول دائم — دفعة واحدة"],
+    billingPeriod: "one-time"
   },
-  // Legacy aliases — for backward compatibility with old links/bookmarks
-  'trial': {
-    id: "basic",
-    name: "Basic (Monthly)",
-    nameAr: "أساسي (شهري)",
-    price: 7,
-    comparePrice: 0,
-    icon: Clock,
-    tier: "BASIC",
-    tierAr: "أساسي",
-    features: ["7-Day Guided Discipline Journey", "Daily identity prompts", "Evidence tracking basics", "Progress dashboard", "Cancel anytime"],
-    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مطالبات الهوية اليومية", "أساسيات تتبع الأدلة", "لوحة تتبع التقدم", "إلغاء في أي وقت"],
-    billingPeriod: "monthly"
-  },
-  'planner': {
+  // Legacy aliases — old links now resolve to the $9.99 Identity Recode Planner
+  'basic': {
     id: "premium",
-    name: "Premium (Monthly)",
-    nameAr: "مميز (شهري)",
-    price: 17,
-    comparePrice: 0,
+    name: "Identity Recode Planner",
+    nameAr: "مخطط إعادة صياغة الهوية",
+    price: 9.99,
+    comparePrice: 17,
     icon: Calendar,
     tier: "PREMIUM",
     tierAr: "مميز",
-    features: ["Everything in Basic", "30-Day Identity Planner", "Executive Manual", "Identity Baseline Worksheet", "Digital + Print PDFs", "Decision Pattern Analysis", "Cancel anytime"],
-    featuresAr: ["كل ما في الباقة الأساسية", "مخطط الهوية لمدة 30 يوم", "الدليل التنفيذي", "ورقة عمل خط الأساس للهوية", "PDF رقمي + للطباعة", "تحليل أنماط القرارات", "إلغاء في أي وقت"],
-    billingPeriod: "monthly"
+    features: ["7-Day Guided Discipline Journey", "30-Day Identity Planner", "All core interactive apps", "Digital + Print PDFs", "Lifetime access — pay once"],
+    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مخطط الهوية لمدة 30 يوم", "جميع التطبيقات التفاعلية الأساسية", "PDF رقمي + للطباعة", "وصول دائم — دفعة واحدة"],
+    billingPeriod: "one-time"
+  },
+  'trial': {
+    id: "premium",
+    name: "Identity Recode Planner",
+    nameAr: "مخطط إعادة صياغة الهوية",
+    price: 9.99,
+    comparePrice: 17,
+    icon: Calendar,
+    tier: "PREMIUM",
+    tierAr: "مميز",
+    features: ["7-Day Guided Discipline Journey", "30-Day Identity Planner", "All core interactive apps", "Digital + Print PDFs", "Lifetime access — pay once"],
+    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مخطط الهوية لمدة 30 يوم", "جميع التطبيقات التفاعلية الأساسية", "PDF رقمي + للطباعة", "وصول دائم — دفعة واحدة"],
+    billingPeriod: "one-time"
+  },
+  'planner': {
+    id: "premium",
+    name: "Identity Recode Planner",
+    nameAr: "مخطط إعادة صياغة الهوية",
+    price: 9.99,
+    comparePrice: 17,
+    icon: Calendar,
+    tier: "PREMIUM",
+    tierAr: "مميز",
+    features: ["7-Day Guided Discipline Journey", "30-Day Identity Planner", "All core interactive apps", "Digital + Print PDFs", "Lifetime access — pay once"],
+    featuresAr: ["رحلة انضباط موجهة لمدة 7 أيام", "مخطط الهوية لمدة 30 يوم", "جميع التطبيقات التفاعلية الأساسية", "PDF رقمي + للطباعة", "وصول دائم — دفعة واحدة"],
+    billingPeriod: "one-time"
   }
 };
 
@@ -628,7 +630,7 @@ function CheckoutContentInner({ productId }: { productId: string | null }) {
                 <div className="pt-4 space-y-3 border-t">
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><CheckCircle2 className="w-4 w-4 text-[#3DD4B0]" /><span>{t('instantAccessAfter')}</span></div>
                   <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><Shield className="w-4 w-4 text-[#3DD4B0]" /><span>{t('accessCodeSent')}</span></div>
-                  <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><Sparkles className="w-4 w-4 text-[#3DD4B0]" /><span>{t('monthlyAccess')}</span></div>
+                  <div className="flex items-center gap-2 text-sm text-[#8A94A6]"><Sparkles className="w-4 w-4 text-[#3DD4B0]" /><span>{t('lifetimeAccess')}</span></div>
                 </div>
               </CardContent>
             </Card>

@@ -40,15 +40,15 @@ export default function CommunityAccessPage() {
               <Lock className="w-8 h-8 text-[#3DD4B0]" />
             </div>
             <CardTitle className="text-2xl">{getText('Access Required', 'الوصول مطلوب')}</CardTitle>
-            <CardDescription className="text-base">{getText('The Transformation Community is included in the Mastery ($27/mo)', 'مجتمع التحول مضمّن في الإتقان ($27/شهر)')}</CardDescription>
+            <CardDescription className="text-base">{getText('The Transformation Community is included in Mastery ($27 one-time)', 'مجتمع التحول مضمّن في الإتقان (27$ دفعة واحدة)')}</CardDescription>
           </CardHeader>
           <CardContent className="text-center">
             <Link href="/products/mastery">
               <Button className="w-full h-14 bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold text-lg">
-                {getText('Get Mastery - $27/mo', 'احصل على الإتقان - $27/شهر')} <ArrowRight className="w-5 h-5 ml-2" />
+                {getText('Get Mastery — $27 once', 'احصل على الإتقان — 27$ دفعة واحدة')} <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
-            <p className="text-sm text-[#8A94A6] mt-3">{getText('Monthly subscription. Cancel anytime.', 'اشتراك شهري. إلغاء في أي وقت.')}</p>
+            <p className="text-sm text-[#8A94A6] mt-3">{getText('One payment. Lifetime access.', 'دفعة واحدة. وصول دائم.')}</p>
           </CardContent>
         </Card>
 
@@ -109,7 +109,7 @@ export default function CommunityAccessPage() {
               {getText('Join the Community', 'انضم إلى المجتمع')} <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
-          <p className="text-sm text-[#8A94A6] mt-3">{getText('Included in Mastery ($27/mo) with AI Coach + All Apps', 'مضمّن في الإتقان ($27/شهر) مع مدرب AI + جميع التطبيقات')}</p>
+          <p className="text-sm text-[#8A94A6] mt-3">{getText('Included in Mastery ($27 one-time) with AI Coach + All Apps', 'مضمّن في الإتقان (27$ دفعة واحدة) مع مدرب AI + جميع التطبيقات')}</p>
         </div>
       </div>
     </div>

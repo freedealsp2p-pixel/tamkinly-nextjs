@@ -192,7 +192,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Legacy product redirects (old pricing model retired 2026-09 -> current tiers)
-      // Old bundle/complete-bundle links now resolve to Mastery $27; trial/planner to Basic/Premium
+      // Old bundle/complete-bundle links now resolve to Mastery $27 (one-time); trial/planner to the Identity Recode Planner $9.99 (one-time)
       // AR prefix preserved explicitly (config redirects run before locale middleware)
       {
         source: '/products/bundle',
@@ -216,12 +216,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/products/trial',
-        destination: '/products/basic',
+        destination: '/products/premium',
         permanent: true,
       },
       {
         source: '/ar/products/trial',
-        destination: '/ar/products/basic',
+        destination: '/ar/products/premium',
         permanent: true,
       },
       {

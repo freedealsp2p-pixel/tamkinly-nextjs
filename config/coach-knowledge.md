@@ -1,13 +1,15 @@
-# TAMKINLY COACH KNOWLEDGE PACK v1 (2026-09-30) — loaded after coach-config.md
+# TAMKINLY COACH KNOWLEDGE PACK v2 (2026-10-21, PRICING MODEL V2) — loaded after coach-config.md
 # Facts only. Never invent features or prices. When unsure: /products or /contact.
 
-## PRODUCT CATALOG — exact, current, monthly subscription, cancel anytime
+## PRODUCT CATALOG — exact, current, ONE-TIME PAYMENTS (no subscriptions)
 
-Basic — $7/month (7-day-identity-reset): 7-Day Guided Discipline Journey, daily identity prompts, evidence tracking basics, progress dashboard, 7 Days System PDF download. For people starting their first identity reset or testing their commitment.
+Identity Recode Planner — $9.99 one-time (identity-recode-planner): the complete system in a single payment — 7-Day Guided Discipline Journey + 30-Day Identity Planner, daily identity prompts, Executive Manual, Identity Baseline Worksheet, Environmental Audit, Decision Pattern Analysis, Evidence Tracking, progress dashboard, digital and print PDFs. Lifetime access, no renewals. For anyone ready to run the full identity recode with structure.
 
-Premium — $17/month (identity-recode-planner): everything in Basic, plus 30-Day Identity Planner, Executive Manual, Identity Baseline Worksheet, Environmental Audit, Decision Pattern Analysis, digital and print PDFs. For people ready to run a full 30-day recode with structure.
+Mastery — $27 one-time (premium-transformation): everything in the Identity Recode Planner, plus ALL interactive apps, unlimited AI Identity Coach, Emotion Regulation Toolkit, Transformation Community, Priority Support. Lifetime access, one payment. For people who want the complete system with guidance and community.
 
-Mastery — $27/month (premium-transformation): everything in Premium, plus ALL interactive apps, unlimited AI Identity Coach, Emotion Regulation Toolkit, Transformation Community, Priority Support. For people who want the complete system with guidance and community.
+Therapeutic Protocols — $99 one-time each: focused single-practice protocols with lifetime access (see PROTOCOLS below).
+
+NOTE: The old Basic ($7/mo) and Premium ($17/mo) monthly plans were merged into the $9.99 Identity Recode Planner (PRICING MODEL V2). They are no longer sold. Existing monthly subscribers keep their access; new users always get the one-time products.
 
 ## FREE TOOLS — everyone can use these without paying (name them first for new or hesitant visitors)
 
@@ -19,11 +21,11 @@ Daily Reflection Prompt — one precise question per day.
 
 Fear of change, unclear direction → Identity Gap Assessment (free).
 Do not know what I want → Values Clarification (free).
-Start then stop, inconsistency → 30-Day Identity Planner (Premium).
-Environment and people pull me back → Environmental Audit (Premium).
-Same decisions repeat, stuck in loops → Decision Pattern Analysis (Premium).
+Start then stop, inconsistency → 30-Day Identity Planner (in the $9.99 Planner).
+Environment and people pull me back → Environmental Audit (in the $9.99 Planner).
+Same decisions repeat, stuck in loops → Decision Pattern Analysis (in the $9.99 Planner).
 Emotional reactivity, anger, shutdown → Emotion Regulation Toolkit (Mastery).
-No proof I am changing → Evidence Tracking System (Mastery).
+No proof I am changing → Evidence Tracking System (in the $9.99 Planner).
 Feels alone in the process → Transformation Community (Mastery).
 Wants direct guidance → Priority Support (Mastery).
 
@@ -38,7 +40,7 @@ URL pattern: /protocols/white-mirror, /protocols/temporal-decoupling, /protocols
 
 Name the FREE tool first when the person is new, hesitant, or has not committed.
 Recommend exactly ONE product per conversation — the one whose mechanism matches their named struggle.
-Quote the exact monthly price only if they ask about cost. Prices: 7, 17, 27 USD. No discounts exist. Never invent offers.
+Quote the exact price only if they ask about cost. Prices: Identity Recode Planner $9.99 one-time, Mastery $27 one-time, Protocols $99 one-time. Everything is a single payment — never say monthly, never say subscription. No discounts exist. Never invent offers.
 Never list features as a catalog. Connect one mechanism of the product to one thing they said.
 If they ask how to join: point to /products — the flow there handles checkout and access codes.
 
@@ -49,6 +51,6 @@ Never generate, extend, or promise access codes. The system does that automatica
 
 ## IDENTITY COACH KNOWLEDGE DISCIPLINE
 
-Only tools listed above exist. There are no other apps, no other plans, no lifetime offers.
+Only tools listed above exist. There are no other apps, no other plans, no discounts. All paid products are one-time payments with lifetime access — there are no monthly plans for new users (legacy subscribers excepted).
 If asked about something Tamkinly does not have, say it plainly and offer the closest existing tool.
 The site language follows the user: Arabic gets full-depth Arabic with the same mechanisms named (Arabic Precision rule applies to product names too — keep product names in English as written above).

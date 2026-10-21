@@ -37,11 +37,13 @@ interface ProductRecommendation {
   altProductKey: string;
   price: string;
   isFree: boolean;
+  oneTime?: boolean;
   ctaKey: string;
   href: string;
 }
 
-// Product mapping logic
+// Product mapping logic — PRICING MODEL V2 (2026-10-21): one-time payments.
+// All former BASIC recommendations now point to the Identity Recode Planner ($9.99).
 function getRecommendation(answers: WizardAnswers): ProductRecommendation {
   const { goal, time, challenge } = answers;
 
@@ -57,39 +59,42 @@ function getRecommendation(answers: WizardAnswers): ProductRecommendation {
     };
   }
 
-  // Goal=Habits + Time=15-30min or 30+ -> Daily Planner (BASIC)
+  // Goal=Habits + Time=15-30min or 30+ -> Daily Planner (in the Identity Recode Planner)
   if (goal === 'habits' && (time === '15-30min' || time === '30plus')) {
     return {
       productKey: 'dailyPlanner',
       altProductKey: 'habitTracker',
-      price: '$7',
+      price: '$9.99',
       isFree: false,
+      oneTime: true,
       ctaKey: 'ctaGetStarted',
-      href: '/products/basic',
+      href: '/products/premium',
     };
   }
 
-  // Goal=Productivity + any -> Goal System (BASIC)
+  // Goal=Productivity + any -> Goal System (in the Identity Recode Planner)
   if (goal === 'productivity') {
     return {
       productKey: 'goalSystem',
       altProductKey: 'dailyPlanner',
-      price: '$7',
+      price: '$9.99',
       isFree: false,
+      oneTime: true,
       ctaKey: 'ctaGetStarted',
-      href: '/products/basic',
+      href: '/products/premium',
     };
   }
 
-  // Goal=Identity + Challenge=Knowing who I am -> Identity Baseline (BASIC)
+  // Goal=Identity + Challenge=Knowing who I am -> Identity Baseline (in the Planner)
   if (goal === 'identity' && challenge === 'knowingWhoIAm') {
     return {
       productKey: 'identityBaseline',
       altProductKey: 'aiCoach',
-      price: '$7',
+      price: '$9.99',
       isFree: false,
+      oneTime: true,
       ctaKey: 'ctaGetStarted',
-      href: '/products/basic',
+      href: '/products/premium',
     };
   }
 
@@ -100,20 +105,22 @@ function getRecommendation(answers: WizardAnswers): ProductRecommendation {
       altProductKey: 'identityBaseline',
       price: '$27',
       isFree: false,
+      oneTime: true,
       ctaKey: 'ctaGetStarted',
       href: '/products/mastery',
     };
   }
 
-  // Goal=Focus + any -> Goal System (BASIC)
+  // Goal=Focus + any -> Goal System (in the Identity Recode Planner)
   if (goal === 'focus') {
     return {
       productKey: 'goalSystem',
       altProductKey: 'dailyPlanner',
-      price: '$7',
+      price: '$9.99',
       isFree: false,
+      oneTime: true,
       ctaKey: 'ctaGetStarted',
-      href: '/products/basic',
+      href: '/products/premium',
     };
   }
 
@@ -270,7 +277,7 @@ export default function ProductRecommender() {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-white">{t(`products.${recommendation.productKey}.name`)}</h3>
-                      <p className="text-[#3DD4B0] font-semibold">{recommendation.price}{recommendation.isFree ? '' : (isAr ? '/شهر' : '/mo')}</p>
+                      <p className="text-[#3DD4B0] font-semibold">{recommendation.price}{recommendation.isFree ? '' : (recommendation.oneTime ? (isAr ? ' دفعة واحدة' : ' one-time') : (isAr ? '/شهر' : '/mo'))}</p>
                     </div>
                   </div>
                   <p className="text-slate-300 text-sm mb-4">{t(`products.${recommendation.productKey}.description`)}</p>

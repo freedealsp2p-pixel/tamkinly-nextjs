@@ -392,7 +392,7 @@
 |---|---|---|---|
 | زائر بارد (مقال/سوشيال) | "اكتشف فجوة هويتك في 3 دقائق — مجاناً" | "Discover your Identity Gap in 3 minutes — free" | `/quiz` |
 | بعد نتيجة Quiz | "خطوتك التالية جاهزة — ابدأها الآن" | "Your next step is ready — start now" | حسب مستوى النتيجة |
-| مستخدم مجاني نشط | "افتح النظام الكامل — ابدأ بـ7$ فقط" | "Unlock the full system — start at $7" | `/products/basic` |
+| مستخدم مجاني نشط | "افتح النظام الكامل — 9.99$ دفعة واحدة بلا اشتراك" | "Unlock the full system — $9.99 once, no subscription" | `/products/premium` |
 | Basic ينجح في الأسبوع | "أنت جاهز للتحول الكامل — 30 يوماً بانتظارك" | "You're ready for the full 30-day transformation" | `/products/premium` |
 | Premium يُظهر انضباطاً | "افتح مدربك الذكي ومجتمعك — Mastery" | "Unlock your AI Coach & community — Mastery" | `/products/mastery` |
 | سلة متروكة | "رحلتك تنتظر — أكمل ما بدأت" | "Your journey is waiting — finish checkout" | `/cart` |

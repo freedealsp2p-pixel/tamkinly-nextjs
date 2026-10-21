@@ -28,8 +28,7 @@ export function Footer() {
 
   const productLinks = [
     { href: "/products", label: t("allProducts") },
-    { href: "/products/basic", label: t("basicProduct") },
-    { href: "/products/premium", label: t("premiumProduct") },
+    { href: "/products/premium", label: t("plannerProduct") },
     { href: "/products/mastery", label: t("masteryProduct") },
     { href: "/apps/therapeutic-protocols", label: t("protocolsHub") },
     { href: "/apps/therapeutic-protocols/temporal-decoupling", label: t("temporalDecoupling") },

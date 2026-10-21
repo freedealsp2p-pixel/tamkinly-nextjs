@@ -131,7 +131,7 @@ The Tamkinly Team
   {
     name: 'Planner Purchase',
     trigger: 'PLANNER_PURCHASE',
-    description: 'Confirmation and onboarding for Identity Recode Planner ($17) purchasers.',
+    description: 'Confirmation and onboarding for Identity Recode Planner ($9.99 one-time) purchasers.',
     isActive: true,
     steps: {
       create: [{
@@ -203,7 +203,7 @@ The Tamkinly Team
   {
     name: 'Premium Purchase',
     trigger: 'PREMIUM_PURCHASE',
-    description: 'Confirmation and onboarding for Premium Transformation ($27) purchasers.',
+    description: 'Confirmation and onboarding for Mastery ($27 one-time) purchasers.',
     isActive: true,
     steps: {
       create: [{
@@ -249,7 +249,7 @@ Thank you for investing in your transformation with the **Premium Transformation
 
 With Premium, you get:
 
-✅ **All Planner features** ($17 value)
+✅ **All Planner features** ($9.99 value)
 ✅ **Decision tracking** - Identify patterns and biases
 ✅ **Evidence logging** - Track your transformation proof
 ✅ **Advanced analytics** - Measure your progress
@@ -321,7 +321,7 @@ Welcome to the **Complete Bundle** family! You've invested in the ultimate trans
 
 ## Your VIP Benefits
 
-💎 **Everything in Premium** ($27 value)
+💎 **Everything in Mastery** ($27 value)
 💎 **AI Coaching** - Personalized insights anytime
 💎 **Community Access** - Share wins, get support
 💎 **Monthly Live Q&A** - Direct founder access
@@ -438,12 +438,12 @@ Don't let this fade away.
 
 ## Continue Your Journey
 
-**Option 1: Identity Recode Planner ($17)**
+**Option 1: Identity Recode Planner ($9.99 one-time)**
 - Keep your core apps
 - 30-day transformation system
 - Lifetime access
 
-**Option 2: Premium Transformation ($27)**
+**Option 2: Mastery ($27 one-time)**
 - Everything in Planner
 - Advanced analytics
 - Decision tracking
@@ -611,7 +611,7 @@ Hello {{name}},
 
 You're committed to transformation. Take it to the next level:
 
-**Upgrade to Premium ($27)** and get:
+**Upgrade to Mastery ($27 one-time)** and get:
 - Decision Pattern Analysis
 - Evidence Tracking System
 - Progress Dashboard

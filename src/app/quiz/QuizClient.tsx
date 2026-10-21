@@ -216,7 +216,7 @@ const quizQuestions: QuestionType[] = [
   }
 ];
 
-// Products are defined in quiz-recommendations.ts (3-tier: BASIC $7, PREMIUM $17, MASTERY $27)
+// Products are defined in quiz-recommendations.ts (PRICING MODEL V2: Planner $9.99 one-time, Mastery $27 one-time)
 
 // Main Quiz Component
 export default function QuizClient() {

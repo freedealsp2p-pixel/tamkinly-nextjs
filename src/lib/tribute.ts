@@ -50,6 +50,60 @@ export interface TributeWebhookPayload {
 }
 
 // ============================================
+// ONE-TIME PRODUCTS (PRICING MODEL V2, 2026-10-21)
+// ============================================
+// Founder decision #4: the 3 legacy Tribute SUBSCRIPTIONS are stopped at V2
+// publish; new sales go through two one-time Tribute digital products:
+//   TRIBUTE_PRODUCT_PLANNER  → Identity Recode Planner $9.99 → PREMIUM tier
+//   TRIBUTE_PRODUCT_MASTERY  → Mastery $27 one-time          → MASTERY tier
+// The product IDs are configured via env vars on the server (founder sends
+// the IDs after creating the products in the Tribute dashboard).
+// Access granted is PERMANENT (no expiresAt) — one payment, lifetime access.
+
+export const ONE_TIME_PRODUCTS: Record<'planner' | 'mastery', {
+  productIdEnv: string;
+  linkEnv: string | null;
+  webLinkEnv: string | null;
+  priceCents: number;
+  name: string;
+  nameAr: string;
+  tier: 'PREMIUM' | 'MASTERY';
+}> = {
+  planner: {
+    productIdEnv: 'TRIBUTE_PRODUCT_PLANNER',
+    linkEnv: 'TRIBUTE_LINK_PLANNER',
+    webLinkEnv: 'TRIBUTE_LINK_PLANNER_WEB',
+    priceCents: 999,
+    name: 'Identity Recode Planner (One-time)',
+    nameAr: 'مخطط إعادة صياغة الهوية (دفعة واحدة)',
+    tier: 'PREMIUM',
+  },
+  mastery: {
+    productIdEnv: 'TRIBUTE_PRODUCT_MASTERY',
+    linkEnv: 'TRIBUTE_LINK_MASTERY',
+    webLinkEnv: 'TRIBUTE_LINK_MASTERY_WEB',
+    priceCents: 2700,
+    name: 'Tamkinly Mastery (One-time)',
+    nameAr: 'تمكنلي إتقان (دفعة واحدة)',
+    tier: 'MASTERY',
+  },
+};
+
+/**
+ * Resolve a Tribute digital product ID to a one-time tier product key.
+ * Returns null when the product is not one of the configured one-time products.
+ */
+export function getOneTimeProductForProductId(productId?: number): 'planner' | 'mastery' | null {
+  if (!productId) return null;
+  for (const key of ['planner', 'mastery'] as const) {
+    const cfg = ONE_TIME_PRODUCTS[key];
+    const raw = process.env[cfg.productIdEnv];
+    if (raw && parseInt(raw, 10) === productId) return key;
+  }
+  return null;
+}
+
+// ============================================
 // PROTOCOL DIGITAL PRODUCTS (one-time $99 purchases)
 // ============================================
 // Each therapeutic protocol is a separate Tribute digital product.
@@ -75,8 +129,12 @@ export function getProtocolSlugForProductId(productId?: number): string | null {
 }
 
 // ============================================
-// TIER CONFIGURATION
+// TIER CONFIGURATION (LEGACY subscriptions — honored until self-cancel)
 // ============================================
+// PRICING MODEL V2: these 3 Tribute subscriptions are NO LONGER SOLD (stopped
+// at publish per founder decision #4). The config and webhook handling below
+// stay intact so existing monthly subscribers (Basic $7 / Premium $17 /
+// Mastery $27) keep their renewals and access until they cancel themselves.
 
 export const TIER_CONFIG: Record<TributeTier, {
   subscriptionIdEnv: string;
@@ -208,7 +266,7 @@ export function processTributeWebhook(payload: TributeWebhookPayload): TributeWe
   
   let tier: TributeTier | null = null;
   
-  // For subscription events — match by subscription_id
+  // For subscription events — match by subscription_id (LEGACY subscribers)
   if (data.subscription_id) {
     for (const tierKey of ['basic', 'premium', 'mastery'] as TributeTier[]) {
       const config = TIER_CONFIG[tierKey];
@@ -222,6 +280,8 @@ export function processTributeWebhook(payload: TributeWebhookPayload): TributeWe
   }
   
   // If we couldn't match by subscription_id, try matching by amount
+  // (LEGACY monthly prices 700/1700/2700 cents only — one-time products are
+  // matched by product_id in getOneTimeProductForProductId / getProtocolSlugForProductId)
   if (!tier && data.amount) {
     const amount = data.amount;
     if (amount === 700) tier = 'basic';
@@ -312,10 +372,53 @@ export function isConfigured(tier: TributeTier): boolean {
 }
 
 /**
- * Check if Tribute is configured at all
+ * Check if Tribute is configured at all (legacy subscriptions or one-time products)
  */
 export function isAnyConfigured(): boolean {
-  return isConfigured('basic') || isConfigured('premium') || isConfigured('mastery');
+  return isConfigured('basic') || isConfigured('premium') || isConfigured('mastery')
+    || isOneTimeConfigured('planner') || isOneTimeConfigured('mastery');
+}
+
+// ============================================
+// ONE-TIME PRODUCT PAYMENT LINKS (PRICING MODEL V2)
+// ============================================
+
+export interface TributeOneTimeLink {
+  configured: boolean;
+  telegramLink: string | null;
+  webLink: string | null;
+  productId: number | null;
+  priceCents: number;
+  name: string;
+  nameAr: string;
+  tier: 'PREMIUM' | 'MASTERY';
+}
+
+/**
+ * Get the payment link for a one-time product (planner / mastery).
+ * Full links come from env (TRIBUTE_LINK_* / TRIBUTE_LINK_*_WEB) — copy them
+ * from the Tribute dashboard when the founder creates the two products.
+ */
+export function getOneTimePaymentLink(key: 'planner' | 'mastery'): TributeOneTimeLink {
+  const cfg = ONE_TIME_PRODUCTS[key];
+  const idRaw = process.env[cfg.productIdEnv];
+  const telegramLink = cfg.linkEnv ? (process.env[cfg.linkEnv] || null) : null;
+  const webLink = cfg.webLinkEnv ? (process.env[cfg.webLinkEnv] || null) : null;
+  const productId = idRaw && !isNaN(parseInt(idRaw, 10)) ? parseInt(idRaw, 10) : null;
+  return {
+    configured: !!(telegramLink || webLink),
+    telegramLink,
+    webLink,
+    productId,
+    priceCents: cfg.priceCents,
+    name: cfg.name,
+    nameAr: cfg.nameAr,
+    tier: cfg.tier,
+  };
+}
+
+export function isOneTimeConfigured(key: 'planner' | 'mastery'): boolean {
+  return getOneTimePaymentLink(key).configured;
 }
 
 /**

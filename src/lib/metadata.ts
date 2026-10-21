@@ -38,7 +38,7 @@ export const siteMetadata = {
   products: {
     title: 'Products & Pricing',
     description:
-      'Start free with powerful identity tools, then upgrade as you grow. Flexible monthly plans from $7/mo. Cancel anytime.',
+      'Start free with powerful identity tools, then unlock everything with one simple payment — $9.99 one-time. No subscription.',
     keywords: 'identity transformation products, identity planner, \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0647\u0648\u064a\u0629',
   },
   about: {

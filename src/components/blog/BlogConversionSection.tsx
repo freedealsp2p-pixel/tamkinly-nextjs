@@ -23,9 +23,9 @@ export function BlogConversionSection({ promoteProduct = 'recode' }: BlogConvers
   const isAr = locale === 'ar';
 
   const productInfo = {
-    recode: { href: '/products/premium', tier: 'PREMIUM', price: '$17/mo' },
-    coach: { href: '/products/mastery', tier: 'MASTERY', price: '$27/mo' },
-    planner: { href: '/products/premium', tier: 'PREMIUM', price: '$17/mo' },
+    recode: { href: '/products/premium', tier: 'PLANNER', price: '$9.99' },
+    coach: { href: '/products/mastery', tier: 'MASTERY', price: '$27' },
+    planner: { href: '/products/premium', tier: 'PLANNER', price: '$9.99' },
   };
 
   const product = productInfo[promoteProduct];
@@ -69,11 +69,11 @@ export function BlogConversionSection({ promoteProduct = 'recode' }: BlogConvers
 
           {/* Two-column pricing */}
           <div className="grid sm:grid-cols-2 gap-6">
-            {/* BASIC Plan */}
+            {/* PLANNER Plan ($9.99 one-time — replaces the former BASIC card) */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/[0.07] hover:border-white/15 transition-all duration-300">
               <div className={`flex items-center gap-2 mb-3 ${isAr ? 'flex-row-reverse' : ''}`}>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1F6F78]/30 text-[#3DD4B0]">BASIC</span>
-                <span className="text-white font-bold">$7</span>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1F6F78]/30 text-[#3DD4B0]">PLANNER</span>
+                <span className="text-white font-bold">$9.99</span>
               </div>
               <h3 className={`text-white font-serif text-lg font-bold mb-2 ${isAr ? 'text-right' : ''}`}>
                 {t('basicTitle')}
@@ -89,7 +89,7 @@ export function BlogConversionSection({ promoteProduct = 'recode' }: BlogConvers
                   </li>
                 ))}
               </ul>
-              <Link href="/products/basic">
+              <Link href="/products/premium">
                 <Button className="w-full bg-[#1F6F78] text-white hover:bg-[#154d54] font-semibold transition-all duration-200">
                   {t('getBasic')} <ArrowRight className={`${isAr ? 'mr-1 rotate-180' : 'ml-1'} h-4 w-4`} />
                 </Button>

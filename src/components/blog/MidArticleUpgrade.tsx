@@ -22,9 +22,9 @@ interface MidArticleUpgradeProps {
 }
 
 const TIER_INFO: Record<string, { price: string; apps: number; slug: string; color: string; badgeColor: string }> = {
-  BASIC: { price: '$7/mo', apps: 1, slug: '/products/basic', color: '#2A8A94', badgeColor: 'bg-[#2A8A94]/20 text-[#2A8A94]' },
-  PREMIUM: { price: '$17/mo', apps: 11, slug: '/products/premium', color: '#1F6F78', badgeColor: 'bg-[#1F6F78]/20 text-[#1F6F78]' },
-  MASTERY: { price: '$27/mo', apps: 16, slug: '/products/mastery', color: '#0F1C2E', badgeColor: 'bg-[#0F1C2E] text-[#3DD4B0]' },
+  BASIC: { price: '$9.99', apps: 12, slug: '/products/premium', color: '#2A8A94', badgeColor: 'bg-[#2A8A94]/20 text-[#2A8A94]' },
+  PREMIUM: { price: '$9.99', apps: 12, slug: '/products/premium', color: '#1F6F78', badgeColor: 'bg-[#1F6F78]/20 text-[#1F6F78]' },
+  MASTERY: { price: '$27', apps: 16, slug: '/products/mastery', color: '#0F1C2E', badgeColor: 'bg-[#0F1C2E] text-[#3DD4B0]' },
 };
 
 export function MidArticleUpgrade({ promoteTier = 'BASIC', productSlug, variant = 'default' }: MidArticleUpgradeProps) {
@@ -33,7 +33,7 @@ export function MidArticleUpgrade({ promoteTier = 'BASIC', productSlug, variant 
   const isAr = locale === 'ar';
   const tier = TIER_INFO[promoteTier];
   const href = productSlug || tier.slug;
-  const tierPrice = isAr ? tier.price.replace('/mo', '/شهر') : tier.price;
+  const tierPrice = tier.price;
 
   if (variant === 'minimal') {
     return (

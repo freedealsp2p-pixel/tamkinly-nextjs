@@ -213,7 +213,7 @@ export async function POST(request: NextRequest) {
           freeLimitReached: true,
           freeMessagesUsed: userMessageCount,
           maxFreeMessages: 2,
-          message: 'You have used your 2 free questions. Get Premium ($17/mo) or Mastery ($27/mo) to continue.',
+          message: 'You have used your 2 free questions. Get the Identity Recode Planner ($9.99 one-time) or Mastery ($27 one-time) to continue.',
           redirectUrl: '/products',
         }, { status: 403 });
       }

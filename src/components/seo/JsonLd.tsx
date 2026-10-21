@@ -159,13 +159,14 @@ export function BlogArticleJsonLd({
 }
 
 /**
- * Real pricing model: each app's JSON-LD offer must reflect the actual
- * subscription tier price that unlocks it (FREE $0 / BASIC $7 / PREMIUM $17 / MASTERY $27).
+ * Real pricing model (PRICING MODEL V2, 2026-10-21): each app's JSON-LD offer
+ * reflects the one-time price of the product that unlocks it
+ * (FREE $0 / BASIC & PREMIUM = Identity Recode Planner $9.99 / MASTERY $27).
  */
-const APP_TIER_MONTHLY_PRICE: Record<string, number> = {
+const APP_TIER_PRICE: Record<string, number> = {
   FREE: 0,
-  BASIC: 7,
-  PREMIUM: 17,
+  BASIC: 9.99,
+  PREMIUM: 9.99,
   MASTERY: 27,
 };
 
@@ -205,8 +206,8 @@ export function AppPageJsonLd({
     features,
     offers: {
       price: tier
-        ? (APP_TIER_MONTHLY_PRICE[tier] ?? (isFree ? 0 : 7))
-        : (isFree ? 0 : 7),
+        ? (APP_TIER_PRICE[tier] ?? (isFree ? 0 : 9.99))
+        : (isFree ? 0 : 9.99),
       currency: 'USD',
     },
 

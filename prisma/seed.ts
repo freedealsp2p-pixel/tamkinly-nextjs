@@ -103,7 +103,7 @@ async function main() {
     },
 
     // ==========================================
-    // BASIC TIER - Core Apps ($7-17)
+    // BASIC TIER - legacy tier (now included in the $9.99 Identity Recode Planner)
     // ==========================================
     {
       slug: 'executive-manual',
@@ -195,7 +195,7 @@ async function main() {
     },
 
     // ==========================================
-    // PREMIUM TIER - Advanced Apps ($27)
+    // PREMIUM TIER - core apps (unlocked by the $9.99 Identity Recode Planner)
     // ==========================================
     {
       slug: 'decision-analysis',
@@ -383,8 +383,8 @@ async function main() {
   
   console.log(`🆓 FREE (Lead Magnet): ${tierCounts.FREE} apps`);
   console.log(`⏳ TRIAL (7-Day): ${tierCounts.TRIAL} apps`);
-  console.log(`📦 BASIC ($7-17): ${tierCounts.BASIC} apps`);
-  console.log(`⭐ PREMIUM ($27): ${tierCounts.PREMIUM} apps`);
+  console.log(`📦 BASIC (legacy, in $9.99 Planner): ${tierCounts.BASIC} apps`);
+  console.log(`⭐ PREMIUM ($9.99 Planner): ${tierCounts.PREMIUM} apps`);
   console.log(`💎 BUNDLE ($47): ${tierCounts.BUNDLE} apps`);
   console.log('━'.repeat(50));
   console.log(`   TOTAL: ${apps.length} apps`);

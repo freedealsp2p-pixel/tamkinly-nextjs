@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     for (let i = 0; i < numCodes; i++) {
       const code = generateAccessCode();
       
-      // Monthly subscription validity (2026-09-28): BASIC is the $7/month
+      // Monthly validity for LEGACY BASIC codes only (V2 2026-10-21: Basic no longer sold)
       // plan — 30-day cycle, extended automatically on each renewal.
       let expiresAt: Date | undefined;
       if (tier === 'BASIC') {

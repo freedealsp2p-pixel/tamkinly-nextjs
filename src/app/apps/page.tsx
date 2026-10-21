@@ -113,12 +113,12 @@ export default function AppsPage() {
     MASTERY: appsData.filter(app => app.tier === 'MASTERY'),
   };
 
-  // Get tier stats
+  // Get tier stats — PRICING MODEL V2: one-time payments (BASIC is legacy-only)
   const tierStats = {
     FREE: { count: appsByTier.FREE.length, label: t('tierLabels.FREE'), price: '$0' },
-    BASIC: { count: appsByTier.BASIC.length, label: t('tierLabels.BASIC'), price: '$7/mo' },
-    PREMIUM: { count: appsByTier.PREMIUM.length, label: t('tierLabels.PREMIUM'), price: '$17/mo' },
-    MASTERY: { count: appsByTier.MASTERY.length, label: t('tierLabels.MASTERY'), price: '$27/mo' },
+    BASIC: { count: appsByTier.BASIC.length, label: t('tierLabels.BASIC'), price: '$9.99' },
+    PREMIUM: { count: appsByTier.PREMIUM.length, label: t('tierLabels.PREMIUM'), price: '$9.99' },
+    MASTERY: { count: appsByTier.MASTERY.length, label: t('tierLabels.MASTERY'), price: '$27' },
   };
 
   // Generate SoftwareApplication schemas for SEO
@@ -433,7 +433,7 @@ function AppCard({ app, isLocked, t, locale }: {
             <Link href={`/apps/${app.slug}`}>
               <Button className="w-full bg-[#0F1C2E] text-white hover:bg-[#1a2d47] shadow-md" size="sm">
                 <Eye className="w-4 h-4 mr-2" />
-                {t('openAccess')} - ${app.tier === 'BASIC' ? '7' : app.tier === 'PREMIUM' ? '17' : '27'}/mo
+                {t('openAccess')} - ${app.tier === 'BASIC' || app.tier === 'PREMIUM' ? '9.99' : '27'}
               </Button>
             </Link>
           ) : (

@@ -1,11 +1,21 @@
 /**
  * Products Service - Local Next.js Implementation
- * NEW MODEL (2026-07-02): Monthly Subscription with 3 paid tiers + 1 free lead magnet
+ * PRICING MODEL V2 (2026-10-21): One-time payments — no subscriptions.
+ * Founder-approved (5 decisions, 2026-10-21):
+ *   1. Identity Recode Planner = $9.99 ONE-TIME (merges weekly 7-day + 30-day + ALL BASIC & PREMIUM apps)
+ *      → grants PREMIUM tier (AccessTier enum unchanged — zero migration).
+ *   2. Mastery = $27 ONE-TIME (was monthly) → grants MASTERY tier.
+ *   3. Therapeutic Protocols = $99 one-time (UNCHANGED).
+ *   4. Free tier stays free ($0 lead magnet).
+ *   5. Rule of three: at most 3 products shown to the user (Planner / Mastery / Protocols).
+ * Anchor pricing: $17 crossed out next to $9.99 (comparePrice).
+ * Legacy monthly subscribers (Basic $7 / Premium $17 / Mastery $27) keep working
+ * until they cancel themselves — legacy product IDs resolve via PRODUCT_ID_ALIASES.
  *
- * FREE     → $0  - Identity Quiz + free apps (lead magnet)
- * BASIC    → $7/month  - 7-day discipline journey (was BASIC)
- * PREMIUM  → $17/month - 30-day journey + core apps (was BASIC)
- * MASTERY  → $27/month - AI Coach + Community + everything (was MASTERY)
+ * FREE     → $0        - Identity Quiz + free apps (lead magnet)
+ * PREMIUM  → $9.99 once - Identity Recode Planner (includes everything BASIC had)
+ * MASTERY  → $27 once   - AI Coach + Community + everything
+ * PROTOCOL → $99 once   - therapeutic protocols (separate products)
  */
 
 import { db } from './db';
@@ -20,7 +30,7 @@ export interface Product {
   description: string;
   shortDesc: string;
   category: string;
-  type: 'FREE' | 'SUBSCRIPTION_MONTHLY' | 'DIGITAL_PDF' | 'INTERACTIVE_APP';
+  type: 'FREE' | 'SUBSCRIPTION_MONTHLY' | 'ONE_TIME' | 'DIGITAL_PDF' | 'INTERACTIVE_APP';
   accessTier: 'FREE' | 'BASIC' | 'PREMIUM' | 'MASTERY' | null;
   image: string | null;
   features: string[];
@@ -29,41 +39,25 @@ export interface Product {
   billingPeriod: 'monthly' | 'one-time';
 }
 
-// Local Products Data (3 paid tiers — FREE is shown separately as lead magnet)
+// Local Products Data (PRICING MODEL V2 — one-time payments, rule of three)
+// FREE is shown separately as lead magnet; therapeutic protocols ($99) are separate products.
 export const LOCAL_PRODUCTS: Product[] = [
   {
-    id: 'basic',
-    name: 'Basic',
-    slug: 'basic',
-    price: 7,
-    comparePrice: null,
-    description: 'Start with a focused 7-day discipline journey into identity transformation. The perfect entry point to test the methodology before committing deeper.',
-    shortDesc: '7-day guided discipline journey',
-    category: 'subscription',
-    type: 'SUBSCRIPTION_MONTHLY',
-    accessTier: 'BASIC',
-    image: null,
-    features: ['7-Day Guided Discipline Journey', 'Daily identity prompts', 'Evidence tracking basics', 'Progress dashboard', '7 Days System PDF (downloadable)', 'Cancel anytime'],
-    isActive: true,
-    isFeatured: false,
-    billingPeriod: 'monthly',
-  },
-  {
     id: 'premium',
-    name: 'Premium',
+    name: 'Identity Recode Planner',
     slug: 'premium',
-    price: 17,
-    comparePrice: null,
-    description: 'The complete 30-day transformation system with interactive apps and PDF downloads. Based on evidence-based psychology and identity science.',
-    shortDesc: '30-day transformation + interactive apps',
-    category: 'subscription',
-    type: 'SUBSCRIPTION_MONTHLY',
+    price: 9.99,
+    comparePrice: 17, // anchor: old Premium $17/mo crossed out (founder decision #3)
+    description: 'The complete Identity Recode Planner: the 7-day discipline reset PLUS the 30-day transformation system, all interactive apps of both former plans, and every PDF download — in one single payment. Based on evidence-based psychology and identity science.',
+    shortDesc: '7-day reset + 30-day transformation + all apps — one payment',
+    category: 'one-time',
+    type: 'ONE_TIME',
     accessTier: 'PREMIUM',
     image: null,
-    features: ['Everything in Basic', '30-Day Identity Planner', 'Executive Manual', 'Identity Baseline Worksheet', 'Digital + Print PDFs', 'Decision Pattern Analysis', 'Cancel anytime'],
+    features: ['7-Day Guided Discipline Journey', '30-Day Identity Planner', 'Daily identity prompts', 'Executive Manual', 'Identity Baseline Worksheet', 'All core interactive apps', 'Digital + Print PDFs', 'Decision Pattern Analysis', 'Evidence tracking', 'Progress dashboard', 'Lifetime access — pay once, keep it forever'],
     isActive: true,
     isFeatured: true,
-    billingPeriod: 'monthly',
+    billingPeriod: 'one-time',
   },
   {
     id: 'mastery',
@@ -71,27 +65,49 @@ export const LOCAL_PRODUCTS: Product[] = [
     slug: 'mastery',
     price: 27,
     comparePrice: null,
-    description: 'The ultimate package: All apps + AI coaching + community access + priority support. Best value for committed individuals ready for total transformation.',
-    shortDesc: 'Everything + AI Coach + Community',
-    category: 'subscription',
-    type: 'SUBSCRIPTION_MONTHLY',
+    description: 'The ultimate one-time package: everything in the Identity Recode Planner plus ALL interactive apps, AI coaching, community access and priority support. Best value for committed individuals ready for total transformation.',
+    shortDesc: 'Everything + AI Coach + Community — one payment',
+    category: 'one-time',
+    type: 'ONE_TIME',
     accessTier: 'MASTERY',
     image: null,
-    features: ['Everything in Premium', 'All Interactive Apps', 'AI Identity Coach', 'Transformation Community', 'Priority Support', 'Emotion Regulation Toolkit', 'Cancel anytime'],
+    features: ['Everything in the Identity Recode Planner', 'All Interactive Apps', 'AI Identity Coach', 'Transformation Community', 'Priority Support', 'Emotion Regulation Toolkit', 'Lifetime access — pay once, keep it forever'],
     isActive: true,
     isFeatured: true,
+    billingPeriod: 'one-time',
+  },
+  // LEGACY (no longer sold): Basic $7/mo — kept resolvable for existing
+  // subscribers/codes (founder decision #2: honor until self-cancel).
+  {
+    id: 'basic',
+    name: 'Basic',
+    slug: 'basic',
+    price: 7,
+    comparePrice: null,
+    description: 'Legacy monthly plan — no longer available for new purchases. Existing Basic subscribers keep full access. New users: get the Identity Recode Planner ($9.99 one-time) which includes everything Basic had and much more.',
+    shortDesc: 'Legacy plan — replaced by the Identity Recode Planner',
+    category: 'legacy',
+    type: 'ONE_TIME',
+    accessTier: 'BASIC',
+    image: null,
+    features: ['Legacy monthly plan (no longer sold)', 'Existing subscribers keep access', 'Upgrade to the Identity Recode Planner for the full system'],
+    isActive: false, // V2: hidden from sale; still resolvable via aliases
+    isFeatured: false,
     billingPeriod: 'monthly',
   },
 ];
 
 // Legacy product ID aliases for backward compatibility with existing orders/codes
 // Maps old product IDs to new ones (for webhook, checkout, etc.)
+// V2 (2026-10-21): 'planner'/'trial' now resolve to the $9.99 Identity Recode
+// Planner (product id 'premium'); 'bundle' resolves to Mastery. Old orders and
+// old links keep working without breaking the new one-time model.
 export const PRODUCT_ID_ALIASES: Record<string, string> = {
-  'trial': 'basic',       // old BASIC → new BASIC
-  'planner': 'premium',   // old BASIC → new PREMIUM
-  'premium': 'mastery',   // old PREMIUM → new MASTERY (merged)
-  'bundle': 'mastery',    // old MASTERY → new MASTERY
-  'basic': 'basic',
+  'trial': 'premium',     // legacy 7-day trial → Identity Recode Planner
+  'planner': 'premium',   // legacy planner → Identity Recode Planner (same id now)
+  'premium': 'premium',   // unchanged id — now the $9.99 one-time planner
+  'bundle': 'mastery',    // old bundle → Mastery ($27 one-time)
+  'basic': 'basic',       // legacy Basic (not sold anymore, still resolvable)
   'mastery': 'mastery',
 };
 
@@ -128,6 +144,13 @@ export function getActiveProducts(): Product[] {
 export function getFeaturedProducts(): Product[] {
   return LOCAL_PRODUCTS.filter(p => p.isFeatured && p.isActive);
 }
+
+// DB ProductType enum has no ONE_TIME — map for Prisma sync only
+// (BUNDLE is the closest existing DB type; no migration needed for V2).
+const DB_TYPE_MAP: Record<string, string> = {
+  'ONE_TIME': 'BUNDLE',
+  'SUBSCRIPTION_MONTHLY': 'BUNDLE', // legacy rows
+};
 
 // Products API
 export const ProductsService = {
@@ -183,7 +206,7 @@ export const ProductsService = {
             description: product.description,
             shortDesc: product.shortDesc,
             category: product.category,
-            type: product.type as any,
+            type: (DB_TYPE_MAP[product.type] || product.type) as any,
             accessTier: product.accessTier,
             image: product.image,
             features: JSON.stringify(product.features),

@@ -16,9 +16,9 @@
 | Category | Meaning |
 |---|---|
 | **Free** | Publicly accessible content or tool — no payment required |
-| **Basic** | Included with the Basic subscription ($7/month) |
-| **Premium** | Included with the Premium subscription ($17/month) |
-| **Mastery** | Included with the Mastery subscription ($27/month) |
+| **Basic** | LEGACY monthly tier (no longer sold) — now included in the $9.99 Identity Recode Planner |
+| **Premium** | Unlocked by the Identity Recode Planner ($9.99 one-time, PRICING MODEL V2) |
+| **Mastery** | Unlocked by Mastery ($27 one-time, PRICING MODEL V2) |
 | **Protocol** | Unlocked via a one-time access-key purchase (therapeutic protocols) |
 | **System** | Functional/infrastructure page (account, checkout, search, redirects) — not a product |
 
@@ -28,7 +28,7 @@
 
 1. **Never invent a link** that is not in this file — if you need one that is missing, ask the project engineer first.
 2. **Never promise** features, prices, delivery times, or refunds that are not documented here.
-3. **Prices are final and singular:** Basic $7 / Premium $17 / Mastery $27 per month. Any other number is an error — never output it.
+3. **Prices are final and singular (PRICING MODEL V2, one-time payments):** Identity Recode Planner $9.99 / Mastery $27 / Therapeutic Protocols $99. No monthly plans for new users. Any other number is an error — never output it.
 4. **One CTA per message, one clear destination**, tied to a real benefit documented in this file.
 5. **Recovery section tone:** empathy first, zero blame, total privacy, soft CTA, absolutely no healing promises.
 6. Product/marketing pages for paid tiers are publicly viewable; the category assigned to them indicates the tier they sell or unlock.
@@ -87,9 +87,9 @@
 | Link | Title | Description | Category |
 |---|---|---|---|
 | `/products` | Products Hub | Public side-by-side comparison of the three subscription tiers | Free |
-| `/products/basic` | BASIC — $7/month | 7-Day Guided Discipline Journey: daily guided steps, Trial Planner app, daily identity prompts, evidence-tracking basics, downloadable **7 Days System PDF**, progress dashboard, cancel anytime. Welcome email: BASIC Onboarding sequence (7 days + gradual Premium upsell) | Basic |
-| `/products/premium` | PREMIUM — $17/month | Complete 30-day transformation system: everything in Basic plus the full 30-day journey, **11 premium apps** (see Section 5), and the **30-Day Identity Planner + Executive Manual + Identity Baseline Worksheet** PDFs (digital + print). Most showcased tier. Welcome email: PREMIUM Onboarding sequence | Premium |
-| `/products/mastery` | MASTERY — $27/month | The final tier: everything in Premium, all 20 apps unlocked, **AI Identity Coach**, community access, priority support, plus the Emotion Regulation Toolkit. Best value. Welcome email: MASTERY VIP Journey sequence | Mastery |
+| `/products/premium` | PLANNER — $9.99 one-time (old /products/basic redirects here) | The complete system: 7-Day Guided Discipline Journey + full 30-day journey, **all 12 core apps** (see Section 5), the **30-Day Identity Planner + Executive Manual + Identity Baseline Worksheet** PDFs (digital + print). Lifetime access, single payment. Welcome email: PREMIUM Onboarding sequence | Premium |
+| `/products/premium` | PLANNER — $9.99 one-time | The Identity Recode Planner: 7-day reset + full 30-day journey + **all 12 core apps** + planner/manual/baseline PDFs. Most showcased product. Welcome email: PREMIUM Onboarding sequence | Premium |
+| `/products/mastery` | MASTERY — $27 one-time | The final product: everything in the Planner, all apps unlocked, **AI Identity Coach**, community access, priority support, plus the Emotion Regulation Toolkit. Lifetime access. Welcome email: MASTERY VIP Journey sequence | Mastery |
 
 ---
 ## 5) Applications Registry — All 20 Apps (master table)
@@ -319,7 +319,7 @@
 ## 12) Fact Sheet (hard facts — never invented, never rounded)
 
 ### 12.1 Commercial facts
-- **Only official prices:** Basic **$7** / Premium **$17** / Mastery **$27** per month. Any other number is an error.
+- **Only official prices (one-time):** Identity Recode Planner **$9.99** / Mastery **$27** / Protocols **$99**. Any other number is an error.
 - **Quiz result levels:** beginner / explorer / builder / master — each level maps to a different product recommendation (Free apps → Basic → Premium → Mastery).
 - **Journey design:** free quiz → free tools → Basic (7-day) → Premium (30-day) → Mastery (everything + AI coach).
 - **Protocol access:** one-time keys; delivery email + 9-day follow-up per protocol; troubleshooting path = `/order-status` → noreply@ email.
@@ -342,7 +342,7 @@
 |---|---|---|
 | Cold visitor (article/social) | "Discover your Identity Gap in 3 minutes — free" | `/quiz` |
 | After quiz result | "Your next step is ready — start now" | Product matching the result level |
-| Active free user | "Unlock the full system — start at $7" | `/products/basic` |
+| Active free user | "Unlock the full system — $9.99 once, no subscription" | `/products/premium` |
 | Basic user succeeding in week 1 | "You're ready for the full 30-day transformation" | `/products/premium` |
 | Premium user showing discipline | "Unlock your AI Coach & community — Mastery" | `/products/mastery` |
 | Abandoned cart | "Your journey is waiting — finish checkout" | `/cart` |

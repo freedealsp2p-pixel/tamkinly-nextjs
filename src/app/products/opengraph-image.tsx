@@ -10,8 +10,8 @@ export default async function Image() {
   return generatePageImage({
     title: 'Products & Pricing',
     subtitle: 'Identity Transformation Tools',
-    description: 'Start free with powerful identity tools. Flexible monthly plans from $7/mo. Cancel anytime.',
-    tags: ['Free Tier', 'Monthly Plans', 'Cancel Anytime'],
+    description: 'Start free with powerful identity tools. Unlock everything with one payment — $9.99, no subscription.',
+    tags: ['Free Tier', 'One-Time Payment', 'Lifetime Access'],
     accentColor: '#1F6F78',
   });
 }

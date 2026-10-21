@@ -52,13 +52,14 @@ import { useTranslations, useLocale } from "@/components/providers/LocaleProvide
 
 import ProductRecommender from "@/components/products/ProductRecommender";
 
-// Product URLs mapping — NEW MODEL: 3 monthly tiers + legacy aliases
+// Product URLs mapping — PRICING MODEL V2 (2026-10-21): one-time payments + legacy aliases
+// 'premium' = Identity Recode Planner $9.99; 'mastery' = Mastery $27; 'basic' legacy → planner page
 const PRODUCT_URLS: Record<string, string> = {
-  'basic': '/products/basic',
+  'basic': '/products/premium',
   'premium': '/products/premium',
   'mastery': '/products/mastery',
   // Legacy aliases (redirect to new pages)
-  'trial': '/products/basic',
+  'trial': '/products/premium',
   'planner': '/products/premium',
   'bundle': '/products/mastery',
 };
@@ -159,17 +160,14 @@ function HeroSection({ t }: { t: ReturnType<typeof useTranslations> }) {
 
 // App Access Matrix Section
 function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
-  const { locale } = useLocale();
-  const per = locale === 'ar' ? '/شهر' : '/mo';
-  // Build allApps using translations - access flags for the 3 paid tiers only.
+  // Build allApps using translations - access flags for the 2 paid one-time products only.
   // FREE apps (4) are shown separately as "Get started free" — not in this matrix.
-  // BASIC tier unlocks ONLY trial-planner (1 app).
-  // PREMIUM tier unlocks trial-planner + 10 core apps (11 total).
-  // MASTERY tier unlocks everything (15 apps).
+  // PLANNER ($9.99) unlocks EVERYTHING the former BASIC + PREMIUM monthly plans had.
+  // MASTERY ($27) unlocks everything (15 apps).
   const allApps = [
-    // BASIC tier — only trial-planner
+    // Included in Planner — the former BASIC app
     { nameKey: 'trial-planner', basic: true, premium: true, mastery: true },
-    // PREMIUM tier — core transformation apps (10)
+    // Included in Planner — the former PREMIUM core apps (10)
     { nameKey: 'executive-manual', basic: false, premium: true, mastery: true },
     { nameKey: 'daily-planner', basic: false, premium: true, mastery: true },
     { nameKey: 'identity-baseline', basic: false, premium: true, mastery: true },
@@ -181,18 +179,18 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
     { nameKey: 'decision-analysis', basic: false, premium: true, mastery: true },
     { nameKey: 'evidence-tracking', basic: false, premium: true, mastery: true },
     { nameKey: 'progress-dashboard', basic: false, premium: true, mastery: true },
-    // MASTERY tier — advanced apps (4)
+    // MASTERY-only apps (4)
     { nameKey: 'emotion-regulation', basic: false, premium: false, mastery: true },
     { nameKey: 'ai-identity-coach', basic: false, premium: false, mastery: true },
     { nameKey: 'community-access', basic: false, premium: false, mastery: true },
     { nameKey: 'priority-support', basic: false, premium: false, mastery: true },
   ];
 
-  // Product data for the matrix — NEW MODEL: 3 monthly tiers
+  // Product data for the matrix — PRICING MODEL V2: one-time payments, rule of three
   // FREE shown separately as "Get started free" (not in main matrix to avoid choice paralysis)
   const productsForMatrix = [
-    { id: "basic", tier: 'BASIC', color: "#1F6F78", price: 7, popular: false, nameKey: 'basic' },
-    { id: "premium", tier: 'PREMIUM', color: "#3DD4B0", price: 17, popular: true, nameKey: 'premium' },
+    { id: "free", tier: 'FREE', color: "#3DD4B0", price: 0, popular: false, nameKey: 'free' },
+    { id: "premium", tier: 'PREMIUM', color: "#3DD4B0", price: 9.99, popular: true, nameKey: 'premium' },
     { id: "mastery", tier: 'MASTERY', color: "#0F1C2E", price: 27, popular: false, nameKey: 'mastery' },
   ];
 
@@ -221,7 +219,7 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-[#0F1C2E]">{t(`products.${product.nameKey}.name`)}</h3>
                     <Badge style={{ backgroundColor: product.color, color: product.id === 'free' ? '#0F1C2E' : 'white' }}>
-                      {product.price === 0 ? t('free') : `$${product.price}${per}`}
+                      {product.price === 0 ? t('free') : `$${product.price}`}
                     </Badge>
                   </div>
                   <div className="space-y-2">
@@ -257,13 +255,9 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
                     <div className="text-[#3DD4B0] font-bold">{t('products.free.shortName')}</div>
                     <div className="text-sm text-slate-500">$0</div>
                   </th>
-                  <th className="text-center py-4 px-4">
-                    <div className="text-[#1F6F78] font-bold">{t('products.basic.shortName')}</div>
-                    <div className="text-sm text-slate-500">$7</div>
-                  </th>
                   <th className="text-center py-4 px-4 bg-[#3DD4B0]/5 border-2 border-[#3DD4B0] rounded-t-lg">
                     <div className="text-[#3DD4B0] font-bold">{t('products.premium.shortName')}</div>
-                    <div className="text-sm text-slate-500">$17</div>
+                    <div className="text-sm text-slate-500">$9.99 <span className="line-through">$17</span></div>
                   </th>
                   <th className="text-center py-4 px-4">
                     <div className="text-[#0F1C2E] font-bold">{t('products.mastery.shortName')}</div>
@@ -277,9 +271,6 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
                     <td className="py-3 px-4 text-slate-700">{t(`matrixApps.${idx}`)}</td>
                     <td className="text-center py-3 px-4 bg-[#3DD4B0]/5">
                       <span className="text-slate-300">—</span>
-                    </td>
-                    <td className="text-center py-3 px-4">
-                      {app.basic ? <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] mx-auto" /> : <span className="text-slate-300">—</span>}
                     </td>
                     <td className="text-center py-3 px-4">
                       {app.premium ? <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] mx-auto" /> : <span className="text-slate-300">—</span>}
@@ -309,13 +300,14 @@ function ProductCard({ product, t, matched }: {
     icon: React.ElementType;
     popular: boolean;
     featured?: boolean;
+    billingPeriod?: string;
   };
   t: ReturnType<typeof useTranslations>;
   matched?: boolean;
 }) {
   const Icon = product.icon;
   const { locale } = useLocale();
-  const per = locale === 'ar' ? '/شهر' : '/mo';
+  const per = product.billingPeriod === 'monthly' ? (locale === 'ar' ? '/شهر' : '/mo') : (locale === 'ar' ? 'دفعة واحدة' : ' one-time');
   const isFree = product.price === 0;
   const { toast } = useToast();
   const [guaranteeOpen, setGuaranteeOpen] = useState(false);
@@ -415,9 +407,9 @@ function ProductCard({ product, t, matched }: {
           ) : (
             <>
               <span className="text-4xl font-bold text-[#0F1C2E]">${product.price}</span><span className="text-lg text-[#8A94A6]">{per}</span>
-              {product.comparePrice && (
+              {product.comparePrice ? (
                 <span className="text-lg text-slate-400 line-through">${product.comparePrice}</span>
-              )}
+              ) : null}
             </>
           )}
         </div>
@@ -426,7 +418,7 @@ function ProductCard({ product, t, matched }: {
         <div className="flex items-center gap-2 mb-4">
           {!isFree && product.comparePrice && product.comparePrice > product.price && (
             <Badge className="bg-green-100 text-green-700">
-              {t('save')} ${product.comparePrice - product.price}
+              {t('save')} ${Math.round((product.comparePrice - product.price) * 100) / 100}
             </Badge>
           )}
           {!isFree && (
@@ -517,7 +509,7 @@ function ProductCard({ product, t, matched }: {
                     : 'bg-[#0F1C2E] text-white hover:bg-[#1a2d47]'}`}
                 size="lg"
               >
-                {t('viewDetails')} - ${product.price}${per}
+                {t('viewDetails')} - ${product.price}{product.billingPeriod === 'monthly' ? per : ''}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -540,12 +532,12 @@ function ProductCard({ product, t, matched }: {
 function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   // Two-step decision state: which identity chip did the user pick?
   const [answer, setAnswer] = useState<string | null>(null);
-  // Product data with non-translatable fields
+  // Product data with non-translatable fields — PRICING MODEL V2: rule of three
+  // (Free lead magnet + Planner $9.99 one-time + Mastery $27 one-time)
   const products = [
     { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, color: "#3DD4B0", popular: false, billingPeriod: "free" },
-    { id: "basic", nameKey: "basic", price: 7, comparePrice: 15, tier: "BASIC", icon: Clock, popular: false, billingPeriod: "monthly" },
-    { id: "premium", nameKey: "premium", price: 17, comparePrice: 29, tier: "PREMIUM", icon: Calendar, popular: true, billingPeriod: "monthly" },
-    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, popular: false, billingPeriod: "monthly" },
+    { id: "premium", nameKey: "premium", price: 9.99, comparePrice: 17, tier: "PREMIUM", icon: Calendar, popular: true, billingPeriod: "one-time" },
+    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, popular: false, billingPeriod: "one-time" },
   ];
 
   return (
@@ -572,9 +564,8 @@ function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
           <p className="text-sm text-slate-500 mb-4">
             {t('choosePathSubtitle')}
           </p>
-          <div className="grid sm:grid-cols-3 gap-2">
+          <div className="grid sm:grid-cols-2 gap-2">
             {[
-              { id: 'basic', label: t('pathChipStarter') },
               { id: 'premium', label: t('pathChipTransformer') },
               { id: 'mastery', label: t('pathChipAllIn') },
             ].map((chip) => (
@@ -600,7 +591,7 @@ function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {products.map((product) => (
             <div key={product.id} id={`plan-${product.id}`} className={`scroll-mt-28 ${product.popular ? 'lg:-translate-y-3' : ''}`}>
               <ProductCard
