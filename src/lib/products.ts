@@ -53,7 +53,9 @@ export const LOCAL_PRODUCTS: Product[] = [
     category: 'one-time',
     type: 'ONE_TIME',
     accessTier: 'PREMIUM',
-    image: null,
+    // Task 71 (2026-10-25): founder-supplied product cover (RN-2 gate passed:
+    // $9.99 one-time + lifetime access, zero legacy pricing/tiers/guarantee text).
+    image: '/images/products/covers/tamkinly-planner-cover-2k.webp',
     features: ['7-Day Guided Discipline Journey', '30-Day Identity Planner', 'Daily identity prompts', 'Executive Manual', 'Identity Baseline Worksheet', 'Identity Reset Checklist — weekly cycle tool with Failure Recovery Protocol (printable, reuse indefinitely)', 'All core interactive apps', 'Digital + Print PDFs', 'Decision Pattern Analysis', 'Evidence tracking', 'Progress dashboard', 'Lifetime access — pay once, keep it forever'],
     isActive: true,
     isFeatured: true,
@@ -70,7 +72,9 @@ export const LOCAL_PRODUCTS: Product[] = [
     category: 'one-time',
     type: 'ONE_TIME',
     accessTier: 'MASTERY',
-    image: null,
+    // Task 71 (2026-10-25): founder-supplied product cover (RN-2 gate passed:
+    // $27 one-time + lifetime access, zero legacy pricing/tiers/guarantee text).
+    image: '/images/products/covers/tamkinly-mastery-cover-2k.webp',
     features: ['Everything in the Identity Recode Planner', 'All Interactive Apps', 'AI Identity Coach', 'Transformation Community', 'Priority Support', 'Emotion Regulation Toolkit', 'Lifetime access — pay once, keep it forever'],
     isActive: true,
     isFeatured: true,

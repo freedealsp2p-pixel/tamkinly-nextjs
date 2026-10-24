@@ -283,8 +283,9 @@ export default function QuizClient() {
 
     if (overallScore >= 70) {
       recommendedProduct = 'mastery';
-      personalizedMessage = "You have a strong foundation. The Premium Bundle will help you optimize and master your identity transformation with advanced tools and frameworks.";
-      personalizedMessageAr = "لديك أساس قوي. ستساعدك الباقة المتميزة على تحسين وإتقان تحول هويتك مع أدوات وأطر متقدمة.";
+      // Task 71 terminology sweep: BUNDLE -> Mastery (founder directive 2026-10-25)
+      personalizedMessage = "You have a strong foundation. Mastery will help you optimize and master your identity transformation with advanced tools and frameworks.";
+      personalizedMessageAr = "لديك أساس قوي. سيساعدك الإتقان (Mastery) على تحسين وإتقان تحول هويتك مع أدوات وأطر متقدمة.";
     } else if (overallScore >= 50) {
       recommendedProduct = 'mastery';
       personalizedMessage = "You're ready for transformation. The Identity Recode Planner is perfectly suited for your journey - it will guide you through a complete 30-day identity reconstruction.";

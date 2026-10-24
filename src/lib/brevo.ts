@@ -429,12 +429,13 @@ export const BrevoEmails = {
   },
 
   // Legacy aliases -> new lineup templates
-  async sendTrialPurchase( // old trial product retired -> Basic delivery
+  async sendTrialPurchase( // old trial product retired -> legacy Basic delivery
     email: string, name: string, accessKey: string, locale: string = 'ar'
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     return this.sendTemplate(
       templateFor(BREVO_TEMPLATES.CODE_BASIC, locale), email,
-      { NAME: name, CODE: accessKey, PRODUCT: 'Basic Plan' },
+      // Task 71 sweep: legacy recipients also see the merged lineup name
+      { NAME: name, CODE: accessKey, PRODUCT: 'The Planner' },
       { name, sender: senderFor('CODE_BASIC') }
     );
   },
@@ -454,7 +455,8 @@ export const BrevoEmails = {
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     return this.sendTemplate(
       templateFor(BREVO_TEMPLATES.CODE_PREMIUM, locale), email,
-      { NAME: name, CODE: accessKey, PRODUCT: 'Premium Plan' },
+      // Task 71 sweep: Premium merged into The Planner (founder 2026-10-25)
+      { NAME: name, CODE: accessKey, PRODUCT: 'The Planner' },
       { name, sender: senderFor('CODE_PREMIUM') }
     );
   },

@@ -448,7 +448,8 @@ export default function IdentityVsBehaviorGuide() {
               {getText("Ready for Structured Transformation?", "هل أنت مستعد لتحول منظم؟")}
             </h2>
             <p className="text-slate-300 mb-6">
-              {getText("The Premium subscription provides a 30-day guided journey with daily exercises, journaling prompts, and progress tracking.", "يوفر اشتراك المميز رحلة موجهة لمدة 30 يومًا مع تمارين يومية وموجهات كتابة وتتبع التقدم.")}
+              {/* Task 71 terminology sweep: Premium subscription -> The Planner (one-time) */}
+              {getText("The Planner ($9.99 one-time, lifetime access) provides a 30-day guided journey with daily exercises, journaling prompts, and progress tracking.", "يوفر المخطط (The Planner) — دفعة واحدة 9.99$ بوصول دائم — رحلة موجهة لمدة 30 يومًا مع تمارين يومية وموجهات كتابة وتتبع التقدم.")}
             </p>
             <Link href="/products">
               <Button size="xl" variant="accent" className="font-bold shadow-2xl shadow-[#3DD4B0]/30 hover:shadow-[#3DD4B0]/50">

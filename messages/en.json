@@ -376,7 +376,7 @@
     "search": "Search",
     "guides": "Guides",
     "downloads": "Downloads",
-    "basicProduct": "Basic (Legacy — no longer sold)",
+    "basicProduct": "The Planner (replaces Basic)",
     "premiumProduct": "Identity Recode Planner — $9.99",
     "masteryProduct": "Mastery — $27 one-time",
     "protocolsHub": "Therapeutic Protocols",
@@ -465,7 +465,7 @@
     "joinThousands": "Join thousands who have already begun their journey back to themselves. Your transformation starts with a single decision.",
     "beginTransformation": "Begin Your Transformation",
     "personalizedMessages": {
-      "high": "You have a strong foundation. The Premium plan will help you optimize and master your identity transformation with advanced tools and frameworks.",
+      "high": "You have a strong foundation. Mastery will help you optimize and master your identity transformation with advanced tools and frameworks.",
       "medium": "You're ready for transformation. The Identity Recode Planner is perfectly suited for your journey - it will guide you through a complete 30-day identity reconstruction.",
       "low": "There's significant potential waiting to be unlocked. The Planner will help you rebuild your identity foundation from the ground up.",
       "veryLow": "Your transformation journey starts with a single step. The 7-Day Reset is the perfect introduction to discover what's possible."
@@ -928,8 +928,8 @@
     "trustLifetimeAccess": "Instant Access",
     "free": "Free",
     "trial": "Trial",
-    "basic": "BASIC",
-    "premium": "Premium",
+    "basic": "Legacy",
+    "premium": "The Planner",
     "mostPopular": "Most Popular",
     "bestValue": "Best Value",
     "startFreeNow": "Start Free Now",
@@ -1148,7 +1148,7 @@
     "pathChipAllIn": "I want everything — plus the AI Coach",
     "matchesYou": "Matches your answer",
     "startHereTitle": "Not sure where to start?",
-    "startHereBody": "Most members begin with Premium — the complete system at the fair middle of the ladder.",
+    "startHereBody": "Most members begin with The Planner — the complete system at the fair middle of the ladder.",
     "startHereButton": "Get the Identity Recode Planner — $9.99",
     "startHereSecondary": "or compare all plans above",
     "heroCtaPrimary": "Get the Identity Recode Planner — $9.99",
@@ -1296,7 +1296,7 @@
       "Unlimited": "Unlimited"
     },
     "haveAccessCode": "Have an access code?",
-    "enterCodeDesc": "Enter your code to unlock premium apps",
+    "enterCodeDesc": "Enter your code to unlock your apps",
     "activateCode": "Activate",
     "codeActivated": "Code activated! Refreshing...",
     "recoveryPrograms": "Recovery Programs",
@@ -1897,7 +1897,7 @@
     "categoryMindsetStrategy": "Mindset & Strategy",
     "categoryProductivityGrowth": "Productivity & Growth",
     "categoryFreeApp": "FREE App",
-    "categoryBasicApp": "BASIC App",
+    "categoryBasicApp": "Planner App",
     "categoryBundleApp": "Mastery App",
     "categoryWorksheet": "Worksheet",
     "categoryIdentityShift": "Identity Shift",
@@ -1912,7 +1912,7 @@
     "categoryExcellence": "Excellence",
     "categoryMentalClarity": "Mental Clarity",
     "tierFree": "FREE",
-    "tierBasic": "BASIC",
+    "tierBasic": "The Planner",
     "tierBundle": "Mastery",
     "startHereTitle": "Start Here",
     "startHereSubtitle": "New to Tamkinly? These three articles will give you the foundation.",
@@ -1999,7 +1999,7 @@
     "createAccountTitle": "Create a free account to save your progress",
     "createAccountDesc": "Your quiz results and achievements will be saved permanently",
     "createFreeAccount": "Create Free Account",
-    "premium": "Premium",
+    "premium": "The Planner",
     "free": "Free",
     "signOut": "Sign Out",
     "signInToSave": "Sign In to Save Progress",
@@ -2012,7 +2012,7 @@
     "achievements": "Achievements",
     "viewAllAchievements": "View All Achievements",
     "unlockFullPotential": "Unlock Full Potential",
-    "unlockDesc": "Get access to all 15+ apps, AI coaching, and premium features",
+    "unlockDesc": "Get access to all 15+ apps, AI coaching, and all Planner features",
     "viewProducts": "View Products",
     "quickLinks": "Quick Links",
     "takeAssessment": "Take Assessment",
@@ -2062,7 +2062,7 @@
     "guidanceTitle": "Your Next Step",
     "guidanceWide": "Your identity gap is significant. The best next step is the Identity Recode Planner — 30 structured days to close the gap.",
     "guidanceModerate": "You have real strengths working for you. Focus on your weakest dimension to unlock the next level.",
-    "guidanceNarrow": "Your foundation is solid. The work now is deepening, not rebuilding. Premium tools help you optimize.",
+    "guidanceNarrow": "Your foundation is solid. The work now is deepening, not rebuilding. Planner tools help you optimize.",
     "guidanceNoQuiz": "Start with the free Identity Gap Assessment to discover where you stand.",
     "journeyProgress": "30-Day Journey Progress",
     "dayOf": "Day {day} of 30",
@@ -2568,13 +2568,13 @@
   "downloadsPage": {
     "badge": "Tamkinly Products",
     "title": "Identity Recode Planner",
-    "subtitle": "Every downloadable file of the identity transformation system in one place — 9 files",
+    "subtitle": "The free files are below — Planner-package files unlock with your access code after purchase",
     "files": "files",
     "pages": "pages",
     "totalSize": "Total Size",
     "downloadFile": "Download File",
     "downloadAllNote": "Click each button to download the file separately",
-    "includedNote": "All files above are included in BOTH packages — The Planner and Mastery. One payment, lifetime access.",
+    "includedNote": "Planner files are included in BOTH one-time packages — The Planner ($9.99) and Mastery ($27). One payment, lifetime access.",
     "products": {
       "executiveManual": {
         "name": "Executive Manual",
@@ -2611,9 +2611,31 @@
       "actionList": {
         "name": "Action List — Turn Today Into Evidence",
         "description": "A free one-page attachment: the daily action list built on the Tamkinly methodology — print it and reuse indefinitely."
+      },
+      "recoveryToolkit": {
+        "name": "Recovery Toolkit — 11 Practical Worksheets",
+        "description": "The complete free compendium: HALT check, trigger journal, emergency plan, reframing tools and more."
+      },
+      "plannerDigital": {
+        "name": "Identity Recode Planner — Digital Interactive Edition",
+        "description": "The complete interactive planner: fillable fields, 30-day system, the full Identity Recode method."
+      },
+      "plannerPrint": {
+        "name": "Identity Recode Planner — Print-Ready Edition",
+        "description": "High-resolution print edition — print it and reuse the weekly cycles indefinitely."
       }
     },
-    "pagesLabel": "pages"
+    "pagesLabel": "pages",
+    "freeTitle": "Free files",
+    "freeSubtitle": "No payment, no code — download and start now",
+    "recoveryPointerTitle": "Recovery Toolkit — 11 practical worksheets",
+    "recoveryPointerDesc": "HALT check, trigger journal, emergency plan and more — all free, on the recovery page.",
+    "recoveryPointerCta": "Open the recovery page",
+    "lockedTitle": "The Planner package files",
+    "lockedDesc": "The complete planner (digital interactive + print-ready), the 7-Day Reset guide, the checklist and every worksheet — unlocked with the access code that arrives in your email right after payment.",
+    "lockedCta": "Unlock with your access code",
+    "lockedBuyCta": "Get The Planner — $9.99",
+    "lockedNote": "How it works: pay on Tribute → your access code arrives by email → enter it once → every file opens. One payment, lifetime access."
   },
   "quizPreview": {
     "headline": "Here's what you'll receive in 5 minutes.",
@@ -2696,10 +2718,10 @@
     "rewardTiers": "Reward Tiers",
     "tier1Title": "1-3 Referrals: Free Trial Extension",
     "tier1Desc": "Get 7 extra days of trial access for each referral",
-    "tier2Title": "4-9 Referrals: Basic App Access",
-    "tier2Desc": "Unlock 4 core apps for 30 days free",
-    "tier3Title": "10+ Referrals: Premium Access",
-    "tier3Desc": "Get full premium access for 90 days free",
+    "tier2Title": "4-9 Referrals: Planner App Access",
+    "tier2Desc": "Unlock 4 Planner apps for 30 days free",
+    "tier3Title": "10+ Referrals: Full Planner Access",
+    "tier3Desc": "Get full Planner access for 90 days free",
     "nextReward": "Next reward at {count} referrals",
     "shareText": "Transform your identity with Tamkinly!",
     "copiedToClipboard": "Copied to clipboard!",
@@ -4281,10 +4303,10 @@
     "basicBenefit1": "Daily reflection prompts & exercises",
     "basicBenefit2": "Identity mapping worksheets",
     "basicBenefit3": "Progress tracking dashboard",
-    "getBasic": "Get Basic Plan",
+    "getBasic": "Get The Planner — $9.99",
     "bestValue": "BEST VALUE",
     "bundleTitle": "Mastery",
-    "bundleDesc": "Everything in Premium, plus all interactive apps, AI identity coaching, and priority support.",
+    "bundleDesc": "Everything in The Planner, plus all interactive apps, AI identity coaching, and priority support.",
     "bundleBenefit1": "AI-powered identity coach sessions",
     "bundleBenefit2": "All 15+ interactive apps & tools",
     "bundleBenefit3": "Priority support & community access",
@@ -4431,8 +4453,8 @@
     },
     "tierPREMIUM": {
       "heading": "Full Recovery Toolkit",
-      "description": "Everything in Basic plus 10+ therapeutic apps, advanced worksheets, and guided recovery tools.",
-      "benefit1": "All Basic features included",
+      "description": "Everything in the Planner plus 10+ therapeutic apps, advanced worksheets, and guided recovery tools.",
+      "benefit1": "All Planner features included",
       "benefit2": "10+ interactive therapeutic apps",
       "benefit3": "Guided recovery exercises & techniques"
     },
@@ -4508,9 +4530,9 @@
   },
   "therapeuticProtocols": {
     "hub": {
-      "title": "Premium Therapeutic Protocols",
+      "title": "Therapeutic Protocols",
       "subtitle": "Independent therapeutic experiences designed for deep psychological work — three paid protocols and one completely free exercise.",
-      "premiumBadge": "Three paid premium experiences + a completely free exercise to start now",
+      "premiumBadge": "Three paid experiences + a completely free exercise to start now",
       "disclaimer": "Tamkinly therapeutic protocols are designed for personal growth and psychological exploration. They do not replace professional mental health treatment."
     },
     "landing": {
@@ -4523,7 +4545,7 @@
       "perk1": "Complete guided therapeutic experience",
       "perk2": "Lifetime access to this protocol",
       "perk3": "Progress preserved locally on your device",
-      "footerDisclaimer": "This is a premium therapeutic experience. It does not replace professional mental health treatment."
+      "footerDisclaimer": "This is a paid therapeutic experience. It does not replace professional mental health treatment."
     },
     "purchase": {
       "title": "Purchase this Protocol",

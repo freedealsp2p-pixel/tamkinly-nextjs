@@ -21,7 +21,8 @@ import {
   Loader2,
   Check,
   Sparkles,
-  ShoppingCart
+  ShoppingCart,
+  ExternalLink
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
@@ -50,6 +51,8 @@ const productsConfig: Record<string, {
   popular: boolean;
   icon: React.ElementType;
   color: string;
+  image?: string;
+  tributeHref?: string;
 }> = {
   'premium': {
     id: "premium",
@@ -58,7 +61,9 @@ const productsConfig: Record<string, {
     comparePrice: 17,
     popular: true,
     icon: Calendar,
-    color: "#3DD4B0"
+    color: "#3DD4B0",
+    image: "/images/products/covers/tamkinly-planner-cover-2k.webp",
+    tributeHref: "/api/tribute/redirect?tier=premium&amount=9.99",
   },
   'mastery': {
     id: "mastery",
@@ -67,7 +72,9 @@ const productsConfig: Record<string, {
     comparePrice: 0,
     popular: false,
     icon: Award,
-    color: "#0F1C2E"
+    color: "#0F1C2E",
+    image: "/images/products/covers/tamkinly-mastery-cover-2k.webp",
+    tributeHref: "/api/tribute/redirect?tier=mastery&amount=27",
   },
   // Legacy slugs - render the Identity Recode Planner ($9.99 one-time)
   'basic': {
@@ -77,7 +84,9 @@ const productsConfig: Record<string, {
     comparePrice: 17,
     popular: true,
     icon: Calendar,
-    color: "#3DD4B0"
+    color: "#3DD4B0",
+    image: "/images/products/covers/tamkinly-planner-cover-2k.webp",
+    tributeHref: "/api/tribute/redirect?tier=premium&amount=9.99",
   },
   'trial': {
     id: "premium",
@@ -86,7 +95,9 @@ const productsConfig: Record<string, {
     comparePrice: 17,
     popular: true,
     icon: Calendar,
-    color: "#3DD4B0"
+    color: "#3DD4B0",
+    image: "/images/products/covers/tamkinly-planner-cover-2k.webp",
+    tributeHref: "/api/tribute/redirect?tier=premium&amount=9.99",
   },
   'planner': {
     id: "premium",
@@ -95,7 +106,9 @@ const productsConfig: Record<string, {
     comparePrice: 17,
     popular: true,
     icon: Calendar,
-    color: "#3DD4B0"
+    color: "#3DD4B0",
+    image: "/images/products/covers/tamkinly-planner-cover-2k.webp",
+    tributeHref: "/api/tribute/redirect?tier=premium&amount=9.99",
   }
 };
 
@@ -401,11 +414,22 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col lg:flex-row items-start gap-8">
-              {/* Product Icon/Image */}
+              {/* Product Icon/Image — Task 71: founder cover when available, icon fallback */}
               <div className="flex-shrink-0">
-                <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                  <Icon className="w-16 h-16 lg:w-20 lg:h-20 text-[#3DD4B0]" />
-                </div>
+                {config.image ? (
+                  <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-2xl overflow-hidden border border-white/20 bg-white/10 backdrop-blur-sm">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={config.image}
+                      alt={name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                    <Icon className="w-16 h-16 lg:w-20 lg:h-20 text-[#3DD4B0]" />
+                  </div>
+                )}
               </div>
               
               {/* Product Info */}
@@ -491,6 +515,22 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                     </Button>
                   </Link>
                 </div>
+
+                {/* Task 71: direct Tribute payment link — founder directive "direct bundle links in the products".
+                    Same one-time web link the checkout uses (env-overridable), opens Tribute in a new tab. */}
+                {config.tributeHref && (
+                  <a
+                    href={config.tributeHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-3 text-sm font-medium text-[#3DD4B0] hover:text-white transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    {locale === 'ar'
+                      ? `الدفع المباشر عبر Tribute — $${config.price} دفعة واحدة، ويصلك رمز الوصول فوراً`
+                      : `Pay directly via Tribute — $${config.price} one-time, your access code arrives instantly`}
+                  </a>
+                )}
                 
                 {/* Trust Badges */}
                 <div className="flex flex-wrap items-center gap-4 mt-6 text-sm text-slate-400">

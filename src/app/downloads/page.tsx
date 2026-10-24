@@ -1,32 +1,45 @@
 'use client';
 
-import { FileText, HardDrive } from "lucide-react";
+import { FileText, HardDrive, Lock, Download, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { useTranslations, useLocale } from "@/components/providers/LocaleProvider";
 import { BilingualDownloadButton } from "@/components/ui/bilingual-download-button";
 
-// Map each product to its BILINGUAL_FILES key
-// V2 (2026-10-21): the Basic/Premium tier split is retired — every file below is
-// included in BOTH one-time packages (The Planner + Mastery). Legacy monthly
-// subscribers keep their access (founder decision D2).
-const productKeys = [
-  { key: "sevenDaysSystem", bilingualKey: "7-DAYS-SYSTEM", pages: 30, size: "5.0 MB" },
-  { key: "executiveManual", bilingualKey: "EXECUTIVE-MANUAL", pages: 6, size: "74 KB" },
-  { key: "identityBaseline", bilingualKey: "IDENTITY-BASELINE", pages: 12, size: "75 KB" },
-  { key: "environmentalAudit", bilingualKey: "ENVIRONMENTAL-AUDIT", pages: 8, size: "62 KB" },
-  { key: "decisionPattern", bilingualKey: "DECISION-PATTERN", pages: 7, size: "58 KB" },
-  { key: "evidenceTracking", bilingualKey: "EVIDENCE-TRACKING", pages: 8, size: "60 KB" },
-  { key: "progressDashboard", bilingualKey: "PROGRESS-DASHBOARD", pages: 7, size: "58 KB" },
-  { key: "identityResetChecklist", bilingualKey: "IDENTITY-RESET-CHECKLIST", pages: 3, size: "1.7 MB" },
-  { key: "actionList", bilingualKey: "ACTION-LIST", pages: 1, size: "0.6 MB" },
+// ============================================
+// TASK 71 (2026-10-25) — founder directive: pay FIRST (Tribute), then access.
+// The public downloads page now exposes ONLY the free files.
+// Every Planner-package file moved behind the server-side gate at
+// /downloads/planner (access code + email, tier >= PREMIUM).
+// D1 untouched: no old path removed — legacy root PDFs stay reachable by
+// direct URL until the Cutover migration completes (6/6 subscribers).
+// ============================================
+
+// Free files — public, no access code needed
+const freeFiles = [
+  { key: "actionList", bilingualKey: "ACTION-LIST" },
+  { key: "recoveryToolkit", bilingualKey: "RECOVERY-TOOLKIT-EN" },
+];
+
+// Planner-package files — gated behind /downloads/planner (server-side check)
+const plannerFileKeys = [
+  "plannerDigital",
+  "plannerPrint",
+  "sevenDaysSystem",
+  "identityResetChecklist",
+  "executiveManual",
+  "identityBaseline",
+  "environmentalAudit",
+  "decisionPattern",
+  "evidenceTracking",
+  "progressDashboard",
 ];
 
 export default function DownloadsPage() {
   const t = useTranslations('downloadsPage');
   const { locale } = useLocale();
-  const totalSize = "7.6 MB";
-  const totalPages = 82;
   const isAr = locale === 'ar';
 
   return (
@@ -47,27 +60,13 @@ export default function DownloadsPage() {
           <p className="text-[#3DD4B0]/90 text-sm mt-3 max-w-2xl mx-auto">
             {t('includedNote')}
           </p>
-          
-          {/* Stats */}
-          <div className="flex justify-center gap-6 mt-6">
-            <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/10">
-              <span className="text-[#3DD4B0] font-bold">{productKeys.length}</span>
-              <span className="text-slate-400 text-sm ml-2">{t('files')}</span>
-            </div>
-            <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/10">
-              <span className="text-[#3DD4B0] font-bold">{totalPages}</span>
-              <span className="text-slate-400 text-sm ml-2">{t('pages')}</span>
-            </div>
-            <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/10">
-              <span className="text-[#3DD4B0] font-bold">{totalSize}</span>
-              <span className="text-slate-400 text-sm ml-2">{t('totalSize')}</span>
-            </div>
-          </div>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {productKeys.map((product, index) => (
+        {/* ============ FREE FILES — public ============ */}
+        <h2 className="text-xl font-bold text-white mb-1">{t('freeTitle')}</h2>
+        <p className="text-slate-400 text-sm mb-5">{t('freeSubtitle')}</p>
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
+          {freeFiles.map((product, index) => (
             <Card key={index} className="bg-white/5 border-white/10 hover:border-[#3DD4B0]/50 transition-all duration-300">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
@@ -81,14 +80,9 @@ export default function DownloadsPage() {
                     <p className="text-slate-400 text-sm mb-3">
                       {t(`products.${product.key}.description`)}
                     </p>
-                    <div className="flex items-center gap-3 text-xs text-slate-500">
-                      <span>{product.pages} {t('pagesLabel')}</span>
-                      <span>•</span>
-                      <span>{product.size}</span>
-                    </div>
                   </div>
                 </div>
-                
+
                 <div className="mt-4">
                   <BilingualDownloadButton
                     fileKey={product.bilingualKey}
@@ -100,7 +94,62 @@ export default function DownloadsPage() {
               </CardContent>
             </Card>
           ))}
+
+          {/* Recovery worksheets pointer — 11 free worksheets live on /recovery */}
+          <Card className="bg-white/5 border-white/10 md:col-span-2">
+            <CardContent className="p-6 flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <h3 className="text-white font-semibold text-lg mb-1">{t('recoveryPointerTitle')}</h3>
+                <p className="text-slate-400 text-sm">{t('recoveryPointerDesc')}</p>
+              </div>
+              <Link href="/recovery">
+                <Button className="bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold">
+                  {t('recoveryPointerCta')}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* ============ PLANNER FILES — locked (pay first, then access) ============ */}
+        <Card className="bg-white/5 border-[#3DD4B0]/30">
+          <CardContent className="p-6 sm:p-8">
+            <div className="flex items-start gap-4 mb-5">
+              <div className="w-12 h-12 bg-[#3DD4B0]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Lock className="w-6 h-6 text-[#3DD4B0]" />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-white font-semibold text-xl mb-1">{t('lockedTitle')}</h2>
+                <p className="text-slate-400 text-sm">{t('lockedDesc')}</p>
+              </div>
+            </div>
+
+            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 mb-6">
+              {plannerFileKeys.map((key) => (
+                <li key={key} className="flex items-center gap-2 text-sm text-slate-300">
+                  <Lock className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
+                  {t(`products.${key}.name`)}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <Link href="/downloads/planner" className="w-full sm:w-auto">
+                <Button className="w-full bg-[#3DD4B0] text-[#0F1C2E] hover:bg-[#2BC49E] font-semibold h-12 px-6">
+                  <Download className="mr-2 h-4 w-4" />
+                  {t('lockedCta')}
+                </Button>
+              </Link>
+              <Link href="/products/premium" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white/10 h-12 px-6">
+                  {t('lockedBuyCta')}
+                </Button>
+              </Link>
+            </div>
+            <p className="text-slate-500 text-xs mt-4">{t('lockedNote')}</p>
+          </CardContent>
+        </Card>
 
         {/* Download All Note */}
         <div className="mt-8 text-center">

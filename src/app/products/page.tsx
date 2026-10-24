@@ -301,6 +301,8 @@ function ProductCard({ product, t, matched }: {
     popular: boolean;
     featured?: boolean;
     billingPeriod?: string;
+    image?: string | null;
+    tributeHref?: string | null;
   };
   t: ReturnType<typeof useTranslations>;
   matched?: boolean;
@@ -378,6 +380,19 @@ function ProductCard({ product, t, matched }: {
         </div>
       )}
       
+      {/* Product cover (Task 71: founder-supplied, RN-2-gated) — rendered above the card body */}
+      {product.image && (
+        <div className="relative h-44 sm:h-48 overflow-hidden bg-[#0F1C2E]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={product.image}
+            alt={productName}
+            className="w-full h-full object-cover object-top"
+            loading="lazy"
+          />
+        </div>
+      )}
+
       <CardContent className="p-6 lg:p-8">
         {/* Icon */}
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#3DD4B0]/10 text-[#3DD4B0] mb-4">
@@ -521,6 +536,17 @@ function ProductCard({ product, t, matched }: {
               <ShoppingCart className="mr-2 h-4 w-4" />
               {t('addToCart')}
             </Button>
+            {/* Task 71: direct Tribute payment — founder directive "direct bundle links in the products" */}
+            {product.tributeHref && (
+              <a
+                href={product.tributeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center text-xs font-medium text-[#1F6F78] hover:text-[#3DD4B0] underline underline-offset-2 pt-1"
+              >
+                {locale === 'ar' ? 'أو ادفع مباشرة عبر Tribute ← فور الدفع يصلك رمز الوصول' : 'Or pay directly via Tribute — your access code arrives right after payment'}
+              </a>
+            )}
           </div>
         )}
       </CardContent>
@@ -535,9 +561,12 @@ function ProductsSection({ t }: { t: ReturnType<typeof useTranslations> }) {
   // Product data with non-translatable fields — PRICING MODEL V2: rule of three
   // (Free lead magnet + Planner $9.99 one-time + Mastery $27 one-time)
   const products = [
-    { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, color: "#3DD4B0", popular: false, billingPeriod: "free" },
-    { id: "premium", nameKey: "premium", price: 9.99, comparePrice: 17, tier: "PREMIUM", icon: Calendar, popular: true, billingPeriod: "one-time" },
-    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, popular: false, billingPeriod: "one-time" },
+    // Task 71 (2026-10-25): founder covers wired into cards + direct Tribute pay links
+    // (founder directive: direct bundle links live in the products — pay on Tribute,
+    // then return for the access key; /api/tribute/redirect keeps env-override + logging).
+    { id: "free", nameKey: "free", price: 0, comparePrice: 0, tier: "FREE", icon: Sparkles, popular: false, billingPeriod: "free", image: null as string | null, tributeHref: null as string | null },
+    { id: "premium", nameKey: "premium", price: 9.99, comparePrice: 17, tier: "PREMIUM", icon: Calendar, popular: true, billingPeriod: "one-time", image: "/images/products/covers/tamkinly-planner-cover-2k.webp", tributeHref: "/api/tribute/redirect?tier=premium&amount=9.99" },
+    { id: "mastery", nameKey: "mastery", price: 27, comparePrice: 0, tier: "MASTERY", icon: Award, popular: false, billingPeriod: "one-time", image: "/images/products/covers/tamkinly-mastery-cover-2k.webp", tributeHref: "/api/tribute/redirect?tier=mastery&amount=27" },
   ];
 
   return (
