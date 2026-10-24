@@ -2568,12 +2568,13 @@
   "downloadsPage": {
     "badge": "Tamkinly Products",
     "title": "Identity Recode Planner",
-    "subtitle": "The 30-day identity transformation system — 6 documents to download",
+    "subtitle": "Every downloadable file of the identity transformation system in one place — 9 files",
     "files": "files",
     "pages": "pages",
     "totalSize": "Total Size",
     "downloadFile": "Download File",
     "downloadAllNote": "Click each button to download the file separately",
+    "includedNote": "All files above are included in BOTH packages — The Planner and Mastery. One payment, lifetime access.",
     "products": {
       "executiveManual": {
         "name": "Executive Manual",
@@ -2606,6 +2607,10 @@
       "identityResetChecklist": {
         "name": "Identity Reset Checklist",
         "description": "Weekly-cycle tool: define one specific identity, grow into it for a focused week, and analyze any setback with the Failure Recovery Protocol. Print it and rerun the cycle as many times as you want."
+      },
+      "actionList": {
+        "name": "Action List — Turn Today Into Evidence",
+        "description": "A free one-page attachment: the daily action list built on the Tamkinly methodology — print it and reuse indefinitely."
       }
     },
     "pagesLabel": "pages"

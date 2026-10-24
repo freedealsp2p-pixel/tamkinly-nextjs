@@ -56,6 +56,13 @@ jobs:
             fi
             npx prisma db push --skip-generate --accept-data-loss
 
+            # ---- TASK70 products sync (AUD-1, 2026-10-25) ----
+            # Guarded, idempotent sync of the stale products cache to V2
+            # (one-time Planner $9.99 / Mastery $27) + AR enrichment + retirement
+            # of the two legacy monthly rows syncToDatabase never touches.
+            # DB backup above already covers this. Non-fatal by design.
+            node prisma/seed-task70-products.mjs || echo "[TASK70-DB] products sync failed (non-fatal, deploy continues)"
+
             # Remove stale Next build lock (only when no build is actually running)
             if [ -f .next/lock ] && ! pgrep -f "next build" >/dev/null 2>&1; then
               rm -f .next/lock

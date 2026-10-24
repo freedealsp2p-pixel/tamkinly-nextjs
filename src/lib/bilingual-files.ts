@@ -120,6 +120,13 @@ export const BILINGUAL_FILES: Record<string, BilingualFile> = {
     en: { href: '/Executive-Manual.pdf', available: true, size: '74 KB' },
     category: 'PREMIUM Product',
   },
+  'ACTION-LIST': {
+    resourceId: 'ACTION-LIST',
+    titleFallback: { ar: 'قائمة العمل — حوّل يومك إلى دليل', en: 'Action List — Turn Today Into Evidence' },
+    ar: { href: '/downloads/v2/Tamkinly-Action-List.pdf', available: true, size: '0.6 MB' },
+    en: { href: '/downloads/v2/Tamkinly-Action-List.pdf', available: true, size: '0.6 MB' },
+    category: 'Free Attachment',
+  },
   'IDENTITY-BASELINE': {
     resourceId: 'IDENTITY-BASELINE',
     titleFallback: { ar: 'ورقة عمل خط الأساس', en: 'Identity Baseline Worksheet' },

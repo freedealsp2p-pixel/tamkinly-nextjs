@@ -7,10 +7,11 @@ import { useTranslations, useLocale } from "@/components/providers/LocaleProvide
 import { BilingualDownloadButton } from "@/components/ui/bilingual-download-button";
 
 // Map each product to its BILINGUAL_FILES key
+// V2 (2026-10-21): the Basic/Premium tier split is retired — every file below is
+// included in BOTH one-time packages (The Planner + Mastery). Legacy monthly
+// subscribers keep their access (founder decision D2).
 const productKeys = [
-  // BASIC tier
   { key: "sevenDaysSystem", bilingualKey: "7-DAYS-SYSTEM", pages: 30, size: "5.0 MB" },
-  // PREMIUM tier
   { key: "executiveManual", bilingualKey: "EXECUTIVE-MANUAL", pages: 6, size: "74 KB" },
   { key: "identityBaseline", bilingualKey: "IDENTITY-BASELINE", pages: 12, size: "75 KB" },
   { key: "environmentalAudit", bilingualKey: "ENVIRONMENTAL-AUDIT", pages: 8, size: "62 KB" },
@@ -18,13 +19,14 @@ const productKeys = [
   { key: "evidenceTracking", bilingualKey: "EVIDENCE-TRACKING", pages: 8, size: "60 KB" },
   { key: "progressDashboard", bilingualKey: "PROGRESS-DASHBOARD", pages: 7, size: "58 KB" },
   { key: "identityResetChecklist", bilingualKey: "IDENTITY-RESET-CHECKLIST", pages: 3, size: "1.7 MB" },
+  { key: "actionList", bilingualKey: "ACTION-LIST", pages: 1, size: "0.6 MB" },
 ];
 
 export default function DownloadsPage() {
   const t = useTranslations('downloadsPage');
   const { locale } = useLocale();
-  const totalSize = "6.9 MB";
-  const totalPages = 81;
+  const totalSize = "7.6 MB";
+  const totalPages = 82;
   const isAr = locale === 'ar';
 
   return (
@@ -41,6 +43,9 @@ export default function DownloadsPage() {
           </h1>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             {t('subtitle')}
+          </p>
+          <p className="text-[#3DD4B0]/90 text-sm mt-3 max-w-2xl mx-auto">
+            {t('includedNote')}
           </p>
           
           {/* Stats */}
