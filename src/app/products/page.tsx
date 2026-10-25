@@ -160,30 +160,37 @@ function HeroSection({ t }: { t: ReturnType<typeof useTranslations> }) {
 
 // App Access Matrix Section
 function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
-  // Build allApps using translations - access flags for the 2 paid one-time products only.
-  // FREE apps (4) are shown separately as "Get started free" — not in this matrix.
-  // PLANNER ($9.99) unlocks EVERYTHING the former BASIC + PREMIUM monthly plans had.
-  // MASTERY ($27) unlocks everything (15 apps).
+  // Build allApps using translations — the products comparison matrix (16 rows).
+  // PLANNER ($9.99) unlocks everything the former BASIC + PREMIUM monthly plans had.
+  // MASTERY ($27) unlocks everything (all 16 rows).
+  // Row order MUST match translations `productsPage.matrixApps` index-for-index (0..15).
+  // `free` = included in the FREE tier (open to everyone — /apps gate: tier FREE, no code).
+  // Free tools stay accessible to Planner/Mastery buyers as well, hence premium/mastery true.
+  // AUD-1 fix (founder directive 2026-10-25): labels and flags were misaligned — ERQ,
+  // AI Coach, Community and Priority Support were shown as Planner-included, and the
+  // FREE column rendered dashes for every row (Identity Gap Assessment not marked free).
   const allApps = [
-    // Included in Planner — the former BASIC app
-    { nameKey: 'trial-planner', basic: true, premium: true, mastery: true },
-    // Included in Planner — the former PREMIUM core apps (10)
-    { nameKey: 'executive-manual', basic: false, premium: true, mastery: true },
-    { nameKey: 'daily-planner', basic: false, premium: true, mastery: true },
-    { nameKey: 'identity-baseline', basic: false, premium: true, mastery: true },
-    { nameKey: 'environmental-audit', basic: false, premium: true, mastery: true },
-    { nameKey: 'goal-system', basic: false, premium: true, mastery: true },
-    { nameKey: 'identity-recode-system', basic: false, premium: true, mastery: true },
-    { nameKey: 'journal-system', basic: false, premium: true, mastery: true },
-    { nameKey: 'worksheets', basic: false, premium: true, mastery: true },
-    { nameKey: 'decision-analysis', basic: false, premium: true, mastery: true },
-    { nameKey: 'evidence-tracking', basic: false, premium: true, mastery: true },
-    { nameKey: 'progress-dashboard', basic: false, premium: true, mastery: true },
+    // FREE web apps (open to everyone)
+    { nameKey: 'identity-gap-quiz', free: true, basic: false, premium: true, mastery: true },
+    { nameKey: 'values-clarification', free: true, basic: false, premium: true, mastery: true },
+    { nameKey: 'daily-reflection', free: true, basic: false, premium: true, mastery: true },
+    // Included in Planner — the former BASIC app (7-Day Discipline Journey)
+    { nameKey: 'trial-planner', free: false, basic: true, premium: true, mastery: true },
+    // Included in Planner — the former PREMIUM core tools (7)
+    { nameKey: 'executive-manual', free: false, basic: false, premium: true, mastery: true },
+    { nameKey: 'daily-planner', free: false, basic: false, premium: true, mastery: true },
+    { nameKey: 'identity-baseline', free: false, basic: false, premium: true, mastery: true },
+    { nameKey: 'environmental-audit', free: false, basic: false, premium: true, mastery: true },
+    { nameKey: 'decision-analysis', free: false, basic: false, premium: true, mastery: true },
+    { nameKey: 'evidence-tracking', free: false, basic: false, premium: true, mastery: true },
+    { nameKey: 'progress-dashboard', free: false, basic: false, premium: true, mastery: true },
     // MASTERY-only apps (4)
-    { nameKey: 'emotion-regulation', basic: false, premium: false, mastery: true },
-    { nameKey: 'ai-identity-coach', basic: false, premium: false, mastery: true },
-    { nameKey: 'community-access', basic: false, premium: false, mastery: true },
-    { nameKey: 'priority-support', basic: false, premium: false, mastery: true },
+    { nameKey: 'emotion-regulation', free: false, basic: false, premium: false, mastery: true },
+    { nameKey: 'ai-identity-coach', free: false, basic: false, premium: false, mastery: true },
+    { nameKey: 'community-access', free: false, basic: false, premium: false, mastery: true },
+    { nameKey: 'priority-support', free: false, basic: false, premium: false, mastery: true },
+    // FREE — Habit Tracker (daily, open to everyone)
+    { nameKey: 'habit-tracker', free: true, basic: false, premium: true, mastery: true },
   ];
 
   // Product data for the matrix — PRICING MODEL V2: one-time payments, rule of three
@@ -224,10 +231,11 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
                   </div>
                   <div className="space-y-2">
                     {allApps.map((app, idx) => {
-                      const hasAccess = product.tier === 'BASIC' ? app.basic :
-                                       product.tier === 'PREMIUM' ? app.premium :
-                                       product.tier === 'MASTERY' ? app.mastery :
-                                       false;
+                      const hasAccess = product.tier === 'FREE' ? app.free :
+                                        product.tier === 'BASIC' ? app.basic :
+                                        product.tier === 'PREMIUM' ? app.premium :
+                                        product.tier === 'MASTERY' ? app.mastery :
+                                        false;
                       return (
                         <div key={idx} className={`flex items-center gap-2 text-sm ${hasAccess ? 'text-slate-700' : 'text-slate-300'}`}>
                           {hasAccess ? (
@@ -270,7 +278,7 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
                   <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50">
                     <td className="py-3 px-4 text-slate-700">{t(`matrixApps.${idx}`)}</td>
                     <td className="text-center py-3 px-4 bg-[#3DD4B0]/5">
-                      <span className="text-slate-300">—</span>
+                      {app.free ? <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] mx-auto" /> : <span className="text-slate-300">—</span>}
                     </td>
                     <td className="text-center py-3 px-4">
                       {app.premium ? <CheckCircle2 className="w-5 h-5 text-[#3DD4B0] mx-auto" /> : <span className="text-slate-300">—</span>}
@@ -283,6 +291,11 @@ function AppMatrixSection({ t }: { t: ReturnType<typeof useTranslations> }) {
               </tbody>
             </table>
           </div>
+
+          {/* Free-tier honesty note — always visible (mobile + desktop) */}
+          <p className="text-sm text-slate-500 mt-6 text-center max-w-3xl mx-auto">
+            {t('matrixFreeNote')}
+          </p>
         </div>
       </div>
     </section>

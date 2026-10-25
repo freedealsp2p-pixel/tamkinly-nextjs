@@ -302,7 +302,7 @@
     "saveBundle": "Mastery — $27 (Limited Time)",
     "loading": "Loading...",
     "translate": "Translate",
-    "promoDescription": "Limited time offer: the complete Mastery package — $27",
+    "promoDescription": "Limited time offer: the complete Mastery system — $27",
     "viewBundle": "View Mastery — $27",
     "dismiss": "Dismiss",
     "skipToContent": "Skip to main content"
@@ -715,7 +715,7 @@
         "name": "Mastery",
         "tier": "Mastery",
         "description": "Everything in the Identity Recode Planner plus the Mastery apps: AI Identity Coach, Emotion Regulation Toolkit, Transformation Community and Priority Support — $27 one-time.",
-        "longDescription": "Mastery is the complete package: everything in the Identity Recode Planner (identity discovery, role replacement, goal reverse-engineering and identity simulation) plus the Mastery-only apps — your AI Identity Coach for guided identity work, the Emotion Regulation Toolkit, the Transformation Community and Priority Support. One payment, lifetime access.",
+        "longDescription": "Mastery is the complete system: everything in the Identity Recode Planner (identity discovery, role replacement, goal reverse-engineering and identity simulation) plus the Mastery-only apps — your AI Identity Coach for guided identity work, the Emotion Regulation Toolkit, the Transformation Community and Priority Support. One payment, lifetime access.",
         "cta": "Get Mastery",
         "highlights": {
           "bestValue": "Best value",
@@ -725,7 +725,7 @@
         "benefits": {
           "dataDriven": {
             "title": "Complete System",
-            "description": "Every app, coach and community in one package"
+            "description": "Every app, coach and community in one system"
           },
           "patterns": {
             "title": "AI Identity Coach",
@@ -938,7 +938,7 @@
     "addedToCart": "Added to Cart!",
     "addedToCartDesc": "{name} has been added to your cart.",
     "matrixBadge": "App Access Matrix",
-    "matrixTitle": "See What's Included in Each Package",
+    "matrixTitle": "See What's Included in Each Plan",
     "matrixSubtitle": "Transparent pricing. Know exactly what you're getting before you buy.",
     "matrixAppsTools": "Apps / Tools",
     "valueLadderBadge": "Value Ladder",
@@ -1152,15 +1152,16 @@
     "startHereButton": "Get the Identity Recode Planner — $9.99",
     "startHereSecondary": "or compare all plans above",
     "heroCtaPrimary": "Get the Identity Recode Planner — $9.99",
-    "heroCtaSecondary": "Compare all plans"
+    "heroCtaSecondary": "Compare all plans",
+    "matrixFreeNote": "Everything marked ✓ in the FREE column is open to everyone — no code, no card. Also always free: the Daily Action List + Recovery Toolkit downloads on the Downloads page, and both recovery programs (Porn Recovery and TRC)."
   },
   "appsPage": {
     "headerTitle": "Tamkinly Apps",
     "headerSubtitle": "Choose your transformation path",
-    "viewPackages": "View Packages",
+    "viewPackages": "View Plans",
     "heroBadge": "Transformation Tools",
     "heroTitle": "Start with Free, Upgrade Anytime",
-    "heroSubtitle": "Access powerful transformation tools based on your package. Start free and unlock more as you grow.",
+    "heroSubtitle": "Access powerful transformation tools based on your plan. Start free and unlock more as you grow.",
     "allApps": "All Apps ({count})",
     "freeForever": "Free Forever - No Purchase Required",
     "startFree": "Start Free",
@@ -1370,7 +1371,7 @@
         "questions": [
           {
             "q": "What products does Tamkinly offer?",
-            "a": "Tamkinly offers digital products focused on identity transformation and personal development. Our flagship product is the Identity Recode Planner, a 30-day guided journey to help you rediscover and reconstruct your authentic self. We also offer worksheets, daily planners, and bundle packages."
+            "a": "Tamkinly offers digital products focused on identity transformation and personal development. Our flagship product is the Identity Recode Planner, a 30-day guided journey to help you rediscover and reconstruct your authentic self. We also offer worksheets, daily planners, and complete systems."
           },
           {
             "q": "How do I access my purchased products?",
@@ -1850,7 +1851,7 @@
     "popularAppsTitle": "All Apps",
     "popularAppsDesc": "Interactive transformation tools",
     "popularProductsTitle": "Products",
-    "popularProductsDesc": "Transformation packages",
+    "popularProductsDesc": "Transformation products",
     "popularBlogTitle": "Blog",
     "popularBlogDesc": "Articles and guides",
     "typeLabels": {
@@ -2560,7 +2561,7 @@
     "productLabels": {
       "identity-recode": "Identity Recode Planner",
       "daily-planner": "Daily Planner",
-      "worksheet": "Worksheets Package"
+      "worksheet": "Worksheets"
     },
     "activateCode": "Activate Code",
     "enterCodeDesc": "Enter your TMLY access code to activate your product"
@@ -2568,13 +2569,13 @@
   "downloadsPage": {
     "badge": "Tamkinly Products",
     "title": "Identity Recode Planner",
-    "subtitle": "The free files are below — Planner-package files unlock with your access code after purchase",
+    "subtitle": "The free files are below — Planner files unlock with your access code after purchase",
     "files": "files",
     "pages": "pages",
     "totalSize": "Total Size",
     "downloadFile": "Download File",
     "downloadAllNote": "Click each button to download the file separately",
-    "includedNote": "Planner files are included in BOTH one-time packages — The Planner ($9.99) and Mastery ($27). One payment, lifetime access.",
+    "includedNote": "Planner files are included in BOTH one-time products — The Planner ($9.99) and Mastery ($27). One payment, lifetime access.",
     "products": {
       "executiveManual": {
         "name": "Executive Manual",
@@ -2631,7 +2632,7 @@
     "recoveryPointerTitle": "Recovery Toolkit — 11 practical worksheets",
     "recoveryPointerDesc": "HALT check, trigger journal, emergency plan and more — all free, on the recovery page.",
     "recoveryPointerCta": "Open the recovery page",
-    "lockedTitle": "The Planner package files",
+    "lockedTitle": "The Planner files",
     "lockedDesc": "The complete planner (digital interactive + print-ready), the 7-Day Reset guide, the checklist and every worksheet — unlocked with the access code that arrives in your email right after payment.",
     "lockedCta": "Unlock with your access code",
     "lockedBuyCta": "Get The Planner — $9.99",
