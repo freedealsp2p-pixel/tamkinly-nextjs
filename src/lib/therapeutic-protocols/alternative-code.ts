@@ -115,8 +115,8 @@ export const ALTERNATIVE_CODE_STEPS: ProtocolStep[] = [
   {
     id: 3,
     title: {
-      ar: 'الغوص الإيحائي',
-      en: 'Hypnotic Immersion',
+      ar: 'الغوص الموجّه',
+      en: 'Guided Immersion',
     },
     durationLabel: { ar: 'خمس دقائق', en: 'Five minutes' },
     duration: 300,

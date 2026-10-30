@@ -132,7 +132,7 @@ export function ProtocolLanding({
             }}
           >
             <Lock className="w-3.5 h-3.5" />
-            {isAr ? 'تجربة علاجية مميزة' : 'Premium Therapeutic Experience'}
+            {isAr ? 'مبنية على تجربة ميدانية مع الآلاف' : 'Built on field work with thousands'}
           </div>
         </div>
 
@@ -206,8 +206,8 @@ export function ProtocolLanding({
           <div className="rounded-2xl border border-[#1F6F78]/25 bg-[#1F6F78]/5 px-4 py-3 mb-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
             <p className="text-xs sm:text-sm text-[#0F1C2E]/70 leading-relaxed flex-1">
               {isAr
-                ? 'إن كانت هذه أول تجربة علاجية لك، ننصح بالبدء من التفكيك الزمني — المسار مصمم ليُمارَس بالتدريج.'
-                : 'If this is your first therapeutic experience, we recommend starting with Temporal Decoupling — the path is designed to be practiced progressively.'}
+                ? 'إن كانت هذه أول تجربة موجّهة لك، ننصح بالبدء من التفكيك الزمني — المسار مصمم ليُمارَس بالتدريج.'
+                : 'If this is your first guided experience, we recommend starting with Temporal Decoupling — the path is designed to be practiced progressively.'}
             </p>
             <Link
               href="/apps/therapeutic-protocols/temporal-decoupling"

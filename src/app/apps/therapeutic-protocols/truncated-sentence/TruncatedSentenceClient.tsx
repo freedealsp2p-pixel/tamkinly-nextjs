@@ -521,7 +521,7 @@ export default function TruncatedSentenceClient() {
   const breadcrumbs = [
     { label: isAr ? 'الرئيسية' : 'Home', href: '/' },
     { label: isAr ? 'التطبيقات' : 'Apps', href: '/apps' },
-    { label: isAr ? 'البروتوكولات العلاجية' : 'Therapeutic Protocols', href: '/apps/therapeutic-protocols' },
+    { label: isAr ? 'بروتوكولات التعافي' : 'Recovery Protocols', href: '/apps/therapeutic-protocols' },
     { label: pick(TRUNCATED_SENTENCE_META.title, isAr) },
   ];
 

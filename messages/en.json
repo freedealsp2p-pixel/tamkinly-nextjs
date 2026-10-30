@@ -46,7 +46,7 @@
     },
     "refund": {
       "title": "Refund Policy | 30-Day Money Back Guarantee - Tamkinly",
-      "description": "30-day money-back guarantee on all app purchases. Not satisfied? Contact us for a full refund — no questions asked. One-time therapeutic protocol purchases are non-refundable after the access code is issued."
+      "description": "30-day money-back guarantee on all app purchases. Not satisfied? Contact us for a full refund — no questions asked. One-time recovery protocol purchases are non-refundable after the access code is issued."
     },
     "cart": {
       "title": "Shopping Cart | Complete Your Purchase - Tamkinly",
@@ -379,7 +379,7 @@
     "basicProduct": "The Planner (replaces Basic)",
     "premiumProduct": "Identity Recode Planner — $9.99",
     "masteryProduct": "Mastery — $27 one-time",
-    "protocolsHub": "Therapeutic Protocols",
+    "protocolsHub": "Recovery Protocols",
     "temporalDecoupling": "Temporal Decoupling — $99",
     "whiteMirror": "White Mirror — $99",
     "alternativeCode": "Alternative Code — $99",
@@ -1103,7 +1103,7 @@
       },
       {
         "q": "Is there a money-back guarantee?",
-        "a": "Yes! We offer a 30-day money-back guarantee on all app purchases. If you're not satisfied, simply contact us for a full refund—no questions asked. Exception: one-time therapeutic protocol purchases are non-refundable once the access code is issued."
+        "a": "Yes! We offer a 30-day money-back guarantee on all app purchases. If you're not satisfied, simply contact us for a full refund—no questions asked. Exception: one-time recovery protocol purchases are non-refundable once the access code is issued."
       },
       {
         "q": "Can I upgrade later?",
@@ -1341,7 +1341,7 @@
     "followTitle": "Follow us on social media",
     "followSubtitle": "Daily identity-building insights, exercises and behind-the-scenes. Or send us a message using the form above — either way, we'd be happy to hear from you.",
     "productsTitle": "Explore all our products",
-    "productsSubtitle": "Every program, app and therapeutic protocol in one place — one payment, lifetime access."
+    "productsSubtitle": "Every program, app and recovery protocol in one place — one payment, lifetime access."
   },
   "faqPage": {
     "heroBadge": "Frequently Asked Questions",
@@ -2323,7 +2323,7 @@
     "needRefund": "Need a Refund?",
     "needRefundDesc": "Contact our support team and we'll process your refund promptly",
     "requestRefund": "Request Refund",
-    "protocolsNonRefundable": "Therapeutic Protocols (One-Time Purchases)",
+    "protocolsNonRefundable": "Recovery Protocols (One-Time Purchases)",
     "protocolsNonRefundableDesc": "Protocol purchases become non-refundable once your personal access code has been issued, because the code cannot be deactivated after delivery."
   },
   "auth": {
@@ -4531,10 +4531,10 @@
   },
   "therapeuticProtocols": {
     "hub": {
-      "title": "Therapeutic Protocols",
-      "subtitle": "Independent therapeutic experiences designed for deep psychological work — three paid protocols and one completely free exercise.",
+      "title": "Recovery Protocols",
+      "subtitle": "Protocols designed for deep psychological work, shaped by real field experience in the community: daily contact with thousands of people, witnessing and hearing thousands of deep human stories — three paid protocols and one completely free exercise.",
       "premiumBadge": "Three paid experiences + a completely free exercise to start now",
-      "disclaimer": "Tamkinly therapeutic protocols are designed for personal growth and psychological exploration. They do not replace professional mental health treatment."
+      "disclaimer": "Tamkinly recovery protocols are designed for personal growth and psychological exploration. They do not replace professional mental health treatment."
     },
     "landing": {
       "stepsLabel": "steps",
@@ -4543,10 +4543,10 @@
       "nonRefundable": "Non-refundable",
       "purchaseCta": "Purchase — $99",
       "paymentMethod": "Payment via Tribute (Telegram) — or Crypto / Bank transfer via Wise on request",
-      "perk1": "Complete guided therapeutic experience",
+      "perk1": "Complete guided recovery experience",
       "perk2": "Lifetime access to this protocol",
       "perk3": "Progress preserved locally on your device",
-      "footerDisclaimer": "This is a paid therapeutic experience. It does not replace professional mental health treatment."
+      "footerDisclaimer": "A recovery experience shaped by daily field work with thousands of people and their deep stories. It does not replace professional mental health treatment."
     },
     "purchase": {
       "title": "Purchase this Protocol",
@@ -4587,7 +4587,7 @@
     },
     "temporalDecoupling": {
       "steps": {
-        "cue": "Hypnotic Cue",
+        "cue": "Guided Cue",
         "prev": "Previous Step",
         "next": "Next Step",
         "complete": "Complete Protocol"
@@ -4601,7 +4601,7 @@
     },
     "alternativeCode": {
       "steps": {
-        "cue": "Hypnotic Cue",
+        "cue": "Guided Cue",
         "prev": "Previous Step",
         "next": "Next Step",
         "complete": "Complete Protocol"
@@ -4615,7 +4615,7 @@
     },
     "whiteMirror": {
       "steps": {
-        "cue": "Hypnotic Cue",
+        "cue": "Guided Cue",
         "prev": "Previous Step",
         "next": "Next Step",
         "complete": "Complete Protocol"
@@ -4631,7 +4631,7 @@
       "breadcrumbs": {
         "home": "Tamkinly",
         "apps": "Apps",
-        "protocols": "Therapeutic Protocols"
+        "protocols": "Recovery Protocols"
       },
       "welcome": {
         "eyebrow": "Private Guided Experience",
@@ -4686,7 +4686,7 @@
         "reflectionPlaceholder": "If you wish, write a word or a sentence about this experience…",
         "privacyNote": "This stays on this device only — nothing is sent or stored anywhere else.",
         "whenReady": "When you are ready",
-        "backToProtocols": "Back to Therapeutic Protocols"
+        "backToProtocols": "Back to Recovery Protocols"
       }
     }
   },

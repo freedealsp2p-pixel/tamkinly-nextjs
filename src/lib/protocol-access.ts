@@ -68,8 +68,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     tributeWebLink: 'https://web.tribute.tg/p/Ecu',
     image: '/uploads/protocols/temporal-decoupling-protocol.webp',
     imageAlt: {
-      ar: 'علبة منتج بروتوكول التفكيك الزمني: تجربة علاجية موجّهة من 7 خطوات في نحو 12 دقيقة، مع خصوصية محمية، أداة عملية لإعادة توطيد الذاكرة وليست بديلاً عن الرعاية النفسية المتخصصة.',
-      en: 'The Temporal Decoupling Protocol product box: a 7-step guided therapeutic experience of about 12 minutes with protected privacy — a practical tool for memory reconsolidation, not a replacement for professional mental health care.',
+      ar: 'علبة منتج بروتوكول التفكيك الزمني: تجربة تعافٍ موجّهة من 7 خطوات في نحو 12 دقيقة، مع خصوصية محمية، أداة عملية لإعادة توطيد الذاكرة وليست بديلاً عن الرعاية النفسية المتخصصة.',
+      en: 'The Temporal Decoupling Protocol product box: a 7-step guided recovery experience of about 12 minutes with protected privacy — a practical tool for memory reconsolidation, not a replacement for professional mental health care.',
     },
   },
   'alternative-code': {
@@ -90,8 +90,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     tributeWebLink: 'https://web.tribute.tg/p/EcS',
     image: '/uploads/protocols/alternative-code-protocol.webp',
     imageAlt: {
-      ar: 'بروتوكول الشفرة البديلة: تجربة علاجية تفاعلية من 5 خطوات في نحو 15 دقيقة تستخدم فاكّ الشفرة لتحويل اسم الشخص إلى مفتاح لإعادة توجيه الذاكرة.',
-      en: 'The Alternative Code Protocol: an interactive 5-step therapeutic experience of about 15 minutes that uses the Name Decoder to turn a person\'s name into a key for redirecting memory.',
+      ar: 'بروتوكول الشفرة البديلة: تجربة تعافٍ تفاعلية من 5 خطوات في نحو 15 دقيقة تستخدم فاكّ الشفرة لتحويل اسم الشخص إلى مفتاح لإعادة توجيه الذاكرة.',
+      en: 'The Alternative Code Protocol: an interactive 5-step recovery experience of about 15 minutes that uses the Name Decoder to turn a person\'s name into a key for redirecting memory.',
     },
   },
   'white-mirror': {
