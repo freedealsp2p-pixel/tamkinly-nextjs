@@ -10,7 +10,6 @@ import {
   ArrowRight, 
   ArrowLeft,
   CheckCircle2, 
-  Shield, 
   Zap, 
   Download,
   Star,
@@ -535,10 +534,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                 {/* Trust Badges */}
                 <div className="flex flex-wrap items-center gap-4 mt-6 text-sm text-slate-400">
                   <div className="flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-[#3DD4B0]" />
-                    <span>{t('productDetail.dayGuarantee')}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
                     <Download className="w-4 h-4 text-[#3DD4B0]" />
                     <span>{t('productDetail.instantAccess')}</span>
                   </div>
@@ -722,14 +717,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
                         ))}
                       </div>
                       
-                      <Separator className="my-6" />
-                      
-                      {/* Guarantee */}
-                      <div className="text-center">
-                        <Shield className="w-10 h-10 text-[#3DD4B0] mx-auto mb-2" />
-                        <p className="text-sm font-semibold text-[#0F1C2E] mb-1">{t('productDetail.dayGuarantee')}</p>
-                        <p className="text-xs text-slate-500">{t('productDetail.noQuestionsAsked')}</p>
-                      </div>
                     </CardContent>
                   </Card>
                   

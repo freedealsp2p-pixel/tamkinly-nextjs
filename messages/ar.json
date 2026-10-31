@@ -475,7 +475,7 @@
     "shareResults": "شارك نتائجك"
   },
   "productDetail": {
-    "cancelAnytime": "إلغاء في أي وقت",
+    "cancelAnytime": "وصول دائم — دفعة واحدة",
     "backToProducts": "العودة إلى المنتجات",
     "mostPopular": "الأكثر شعبية",
     "save": "وفر",
@@ -1129,7 +1129,7 @@
       "متتبع العادات"
     ],
     "paymentMethodsNote": "طرق الدفع: Tribute عبر تيليجرام • وايز • كريبتو (USDC/USDT) • تحويل بنكي",
-    "trustCancelAnytime": "إلغاء في أي وقت",
+    "trustCancelAnytime": "وصول دائم — دفعة واحدة",
     "productRecommender": {
       "title": "جدد نقطة بدايتك المثالية",
       "subtitle": "أجب عن 3 أسئلة سريعة وسنرشح لك الأداة الأفضل",

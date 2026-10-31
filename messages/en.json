@@ -475,7 +475,7 @@
     "shareResults": "Share Your Results"
   },
   "productDetail": {
-    "cancelAnytime": "Cancel anytime",
+    "cancelAnytime": "Lifetime access — one payment",
     "backToProducts": "Back to Products",
     "mostPopular": "Most Popular",
     "save": "Save",
@@ -1129,7 +1129,7 @@
       "Habit Tracker"
     ],
     "paymentMethodsNote": "Payment methods: Tribute via Telegram • Wise • Crypto (USDC/USDT) • Bank Transfer",
-    "trustCancelAnytime": "Cancel anytime",
+    "trustCancelAnytime": "Lifetime access — one payment",
     "productRecommender": {
       "title": "Find Your Perfect Starting Point",
       "subtitle": "Answer 3 quick questions and we'll recommend the best tool for you",

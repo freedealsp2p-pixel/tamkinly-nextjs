@@ -121,7 +121,7 @@ export default function TrialPlannerPage() {
           <div className="text-center text-slate-300">
             <p className="flex items-center justify-center gap-2">
               <CheckCircle2 className="w-5 h-5 text-[#3DD4B0]" />
-              {getText('30-day money-back guarantee • Instant access • Cancel anytime', 'ضمان استرداد 30 يوماً • وصول فوري • إلغاء في أي وقت')}
+              {getText('30-day money-back guarantee • Instant access • Lifetime access — one payment', 'ضمان استرداد 30 يوماً • وصول فوري • وصول دائم — دفعة واحدة')}
             </p>
           </div>
         </div>
