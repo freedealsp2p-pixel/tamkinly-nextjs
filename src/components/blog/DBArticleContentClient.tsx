@@ -119,7 +119,7 @@ export function DBArticleContentClient({ article, relationships }: { article: DB
             )}
             {protocols.length > 0 && (
               <div className="mt-12 p-6 rounded-2xl bg-[#F5F9F8] border border-slate-100">
-                <h3 className="text-lg font-semibold text-[#0F1C2E] mb-4">{isAr ? 'بروتوكولات علاجية' : 'Related Therapeutic Protocols'}</h3>
+                <h3 className="text-lg font-semibold text-[#0F1C2E] mb-4">{isAr ? 'بروتوكولات تعافٍ' : 'Related Recovery Protocols'}</h3>
                 <div className="space-y-3">
                   {protocols.map((rel, i) => (
                     <Link key={i} href={`/apps/therapeutic-protocols/${rel.targetSlug}`} className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-100 hover:border-[#1F6F78]/30 transition-all">
