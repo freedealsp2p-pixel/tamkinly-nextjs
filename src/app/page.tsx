@@ -361,27 +361,46 @@ function VideoSection() {
             </p>
           </div>
           
-          {/* Video Player Placeholder */}
+          {/* Identity Gap Video — real player (replaces static placeholder image) */}
           <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-slate-200 bg-[#0F1C2E]">
-            <Image
-              src="/hero-image.webp"
-              alt={tHome("heroImageAlt")}
-              fill
-              className="object-cover opacity-80"
+            <video
+              src="/videos/identity-gap-hero.mp4"
+              poster="/hero-image.webp"
+              controls
+              preload="metadata"
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              aria-label={tHome("heroImageAlt")}
             />
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Link href="/methodology" className="inline-block">
-                <span className="w-20 h-20 rounded-full bg-[#3DD4B0] flex items-center justify-center shadow-lg hover:scale-110 transition-transform group">
-                  <Play className="h-8 w-8 text-[#0F1C2E] ml-1 group-hover:scale-110 transition-transform" />
-                </span>
-              </Link>
-            </div>
-            {/* Duration Badge */}
-            <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-lg text-sm">
-              3:24
-            </div>
           </div>
+
+          {/* VideoObject structured data for SEO */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "VideoObject",
+                name: "The Identity Gap — Tamkinly",
+                description: "That is not a discipline problem. That is an identity gap: the distance between who you are and who you decided to become. Take the free identity gap assessment on Tamkinly.",
+                thumbnailUrl: ["https://www.tamkinly.com/hero-image.webp"],
+                uploadDate: "2026-11-04",
+                contentUrl: "https://www.tamkinly.com/videos/identity-gap-hero.mp4",
+                embedUrl: "https://www.tamkinly.com",
+                duration: "PT56S",
+                isFamilyFriendly: true,
+                publisher: {
+                  "@type": "Organization",
+                  name: "Tamkinly",
+                  url: "https://www.tamkinly.com",
+                  logo: {
+                    "@type": "ImageObject",
+                    url: "https://www.tamkinly.com/logo-icon.webp"
+                  }
+                }
+              })
+            }}
+          />
           
         </div>
       </div>
