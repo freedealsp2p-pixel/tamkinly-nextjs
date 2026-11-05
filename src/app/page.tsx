@@ -342,7 +342,6 @@ function HowItWorksSection() {
 // ============================================
 function VideoSection() {
   const t = useTranslations();
-  const tHome = useTranslations("homePage");
 
   return (
     <section className="py-20 lg:py-28 bg-[#F6F8FA]">
@@ -361,26 +360,18 @@ function VideoSection() {
             </p>
           </div>
           
-          {/* Video Player Placeholder */}
+          {/* Identity Reel — approved by founder 2026-11-05 (Task 79 Revision 1) */}
           <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-slate-200 bg-[#0F1C2E]">
-            <Image
-              src="/hero-image.webp"
-              alt={tHome("heroImageAlt")}
-              fill
-              className="object-cover opacity-80"
-            />
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Link href="/methodology" className="inline-block">
-                <span className="w-20 h-20 rounded-full bg-[#3DD4B0] flex items-center justify-center shadow-lg hover:scale-110 transition-transform group">
-                  <Play className="h-8 w-8 text-[#0F1C2E] ml-1 group-hover:scale-110 transition-transform" />
-                </span>
-              </Link>
-            </div>
-            {/* Duration Badge */}
-            <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1 rounded-lg text-sm">
-              3:24
-            </div>
+            <video
+              className="w-full h-full"
+              controls
+              playsInline
+              preload="none"
+              poster="/videos/identity_reel_poster.jpg"
+              aria-label={t("video.title") + t("video.titleHighlight") + t("video.titleEnd")}
+            >
+              <source src="/videos/identity_reel.mp4" type="video/mp4" />
+            </video>
           </div>
           
         </div>
