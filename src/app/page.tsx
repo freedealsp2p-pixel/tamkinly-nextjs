@@ -143,7 +143,9 @@ function HeroSection() {
             </div>
           </div>
           
-          {/* Right Column — Hero Video: approved identity reel moved to hero (founder order 2026-11-06) — preload=none: zero bytes until play */}
+          {/* Right Column — Hero Video: approved reel + re-produced OPENING SHOT (founder order 2026-11-07):
+              first 4s = clean hold on the hero identity image (man between the two roads — the site's
+              visual signature), then the approved story plays bit-identical. preload=none: zero bytes until play */}
           <div className="relative mt-10 lg:mt-0">
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-white/10 bg-[#0F1C2E]">
               <video
@@ -151,12 +153,12 @@ function HeroSection() {
                 controls
                 playsInline
                 preload="none"
-                poster="/videos/identity_reel_poster.jpg"
+                poster="/videos/identity_reel_hero_poster.jpg"
                 aria-label={`${t("video.title")} ${t("video.titleHighlight")}${t("video.titleEnd")}`}
               >
                 <source src="/videos/identity_reel.mp4" type="video/mp4" />
-                <track kind="subtitles" srcLang="en" label="English" src="/videos/identity_reel_en.vtt" />
-                <track kind="subtitles" srcLang="ar" label="العربية" src="/videos/identity_reel_ar.vtt" />
+                <track kind="subtitles" srcLang="en" label="English" src="/videos/identity_reel_en.vtt?v=2" />
+                <track kind="subtitles" srcLang="ar" label="العربية" src="/videos/identity_reel_ar.vtt?v=2" />
               </video>
             </div>
           </div>
@@ -787,10 +789,10 @@ function VideoJsonLd() {
     "@context": "https://schema.org",
     "@type": "VideoObject",
     name: "What is the Identity Gap? — Tamkinly",
-    description: "Discover the concept behind the Identity Gap and what is holding you back — a 50-second visual explanation from Tamkinly.",
-    thumbnailUrl: ["https://tamkinly.com/videos/identity_reel_poster.jpg"],
-    uploadDate: "2026-11-06",
-    duration: "PT50S",
+    description: "Discover the concept behind the Identity Gap and what is holding you back — a 54-second visual explanation from Tamkinly, opening on the man at the crossroads.",
+    thumbnailUrl: ["https://tamkinly.com/videos/identity_reel_hero_poster.jpg"],
+    uploadDate: "2026-11-07",
+    duration: "PT54S",
     contentUrl: "https://tamkinly.com/videos/identity_reel.mp4",
     publisher: { "@type": "Organization", name: "Tamkinly", url: "https://tamkinly.com" },
   };
