@@ -51,7 +51,6 @@ const QuizPreviewWidget = dynamic(
 // ============================================
 function HeroSection() {
   const t = useTranslations();
-  const tHome = useTranslations("homePage");
   const { direction } = useLocale();
 
   return (
@@ -144,18 +143,21 @@ function HeroSection() {
             </div>
           </div>
           
-          {/* Right Column - Hero Image */}
-          <div className="hidden lg:block relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-white/10">
-              <Image
-                src="/hero-image.webp"
-                alt={tHome("heroImageAlt")}
-                width={672}
-                height={384}
-                className="w-full h-auto object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1C2E]/50 to-transparent" />
+          {/* Right Column — Hero Video: approved identity reel moved to hero (founder order 2026-11-06) — preload=none: zero bytes until play */}
+          <div className="relative mt-10 lg:mt-0">
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-white/10 bg-[#0F1C2E]">
+              <video
+                className="w-full h-full"
+                controls
+                playsInline
+                preload="none"
+                poster="/videos/identity_reel_poster.jpg"
+                aria-label={`${t("video.title")} ${t("video.titleHighlight")}${t("video.titleEnd")}`}
+              >
+                <source src="/videos/identity_reel.mp4" type="video/mp4" />
+                <track kind="subtitles" srcLang="en" label="English" src="/videos/identity_reel_en.vtt" />
+                <track kind="subtitles" srcLang="ar" label="العربية" src="/videos/identity_reel_ar.vtt" />
+              </video>
             </div>
           </div>
         </div>
@@ -331,49 +333,6 @@ function HowItWorksSection() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================
-// VIDEO SECTION
-// ============================================
-function VideoSection() {
-  const t = useTranslations();
-
-  return (
-    <section className="py-20 lg:py-28 bg-[#F6F8FA]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">
-              <Play className="w-3.5 h-3.5 mr-1" />
-              {t("video.badge")}
-            </Badge>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F1C2E] mb-4">
-              {t("video.title")}&nbsp;<span className="text-[#3DD4B0]">{t("video.titleHighlight")}</span>{t("video.titleEnd")}
-            </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              {t("video.subtitle")}
-            </p>
-          </div>
-          
-          {/* Identity Reel — approved by founder 2026-11-05 (Task 79 Revision 1) */}
-          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-[#3DD4B0]/20 border border-slate-200 bg-[#0F1C2E]">
-            <video
-              className="w-full h-full"
-              controls
-              playsInline
-              preload="none"
-              poster="/videos/identity_reel_poster.jpg"
-              aria-label={t("video.title") + t("video.titleHighlight") + t("video.titleEnd")}
-            >
-              <source src="/videos/identity_reel.mp4" type="video/mp4" />
-            </video>
-          </div>
-          
         </div>
       </div>
     </section>
@@ -730,14 +689,6 @@ function HowItWorksSectionLazy() {
   );
 }
 
-function VideoSectionLazy() {
-  return (
-    <Suspense fallback={<div className="py-20 lg:py-28 bg-[#F6F8FA]"><div className="container mx-auto px-4 max-w-4xl"><div className="animate-pulse"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto mb-12" /><div className="aspect-video bg-slate-200 rounded-2xl" /></div></div></div>}>
-      <VideoSection />
-    </Suspense>
-  );
-}
-
 function TestimonialsSectionLazy() {
   return (
     <Suspense fallback={<div className="py-20 lg:py-28 bg-white"><div className="container mx-auto px-4"><div className="animate-pulse space-y-6 max-w-3xl mx-auto mb-12"><div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" /><div className="h-12 bg-slate-200 rounded w-2/3 mx-auto" /></div><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{[...Array(6)].map((_, i) => <div key={i} className="h-64 bg-[#F6F8FA] rounded-xl" />)}</div></div></div>}>
@@ -830,10 +781,26 @@ function RecoverySection() {
   );
 }
 
+// VideoObject JSON-LD — approved identity reel in hero (video SEO)
+function VideoJsonLd() {
+  const videoLd = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: "What is the Identity Gap? — Tamkinly",
+    description: "Discover the concept behind the Identity Gap and what is holding you back — a 50-second visual explanation from Tamkinly.",
+    thumbnailUrl: ["https://tamkinly.com/videos/identity_reel_poster.jpg"],
+    uploadDate: "2026-11-06",
+    duration: "PT50S",
+    contentUrl: "https://tamkinly.com/videos/identity_reel.mp4",
+    publisher: { "@type": "Organization", name: "Tamkinly", url: "https://tamkinly.com" },
+  };
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd) }} />;
+}
+
 export default function Home() {
   return (
     <>
-
+      <VideoJsonLd />
       <HeroSection />
       <SelfIdentificationSection />
       <RecoverySection />
@@ -841,7 +808,6 @@ export default function Home() {
       <DiscoverSectionLazy />
       <HowItWorksSectionLazy />
       <DailyReflectionPreview />
-      <VideoSectionLazy />
       <NewsletterSection />
       <CTASectionLazy />
 
