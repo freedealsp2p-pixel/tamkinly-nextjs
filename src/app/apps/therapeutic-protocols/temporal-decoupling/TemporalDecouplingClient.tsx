@@ -115,6 +115,7 @@ export default function TemporalDecouplingClient() {
           steps={TEMPORAL_DECOUPLING_STEPS}
           breadcrumbs={breadcrumbs}
           accentColor={TEMPORAL_DECOUPLING_META.accentColor}
+          audioSlug="temporal-decoupling"
           onBegin={handleBegin}
         />
       )}

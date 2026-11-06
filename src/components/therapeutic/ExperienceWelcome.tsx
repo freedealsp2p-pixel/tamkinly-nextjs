@@ -3,6 +3,7 @@
 import { Clock, ListOrdered, Wind } from 'lucide-react';
 import { useLocale, useTranslations } from '@/components/providers/LocaleProvider';
 import { RecoveryBreadcrumb } from '@/components/recovery/system';
+import { SessionAudio } from './SessionAudio';
 import type { ProtocolMeta, ProtocolStep } from './types';
 
 interface ExperienceWelcomeProps {
@@ -16,6 +17,8 @@ interface ExperienceWelcomeProps {
   breadcrumbs: { label: string; href?: string }[];
   /** Primary color for the protocol */
   accentColor?: string;
+  /** Protocol slug for the optional recorded session audio (e.g. "temporal-decoupling"). Omit to render no audio block. */
+  audioSlug?: string;
   /** Called when the user chooses to continue toward preparation / gate */
   onBegin: () => void;
 }
@@ -36,6 +39,7 @@ export function ExperienceWelcome({
   steps,
   breadcrumbs,
   accentColor = '#1F6F78',
+  audioSlug,
   onBegin,
 }: ExperienceWelcomeProps) {
   const { direction, locale } = useLocale();
@@ -89,6 +93,9 @@ export function ExperienceWelcome({
               : '~' + minutes + ' ' + ts('welcome.durationUnit')}
           </span>
         </div>
+
+        {/* Optional recorded session audio — language-aware, zero weight until play */}
+        {audioSlug ? <SessionAudio slug={audioSlug} accentColor={accentColor} /> : null}
 
         {/* What the user will actually do — source step titles */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">

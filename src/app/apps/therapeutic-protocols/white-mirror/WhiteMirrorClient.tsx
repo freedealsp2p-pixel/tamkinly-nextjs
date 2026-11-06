@@ -126,6 +126,7 @@ export default function WhiteMirrorClient() {
           steps={WHITE_MIRROR_STEPS}
           breadcrumbs={breadcrumbs}
           accentColor={WHITE_MIRROR_META.accentColor}
+          audioSlug="white-mirror"
           onBegin={handleBegin}
         />
       )}

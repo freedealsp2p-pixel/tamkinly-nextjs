@@ -151,6 +151,7 @@ export default function AlternativeCodeClient() {
           steps={ALTERNATIVE_CODE_STEPS}
           breadcrumbs={breadcrumbs}
           accentColor={ALTERNATIVE_CODE_META.accentColor}
+          audioSlug="alternative-code"
           onBegin={handleBegin}
         />
       )}

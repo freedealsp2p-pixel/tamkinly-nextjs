@@ -121,6 +121,11 @@ interface TrackPlayerProps {
   unavailableNote: string;
   isAr: boolean;
   direction: 'rtl' | 'ltr';
+  /** Legacy base source — tried once if the localized file is missing */
+  fallbackSrc?: string;
+  /** Active audio language (follows site language unless the chip overrides) */
+  audioLang: 'ar' | 'en';
+  onAudioLangChange: (lang: 'ar' | 'en') => void;
 }
 
 function TrackPlayer({
@@ -133,6 +138,9 @@ function TrackPlayer({
   unavailableNote,
   isAr,
   direction,
+  fallbackSrc,
+  audioLang,
+  onAudioLangChange,
 }: TrackPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
@@ -140,6 +148,28 @@ function TrackPlayer({
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
   const [unavailable, setUnavailable] = useState(false);
+  const [useFallback, setUseFallback] = useState(false);
+
+  // Language-aware source: primary = localized file, fallback = legacy base file.
+  const activeSrc = useFallback && fallbackSrc ? fallbackSrc : src;
+
+  // Reset playback state when the requested language (or track) changes.
+  useEffect(() => {
+    setUseFallback(false);
+    setUnavailable(false);
+    setPlaying(false);
+    setProgress(0);
+    setCurrent(0);
+  }, [src]);
+
+  // Missing localized file → try the legacy base file once, then give up calmly.
+  const handleSourceError = useCallback(() => {
+    if (!useFallback && fallbackSrc && fallbackSrc !== src) {
+      setUseFallback(true);
+    } else {
+      setUnavailable(true);
+    }
+  }, [useFallback, fallbackSrc, src]);
 
   const toggle = useCallback(() => {
     const audio = audioRef.current;
@@ -148,9 +178,9 @@ function TrackPlayer({
       audio.pause();
       setPlaying(false);
     } else {
-      audio.play().catch(() => setUnavailable(true));
+      audio.play().catch(handleSourceError);
     }
-  }, [playing]);
+  }, [playing, handleSourceError]);
 
   const onSeek = (value: number) => {
     const audio = audioRef.current;
@@ -166,9 +196,32 @@ function TrackPlayer({
           <h4 className="text-sm sm:text-base font-semibold text-[#0F1C2E]">{title}</h4>
           <p className="text-xs text-[#0F1C2E]/50 mt-0.5 leading-relaxed">{description}</p>
         </div>
-        <span className="flex-shrink-0 text-xs px-2 py-1 rounded-full bg-[#0F1C2E]/5 text-[#0F1C2E]/50 font-medium">
-          {durationLabel}
-        </span>
+        <div className="flex-shrink-0 flex items-center gap-2">
+          <div
+            className="flex items-center rounded-full border border-slate-200 overflow-hidden"
+            role="group"
+            aria-label={isAr ? 'لغة الصوت' : 'Audio language'}
+          >
+            {(['ar', 'en'] as const).map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => onAudioLangChange(l)}
+                aria-pressed={audioLang === l}
+                className={`px-2 py-0.5 text-[11px] font-semibold transition-colors ${
+                  audioLang === l
+                    ? 'bg-[#3DD4B0] text-[#0F1C2E]'
+                    : 'bg-white text-[#0F1C2E]/50 hover:text-[#0F1C2E]'
+                }`}
+              >
+                {l === 'ar' ? 'AR' : 'EN'}
+              </button>
+            ))}
+          </div>
+          <span className="text-xs px-2 py-1 rounded-full bg-[#0F1C2E]/5 text-[#0F1C2E]/50 font-medium">
+            {durationLabel}
+          </span>
+        </div>
       </div>
 
       {locked ? (
@@ -217,9 +270,10 @@ function TrackPlayer({
       {!locked && (
         <audio
           ref={audioRef}
-          src={src}
+          key={activeSrc}
+          src={activeSrc}
           preload="metadata"
-          onError={() => setUnavailable(true)}
+          onError={handleSourceError}
           onLoadedMetadata={(e) => {
             const d = e.currentTarget.duration;
             if (Number.isFinite(d)) setDuration(d);
@@ -334,6 +388,14 @@ function TruncatedDisplay({ split, showTape, taped, onTapeEnd, direction }: Trun
 export default function TruncatedSentenceClient() {
   const { locale, direction } = useLocale();
   const isAr = locale === 'ar';
+
+  // Audio language override (AR/EN chip on the players). Null = follow site language.
+  const [audioLangOverride, setAudioLangOverride] = useState<'ar' | 'en' | null>(null);
+  const audioLang = audioLangOverride ?? (isAr ? 'ar' : 'en');
+  const localizedAudio = useCallback(
+    (base: string) => base.replace(/\.mp3$/, `.${audioLang}.mp3`),
+    [audioLang],
+  );
 
   const [restored, setRestored] = useState(false);
   const [view, setView] = useState<View>('exercise');
@@ -648,7 +710,10 @@ export default function TruncatedSentenceClient() {
                   </div>
 
                   <TrackPlayer
-                    src={AUDIO_TRACKS.intro.src}
+                    src={localizedAudio(AUDIO_TRACKS.intro.src)}
+                    fallbackSrc={AUDIO_TRACKS.intro.src}
+                    audioLang={audioLang}
+                    onAudioLangChange={setAudioLangOverride}
                     title={pick(AUDIO_TRACKS.intro.title, isAr)}
                     durationLabel={pick(AUDIO_TRACKS.intro.durationLabel, isAr)}
                     description={pick(AUDIO_TRACKS.intro.description, isAr)}
@@ -803,7 +868,10 @@ export default function TruncatedSentenceClient() {
                   </div>
 
                   <TrackPlayer
-                    src={AUDIO_TRACKS.intro.src}
+                    src={localizedAudio(AUDIO_TRACKS.intro.src)}
+                    fallbackSrc={AUDIO_TRACKS.intro.src}
+                    audioLang={audioLang}
+                    onAudioLangChange={setAudioLangOverride}
                     title={pick(AUDIO_TRACKS.intro.title, isAr)}
                     durationLabel={pick(AUDIO_TRACKS.intro.durationLabel, isAr)}
                     description={pick(AUDIO_TRACKS.intro.description, isAr)}
@@ -901,7 +969,10 @@ export default function TruncatedSentenceClient() {
                         </div>
 
                         <TrackPlayer
-                          src={AUDIO_TRACKS.night3.src}
+                          src={localizedAudio(AUDIO_TRACKS.night3.src)}
+                          fallbackSrc={AUDIO_TRACKS.night3.src}
+                          audioLang={audioLang}
+                          onAudioLangChange={setAudioLangOverride}
                           title={pick(AUDIO_TRACKS.night3.title, isAr)}
                           durationLabel={pick(AUDIO_TRACKS.night3.durationLabel, isAr)}
                           description={pick(AUDIO_TRACKS.night3.description, isAr)}
