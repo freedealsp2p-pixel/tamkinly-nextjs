@@ -429,6 +429,8 @@ export function generatePageMetadataFromConfig(pageKey: keyof typeof PAGE_METADA
       alternateLocale: isAr ? 'en_US' : 'ar_SA',
       type: config.type || 'website',
       images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+      // Video SEO — approved identity reel in homepage hero (2026-11-06)
+      ...(pageKey === 'home' ? { videos: [{ url: `${SEO_SITE_CONFIG.url}/videos/identity_reel.mp4`, width: 1920, height: 1080, type: 'video/mp4' }] } : {}),
     },
     
     twitter: {
@@ -470,13 +472,6 @@ export function generatePageMetadataFromConfig(pageKey: keyof typeof PAGE_METADA
 // ============================================
 
 export const HOME_METADATA = generatePageMetadataFromConfig('home');
-
-// Video SEO — approved identity reel lives in the homepage hero (2026-11-06)
-if (HOME_METADATA.openGraph) {
-  HOME_METADATA.openGraph.videos = [
-    { url: '/videos/identity_reel.mp4', width: 1920, height: 1080, type: 'video/mp4' },
-  ];
-}
 export const PRODUCTS_METADATA = generatePageMetadataFromConfig('products');
 export const APPS_METADATA = generatePageMetadataFromConfig('apps');
 export const QUIZ_METADATA = generatePageMetadataFromConfig('quiz');
