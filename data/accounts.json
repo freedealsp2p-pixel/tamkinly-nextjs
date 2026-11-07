@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "name": "Tamkinly canonical account registry (D1 gate source)",
+    "created": "2026-11-08",
+    "created_by": "AUD-1",
+    "source": "Founder-provided list (chat 2026-11-08)",
+    "rule": "Every @handle / company path used in published content MUST exist here. Banned: @tamkinlyhq.",
+    "security": "Emails listed are public contact addresses only — never secrets, never tokens."
+  },
+  "email": {
+    "primary": "tamkinly36@gmail.com",
+    "founder": "abdallahchouaf1@gmail.com"
+  },
+  "platforms": {
+    "instagram": {
+      "handle": "@tamkinly",
+      "url": "https://www.instagram.com/tamkinly/"
+    },
+    "x": {
+      "handle": "@Tamkinly",
+      "url": "https://x.com/Tamkinly"
+    },
+    "linkedin": {
+      "handle": "company/tamkinly",
+      "url": "https://www.linkedin.com/company/tamkinly/"
+    },
+    "youtube": {
+      "handle": "@Tamkinly-v1c",
+      "url": "https://www.youtube.com/@Tamkinly-v1c"
+    },
+    "tiktok": {
+      "handle": "@tamkinly",
+      "url": "https://www.tiktok.com/@tamkinly"
+    },
+    "pinterest": {
+      "handle": "Tamkinly",
+      "url": "https://www.pinterest.com/Tamkinly/"
+    },
+    "telegram": {
+      "channel_handle": "@tamkinlyenglish",
+      "channel_id": "-1003765646213",
+      "dev_channel": "Tamkinly Tests Dev (-1004457174477)",
+      "publish_bot": "@tamkinly_publish_bot"
+    }
+  },
+  "banned_handles": [
+    "@tamkinlyhq"
+  ],
+  "frozen_platforms_note": "Per three_day_plan_completion_directive: only Telegram/X/LinkedIn/Instagram confirmed for wave 1; YouTube/TikTok/Pinterest frozen until after first 3 approved posts."
+}
