@@ -176,7 +176,7 @@ export async function POST(request: NextRequest) {
           <div style="font-size:28px;font-weight:bold;letter-spacing:2px;background:#F5F9F8;border:1px solid #D8E6E4;border-radius:12px;padding:16px;text-align:center;">${result.code}</div>
           <p style="margin:16px 0 4px;"><b>How to activate:</b></p>
           <ol style="margin:0 0 16px;color:#475569;padding-left:20px;">
-            <li>Open <a href="https://tamkinly.com/apps/recovery-protocols/${protocolSlug}">tamkinly.com — ${title}</a></li>
+            <li>Open <a href="https://tamkinly.com/Recovery_Protocols/${protocolSlug}">tamkinly.com — ${title}</a></li>
             <li>Click <i>Purchase</i>, then choose <i>"I have an access code"</i></li>
             <li>Enter the code above — lifetime access begins</li>
           </ol>

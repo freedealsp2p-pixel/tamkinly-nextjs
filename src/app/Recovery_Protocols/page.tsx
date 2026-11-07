@@ -17,7 +17,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/apps/recovery-protocols/temporal-decoupling',
+    href: '/Recovery_Protocols/temporal-decoupling',
     requiresSafety: false,
     image: '/uploads/protocols/temporal-decoupling-protocol.webp',
     imageAlt: {
@@ -43,7 +43,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/apps/recovery-protocols/alternative-code',
+    href: '/Recovery_Protocols/alternative-code',
     requiresSafety: false,
     image: '/uploads/protocols/alternative-code-protocol.webp',
     imageAlt: {
@@ -69,7 +69,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/apps/recovery-protocols/white-mirror',
+    href: '/Recovery_Protocols/white-mirror',
     requiresSafety: true,
     image: '/uploads/protocols/white-mirror-protocol.webp',
     imageAlt: {
@@ -94,7 +94,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/apps/recovery-protocols/truncated-sentence',
+    href: '/Recovery_Protocols/truncated-sentence',
     requiresSafety: false,
     image: '/uploads/protocols/truncated-sentence-protocol.webp',
     imageAlt: {
@@ -135,7 +135,6 @@ export default function RecoveryProtocolsHub() {
 
   const breadcrumbs = [
     { label: t('shared.breadcrumbs.home'), href: '/' },
-    { label: t('shared.breadcrumbs.apps'), href: '/apps' },
     { label: t('shared.breadcrumbs.protocols') },
   ];
 
@@ -187,6 +186,20 @@ export default function RecoveryProtocolsHub() {
                 ? 'المعلومة وحدها لا تغيّر الجهاز العصبي — التجربة الموجّهة هي التي تغيّره.'
                 : 'Information alone does not change the nervous system. Guided experience does.'}
             </p>
+            {/* Founder directive 2026-11-07: this section is the right home for the
+                protocol exercises — recovery from pornography and from sexual harassment. */}
+            <div className="rounded-xl bg-[#1F6F78]/5 border border-[#1F6F78]/15 px-4 py-3 mt-2">
+              <p className="font-semibold text-[#1F6F78] text-sm mb-1">
+                {isAr
+                  ? 'هذا مكانها الصحيح'
+                  : 'This is their right place'}
+              </p>
+              <p>
+                {isAr
+                  ? 'كل تمارين البروتوكولات تجتمع هنا لتعمل على التعافي من الإباحية والتعافي من التحرش الجنسي: أساليب متقدمة لتسريع التعافي متاحة هنا في الموقع، تساعدك على تجاوز المراحل المظلمة وإحداث النقلة في تطوير ذاتك حين تُفكّ السلاسل التي تبقيك داخل دائرة الاستياء وظلم النفس والمشاعر الهابطة.'
+                  : 'All the protocol exercises live here to work on recovery from pornography and recovery from sexual harassment: advanced methods to accelerate recovery, available right here on the site — they help you cross the dark stages and make the leap in personal growth as the chains that keep you inside the circle of resentment, self-injustice, and low feelings are unlocked.'}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -342,7 +355,7 @@ export default function RecoveryProtocolsHub() {
               : 'Begin with the protocol most members start with: Temporal Decoupling.'}
           </p>
           <Link
-            href="/apps/recovery-protocols/temporal-decoupling"
+            href="/Recovery_Protocols/temporal-decoupling"
             className="inline-flex items-center gap-2 bg-[#3DD4B0] text-[#0F1C2E] rounded-xl px-5 py-2.5 font-semibold hover:bg-[#2BC49E] transition-colors"
           >
             {isAr ? '\u0627\u0628\u062f\u0623 \u0645\u0646 \u0647\u0646\u0627' : 'Start here'}

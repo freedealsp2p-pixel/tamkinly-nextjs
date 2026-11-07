@@ -38,7 +38,10 @@ const APP_TIERS: Record<string, string> = {
   'priority-support': 'MASTERY',
 };
 
-const SELF_GATED_APPS = new Set(['ai-identity-coach', 'recovery-protocols']);
+// Self-gated: manage their own access UI. Recovery Protocols moved to top-level
+// /Recovery_Protocols (2026-11-07) — it handles its own entitlement via access codes,
+// so it no longer passes through this /apps guard.
+const SELF_GATED_APPS = new Set(['ai-identity-coach']);
 
 // PRICING MODEL V2 (founder directive 2026-10-21): TWO packages only.
 // BASIC + PREMIUM app gates are both unlocked by The Planner ($9.99 one-time);

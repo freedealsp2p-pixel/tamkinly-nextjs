@@ -19,17 +19,17 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: isAr ? `${SITE_URL}/ar/apps/recovery-protocols/white-mirror` : `${SITE_URL}/apps/recovery-protocols/white-mirror`,
+      canonical: isAr ? `${SITE_URL}/ar/Recovery_Protocols/white-mirror` : `${SITE_URL}/Recovery_Protocols/white-mirror`,
       languages: {
-        'en-US': `${SITE_URL}/apps/recovery-protocols/white-mirror`,
-        'ar-SA': `${SITE_URL}/ar/apps/recovery-protocols/white-mirror`,
-        'x-default': `${SITE_URL}/apps/recovery-protocols/white-mirror`,
+        'en-US': `${SITE_URL}/Recovery_Protocols/white-mirror`,
+        'ar-SA': `${SITE_URL}/ar/Recovery_Protocols/white-mirror`,
+        'x-default': `${SITE_URL}/Recovery_Protocols/white-mirror`,
       },
     },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/apps/recovery-protocols/white-mirror`,
+      url: `${SITE_URL}/Recovery_Protocols/white-mirror`,
       siteName: 'Tamkinly',
       type: 'website',
       locale: isAr ? 'ar_AR' : 'en_US',

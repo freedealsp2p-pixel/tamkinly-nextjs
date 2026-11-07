@@ -96,7 +96,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/ar/apps/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.54 },
   ]);
 
-  // Premium Therapeutic Protocols - English + Arabic
+  // Recovery Protocols section (/Recovery_Protocols, founder directive 2026-11-07) - English + Arabic
   const recoveryProtocolSlugs = [
     'temporal-decoupling',
     'alternative-code',
@@ -104,9 +104,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       'truncated-sentence',
   ];
   const recoveryProtocolPages = [
-    { url: `${baseUrl}/apps/recovery-protocols`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/Recovery_Protocols`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
     ...recoveryProtocolSlugs.map((slug) => ({
-      url: `${baseUrl}/apps/recovery-protocols/${slug}`,
+      url: `${baseUrl}/Recovery_Protocols/${slug}`,
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.8,

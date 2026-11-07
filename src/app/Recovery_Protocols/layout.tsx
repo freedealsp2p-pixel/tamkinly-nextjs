@@ -8,8 +8,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = isAr
     ? 'بروتوكولات تعافٍ موجّهة مبنية على علم النفس: فصل زمني، الشفرة البديلة، والمرآة البيضاء — أدوات عملية للتنظيم العاطفي والتخلص من السلوك القهري.'
     : 'Guided recovery protocols grounded in psychology: Temporal Decoupling, The Alternative Code, and The White Mirror — tools for emotional regulation.';
-  const enUrl = 'https://tamkinly.com/apps/recovery-protocols';
-  const arUrl = 'https://tamkinly.com/ar/apps/recovery-protocols';
+  const enUrl = 'https://tamkinly.com/Recovery_Protocols';
+  const arUrl = 'https://tamkinly.com/ar/Recovery_Protocols';
   return {
     title,
     description,

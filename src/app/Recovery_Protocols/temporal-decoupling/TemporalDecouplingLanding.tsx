@@ -11,7 +11,7 @@ export default function TemporalDecouplingLanding() {
   const breadcrumbs = [
     { label: ts('breadcrumbs.home'), href: '/' },
     { label: ts('breadcrumbs.apps'), href: '/apps' },
-    { label: ts('breadcrumbs.protocols'), href: '/apps/recovery-protocols' },
+    { label: ts('breadcrumbs.protocols'), href: '/Recovery_Protocols' },
     { label: tpp('temporal-decoupling.title') },
   ];
 

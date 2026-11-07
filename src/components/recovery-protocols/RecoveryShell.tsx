@@ -24,7 +24,7 @@ interface RecoveryShellProps {
  *
  * A generalized recovery experience shell shared by both:
  *   1. Free recovery exercises (under /recovery/)
- *   2. Paid recovery protocols (under /apps/recovery-protocols/)
+ *   2. Paid recovery protocols (under /Recovery_Protocols/)
  *
  * Reuses the proven TherapeuticExit component from the recovery system
  * without duplicating its logic.
@@ -42,7 +42,7 @@ export function RecoveryShell({
       <main>{children}</main>
       {sectionType === 'recovery' && (
         <TherapeuticExit
-          fallbackHref="/apps/recovery-protocols"
+          fallbackHref="/Recovery_Protocols"
           {...exitProps}
         />
       )}
