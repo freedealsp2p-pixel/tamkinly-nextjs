@@ -1,0 +1,111 @@
+name: Ops: VPS Firewall Allowlist (add-only, inspect-first)
+
+on:
+  workflow_dispatch:
+    inputs:
+      allow_ip:
+        description: 'IPv4 address to allow (single IP)'
+        required: true
+        type: string
+      dry_run:
+        description: 'Inspect only — make no changes'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  allowlist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect and (optionally) add IP
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          ALLOW_IP: ${{ github.event.inputs.allow_ip }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          port: ${{ secrets.VPS_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          command_timeout: 10m
+          script_stop: false
+          envs: ALLOW_IP,DRY_RUN
+          script: |
+            IP="$ALLOW_IP"
+            DRY="$DRY_RUN"
+            echo "== INPUT ip=$IP dry_run=$DRY =="
+            case "$IP" in
+              ''|*[!0-9.]*) echo "INVALID IPv4 — aborting (no changes)"; exit 1;;
+            esac
+
+            echo; echo "===== 1. SSHD AUTH CONTEXT (read-only) ====="
+            sshd -T 2>/dev/null | grep -Ei '^(passwordauthentication|permitrootlogin|pubkeyauthentication|kbdinteractiveauthentication|matchaddress|matchuser|allowusers|allowgroups|denyusers|listenaddress)' || echo "(sshd -T no relevant lines)"
+            echo "--- sshd_config Match/deny blocks ---"
+            grep -n -Ei '^\s*Match|AllowUsers|AllowGroups|DenyUsers|DenyGroups|ListenAddress' /etc/ssh/sshd_config 2>/dev/null || echo "(none in sshd_config)"
+            echo "--- sshd_config.d drop-ins ---"
+            ls -la /etc/ssh/sshd_config.d/ 2>/dev/null || true
+            grep -rn -Ei 'Match|AllowUsers|AllowGroups|DenyUsers|ListenAddress|PasswordAuthentication|PermitRootLogin' /etc/ssh/sshd_config.d/ 2>/dev/null || echo "(no gating directives in drop-ins)"
+            echo "--- pam_access ---"
+            grep -rn 'pam_access' /etc/pam.d/sshd 2>/dev/null || echo "(no pam_access in /etc/pam.d/sshd)"
+            echo "--- access.conf active lines ---"
+            grep -vE '^\s*#|^\s*$' /etc/security/access.conf 2>/dev/null | head -25 || echo "(no access.conf or empty)"
+
+            echo; echo "===== 2. FIREWALLD ====="
+            echo "--- runtime rich rules ---";  firewall-cmd --zone=public --list-rich-rules 2>/dev/null || true
+            echo "--- permanent rich rules ---"; firewall-cmd --permanent --zone=public --list-rich-rules 2>/dev/null || true
+            echo "--- services ---"; firewall-cmd --zone=public --list-services 2>/dev/null || true
+            echo "--- ports ---";    firewall-cmd --zone=public --list-ports 2>/dev/null || true
+
+            echo; echo "===== 3. FAIL2BAN ====="
+            echo "--- user-whitelist.conf ---"
+            cat /etc/fail2ban/jail.d/user-whitelist.conf 2>/dev/null || echo "(file absent)"
+            echo "--- effective sshd ignoreip ---"
+            fail2ban-client get sshd ignoreip 2>/dev/null || true
+
+            echo; echo "===== 4. RECENT SSH LOG (why auth fails) ====="
+            journalctl -u sshd -u ssh -n 20 --no-pager 2>/dev/null | tail -20 || tail -20 /var/log/secure 2>/dev/null || echo "(no ssh log readable)"
+
+            if [ "$DRY" = "true" ] || [ "$DRY" = "1" ]; then
+              echo; echo "===== DRY_RUN=true — NO CHANGES MADE ====="
+              exit 0
+            fi
+
+            echo; echo "===== 5. APPLY (add-only, idempotent): $IP ====="
+            RULE="rule family=\"ipv4\" source address=\"$IP\" accept"
+            if firewall-cmd --zone=public --query-rich-rule="$RULE" >/dev/null 2>&1; then
+              echo "firewalld runtime: already present"
+            else
+              firewall-cmd --zone=public --add-rich-rule="$RULE" && echo "firewalld runtime: added"
+            fi
+            if firewall-cmd --permanent --zone=public --query-rich-rule="$RULE" >/dev/null 2>&1; then
+              echo "firewalld permanent: already present"
+            else
+              firewall-cmd --permanent --zone=public --add-rich-rule="$RULE" && echo "firewalld permanent: added"
+            fi
+
+            WL=/etc/fail2ban/jail.d/user-whitelist.conf
+            if [ -f "$WL" ]; then
+              cp "$WL" "${WL}.bak.$(date -u +%Y%m%dT%H%M%SZ)"
+              if grep -q "$IP" "$WL"; then
+                echo "fail2ban whitelist: already contains $IP"
+              else
+                sed -i "s#^\(ignoreip[[:space:]]*=.*\)#\1 $IP#" "$WL"
+                echo "fail2ban whitelist: appended $IP to every ignoreip line"
+              fi
+              cat "$WL"
+              if fail2ban-client -t >/dev/null 2>&1; then
+                fail2ban-client reload >/dev/null 2>&1 && echo "fail2ban: config test OK, reloaded"
+              else
+                echo "FAIL2BAN CONFIG TEST FAILED — restoring backup"; ls -1t "${WL}".bak.* | head -1 | xargs cp -- "${WL}"; fail2ban-client reload >/dev/null 2>&1 || true; exit 1
+              fi
+            else
+              printf '# user/trusted IP whitelist (managed via GitHub Actions, ADD-ONLY)\n[DEFAULT]\nignoreip = 127.0.0.1/8 ::1 %s\n\n[sshd]\nignoreip = 127.0.0.1/8 ::1 %s\n' "$IP" "$IP" > "$WL"
+              echo "fail2ban whitelist: file created with $IP"
+              fail2ban-client -t >/dev/null 2>&1 && fail2ban-client reload >/dev/null 2>&1 && echo "fail2ban: reloaded"
+            fi
+
+            echo; echo "===== 6. POST-APPLY STATE ====="
+            echo "--- runtime rich rules ---";  firewall-cmd --zone=public --list-rich-rules 2>/dev/null | grep "$IP" || echo "(missing!)"
+            echo "--- permanent rich rules ---"; firewall-cmd --permanent --zone=public --list-rich-rules 2>/dev/null | grep "$IP" || echo "(missing!)"
+            echo "--- effective sshd ignoreip ---"; fail2ban-client get sshd ignoreip 2>/dev/null || true
+            echo "===== DONE ====="
