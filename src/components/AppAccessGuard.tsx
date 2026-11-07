@@ -38,7 +38,7 @@ const APP_TIERS: Record<string, string> = {
   'priority-support': 'MASTERY',
 };
 
-const SELF_GATED_APPS = new Set(['ai-identity-coach', 'therapeutic-protocols']);
+const SELF_GATED_APPS = new Set(['ai-identity-coach', 'recovery-protocols']);
 
 // PRICING MODEL V2 (founder directive 2026-10-21): TWO packages only.
 // BASIC + PREMIUM app gates are both unlocked by The Planner ($9.99 one-time);

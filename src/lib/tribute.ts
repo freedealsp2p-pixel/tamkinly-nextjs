@@ -186,7 +186,7 @@ export function resolveOneTimeProduct(productId?: number, productName?: string):
 // ============================================
 // PROTOCOL DIGITAL PRODUCTS (one-time $99 purchases)
 // ============================================
-// Each therapeutic protocol is a separate Tribute digital product.
+// Each recovery protocol is a separate Tribute digital product.
 // The product IDs are configured via env vars (see .env).
 
 export const PROTOCOL_PRODUCT_ENV: Record<string, string> = {

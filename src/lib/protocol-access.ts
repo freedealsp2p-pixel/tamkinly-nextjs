@@ -2,7 +2,7 @@
  * Protocol Access Control
  * 
  * Server-side only. Verifies protocol-specific entitlement for premium
- * therapeutic experiences. Each protocol is independently purchasable.
+ * recovery experiences. Each protocol is independently purchasable.
  * 
  * Entitlement model:
  *   - AppAccess record with tier=PROTOCOL and protocolSlug='temporal-decoupling'
@@ -119,7 +119,7 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
 };
 
 /**
- * Check if a user has access to a specific therapeutic protocol.
+ * Check if a user has access to a specific recovery protocol.
  * SERVER-SIDE ONLY.
  * 
  * Checks in order:

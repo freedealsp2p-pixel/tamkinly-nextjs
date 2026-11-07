@@ -122,7 +122,7 @@ export function DBArticleContentClient({ article, relationships }: { article: DB
                 <h3 className="text-lg font-semibold text-[#0F1C2E] mb-4">{isAr ? 'بروتوكولات تعافٍ' : 'Related Recovery Protocols'}</h3>
                 <div className="space-y-3">
                   {protocols.map((rel, i) => (
-                    <Link key={i} href={`/apps/therapeutic-protocols/${rel.targetSlug}`} className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-100 hover:border-[#1F6F78]/30 transition-all">
+                    <Link key={i} href={`/apps/recovery-protocols/${rel.targetSlug}`} className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-100 hover:border-[#1F6F78]/30 transition-all">
                       <span className="font-medium text-[#0F1C2E]">{rel.label || rel.targetSlug}</span>
                       <ArrowRight className={`h-4 w-4 text-[#1F6F78] ${isAr ? 'rotate-180' : ''}`} />
                     </Link>

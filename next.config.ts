@@ -155,6 +155,29 @@ const nextConfig: NextConfig = {
         destination: '/apps/community-access',
         permanent: true,
       },
+      // Recovery Protocols rename (founder directive 2026-11-07):
+      // /apps/therapeutic-protocols -> /apps/recovery-protocols
+      // AR prefix preserved explicitly (config redirects run before locale middleware)
+      {
+        source: '/ar/apps/therapeutic-protocols/:path*',
+        destination: '/ar/apps/recovery-protocols/:path*',
+        permanent: true,
+      },
+      {
+        source: '/ar/apps/therapeutic-protocols',
+        destination: '/ar/apps/recovery-protocols',
+        permanent: true,
+      },
+      {
+        source: '/apps/therapeutic-protocols/:path*',
+        destination: '/apps/recovery-protocols/:path*',
+        permanent: true,
+      },
+      {
+        source: '/apps/therapeutic-protocols',
+        destination: '/apps/recovery-protocols',
+        permanent: true,
+      },
       // Recovery path redirects
       // Legacy TRC redirects (locale-aware — config redirects run before middleware)
       // AR prefix must be preserved: /ar/trc -> /ar/recovery/trc, not /recovery/trc

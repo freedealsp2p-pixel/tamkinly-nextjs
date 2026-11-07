@@ -13,7 +13,7 @@ const VALID_APP_SLUGS = new Set([
   'decision-analysis', 'emotion-regulation', 'environmental-audit', 'evidence-tracking',
   'executive-manual', 'goal-system', 'habit-tracker', 'identity-baseline',
   'identity-gap-quiz', 'identity-planner', 'identity-recode-system', 'journal-system',
-  'priority-support', 'progress-dashboard', 'therapeutic-protocols', 'trial-planner',
+  'priority-support', 'progress-dashboard', 'recovery-protocols', 'trial-planner',
   'values-clarification', 'worksheets',
 ]);
 

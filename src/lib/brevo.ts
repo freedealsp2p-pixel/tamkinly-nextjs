@@ -445,7 +445,7 @@ export const BrevoEmails = {
   ): Promise<{ success: boolean; messageId?: string; error?: string }> {
     return this.sendTemplate(
       templateFor(BREVO_TEMPLATES.CODE_PROTOCOL, locale), email,
-      { NAME: name, CODE: accessKey, PRODUCT: 'Therapeutic Protocol' },
+      { NAME: name, CODE: accessKey, PRODUCT: 'Recovery Protocol' },
       { name, sender: senderFor('CODE_PROTOCOL') }
     );
   },

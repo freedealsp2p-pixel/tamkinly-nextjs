@@ -5,7 +5,7 @@
  *   1. Identity Recode Planner = $9.99 ONE-TIME (merges weekly 7-day + 30-day + ALL BASIC & PREMIUM apps)
  *      → grants PREMIUM tier (AccessTier enum unchanged — zero migration).
  *   2. Mastery = $27 ONE-TIME (was monthly) → grants MASTERY tier.
- *   3. Therapeutic Protocols = $99 one-time (UNCHANGED).
+ *   3. Recovery Protocols = $99 one-time (UNCHANGED).
  *   4. Free tier stays free ($0 lead magnet).
  *   5. Rule of three: at most 3 products shown to the user (Planner / Mastery / Protocols).
  * Anchor pricing: $17 crossed out next to $9.99 (comparePrice).
@@ -15,7 +15,7 @@
  * FREE     → $0        - Identity Quiz + free apps (lead magnet)
  * PREMIUM  → $9.99 once - Identity Recode Planner (includes everything BASIC had)
  * MASTERY  → $27 once   - AI Coach + Community + everything
- * PROTOCOL → $99 once   - therapeutic protocols (separate products)
+ * PROTOCOL → $99 once   - recovery protocols (separate products)
  */
 
 import { db } from './db';
@@ -40,7 +40,7 @@ export interface Product {
 }
 
 // Local Products Data (PRICING MODEL V2 — one-time payments, rule of three)
-// FREE is shown separately as lead magnet; therapeutic protocols ($99) are separate products.
+// FREE is shown separately as lead magnet; recovery protocols ($99) are separate products.
 export const LOCAL_PRODUCTS: Product[] = [
   {
     id: 'premium',

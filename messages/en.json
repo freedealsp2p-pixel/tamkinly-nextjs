@@ -1422,7 +1422,7 @@
         "questions": [
           {
             "q": "What is your refund policy?",
-            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked. Exception: one-time Therapeutic Protocol purchases are non-refundable once the personal access code has been issued."
+            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked. Exception: one-time Recovery Protocol purchases are non-refundable once the personal access code has been issued."
           },
           {
             "q": "How do I request a refund?",
@@ -1452,7 +1452,7 @@
         "questions": [
           {
             "q": "What is your refund policy?",
-            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase, you can request a full refund within 30 days of the original purchase date — no questions asked. Exception: one-time Therapeutic Protocol purchases become non-refundable once the personal access code has been issued."
+            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase, you can request a full refund within 30 days of the original purchase date — no questions asked. Exception: one-time Recovery Protocol purchases become non-refundable once the personal access code has been issued."
           },
           {
             "q": "Do you offer any guarantees on results?",
@@ -2104,7 +2104,7 @@
     "trcProgram": "Trauma Recovery",
     "trcShort": "Grounding, breathing, and safety techniques",
     "recoveryPrograms": "Recovery Programs",
-    "recoveryProgramsDesc": "Therapeutic tools for recovery and growth",
+    "recoveryProgramsDesc": "Recovery tools for growth",
     "exploreRecovery": "Explore Recovery",
     "currentTierAr": "Current Tier",
     "nextTierAtAr": "{count} more referrals to next tier",
@@ -3051,7 +3051,7 @@
   },
   "dashboard": {
     "recoveryPrograms": "Recovery Programs",
-    "recoveryProgramsDesc": "Therapeutic tools for recovery and growth",
+    "recoveryProgramsDesc": "Recovery tools for growth",
     "pornRecovery": "Porn Recovery",
     "pornRecoveryShort": "Comprehensive journey without self-judgment",
     "trcProgram": "Trauma Recovery",
@@ -4529,7 +4529,7 @@
       "retake": "Retake Assessment"
     }
   },
-  "therapeuticProtocols": {
+  "recoveryProtocols": {
     "hub": {
       "title": "Recovery Protocols",
       "subtitle": "Protocols designed for deep psychological work, shaped by real field experience in the community: daily contact with thousands of people, witnessing and hearing thousands of deep human stories — three paid protocols and one completely free exercise.",

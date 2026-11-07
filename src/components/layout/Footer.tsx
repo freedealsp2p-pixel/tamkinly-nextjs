@@ -33,10 +33,10 @@ export function Footer() {
     { href: "/products", label: t("allProducts") },
     { href: "/products/premium", label: t("plannerProduct") },
     { href: "/products/mastery", label: t("masteryProduct") },
-    { href: "/apps/therapeutic-protocols", label: t("protocolsHub") },
-    { href: "/apps/therapeutic-protocols/temporal-decoupling", label: t("temporalDecoupling") },
-    { href: "/apps/therapeutic-protocols/white-mirror", label: t("whiteMirror") },
-    { href: "/apps/therapeutic-protocols/alternative-code", label: t("alternativeCode") },
+    { href: "/apps/recovery-protocols", label: t("protocolsHub") },
+    { href: "/apps/recovery-protocols/temporal-decoupling", label: t("temporalDecoupling") },
+    { href: "/apps/recovery-protocols/white-mirror", label: t("whiteMirror") },
+    { href: "/apps/recovery-protocols/alternative-code", label: t("alternativeCode") },
   ];
 
   const recoveryLinks = [
