@@ -109,3 +109,4 @@ jobs:
             echo "--- permanent rich rules ---"; firewall-cmd --permanent --zone=public --list-rich-rules 2>/dev/null | grep "$IP" || echo "(missing!)"
             echo "--- effective sshd ignoreip ---"; fail2ban-client get sshd ignoreip 2>/dev/null || true
             echo "===== DONE ====="
+# r1: registration touch
