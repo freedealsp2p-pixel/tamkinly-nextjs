@@ -12,6 +12,11 @@ on:
         required: false
         type: boolean
         default: true
+      unban:
+        description: 'Also lift existing fail2ban bans for this IP (safe: IP must be whitelisted first)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   allowlist:
@@ -22,6 +27,7 @@ jobs:
         env:
           ALLOW_IP: ${{ github.event.inputs.allow_ip }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          UNBAN: ${{ github.event.inputs.unban }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
@@ -29,10 +35,11 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           command_timeout: 10m
           script_stop: false
-          envs: ALLOW_IP,DRY_RUN
+          envs: ALLOW_IP,DRY_RUN,UNBAN
           script: |
             IP="$ALLOW_IP"
             DRY="$DRY_RUN"
+            UNB="$UNBAN"
             echo "== INPUT ip=$IP dry_run=$DRY =="
             case "$IP" in
               ''|*[!0-9.]*) echo "INVALID IPv4 — aborting (no changes)"; exit 1;;
@@ -68,6 +75,14 @@ jobs:
             if [ "$DRY" = "true" ] || [ "$DRY" = "1" ]; then
               echo; echo "===== DRY_RUN=true — NO CHANGES MADE ====="
               exit 0
+            fi
+
+            if [ "$UNB" = "true" ] || [ "$UNB" = "1" ]; then
+              echo; echo "===== 4b. UNBAN (whitelisted IP only): $IP ====="
+              fail2ban-client set sshd unbanip "$IP" 2>&1 || echo "(no active sshd ban)"
+              fail2ban-client unbanip "$IP" 2>&1 || echo "(no active default-jail ban)"
+              echo "--- remaining runtime reject rules for $IP (expect none) ---"
+              firewall-cmd --zone=public --list-rich-rules 2>/dev/null | grep "$IP" | grep reject || echo "(none)"
             fi
 
             echo; echo "===== 5. APPLY (add-only, idempotent): $IP ====="
@@ -109,4 +124,3 @@ jobs:
             echo "--- permanent rich rules ---"; firewall-cmd --permanent --zone=public --list-rich-rules 2>/dev/null | grep "$IP" || echo "(missing!)"
             echo "--- effective sshd ignoreip ---"; fail2ban-client get sshd ignoreip 2>/dev/null || true
             echo "===== DONE ====="
-# r1: registration touch
