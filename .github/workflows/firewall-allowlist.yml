@@ -1,4 +1,4 @@
-name: Ops: VPS Firewall Allowlist (add-only, inspect-first)
+name: "Ops: VPS Firewall Allowlist (add-only, inspect-first)"
 
 on:
   workflow_dispatch:
