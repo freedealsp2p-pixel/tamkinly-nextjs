@@ -86,8 +86,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     stepCount: 5,
     durationLabel: { ar: '15 دقيقة', en: '15 minutes' },
     requiresSafety: false,
-    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcS',
-    tributeWebLink: 'https://web.tribute.tg/p/EcS',
+    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pJy9',
+    tributeWebLink: 'https://web.tribute.tg/p/Jy9',
     image: '/uploads/protocols/alternative-code-protocol.webp',
     imageAlt: {
       ar: 'بروتوكول الشفرة البديلة: تجربة تعافٍ تفاعلية من 5 خطوات في نحو 15 دقيقة تستخدم فاكّ الشفرة لتحويل اسم الشخص إلى مفتاح لإعادة توجيه الذاكرة.',
