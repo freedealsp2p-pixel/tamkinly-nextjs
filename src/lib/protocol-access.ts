@@ -108,8 +108,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     stepCount: 4,
     durationLabel: { ar: '9 دقائق', en: '9 minutes' },
     requiresSafety: true,
-    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcz',
-    tributeWebLink: 'https://web.tribute.tg/p/Ecz',
+    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pJyL',
+    tributeWebLink: 'https://web.tribute.tg/p/JyL',
     image: '/uploads/protocols/white-mirror-protocol.webp',
     imageAlt: {
       ar: 'علبة منتج بروتوكول المرآة البيضاء: تجربة هادئة من 4 خطوات في نحو 9 دقائق لكسر النمط وإعادة التشفير، تبدأ ببوابة أمان وتوفر إرشاداً صوتياً اختيارياً وخصوصية محمية.',

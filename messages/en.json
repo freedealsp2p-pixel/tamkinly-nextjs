@@ -46,7 +46,7 @@
     },
     "refund": {
       "title": "Refund Policy | 30-Day Money Back Guarantee - Tamkinly",
-      "description": "30-day money-back guarantee on all app purchases. Not satisfied? Contact us for a full refund — no questions asked. One-time recovery protocol purchases are non-refundable after the access code is issued."
+      "description": "30-day money-back guarantee on all products. Not satisfied? Contact us for a full refund — no questions asked. Approved refunds are issued to the original payment method within 3–5 business days."
     },
     "cart": {
       "title": "Shopping Cart | Complete Your Purchase - Tamkinly",
@@ -1103,7 +1103,7 @@
       },
       {
         "q": "Is there a money-back guarantee?",
-        "a": "Yes! We offer a 30-day money-back guarantee on all app purchases. If you're not satisfied, simply contact us for a full refund—no questions asked. Exception: one-time recovery protocol purchases are non-refundable once the access code is issued."
+        "a": "Yes! We offer a 30-day money-back guarantee on all app purchases. If you're not satisfied, simply contact us for a full refund—no questions asked. Approved refunds are issued to your original payment method within 3–5 business days."
       },
       {
         "q": "Can I upgrade later?",
@@ -1422,7 +1422,7 @@
         "questions": [
           {
             "q": "What is your refund policy?",
-            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked. Exception: one-time Recovery Protocol purchases are non-refundable once the personal access code has been issued."
+            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase for any reason, contact us within 30 days for a full refund, no questions asked. Approved refunds are issued to your original payment method within 3–5 business days."
           },
           {
             "q": "How do I request a refund?",
@@ -1452,7 +1452,7 @@
         "questions": [
           {
             "q": "What is your refund policy?",
-            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase, you can request a full refund within 30 days of the original purchase date — no questions asked. Exception: one-time Recovery Protocol purchases become non-refundable once the personal access code has been issued."
+            "a": "We offer a 30-day money-back guarantee on all app purchases. If you are not satisfied with your purchase, you can request a full refund within 30 days of the original purchase date — no questions asked. Approved refunds are issued to your original payment method within 3–5 business days."
           },
           {
             "q": "Do you offer any guarantees on results?",
@@ -2282,7 +2282,7 @@
     "questionsTermsDesc": "Contact us for any questions regarding these terms",
     "contactUs": "Contact Us",
     "paymentsAndRefunds": "Payments & Refunds",
-    "paymentsDesc": "Prices are shown in US dollars and may change at any time; the price in effect at the time of your purchase is the price that applies to you. All app products (Identity Recode Planner $9.99, Mastery $27) are one-time payments with lifetime access and are covered by our 30-day money-back guarantee: if you are not satisfied, contact us within 30 days of purchase and we will refund you in full. One-time Therapeutic Protocol purchases are non-refundable once your personal access code has been issued, because the code cannot be deactivated after delivery. To request a refund, email hello@tamkinly.com from the address used for the purchase; approved refunds are returned to the original payment method. The same policy applies to purchases made through Telegram (Tribute), with refund requests handled through our support email."
+    "paymentsDesc": "Prices are shown in US dollars and may change at any time; the price in effect at the time of your purchase is the price that applies to you. All app products (Identity Recode Planner $9.99, Mastery $27) are one-time payments with lifetime access and are covered by our 30-day money-back guarantee: if you are not satisfied, contact us within 30 days of purchase and we will refund you in full — no questions asked. To request a refund, email hello@tamkinly.com from the address used for the purchase; approved refunds are returned to the original payment method within 3–5 business days. The same policy applies to purchases made through Telegram (Tribute), with refund requests handled through our support email."
   },
   "refundPage": {
     "badge": "Refund Policy",
@@ -2323,8 +2323,8 @@
     "needRefund": "Need a Refund?",
     "needRefundDesc": "Contact our support team and we'll process your refund promptly",
     "requestRefund": "Request Refund",
-    "protocolsNonRefundable": "Recovery Protocols (One-Time Purchases)",
-    "protocolsNonRefundableDesc": "Protocol purchases become non-refundable once your personal access code has been issued, because the code cannot be deactivated after delivery."
+    "protocolsNonRefundable": "Questions about a refund?",
+    "protocolsNonRefundableDesc": "Contact us at hello@tamkinly.com or on Telegram @tamkinlyenglish — we reply within 24–48 hours. Approved refunds are issued to your original payment method within 3–5 business days."
   },
   "auth": {
     "signin": {
@@ -4540,7 +4540,7 @@
       "stepsLabel": "steps",
       "includes": "What this experience includes",
       "oneTime": "One-time payment",
-      "nonRefundable": "Non-refundable",
+      "nonRefundable": "30-Day Money-Back Guarantee",
       "purchaseCta": "Purchase — $99",
       "paymentMethod": "Payment via Tribute (Telegram) — or Crypto / Bank transfer via Wise on request",
       "perk1": "Complete guided recovery experience",
@@ -4560,7 +4560,7 @@
       "notesTitle": "Important notes:",
       "note1": "Access is granted after payment verification — usually within a few hours.",
       "note2": "Your access code arrives at the email you provided.",
-      "note3": "This is a one-time, non-refundable purchase.",
+      "note3": "This is a one-time purchase covered by our 30-day money-back guarantee.",
       "note4": "Can't pay via Telegram? We also accept Crypto (USDC/USDT) and bank transfer via Wise — message us on Telegram and we'll provide the details."
     },
     "protocols": {
