@@ -43,6 +43,33 @@
       "publish_bot": "@tamkinly_publish_bot"
     }
   },
+  "bios": {
+    "structure": "WHY -> HOW -> WHAT (task_046 founder directive)",
+    "layers": {
+      "tagline": "Return to Your Center",
+      "tagline_ar": "عد إلى مركزك",
+      "why_sentence": "Consciously build the person you choose to become.",
+      "why_sentence_ar": "ابنِ بوعيٍ كامل الشخص الذي تختار أن تصبحه."
+    },
+    "platforms": {
+      "instagram": {
+        "en": "Consciously build the person you choose to become. Planners • identity apps • recovery exercises • protocols. Return to Your Center.",
+        "ar": "ابنِ بوعي الشخص الذي تختار أن تصبحه. مخططات • تطبيقات هوية • تمارين تعافٍ • بروتوكولات. عُد إلى مركزك."
+      },
+      "x": {
+        "en": "Tamkinly helps you consciously build the person you choose to become — planners, identity apps, recovery exercises & protocols. Return to Your Center.",
+        "ar": "تمكينلي تساعدك أن تبني بوعي الشخص الذي تختار أن تصبحه — مخططات، تطبيقات هوية، تمارين تعافٍ وبروتوكولات. عُد إلى مركزك."
+      },
+      "linkedin": {
+        "tagline_en": "Consciously build the person you choose to become.",
+        "about_en": "WHY: Modern self-help sells quick fixes. Tamkinly exists because lasting change is identity work — returning to who you already are. HOW: We build bilingual (Arabic/English) tools: identity planners, behavior-change apps, practical recovery exercises, and paid recovery protocols. WHAT: Tamkinly — Return to Your Center."
+      },
+      "telegram": {
+        "en": "Consciously build the person you choose to become. Tamkinly — planners, identity apps, practical recovery exercises & paid recovery protocols. Official channel for releases and reflections. Return to Your Center."
+      }
+    },
+    "pending_platforms_note": "YouTube/TikTok/Pinterest bios after unfreeze (three_day_plan_completion_directive)"
+  },
   "banned_handles": [
     "@tamkinlyhq"
   ],

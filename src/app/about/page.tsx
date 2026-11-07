@@ -65,6 +65,9 @@ function MissionSection() {
               <p>
                 {t("missionP3")}
               </p>
+              <p className="font-medium text-[#1F6F78]">
+                {t("missionWhy")}
+              </p>
             </div>
           </div>
           

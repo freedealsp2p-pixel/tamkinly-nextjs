@@ -81,6 +81,23 @@
   --color-brand-muted: #8A94A6;
   --color-brand-muted-50: #f1f3f6;
   --color-brand-muted-100: #e3e7ec;
+
+  /* Terracotta — warm accent only. Founder decision 2026-11-08: #C97B7B is NOT
+     a warning color; it stays as a warm touch (quotes, footers, warm borders). */
+  --color-brand-terracotta: #C97B7B;
+  --color-brand-terracotta-50: #f8eded;
+  --color-brand-terracotta-100: #f1dbdb;
+  --color-brand-terracotta-200: #e4c0c0;
+  --color-brand-terracotta-400: #c48a8a;
+  --color-brand-terracotta-600: #b26565;
+  --color-brand-terracotta-700: #a86060;
+
+  /* Semantic status colors — SEPARATE from terracotta (founder decision).
+     Success reuses the Calm Mint accent; muted values fit "calm authority". */
+  --color-semantic-success: #3DD4B0;
+  --color-semantic-warning: #B45309;
+  --color-semantic-info: #2E6FA3;
+  --color-semantic-danger: #B3402F;
 }
 
 /* Tamkinly Brand Colors - RESONANT CLARITY */
@@ -145,6 +162,13 @@
   --sidebar-accent-foreground: oklch(0.22 0.03 250);
   --sidebar-border: oklch(0.9 0 0);
   --sidebar-ring: oklch(0.45 0.1 185);
+}
+
+
+/* Founder-approved therapeutic reading scale (2026-11-08): 18px root.
+   Scales the whole rem-based system proportionally (text-base -> 18px). */
+html {
+  font-size: 18px;
 }
 
 

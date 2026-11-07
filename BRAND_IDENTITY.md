@@ -15,8 +15,14 @@ ________________
 Tamkinly
 
 
-الشعار:
-Empowerment Through Refined Choices
+الشعار (Tagline — مثبت في كل العناوين الحية):
+Return to Your Center / عد إلى مركزك
+
+جملة WHY الكاملة (صفحة About + منشورات المؤسس — طبقة مكمّلة للشعار):
+Consciously build the person you choose to become.
+ابنِ بوعيٍ كامل الشخص الذي تختار أن تصبحه.
+
+(الشعار القديم "Empowerment Through Refined Choices" أُوقف بقرار المؤسس 2026-11-08 — فقد في صناعة ما قبله)
 
 
 الموقع:
@@ -211,9 +217,15 @@ Calm authority with intentional depth. Design should feel like a journey, not a 
 
 
 
-7) Danger – Soft Warning
+7) Terracotta – Warm Accent (تراكوتا دافئة)
    HEX: #C97B7B
-   الاستخدام: رسائل التحذير (نادراً)
+   الاستخدام: لمسة دافئة — اقتباسات، فوتر، حدود دافئة (نادراً)
+   ⚠️ قرار المؤسس 2026-11-08: التراكوتا ليست لون تحذير.
+   التحذيري الدلالي منفصل تماماً:
+   • Warning (تحذيري): #B45309 كهرماني مكتوم
+   • Danger (خطر): #B3402F أحمر طوبي مكتوم
+   • Info (معلوماتي): #2E6FA3 أزرق هادئ
+   • Success (نجاح): #3DD4B0 (نفس Mint الرسمي)
 
 
 
@@ -251,7 +263,10 @@ Calm authority with intentional depth. Design should feel like a journey, not a 
 --background:   #F6F8FA
 --text:         #2B2E34
 --muted:        #8A94A6
---danger:       #C97B7B
+--terracotta:  #C97B7B   (لمسة دافئة فقط — ليست تحذيراً)
+--warning:     #B45309   (تحذيري دلالي منفصل)
+--danger:      #B3402F   (خطر دلالي منفصل)
+--info:        #2E6FA3
 --success:      #3DD4B0
 --light-teal:   #2A8A94
 --soft-mint:    #7AEEE0
@@ -282,8 +297,9 @@ Inter (English)
 
 
 اللغة العربية:
-• Font: IBM Plex Arabic
-• أو Cairo
+• Font: IBM Plex Sans Arabic أو Cairo (قرار المؤسس بعد رؤية العيّنات في ملف البراند المرئي)
+• ملاحظة تقنية 2026-11-08: متغير --font-arabic مُشار إليه في globals.css لكنه غير محمّل
+  في layout.tsx بعد — العربي حالياً على fallback النظام. التحميل ينتظر اختيار المؤسس.
 
 
 
@@ -297,7 +313,7 @@ Inter (English)
 H1: 48-56px, Inter Bold
 H2: 36-40px, Inter Bold
 H3: 28-32px, Inter SemiBold
-Body: 16-18px, Inter Regular
+Body: 18px — قرار علاجي معتمد من المؤسس 2026-11-08 (Inter Regular)
 Small: 13-14px, Inter Regular
 
 
@@ -396,6 +412,11 @@ Paragraph Spacing:
 Element Spacing:
 • بين العناصر المختلفة: 32-48px
 • بين العناصر المتشابهة: 16-24px
+
+نظام المسافات (قرار المؤسس 2026-11-08):
+• الشبكة الأساسية: 8px — كل المسافات مضاعفاتها (8/16/24/32/48)
+• أهداف اللمس: 44px كحد أدنى لكل عنصر تفاعلي (قرار علاجي للجمهور)
+• حجم النص الأساسي: 18px مثبت (انظر TYPOGRAPHY)
 
 
 Content Flow:
