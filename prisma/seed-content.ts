@@ -20,7 +20,7 @@ const topics = [
   { name: 'Pattern Interrupt', nameAr: 'قطع الأنماط', slug: 'pattern-interrupt', isActive: true },
   { name: 'Identity Transformation', nameAr: 'تحوّل الهوية', slug: 'identity-transformation', isActive: true },
   { name: 'Self-Authorship', nameAr: 'التفويض الذاتي', slug: 'self-authorship', isActive: true },
-  { name: 'Therapeutic Protocols', nameAr: 'البروتوكولات العلاجية', slug: 'therapeutic-protocols', isActive: true },
+  { name: 'Recovery Protocols', nameAr: 'بروتوكولات التعافي', slug: 'recovery-protocols', isActive: true },
   { name: 'Dopamine Regulation', nameAr: 'تنظيم الدوبامين', slug: 'dopamine-regulation', isActive: true },
   { name: 'Vagus Nerve', nameAr: 'العصب المبهم', slug: 'vagus-nerve', isActive: true },
   { name: 'Emotional Processing', nameAr: 'المعالجة العاطفية', slug: 'emotional-processing', isActive: true },

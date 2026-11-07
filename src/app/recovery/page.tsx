@@ -6,6 +6,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useLocale } from '@/components/providers/LocaleProvider';
 import {
   Shield, Heart, ArrowLeft, Eye, Gauge, Sprout, BookOpen, Sparkles,
@@ -416,6 +417,57 @@ export default function RecoveryHubPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          SECTION 3.5: RECOVERY PROTOCOLS (founder directive 2026-11-07:
+          the protocol exercises live under the Recovery section — recovery
+          from pornography and recovery from sexual harassment)
+          ═══════════════════════════════════════════════════════════ */}
+      <section className="py-12 px-4">
+        <div className="max-w-3xl mx-auto">
+          <Link href="/Recovery_Protocols" className="block group">
+            <div
+              className="rounded-2xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+              style={{ background: 'linear-gradient(135deg, #0F1C2E 0%, #16324a 60%, #0F1C2E 100%)' }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles className="w-4 h-4" style={{ color: '#3DD4B0' }} />
+                <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#3DD4B0' }}>
+                  {isAr ? 'قسم البروتوكولات' : 'Protocols Section'}
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                {isAr ? 'بروتوكولات التعافي' : 'Recovery Protocols'}
+              </h2>
+              <p className="text-sm leading-relaxed text-gray-300 mb-4">
+                {isAr
+                  ? 'تمارين تشغيل قصيرة تكمل المسارين — للتعافي من الإباحية والتعافي من التحرش الجنسي. كل بروتوكول يستهدف ميكانيزم عصبي محدداً بالاسم: ذكرى تعيد تشغيل نفسها، محفّز يستدعي الشحنة القديمة، حلقة ناقد داخلي — ويعيد لك مقعد المخرج في قصتك.'
+                  : 'Short activation protocols that complete both paths — recovery from pornography and recovery from sexual harassment. Each protocol targets one named neural mechanism: a memory that keeps replaying, a trigger that fires the old charge, an inner-critic loop — and hands you back the director\u2019s chair in your own story.'}
+              </p>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400 mb-5">
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3 h-3" />
+                  {isAr ? '‏9–15 دقيقة لكل بروتوكول' : '9–15 minutes each'}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Lock className="w-3 h-3" />
+                  {isAr ? 'دفع واحد 99$ لكل بروتوكول + بروتوكول مجاني للبدء' : '$99 one-time each + one free to start'}
+                </span>
+                <span>{isAr ? 'بوابة أمان للمتقدمين' : 'Safety gate for advanced users'}</span>
+              </div>
+              <span
+                className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-semibold transition-colors group-hover:brightness-110"
+                style={{ backgroundColor: '#3DD4B0', color: '#0F1C2E' }}
+              >
+                {isAr ? 'افتح بروتوكولات التعافي' : 'Open Recovery Protocols'}
+                {isAr
+                  ? <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                  : <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 
