@@ -5,6 +5,12 @@ on:
     branches: [master]
   workflow_dispatch:
 
+# AUD-1 (2026-11-08): serialize deploys — 3 pushes in 10s raced 3 deploys on the
+# same VPS working tree (git pull 'no candidates' + pm2 left stopped -> 502).
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
