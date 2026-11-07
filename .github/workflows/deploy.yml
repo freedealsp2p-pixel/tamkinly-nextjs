@@ -70,29 +70,38 @@ jobs:
               echo "Removed stale .next/lock"
             fi
 
-            # Build with sufficient memory (1280MB proven required on this 1GB box)
-            NODE_OPTIONS="--max-old-space-size=1280" npm run build > /root/tamkinly-autodeploy-build.log 2>&1
+            # ---- MEMORY GUARD (AUD-1, 2026-11-07): the 1GB box OOM-killed two
+            #      builds today (runs 42391733996 & 42395920493) while the app
+            #      kept its RSS during `next build`. Stop pm2 for the build
+            #      window to free RAM; service is restored right after, whatever
+            #      the outcome (old .next keeps serving if the build fails).
+            pm2 stop tamkinly-prod >/dev/null 2>&1 || true
+            BUILD_RC=0
+            NODE_OPTIONS="--max-old-space-size=1280" npm run build > /root/tamkinly-autodeploy-build.log 2>&1 || BUILD_RC=$?
 
             # ---- BUILD GATE (npm exit code alone is NOT proof; Next 16 stale lock
             #      can fake BUILD_EXIT=0 — must verify log contents) ----
             # Next 16 (Turbopack) prints: "✓ Generating static pages using N workers (156/156)"
             # — the ✓-prefixed line only appears on completion
-            grep -q "✓ Generating static pages" /root/tamkinly-autodeploy-build.log
-            test -s .next/BUILD_ID
-            if grep -q "Another next build" /root/tamkinly-autodeploy-build.log; then
-              echo "BUILD REFUSED: another build is already running" >&2
+            if [ "$BUILD_RC" -eq 0 ] \
+               && grep -q "✓ Generating static pages" /root/tamkinly-autodeploy-build.log \
+               && test -s .next/BUILD_ID \
+               && ! grep -q "Another next build" /root/tamkinly-autodeploy-build.log; then
+              # Copy static files
+              mkdir -p .next/standalone/.next
+              cp -r .next/static .next/standalone/.next/
+              cp -r public .next/standalone/
+
+              # Restart PM2 — correct process name (tamkinly-prod, NOT tamkinly)
+              pm2 restart tamkinly-prod
+
+              # Save PM2 state
+              pm2 save
+
+              echo "Deployment completed successfully!"
+            else
+              echo "BUILD FAILED rc=$BUILD_RC — restoring previous build" >&2
+              tail -40 /root/tamkinly-autodeploy-build.log >&2 || true
+              pm2 restart tamkinly-prod 2>/dev/null || pm2 start npm --name tamkinly-prod -- start
               exit 1
             fi
-
-            # Copy static files
-            mkdir -p .next/standalone/.next
-            cp -r .next/static .next/standalone/.next/
-            cp -r public .next/standalone/
-
-            # Restart PM2 — correct process name (tamkinly-prod, NOT tamkinly)
-            pm2 restart tamkinly-prod
-
-            # Save PM2 state
-            pm2 save
-
-            echo "Deployment completed successfully!"
