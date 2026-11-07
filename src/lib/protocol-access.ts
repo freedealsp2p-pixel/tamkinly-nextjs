@@ -64,8 +64,8 @@ export const PROTOCOL_PRODUCTS: Record<ProtocolSlug, ProtocolProductConfig> = {
     stepCount: 7,
     durationLabel: { ar: '12 دقيقة', en: '12 minutes' },
     requiresSafety: false,
-    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pEcu',
-    tributeWebLink: 'https://web.tribute.tg/p/Ecu',
+    tributeTelegramLink: 'https://t.me/tribute/app?startapp=pJxN',
+    tributeWebLink: 'https://web.tribute.tg/p/JxN',
     image: '/uploads/protocols/temporal-decoupling-protocol.webp',
     imageAlt: {
       ar: 'علبة منتج بروتوكول التفكيك الزمني: تجربة تعافٍ موجّهة من 7 خطوات في نحو 12 دقيقة، مع خصوصية محمية، أداة عملية لإعادة توطيد الذاكرة وليست بديلاً عن الرعاية النفسية المتخصصة.',
