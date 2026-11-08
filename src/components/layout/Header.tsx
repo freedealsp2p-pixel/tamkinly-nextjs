@@ -127,7 +127,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
 
   if (!hydrated) {
     return (
-      <Button variant="ghost" size="icon" className="md:hidden text-primary opacity-0" aria-hidden>
+      <Button variant="ghost" size="icon" className="md:hidden text-primary opacity-0" aria-hidden tabIndex={-1}>
         <Menu className="h-6 w-6" />
       </Button>
     );
@@ -146,7 +146,7 @@ function MobileMenu({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (open: 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild className="md:hidden">
-        <Button variant="ghost" size="icon" className="text-primary">
+        <Button variant="ghost" size="icon" className="text-primary" aria-label={locale === 'ar' ? 'فتح قائمة التنقل' : 'Open navigation menu'}>
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
@@ -449,7 +449,7 @@ export function Header() {
             <NotificationBell />
             
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative text-slate-600 hover:text-primary">
+              <Button variant="ghost" size="icon" className="relative text-slate-600 hover:text-primary" aria-label={locale === 'ar' ? `سلة المشتريات، ${cartCount} عنصر` : `Shopping cart, ${cartCount} items`}>
                 <ShoppingCart className="h-5 w-5" />
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -end-1 h-5 w-5 rounded-full bg-accent text-[10px] font-bold text-primary flex items-center justify-center shadow-sm">
@@ -459,7 +459,7 @@ export function Header() {
               </Button>
             </Link>
             <Link href="/auth/signin">
-              <Button variant="ghost" size="icon" className="text-slate-600 hover:text-primary">
+              <Button variant="ghost" size="icon" className="text-slate-600 hover:text-primary" aria-label={locale === 'ar' ? 'الحساب وتسجيل الدخول' : 'Account and sign-in'}>
                 <User className="h-5 w-5" />
               </Button>
             </Link>

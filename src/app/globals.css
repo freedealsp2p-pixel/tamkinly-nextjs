@@ -493,3 +493,38 @@ html {
 .print-only-header {
   display: none;
 }
+
+/* ============================================
+   P0 Accessibility — gray text contrast (2026-11-08)
+   text-slate-400 (#94a3b8) = 2.8:1 on white — fails WCAG AA (4.5:1).
+   Darkened one step on light surfaces. Dark surfaces (ink navy, teal,
+   slate-900, black, white-text containers) re-declare the original lighter
+   values so their contrast is NOT regressed.
+   Unlayered rules outrank Tailwind v4 layered utilities (cascade).
+   ============================================ */
+.text-slate-400 { color: #64748b; }
+.text-slate-500 { color: #475569; }
+
+.text-white .text-slate-400,
+.bg-\[\#0F1C2E\] .text-slate-400,
+.bg-\[\#1F6F78\] .text-slate-400,
+.bg-primary .text-slate-400,
+[class*="bg-slate-9"] .text-slate-400,
+[class*="bg-black"] .text-slate-400,
+[class*="from-[#0F1C2E]"] .text-slate-400,
+[class*="via-[#0F1C2E]"] .text-slate-400,
+[class*="from-[#1F6F78]"] .text-slate-400 {
+  color: #94a3b8;
+}
+
+.text-white .text-slate-500,
+.bg-\[\#0F1C2E\] .text-slate-500,
+.bg-\[\#1F6F78\] .text-slate-500,
+.bg-primary .text-slate-500,
+[class*="bg-slate-9"] .text-slate-500,
+[class*="bg-black"] .text-slate-500,
+[class*="from-[#0F1C2E]"] .text-slate-500,
+[class*="via-[#0F1C2E]"] .text-slate-500,
+[class*="from-[#1F6F78]"] .text-slate-500 {
+  color: #64748b;
+}
