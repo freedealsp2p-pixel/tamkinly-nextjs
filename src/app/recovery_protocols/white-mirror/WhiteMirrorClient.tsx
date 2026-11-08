@@ -85,7 +85,7 @@ export default function WhiteMirrorClient() {
   // Declining must prevent the protocol from starting.
   const handleDecline = useCallback(() => {
     dispatch({ type: 'BACK_TO_WELCOME' });
-    router.push('/Recovery_Protocols');
+    router.push('/recovery_protocols');
   }, [router]);
 
   const handleNext = useCallback(() => {
@@ -110,7 +110,7 @@ export default function WhiteMirrorClient() {
   const breadcrumbs = [
     { label: ts('breadcrumbs.home'), href: '/' },
     { label: ts('breadcrumbs.apps'), href: '/apps' },
-    { label: ts('breadcrumbs.protocols'), href: '/Recovery_Protocols' },
+    { label: ts('breadcrumbs.protocols'), href: '/recovery_protocols' },
     { label: tpp('white-mirror.title') },
   ];
 
@@ -157,8 +157,8 @@ export default function WhiteMirrorClient() {
           translationKey={TK}
           accentColor={WHITE_MIRROR_META.accentColor}
           suggestedNext={[
-            { label: tpp('temporal-decoupling.title'), href: '/Recovery_Protocols/temporal-decoupling' },
-            { label: tpp('alternative-code.title'), href: '/Recovery_Protocols/alternative-code' },
+            { label: tpp('temporal-decoupling.title'), href: '/recovery_protocols/temporal-decoupling' },
+            { label: tpp('alternative-code.title'), href: '/recovery_protocols/alternative-code' },
           ]}
           onRepeat={handleRestart}
         />

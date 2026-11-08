@@ -210,7 +210,7 @@ export function ProtocolLanding({
                 : 'If this is your first guided experience, we recommend starting with Temporal Decoupling — the path is designed to be practiced progressively.'}
             </p>
             <Link
-              href="/Recovery_Protocols/temporal-decoupling"
+              href="/recovery_protocols/temporal-decoupling"
               className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#1F6F78] border border-[#1F6F78]/40 bg-white hover:bg-[#1F6F78]/10 transition-colors flex-shrink-0 whitespace-nowrap"
             >
               {isAr ? 'البداية الموصى بها' : 'Recommended start'}
@@ -278,7 +278,7 @@ export function ProtocolLanding({
               {isAr ? path.forLine.ar : path.forLine.en}
             </p>
             <Link
-              href="/Recovery_Protocols"
+              href="/recovery_protocols"
               className="inline-flex items-center gap-1 text-xs font-medium mt-2 hover:underline"
               style={{ color: config.accentColor }}
             >
@@ -385,7 +385,7 @@ export function ProtocolLanding({
         {/* Rule 5 — Guided journey: the path continues after this protocol */}
         {nextProto && (
           <Link
-            href={`/Recovery_Protocols/${nextProto.slug}`}
+            href={`/recovery_protocols/${nextProto.slug}`}
             className="block rounded-2xl bg-white border border-slate-100 shadow-sm px-4 py-3 mb-6 hover:border-[#3DD4B0]/50 transition-colors"
           >
             <div className="flex items-center justify-between gap-3">

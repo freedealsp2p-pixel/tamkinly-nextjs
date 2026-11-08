@@ -11,7 +11,7 @@ export default function AlternativeCodeLanding() {
   const breadcrumbs = [
     { label: ts('breadcrumbs.home'), href: '/' },
     { label: ts('breadcrumbs.apps'), href: '/apps' },
-    { label: ts('breadcrumbs.protocols'), href: '/Recovery_Protocols' },
+    { label: ts('breadcrumbs.protocols'), href: '/recovery_protocols' },
     { label: tpp('alternative-code.title') },
   ];
 

@@ -17,7 +17,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/Recovery_Protocols/temporal-decoupling',
+    href: '/recovery_protocols/temporal-decoupling',
     requiresSafety: false,
     image: '/uploads/protocols/temporal-decoupling-protocol.webp',
     imageAlt: {
@@ -43,7 +43,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/Recovery_Protocols/alternative-code',
+    href: '/recovery_protocols/alternative-code',
     requiresSafety: false,
     image: '/uploads/protocols/alternative-code-protocol.webp',
     imageAlt: {
@@ -69,7 +69,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/Recovery_Protocols/white-mirror',
+    href: '/recovery_protocols/white-mirror',
     requiresSafety: true,
     image: '/uploads/protocols/white-mirror-protocol.webp',
     imageAlt: {
@@ -94,7 +94,7 @@ const PROTOCOLS = [
     titleKey: 'title',
     subtitleKey: 'subtitle',
     descriptionKey: 'description',
-    href: '/Recovery_Protocols/truncated-sentence',
+    href: '/recovery_protocols/truncated-sentence',
     requiresSafety: false,
     image: '/uploads/protocols/truncated-sentence-protocol.webp',
     imageAlt: {
@@ -355,7 +355,7 @@ export default function RecoveryProtocolsHub() {
               : 'Begin with the protocol most members start with: Temporal Decoupling.'}
           </p>
           <Link
-            href="/Recovery_Protocols/temporal-decoupling"
+            href="/recovery_protocols/temporal-decoupling"
             className="inline-flex items-center gap-2 bg-[#3DD4B0] text-[#0F1C2E] rounded-xl px-5 py-2.5 font-semibold hover:bg-[#2BC49E] transition-colors"
           >
             {isAr ? '\u0627\u0628\u062f\u0623 \u0645\u0646 \u0647\u0646\u0627' : 'Start here'}

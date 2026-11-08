@@ -427,7 +427,7 @@ export default function RecoveryHubPage() {
           ═══════════════════════════════════════════════════════════ */}
       <section className="py-12 px-4">
         <div className="max-w-3xl mx-auto">
-          <Link href="/Recovery_Protocols" className="block group">
+          <Link href="/recovery_protocols" className="block group">
             <div
               className="rounded-2xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
               style={{ background: 'linear-gradient(135deg, #0F1C2E 0%, #16324a 60%, #0F1C2E 100%)' }}

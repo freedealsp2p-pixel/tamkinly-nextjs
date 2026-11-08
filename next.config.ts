@@ -162,7 +162,10 @@ const nextConfig: NextConfig = {
       // Product access links are DIRECT to the page — NO redirects for the protocols.
       // Old /apps/therapeutic-protocols and /apps/recovery-protocols paths intentionally
       // die with 404 (no 308 hop for product access); the new sitemap carries the
-      // canonical /Recovery_Protocols URLs for SEO.
+      // canonical /recovery_protocols URLs for SEO.
+      // [2026-11-08 founder directive] Path renamed to lowercase /recovery_protocols.
+      // Still NO redirect from the old capitalized URL — internal links point direct;
+      // the old URL dies with 404 like the /apps/* paths above.
       // Recovery path redirects
       // Legacy TRC redirects (locale-aware — config redirects run before middleware)
       // AR prefix must be preserved: /ar/trc -> /ar/recovery/trc, not /recovery/trc

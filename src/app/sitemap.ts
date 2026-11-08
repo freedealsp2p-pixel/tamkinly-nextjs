@@ -96,17 +96,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/ar/apps/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.54 },
   ]);
 
-  // Recovery Protocols section (/Recovery_Protocols, founder directive 2026-11-07) - English + Arabic
+  // Recovery Protocols section — canonical lowercase path /recovery_protocols.
+  // [2026-11-08 founder directive] Path renamed from /Recovery_Protocols to
+  // lowercase; links are DIRECT (no redirects per 2026-11-07 rule) and this is
+  // the final sitemap shape: English + Arabic with hreflang alternates.
   const recoveryProtocolSlugs = [
     'temporal-decoupling',
     'alternative-code',
     'white-mirror',
-      'truncated-sentence',
+    'truncated-sentence',
   ];
   const recoveryProtocolPages = [
-    { url: `${baseUrl}/Recovery_Protocols`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${baseUrl}/recovery_protocols`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
     ...recoveryProtocolSlugs.map((slug) => ({
-      url: `${baseUrl}/Recovery_Protocols/${slug}`,
+      url: `${baseUrl}/recovery_protocols/${slug}`,
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.8,

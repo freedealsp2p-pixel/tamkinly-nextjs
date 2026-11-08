@@ -56,13 +56,13 @@ export function WhiteMirrorGate({ onAccept, onDecline }: WhiteMirrorGateProps) {
             </p>
             <div className="space-y-2">
               <Link
-                href="/Recovery_Protocols/temporal-decoupling"
+                href="/recovery_protocols/temporal-decoupling"
                 className="block px-4 py-3 rounded-xl bg-[#F5F9F8] text-sm font-medium text-[#0F1C2E] hover:bg-[#e8f1f0] transition-colors"
               >
                 {isAr ? 'بروتوكول التفكيك الزمني' : 'The Temporal Decoupling Protocol'}
               </Link>
               <Link
-                href="/Recovery_Protocols/alternative-code"
+                href="/recovery_protocols/alternative-code"
                 className="block px-4 py-3 rounded-xl bg-[#F5F9F8] text-sm font-medium text-[#0F1C2E] hover:bg-[#e8f1f0] transition-colors"
               >
                 {isAr ? 'بروتوكول الشفرة البديلة' : 'The Alternative Code Protocol'}

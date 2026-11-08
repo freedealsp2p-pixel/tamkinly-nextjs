@@ -4,52 +4,43 @@ import { useReducer, useCallback, useEffect, useState } from 'react';
 import { useTranslations } from '@/components/providers/LocaleProvider';
 import {
   RecoveryShell, ExperienceWelcome, PreparationScreen,
-  ProtocolStepCard, ProtocolCompletion, NameDecoder,
+  ProtocolStepCard, ProtocolCompletion,
 } from '@/components/recovery-protocols';
 import {
   createProtocolReducer, loadPersistedProgress, persistProgress,
   clearPersistedProgress, scrollToTop,
 } from '@/components/recovery-protocols/types';
-import { ALTERNATIVE_CODE_META, ALTERNATIVE_CODE_STEPS } from '@/lib/recovery-protocols/alternative-code';
+import { TEMPORAL_DECOUPLING_META, TEMPORAL_DECOUPLING_STEPS } from '@/lib/recovery-protocols/temporal-decoupling';
 
-const SLUG = 'alternative-code';
-const TK = 'recoveryProtocols.alternativeCode';
-const { initialState, reducer } = createProtocolReducer(ALTERNATIVE_CODE_STEPS.length);
+const SLUG = 'temporal-decoupling';
+const TK = 'recoveryProtocols.temporalDecoupling';
+const { initialState, reducer } = createProtocolReducer(TEMPORAL_DECOUPLING_STEPS.length);
 
 /**
- * Alternative Code — the most interactive of the three premium experiences.
- *
- * The Name Decoder stays central to the source's letter-based interaction:
- *   INPUT -> DECODE -> CREATE ALTERNATIVE ASSOCIATIONS -> BUILD ALTERNATIVE
- *   WORLD -> IMMERSION -> INTEGRATION.
- *
- * Privacy: the entered name lives only in component state for the duration
- * of the session. It is never sent to the backend, analytics, or storage.
- * Only the step position (never the name or words) is saved locally so the
- * session can be resumed.
+ * Temporal Decoupling — premium guided experience.
+ * Journey: welcome -> preparation -> guided session (pausable) -> completion.
+ * The source protocol (7 steps, ~12 minutes) remains untouched.
  */
-export default function AlternativeCodeClient() {
+export default function TemporalDecouplingClient() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [restored, setRestored] = useState(false);
   const ts = useTranslations('recoveryProtocols.shared');
   const tpp = useTranslations('recoveryProtocols.protocols');
 
-  // Name Decoder state — memory only, never persisted.
-  const [name, setName] = useState('');
-  const [words, setWords] = useState<Record<number, string>>({});
-
-  const totalSteps = ALTERNATIVE_CODE_STEPS.length;
-  const step = ALTERNATIVE_CODE_STEPS[state.currentStep];
+  const totalSteps = TEMPORAL_DECOUPLING_STEPS.length;
+  const step = TEMPORAL_DECOUPLING_STEPS[state.currentStep];
   const progress = state.phase === 'active'
     ? ((state.currentStep + 1) / totalSteps) * 100
     : 0;
 
-  // Resume: restore saved position (device only, never the name) on mount.
+  // Resume: restore saved position (device only) once on mount.
   useEffect(() => {
     const saved = loadPersistedProgress(SLUG);
     if (saved) {
       if (saved.phase === 'active' && saved.currentStep < totalSteps) {
         dispatch({ type: 'START' });
+        // START resets to step 0; advance to the saved step.
+        // (dispatch batching keeps this a single visible state)
         for (let i = 0; i < saved.currentStep; i++) {
           dispatch({ type: 'NEXT_STEP' });
         }
@@ -60,7 +51,7 @@ export default function AlternativeCodeClient() {
     setRestored(true);
   }, [totalSteps]);
 
-  // Persist position for resume; clear on completion.
+  // Persist position for resume; clear it once the experience completes.
   useEffect(() => {
     if (!restored) return;
     if (state.phase === 'completion') {
@@ -105,38 +96,11 @@ export default function AlternativeCodeClient() {
   const handlePause = useCallback(() => dispatch({ type: 'PAUSE' }), []);
   const handleResume = useCallback(() => dispatch({ type: 'RESUME' }), []);
 
-  const handleNameChange = useCallback((value: string) => {
-    setName(value);
-    setWords({}); // letters changed -> previous associations reset
-  }, []);
-
-  const handleWordChange = useCallback((index: number, word: string) => {
-    setWords((prev) => ({ ...prev, [index]: word }));
-  }, []);
-
-  /**
-   * Name Decoder placement, following the source protocol:
-   *   Step 1 (Decoding the Cipher): type the name, watch it become bare letters.
-   *   Step 2 (Crafting the New World): give each letter a new word.
-   * The source allows writing on paper instead — continuing never requires input.
-   */
-  const renderStepExtra = useCallback((stepData: typeof step, stepIndex: number) => {
-    if (stepIndex === 0) {
-      return <NameDecoder mode="decode" name={name} onNameChange={handleNameChange} words={words} onWordChange={handleWordChange} accentColor={ALTERNATIVE_CODE_META.accentColor} />;
-    }
-    if (stepIndex === 1) {
-      return <NameDecoder mode="build" name={name} onNameChange={handleNameChange} words={words} onWordChange={handleWordChange} accentColor={ALTERNATIVE_CODE_META.accentColor} />;
-    }
-    // Steps 3-5 are guided immersion — text and audio carry the experience.
-    void stepData;
-    return null;
-  }, [name, words, handleNameChange, handleWordChange]);
-
   const breadcrumbs = [
     { label: ts('breadcrumbs.home'), href: '/' },
     { label: ts('breadcrumbs.apps'), href: '/apps' },
-    { label: ts('breadcrumbs.protocols'), href: '/Recovery_Protocols' },
-    { label: tpp('alternative-code.title') },
+    { label: ts('breadcrumbs.protocols'), href: '/recovery_protocols' },
+    { label: tpp('temporal-decoupling.title') },
   ];
 
   return (
@@ -147,18 +111,18 @@ export default function AlternativeCodeClient() {
       {state.phase === 'welcome' && (
         <ExperienceWelcome
           translationKey={TK}
-          meta={ALTERNATIVE_CODE_META}
-          steps={ALTERNATIVE_CODE_STEPS}
+          meta={TEMPORAL_DECOUPLING_META}
+          steps={TEMPORAL_DECOUPLING_STEPS}
           breadcrumbs={breadcrumbs}
-          accentColor={ALTERNATIVE_CODE_META.accentColor}
-          audioSlug="alternative-code"
+          accentColor={TEMPORAL_DECOUPLING_META.accentColor}
+          audioSlug="temporal-decoupling"
           onBegin={handleBegin}
         />
       )}
 
       {state.phase === 'preparation' && (
         <PreparationScreen
-          accentColor={ALTERNATIVE_CODE_META.accentColor}
+          accentColor={TEMPORAL_DECOUPLING_META.accentColor}
           onStart={handleStart}
           onBack={handleBackToWelcome}
         />
@@ -171,24 +135,23 @@ export default function AlternativeCodeClient() {
           stepIndex={state.currentStep}
           totalSteps={totalSteps}
           progress={progress}
-          accentColor={ALTERNATIVE_CODE_META.accentColor}
+          accentColor={TEMPORAL_DECOUPLING_META.accentColor}
           onNext={handleNext}
           onPrev={handlePrev}
           onRestart={handleRestart}
           onPause={handlePause}
           isPaused={state.isPaused}
           onResume={handleResume}
-          renderStepExtra={renderStepExtra}
         />
       )}
 
       {state.phase === 'completion' && (
         <ProtocolCompletion
           translationKey={TK}
-          accentColor={ALTERNATIVE_CODE_META.accentColor}
+          accentColor={TEMPORAL_DECOUPLING_META.accentColor}
           suggestedNext={[
-            { label: tpp('temporal-decoupling.title'), href: '/Recovery_Protocols/temporal-decoupling' },
-            { label: tpp('white-mirror.title'), href: '/Recovery_Protocols/white-mirror' },
+            { label: tpp('alternative-code.title'), href: '/recovery_protocols/alternative-code' },
+            { label: tpp('white-mirror.title'), href: '/recovery_protocols/white-mirror' },
           ]}
           onRepeat={handleRestart}
         />

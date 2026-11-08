@@ -115,7 +115,7 @@ export function ProtocolCompletion({
           ))}
 
           <button
-            onClick={() => router.push('/Recovery_Protocols')}
+            onClick={() => router.push('/recovery_protocols')}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 text-[#0F1C2E]/45 hover:text-[#0F1C2E]/70 text-sm transition-colors"
           >
             {ts('completion.backToProtocols')}

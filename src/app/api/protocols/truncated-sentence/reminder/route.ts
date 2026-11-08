@@ -18,8 +18,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 function buildEmail(locale: string): { subject: string; html: string } {
   const isAr = locale === 'ar';
   const url = isAr
-    ? 'https://tamkinly.com/ar/Recovery_Protocols/truncated-sentence'
-    : 'https://tamkinly.com/Recovery_Protocols/truncated-sentence';
+    ? 'https://tamkinly.com/ar/recovery_protocols/truncated-sentence'
+    : 'https://tamkinly.com/recovery_protocols/truncated-sentence';
 
   if (isAr) {
     const subject = 'ليلة اليوم الثالث قد حانت — ورقتك بانتظارك';

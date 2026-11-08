@@ -42,8 +42,8 @@ export const PRODUCT_LINKS: ProductLink[] = [
   { href: '/products', icon: 'store', labelKey: 'allProducts' },
   { href: '/products/premium', icon: 'planner', labelKey: 'plannerProduct', price: '$9.99' },
   { href: '/products/mastery', icon: 'mastery', labelKey: 'masteryProduct', price: '$27' },
-  { href: '/Recovery_Protocols', icon: 'protocolsHub', labelKey: 'protocolsHub', price: '$99' },
-  { href: '/Recovery_Protocols/temporal-decoupling', icon: 'protocol', labelKey: 'temporalDecoupling' },
-  { href: '/Recovery_Protocols/white-mirror', icon: 'protocol', labelKey: 'whiteMirror' },
-  { href: '/Recovery_Protocols/alternative-code', icon: 'protocol', labelKey: 'alternativeCode' },
+  { href: '/recovery_protocols', icon: 'protocolsHub', labelKey: 'protocolsHub', price: '$99' },
+  { href: '/recovery_protocols/temporal-decoupling', icon: 'protocol', labelKey: 'temporalDecoupling' },
+  { href: '/recovery_protocols/white-mirror', icon: 'protocol', labelKey: 'whiteMirror' },
+  { href: '/recovery_protocols/alternative-code', icon: 'protocol', labelKey: 'alternativeCode' },
 ];

@@ -24,18 +24,18 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     alternates: {
       canonical: isAr
-        ? `${SITE_URL}/ar/Recovery_Protocols/truncated-sentence`
-        : `${SITE_URL}/Recovery_Protocols/truncated-sentence`,
+        ? `${SITE_URL}/ar/recovery_protocols/truncated-sentence`
+        : `${SITE_URL}/recovery_protocols/truncated-sentence`,
       languages: {
-        'en-US': `${SITE_URL}/Recovery_Protocols/truncated-sentence`,
-        'ar-SA': `${SITE_URL}/ar/Recovery_Protocols/truncated-sentence`,
-        'x-default': `${SITE_URL}/Recovery_Protocols/truncated-sentence`,
+        'en-US': `${SITE_URL}/recovery_protocols/truncated-sentence`,
+        'ar-SA': `${SITE_URL}/ar/recovery_protocols/truncated-sentence`,
+        'x-default': `${SITE_URL}/recovery_protocols/truncated-sentence`,
       },
     },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/Recovery_Protocols/truncated-sentence`,
+      url: `${SITE_URL}/recovery_protocols/truncated-sentence`,
       siteName: 'Tamkinly',
       type: 'website',
       locale: isAr ? 'ar_AR' : 'en_US',

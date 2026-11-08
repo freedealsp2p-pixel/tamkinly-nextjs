@@ -19,17 +19,17 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: isAr ? `${SITE_URL}/ar/Recovery_Protocols/alternative-code` : `${SITE_URL}/Recovery_Protocols/alternative-code`,
+      canonical: isAr ? `${SITE_URL}/ar/recovery_protocols/alternative-code` : `${SITE_URL}/recovery_protocols/alternative-code`,
       languages: {
-        'en-US': `${SITE_URL}/Recovery_Protocols/alternative-code`,
-        'ar-SA': `${SITE_URL}/ar/Recovery_Protocols/alternative-code`,
-        'x-default': `${SITE_URL}/Recovery_Protocols/alternative-code`,
+        'en-US': `${SITE_URL}/recovery_protocols/alternative-code`,
+        'ar-SA': `${SITE_URL}/ar/recovery_protocols/alternative-code`,
+        'x-default': `${SITE_URL}/recovery_protocols/alternative-code`,
       },
     },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/Recovery_Protocols/alternative-code`,
+      url: `${SITE_URL}/recovery_protocols/alternative-code`,
       siteName: 'Tamkinly',
       type: 'website',
       locale: isAr ? 'ar_AR' : 'en_US',

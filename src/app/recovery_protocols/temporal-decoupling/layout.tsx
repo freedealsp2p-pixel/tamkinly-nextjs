@@ -19,17 +19,17 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: isAr ? `${SITE_URL}/ar/Recovery_Protocols/temporal-decoupling` : `${SITE_URL}/Recovery_Protocols/temporal-decoupling`,
+      canonical: isAr ? `${SITE_URL}/ar/recovery_protocols/temporal-decoupling` : `${SITE_URL}/recovery_protocols/temporal-decoupling`,
       languages: {
-        'en-US': `${SITE_URL}/Recovery_Protocols/temporal-decoupling`,
-        'ar-SA': `${SITE_URL}/ar/Recovery_Protocols/temporal-decoupling`,
-        'x-default': `${SITE_URL}/Recovery_Protocols/temporal-decoupling`,
+        'en-US': `${SITE_URL}/recovery_protocols/temporal-decoupling`,
+        'ar-SA': `${SITE_URL}/ar/recovery_protocols/temporal-decoupling`,
+        'x-default': `${SITE_URL}/recovery_protocols/temporal-decoupling`,
       },
     },
     openGraph: {
       title,
       description,
-      url: `${SITE_URL}/Recovery_Protocols/temporal-decoupling`,
+      url: `${SITE_URL}/recovery_protocols/temporal-decoupling`,
       siteName: 'Tamkinly',
       type: 'website',
       locale: isAr ? 'ar_AR' : 'en_US',
