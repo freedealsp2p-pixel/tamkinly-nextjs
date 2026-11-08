@@ -82,6 +82,15 @@ jobs:
             #      window to free RAM; service is restored right after, whatever
             #      the outcome (old .next keeps serving if the build fails).
             pm2 stop tamkinly-prod >/dev/null 2>&1 || true
+            # 2026-11-08 (AUD-1): a failed build WIPED .next before failing (Turbopack
+            # cleans first) -> 502 crash-loop with nothing to serve. Keep the previous
+            # build aside; restore it verbatim on any failure.
+            NEXT_PREV=""
+            if [ -d .next ]; then
+              NEXT_PREV=".next.prev-$(date +%s)"
+              mv .next "$NEXT_PREV"
+            fi
+            rm -f .next/lock 2>/dev/null || true
             BUILD_RC=0
             NODE_OPTIONS="--max-old-space-size=1280" npm run build > /root/tamkinly-autodeploy-build.log 2>&1 || BUILD_RC=$?
 
@@ -104,10 +113,13 @@ jobs:
               # Save PM2 state
               pm2 save
 
+              rm -rf "$NEXT_PREV" 2>/dev/null || true
               echo "Deployment completed successfully!"
             else
               echo "BUILD FAILED rc=$BUILD_RC — restoring previous build" >&2
               tail -40 /root/tamkinly-autodeploy-build.log >&2 || true
+              rm -rf .next
+              if [ -n "$NEXT_PREV" ] && [ -d "$NEXT_PREV" ]; then mv "$NEXT_PREV" .next; fi
               pm2 restart tamkinly-prod 2>/dev/null || pm2 start npm --name tamkinly-prod -- start
               exit 1
             fi

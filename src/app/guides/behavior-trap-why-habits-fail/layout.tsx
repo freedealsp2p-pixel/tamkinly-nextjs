@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/guides/behavior-trap-why-habits-fail';
   const arUrl = 'https://tamkinly.com/ar/guides/behavior-trap-why-habits-fail';
   return {
-  title: 'فخ السلوك: لماذا تفشل العادات وكيف تنجح | تمكينلي — عد إلى مركزك' : 'The Behavior Trap: Why Habits Fail and How They Succeed | Tamkinly — Return to Your Center',
+  title: isAr ? 'فخ السلوك: لماذا تفشل العادات وكيف تنجح | تمكينلي — عد إلى مركزك' : 'The Behavior Trap: Why Habits Fail and How They Succeed | Tamkinly — Return to Your Center',
   description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails — and how to build an identity that supports them.',
   keywords: [
     'behavior trap',
@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   },
   openGraph: {
-    title: 'فخ السلوك: لماذا تفشل العادات وكيف تنجح | تمكينلي — عد إلى مركزك' : 'The Behavior Trap: Why Habits Fail and How They Succeed | Tamkinly — Return to Your Center',
+    title: isAr ? 'فخ السلوك: لماذا تفشل العادات وكيف تنجح | تمكينلي — عد إلى مركزك' : 'The Behavior Trap: Why Habits Fail and How They Succeed | Tamkinly — Return to Your Center',
     description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails — and how to build an identity that supports them.',
     url: isAr ? arUrl : enUrl,
     siteName: 'Tamkinly',
@@ -46,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'فخ السلوك: لماذا تفشل العادات وكيف تنجح | تمكينلي — عد إلى مركزك' : 'The Behavior Trap: Why Habits Fail and How They Succeed | Tamkinly — Return to Your Center',
+    title: isAr ? 'فخ السلوك: لماذا تفشل العادات وكيف تنجح | تمكينلي — عد إلى مركزك' : 'The Behavior Trap: Why Habits Fail and How They Succeed | Tamkinly — Return to Your Center',
     description: 'Most people focus on changing behavior while ignoring identity. Learn why behavioral change alone fails — and how to build an identity that supports them.',
     site: '@tamkinly',
     images: ['https://tamkinly.com/guides/behavior-trap-why-habits-fail/opengraph-image'],

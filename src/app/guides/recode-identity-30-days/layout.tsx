@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/guides/recode-identity-30-days';
   const arUrl = 'https://tamkinly.com/ar/guides/recode-identity-30-days';
   return {
-  title: 'كيف تعيد صياغة هويتك في 30 يوماً — دليل خطوة بخطوة | تمكينلي — عد إلى مركزك' : 'How to Recode Your Identity in 30 Days | Step-by-Step Guide | Tamkinly — Return to Your Center',
+  title: isAr ? 'كيف تعيد صياغة هويتك في 30 يوماً — دليل خطوة بخطوة | تمكينلي — عد إلى مركزك' : 'How to Recode Your Identity in 30 Days | Step-by-Step Guide | Tamkinly — Return to Your Center',
   description: 'A practical step-by-step guide to transforming your identity from the inside out, based on neuroscience research on building new neural pathways.',
   keywords: [
     'recode identity',
