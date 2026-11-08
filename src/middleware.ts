@@ -157,11 +157,16 @@ export function middleware(request: NextRequest) {
         headers: requestHeaders,
       }
     });
-    response.cookies.set('NEXT_LOCALE', localeMatch, {
-      maxAge: 365 * 24 * 60 * 60,
-      path: '/',
-      sameSite: 'lax',
-    });
+    // Set the cookie only when it would actually change — an unconditional
+    // Set-Cookie on every /ar response makes the HTML uncacheable at the edge
+    // (nginx anonymous micro-cache speed pass 2026-11-08).
+    if (request.cookies.get('NEXT_LOCALE')?.value !== localeMatch) {
+      response.cookies.set('NEXT_LOCALE', localeMatch, {
+        maxAge: 365 * 24 * 60 * 60,
+        path: '/',
+        sameSite: 'lax',
+      });
+    }
     return response;
   }
 
@@ -172,11 +177,14 @@ export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = pathWithoutLocale;
     const response = NextResponse.redirect(url, 308);
-    response.cookies.set('NEXT_LOCALE', defaultLocale, {
-      maxAge: 365 * 24 * 60 * 60,
-      path: '/',
-      sameSite: 'lax',
-    });
+    // Same micro-cache rule: only set when it changes (2026-11-08).
+    if (request.cookies.get('NEXT_LOCALE')?.value !== defaultLocale) {
+      response.cookies.set('NEXT_LOCALE', defaultLocale, {
+        maxAge: 365 * 24 * 60 * 60,
+        path: '/',
+        sameSite: 'lax',
+      });
+    }
     return response;
   }
 
