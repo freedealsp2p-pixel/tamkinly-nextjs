@@ -507,9 +507,14 @@ export function generateAppPageMetadata(slug: string, locale: string = 'en'): Me
     ? 'Free to use.' 
     : `Available in ${app.tier} package.`;
   
+  const metaTitle = isAr ? `${app.titleAr || app.title} | تمكينلي — عد إلى مركزك` : `${app.title} | Tamkinly — Return to Your Center`;
+  const metaDescription = isAr
+    ? `${app.descriptionAr || app.description} ${isFree ? 'مجاني للاستخدام.' : `متاح في باقة ${app.tier}.`}`
+    : `${app.description} ${tierDescription}`;
+
   return {
-    title: app.title,
-    description: `${app.description} ${tierDescription}`,
+    title: metaTitle,
+    description: metaDescription,
     keywords: app.keywords,
     
     alternates: {
@@ -522,8 +527,8 @@ export function generateAppPageMetadata(slug: string, locale: string = 'en'): Me
     },
     
     openGraph: {
-      title: app.title,
-      description: app.description,
+      title: metaTitle,
+      description: metaDescription,
       url: fullUrl,
       siteName: 'Tamkinly',
       type: 'website',
@@ -532,15 +537,15 @@ export function generateAppPageMetadata(slug: string, locale: string = 'en'): Me
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: app.title,
+          alt: app.titleAr || app.title,
         },
       ],
     },
     
     twitter: {
       card: 'summary_large_image',
-      title: app.title,
-      description: app.description,
+      title: metaTitle,
+      description: metaDescription,
       site: '@tamkinly',
       images: [imageUrl],
     },

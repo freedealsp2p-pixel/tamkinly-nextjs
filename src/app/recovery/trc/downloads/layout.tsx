@@ -4,7 +4,7 @@ import { getLocale } from '@/lib/get-locale';
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
-  const title = isAr ? 'تحميلات TRC | تمكينلي' : 'TRC Downloads | Tamkinly';
+  const title = isAr ? 'تحميلات TRC | تمكينلي' : 'TRC Downloads  | Tamkinly — Return to Your Center';
   const description = isAr ? 'حمّل المجموعة الكاملة من أوراق عمل TRC: خطة السلامة، خرائط المحفزات، بطاقات التأريض والمزيد — موارد تعافٍ مجانية للطباعة.' : 'Download the complete set of TRC worksheets: safety plan, trigger mapping, grounding cards, and more — free printable recovery resources.';
   const enUrl = 'https://tamkinly.com/recovery/trc/downloads';
   const arUrl = 'https://tamkinly.com/ar/recovery/trc/downloads';

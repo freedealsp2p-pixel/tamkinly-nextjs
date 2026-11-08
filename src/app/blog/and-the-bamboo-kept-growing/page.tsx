@@ -219,7 +219,7 @@ export default function AndTheBambooKeptGrowingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "At Tamkinly, we map this process through what we call the Identity Baseline — the eight dimensions of who you are. When you begin your transformation, the changes happen in the dimensions nobody can see first: your intellectual frameworks, your emotional regulation, your spiritual alignment. These are underground dimensions. Your physical appearance, your social standing, your financial reality — these are the surface. And just like the bamboo, the underground must be built before the surface can sustain explosive growth.",
-                "في تمكنلي، نرسم هذه العملية من خلال ما نسميه خط الأساس للهوية — الأبعاد الثمانية لمن أنت. عندما تبدأ تحولك، التغييرات تحدث أولاً في الأبعاد التي لا يستطيع أحد رؤيتها: أطرك الفكرية، تنظيمك العاطفي، محاذاتك الروحية. هذه أبعاد تحت الأرض. مظهرك الجسدي، مكانتك الاجتماعية، واقعك المالي — هذه هي السطح. ومثل الخيزران، يجب بناء ما تحت الأرض قبل أن يتمكن السطح من تحمل النمو الانفجاري."
+                "في تمكينلي، نرسم هذه العملية من خلال ما نسميه خط الأساس للهوية — الأبعاد الثمانية لمن أنت. عندما تبدأ تحولك، التغييرات تحدث أولاً في الأبعاد التي لا يستطيع أحد رؤيتها: أطرك الفكرية، تنظيمك العاطفي، محاذاتك الروحية. هذه أبعاد تحت الأرض. مظهرك الجسدي، مكانتك الاجتماعية، واقعك المالي — هذه هي السطح. ومثل الخيزران، يجب بناء ما تحت الأرض قبل أن يتمكن السطح من تحمل النمو الانفجاري."
               )}
             </p>
 
@@ -334,7 +334,7 @@ export default function AndTheBambooKeptGrowingArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "At Tamkinly, we built the Daily Reflection Practice specifically for this — to give you a way to track what's happening underground. When you journal your identity evidence daily, you create a record that your doubting mind can't argue with. The reflection becomes your proof that roots are forming, even when the surface looks unchanged.",
-                "في تمكنلي، بنينا ممارسة التأمل اليومي خصيصاً لهذا — لنمنحك طريقة لتتبع ما يحدث تحت الأرض. عندما تدوّن أدلة هويتك يومياً، تخلق سجلاً لا يمكن لعقلك المتشكك أن يجادله. التأمل يصبح دليلك أن الجذور تتشكل، حتى عندما يبدو السطح بدون تغيير."
+                "في تمكينلي، بنينا ممارسة التأمل اليومي خصيصاً لهذا — لنمنحك طريقة لتتبع ما يحدث تحت الأرض. عندما تدوّن أدلة هويتك يومياً، تخلق سجلاً لا يمكن لعقلك المتشكك أن يجادله. التأمل يصبح دليلك أن الجذور تتشكل، حتى عندما يبدو السطح بدون تغيير."
               )}
             </p>
 

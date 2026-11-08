@@ -186,7 +186,7 @@ export async function sendWelcomeEmail(
   const locale = options.locale || 'en';
   
   const htmlContent = EmailTemplates.welcome(options.name, locale);
-  const subject = locale === 'ar' ? 'مرحباً بك في تمكنلي! 🎯' : 'Welcome to Tamkinly! 🎯';
+  const subject = locale === 'ar' ? 'مرحباً بك في تمكينلي! 🎯' : 'Welcome to Tamkinly! 🎯';
   
   if (provider === 'brevo') {
     return BrevoClient.emails.send({
@@ -643,7 +643,7 @@ export async function sendPaymentReceivedEmail(
           <p style="color: #8A94A6; font-size: 14px;">عادة ما يتم التأكيد خلال بضع دقائق. تحقق من بريدك الوارد قريباً!</p>
         </div>
         <div style="text-align: center; padding: 20px; color: #8A94A6; font-size: 12px;">
-          <p>تمكنلي - منصة تحويل الهوية</p>
+          <p>تمكينلي - منصة تحويل الهوية</p>
         </div>
       </div>`
     : `<div style="font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 600px; margin: 0 auto; background: #F6F8FA; padding: 20px;">

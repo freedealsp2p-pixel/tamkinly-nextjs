@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/guides/identity-vs-behavior-change';
   const arUrl = 'https://tamkinly.com/ar/guides/identity-vs-behavior-change';
   return {
-  title: 'Identity vs Behavior Change: Why Willpower Fails',
+  title: 'الهوية مقابل تغيير السلوك: لماذا تفشل الإرادة | تمكينلي — عد إلى مركزك' : 'Identity vs Behavior Change: Why Willpower Fails | Tamkinly — Return to Your Center',
   description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation.',
   keywords: [
     'identity vs behavior change',
@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   },
   openGraph: {
-    title: 'Identity vs Behavior Change: Why Willpower Always Fails',
+    title: 'الهوية مقابل تغيير السلوك: لماذا تفشل الإرادة | تمكينلي — عد إلى مركزك' : 'Identity vs Behavior Change: Why Willpower Always Fails | Tamkinly — Return to Your Center',
     description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation.',
     url: isAr ? arUrl : enUrl,
     siteName: 'Tamkinly',
@@ -47,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Identity vs Behavior Change: Why Willpower Always Fails',
+    title: 'الهوية مقابل تغيير السلوك: لماذا تفشل الإرادة | تمكينلي — عد إلى مركزك' : 'Identity vs Behavior Change: Why Willpower Always Fails | Tamkinly — Return to Your Center',
     description: 'The hidden reason most self-improvement efforts don\'t last — and the identity-first approach that creates permanent transformation.',
     site: '@tamkinly',
     images: ['https://tamkinly.com/guides/identity-vs-behavior-change/opengraph-image'],

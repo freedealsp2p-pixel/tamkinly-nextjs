@@ -56,7 +56,7 @@ export default function ValuesClarificationToolArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Tamkinly Team", "فريق تمكنلي")}
+                {getText("Tamkinly Team", "فريق تمكينلي")}
               </span>
             </div>
           </div>
@@ -346,7 +346,7 @@ export default function ValuesClarificationToolArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The Values Clarification Tool is part of Tamkinly's FREE tier because we believe everyone deserves this foundational clarity. Knowing your values isn't a luxury—it's essential for authentic identity transformation.",
-                "أداة توضيح القيم جزء من المستوى المجاني من تمكنلي لأننا نؤمن أن الجميع يستحق هذه الوضوح الأساسي. معرفة قيمك ليست رفاهية—إنها ضرورية لتحويل الهوية الأصيل."
+                "أداة توضيح القيم جزء من المستوى المجاني من تمكينلي لأننا نؤمن أن الجميع يستحق هذه الوضوح الأساسي. معرفة قيمك ليست رفاهية—إنها ضرورية لتحويل الهوية الأصيل."
               )}
             </p>
 

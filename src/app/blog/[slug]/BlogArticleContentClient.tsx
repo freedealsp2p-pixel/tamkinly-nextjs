@@ -124,7 +124,7 @@ export function BlogArticleContentClient({ article }: { article: BlogArticle }) 
               <p className="text-slate-600 leading-relaxed mb-6">
                 {getText(
                   'At Tamkinly, we believe in evidence-based transformation. This article is part of our comprehensive approach to identity change, combining research-backed methodologies with practical, actionable frameworks.',
-                  'في تمكنلي، نؤمن بالتحول المبني على الأدلة. هذا المقال جزء من نهجنا الشامل لتغيير الهوية، يجمع بين المنهجيات المدعومة بالبحث والأطر العملية القابلة للتطبيق.'
+                  'في تمكينلي، نؤمن بالتحول المبني على الأدلة. هذا المقال جزء من نهجنا الشامل لتغيير الهوية، يجمع بين المنهجيات المدعومة بالبحث والأطر العملية القابلة للتطبيق.'
                 )}
               </p>
 
@@ -180,7 +180,7 @@ export function BlogArticleContentClient({ article }: { article: BlogArticle }) 
               <p className="text-slate-600 leading-relaxed mb-6">
                 {getText(
                   'Every article in the Tamkinly blog connects to our core transformation methodology. We focus on three key elements: awareness, action, and identity integration.',
-                  'كل مقال في مدونة تمكنلي مرتبط بمنهجية التحول الأساسية لدينا. نركز على ثلاثة عناصر رئيسية: الوعي، والفعل، واندماج الهوية.'
+                  'كل مقال في مدونة تمكينلي مرتبط بمنهجية التحول الأساسية لدينا. نركز على ثلاثة عناصر رئيسية: الوعي، والفعل، واندماج الهوية.'
                 )}
               </p>
 

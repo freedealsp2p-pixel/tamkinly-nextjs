@@ -11,8 +11,8 @@ async function getLocale(): Promise<'en' | 'ar'> {
 }
 
 const metadataByLocale = {
-  en: { title: "TRC Worksheets | Tamkinly", description: "Interactive therapeutic worksheets for trauma recovery \u2014 safety plan, trigger mapping, and more." },
-  ar: { title: "\u0623\u0648\u0631\u0627\u0642 \u0639\u0645\u0644 TRC | Tamkinly", description: "\u0623\u0648\u0631\u0627\u0642 \u0639\u0645\u0644 \u0639\u0644\u0627\u062c\u064a\u0629 \u062a\u0641\u0627\u0639\u0644\u064a\u0629 \u0644\u0644\u062a\u0639\u0627\u0641\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0645\u0627\u062a." },
+  en: { title: "TRC Worksheets  | Tamkinly — Return to Your Center", description: "Interactive therapeutic worksheets for trauma recovery \u2014 safety plan, trigger mapping, and more." },
+  ar: { title: "\u0623\u0648\u0631\u0627\u0642 \u0639\u0645\u0644 TRC  | تمكينلي — عد إلى مركزك", description: "\u0623\u0648\u0631\u0627\u0642 \u0639\u0645\u0644 \u0639\u0644\u0627\u062c\u064a\u0629 \u062a\u0641\u0627\u0639\u0644\u064a\u0629 \u0644\u0644\u062a\u0639\u0627\u0641\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0645\u0627\u062a." },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

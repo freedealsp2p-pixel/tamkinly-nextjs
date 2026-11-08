@@ -155,7 +155,7 @@ export const PAGE_METADATA: Record<string, PageMetadataConfig> = {
   },
   blog: {
     title: 'Blog — Research-Backed Insights | Return to Your Center',
-    titleAr: 'المدونة — رؤى مبنية على الأبحاث | عد إلى مركزك',
+    titleAr: 'المدونة — رؤى مبنية على الأبحاث | تمكينلي — عد إلى مركزك',
     description: 'Research-backed insights, practical frameworks, and transformation tools. Articles on identity transformation, identity recode, and personal development.',
     descriptionAr: 'رؤى مبنية على الأبحاث، أطر عملية، وأدوات تحويل. مقالات عن تحويل الهوية، تكوين العادات، والتطوير الشخصي.',
     path: '/blog',

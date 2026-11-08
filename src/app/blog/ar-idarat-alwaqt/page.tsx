@@ -222,7 +222,7 @@ function IdaratAlwaqtArticleAR() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              لذلك صُمّم <Link href="/apps/daily-planner" className="text-accent hover:underline">المخطط اليومي</Link> في تمكنلي بطريقة مختلفة: لا يبدأ بالمهام، بل بالهوية. يسألك أولاً "من تريد أن تكون اليوم؟" ثم يساعدك في اختيار المهام التي تعبر عن هذه الهوية. هذا الترتيب — الهوية أولاً ثم المهام — هو ما يجعله أداة إدارة وقت حقيقية وليس مجرد قائمة مهام أخرى.
+              لذلك صُمّم <Link href="/apps/daily-planner" className="text-accent hover:underline">المخطط اليومي</Link> في تمكينلي بطريقة مختلفة: لا يبدأ بالمهام، بل بالهوية. يسألك أولاً "من تريد أن تكون اليوم؟" ثم يساعدك في اختيار المهام التي تعبر عن هذه الهوية. هذا الترتيب — الهوية أولاً ثم المهام — هو ما يجعله أداة إدارة وقت حقيقية وليس مجرد قائمة مهام أخرى.
             </p>
 
             <h2 className="text-2xl font-bold text-primary mt-12 mb-6">

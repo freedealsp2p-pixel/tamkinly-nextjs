@@ -13,8 +13,8 @@ async function getLocale(): Promise<'en' | 'ar'> {
 }
 
 const metadataByLocale = {
-  en: { title: "Thought Reframing Tool | Tamkinly", description: "A cognitive tool for reframing trauma-related thoughts." },
-  ar: { title: "\u0625\u0639\u0627\u062f\u0629 \u0635\u064a\u0627\u063a\u0629 \u0627\u0644\u0623\u0641\u0643\u0627\u0631 | Tamkinly", description: "\u0623\u062f\u0627\u0629 \u0645\u0639\u0631\u0641\u064a\u0629 \u0644\u0625\u0639\u0627\u062f\u0629 \u0635\u064a\u0627\u063a\u0629 \u0627\u0644\u0623\u0641\u0643\u0627\u0631 \u0627\u0644\u0645\u0631\u062a\u0628\u0637\u0629 \u0628\u0627\u0644\u0635\u062f\u0645\u0629." },
+  en: { title: "Thought Reframing Tool  | Tamkinly — Return to Your Center", description: "A cognitive tool for reframing trauma-related thoughts." },
+  ar: { title: "\u0625\u0639\u0627\u062f\u0629 \u0635\u064a\u0627\u063a\u0629 \u0627\u0644\u0623\u0641\u0643\u0627\u0631  | تمكينلي — عد إلى مركزك", description: "\u0623\u062f\u0627\u0629 \u0645\u0639\u0631\u0641\u064a\u0629 \u0644\u0625\u0639\u0627\u062f\u0629 \u0635\u064a\u0627\u063a\u0629 \u0627\u0644\u0623\u0641\u0643\u0627\u0631 \u0627\u0644\u0645\u0631\u062a\u0628\u0637\u0629 \u0628\u0627\u0644\u0635\u062f\u0645\u0629." },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

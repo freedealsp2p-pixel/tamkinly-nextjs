@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
   const title = isAr
-    ? 'المرآة البيضاء | تمكينلي'
-    : 'The White Mirror | Tamkinly';
+    ? 'المرآة البيضاء  | تمكينلي — عد إلى مركزك'
+    : 'The White Mirror  | Tamkinly — Return to Your Center';
   const description = isAr
     ? 'أوقف عجلة الأفكار السلبية بقوة في لحظة الفراغ التام. بروتوكول كسر النمط الآمن — 4 خطوات في 9 دقائق.'
     : 'Forcefully halt the cycle of negative thoughts in a moment of complete void. Safe pattern interrupt protocol — 4 steps in 9 minutes.';

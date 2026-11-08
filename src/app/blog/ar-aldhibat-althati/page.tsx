@@ -184,7 +184,7 @@ function AldhibatAlthatiArticleAR() {
                 </li>
                 <li className="flex gap-3">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent text-primary text-sm flex items-center justify-center font-semibold">6</span>
-                  <span><strong>الصبر الهوياتي:</strong> أعطِ هويتك الجديدة وقتاً لتترسخ. التحول ليس حدثاً — بل عملية. وكما نؤكد في <Link href="/methodology" className="text-accent hover:underline">منهجية تمكنلي</Link>، النمو غير المرئي هو الأهم.</span>
+                  <span><strong>الصبر الهوياتي:</strong> أعطِ هويتك الجديدة وقتاً لتترسخ. التحول ليس حدثاً — بل عملية. وكما نؤكد في <Link href="/methodology" className="text-accent hover:underline">منهجية تمكينلي</Link>، النمو غير المرئي هو الأهم.</span>
                 </li>
               </ol>
             </div>

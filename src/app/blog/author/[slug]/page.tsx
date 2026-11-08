@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
   const isAr = locale === 'ar';
   const name = isAr ? author.nameAr : author.name;
   const bio = isAr ? author.bioAr : author.bio;
-  const title = `${name}${isAr ? ' | تمكنلي' : ' | Tamkinly'}`;
+  const title = `${name}${isAr ? ' | تمكينلي — عد إلى مركزك' : ' | Tamkinly — Return to Your Center'}`;
 
   const enUrl = `https://tamkinly.com/blog/author/${author.slug}`;
   const arUrl = `https://tamkinly.com/ar/blog/author/${author.slug}`;

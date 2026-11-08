@@ -343,7 +343,7 @@ const ar: TriggerMappingTranslations = {
   completionSaveReminder: 'تم حفظ سجلاتك على هذا الجهاز. يمكنك العودة في أي وقت لإضافة المزيد.',
   completionNextStepTitle: 'إنشاء خطة أمان',
   completionNextStepDesc: 'استخدم ما تعلمته عن محفزاتك لبناء خطة أمان شخصية.',
-  completionGoHome: 'العودة إلى تمكنلي',
+  completionGoHome: 'العودة إلى تمكينلي',
   completionEntriesCount: 'تم رسم خريطة {count} سجل محفز',
 
   safetyNotFeelingSafe: 'لا أشعر بالراحة الآن',

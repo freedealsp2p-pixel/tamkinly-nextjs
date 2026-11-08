@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const enUrl = 'https://tamkinly.com/guides/environment-shapes-you';
   const arUrl = 'https://tamkinly.com/ar/guides/environment-shapes-you';
   return {
-  title: 'Your Environment Shapes You: Personal Environment Audit Guide',
+  title: 'بيئتك تصنعك: دليل تدقيق بيئتك الشخصية | تمكينلي — عد إلى مركزك' : 'Your Environment Shapes You: Personal Environment Audit Guide | Tamkinly — Return to Your Center',
   description: 'Your physical, digital, and social environment shapes your identity more than you think. Learn how to design an environment that supports your new identity.',
   keywords: [
     'environment shapes identity',
@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   },
   openGraph: {
-    title: 'Your Environment Shapes You: Personal Environment Audit Guide',
+    title: 'بيئتك تصنعك: دليل تدقيق بيئتك الشخصية | تمكينلي — عد إلى مركزك' : 'Your Environment Shapes You: Personal Environment Audit Guide | Tamkinly — Return to Your Center',
     description: 'Your physical, digital, and social environment shapes your identity more than you think. Learn how to design an environment that supports your new identity.',
     url: isAr ? arUrl : enUrl,
     siteName: 'Tamkinly',
@@ -46,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Your Environment Shapes You: Personal Environment Audit Guide',
+    title: 'بيئتك تصنعك: دليل تدقيق بيئتك الشخصية | تمكينلي — عد إلى مركزك' : 'Your Environment Shapes You: Personal Environment Audit Guide | Tamkinly — Return to Your Center',
     description: 'Your physical, digital, and social environment shapes your identity more than you think. Learn how to design an environment that supports your new identity.',
     site: '@tamkinly',
     images: ['https://tamkinly.com/guides/environment-shapes-you/opengraph-image'],

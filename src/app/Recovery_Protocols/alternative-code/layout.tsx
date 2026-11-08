@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
   const title = isAr
-    ? 'الشفرة البديلة | تمكينلي'
-    : 'The Alternative Code | Tamkinly';
+    ? 'الشفرة البديلة  | تمكينلي — عد إلى مركزك'
+    : 'The Alternative Code  | Tamkinly — Return to Your Center';
   const description = isAr
     ? 'حوّل اسماً مؤلماً إلى شفرة لعالم جديد. بروتوكول إيحائي للاستبدال العصبي — 5 خطوات في 15 دقيقة.'
     : 'Transform a painful name into a code for a new world. Guided neural substitution protocol — 5 steps in 15 minutes.';

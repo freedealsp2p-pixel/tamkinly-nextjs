@@ -13,8 +13,8 @@ async function getLocale(): Promise<'en' | 'ar'> {
 }
 
 const metadataByLocale = {
-  en: { title: "Trauma Journal | Tamkinly", description: "A safe and structured writing tool for processing traumatic experiences." },
-  ar: { title: "\u064a\u0648\u0645\u064a\u0627\u062a \u0627\u0644\u062a\u0639\u0627\u0641\u064a | Tamkinly", description: "أداة كتابية آمنة ومنظمة لمعالجة التجارب الصادمة: اكتب بما تشعر بحرية، ورتّب أفكارك بأسئلة موجّهة، وراقب مسار تعافيك عبر الزمن." },
+  en: { title: "Trauma Journal  | Tamkinly — Return to Your Center", description: "A safe and structured writing tool for processing traumatic experiences." },
+  ar: { title: "\u064a\u0648\u0645\u064a\u0627\u062a \u0627\u0644\u062a\u0639\u0627\u0641\u064a  | تمكينلي — عد إلى مركزك", description: "أداة كتابية آمنة ومنظمة لمعالجة التجارب الصادمة: اكتب بما تشعر بحرية، ورتّب أفكارك بأسئلة موجّهة، وراقب مسار تعافيك عبر الزمن." },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

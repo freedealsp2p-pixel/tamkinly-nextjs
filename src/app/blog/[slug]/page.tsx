@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
       const baseUrl = isAr ? `https://tamkinly.com/ar/blog/${slug}` : `https://tamkinly.com/blog/${slug}`;
       const otherUrl = isAr ? `https://tamkinly.com/blog/${slug}` : `https://tamkinly.com/ar/blog/${slug}`;
       return {
-        title: smartPageTitle(title, ' | Tamkinly'),
+        title: smartPageTitle(title, isAr ? ' | تمكينلي — عد إلى مركزك' : ' | Tamkinly — Return to Your Center'),
         description: desc,
         alternates: {
           canonical: baseUrl,

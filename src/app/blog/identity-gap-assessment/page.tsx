@@ -37,7 +37,7 @@ export default function IdentityGapAssessmentArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Tamkinly Team", "فريق تمكنلي")}
+                {getText("Tamkinly Team", "فريق تمكينلي")}
               </span>
             </div>
           </div>
@@ -314,7 +314,7 @@ export default function IdentityGapAssessmentArticle() {
             <p className="text-slate-600 leading-relaxed mb-6">
               {getText(
                 "The assessment is part of Tamkinly's FREE tier—our commitment to making evidence-based identity transformation accessible to everyone. Because everyone deserves the clarity that comes from understanding where they are and where they're headed.",
-                "التقييم جزء من المستوى المجاني من تمكنلي—التزامنا بجعل تحول الهوية المبني على الأدلة متاحاً للجميع. لأن الجميع يستحقون الوضوح الذي يأتي من فهم أين هم وإلى أين يتجهون."
+                "التقييم جزء من المستوى المجاني من تمكينلي—التزامنا بجعل تحول الهوية المبني على الأدلة متاحاً للجميع. لأن الجميع يستحقون الوضوح الذي يأتي من فهم أين هم وإلى أين يتجهون."
               )}
             </p>
 

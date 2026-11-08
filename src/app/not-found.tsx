@@ -4,7 +4,7 @@ import { Home, Search } from 'lucide-react';
 import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
-  title: 'Page Not Found | Tamkinly',
+  title: 'Page Not Found  | Tamkinly — Return to Your Center',
   robots: { index: false, follow: false },
 };
 

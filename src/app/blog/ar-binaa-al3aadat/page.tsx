@@ -288,7 +288,7 @@ function BinaaAl3aadatArticleAR() {
             </p>
 
             <p className="text-slate-600 leading-relaxed mb-6">
-              هذا هو السر وراء <Link href="/methodology" className="text-accent hover:underline">منهجية تمكنلي</Link>: لا نعتمد على الحماس والإرادة، بل نبني هوية قوية تتحمل غياب كليهما. عندما تصبح العادة تعبيراً عن من أنت، لا تحتاج إلى حماس للاستمرار — كما لا تحتاج إلى حماس للتنفس.
+              هذا هو السر وراء <Link href="/methodology" className="text-accent hover:underline">منهجية تمكينلي</Link>: لا نعتمد على الحماس والإرادة، بل نبني هوية قوية تتحمل غياب كليهما. عندما تصبح العادة تعبيراً عن من أنت، لا تحتاج إلى حماس للاستمرار — كما لا تحتاج إلى حماس للتنفس.
             </p>
 
             <div className="flex items-center gap-2 text-accent mt-12 mb-8">

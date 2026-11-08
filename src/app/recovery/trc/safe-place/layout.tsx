@@ -13,8 +13,8 @@ async function getLocale(): Promise<'en' | 'ar'> {
 }
 
 const metadataByLocale = {
-  en: { title: "Safe Place Exercise | Tamkinly", description: "A guided imagery exercise for building a mental safe place." },
-  ar: { title: "\u062a\u0645\u0631\u064a\u0646 \u0627\u0644\u0645\u0643\u0627\u0646 \u0627\u0644\u0622\u0645\u0646 | Tamkinly", description: "تمرين تخيلي موجّه لبناء مكان آمن ذهني تلجأ إليه وقت الضيق — تخيّل تفاصيله بإرشادات واضحة، واثبت فيه كلما احتجت إلى سكينة وطمأنينة." },
+  en: { title: "Safe Place Exercise  | Tamkinly — Return to Your Center", description: "A guided imagery exercise for building a mental safe place." },
+  ar: { title: "\u062a\u0645\u0631\u064a\u0646 \u0627\u0644\u0645\u0643\u0627\u0646 \u0627\u0644\u0622\u0645\u0646  | تمكينلي — عد إلى مركزك", description: "تمرين تخيلي موجّه لبناء مكان آمن ذهني تلجأ إليه وقت الضيق — تخيّل تفاصيله بإرشادات واضحة، واثبت فيه كلما احتجت إلى سكينة وطمأنينة." },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

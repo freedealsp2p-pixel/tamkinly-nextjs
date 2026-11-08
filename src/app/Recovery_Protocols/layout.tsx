@@ -4,7 +4,7 @@ import { getLocale } from '@/lib/get-locale';
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
-  const title = isAr ? 'بروتوكولات التعافي | تمكينلي' : 'Recovery Protocols | Tamkinly';
+  const title = isAr ? 'بروتوكولات التعافي | تمكينلي' : 'Recovery Protocols  | Tamkinly — Return to Your Center';
   const description = isAr
     ? 'بروتوكولات تعافٍ موجّهة مبنية على علم النفس: فصل زمني، الشفرة البديلة، والمرآة البيضاء — أدوات عملية للتنظيم العاطفي والتخلص من السلوك القهري.'
     : 'Guided recovery protocols grounded in psychology: Temporal Decoupling, The Alternative Code, and The White Mirror — tools for emotional regulation.';

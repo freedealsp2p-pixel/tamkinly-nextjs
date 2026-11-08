@@ -103,14 +103,14 @@ export function getWelcomeEmailHtml(name: string, locale: 'en' | 'ar' = 'en'): s
 
   const body = `
     <div class="header">
-      <h1>${isAr ? 'مرحباً بك في تمكنلي! 🎯' : 'Welcome to Tamkinly! 🎯'}</h1>
+      <h1>${isAr ? 'مرحباً بك في تمكينلي! 🎯' : 'Welcome to Tamkinly! 🎯'}</h1>
       <p class="subtitle">${isAr ? 'رحلة التحول تبدأ الآن' : 'Your transformation journey starts now'}</p>
     </div>
     <div class="content">
       <h2>${isAr ? 'شكراً لاشتراكك!' : "You're In! Thank You for Subscribing"}</h2>
       <p>${isAr ? `عزيزي/عزيزتي ${name}،` : `Dear ${name},`}</p>
       <p>${isAr
-        ? 'مرحباً بك في مجتمع تمكنلي! لقد اتخذت الخطوة الأولى نحو تحويل هويتك وتحقيق أهدافك.'
+        ? 'مرحباً بك في مجتمع تمكينلي! لقد اتخذت الخطوة الأولى نحو تحويل هويتك وتحقيق أهدافك.'
         : "Welcome to the Tamkinly community! You've just taken the first step toward transforming your identity and achieving your goals."
       }</p>
       <p>${isAr ? 'كمشترك، ستتلقى:' : 'As a subscriber, you\'ll receive:'}</p>
@@ -183,7 +183,7 @@ export function getPurchaseConfirmationHtml(
       <h2>${isAr ? `تم تأكيد طلبك: ${productName}` : `Your Order is Confirmed: ${productName}`}</h2>
       <p>${isAr ? `عزيزي/عزيزتي ${name}،` : `Dear ${name},`}</p>
       <p>${isAr
-        ? 'شكراً لاختيارك تمكنلي! منتجك جاهز ويمكنك الوصول إليه الآن.'
+        ? 'شكراً لاختيارك تمكينلي! منتجك جاهز ويمكنك الوصول إليه الآن.'
         : 'Thank you for choosing Tamkinly! Your product is ready and you can access it now.'
       }</p>
 
@@ -277,7 +277,7 @@ export function getDay3FollowUpHtml(name: string, locale: 'en' | 'ar' = 'en'): s
     <div class="content">
       <h2>${isAr ? `${name}، أنت في اليوم الثالث!` : `${name}, You're on Day 3!`}</h2>
       <p>${isAr
-        ? 'مرت ثلاثة أيام منذ بدأت رحلتك مع تمكنلي. هذا هو الوقت الذي يبدأ فيه الكثيرون يشعرون بأولى علامات التغيير.'
+        ? 'مرت ثلاثة أيام منذ بدأت رحلتك مع تمكينلي. هذا هو الوقت الذي يبدأ فيه الكثيرون يشعرون بأولى علامات التغيير.'
         : "It's been three days since you started your Tamkinly journey. This is when many people start feeling the first signs of change."
       }</p>
 
@@ -356,7 +356,7 @@ export function getDay7FollowUpHtml(name: string, locale: 'en' | 'ar' = 'en'): s
       <ul>
         <li>${isAr ? 'أكمل تقييم الأسبوع الأول في التطبيق' : 'Complete the Week 1 assessment in the app'}</li>
         <li>${isAr ? 'حدد هدفاً واحداً للأسبوع القادم' : 'Set one goal for next week'}</li>
-        <li>${isAr ? 'شارك رؤيتك مع مجتمع تمكنلي' : 'Share your insights with the Tamkinly community'}</li>
+        <li>${isAr ? 'شارك رؤيتك مع مجتمع تمكينلي' : 'Share your insights with the Tamkinly community'}</li>
       </ul>
 
       <p style="text-align: center;">
@@ -421,7 +421,7 @@ export function getDay14FollowUpHtml(name: string, currentTier: string = 'basic'
       </p>
 
       <p>${isAr
-        ? 'ملاحظة: هذا العرض الحصري متاح فقط لمشتركي تمكنلي النشطين.'
+        ? 'ملاحظة: هذا العرض الحصري متاح فقط لمشتركي تمكينلي النشطين.'
         : 'Note: This exclusive offer is only available to active Tamkinly subscribers.'
       }</p>
     </div>
@@ -558,7 +558,7 @@ export function getQuizResultsHtml(
 
   const insightsHtml = insights.length > 0
     ? insights.map(i => `<li>${i}</li>`).join('')
-    : `<li>${isAr ? 'استمر في استخدام أدوات تمكنلي لتطوير نقاط قوتك' : 'Keep using Tamkinly tools to develop your strengths'}</li>`;
+    : `<li>${isAr ? 'استمر في استخدام أدوات تمكينلي لتطوير نقاط قوتك' : 'Keep using Tamkinly tools to develop your strengths'}</li>`;
 
   const body = `
     <div class="header">
@@ -693,7 +693,7 @@ export function getIdentityMilestoneHtml(
         <h3>${isAr ? '🏆 ما التالي؟' : '🏆 What\'s Next?'}</h3>
         <ul>
           <li>${isAr ? 'أعد التقييم لقياس تحولك' : 'Re-take assessments to measure your transformation'}</li>
-          <li>${isAr ? 'شارك قصتك مع مجتمع تمكنلي' : 'Share your story with the Tamkinly community'}</li>
+          <li>${isAr ? 'شارك قصتك مع مجتمع تمكينلي' : 'Share your story with the Tamkinly community'}</li>
           <li>${isAr ? 'ارتقِ للحصول على أدوات متقدمة مستمرة' : 'Upgrade for continued advanced tools'}</li>
         </ul>
       </div>

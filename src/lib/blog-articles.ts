@@ -1082,7 +1082,7 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
   
   if (!article) {
     return {
-      title: isAr ? 'المقال غير موجود | تمكنلي' : 'Article Not Found | Tamkinly Blog',
+      title: isAr ? 'المقال غير موجود | تمكينلي' : 'Article Not Found | Tamkinly Blog',
       description: isAr ? 'المقال المطلوب غير متاح حالياً.' : 'The requested article could not be found.',
     };
   }
@@ -1090,7 +1090,7 @@ export function generateBlogArticleMetadata(slug: string, locale: string = 'en')
   // Locale-aware bilingual metadata: serve Arabic title/description on /ar/* paths
   const title = isAr ? (article.titleAr || article.title) : article.title;
   const description = isAr ? (article.descriptionAr || article.description) : article.description;
-  const suffix = isAr ? ' | تمكنلي' : ' | Tamkinly';
+  const suffix = isAr ? ' | تمكينلي — عد إلى مركزك' : ' | Tamkinly — Return to Your Center';
   
   const enUrl = `https://tamkinly.com/blog/${article.slug}`;
   const arUrl = `https://tamkinly.com/ar/blog/${article.slug}`;
@@ -1205,7 +1205,7 @@ export const BLOG_CATEGORIES: BlogCategory[] = [
     slug: 'recovery',
     name: 'Recovery',
     description: 'Free, science-based recovery education: the compulsion cycle, urge surfing, relapse prevention, trauma recovery stages, and nervous-system regulation — companion guides to Tamkinly\'s free recovery journeys.',
-    descriptionAr: 'تثقيف مجاني مبني على العلم للتعافي: دورة الإدمان، ركوب الموجة، الوقاية من الانتكاس، مراحل التعافي من الصدمات وتنظيم الجهاز العصبي — أدلة مرافقة لرحلات التعافي المجانية في تمكنلي.',
+    descriptionAr: 'تثقيف مجاني مبني على العلم للتعافي: دورة الإدمان، ركوب الموجة، الوقاية من الانتكاس، مراحل التعافي من الصدمات وتنظيم الجهاز العصبي — أدلة مرافقة لرحلات التعافي المجانية في تمكينلي.',
     subCategories: ['Recovery'],
     icon: 'Shield',
     color: 'from-[#1F6F78] to-[#3DD4B0]',
@@ -1214,7 +1214,7 @@ export const BLOG_CATEGORIES: BlogCategory[] = [
     slug: 'app-guides',
     name: 'App Guides',
     description: 'Comprehensive guides for Tamkinly\'s identity transformation tools. Learn how to use each app effectively for maximum personal growth.',
-    descriptionAr: 'أدلة شاملة لأدوات تحويل الهوية في تمكنلي. تعلم كيفية استخدام كل تطبيق بفعالية لأقصى نمو شخصي.',
+    descriptionAr: 'أدلة شاملة لأدوات تحويل الهوية في تمكينلي. تعلم كيفية استخدام كل تطبيق بفعالية لأقصى نمو شخصي.',
     subCategories: ['FREE App', 'BASIC App', 'MASTERY App'],
     icon: 'Smartphone',
     color: 'from-emerald-500 to-teal-600',

@@ -424,7 +424,7 @@ function buildDigestHtml(s: Record<string, unknown>): string {
   return `<div dir="rtl" style="font-family:'Segoe UI',Tahoma,sans-serif;max-width:640px;margin:0 auto;background:#F6F8FA;padding:20px;">
   <div style="background:linear-gradient(135deg,#0F1C2E,#1F6F78);border-radius:16px;padding:28px;text-align:center;">
     <h1 style="color:#3DD4B0;margin:0 0 6px;">تقرير السرب اليومي</h1>
-    <p style="color:#ffffff;margin:0;font-size:14px;">تمكنلي — ${esc(String(s.generatedAt).slice(0, 16).replace('T', ' '))} UTC</p>
+    <p style="color:#ffffff;margin:0;font-size:14px;">تمكينلي — ${esc(String(s.generatedAt).slice(0, 16).replace('T', ' '))} UTC</p>
   </div>
   <div style="background:white;border-radius:12px;padding:20px;margin-top:16px;">
     <h2 style="color:#0F1C2E;font-size:16px;margin:0 0 8px;">العملاء والنشاط</h2>
@@ -457,7 +457,7 @@ function buildDigestHtml(s: Record<string, unknown>): string {
     ${warnings.length ? `<div style="background:#F8EEEF;border-right:4px solid #B88A8E;border-radius:8px;padding:12px 16px;margin-top:14px;"><strong style="color:#B04A4A;">تنبيهات:</strong><ul style="margin:6px 0 0;padding-right:18px;color:#0F1C2E;font-size:13px;">${warnings.map((w) => `<li>${esc(w)}</li>`).join('')}</ul></div>` : ''}
     <p style="text-align:center;margin:18px 0 0;"><a href="https://tamkinly.com/admin" style="color:#1F6F78;font-weight:700;">لوحة التحكم</a> • <a href="https://hermes-swarm-ai.tamkinly.com/api/agent/ops?view=summary" style="color:#1F6F78;font-weight:700;">واجهة السرب</a></p>
   </div>
-  <p style="text-align:center;color:#8A94A6;font-size:12px;">أُرسل آلياً بواسطة سرب هرمز — تمكنلي</p>
+  <p style="text-align:center;color:#8A94A6;font-size:12px;">أُرسل آلياً بواسطة سرب هرمز — تمكينلي</p>
 </div>`;
 }
 
@@ -466,7 +466,7 @@ async function sendDigest(): Promise<{ success: boolean; sentTo?: string; error?
   const to = process.env.DIGEST_EMAIL || 'admin@tamkinly.com';
   const result = await sendEmail({
     to,
-    subject: 'تمكنلي — تقرير السرب اليومي',
+    subject: 'تمكينلي — تقرير السرب اليومي',
     htmlContent: buildDigestHtml(summary),
     tags: ['swarm-digest'],
   });

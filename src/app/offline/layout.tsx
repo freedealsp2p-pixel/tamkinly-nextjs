@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Offline | Tamkinly',
+  title: 'Offline  | Tamkinly — Return to Your Center',
   robots: {
     index: false,
     follow: false,

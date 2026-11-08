@@ -56,7 +56,7 @@ export default function BecomingExceptionalArticle() {
               </span>
               <span className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {getText("Tamkinly Team", "فريق تمكنلي")}
+                {getText("Tamkinly Team", "فريق تمكينلي")}
               </span>
             </div>
           </div>

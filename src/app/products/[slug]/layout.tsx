@@ -85,7 +85,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const arUrl = `https://tamkinly.com/ar/products/${slug}`;
 
   return {
-    title: `${product.name} | Tamkinly`,
+    title: isAr ? `${product.nameAr || product.name} | تمكينلي — عد إلى مركزك` : `${product.name} | Tamkinly — Return to Your Center`,
     description: product.description,
     keywords: product.keywords,
 
