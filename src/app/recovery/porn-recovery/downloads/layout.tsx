@@ -4,7 +4,7 @@ import { getLocale } from '@/lib/get-locale';
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const isAr = locale === 'ar';
-  const title = isAr ? 'تحميلات التعافي | تمكينلي' : 'Recovery Downloads | Tamkinly';
+  const title = isAr ? 'تحميلات التعافي  | تمكينلي — عد إلى مركزك' : 'Recovery Downloads  | Tamkinly — Return to Your Center';
   const description = isAr
     ? 'حمّل أوراق العمل وأدوات التعافي: خرائط المحفزات، خطة السلامة، وممارسات يومية لدعم رحلة تعافيك.'
     : 'Download recovery worksheets and tools: trigger mapping, safety plan, and daily practices to support your recovery journey.';

@@ -11,8 +11,8 @@ async function getLocale(): Promise<'en' | 'ar'> {
 }
 
 const metadataByLocale = {
-  en: { title: 'Recovery Journey | Tamkinly', description: 'Track your progress through the porn recovery journey.' },
-  ar: { title: 'رحلة التعافي | Tamkinly', description: 'تتبّع تقدّمك عبر رحلة التعافي: سجّل أيامك النظيفة، ولاحظ مثيراتك ومحفزات الانتكاس، وشاهد كيف تتقوّى عزيمتك يوماً بعد يوم.' },
+  en: { title: 'Recovery Journey  | Tamkinly — Return to Your Center', description: 'Track your progress through the porn recovery journey.' },
+  ar: { title: 'رحلة التعافي  | تمكينلي — عد إلى مركزك', description: 'تتبّع تقدّمك عبر رحلة التعافي: سجّل أيامك النظيفة، ولاحظ مثيراتك ومحفزات الانتكاس، وشاهد كيف تتقوّى عزيمتك يوماً بعد يوم.' },
 };
 
 export async function generateMetadata(): Promise<Metadata> {

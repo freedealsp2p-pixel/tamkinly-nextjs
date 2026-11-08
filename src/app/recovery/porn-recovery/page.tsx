@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const isAr = locale === 'ar';
   const basePath = isAr ? 'https://tamkinly.com/ar/recovery/porn-recovery' : 'https://tamkinly.com/recovery/porn-recovery';
   return {
-    title: isAr ? 'رحلة التعافي | تمكينلي' : 'Recovery Journey | Tamkinly',
+    title: isAr ? 'رحلة التعافي  | تمكينلي — عد إلى مركزك' : 'Recovery Journey  | Tamkinly — Return to Your Center',
     description: isAr
       ? 'رحلة تعافي مجانية مبنية على الأدلة. افهم حلقة السلوك القهري، وابنِ أدوات عملية (HALT، سجل المحفزات، خطة الطوارئ)، وكن من تريد أن تكون — بدون لوم ذات.'
       : 'A free, evidence-based recovery journey. Understand the behavioral loop, build practical tools (HALT, Trigger Journal, Emergency Plan) — without self-blame.',
