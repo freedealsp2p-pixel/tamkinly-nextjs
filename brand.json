@@ -1,0 +1,161 @@
+{
+  "_meta": {
+    "name": "Tamkinly brand.json — machine-readable source of truth v1.0",
+    "approved_by": "Founder, 2026-11-08 (approval of all tokens + 3 adjustments)",
+    "maintained_by": "AUD-1 (Super Z)",
+    "companion_doc": "BRAND_IDENTITY.md",
+    "usage": "Source for automated brand gates (step 5): colors, typography, tagline, spelling, message layers."
+  },
+  "identity": {
+    "name_latin": "Tamkinly",
+    "name_arabic": "تمكينلي",
+    "coined": true,
+    "coining_reason": "The previous name was lost/confused within the industry that preceded it — coined fresh 2026-11-08 by the founder.",
+    "forbidden_spellings": [
+      "Tamkeenly",
+      "Tamkinli",
+      "تامكينلي"
+    ]
+  },
+  "message_layers": {
+    "tagline": {
+      "en": "Return to Your Center",
+      "ar": "عد إلى مركزك",
+      "rule": "Layer 1 — fixed in every live page title (EN + AR)."
+    },
+    "why_sentence": {
+      "en": "Consciously build the person you choose to become.",
+      "ar": "ابنِ بوعيٍ كامل الشخص الذي تختار أن تصبحه.",
+      "rule": "Layer 2 — About page + founder posts. Complementary, never a replacement for the tagline."
+    },
+    "retired": {
+      "tagline_old": "Empowerment Through Refined Choices",
+      "retired_on": "2026-11-08"
+    }
+  },
+  "framework": {
+    "model": "WHY -> HOW -> WHAT (brand philosophy for marketing)",
+    "ownership": {
+      "superz": [
+        "reels",
+        "voice",
+        "visual"
+      ],
+      "hermes": [
+        "swarm",
+        "content",
+        "marketing",
+        "task board"
+      ]
+    }
+  },
+  "color": {
+    "core": {
+      "ink_navy": {
+        "hex": "#0F1C2E",
+        "role": "primary dark / text / dark backgrounds (dominant)"
+      },
+      "teal_deep": {
+        "hex": "#1F6F78",
+        "role": "brand-primary"
+      },
+      "teal_mid": {
+        "hex": "#2A8A94",
+        "role": "brand-secondary"
+      },
+      "mint_accent": {
+        "hex": "#3DD4B0",
+        "role": "accent / CTA"
+      },
+      "mint_light": {
+        "hex": "#7AEEE0",
+        "role": "accent-light / gradients"
+      }
+    },
+    "warm_accent": {
+      "terracotta_soft": {
+        "hex": "#C97B7B",
+        "role": "warm touch ONLY — explicitly NOT a warning color (founder decision 2026-11-08)"
+      },
+      "coral_wash": {
+        "hex": "#E8685A",
+        "role": "rgba(232,104,90) warm washes at 0.3-0.5 opacity"
+      }
+    },
+    "semantic": {
+      "rule": "Distinct from warm accents. Values as implemented in globals.css (commit 93c4da6).",
+      "success": {
+        "hex": "#3DD4B0"
+      },
+      "warning": {
+        "hex": "#B45309"
+      },
+      "info": {
+        "hex": "#2E6FA3"
+      },
+      "danger": {
+        "hex": "#B3402F"
+      }
+    },
+    "neutrals": {
+      "neutral_gray": {
+        "hex": "#666666",
+        "role": "text-secondary"
+      },
+      "slate_muted": {
+        "hex": "#8A94A6",
+        "role": "captions / borders"
+      },
+      "surface_offwhite": {
+        "hex": "#F6F8FA",
+        "role": "surface"
+      },
+      "surface_mist": {
+        "hex": "#F1F3F6",
+        "role": "surface-alt"
+      }
+    },
+    "dark_mode": {
+      "status": "documented_only",
+      "application": "deferred to a standalone release after a full review — especially TRC therapy pages (founder decision 2026-11-08)"
+    }
+  },
+  "typography": {
+    "arabic_sans": {
+      "family": "IBM Plex Sans Arabic",
+      "status": "official Arabic brand font — approved by founder 2026-11-08"
+    },
+    "latin_sans": {
+      "family": "Inter",
+      "role": "body EN"
+    },
+    "latin_serif": {
+      "family": "Playfair Display",
+      "role": "celebratory headings only"
+    },
+    "latin_mono": {
+      "family": "Geist Mono",
+      "role": "numbers / tags"
+    },
+    "base_font_size_px": 18,
+    "base_note": "18px root = founder-approved therapeutic reading scale (scales the whole rem-based system).",
+    "tech_note": "var(--font-arabic) is referenced in globals.css but not yet loaded — load IBM Plex Sans Arabic in the next typography pass."
+  },
+  "layout": {
+    "spacing_system_px": 8,
+    "touch_target_min_px": 44
+  },
+  "products_family": {
+    "scope": "Full family — never describe the brand as only 3 protocol pages.",
+    "items": [
+      "planners",
+      "apps (identity change)",
+      "practical recovery exercises",
+      "paid recovery protocols"
+    ]
+  },
+  "accounts_source": {
+    "file": "data/accounts.json",
+    "rule": "Every @handle used in published content MUST exist there. Banned: @tamkinlyhq."
+  }
+}

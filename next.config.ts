@@ -93,6 +93,9 @@ const nextConfig: NextConfig = {
           { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'geolocation=(), microphone=(), camera=(), payment=()' },
+          // [P2 2026-11-08, AUD-1] Isolates the browsing context group.
+          // Popup-payment safe: checkout/payment contain no popup flows (verified 2026-11-08).
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
           // HSTS: 1 year + preload
           { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains; preload' },
         ],

@@ -1,7 +1,7 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect, useCallback, Suspense } from 'react';
+import { useEffect, useCallback, useState, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import {
   GA_MEASUREMENT_ID,
@@ -20,7 +20,36 @@ import {
  * Privacy-first approach
  */
 
+/**
+ * P2 hardening (AUD-1, 2026-11-08): defer heavy UX analytics — Contentsquare
+ * and Hotjar — until the first user interaction (pointerdown / keydown /
+ * touchstart / scroll / wheel) or an 8-second idle fallback, whichever comes
+ * first. The consent gate above still applies first; this only postpones the
+ * network load so hydration and INP stay clean. Real-user tracking unaffected.
+ */
+function useAfterFirstInteraction(): boolean {
+  const [interacted, setInteracted] = useState(false);
+  useEffect(() => {
+    if (interacted) return;
+    const EVENTS = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'wheel'];
+    let timer = 0;
+    const onFirst = () => {
+      EVENTS.forEach((e) => window.removeEventListener(e, onFirst, { capture: true }));
+      clearTimeout(timer);
+      setInteracted(true);
+    };
+    EVENTS.forEach((e) => window.addEventListener(e, onFirst, { capture: true, passive: true }));
+    timer = window.setTimeout(onFirst, 8000);
+    return () => {
+      EVENTS.forEach((e) => window.removeEventListener(e, onFirst, { capture: true }));
+      clearTimeout(timer);
+    };
+  }, [interacted]);
+  return interacted;
+}
+
 function AnalyticsInner() {
+  const interacted = useAfterFirstInteraction();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -78,7 +107,8 @@ function AnalyticsInner() {
     );
   }
 
-  // After consent: load GA4 + GT + Contentsquare + Hotjar
+  // After consent: GA4 + GT load immediately; Contentsquare + Hotjar
+  // additionally wait for first user interaction (P2 hardening, 2026-11-08)
   const gtagLoaderId = GOOGLE_TAG_ID || GA_MEASUREMENT_ID;
 
   return (
@@ -116,7 +146,7 @@ function AnalyticsInner() {
       />
 
       {/* ===== Contentsquare UX Analytics ===== */}
-      {CONTENTSQUARE_ID && (
+      {interacted && CONTENTSQUARE_ID && (
         <Script
           id="contentsquare-init"
           strategy="afterInteractive"
@@ -125,7 +155,7 @@ function AnalyticsInner() {
       )}
 
       {/* ===== Hotjar Heatmaps & Recordings ===== */}
-      {HOTJAR_ID && (
+      {interacted && HOTJAR_ID && (
         <Script
           id="hotjar-init"
           strategy="afterInteractive"
