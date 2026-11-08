@@ -1,0 +1,30 @@
+<!-- Tamkinly image template — video-thumb-1280x720.svg (YouTube / reels cover)
+     Grid: 8px | Safe: 72px | brand.json v1.0
+     Title <= 2 lines at 64px. Duration chip: Geist Mono. Terracotta: corner dot only. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <radialGradient id="vg" cx="75%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#1F6F78" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#0F1C2E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#0F1C2E"/>
+  <rect width="1280" height="720" fill="url(#vg)"/>
+
+  <!-- duration chip -->
+  <rect x="1208" y="72" width="120" height="48" rx="24" fill="#3DD4B0" fill-opacity="0.18"/>
+  <text x="1268" y="104" font-family="Geist Mono, monospace" font-size="24" fill="#3DD4B0" text-anchor="end">0:60</text>
+
+  <!-- TITLE (<= 2 lines, 64px/1.25, weight 700) -->
+  <text x="72" y="264" font-family="IBM Plex Sans Arabic, Inter" font-size="64" font-weight="700" fill="#F6F8FA" direction="rtl">عنوان الفيديو — سطر أول</text>
+  <text x="72" y="352" font-family="IBM Plex Sans Arabic, Inter" font-size="64" font-weight="700" fill="#F6F8FA" direction="rtl">سطر ثانٍ إن لزم</text>
+
+  <!-- warm accent dot (terracotta touch) -->
+  <circle cx="88" cy="416" r="12" fill="#C97B7B"/>
+  <text x="120" y="428" font-family="IBM Plex Sans Arabic, Inter" font-size="28" font-weight="500" fill="#F6F8FA" direction="rtl">وعد واحد واضح من الفيديو</text>
+
+  <!-- footer strip -->
+  <rect x="72" y="600" width="1136" height="4" fill="#1F6F78"/>
+  <text x="72" y="648" font-family="Inter" font-size="20" font-weight="600" fill="#3DD4B0" letter-spacing="2">RETURN TO YOUR CENTER</text>
+  <text x="1208" y="648" font-family="Inter" font-size="20" fill="#8A94A6" text-anchor="end">@tamkinly</text>
+</svg>

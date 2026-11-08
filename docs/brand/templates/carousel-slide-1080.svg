@@ -1,0 +1,38 @@
+<!-- Tamkinly image template — carousel-slide-1080.svg (content slides 2..N-1)
+     Grid: 8px | Safe: 72px | brand.json v1.0
+     One idea per slide. Body <= 5 lines. Progress dots: mint, current = solid. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <rect width="1080" height="1080" fill="#0F1C2E"/>
+  <!-- faint teal edge line (brand geometry) -->
+  <rect x="0" y="0" width="8" height="1080" fill="#1F6F78"/>
+
+  <!-- kicker (24px, teal_mid) -->
+  <text x="72" y="168" font-family="IBM Plex Sans Arabic, Inter" font-size="24" font-weight="600" fill="#2A8A94" direction="rtl">الكِكّر — فكرة الشريحة</text>
+
+  <!-- BODY (36px/1.5, weight 500) -->
+  <text x="72" y="272" font-family="IBM Plex Sans Arabic, Inter" font-size="36" font-weight="500" fill="#F6F8FA" direction="rtl">النص الأساسي يُكتب هنا — الفكرة الواحدة</text>
+  <text x="72" y="328" font-family="IBM Plex Sans Arabic, Inter" font-size="36" font-weight="500" fill="#F6F8FA" direction="rtl">التي تحملها الشريحة، حتى خمسة أسطر</text>
+  <text x="72" y="384" font-family="IBM Plex Sans Arabic, Inter" font-size="36" font-weight="500" fill="#F6F8FA" direction="rtl">كحد أقصى مع فراغ تنفس 8px</text>
+
+  <!-- optional stat block (Geist Mono number + label) -->
+  <text x="72" y="560" font-family="Geist Mono, monospace" font-size="64" font-weight="700" fill="#3DD4B0">00%</text>
+  <text x="72" y="608" font-family="IBM Plex Sans Arabic, Inter" font-size="24" fill="#8A94A6" direction="rtl">وسم الإحصائية مع مصدرها المتحقق (C2)</text>
+
+  <!-- progress dots (slide 3 of 10 example) -->
+  <g fill="#2A8A94">
+    <circle cx="72"  cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="96"  cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="120" cy="872" r="6"/>
+    <circle cx="144" cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="168" cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="192" cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="216" cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="240" cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="264" cy="872" r="6" fill-opacity="0.35"/>
+    <circle cx="288" cy="872" r="6" fill-opacity="0.35"/>
+  </g>
+
+  <!-- footer -->
+  <text x="72" y="952" font-family="Inter" font-size="20" font-weight="600" fill="#3DD4B0" letter-spacing="2">RETURN TO YOUR CENTER</text>
+  <text x="1008" y="952" font-family="Inter" font-size="20" fill="#8A94A6" text-anchor="end">@tamkinly</text>
+</svg>

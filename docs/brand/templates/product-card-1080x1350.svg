@@ -1,0 +1,38 @@
+<!-- Tamkinly image template — product-card-1080x1350.svg (IG portrait / products family)
+     Grid: 8px | Safe: 72px | brand.json v1.0 | family: planners / apps / exercises / protocols
+     Price chip: mint. Terracotta: thin warm divider ONLY. No warning semantics here. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#16324a"/>
+      <stop offset="100%" stop-color="#0F1C2E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1350" fill="url(#pbg)"/>
+
+  <!-- product cover placeholder: swap with /images/products/covers/*.webp export -->
+  <rect x="72" y="72" width="936" height="640" rx="32" fill="#F6F8FA"/>
+  <text x="540" y="408" font-family="IBM Plex Sans Arabic, Inter" font-size="32" fill="#666666" text-anchor="middle">صورة غلاف المنتج — 936×640</text>
+
+  <!-- product name (AR first, EN under) -->
+  <text x="72" y="800" font-family="IBM Plex Sans Arabic, Inter" font-size="56" font-weight="700" fill="#F6F8FA" direction="rtl">اسم المنتج من العائلة</text>
+  <text x="72" y="856" font-family="Inter" font-size="28" fill="#8A94A6">Product Name (EN)</text>
+
+  <!-- warm divider (terracotta touch) -->
+  <rect x="72" y="904" width="120" height="8" rx="4" fill="#C97B7B"/>
+
+  <!-- benefit line (one sentence) -->
+  <text x="72" y="976" font-family="IBM Plex Sans Arabic, Inter" font-size="30" font-weight="500" fill="#F6F8FA" direction="rtl">سطر فائدة واحد يلخص العائد — بدون مبالغة</text>
+
+  <!-- price chip (mint) + payment model -->
+  <rect x="72" y="1024" width="352" height="64" rx="32" fill="#3DD4B0"/>
+  <text x="248" y="1066" font-family="Geist Mono, monospace" font-size="28" font-weight="700" fill="#0F1C2E" text-anchor="middle">$9.99 ONCE</text>
+
+  <!-- CTA bar -->
+  <rect x="72" y="1136" width="936" height="88" rx="16" fill="#1F6F78"/>
+  <text x="540" y="1192" font-family="IBM Plex Sans Arabic, Inter" font-size="32" font-weight="700" fill="#F6F8FA" text-anchor="middle">افتح الآن — دفعة واحدة بلا اشتراك</text>
+
+  <!-- footer -->
+  <text x="72" y="1280" font-family="Inter" font-size="20" font-weight="600" fill="#3DD4B0" letter-spacing="2">RETURN TO YOUR CENTER</text>
+  <text x="1008" y="1280" font-family="Inter" font-size="20" fill="#8A94A6" text-anchor="end">@tamkinly</text>
+</svg>

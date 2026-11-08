@@ -1,0 +1,35 @@
+<!-- Tamkinly image template — carousel-cover-1080.svg (slide 1/N)
+     Grid: 8px | Safe: 72px | brand.json v1.0
+     AR: IBM Plex Sans Arabic | EN: Inter | Geist Mono for slide counter -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16324a"/>
+      <stop offset="55%" stop-color="#0F1C2E"/>
+      <stop offset="100%" stop-color="#0F1C2E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+
+  <!-- kicker chip (mint accent on CTA-level elements only) -->
+  <rect x="72" y="96" width="272" height="56" rx="28" fill="#3DD4B0" fill-opacity="0.16"/>
+  <text x="104" y="132" font-family="IBM Plex Sans Arabic, Inter" font-size="24" font-weight="600" fill="#3DD4B0">عنقود الموضوع — Cluster</text>
+
+  <!-- HEADLINE (<= 3 lines, 72px/1.25, weight 700) -->
+  <text x="72" y="368" font-family="IBM Plex Sans Arabic, Inter" font-size="72" font-weight="700" fill="#F6F8FA" direction="rtl">عنوان الغلاف</text>
+  <text x="72" y="460" font-family="IBM Plex Sans Arabic, Inter" font-size="72" font-weight="700" fill="#F6F8FA" direction="rtl">بثلاثة أسطر كحد</text>
+  <text x="72" y="552" font-family="IBM Plex Sans Arabic, Inter" font-size="72" font-weight="700" fill="#F6F8FA" direction="rtl">أقصى</text>
+
+  <!-- subtitle -->
+  <text x="72" y="640" font-family="IBM Plex Sans Arabic, Inter" font-size="28" fill="#8A94A6" direction="rtl">سطر توضيحي واحد تحت العنوان</text>
+
+  <!-- warm accent underline (terracotta touch) -->
+  <rect x="72" y="688" width="160" height="8" rx="4" fill="#C97B7B"/>
+
+  <!-- slide counter (Geist Mono) -->
+  <text x="1008" y="136" font-family="Geist Mono, monospace" font-size="24" fill="#2A8A94" text-anchor="end">1 / 10</text>
+
+  <!-- footer: tagline + handle -->
+  <text x="72" y="952" font-family="Inter" font-size="20" font-weight="600" fill="#3DD4B0" letter-spacing="2">RETURN TO YOUR CENTER</text>
+  <text x="1008" y="952" font-family="Inter" font-size="20" fill="#8A94A6" text-anchor="end">@tamkinly</text>
+</svg>

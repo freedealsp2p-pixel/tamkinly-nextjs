@@ -1,0 +1,3655 @@
+{
+  "_meta": {
+    "name": "Tamkinly content topics registry",
+    "version": "1.0",
+    "created": "2026-11-08",
+    "created_by": "AUD-1 (Super Z)",
+    "founder_condition": "سجلّ المواضيع في ملف في الجيت: لا نعيد العمل على مواضيع منجزة، ونغطي جميع مواضيع الموقع مع إعادة استهدافها من زوايا عديدة",
+    "source": "live sitemap snapshot https://tamkinly.com/sitemap.xml",
+    "rules": [
+      "NEVER start content work without checking this registry — one angle per format per topic.",
+      "Every angle carries a unique angle_id and status: todo | researching | writing | review | published | blocked.",
+      "An angle is ONLY marked published after it has a published_url and a date — that freezes it (no rework on published angles).",
+      "Every site topic must eventually have >= 2 angles (default seeds: A1 seo-article, A2 social-kit). Add more angles freely with new angle_ids.",
+      "New topics discovered by C1 are APPENDED here (never written ad-hoc) with a new topic id.",
+      "C2 evidence files reference topic id + angle id. C3/C4 outputs reference both. The calendar (Hermes) schedules only angles with status >= writing.",
+      "Cluster coverage is reviewed weekly: clusters with zero published angles get priority in the calendar."
+    ]
+  },
+  "cluster_counts_seed": {
+    "core": 1,
+    "protocols": 5,
+    "about": 1,
+    "apps": 21,
+    "blog": 48,
+    "contact": 1,
+    "faq": 1,
+    "free-tools": 1,
+    "guides": 5,
+    "methodology": 1,
+    "products": 3,
+    "quiz": 1,
+    "recovery-hub": 1,
+    "porn-recovery": 3,
+    "trc-therapeutic": 19,
+    "resources": 1
+  },
+  "topics": [
+    {
+      "id": "T-001",
+      "slug": "/",
+      "url_en": "https://tamkinly.com/",
+      "url_ar": "https://tamkinly.com/ar",
+      "title_seed": "Home — Return to Your Center",
+      "cluster": "core",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-002",
+      "slug": "/Recovery_Protocols",
+      "url_en": "https://tamkinly.com/Recovery_Protocols",
+      "url_ar": "https://tamkinly.com/ar/Recovery_Protocols",
+      "title_seed": "Recovery_Protocols",
+      "cluster": "protocols",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-003",
+      "slug": "/Recovery_Protocols/alternative-code",
+      "url_en": "https://tamkinly.com/Recovery_Protocols/alternative-code",
+      "url_ar": "https://tamkinly.com/ar/Recovery_Protocols/alternative-code",
+      "title_seed": "Alternative Code",
+      "cluster": "protocols",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-004",
+      "slug": "/Recovery_Protocols/temporal-decoupling",
+      "url_en": "https://tamkinly.com/Recovery_Protocols/temporal-decoupling",
+      "url_ar": "https://tamkinly.com/ar/Recovery_Protocols/temporal-decoupling",
+      "title_seed": "Temporal Decoupling",
+      "cluster": "protocols",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-005",
+      "slug": "/Recovery_Protocols/truncated-sentence",
+      "url_en": "https://tamkinly.com/Recovery_Protocols/truncated-sentence",
+      "url_ar": "https://tamkinly.com/ar/Recovery_Protocols/truncated-sentence",
+      "title_seed": "Truncated Sentence",
+      "cluster": "protocols",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-006",
+      "slug": "/Recovery_Protocols/white-mirror",
+      "url_en": "https://tamkinly.com/Recovery_Protocols/white-mirror",
+      "url_ar": "https://tamkinly.com/ar/Recovery_Protocols/white-mirror",
+      "title_seed": "White Mirror",
+      "cluster": "protocols",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-007",
+      "slug": "/about",
+      "url_en": "https://tamkinly.com/about",
+      "url_ar": "https://tamkinly.com/ar/about",
+      "title_seed": "About",
+      "cluster": "about",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-008",
+      "slug": "/apps",
+      "url_en": "https://tamkinly.com/apps",
+      "url_ar": "https://tamkinly.com/ar/apps",
+      "title_seed": "Apps",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-009",
+      "slug": "/apps/ai-identity-coach",
+      "url_en": "https://tamkinly.com/apps/ai-identity-coach",
+      "url_ar": "https://tamkinly.com/ar/apps/ai-identity-coach",
+      "title_seed": "Ai Identity Coach",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-010",
+      "slug": "/apps/community-access",
+      "url_en": "https://tamkinly.com/apps/community-access",
+      "url_ar": "https://tamkinly.com/ar/apps/community-access",
+      "title_seed": "Community Access",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-011",
+      "slug": "/apps/daily-planner",
+      "url_en": "https://tamkinly.com/apps/daily-planner",
+      "url_ar": "https://tamkinly.com/ar/apps/daily-planner",
+      "title_seed": "Daily Planner",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-012",
+      "slug": "/apps/daily-reflection",
+      "url_en": "https://tamkinly.com/apps/daily-reflection",
+      "url_ar": "https://tamkinly.com/ar/apps/daily-reflection",
+      "title_seed": "Daily Reflection",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-013",
+      "slug": "/apps/decision-analysis",
+      "url_en": "https://tamkinly.com/apps/decision-analysis",
+      "url_ar": "https://tamkinly.com/ar/apps/decision-analysis",
+      "title_seed": "Decision Analysis",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-014",
+      "slug": "/apps/emotion-regulation",
+      "url_en": "https://tamkinly.com/apps/emotion-regulation",
+      "url_ar": "https://tamkinly.com/ar/apps/emotion-regulation",
+      "title_seed": "Emotion Regulation",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-015",
+      "slug": "/apps/environmental-audit",
+      "url_en": "https://tamkinly.com/apps/environmental-audit",
+      "url_ar": "https://tamkinly.com/ar/apps/environmental-audit",
+      "title_seed": "Environmental Audit",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-016",
+      "slug": "/apps/evidence-tracking",
+      "url_en": "https://tamkinly.com/apps/evidence-tracking",
+      "url_ar": "https://tamkinly.com/ar/apps/evidence-tracking",
+      "title_seed": "Evidence Tracking",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-017",
+      "slug": "/apps/executive-manual",
+      "url_en": "https://tamkinly.com/apps/executive-manual",
+      "url_ar": "https://tamkinly.com/ar/apps/executive-manual",
+      "title_seed": "Executive Manual",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-018",
+      "slug": "/apps/goal-system",
+      "url_en": "https://tamkinly.com/apps/goal-system",
+      "url_ar": "https://tamkinly.com/ar/apps/goal-system",
+      "title_seed": "Goal System",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-019",
+      "slug": "/apps/habit-tracker",
+      "url_en": "https://tamkinly.com/apps/habit-tracker",
+      "url_ar": "https://tamkinly.com/ar/apps/habit-tracker",
+      "title_seed": "Habit Tracker",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-020",
+      "slug": "/apps/identity-baseline",
+      "url_en": "https://tamkinly.com/apps/identity-baseline",
+      "url_ar": "https://tamkinly.com/ar/apps/identity-baseline",
+      "title_seed": "Identity Baseline",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-021",
+      "slug": "/apps/identity-gap-quiz",
+      "url_en": "https://tamkinly.com/apps/identity-gap-quiz",
+      "url_ar": "https://tamkinly.com/ar/apps/identity-gap-quiz",
+      "title_seed": "Identity Gap Quiz",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-022",
+      "slug": "/apps/identity-recode-system",
+      "url_en": "https://tamkinly.com/apps/identity-recode-system",
+      "url_ar": "https://tamkinly.com/ar/apps/identity-recode-system",
+      "title_seed": "Identity Recode System",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-023",
+      "slug": "/apps/journal-system",
+      "url_en": "https://tamkinly.com/apps/journal-system",
+      "url_ar": "https://tamkinly.com/ar/apps/journal-system",
+      "title_seed": "Journal System",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-024",
+      "slug": "/apps/priority-support",
+      "url_en": "https://tamkinly.com/apps/priority-support",
+      "url_ar": "https://tamkinly.com/ar/apps/priority-support",
+      "title_seed": "Priority Support",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-025",
+      "slug": "/apps/progress-dashboard",
+      "url_en": "https://tamkinly.com/apps/progress-dashboard",
+      "url_ar": "https://tamkinly.com/ar/apps/progress-dashboard",
+      "title_seed": "Progress Dashboard",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-026",
+      "slug": "/apps/trial-planner",
+      "url_en": "https://tamkinly.com/apps/trial-planner",
+      "url_ar": "https://tamkinly.com/ar/apps/trial-planner",
+      "title_seed": "Trial Planner",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-027",
+      "slug": "/apps/values-clarification",
+      "url_en": "https://tamkinly.com/apps/values-clarification",
+      "url_ar": "https://tamkinly.com/ar/apps/values-clarification",
+      "title_seed": "Values Clarification",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-028",
+      "slug": "/apps/worksheets",
+      "url_en": "https://tamkinly.com/apps/worksheets",
+      "url_ar": "https://tamkinly.com/ar/apps/worksheets",
+      "title_seed": "Worksheets",
+      "cluster": "apps",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-029",
+      "slug": "/blog",
+      "url_en": "https://tamkinly.com/blog",
+      "url_ar": "https://tamkinly.com/ar/blog",
+      "title_seed": "Blog",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-030",
+      "slug": "/blog/ai-identity-coach-guide",
+      "url_en": "https://tamkinly.com/blog/ai-identity-coach-guide",
+      "url_ar": "https://tamkinly.com/ar/blog/ai-identity-coach-guide",
+      "title_seed": "Ai Identity Coach Guide",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-031",
+      "slug": "/blog/all-in-or-nothing",
+      "url_en": "https://tamkinly.com/blog/all-in-or-nothing",
+      "url_ar": "https://tamkinly.com/ar/blog/all-in-or-nothing",
+      "title_seed": "All In Or Nothing",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-032",
+      "slug": "/blog/and-the-bamboo-kept-growing",
+      "url_en": "https://tamkinly.com/blog/and-the-bamboo-kept-growing",
+      "url_ar": "https://tamkinly.com/ar/blog/and-the-bamboo-kept-growing",
+      "title_seed": "And The Bamboo Kept Growing",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-033",
+      "slug": "/blog/author/tamkinly-team",
+      "url_en": "https://tamkinly.com/blog/author/tamkinly-team",
+      "url_ar": "https://tamkinly.com/ar/blog/author/tamkinly-team",
+      "title_seed": "Tamkinly Team",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-034",
+      "slug": "/blog/automatic-change",
+      "url_en": "https://tamkinly.com/blog/automatic-change",
+      "url_ar": "https://tamkinly.com/ar/blog/automatic-change",
+      "title_seed": "Automatic Change",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-035",
+      "slug": "/blog/becoming-exceptional",
+      "url_en": "https://tamkinly.com/blog/becoming-exceptional",
+      "url_ar": "https://tamkinly.com/ar/blog/becoming-exceptional",
+      "title_seed": "Becoming Exceptional",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-036",
+      "slug": "/blog/daily-reflection-practice",
+      "url_en": "https://tamkinly.com/blog/daily-reflection-practice",
+      "url_ar": "https://tamkinly.com/ar/blog/daily-reflection-practice",
+      "title_seed": "Daily Reflection Practice",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-037",
+      "slug": "/blog/dopamine-reset",
+      "url_en": "https://tamkinly.com/blog/dopamine-reset",
+      "url_ar": "https://tamkinly.com/ar/blog/dopamine-reset",
+      "title_seed": "Dopamine Reset",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-038",
+      "slug": "/blog/environmental-audit-worksheet",
+      "url_en": "https://tamkinly.com/blog/environmental-audit-worksheet",
+      "url_ar": "https://tamkinly.com/ar/blog/environmental-audit-worksheet",
+      "title_seed": "Environmental Audit Worksheet",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-039",
+      "slug": "/blog/erq-emotional-regulation-worksheet",
+      "url_en": "https://tamkinly.com/blog/erq-emotional-regulation-worksheet",
+      "url_ar": "https://tamkinly.com/ar/blog/erq-emotional-regulation-worksheet",
+      "title_seed": "Erq Emotional Regulation Worksheet",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-040",
+      "slug": "/blog/five-steps-to-miracles",
+      "url_en": "https://tamkinly.com/blog/five-steps-to-miracles",
+      "url_ar": "https://tamkinly.com/ar/blog/five-steps-to-miracles",
+      "title_seed": "Five Steps To Miracles",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-041",
+      "slug": "/blog/goal-setting-framework",
+      "url_en": "https://tamkinly.com/blog/goal-setting-framework",
+      "url_ar": "https://tamkinly.com/ar/blog/goal-setting-framework",
+      "title_seed": "Goal Setting Framework",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-042",
+      "slug": "/blog/grounding-for-flashbacks",
+      "url_en": "https://tamkinly.com/blog/grounding-for-flashbacks",
+      "url_ar": "https://tamkinly.com/ar/blog/grounding-for-flashbacks",
+      "title_seed": "Grounding For Flashbacks",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-043",
+      "slug": "/blog/how-to-build-habits-that-stick",
+      "url_en": "https://tamkinly.com/blog/how-to-build-habits-that-stick",
+      "url_ar": "https://tamkinly.com/ar/blog/how-to-build-habits-that-stick",
+      "title_seed": "How To Build Habits That Stick",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-044",
+      "slug": "/blog/identity-based-habits-worksheet",
+      "url_en": "https://tamkinly.com/blog/identity-based-habits-worksheet",
+      "url_ar": "https://tamkinly.com/ar/blog/identity-based-habits-worksheet",
+      "title_seed": "Identity Based Habits Worksheet",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-045",
+      "slug": "/blog/identity-baseline-8d-worksheet",
+      "url_en": "https://tamkinly.com/blog/identity-baseline-8d-worksheet",
+      "url_ar": "https://tamkinly.com/ar/blog/identity-baseline-8d-worksheet",
+      "title_seed": "Identity Baseline 8D Worksheet",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-046",
+      "slug": "/blog/identity-gap-assessment",
+      "url_en": "https://tamkinly.com/blog/identity-gap-assessment",
+      "url_ar": "https://tamkinly.com/ar/blog/identity-gap-assessment",
+      "title_seed": "Identity Gap Assessment",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-047",
+      "slug": "/blog/identity-millionaire",
+      "url_en": "https://tamkinly.com/blog/identity-millionaire",
+      "url_ar": "https://tamkinly.com/ar/blog/identity-millionaire",
+      "title_seed": "Identity Millionaire",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-048",
+      "slug": "/blog/identity-recode-system-guide",
+      "url_en": "https://tamkinly.com/blog/identity-recode-system-guide",
+      "url_ar": "https://tamkinly.com/ar/blog/identity-recode-system-guide",
+      "title_seed": "Identity Recode System Guide",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-049",
+      "slug": "/blog/inversion-thinking",
+      "url_en": "https://tamkinly.com/blog/inversion-thinking",
+      "url_ar": "https://tamkinly.com/ar/blog/inversion-thinking",
+      "title_seed": "Inversion Thinking",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-050",
+      "slug": "/blog/magic-in-work-you-avoid",
+      "url_en": "https://tamkinly.com/blog/magic-in-work-you-avoid",
+      "url_ar": "https://tamkinly.com/ar/blog/magic-in-work-you-avoid",
+      "title_seed": "Magic In Work You Avoid",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-051",
+      "slug": "/blog/morning-routine-identity",
+      "url_en": "https://tamkinly.com/blog/morning-routine-identity",
+      "url_ar": "https://tamkinly.com/ar/blog/morning-routine-identity",
+      "title_seed": "Morning Routine Identity",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-052",
+      "slug": "/blog/paced-breathing-for-regulation",
+      "url_en": "https://tamkinly.com/blog/paced-breathing-for-regulation",
+      "url_ar": "https://tamkinly.com/ar/blog/paced-breathing-for-regulation",
+      "title_seed": "Paced Breathing For Regulation",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-053",
+      "slug": "/blog/physics-of-consciousness",
+      "url_en": "https://tamkinly.com/blog/physics-of-consciousness",
+      "url_ar": "https://tamkinly.com/ar/blog/physics-of-consciousness",
+      "title_seed": "Physics Of Consciousness",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-054",
+      "slug": "/blog/physics-of-momentum",
+      "url_en": "https://tamkinly.com/blog/physics-of-momentum",
+      "url_ar": "https://tamkinly.com/ar/blog/physics-of-momentum",
+      "title_seed": "Physics Of Momentum",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-055",
+      "slug": "/blog/porn-recovery-roadmap",
+      "url_en": "https://tamkinly.com/blog/porn-recovery-roadmap",
+      "url_ar": "https://tamkinly.com/ar/blog/porn-recovery-roadmap",
+      "title_seed": "Porn Recovery Roadmap",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-056",
+      "slug": "/blog/rebuild-identity-after-addiction",
+      "url_en": "https://tamkinly.com/blog/rebuild-identity-after-addiction",
+      "url_ar": "https://tamkinly.com/ar/blog/rebuild-identity-after-addiction",
+      "title_seed": "Rebuild Identity After Addiction",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-057",
+      "slug": "/blog/redefining-discipline",
+      "url_en": "https://tamkinly.com/blog/redefining-discipline",
+      "url_ar": "https://tamkinly.com/ar/blog/redefining-discipline",
+      "title_seed": "Redefining Discipline",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-058",
+      "slug": "/blog/relapse-is-data",
+      "url_en": "https://tamkinly.com/blog/relapse-is-data",
+      "url_ar": "https://tamkinly.com/ar/blog/relapse-is-data",
+      "title_seed": "Relapse Is Data",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-059",
+      "slug": "/blog/relapse-prevention-system",
+      "url_en": "https://tamkinly.com/blog/relapse-prevention-system",
+      "url_ar": "https://tamkinly.com/ar/blog/relapse-prevention-system",
+      "title_seed": "Relapse Prevention System",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-060",
+      "slug": "/blog/self-authorship-worksheet",
+      "url_en": "https://tamkinly.com/blog/self-authorship-worksheet",
+      "url_ar": "https://tamkinly.com/ar/blog/self-authorship-worksheet",
+      "title_seed": "Self Authorship Worksheet",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-061",
+      "slug": "/blog/self-discipline-science",
+      "url_en": "https://tamkinly.com/blog/self-discipline-science",
+      "url_ar": "https://tamkinly.com/ar/blog/self-discipline-science",
+      "title_seed": "Self Discipline Science",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-062",
+      "slug": "/blog/separating-self-from-shame",
+      "url_en": "https://tamkinly.com/blog/separating-self-from-shame",
+      "url_ar": "https://tamkinly.com/ar/blog/separating-self-from-shame",
+      "title_seed": "Separating Self From Shame",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-063",
+      "slug": "/blog/speed-as-strategy",
+      "url_en": "https://tamkinly.com/blog/speed-as-strategy",
+      "url_ar": "https://tamkinly.com/ar/blog/speed-as-strategy",
+      "title_seed": "Speed As Strategy",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-064",
+      "slug": "/blog/stop-procrastinating-identity-shift",
+      "url_en": "https://tamkinly.com/blog/stop-procrastinating-identity-shift",
+      "url_ar": "https://tamkinly.com/ar/blog/stop-procrastinating-identity-shift",
+      "title_seed": "Stop Procrastinating Identity Shift",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-065",
+      "slug": "/blog/ten-minute-block-system",
+      "url_en": "https://tamkinly.com/blog/ten-minute-block-system",
+      "url_ar": "https://tamkinly.com/ar/blog/ten-minute-block-system",
+      "title_seed": "Ten Minute Block System",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-066",
+      "slug": "/blog/the-memory-illusion",
+      "url_en": "https://tamkinly.com/blog/the-memory-illusion",
+      "url_ar": "https://tamkinly.com/ar/blog/the-memory-illusion",
+      "title_seed": "The Memory Illusion",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-067",
+      "slug": "/blog/trauma-journaling-integration",
+      "url_en": "https://tamkinly.com/blog/trauma-journaling-integration",
+      "url_ar": "https://tamkinly.com/ar/blog/trauma-journaling-integration",
+      "title_seed": "Trauma Journaling Integration",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-068",
+      "slug": "/blog/trauma-recovery-three-stages",
+      "url_en": "https://tamkinly.com/blog/trauma-recovery-three-stages",
+      "url_ar": "https://tamkinly.com/ar/blog/trauma-recovery-three-stages",
+      "title_seed": "Trauma Recovery Three Stages",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-069",
+      "slug": "/blog/understanding-the-compulsion-cycle",
+      "url_en": "https://tamkinly.com/blog/understanding-the-compulsion-cycle",
+      "url_ar": "https://tamkinly.com/ar/blog/understanding-the-compulsion-cycle",
+      "title_seed": "Understanding The Compulsion Cycle",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-070",
+      "slug": "/blog/urge-surfing-10-minute-window",
+      "url_en": "https://tamkinly.com/blog/urge-surfing-10-minute-window",
+      "url_ar": "https://tamkinly.com/ar/blog/urge-surfing-10-minute-window",
+      "title_seed": "Urge Surfing 10 Minute Window",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-071",
+      "slug": "/blog/vagus-nerve-breathing",
+      "url_en": "https://tamkinly.com/blog/vagus-nerve-breathing",
+      "url_ar": "https://tamkinly.com/ar/blog/vagus-nerve-breathing",
+      "title_seed": "Vagus Nerve Breathing",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-072",
+      "slug": "/blog/values-clarification-tool",
+      "url_en": "https://tamkinly.com/blog/values-clarification-tool",
+      "url_ar": "https://tamkinly.com/ar/blog/values-clarification-tool",
+      "title_seed": "Values Clarification Tool",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-073",
+      "slug": "/blog/what-trauma-does-to-the-body",
+      "url_en": "https://tamkinly.com/blog/what-trauma-does-to-the-body",
+      "url_ar": "https://tamkinly.com/ar/blog/what-trauma-does-to-the-body",
+      "title_seed": "What Trauma Does To The Body",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-074",
+      "slug": "/blog/who-am-i-worksheet",
+      "url_en": "https://tamkinly.com/blog/who-am-i-worksheet",
+      "url_ar": "https://tamkinly.com/ar/blog/who-am-i-worksheet",
+      "title_seed": "Who Am I Worksheet",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-075",
+      "slug": "/blog/window-of-tolerance",
+      "url_en": "https://tamkinly.com/blog/window-of-tolerance",
+      "url_ar": "https://tamkinly.com/ar/blog/window-of-tolerance",
+      "title_seed": "Window Of Tolerance",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-076",
+      "slug": "/blog/work-on-yourself",
+      "url_en": "https://tamkinly.com/blog/work-on-yourself",
+      "url_ar": "https://tamkinly.com/ar/blog/work-on-yourself",
+      "title_seed": "Work On Yourself",
+      "cluster": "blog",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-077",
+      "slug": "/contact",
+      "url_en": "https://tamkinly.com/contact",
+      "url_ar": "https://tamkinly.com/ar/contact",
+      "title_seed": "Contact",
+      "cluster": "contact",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-078",
+      "slug": "/faq",
+      "url_en": "https://tamkinly.com/faq",
+      "url_ar": "https://tamkinly.com/ar/faq",
+      "title_seed": "Faq",
+      "cluster": "faq",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-079",
+      "slug": "/free-tool",
+      "url_en": "https://tamkinly.com/free-tool",
+      "url_ar": "https://tamkinly.com/ar/free-tool",
+      "title_seed": "Free Tool",
+      "cluster": "free-tools",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-080",
+      "slug": "/guides",
+      "url_en": "https://tamkinly.com/guides",
+      "url_ar": "https://tamkinly.com/ar/guides",
+      "title_seed": "Guides",
+      "cluster": "guides",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-081",
+      "slug": "/guides/behavior-trap-why-habits-fail",
+      "url_en": "https://tamkinly.com/guides/behavior-trap-why-habits-fail",
+      "url_ar": "https://tamkinly.com/ar/guides/behavior-trap-why-habits-fail",
+      "title_seed": "Behavior Trap Why Habits Fail",
+      "cluster": "guides",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-082",
+      "slug": "/guides/environment-shapes-you",
+      "url_en": "https://tamkinly.com/guides/environment-shapes-you",
+      "url_ar": "https://tamkinly.com/ar/guides/environment-shapes-you",
+      "title_seed": "Environment Shapes You",
+      "cluster": "guides",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-083",
+      "slug": "/guides/identity-vs-behavior-change",
+      "url_en": "https://tamkinly.com/guides/identity-vs-behavior-change",
+      "url_ar": "https://tamkinly.com/ar/guides/identity-vs-behavior-change",
+      "title_seed": "Identity Vs Behavior Change",
+      "cluster": "guides",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-084",
+      "slug": "/guides/recode-identity-30-days",
+      "url_en": "https://tamkinly.com/guides/recode-identity-30-days",
+      "url_ar": "https://tamkinly.com/ar/guides/recode-identity-30-days",
+      "title_seed": "Recode Identity 30 Days",
+      "cluster": "guides",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-085",
+      "slug": "/methodology",
+      "url_en": "https://tamkinly.com/methodology",
+      "url_ar": "https://tamkinly.com/ar/methodology",
+      "title_seed": "Methodology",
+      "cluster": "methodology",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-086",
+      "slug": "/products",
+      "url_en": "https://tamkinly.com/products",
+      "url_ar": "https://tamkinly.com/ar/products",
+      "title_seed": "Products",
+      "cluster": "products",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-087",
+      "slug": "/products/mastery",
+      "url_en": "https://tamkinly.com/products/mastery",
+      "url_ar": "https://tamkinly.com/ar/products/mastery",
+      "title_seed": "Mastery",
+      "cluster": "products",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-088",
+      "slug": "/products/premium",
+      "url_en": "https://tamkinly.com/products/premium",
+      "url_ar": "https://tamkinly.com/ar/products/premium",
+      "title_seed": "Premium",
+      "cluster": "products",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-089",
+      "slug": "/quiz",
+      "url_en": "https://tamkinly.com/quiz",
+      "url_ar": "https://tamkinly.com/ar/quiz",
+      "title_seed": "Quiz",
+      "cluster": "quiz",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-090",
+      "slug": "/recovery",
+      "url_en": "https://tamkinly.com/recovery",
+      "url_ar": "https://tamkinly.com/ar/recovery",
+      "title_seed": "Recovery",
+      "cluster": "recovery-hub",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-091",
+      "slug": "/recovery/porn-recovery",
+      "url_en": "https://tamkinly.com/recovery/porn-recovery",
+      "url_ar": "https://tamkinly.com/ar/recovery/porn-recovery",
+      "title_seed": "Porn Recovery",
+      "cluster": "porn-recovery",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-092",
+      "slug": "/recovery/porn-recovery/downloads",
+      "url_en": "https://tamkinly.com/recovery/porn-recovery/downloads",
+      "url_ar": "https://tamkinly.com/ar/recovery/porn-recovery/downloads",
+      "title_seed": "Downloads",
+      "cluster": "porn-recovery",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-093",
+      "slug": "/recovery/porn-recovery/journey",
+      "url_en": "https://tamkinly.com/recovery/porn-recovery/journey",
+      "url_ar": "https://tamkinly.com/ar/recovery/porn-recovery/journey",
+      "title_seed": "Journey",
+      "cluster": "porn-recovery",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-094",
+      "slug": "/recovery/trc",
+      "url_en": "https://tamkinly.com/recovery/trc",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc",
+      "title_seed": "Trc",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-095",
+      "slug": "/recovery/trc/a52",
+      "url_en": "https://tamkinly.com/recovery/trc/a52",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/a52",
+      "title_seed": "A52",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-096",
+      "slug": "/recovery/trc/body-scan",
+      "url_en": "https://tamkinly.com/recovery/trc/body-scan",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/body-scan",
+      "title_seed": "Body Scan",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-097",
+      "slug": "/recovery/trc/downloads",
+      "url_en": "https://tamkinly.com/recovery/trc/downloads",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/downloads",
+      "title_seed": "Downloads",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-098",
+      "slug": "/recovery/trc/eft-tapping",
+      "url_en": "https://tamkinly.com/recovery/trc/eft-tapping",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/eft-tapping",
+      "title_seed": "Eft Tapping",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-099",
+      "slug": "/recovery/trc/grounding",
+      "url_en": "https://tamkinly.com/recovery/trc/grounding",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/grounding",
+      "title_seed": "Grounding",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-100",
+      "slug": "/recovery/trc/grounding-guide",
+      "url_en": "https://tamkinly.com/recovery/trc/grounding-guide",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/grounding-guide",
+      "title_seed": "Grounding Guide",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-101",
+      "slug": "/recovery/trc/journey",
+      "url_en": "https://tamkinly.com/recovery/trc/journey",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/journey",
+      "title_seed": "Journey",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-102",
+      "slug": "/recovery/trc/regulation-guide",
+      "url_en": "https://tamkinly.com/recovery/trc/regulation-guide",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/regulation-guide",
+      "title_seed": "Regulation Guide",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-103",
+      "slug": "/recovery/trc/regulation-toolkit",
+      "url_en": "https://tamkinly.com/recovery/trc/regulation-toolkit",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/regulation-toolkit",
+      "title_seed": "Regulation Toolkit",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-104",
+      "slug": "/recovery/trc/safe-place",
+      "url_en": "https://tamkinly.com/recovery/trc/safe-place",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/safe-place",
+      "title_seed": "Safe Place",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-105",
+      "slug": "/recovery/trc/secondary-trauma",
+      "url_en": "https://tamkinly.com/recovery/trc/secondary-trauma",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/secondary-trauma",
+      "title_seed": "Secondary Trauma",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-106",
+      "slug": "/recovery/trc/shame-recovery",
+      "url_en": "https://tamkinly.com/recovery/trc/shame-recovery",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/shame-recovery",
+      "title_seed": "Shame Recovery",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-107",
+      "slug": "/recovery/trc/thought-reframing",
+      "url_en": "https://tamkinly.com/recovery/trc/thought-reframing",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/thought-reframing",
+      "title_seed": "Thought Reframing",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-108",
+      "slug": "/recovery/trc/trauma-journal",
+      "url_en": "https://tamkinly.com/recovery/trc/trauma-journal",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/trauma-journal",
+      "title_seed": "Trauma Journal",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-109",
+      "slug": "/recovery/trc/what-happens-during-trauma-responses",
+      "url_en": "https://tamkinly.com/recovery/trc/what-happens-during-trauma-responses",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/what-happens-during-trauma-responses",
+      "title_seed": "What Happens During Trauma Responses",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-110",
+      "slug": "/recovery/trc/what-trauma-does-to-the-body",
+      "url_en": "https://tamkinly.com/recovery/trc/what-trauma-does-to-the-body",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/what-trauma-does-to-the-body",
+      "title_seed": "What Trauma Does To The Body",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-111",
+      "slug": "/recovery/trc/worksheets/safety-plan",
+      "url_en": "https://tamkinly.com/recovery/trc/worksheets/safety-plan",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/worksheets/safety-plan",
+      "title_seed": "Safety Plan",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-112",
+      "slug": "/recovery/trc/worksheets/trigger-mapping",
+      "url_en": "https://tamkinly.com/recovery/trc/worksheets/trigger-mapping",
+      "url_ar": "https://tamkinly.com/ar/recovery/trc/worksheets/trigger-mapping",
+      "title_seed": "Trigger Mapping",
+      "cluster": "trc-therapeutic",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    },
+    {
+      "id": "T-113",
+      "slug": "/resources",
+      "url_en": "https://tamkinly.com/resources",
+      "url_ar": "https://tamkinly.com/ar/resources",
+      "title_seed": "Resources",
+      "cluster": "resources",
+      "site_status": "live",
+      "keywords": [],
+      "angles": [
+        {
+          "angle": "A1",
+          "format": "seo-article",
+          "brief": "Re-target this existing site topic as a SEO blog article from a new angle",
+          "owner_role": "C3",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        },
+        {
+          "angle": "A2",
+          "format": "social-kit",
+          "brief": "Re-target the same topic as a social kit (posts + carousel + 60s video script)",
+          "owner_role": "C4",
+          "status": "todo",
+          "output_ref": "",
+          "published_url": "",
+          "date": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+<!-- Tamkinly image template — quote-card-1080.svg
+     Grid: 8px | Safe margin: 72px (9x8) | Source of truth: brand.json v1.0
+     Palette: bg #0F1C2E | teal #1F6F78 / #2A8A94 | accent #3DD4B0
+              warm accent #C97B7B (touch only — NEVER warning) | text #F6F8FA
+     Fonts: AR = IBM Plex Sans Arabic | EN = Inter | numbers = Geist Mono
+     Export: PNG 2x (2160x2160). Handle: @tamkinly only. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <radialGradient id="glow" cx="30%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#1F6F78" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#0F1C2E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="#0F1C2E"/>
+  <rect width="1080" height="1080" fill="url(#glow)"/>
+
+  <!-- safe frame (visual guide — delete before export) -->
+  <rect x="72" y="72" width="936" height="936" fill="none" stroke="#2A8A94" stroke-opacity="0.25" stroke-dasharray="8 8"/>
+
+  <!-- warm accent quote mark (terracotta = touch only) -->
+  <text x="72" y="256" font-family="IBM Plex Sans Arabic, Inter" font-size="160" font-weight="700" fill="#C97B7B">”</text>
+
+  <!-- QUOTE (replace — keep <= 2 lines each language, line-height 1.6 = 80px on 48px) -->
+  <text x="72" y="432" font-family="IBM Plex Sans Arabic, Inter" font-size="48" font-weight="600" fill="#F6F8FA" direction="rtl" text-anchor="start">الاقتباس يُكتب هنا — سطر أول</text>
+  <text x="72" y="512" font-family="IBM Plex Sans Arabic, Inter" font-size="48" font-weight="600" fill="#F6F8FA" direction="rtl" text-anchor="start">سطر ثانٍ إن لزم</text>
+
+  <!-- attribution -->
+  <text x="72" y="608" font-family="IBM Plex Sans Arabic, Inter" font-size="24" fill="#8A94A6">— مصدر الاقتباس / المؤسس</text>
+
+  <!-- tagline layer-1 (fixed in every live asset title) -->
+  <text x="72" y="952" font-family="Inter" font-size="20" font-weight="600" fill="#3DD4B0" letter-spacing="2">RETURN TO YOUR CENTER</text>
+
+  <!-- handle: registry rule data/accounts.json -->
+  <text x="1008" y="952" font-family="Inter" font-size="20" fill="#8A94A6" text-anchor="end">@tamkinly</text>
+</svg>
