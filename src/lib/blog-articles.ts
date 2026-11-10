@@ -1042,6 +1042,24 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     authorAr: 'فريق تمكينلي',
     keywords: ['memory illusion', 'reconstructive memory', 'false memories', 'self narrative', 'identity change', 'وهم الذاكرة', 'الذاكرة الترميمية', 'السرد الذاتي'],
   },
+  {
+    slug: 'the-replay-loop',
+    title: 'The Replay Loop: Why Your Mind Replays What It Cannot Close',
+    titleAr: 'حلقة الإعادة: لماذا يعيد عقلك تشغيل ما لم يُغلق',
+    description: 'Rumination feels like problem-solving, but it is a screening room: replaying painful events keeps them feeling like yesterday. Learn what two studies found about the replay loop — and the one-retelling exercise that turns reliving into re-authoring.',
+    descriptionAr: 'يبدو الاجترار حلّاً للمشكلات، لكنه قاعة عرض: إعادة تشغيل الأحداث المؤلمة تُبقيها تشبه الأمس. اكتشف ما توصلت إليه دراستان عن حلقة الإعادة — وتمرين السرد الواحد الذي يحوّل إعادة العيش إلى إعادة تأليف.',
+    category: 'Identity Shift',
+    categoryAr: 'تحوّل الهوية',
+    readTime: '7 min read',
+    readTimeAr: '7 دقائق قراءة',
+    featured: false,
+    tier: 'FREE',
+    datePublished: '2026-11-11',
+    dateModified: '2026-11-11',
+    author: 'Tamkinly Team',
+    authorAr: 'فريق تمكينلي',
+    keywords: ['rumination', 'replay loop', 'overthinking', 're-authoring', 'narrative identity', 'memory and identity', 'الاجترار', 'حلقة الإعادة', 'التفكير الزائد', 'إعادة التأليف'],
+  },
 ];
 
 // ============================================

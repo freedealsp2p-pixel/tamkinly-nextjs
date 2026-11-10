@@ -11,6 +11,18 @@ export interface ArticleRef {
 }
 
 export const ARTICLE_REFERENCES: Record<string, ArticleRef[]> = {
+  'the-replay-loop': [
+    {
+      title: 'Siedlecka, E., Capper, M. M., & Denson, T. F. (2015). Negative emotional events that people ruminate about feel closer in time.',
+      source: 'PLoS ONE 10(2): e0117105',
+      url: 'https://doi.org/10.1371/journal.pone.0117105',
+    },
+    {
+      title: 'Habermas, T., Delarue, I., Eiswirth, P., Glanz, S., Krämer, C., Landertinger, A., Krainhöfner, M., Batista, J., & Gonçalves, M. M. (2021). Differences between subclinical ruminators and reflectors in narrating autobiographical memories: Innovative moments and autobiographical reasoning.',
+      source: 'Frontiers in Psychology, 12:624644',
+      url: 'https://doi.org/10.3389/fpsyg.2021.624644',
+    },
+  ],
   'identity-gap-assessment': [
     {
       title: 'Higgins, E. T. (1987). Self-discrepancy: A theory relating self and affect.',

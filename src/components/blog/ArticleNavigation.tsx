@@ -35,6 +35,7 @@ const allArticles = [
   { slug: "work-on-yourself", title: "Work on Yourself: The Psycho-Cybernetics of Identity", titleAr: "اعمل على نفسك: السايبرنيتيكا النفسية للهوية", category: "Self-Image", categoryAr: "الصورة الذاتية" },
   { slug: "becoming-exceptional", title: "Becoming Exceptional: Why Ordinary Can Never Build Legacy", titleAr: "التحول لاستثنائي: لماذا لا يمكن للعادي بناء إرث", category: "Excellence", categoryAr: "التميز" },
   { slug: "dopamine-reset", title: "The 24-Hour Dopamine Reset: Reclaiming Your Focus", titleAr: "إعادة ضبط الدوبامين في 24 ساعة: استعد تركيزك", category: "Mental Clarity", categoryAr: "الوضوح الذهني" },
+  { slug: "the-replay-loop", title: "The Replay Loop: Why Your Mind Replays What It Cannot Close", titleAr: "حلقة الإعادة: لماذا يعيد عقلك تشغيل ما لم يُغلق", category: "Identity Shift", categoryAr: "تحوّل الهوية" },
 ];
 
 interface ArticleNavigationProps {
