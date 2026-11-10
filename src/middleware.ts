@@ -47,6 +47,8 @@ const VALID_BLOG_SLUGS = new Set([
   'separating-self-from-shame', 'relapse-is-data',
   'rebuild-identity-after-addiction', 'window-of-tolerance',
   'trauma-journaling-integration', 'the-memory-illusion',
+  // identity & rumination (2026-11-11)
+  'the-replay-loop',
 ]);
 
 const VALID_BLOG_CATEGORY_SLUGS = new Set([
